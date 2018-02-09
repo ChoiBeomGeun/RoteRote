@@ -13,7 +13,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 */
 #pragma once
 #include "Component.h"
-#include "GameLogic.h"
+
 //#include "vector3.h"
 #include "Physics.h"
 #include "Transform.h"
@@ -21,12 +21,13 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
-
+#include  <list>
 namespace TE {
 
 	class Body : public Component
 	{
 	public:
+		
 		Body(glm::vec3 vel, float invmass);
 		~Body();
 
@@ -43,8 +44,7 @@ namespace TE {
 		Grounded GroundType;
 
 		bool Jump;
-
-		Body() : Component(CT_BODY) {};
+		Body();
 
 		void SetRestitution(float r);
 

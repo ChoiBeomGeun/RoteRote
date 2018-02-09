@@ -27,14 +27,8 @@
     <Filter Include="Object">
       <UniqueIdentifier>{1601adb8-666a-425a-b20e-aa40461f81c3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameLogic">
-      <UniqueIdentifier>{6bbdaaf0-256b-4628-8863-cbbaf921fade}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\Transform">
       <UniqueIdentifier>{227be98f-ae60-4cc6-ac25-6791d6093299}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameLogic\Controller">
-      <UniqueIdentifier>{2159a2d8-50fd-4d18-95ad-05e1bd082bab}</UniqueIdentifier>
     </Filter>
     <Filter Include="Factory">
       <UniqueIdentifier>{2ea66733-dd6e-4159-98b2-00c94fbb8c1a}</UniqueIdentifier>
@@ -91,12 +85,6 @@
     </ClCompile>
     <ClCompile Include="Object.cpp">
       <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="GameLogic.cpp">
-      <Filter>GameLogic</Filter>
-    </ClCompile>
-    <ClCompile Include="Controller.cpp">
-      <Filter>GameLogic\Controller</Filter>
     </ClCompile>
     <ClCompile Include="Factory.cpp">
       <Filter>Factory</Filter>
@@ -170,6 +158,15 @@
     <ClCompile Include="Particle.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="CameraMovement.cpp">
+      <Filter>Graphics\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DebugUtil.h">
@@ -210,12 +207,6 @@
     </ClInclude>
     <ClInclude Include="ComponentType.h">
       <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="GameLogic.h">
-      <Filter>GameLogic</Filter>
-    </ClInclude>
-    <ClInclude Include="Controller.h">
-      <Filter>GameLogic\Controller</Filter>
     </ClInclude>
     <ClInclude Include="Factory.h">
       <Filter>Factory</Filter>
@@ -318,6 +309,15 @@
     </ClInclude>
     <ClInclude Include="Particle.h">
       <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraMovement.h">
+      <Filter>Graphics\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

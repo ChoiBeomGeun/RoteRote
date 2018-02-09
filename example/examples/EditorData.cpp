@@ -22,12 +22,22 @@ bool ClearZoneEditable = false;
 
 void EditorData::InitPlayer(GameData & gamedata)
 {
-	gamedata.Player = FACTORY->CreatePlayer(glm::vec3(0, 0, 0), glm::vec3(10, 10, 0), glm::vec3(0, 0, 0), 1.f);
+	gamedata = gamedata;
+	Object * playerinEditor = FACTORY->CreateArchetype(ReadingArchetype("Player.json"));
+	playerinEditor->GetComponent<Transform>()->SetPosition(glm::vec3(0, 0, 0));
+	playerinEditor->GetComponent<Transform>()->SetScale(glm::vec3(10,10, 0));
+	playerinEditor->GetComponent<Body>()->pm_velocity= (glm::vec3(0, 0, 0));
+	playerinEditor->GetComponent<Body>()->pm_mass = 1.f;
+	//gamedata.Player = FACTORY->CreatePlayer(glm::vec3(0, 0, 0), glm::vec3(10, 10, 0), glm::vec3(0, 0, 0), 1.f);
 }
 
 void EditorData::InitClearZone(GameData & gamedata)
 {
-	gamedata.ClearZone = FACTORY->CreateButton(glm::vec3(400, 400, 0), glm::vec3(10, 10, 0));
+	Object * ButtoninEditor = FACTORY->CreateArchetype(ReadingArchetype("Button.json"));
+
+	ButtoninEditor->GetComponent<Transform>()->SetPosition(glm::vec3(400, 400, 0));
+	ButtoninEditor->GetComponent<Transform>()->SetScale(glm::vec3(10, 10, 0));
+	gamedata.ClearZone = ButtoninEditor;
 	gamedata.ClearZone->objectstyle = Objectstyle::Clearzone;
 }
 
@@ -36,7 +46,7 @@ void EditorData::AddWall(GameData& gamedata, glm::vec3 mouse)
 	std::pair<Object*, bool> temp;
 	temp.second = false;
 	temp.first = FACTORY->CreateArchetype(ReadingArchetype("Wall.json"));
-	temp.first->transform->SetPosition(mouse);
+	temp.first->GetComponent<Transform>()->SetPosition(mouse);
 	gamedata.Wall.insert(temp);
 	++Wall_Count;
 }
@@ -46,7 +56,7 @@ void EditorData::AddBox(GameData& gamedata, glm::vec3 mouse)
 	std::pair<Object*, bool> temp;
 	temp.second = false;
 	temp.first = FACTORY->CreateArchetype(ReadingArchetype("Box.json"));
-	temp.first->transform->SetPosition(mouse);
+	temp.first->GetComponent<Transform>()->SetPosition(mouse);
 	gamedata.Box.insert(temp);
 	++Box_Count;
 }
@@ -56,7 +66,7 @@ void EditorData::AddTrigger180(GameData& gamedata, glm::vec3 mouse)
 	std::pair<Object*, bool> temp;
 	temp.second = false;
 	temp.first = FACTORY->CreateArchetype(ReadingArchetype("Trigger180.json"));
-	temp.first->transform->SetPosition(mouse);
+	temp.first->GetComponent<Transform>()->SetPosition(mouse);
 	gamedata.Trigger180.insert(temp);
 	++Trigger180_Count;
 }
@@ -66,7 +76,7 @@ void EditorData::AddTrigger90(GameData& gamedata, glm::vec3 mouse)
 	std::pair<Object*, bool> temp;
 	temp.second = false;
 	temp.first = FACTORY->CreateArchetype(ReadingArchetype("Trigger90.json"));
-	temp.first->transform->SetPosition(mouse);
+	temp.first->GetComponent<Transform>()->SetPosition(mouse);
 	gamedata.Trigger90.insert(temp);
 	++Trigger90_Count;
 }
@@ -76,7 +86,7 @@ void EditorData::AddButton(GameData & gamedata, glm::vec3 mouse)
 	std::pair<Object*, bool> temp;
 	temp.second = false;
 	temp.first = FACTORY->CreateArchetype(ReadingArchetype("Button.json"));
-	temp.first->transform->SetPosition(mouse);
+	temp.first->GetComponent<Transform>()->SetPosition(mouse);
 	gamedata.Button.insert(temp);
 }
 
@@ -85,45 +95,45 @@ void EditorData::MoveObject(GameData & gamedata, glm::vec3 mouse)
 	mouse.z = 130.f;
 	//mouse.z = 150.f;
 	if (PlayerEditable)
-		gamedata.Player->transform->position = mouse;
+		gamedata.Player->GetComponent<Transform>()->position = mouse;
 
 	if (ClearZoneEditable)
-		gamedata.ClearZone->transform->position = mouse;
+		gamedata.ClearZone->GetComponent<Transform>()->position = mouse;
 
 
 	auto box = gamedata.Box.begin();
 	for (box; box != gamedata.Box.end(); ++box)
 	{
 		if (box->second)
-			box->first->transform->position = mouse;
+			box->first->GetComponent<Transform>()->position = mouse;
 	}
 
 	auto wall = gamedata.Wall.begin();
 	for (wall; wall != gamedata.Wall.end(); ++wall)
 	{
 		if (wall->second)
-			wall->first->transform->position = mouse;
+			wall->first->GetComponent<Transform>()->position = mouse;
 	}
 
 	auto trigger180 = gamedata.Trigger180.begin();
 	for (trigger180; trigger180 != gamedata.Trigger180.end(); ++trigger180)
 	{
 		if (trigger180->second)
-			trigger180->first->transform->position = mouse;
+			trigger180->first->GetComponent<Transform>()->position = mouse;
 	}
 
 	auto trigger90 = gamedata.Trigger90.begin();
 	for (trigger90; trigger90 != gamedata.Trigger90.end(); ++trigger90)
 	{
 		if (trigger90->second)
-			trigger90->first->transform->position = mouse;
+			trigger90->first->GetComponent<Transform>()->position = mouse;
 	}
 
 	auto button = gamedata.Button.begin();
 	for (button; button != gamedata.Button.end(); ++button)
 	{
 		if (button->second)
-			button->first->transform->position = mouse;
+			button->first->GetComponent<Transform>()->position = mouse;
 	}
 }
 
@@ -131,7 +141,7 @@ void EditorData::EditableObject(GameData & gamedata, glm::vec3 mouse)
 {
 	if (!gamedata.IsEditable_Object_Exist)
 	{
-		if (Physics::MouseVsRect(mouse, gamedata.Player->transform))
+		if (Physics::MouseVsRect(mouse, gamedata.Player->GetComponent<Transform>()))
 		{
 			PlayerEditable = true;
 			gamedata.IsEditable_Object_Exist = true;
@@ -140,7 +150,7 @@ void EditorData::EditableObject(GameData & gamedata, glm::vec3 mouse)
 	}
 	if (!gamedata.IsEditable_Object_Exist)
 	{
-		if (Physics::MouseVsRect(mouse, gamedata.ClearZone->transform))
+		if (Physics::MouseVsRect(mouse, gamedata.ClearZone->GetComponent<Transform>()))
 		{
 			ClearZoneEditable = true;
 			gamedata.IsEditable_Object_Exist = true;
@@ -152,7 +162,7 @@ void EditorData::EditableObject(GameData & gamedata, glm::vec3 mouse)
 		auto box = gamedata.Box.begin();
 		for (box; box != gamedata.Box.end(); ++box)
 		{
-			if (Physics::MouseVsRect(mouse, box->first->transform))
+			if (Physics::MouseVsRect(mouse, box->first->GetComponent<Transform>()))
 			{
 				box->second = true;
 				gamedata.IsEditable_Object_Exist = true;
@@ -166,7 +176,7 @@ void EditorData::EditableObject(GameData & gamedata, glm::vec3 mouse)
 		auto wall = gamedata.Wall.begin();
 		for (wall; wall != gamedata.Wall.end(); ++wall)
 		{
-			if (Physics::MouseVsRect(mouse, wall->first->transform))
+			if (Physics::MouseVsRect(mouse, wall->first->GetComponent<Transform>()))
 			{
 				wall->second = true;
 				gamedata.IsEditable_Object_Exist = true;
@@ -180,7 +190,7 @@ void EditorData::EditableObject(GameData & gamedata, glm::vec3 mouse)
 		auto trigger180 = gamedata.Trigger180.begin();
 		for (trigger180; trigger180 != gamedata.Trigger180.end(); ++trigger180)
 		{
-			if (Physics::MouseVsRect(mouse, trigger180->first->transform))
+			if (Physics::MouseVsRect(mouse, trigger180->first->GetComponent<Transform>()))
 			{
 				trigger180->second = true;
 				gamedata.IsEditable_Object_Exist = true;
@@ -193,7 +203,7 @@ void EditorData::EditableObject(GameData & gamedata, glm::vec3 mouse)
 		auto trigger90 = gamedata.Trigger90.begin();
 		for (trigger90; trigger90 != gamedata.Trigger90.end(); ++trigger90)
 		{
-			if (Physics::MouseVsRect(mouse, trigger90->first->transform))
+			if (Physics::MouseVsRect(mouse, trigger90->first->GetComponent<Transform>()))
 			{
 				trigger90->second = true;
 				gamedata.IsEditable_Object_Exist = true;
@@ -207,7 +217,7 @@ void EditorData::EditableObject(GameData & gamedata, glm::vec3 mouse)
 		auto button = gamedata.Button.begin();
 		for (button; button != gamedata.Button.end(); ++button)
 		{
-			if (Physics::MouseVsRect(mouse, button->first->transform))
+			if (Physics::MouseVsRect(mouse, button->first->GetComponent<Transform>()))
 			{
 				button->second = true;
 				gamedata.IsEditable_Object_Exist = true;
@@ -219,13 +229,13 @@ void EditorData::EditableObject(GameData & gamedata, glm::vec3 mouse)
 
 void EditorData::UnEditObject(GameData & gamedata, glm::vec3 mouse)
 {
-	if (Physics::MouseVsRect(mouse, gamedata.Player->transform))
+	if (Physics::MouseVsRect(mouse, gamedata.Player->GetComponent<Transform>()))
 	{
 		PlayerEditable = false;
 		gamedata.IsEditable_Object_Exist = false;
 	}
 
-	if (Physics::MouseVsRect(mouse, gamedata.ClearZone->transform))
+	if (Physics::MouseVsRect(mouse, gamedata.ClearZone->GetComponent<Transform>()))
 	{
 		ClearZoneEditable = false;
 		gamedata.IsEditable_Object_Exist = false;
@@ -234,7 +244,7 @@ void EditorData::UnEditObject(GameData & gamedata, glm::vec3 mouse)
 	auto box = gamedata.Box.begin();
 	for (box; box != gamedata.Box.end(); ++box)
 	{
-		if (Physics::MouseVsRect(mouse, box->first->transform))
+		if (Physics::MouseVsRect(mouse, box->first->GetComponent<Transform>()))
 		{
 			box->second = false;
 			gamedata.IsEditable_Object_Exist = false;
@@ -244,7 +254,7 @@ void EditorData::UnEditObject(GameData & gamedata, glm::vec3 mouse)
 	auto wall = gamedata.Wall.begin();
 	for (wall; wall != gamedata.Wall.end(); ++wall)
 	{
-		if (Physics::MouseVsRect(mouse, wall->first->transform))
+		if (Physics::MouseVsRect(mouse, wall->first->GetComponent<Transform>()))
 		{
 			wall->second = false;
 			gamedata.IsEditable_Object_Exist = false;
@@ -254,7 +264,7 @@ void EditorData::UnEditObject(GameData & gamedata, glm::vec3 mouse)
 	auto trigger180 = gamedata.Trigger180.begin();
 	for (trigger180; trigger180 != gamedata.Trigger180.end(); ++trigger180)
 	{
-		if (Physics::MouseVsRect(mouse, trigger180->first->transform))
+		if (Physics::MouseVsRect(mouse, trigger180->first->GetComponent<Transform>()))
 		{
 			trigger180->second = false;
 			gamedata.IsEditable_Object_Exist = false;
@@ -264,7 +274,7 @@ void EditorData::UnEditObject(GameData & gamedata, glm::vec3 mouse)
 	auto trigger90 = gamedata.Trigger90.begin();
 	for (trigger90; trigger90 != gamedata.Trigger90.end(); ++trigger90)
 	{
-		if (Physics::MouseVsRect(mouse, trigger90->first->transform))
+		if (Physics::MouseVsRect(mouse, trigger90->first->GetComponent<Transform>()))
 		{
 			trigger90->second = false;
 			gamedata.IsEditable_Object_Exist = false;
@@ -274,7 +284,7 @@ void EditorData::UnEditObject(GameData & gamedata, glm::vec3 mouse)
 	auto button = gamedata.Button.begin();
 	for (button; button != gamedata.Button.end(); ++button)
 	{
-		if (Physics::MouseVsRect(mouse, button->first->transform))
+		if (Physics::MouseVsRect(mouse, button->first->GetComponent<Transform>()))
 		{
 			button->second = false;
 			gamedata.IsEditable_Object_Exist = false;
@@ -301,11 +311,11 @@ void EditorData::ScaleObject(GameData & gamedata, glm::vec3 mouse)
 			{
 				if (abs(xdis) > abs(ydis))
 				{
-					box->first->transform->scale.x -= xdis;
+					box->first->GetComponent<Transform>()->scale.x -= xdis;
 				}
 				else
 				{
-					box->first->transform->scale.y -= ydis;
+					box->first->GetComponent<Transform>()->scale.y -= ydis;
 				}
 			}
 		}
@@ -317,10 +327,10 @@ void EditorData::ScaleObject(GameData & gamedata, glm::vec3 mouse)
 			{
 				if (abs(xdis) > abs(ydis))
 				{
-					wall->first->transform->scale.x -= xdis;
+					wall->first->GetComponent<Transform>()->scale.x -= xdis;
 				}
 				else
-					wall->first->transform->scale.y -= ydis;
+					wall->first->GetComponent<Transform>()->scale.y -= ydis;
 			}
 		}
 
@@ -331,10 +341,10 @@ void EditorData::ScaleObject(GameData & gamedata, glm::vec3 mouse)
 			{
 				if (abs(xdis) > abs(ydis))
 				{
-					trigger180->first->transform->scale.x -= xdis;
+					trigger180->first->GetComponent<Transform>()->scale.x -= xdis;
 				}
 				else
-					trigger180->first->transform->scale.y -= ydis;
+					trigger180->first->GetComponent<Transform>()->scale.y -= ydis;
 			}
 		}
 
@@ -345,10 +355,10 @@ void EditorData::ScaleObject(GameData & gamedata, glm::vec3 mouse)
 			{
 				if (abs(xdis) > abs(ydis))
 				{
-					trigger90->first->transform->scale.x -= xdis;
+					trigger90->first->GetComponent<Transform>()->scale.x -= xdis;
 				}
 				else
-					trigger90->first->transform->scale.y -= ydis;
+					trigger90->first->GetComponent<Transform>()->scale.y -= ydis;
 			}
 		}
 
@@ -359,10 +369,10 @@ void EditorData::ScaleObject(GameData & gamedata, glm::vec3 mouse)
 			{
 				if (abs(xdis) > abs(ydis))
 				{
-					button->first->transform->scale.x -= xdis;
+					button->first->GetComponent<Transform>()->scale.x -= xdis;
 				}
 				else
-					button->first->transform->scale.y -= ydis;
+					button->first->GetComponent<Transform>()->scale.y -= ydis;
 			}
 		}
 	}
@@ -389,11 +399,11 @@ void EditorData::RotateObject(GameData & gamedata, glm::vec3 mouse)
 			{
 				if (abs(xdis) > abs(ydis))
 				{
-					box->first->transform->angle -= xdis;
+					box->first->GetComponent<Transform>()->angle -= xdis;
 				}
 				else
 				{
-					box->first->transform->angle -= ydis;
+					box->first->GetComponent<Transform>()->angle -= ydis;
 				}
 			}
 		}
@@ -405,10 +415,10 @@ void EditorData::RotateObject(GameData & gamedata, glm::vec3 mouse)
 			{
 				if (abs(xdis) > abs(ydis))
 				{
-					wall->first->transform->angle -= xdis;
+					wall->first->GetComponent<Transform>()->angle -= xdis;
 				}
 				else
-					wall->first->transform->angle -= ydis;
+					wall->first->GetComponent<Transform>()->angle -= ydis;
 			}
 		}
 
@@ -419,10 +429,10 @@ void EditorData::RotateObject(GameData & gamedata, glm::vec3 mouse)
 			{
 				if (abs(xdis) > abs(ydis))
 				{
-					trigger180->first->transform->angle -= xdis;
+					trigger180->first->GetComponent<Transform>()->angle -= xdis;
 				}
 				else
-					trigger180->first->transform->angle -= ydis;
+					trigger180->first->GetComponent<Transform>()->angle -= ydis;
 			}
 		}
 
@@ -433,10 +443,10 @@ void EditorData::RotateObject(GameData & gamedata, glm::vec3 mouse)
 			{
 				if (abs(xdis) > abs(ydis))
 				{
-					trigger90->first->transform->angle -= xdis;
+					trigger90->first->GetComponent<Transform>()->angle -= xdis;
 				}
 				else
-					trigger90->first->transform->angle -= ydis;
+					trigger90->first->GetComponent<Transform>()->angle -= ydis;
 			}
 		}
 
@@ -447,10 +457,10 @@ void EditorData::RotateObject(GameData & gamedata, glm::vec3 mouse)
 			{
 				if (abs(xdis) > abs(ydis))
 				{
-					button->first->transform->angle -= xdis;
+					button->first->GetComponent<Transform>()->angle -= xdis;
 				}
 				else
-					button->first->transform->angle -= ydis;
+					button->first->GetComponent<Transform>()->angle -= ydis;
 			}
 		}
 	}

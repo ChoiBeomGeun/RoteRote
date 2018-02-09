@@ -20,6 +20,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "Application.h"
 #include "Factory.h"
 #include "StateManager.h"
+#include "../../example/examples/PlayerController.h"
 
 namespace TE {
 
@@ -47,6 +48,7 @@ void Physics::Initialize() {
 	GravityType = Gravity::y_Minus;
 	gravity = glm::vec3(0, gravityScale, 0);
 	IsPlayerGround = false;
+	
 	//gravity.Set(0, gravityScale, 0);
 }
 
@@ -72,7 +74,7 @@ void Physics::ExplictEulerIntegrator(float dt) {
 
 		if (STATEMANAGER->b_IsReplay || STATEMANAGER->b_IsAutoplaying)
 		{
-			if ((*i).second->GetOwner()->GetComponent(ComponentType::CT_CONTROLLER) != nullptr)
+			if ((*i).second->GetOwner()->HasComponent<PlayerController>() )
 				continue;
 
 		}
@@ -92,14 +94,14 @@ void Physics::ExplictEulerIntegrator(float dt) {
 			//(*i).second->pm_velocity.SetZero();
 			(*i).second->pm_velocity += gravity * 5.f * dt;
 		}
-		else
+		else if(!(*i).second->pOwner->objectstyle == Player)
 			(*i).second->pm_velocity += (gravity + (*i).second->m_force * (*i).second->pm_invmass)*dt;
 
 		if (gravity.x != 0.f)
 		{
 			if (STATEMANAGER->b_IsGravityChanged)
 				(*i).second->pm_velocity.x = 0;
-			(*i).second->pm_velocity.y *= 0.98f;
+			(*i).second->pm_velocity.y *= 0.98f * dt;
 			// if Gravity Change, vel.y = 0 
 		}
 
@@ -107,7 +109,7 @@ void Physics::ExplictEulerIntegrator(float dt) {
 		{
 			if (STATEMANAGER->b_IsGravityChanged)
 				(*i).second->pm_velocity.y = 0;
-			(*i).second->pm_velocity.x *= 0.98f;
+			(*i).second->pm_velocity.x *= 0.98f * dt;
 		}
 
 		(*i).second->m_force = glm::vec3(0);
@@ -120,7 +122,7 @@ void Physics::BroadPhase() {
 	//Big O Notation : O (n^2 / 2 )
 	if (FACTORY->GetPlayer())
 	{
-		FACTORY->GetPlayer()->body->Jump = false;
+		FACTORY->GetPlayer()->GetComponent<Body>()->Jump = false;
 	}
 	for (std::map<unsigned int, Body*>::iterator i = m_Body.begin();
 		i != m_Body.end(); ++i) {
@@ -158,8 +160,8 @@ void Physics::BroadPhase() {
 		}
 	}
 	if (FACTORY->GetPlayer()) {
-		if (!(FACTORY->GetPlayer()->body->Jump))
-			FACTORY->GetPlayer()->body->GroundType = Grounded::Air;
+		if (!(FACTORY->GetPlayer()->GetComponent<Body>()->Jump))
+			FACTORY->GetPlayer()->GetComponent<Body>()->GroundType = Grounded::Air;
 	}
 	IsPlayerGround = false;
 }
@@ -377,6 +379,50 @@ bool Physics::RectvsRectCollisionCheck(Transform * pA, Transform * pB)
 
 		// Vector from A to B
 		glm::vec3 normal = pB->GetPosition() - pA->GetPosition();
+		//      pB->m_pTransform->Position - pA->m_pTransform->Position;
+
+		// Calculate half extents along x axis for each object
+		float a_extent = (abr.x - atl.x) / 2;
+		float b_extent = (bbr.x - btl.x) / 2;
+
+		float x_overlap = a_extent + b_extent - std::abs(normal.x);
+
+		if (x_overlap > 0)
+		{
+			a_extent = (atl.y - abr.y) / 2;
+			b_extent = (btl.y - bbr.y) / 2;
+
+			float y_overlap = a_extent + b_extent - std::abs(normal.y);
+
+			if (y_overlap > 0)
+			{
+				// Find out which axis is axis of least penetration
+				if (x_overlap < y_overlap)
+					return true;
+				else
+					return true;
+			}
+		}
+	}
+	return false;
+}
+bool TE::Physics::SimpleRectvsRectCollisionCheck(glm::vec3 * pApos, glm::vec3 * pAscale, glm::vec3 * pBpos, glm::vec3 * pBscale)
+{
+	if (pApos && pBpos)
+	{
+		glm::vec3 asize = *pAscale;
+		glm::vec3   apos = *pApos;
+		glm::vec3 bsize = *pBscale;
+		glm::vec3   bpos = *pBpos;
+		glm::vec3 atl, abr, btl, bbr;
+
+		atl = glm::vec3(apos.x - (asize.x * .5f), apos.y + (asize.y * .5f), 0.f);
+		abr = glm::vec3(apos.x + (asize.x * .5f), apos.y - (asize.y * .5f), 0.f);
+		btl = glm::vec3(bpos.x - (bsize.x * .5f), bpos.y + (bsize.y * .5f), 0.f);
+		bbr = glm::vec3(bpos.x + (bsize.x * .5f), bpos.y - (bsize.y * .5f), 0.f);
+
+		// Vector from A to B
+		glm::vec3 normal = *pBpos - *pApos;
 		//      pB->m_pTransform->Position - pA->m_pTransform->Position;
 
 		// Calculate half extents along x axis for each object

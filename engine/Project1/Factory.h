@@ -21,7 +21,12 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "ArchetypeEditor.h"
 
 namespace TE {
-
+	struct ReplayerInfo {
+		glm::vec3 Pos = { 0,0,0 };
+		bool mouseinfo = 0;
+		float aniframe =0;
+		float anitime = 0;
+	};
 	class ObjectFactory : public Systems {
 	public:
 
@@ -43,16 +48,13 @@ namespace TE {
 		//Return an object with specific ID
 		Object* GetObjectwID (ObjectID id);
 		Object * CreateWall(const glm::vec3 & pos, const glm::vec3 & scale);
-		Object * ObjectFactory::CreateButton(const glm::vec3 & pos, const glm::vec3& scale);
-		Object * ObjectFactory::CreateBox(const glm::vec3 & pos, const glm::vec3 & scale);
+	
 		//Object * CreateCamera(const glm::vec3 & eye, const glm::vec3 & center, const glm::vec3 & up, const float angle);
 		Object * CreateEmptyObject();
 		//Showing how to create an object through hardcode
 		//Todo : when applying data driven methods, use this as blueprint
 		void CreateBoundary(void);
-		Object * CreatePlayer (const glm::vec3& pos, const glm::vec3& scale, const glm::vec3& velocity, float invmass);
-		Object * CreateAsteroid(const glm::vec3& pos, const glm::vec3& scale,const glm::vec3& velocity, float invmass);
-		Object * CreateTrigger(const glm::vec3 & pos, const glm::vec3& scale); 
+	
 		Object * CreateArchetype(Archetype path);
 		Object * TE::ObjectFactory::CreateHUD(const glm::vec3 & pos, const glm::vec3 & scale);
 		//used to incremetallly  generate unique ID
@@ -63,6 +65,7 @@ namespace TE {
 		Object * RightBoundary(void);
 		Object * UpBoundary(void);
 		Object * DownBoundary(void);
+		Object * GamePlayer = nullptr;
 		unsigned int GetAllObjectNumbers(void);
 		//Map of Objects to their IDs used for safe referencing
 		std::map<ObjectID, Object*> ObjectIDMap;

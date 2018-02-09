@@ -27,6 +27,8 @@ namespace TE
 		void Update(float dt) override;
 		void Movement(float dt);
 		void JumpInit();
+		void MaxJump();
+
 	private:
 		glm::vec3 pos;
 		Transform * transform;
@@ -37,5 +39,9 @@ namespace TE
 		float JumpSpeed;
 
 		float delta_pos;
+
+		bool JumpEnough;
+
+		bool GravityOn;
 	};
 }

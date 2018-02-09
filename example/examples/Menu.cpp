@@ -80,7 +80,7 @@ void Setting(void)
 void HowToPlay2(void)
 {
 	ooHowToPlay = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(2, 1.5, 0));
-	ooHowToPlay->sprite->texture_load("howtoplay.png");
+	ooHowToPlay->GetComponent<Sprite>()->texture_load("howtoplay.png");
 
 	oHowTOplay = true;
 
@@ -88,7 +88,7 @@ void HowToPlay2(void)
 void Exit(void)
 {
 	confirmation = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(1.5, 0.7, 0));
-	confirmation->sprite->texture_load("Sure.png");
+	confirmation->GetComponent<Sprite>()->texture_load("Sure.png");
 	
 	Exitornot = true;
 	
@@ -135,28 +135,28 @@ void Menu::Update(float dt)
 	switch (index)
 	{
 		case 0:
-		TE::FACTORY->ObjectIDMap[1]->sprite->ChangeColor(255, 255, 0, 255);
-		TE::FACTORY->ObjectIDMap[2]->sprite->ChangeColor(255, 255, 255, 255);
-		TE::FACTORY->ObjectIDMap[3]->sprite->ChangeColor(255, 255, 255, 255);
-		TE::FACTORY->ObjectIDMap[6]->sprite->ChangeColor(255, 255, 255, 255);
+		TE::FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
+		TE::FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		TE::FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		TE::FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
 		break;
 		case 1:
-		TE::FACTORY->ObjectIDMap[2]->sprite->ChangeColor(255, 255, 0, 255);
-		TE::FACTORY->ObjectIDMap[1]->sprite->ChangeColor(255, 255, 255, 255);
-		TE::FACTORY->ObjectIDMap[3]->sprite->ChangeColor(255, 255, 255, 255);
-		TE::FACTORY->ObjectIDMap[6]->sprite->ChangeColor(255, 255, 255, 255);
+		TE::FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
+		TE::FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		TE::FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		TE::FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
 		break;
 		case 2:
-			TE::FACTORY->ObjectIDMap[3]->sprite->ChangeColor(255, 255, 255, 255);
-			TE::FACTORY->ObjectIDMap[2]->sprite->ChangeColor(255, 255, 255, 255);
-			TE::FACTORY->ObjectIDMap[1]->sprite->ChangeColor(255, 255, 255, 255);
-			TE::FACTORY->ObjectIDMap[6]->sprite->ChangeColor(255, 255, 0, 255);
+			TE::FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+			TE::FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+			TE::FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+			TE::FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
 			break;
 		case 3:
-		TE::FACTORY->ObjectIDMap[3]->sprite->ChangeColor(255, 255, 0, 255);
-		TE::FACTORY->ObjectIDMap[2]->sprite->ChangeColor(255, 255, 255, 255);
-		TE::FACTORY->ObjectIDMap[1]->sprite->ChangeColor(255, 255, 255, 255);
-		TE::FACTORY->ObjectIDMap[6]->sprite->ChangeColor(255, 255, 255, 255);
+		TE::FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
+		TE::FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		TE::FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		TE::FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
 		break;
 
 	}

@@ -1,7 +1,7 @@
 {
 	"ArchtypeName" : "Box",
 	"DefaultGravity" : false,
-	"DefaultMass" : 1.0,
+	"DefaultMass" : 0.0,
 	"DefaultPosition" : 
 	{
 		"x" : 0.0,

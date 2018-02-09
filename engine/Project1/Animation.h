@@ -16,7 +16,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 
 
 #include "Component.h"
-#include "GameLogic.h"
+
 #include "Transform.h"
 #include  <string>
 #include "glew.h"

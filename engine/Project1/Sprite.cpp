@@ -1,4 +1,3 @@
-
 /**
 \file        Sprite.cpp
 \author      HyunJun Yoo
@@ -47,7 +46,7 @@ Sprite::~Sprite()
 void Sprite::Initialize()
 {
 
-	pTransform = (Transform*)GetOwner()->GetComponent(CT_TRANSFORM);
+	pTransform =this->GetOwner()->GetComponent<Transform>();
 	if (pTransform == nullptr)
 	{
 		DEBUG_PRINT("Sprite Component Init Fail");

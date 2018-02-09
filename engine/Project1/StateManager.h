@@ -25,6 +25,8 @@ State Manager header file in the engine system class
 #include  "BaseStage.h"
 #include  "GameStateList.h"
 #include <glm/glm.hpp>
+#include <forward_list>
+#include <queue>
 
 namespace TE {
 
@@ -61,9 +63,11 @@ namespace TE {
 		bool b_IsRot180 = false;
 		bool b_Relplay = false;
 		bool IsDrawing;
-
-
-		std::vector <std::pair<glm::vec3, bool>>  ReplayPosition;
+		bool levelreplay = false;
+		bool ReplayInit = true;
+		glm::vec3 InitplayerPos{ 0,0,0 };
+		std::queue<ReplayerInfo> Replayerinfo;
+		std::forward_list <std::pair<glm::vec3, bool>>  ReplayPosition;
 		std::vector <Object>  ReplayPlayer;
 		std::vector <std::pair<float, float>> AniSave;
 		std::vector<BaseStage*> v_StatesLists;

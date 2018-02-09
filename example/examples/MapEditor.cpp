@@ -52,7 +52,7 @@ void MapEditor::Load(void)
 {
 	LEVELMANAGER->LoadLevel(STATEMANAGER->Loadtolevelname);
 	for (auto i : FACTORY->ObjectIDMap)
-		i.second->transform->position.z = 130;
+		i.second->GetComponent<Transform>()->position.z = 130;
 	EditorData::LoadGameData(gamedata);
 }
 
@@ -67,8 +67,8 @@ void MapEditor::Init(void)
 	PHYSICS->IsMapEditorOn = true;
 	GRAPHICS->isMapEditorOn = true;
 
-	FACTORY->GetPlayer()->animation->setFrame(1.0f / 6);
-	FACTORY->GetPlayer()->animation->setTime(1.0f / 6);
+	FACTORY->GetPlayer()->GetComponent<Animation>()->setFrame(1.0f / 6);
+	FACTORY->GetPlayer()->GetComponent<Animation>()->setTime(1.0f / 6);
 }
 
 void MapEditor::Update(float dt)

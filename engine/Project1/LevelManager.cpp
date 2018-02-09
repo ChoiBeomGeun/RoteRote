@@ -54,7 +54,7 @@ void LevelManager::LoadLevel(std::string  path)
 #endif
 	free(Userinfo);
 
-	FACTORY->DestroyAllObjects();
+	//FACTORY->DestroyAllObjects();
 
 	STATEMANAGER->Loadtolevelname = saveLevel;
 	Jsonclass file;
@@ -94,39 +94,46 @@ void LevelManager::LoadLevel(std::string  path)
 		
 		for (unsigned int indexC = 0; ;indexC++) {
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "TRANSFORM") {
-				Transform * transform = new Transform();
-				transform->position.x = Xpos;
-				transform->position.y = Ypos;
-				transform->scale.x = Xscale;
-				transform->scale.y = Yscale;
-				transform->angle = Rotation;
-				transform->rotation = glm::vec3(0, 0, 1);
+			//	Transform * transform = new Transform();
+				tempObject->AddComponent<Transform>();
+			//	tempObject->GetComponent<Transform>()->position.x
+				tempObject->GetComponent<Transform>()->position.x = Xpos;
+				tempObject->GetComponent<Transform>()->position.y = Ypos;
+				tempObject->GetComponent<Transform>()->scale.x = Xscale;
+				tempObject->GetComponent<Transform>()->scale.y = Yscale;
+				tempObject->GetComponent<Transform>()->angle = Rotation;
+				tempObject->GetComponent<Transform>()->rotation = glm::vec3(0, 0, 1);
 			
-				tempObject->AddComponent(transform);
+			//	tempObject->AddComponent(transform);
 			}
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "SPRITE") {
-				Sprite * sprite = new Sprite();
-				sprite->depth = 0.0f;
-				sprite->ChangeColor(255, 255, 255, 255);
-				sprite->isPerspective = true;
-				sprite->texture_load(textureDir);
-				tempObject->AddComponent(sprite);
+			//	Sprite * sprite = new Sprite();
+				tempObject->AddComponent<Sprite>();
+				tempObject->GetComponent<Sprite>()->depth = 0.0f;
+				tempObject->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+				tempObject->GetComponent<Sprite>()->isPerspective = true;
+				tempObject->GetComponent<Sprite>()->texture_load(textureDir);
+			//	tempObject->AddComponent(sprite);
 				
 				
 			}
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "CONTROLLER") {
-				tempObject->AddComponent(new PlayerController());
+				tempObject->AddComponent<PlayerController>();
 
 
 
 			}
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "BODY") {
-				Body * body = new Body(glm::vec3(0, 0, 0), mass);
-				body->gravityOn = GravityOn;
 
-				body->restitution = 0;
-			
-				tempObject->AddComponent(body);
+
+
+		//		Body * body = new Body(glm::vec3(0, 0, 0), mass);
+ 				tempObject->AddComponent<Body>();
+				tempObject->GetComponent<Body>()->gravityOn = GravityOn;
+				tempObject->GetComponent<Body>()->pm_invmass = mass;
+				tempObject->GetComponent<Body>()->restitution = 0;
+		
+
 				
 
 			}
@@ -137,29 +144,30 @@ void LevelManager::LoadLevel(std::string  path)
 
 			}
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "ANIMATION") {
-				Animation * animation = new Animation();
-				animation->setFlipX(false);
-				animation->setTime(0.f);
-				animation->isJumping = false;
-				animation->setPressed(false);
-			
-				tempObject->AddComponent(animation);
+				//Animation * GetComponent<Animation>()= new Animation();
+
+				tempObject->AddComponent<Animation>();
+				tempObject->GetComponent<Animation>()->setFlipX(false);
+				tempObject->GetComponent<Animation>()->setTime(0.f);
+				tempObject->GetComponent<Animation>()->isJumping = false;
+				tempObject->GetComponent<Animation>()->setPressed(false);
+
 			}
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "TRIGGER") {
-				Trigger * trigger = new Trigger();
+	//			Trigger * trigger = new Trigger();
 
-
+				tempObject->AddComponent<Trigger>();
 				if (Objectstyle == "Trigger180") {
-					trigger->TriggerType = "180";
+					tempObject->GetComponent<Trigger>()->TriggerType = "180";
 					tempObject->objectstyle = Objectstyle::Trigger180;
 
 				}
 
 				if (Objectstyle == "Trigger90") {
-					trigger->TriggerType = "90";
+					tempObject->GetComponent<Trigger>()->TriggerType = "90";
 					tempObject->objectstyle = Objectstyle::Trigger90;
 				}
-				tempObject->AddComponent(trigger);
+
 				
 
 			}
@@ -186,8 +194,8 @@ void LevelManager::LoadLevel(std::string  path)
 		else if (Objectstyle == "Button")
 		{
 
-			if(tempObject->sprite !=NULL)
-			tempObject->sprite->depth = -1;
+			if(tempObject->GetComponent<Sprite>() !=NULL)
+			tempObject->GetComponent<Sprite>()->depth = -1;
 			//tempObject = FACTORY->CreateButton(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0));
 			tempObject->objectstyle = Objectstyle::Button;
 		}
@@ -214,10 +222,10 @@ void LevelManager::LoadLevel(std::string  path)
 		else
 			DEBUG_ASSERT(true, "Invaild Object Style");
 
-		if (tempObject->GetComponent(ComponentType::CT_SPRITE))
+		if (tempObject->GetComponent<Sprite>())
 		{
-			FACTORY->ObjectIDMap[tempObject->objID]->sprite->mTexutureDir = (const_cast<char*>(textureDir.c_str()));
-			tempObject->sprite->texture_load(const_cast<char*>(textureDir.c_str()));
+			FACTORY->ObjectIDMap[tempObject->objID]->GetComponent<Sprite>()->mTexutureDir = (const_cast<char*>(textureDir.c_str()));
+			tempObject->GetComponent<Sprite>()->texture_load(const_cast<char*>(textureDir.c_str()));
 		}
 	
 		tempObject->Initialize();
@@ -227,133 +235,133 @@ void LevelManager::LoadLevel(std::string  path)
 
 void LevelManager::SaveLevel(std::string  path)
 {
-	char * Userinfo;
-	size_t len = path.size();
-	_dupenv_s(&Userinfo, &len, "USERPROFILE");
-	
-
-		
-	
-	std::string saveLevel = path;
-#ifdef _DEBUG
-	path = ".\\levels.\\" + path;
-#else
-	path = Userinfo;
-	path += "/Documents/RoteRote/levels/" + saveLevel;
-#endif
-	free(Userinfo);
-	Jsonclass file;
-	Json::Value root;
-	std::string object = "Object";
-
-
-	root["Level"] = 1;
-	root["WorldSize"]["x"] = STATEMANAGER->v_StatesLists[STATEMANAGER->i_CurrentStateNumber]->WorldSizeX;
-	root["WorldSize"]["y"] = STATEMANAGER->v_StatesLists[STATEMANAGER->i_CurrentStateNumber]->WorldSizeY;
-	root["DefalutCamera"]["EYE"]["x"] = CAMERA->cameraPos.x;
-	root["DefalutCamera"]["EYE"]["y"] = CAMERA->cameraPos.y;
-	root["DefalutCamera"]["EYE"]["z"] = CAMERA->cameraPos.z;
-	root["DefalutCamera"]["TARGET"]["x"] = CAMERA->cameraTarget.x;
-	root["DefalutCamera"]["TARGET"]["y"] = CAMERA->cameraTarget.y;
-	root["DefalutCamera"]["TARGET"]["z"] = CAMERA->cameraTarget.z;
-	root["DefalutCamera"]["UP"]["x"] = CAMERA->cameraUp.x;
-	root["DefalutCamera"]["UP"]["y"] = CAMERA->cameraUp.y;
-	root["DefalutCamera"]["UP"]["z"] = CAMERA->cameraUp.z;
-	root["NumberOfObjects"] = FACTORY->ObjectIDMap.size();
-	int  i = 1;
-	for (auto it : FACTORY->ObjectIDMap)
-	{
-		it.second->transform->position.z = 0;
-		static unsigned index = 0;
-
-		if (it.second->GetComponent(CT_TRANSFORM) != nullptr) {
-			root[object + to_string(i)]["Components"][index] = "TRANSFORM";
-			index++;
-		}
-		if (it.second->GetComponent(CT_SPRITE) != nullptr) {
-			root[object + to_string(i)]["Components"][index] = "SPRITE";
-			index++;
-		}
-		if (it.second->GetComponent(CT_BODY) != nullptr) {
-			root[object + to_string(i)]["Components"][index] = "BODY";
-
-			if(it.second->objectstyle == Objectstyle::Box)
-				it.second->body->gravityOn = false;
-			root[object + to_string(i)]["GravityOn"] = it.second->body->gravityOn;
-			index++;
-		}
-		if (it.second->GetComponent(CT_TRIGGER) != nullptr) {
-			root[object + to_string(i)]["Components"][index] = "TRIGGER";
-			root[object + to_string(i)]["TriggerType"] = it.second->trigger->TriggerType;
-			index++;
-		}
-		if (it.second->GetComponent(CT_BUTTON) != nullptr) {
-			root[object + to_string(i)]["Components"][index] = "BUTTON";
-			index++;
-		}
-		if (it.second->GetComponent(CT_CONTROLLER) != nullptr) {
-			root[object + to_string(i)]["Components"][index] = "CONTROLLER";
-			index++;
-		}
-		if (it.second->GetComponent(CT_ANIMATION) != nullptr) {
-			root[object + to_string(i)]["Components"][index] = "ANIMATION";
-			index++;
-		}
-		index = 0;
-
-		switch (it.second->objectstyle)
-		{
-		case Objectstyle::Player:
-			root[object + to_string(i)]["ObjectType"] = "Player";
-			break;
-		case Objectstyle::Asteriod:
-			root[object + to_string(i)]["ObjectType"] = "Asteriod";
-			break;
-		case Objectstyle::Wall:
-			root[object + to_string(i)]["ObjectType"] = "Wall";
-			break;
-		case Objectstyle::Button:
-			root[object + to_string(i)]["ObjectType"] = "Button";
-			break;
-		case Objectstyle::Box:
-			root[object + to_string(i)]["ObjectType"] = "Box";
-			break;
-		case Objectstyle::Trigger90:
-			root[object + to_string(i)]["ObjectType"] = "Trigger90";
-			break;
-		case Objectstyle::Trigger180:
-			root[object + to_string(i)]["ObjectType"] = "Trigger180";
-			break;
-		case Objectstyle::Clearzone:
-			root[object + to_string(i)]["ObjectType"] = "Clearzone";
-			break;
-			/*case Objectstyle::Camera:
-			root[object + to_string(i)]["ObjectType"] = "Camera";
-			break;*/
-		default:
-			DEBUG_ASSERT(true, "Invaild Object Style");
-
-
-		}
-		root[object + to_string(i)]["ObjectID"] = i;
-		root[object + to_string(i)]["Position"]["x"] = it.second->transform->position.x;
-		root[object + to_string(i)]["Position"]["y"] = it.second->transform->position.y;
-		root[object + to_string(i)]["Position"]["z"] = it.second->transform->position.z;
-		root[object + to_string(i)]["Scale"]["x"] = it.second->transform->scale.x;
-		root[object + to_string(i)]["Scale"]["y"] = it.second->transform->scale.y;
-		if (FACTORY->ObjectIDMap[it.first]->GetComponent(ComponentType::CT_BODY) != nullptr)
-			root[object + to_string(i)]["Mass"] = it.second->body->pm_mass;
-		root[object + to_string(i)]["Rotation"] = it.second->transform->angle;
-
-
-		root[object + to_string(i)]["TextureDir"] = FACTORY->ObjectIDMap[it.first]->sprite->mTexutureDir;
-		i++;
-	}
-
-
-	file.WriteFile(path, root);
-
-
+//	char * Userinfo;
+//	size_t len = path.size();
+//	_dupenv_s(&Userinfo, &len, "USERPROFILE");
+//	
+//
+//		
+//	
+//	std::string saveLevel = path;
+//#ifdef _DEBUG
+//	path = ".\\levels.\\" + path;
+//#else
+//	path = Userinfo;
+//	path += "/Documents/RoteRote/levels/" + saveLevel;
+//#endif
+//	free(Userinfo);
+//	Jsonclass file;
+//	Json::Value root;
+//	std::string object = "Object";
+//
+//
+//	root["Level"] = 1;
+//	root["WorldSize"]["x"] = STATEMANAGER->v_StatesLists[STATEMANAGER->i_CurrentStateNumber]->WorldSizeX;
+//	root["WorldSize"]["y"] = STATEMANAGER->v_StatesLists[STATEMANAGER->i_CurrentStateNumber]->WorldSizeY;
+//	root["DefalutCamera"]["EYE"]["x"] = CAMERA->cameraPos.x;
+//	root["DefalutCamera"]["EYE"]["y"] = CAMERA->cameraPos.y;
+//	root["DefalutCamera"]["EYE"]["z"] = CAMERA->cameraPos.z;
+//	root["DefalutCamera"]["TARGET"]["x"] = CAMERA->cameraTarget.x;
+//	root["DefalutCamera"]["TARGET"]["y"] = CAMERA->cameraTarget.y;
+//	root["DefalutCamera"]["TARGET"]["z"] = CAMERA->cameraTarget.z;
+//	root["DefalutCamera"]["UP"]["x"] = CAMERA->cameraUp.x;
+//	root["DefalutCamera"]["UP"]["y"] = CAMERA->cameraUp.y;
+//	root["DefalutCamera"]["UP"]["z"] = CAMERA->cameraUp.z;
+//	root["NumberOfObjects"] = FACTORY->ObjectIDMap.size();
+//	int  i = 1;
+//	for (auto it : FACTORY->ObjectIDMap)
+//	{
+//		it.second->transform->position.z = 0;
+//		static unsigned index = 0;
+//
+//		if (it.second->GetComponent(CT_TRANSFORM) != nullptr) {
+//			root[object + to_string(i)]["Components"][index] = "TRANSFORM";
+//			index++;
+//		}
+//		if (it.second->GetComponent(CT_SPRITE) != nullptr) {
+//			root[object + to_string(i)]["Components"][index] = "SPRITE";
+//			index++;
+//		}
+//		if (it.second->GetComponent(CT_BODY) != nullptr) {
+//			root[object + to_string(i)]["Components"][index] = "BODY";
+//
+//			if(it.second->objectstyle == Objectstyle::Box)
+//				it.second->body->gravityOn = false;
+//			root[object + to_string(i)]["GravityOn"] = it.second->body->gravityOn;
+//			index++;
+//		}
+//		if (it.second->GetComponent(CT_TRIGGER) != nullptr) {
+//			root[object + to_string(i)]["Components"][index] = "TRIGGER";
+//			root[object + to_string(i)]["TriggerType"] = it.second->trigger->TriggerType;
+//			index++;
+//		}
+//		if (it.second->GetComponent(CT_BUTTON) != nullptr) {
+//			root[object + to_string(i)]["Components"][index] = "BUTTON";
+//			index++;
+//		}
+//		if (it.second->GetComponent(CT_CONTROLLER) != nullptr) {
+//			root[object + to_string(i)]["Components"][index] = "CONTROLLER";
+//			index++;
+//		}
+//		if (it.second->GetComponent(CT_ANIMATION) != nullptr) {
+//			root[object + to_string(i)]["Components"][index] = "ANIMATION";
+//			index++;
+//		}
+//		index = 0;
+//
+//		switch (it.second->objectstyle)
+//		{
+//		case Objectstyle::Player:
+//			root[object + to_string(i)]["ObjectType"] = "Player";
+//			break;
+//		case Objectstyle::Asteriod:
+//			root[object + to_string(i)]["ObjectType"] = "Asteriod";
+//			break;
+//		case Objectstyle::Wall:
+//			root[object + to_string(i)]["ObjectType"] = "Wall";
+//			break;
+//		case Objectstyle::Button:
+//			root[object + to_string(i)]["ObjectType"] = "Button";
+//			break;
+//		case Objectstyle::Box:
+//			root[object + to_string(i)]["ObjectType"] = "Box";
+//			break;
+//		case Objectstyle::Trigger90:
+//			root[object + to_string(i)]["ObjectType"] = "Trigger90";
+//			break;
+//		case Objectstyle::Trigger180:
+//			root[object + to_string(i)]["ObjectType"] = "Trigger180";
+//			break;
+//		case Objectstyle::Clearzone:
+//			root[object + to_string(i)]["ObjectType"] = "Clearzone";
+//			break;
+//			/*case Objectstyle::Camera:
+//			root[object + to_string(i)]["ObjectType"] = "Camera";
+//			break;*/
+//		default:
+//			DEBUG_ASSERT(true, "Invaild Object Style");
+//
+//
+//		}
+//		root[object + to_string(i)]["ObjectID"] = i;
+//		root[object + to_string(i)]["Position"]["x"] = it.second->transform->position.x;
+//		root[object + to_string(i)]["Position"]["y"] = it.second->transform->position.y;
+//		root[object + to_string(i)]["Position"]["z"] = it.second->transform->position.z;
+//		root[object + to_string(i)]["Scale"]["x"] = it.second->transform->scale.x;
+//		root[object + to_string(i)]["Scale"]["y"] = it.second->transform->scale.y;
+//		if (FACTORY->ObjectIDMap[it.first]->GetComponent(ComponentType::CT_BODY) != nullptr)
+//			root[object + to_string(i)]["Mass"] = it.second->body->pm_mass;
+//		root[object + to_string(i)]["Rotation"] = it.second->transform->angle;
+//
+//
+//		root[object + to_string(i)]["TextureDir"] = FACTORY->ObjectIDMap[it.first]->sprite->mTexutureDir;
+//		i++;
+//	}
+//
+//
+//	file.WriteFile(path, root);
+//
+//
 }
 
 

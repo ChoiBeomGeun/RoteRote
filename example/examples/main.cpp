@@ -32,7 +32,10 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include <crtdbg.h>
 #include "LevelManager.h"
 #include "MapEditor.h"
-
+#include "InGameLogic.h"
+#include "Clearzone.h"
+#include "LoseconditionLogic.h"
+#include "Trigger.h"
 using namespace TE;
 int main(int,char**)
 {
@@ -50,7 +53,11 @@ int main(int,char**)
 	//Todo : Initialize the Engine and initialize all systems.
 	TEengine->Initialize();
 	//Todo : Create initial game state, main menu 
-	
+
+	INGAMELOGIC = new InGameLogic;
+	INGAMELOGIC->InGameLogicAdd(new TriggerLogic());
+	INGAMELOGIC->InGameLogicAdd(new ClearzoneLogic());
+	INGAMELOGIC->InGameLogicAdd(new LoseconditionLogic());
 
 	STATEMANAGER->AddState(new splash);
 	STATEMANAGER->AddState(new Menu);
@@ -58,7 +65,7 @@ int main(int,char**)
 	STATEMANAGER->AddState(new LevelSelect);
 	STATEMANAGER->AddState(new Level1);
 	STATEMANAGER->AddState(new Pause);
-	STATEMANAGER->AddState(new ReplaySystem);
+
 	STATEMANAGER->AddState(new MapEditor);
 	STATEMANAGER->SetPauseState(StatesList::Pause);
 	STATEMANAGER->SetStartState(StatesList::Splash);
@@ -67,8 +74,8 @@ int main(int,char**)
 
 	//Todo : Main Loop
 	TEengine->GameLoop();
-	//INGAMELOGIC->InGameShutdown();
-//	delete INGAMELOGIC;
+	INGAMELOGIC->DestoryAllGameLogics();
+	delete INGAMELOGIC;
 	//Todo : Shutdown the engine
 	//Also means shutdown and clean all systems
 	STATEMANAGER->DestoryAllStates();

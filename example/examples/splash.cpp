@@ -47,9 +47,9 @@ void splash::Load()
 
 void splash::Init()
 {
-#ifndef _DEBUG
-	APP->toggle_fullscreen(APP->getWindow(), true);
-#endif
+//#ifndef _DEBUG
+//	APP->toggle_fullscreen(APP->getWindow(), true);
+//#endif
 	
 	
 	//CAMERA->view.RotateZ(TUMath::DegreeToRadian(0.f));
@@ -58,8 +58,8 @@ void splash::Init()
 
 
 	LEVELMANAGER->LoadLevel(path2);
-	FACTORY->ObjectIDMap[1]->animation->setFrame(1.0f / 16);
-	FACTORY->ObjectIDMap[1]->animation->setTime(1.0f / 32);
+	FACTORY->ObjectIDMap[1]->GetComponent<Animation>()->setFrame(1.0f / 16);
+	FACTORY->ObjectIDMap[1]->GetComponent<Animation>()->setTime(1.0f / 32);
 	printf("splashInit\n");
 
 }
@@ -75,10 +75,9 @@ void splash::Update(float dt)
 	if (Timer2 >= 400)
 	{
 		FACTORY->Destroy(FACTORY->ObjectIDMap[1]);
-
 		FACTORY->CreateArchetype(ReadingArchetype("Wall.json"));
-		FACTORY->ObjectIDMap[2]->transform->SetScale(glm::vec3(500,90,0));
-		FACTORY->ObjectIDMap[2]->sprite->texture_load("FMOD.png");
+		FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->SetScale(glm::vec3(500,90,0));
+		FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->texture_load("FMOD.png");
 
 		STATEMANAGER->Next();
 		Timer2 = 0;
@@ -93,7 +92,7 @@ void splash::Update(float dt)
 
 void splash::Free(void)
 {
-	delete INGAMELOGIC;
+//	delete INGAMELOGIC;
 	printf("splashFree\n");
 //	INGAMELOGIC->InGameShutdown();
 }

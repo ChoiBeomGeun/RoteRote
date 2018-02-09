@@ -47,30 +47,74 @@ namespace TE {
 		//Init the object
 		void Initialize();
 
+
+
+
+
+		std::vector <Component*>mVcomponetList;
+
 		// Properly destroy the object by delay destruction
 		void Destroy();
+		bool IsLoadingObject = false;
+		template <typename ComponentType>
+		void	 AddComponent();
 
-		bool AddComponent(Component * pComponent);
-	Component* GetComponent(ComponentType cType);
-	ObjectID objID;	
-	Objectstyle objectstyle;
-		//std::vector<Component*> pCompList;
-		//ALL different types of pointers to different components
-		//but set to null ptr if component doesn't exist.
-		//Transform* transform
-		//Sprite * sprite
-		//Body * body
-		//Logic * logic
-		Sprite * sprite;
-		Animation * animation;
-		Transform * transform;
-		Controller * controller;
-		Body * body;
-		Button * button;
-		Trigger * trigger;
-		/*Particle * particle;*/
+		template <typename ComponentType>
+		ComponentType*	GetComponent();
+		
 
-		char * objName = "default";
+		template <typename ComponentType>
+		bool HasComponent();
+		ObjectID objID;	
+		Objectstyle objectstyle;
+
 	};
+
+
+	template <typename ComponentType>
+	bool Object::HasComponent()
+	{
+		for (auto inComponentList : mVcomponetList)
+		{
+
+			if (typeid(*inComponentList).name() == typeid(ComponentType).name())
+				return true;
+		}
+		return false;
+
+	}
+
+
+
+	template<typename ComponentType>
+	void Object::AddComponent()
+	{
+		if (HasComponent<ComponentType>()) {
+			std::cout << "Object Number : "<<this->objID<<"already has this component " << typeid(ComponentType).name();
+			return;
+		}
+		ComponentType * temp = new ComponentType();
+		dynamic_cast<Component*>(temp)->SetOwner(this);
+		this->mVcomponetList.push_back(temp);
+
+
+
+	}
+
+	template<typename ComponentType>
+	ComponentType* Object::GetComponent()
+	{
+		for(auto inComponentList : mVcomponetList)
+		{
+
+			if (typeid(*inComponentList).name() == typeid(ComponentType).name())
+				return dynamic_cast<ComponentType*>(inComponentList);
+		}
+		std::cout << "Object Number : " << this->objID << "doesn't have this component : " << typeid(ComponentType).name();
+		return nullptr;
+
+	}
+
+
 
 }

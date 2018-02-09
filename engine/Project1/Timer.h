@@ -46,7 +46,7 @@ namespace TE
 			currTime = high_resolution_clock::now();
 			duration<float>delta(currTime - prevTime);
 
-			prevTime = high_resolution_clock::now();
+			prevTime = currTime;
 
 			return delta.count();
 		};

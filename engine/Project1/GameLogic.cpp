@@ -13,6 +13,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 /******************************************************************************/
 #include "GameLogic.h"
 #include "Controller.h"
+#include  <list>
 using namespace TE;
 
 namespace TE {
@@ -42,7 +43,7 @@ void GameLogic::Initialize()
 
 void GameLogic::Update(float dt)
 {
-	//std::list<Controller>::iterator itr = ControllerList.begin();
+//	std::list<Controller>::iterator itr = ControllerList.begin();
 	for (auto element : ControllerList)
 		element->Update(dt);
 		

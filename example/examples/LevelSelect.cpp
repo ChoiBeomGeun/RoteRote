@@ -94,7 +94,7 @@ void LevelSelect::Init()
 	for (auto it : FACTORY->ObjectIDMap) {
 		if (it.second->objectstyle == Objectstyle::Button)
 		{
-			if (it.second->sprite->mTexutureDir == "back.png")
+			if (it.second->GetComponent<Sprite>()->mTexutureDir == "back.png")
 			{
 
 				Init = it.second;
@@ -136,9 +136,9 @@ void LevelSelect::Update(float dt)
 		for (unsigned int i = 0; i < buttons.size(); i++)
 		{
 			if (buttons[i].second == levelindex)
-				buttons[i].first->sprite->ChangeColor(255, 255, 0, 255);
+				buttons[i].first->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
 			else
-				buttons[i].first->sprite->ChangeColor(255, 255, 255, 255);
+				buttons[i].first->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
 		}
 
 	}
@@ -178,5 +178,5 @@ void LevelSelect::Free(void)
 
 void LevelSelect::Unload()
 {
-
+	printf("gd");
 }

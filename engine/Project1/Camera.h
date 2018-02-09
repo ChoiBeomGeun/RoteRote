@@ -22,7 +22,10 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include <glm/gtc/type_ptr.hpp>
 
 namespace TE {
-
+	struct CameraObject {
+		glm::vec3 pos;
+		glm::vec3 scale;
+	};
 	class Camera
 	{
 	public:
@@ -53,7 +56,7 @@ namespace TE {
 		bool isCentered;
 		float angle;
 		float _aspect;
-
+		CameraObject * m_camerObject;
 	};
 	extern Camera * CAMERA;
 }

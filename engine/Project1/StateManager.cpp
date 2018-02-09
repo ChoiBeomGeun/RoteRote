@@ -95,10 +95,11 @@ void StateManager::Update(float dt)
 	}
 	if (b_IsRestart && !CAMERA->IsCameraShaking)
 	{
-
+		FACTORY->DestroyAllObjects();
 		CAMERA->cameraUp.x = 0;
 		CAMERA->cameraUp.y = 1;
-		FACTORY->DestroyAllObjects();
+		
+			SOUNDMANAGER->DeleteSounds();
 
 		this->v_StatesLists[i_CurrentStateNumber]->Free();
 		this->v_StatesLists[i_CurrentStateNumber]->Init();
@@ -186,7 +187,7 @@ void StateManager::Update(float dt)
 
 
 
-	if (!b_IsRotating && b_IsGameLevel && !b_Relplay)
+	if (!b_IsRotating && b_IsGameLevel && !b_IsReplay)
 	{
 		if (Input::IsTriggered(SDL_SCANCODE_ESCAPE))
 			PauseReturn();

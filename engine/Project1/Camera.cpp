@@ -1,4 +1,3 @@
-
 /**
 \file        Camera.cpp
 \author      HyunJun Yoo
@@ -30,7 +29,8 @@ Camera::Camera()
 	cameraPos = glm::vec3(0, 0, 3);
 	cameraTarget = glm::vec3(0, 0, -1);
 
-
+	m_camerObject = new CameraObject();
+	m_camerObject->scale = glm::vec3(1, 1, 0);
 	DEBUG_ASSERT(CAMERA != nullptr, "Camera has more than one");
 	CAMERA = this;
 }
@@ -146,7 +146,7 @@ void TE::Camera::onPlayer(bool isOnPlayer)
 {
 	if (isOnPlayer)
 	{
-		CAMERA->cameraPos = FACTORY->GetPlayer()->transform->position;
+		CAMERA->cameraPos = FACTORY->GetPlayer()->GetComponent<Transform>()->position;
 		CAMERA->cameraPos.z = 999.f;
 		view = glm::lookAt(CAMERA->cameraPos, CAMERA->cameraTarget, CAMERA->cameraUp);
 	}
@@ -155,7 +155,7 @@ void TE::Camera::onPlayer(bool isOnPlayer)
 void TE::Camera::followPlayer()
 {
 //	float PaceSpeed = 5.0f;
-	glm::vec3 PaceDirection = FACTORY->GetPlayer()->transform->position - cameraPos;
+	glm::vec3 PaceDirection = FACTORY->GetPlayer()->GetComponent<Transform>()->position - cameraPos;
 	glm::vec3 StartPosition{ 0.f };
 
 }

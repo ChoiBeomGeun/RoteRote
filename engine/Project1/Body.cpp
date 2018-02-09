@@ -18,25 +18,17 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include  "Factory.h"
 #pragma once
 using namespace TE;
-Body::Body(glm::vec3 vel, float invmass) : Component(CT_BODY), pm_velocity(vel), pm_invmass(invmass)
-{
-	restitution = 0.2f;
-	m_force = glm::vec3(0);
 
-	Jump = false;
-	if (pm_invmass == 0)
-		pm_mass = 0;
-	else
-		pm_mass = 1 / invmass;
-	GroundType = Grounded::Ground;
-	//Jump = true;
-	gravityOn = true;
-	//Put the pointer to component to the vector container,
-	//so that Physics system can iterate through
+Body::Body() : Component(CT_BODY)
+{
 	PHYSICS->m_vecprb.push_back(this);
 	PHYSICS->m_Body[FACTORY->BodyID] = this;
 	this->BodyID = FACTORY->BodyID;
 	FACTORY->BodyID++;
+}
+
+Body::Body(glm::vec3 vel, float invmass) : Component(CT_BODY), pm_velocity(vel), pm_invmass(invmass)
+{
 }
 
 Body::~Body()
@@ -44,13 +36,30 @@ Body::~Body()
 }
 void Body::Initialize()
 {
-	m_pTransform = dynamic_cast<Transform*>(this->GetOwner()->GetComponent(CT_TRANSFORM));
+	m_pTransform = GetOwner()->GetComponent<Transform>();
+
+	//restitution = 0.2f;
+	m_force = glm::vec3(0);
+
+	Jump = false;
+	if (pm_invmass == 0)
+		pm_mass = 0;
+	else
+		pm_mass = 1 / pm_invmass;
+	GroundType = Grounded::Ground;
+	//Jump = true;
+	//gravityOn = true;
+	//Put the pointer to component to the vector container,
+	//so that Physics system can iterate through
+
 }
 
 void TE::Body::Update(float dt)
 {
 	dt = dt;
 }
+
+
 
 void Body::SetRestitution(float r)
 {

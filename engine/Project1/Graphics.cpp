@@ -17,9 +17,8 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 static glm::vec3 eye = { 0,0,999 };
 static glm::vec3 target{ 0,0,-1 };
 static glm::vec3 up{ 0,1,0 };
-bool moving;
+//bool moving;
 
-std::vector<std::string> namelist;
 namespace TE {
 	Graphics * GRAPHICS = nullptr;
 }
@@ -201,7 +200,9 @@ void Graphics::Update(float dt)
 	{
 		if (FACTORY->GetPlayer())
 		{
-			CAMERA->cameraPos = FACTORY->GetPlayer()->transform->position;
+			if(!CAMERA->IsCameraShaking)
+			CAMERA->cameraPos = FACTORY->GetPlayer()->GetComponent<Transform>()->position;
+			
 			CAMERA->cameraPos.z = 999.f;
 			CAMERA->lookat(CAMERA->cameraPos, CAMERA->cameraTarget, CAMERA->cameraUp);
 		}
@@ -219,7 +220,7 @@ void Graphics::Update(float dt)
 		auto aniIter = AnimationList.begin();
 		for (aniIter; aniIter != AnimationList.end(); ++aniIter)
 		{
-			if ((*aniIter)->pOwner->GetComponent(CT_ANIMATION) != nullptr) {
+			if ((*aniIter)->pOwner->HasComponent<Animation>()) {
 				if ((*aniIter)->pOwner->objectstyle == Player)
 				{
 					glUniform1i(uniformLocation[ISANIMATION], 1);
@@ -285,15 +286,16 @@ void Graphics::Update(float dt)
 		glUniform1i(uniformLocation[ISANIMATION], 0);
 		if ((*it)->isPerspective)
 		{
-			if ((*it)->pOwner->GetComponent(CT_ANIMATION) != nullptr) {
+			if ((*it)->pOwner->HasComponent<Animation>() ) {
 				glUniform1i(uniformLocation[ISANIMATION], 1);
 			}
 			isHud = 0;
 			CAMERA->proj();
 			model = glm::mat4(1.0f);
 			model = glm::translate(model, glm::vec3((*it)->pTransform->position.x, (*it)->pTransform->position.y, (*it)->pTransform->position.z));
-			model = glm::scale(model, glm::vec3((*it)->pTransform->scale.x, (*it)->pTransform->scale.y, (*it)->pTransform->scale.z));
 			model = glm::rotate(model, glm::radians((*it)->pTransform->angle), (*it)->pTransform->rotation);
+			model = glm::scale(model, glm::vec3((*it)->pTransform->scale.x, (*it)->pTransform->scale.y, (*it)->pTransform->scale.z));
+			
 		}
 		else
 		{

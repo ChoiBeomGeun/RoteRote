@@ -66,9 +66,6 @@
     <ClCompile Include="InGameLogic.cpp">
       <Filter>Source Files\GameLogic</Filter>
     </ClCompile>
-    <ClCompile Include="Replay.cpp">
-      <Filter>Source Files\GameLogic\Replay</Filter>
-    </ClCompile>
     <ClCompile Include="LoseconditionLogic.cpp">
       <Filter>Source Files\GameLogic\Losecondition</Filter>
     </ClCompile>
@@ -83,6 +80,9 @@
     </ClCompile>
     <ClCompile Include="Level1.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ReplayLogic.cpp">
+      <Filter>Source Files\GameLogic\Replay</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,9 +119,6 @@
     <ClInclude Include="GameLogicSystem.h">
       <Filter>Source Files\GameLogic</Filter>
     </ClInclude>
-    <ClInclude Include="Replay.h">
-      <Filter>Source Files\GameLogic\Replay</Filter>
-    </ClInclude>
     <ClInclude Include="LoseconditionLogic.h">
       <Filter>Source Files\GameLogic\Losecondition</Filter>
     </ClInclude>
@@ -139,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="StateLists.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ReplayLogic.h">
+      <Filter>Source Files\GameLogic\Replay</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

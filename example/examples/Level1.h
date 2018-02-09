@@ -13,6 +13,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 /******************************************************************************/
 #pragma once
 #include "BaseStage.h"
+#include "CameraMovement.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -30,13 +31,9 @@ public:
 
 
 	void zoomintoPlayer();
-	void CamMoveToPlayer(float dt);
 	void lookAtMap();
 	//void CamMoveToCenter();
-	void ShakeCamera(float dt);
-	void Setshakeduration(float duration) { shakeDuration = duration; }
-	void FollowPlayer(glm::vec3 startCamPos, float dt);
-
+	
 	
 	//bool increasing;
 	bool CenterToPlayer;
@@ -48,19 +45,13 @@ public:
 
 	bool moving;
 	bool movingToCenter;
-
+	glm::vec3 playerInitPos;
 private:
-	glm::vec3 cameraOriginPos;
-	// how long the object should shake for
-	float shakeDuration;
-	// amplitude of the shake. A larger value shakes the camera harder.
-	float shakeAmount = 3.0f;
-	float decreaseFactor = 1.0f;
-
+	
 	float _camPaceSpeed;
 	glm::vec3 _camPacedirction;
 	glm::vec3 _camStartPosition;
-
+	TE::CameraAction camAct;
 
 private:
 	int Level1Counter;

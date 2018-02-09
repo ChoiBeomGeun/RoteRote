@@ -50,7 +50,7 @@ void ClearzoneLogic::Initialize()
 
 void ClearzoneLogic::Update(float dt)
 {
-	dt;
+
 
 	
 	for (auto Objects : FACTORY->ObjectIDMap)
@@ -58,20 +58,22 @@ void ClearzoneLogic::Update(float dt)
 
 		if (Objects.second->objectstyle == Objectstyle::Clearzone)
 			obj = Objects.second;
+		
 	}
 	if(obj !=NULL)
-	obj->transform->angle += 2;
+	obj->GetComponent<Transform>()->angle += 20 *dt;
 	if (obj != NULL)
 	{
-		if (PHYSICS->RectvsRectCollisionCheck(player->transform, obj->transform) )
+		player = FACTORY->GetPlayer();
+		if (PHYSICS->RectvsRectCollisionCheck(player->GetComponent<Transform>(), obj->GetComponent<Transform>()) )
 		{
 			SOUNDMANAGER->PlaySounds(WinSound, false);
 			APP->b_Win = true;//	LevelInit.b_Win = true;
-			STATEMANAGER->b_Relplay = true;
+			//STATEMANAGER->b_Relplay = true;
 			PHYSICS->gravityScale = -20.f;
 			PHYSICS->GravityType = Gravity::y_Minus;
 			PHYSICS->gravity = glm::vec3(0, PHYSICS->gravityScale, 0);
-			STATEMANAGER->b_IsReplayFirst = true;
+			//STATEMANAGER->b_IsReplayFirst = true;
 		}
 	}
 }

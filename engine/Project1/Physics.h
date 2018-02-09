@@ -62,6 +62,7 @@ namespace TE {
 
 		static bool MouseVsRect(glm::vec3 mouse, Transform *Object);
 		static bool RectvsRectCollisionCheck(Transform *pA, Transform *pB);
+		static bool SimpleRectvsRectCollisionCheck(glm::vec3 *pApos, glm::vec3 *pAscale,glm::vec3 *pBpos,glm::vec3 *pBscale);
 		std::vector<Pair> m_vecpair;
 	private:
 		bool AABBvsAABB(Body *pA, Body *pB, Pair *M);

@@ -61,8 +61,7 @@ void ObjectFactory::Update(float /*dt*/)
 {
 	// (FACTORY->ObjectIDMap[i.first]->GetComponent(ComponentType::CT_TRANSFORM) != nullptr)
 
-
-	  
+      	GamePlayer = FACTORY->GetPlayer();
 
 	//Todo : Delete All object in the objectTobedeleted list
 
@@ -81,11 +80,13 @@ void ObjectFactory::Update(float /*dt*/)
 		if (IDit != ObjectIDMap.end())
 		{
 			//delete and remove from the map
-			if (FACTORY->ObjectIDMap[gameObject->objID]->GetComponent(ComponentType::CT_BODY) != nullptr)
+			if (FACTORY->ObjectIDMap[gameObject->objID]->HasComponent<Body>())
 			{
-				auto IDit2 = PHYSICS->m_Body.find(gameObject->body->BodyID);
+				auto IDit2 = PHYSICS->m_Body.find(gameObject->GetComponent<Body>()->BodyID);
 				PHYSICS->m_Body.erase(IDit2);
 			}
+		
+
 			delete gameObject;
 			ObjectIDMap.erase(IDit);
 		}
@@ -109,6 +110,8 @@ void ObjectFactory::DestroyAllObjects()
 	//std::map<ObjectID, Object* >::iterator it = ObjectIDMap.begin();
  	for ( auto it : ObjectIDMap)
 	{
+		if (it.second->IsLoadingObject)
+			continue;
 		delete it.second;
 	}
 	BodyID = 0;
@@ -163,27 +166,32 @@ Object * ObjectFactory::CreateArchetype(Archetype path)
 	{
 		if (path.HavingComponents[i] == ComponentType::CT_BODY)
 		{
-			temp->AddComponent(new Body(glm::vec3(0, 0, 0), path.mass));
-			temp->body->gravityOn = path.GravityOn;
-			temp->body->restitution = 0;
+			temp->AddComponent<Body>();
+		
+			temp->GetComponent<Body>()->pm_mass = path.mass;
+			temp->GetComponent<Body>()->pm_velocity = glm::vec3(0, 0, 0);
+
+			temp->GetComponent<Body>()->gravityOn = path.GravityOn;
+			temp->GetComponent<Body>()->restitution = 0;
 		
 			//'++;
 		}
 		if (path.HavingComponents[i] == ComponentType::CT_BUTTON)
 		{
-			Button * button = new Button();
-			temp->AddComponent(button);
+	//		Button * button = new Button();
+			temp->AddComponent<Button>();
 			temp->objectstyle = Objectstyle::Button;
 
 		}
 		if (path.HavingComponents[i] == ComponentType::CT_TRANSFORM)
 		{
-			Transform * transform = new Transform();
-			transform->rotation = glm::vec3(0, 0, 1);
-			transform->SetPosition(path.DefaultPosition);
-			transform->SetScale(path.DefaultScale);
-			transform->angle = path.rotation;
-			temp->AddComponent(transform);
+			temp->AddComponent<Transform>();
+		//	Transform * transform = new Transform();
+			temp->GetComponent<Transform>()->rotation = glm::vec3(0, 0, 1);
+			temp->GetComponent<Transform>()->SetPosition(path.DefaultPosition);
+			temp->GetComponent<Transform>()->SetScale(path.DefaultScale);
+			temp->GetComponent<Transform>()->SetRotationZ(path.rotation)  ;
+	
 
 
 
@@ -191,13 +199,14 @@ Object * ObjectFactory::CreateArchetype(Archetype path)
 		}
 		if (path.HavingComponents[i] == ComponentType::CT_SPRITE)
 		{
-			Sprite * sprite = new Sprite();
-			sprite->depth = 0.0f;
-			sprite->ChangeColor(255, 255, 255, 255);
-			sprite->isPerspective = true;
-			sprite->texture_load(path.DefaultTexture);
+	//		Sprite * sprite = new Sprite();
+			temp->AddComponent<Sprite>();
+			temp->GetComponent<Sprite>()->depth = 0.0f;
+			temp->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+			temp->GetComponent<Sprite>()->isPerspective = true;
+			temp->GetComponent<Sprite>()->texture_load(path.DefaultTexture);
 			
-			temp->AddComponent(sprite);
+	
 
 
 
@@ -205,11 +214,12 @@ Object * ObjectFactory::CreateArchetype(Archetype path)
 		}
 		if (path.HavingComponents[i] == ComponentType::CT_CONTROLLER)
 		{
+			temp->AddComponent<PlayerController>();
 			//Controller * controller = new Controller();
 			temp->objectstyle = Player;
-			temp->AddComponent(new PlayerController());
-			temp->body->gravityOn = true;
-			temp->body->restitution = 0;
+
+			temp->GetComponent<Body>()->gravityOn = true;
+			temp->GetComponent<Body>()->restitution = 0;
 			//temp->AddComponent(controller);
 		}
 
@@ -221,7 +231,7 @@ Object * ObjectFactory::CreateArchetype(Archetype path)
 			else
 				temp->objectstyle = Trigger90;
 
-			temp->AddComponent(trigger);
+			temp->AddComponent<Trigger>();
 
 		}
 
@@ -242,107 +252,43 @@ Object * ObjectFactory::CreateArchetype(Archetype path)
 	if (path.DefaultObjectStyle == "Trigger90")
 		temp->objectstyle = Objectstyle::Trigger90;
 	
+	if (path.DefaultObjectStyle == "Hazard")
+		temp->objectstyle = Objectstyle::Hazard;
 	temp->Initialize();
 
 	return temp;
 }
-Object * ObjectFactory::CreatePlayer(const glm::vec3& pos, const glm::vec3& scale, const glm::vec3& velocity, float invmass)
-{
-	Object* player = CreateEmptyObject();
-	player->objectstyle = Objectstyle::Player;
-	Transform * transform = new Transform();
-	transform->SetPosition(pos);
-	player->AddComponent(transform);
-	player->transform->SetScale(scale);
-	player->transform->rotation = glm::vec3(0, 0, 1);
-	//Todo: add sprite and body components
-	Sprite * sprite = new Sprite();
 
-	//TOdo : load textrue and get texture id
-	sprite->TextureId = 1;
-	sprite->isPerspective = true;
-	
-	sprite->depth = 1.0f;
-	
-	//sprite->isFlipY = false;
-	sprite->ChangeColor(255, 255, 255, 255);
-	player->AddComponent(sprite);
-	Animation * animation = new Animation();
-	animation->setFlipX(false);
-	animation->setTime(0.f);
-	animation->isJumping = false;
-	animation->setPressed(false);
-	player->AddComponent(animation);
 
-	
-	player->AddComponent(new PlayerController());
-	player->AddComponent(new Body(velocity, invmass));
-	player->body->BodyID = BodyID;
-	player->body->gravityOn = true;
-	player->body->restitution = 0;
-	player->Initialize();
 
-	PHYSICS->m_Body[BodyID] = player->body;
-	BodyID++;
-	return player;
-}
-
-Object * ObjectFactory::CreateAsteroid(const glm::vec3 & pos, const glm::vec3& scale, const glm::vec3 & velocity, float invmass)
-{
-	Object* asteroid = CreateEmptyObject();
-	asteroid->objectstyle = Objectstyle::Asteriod;
-	Transform * transform = new Transform();
-	transform->SetPosition(pos);
-	asteroid->AddComponent(transform);
-	asteroid->transform->SetScale(scale);
-	asteroid->transform->rotation = glm::vec3(0, 0, 1);
-
-	//Todo: add sprite and body components
-	Sprite * sprite = new Sprite();
-
-	//TOdo : load textrue and get texture id
-	sprite->TextureId = 2;
-	sprite->depth = 0.0f;
-	sprite->ChangeColor(255, 255, 255, 255);
-	sprite->isPerspective = true;
-	//sprite->isFlipY = false;
-	asteroid->AddComponent(sprite);
-
-	asteroid->AddComponent(new Body(velocity, invmass));
-	asteroid->body->gravityOn = true;
-	asteroid->body->BodyID = BodyID;
-	asteroid->Initialize();
-
-	PHYSICS->m_Body[BodyID] = asteroid->body;
-
-	BodyID++;
-	return asteroid;
-
-}
 
 Object * ObjectFactory::CreateWall(const glm::vec3 & pos, const glm::vec3& scale)
 {
 	Object* Wall = CreateEmptyObject();
 	Wall->objectstyle = Objectstyle::Wall;
-	Transform * transform = new Transform();
-	transform->SetPosition(pos);
-	Wall->AddComponent(transform);
-	Wall->transform->SetScale(scale);
+//	Transform * transform = new Transform();
+	Wall->GetComponent<Transform>()->SetPosition(pos);
+	Wall->AddComponent<Transform>();
+	Wall->GetComponent<Transform>()->SetScale(scale);
 
-	Wall->transform->rotation = glm::vec3(0, 0, 1);
-
-	Wall->AddComponent(new Body(glm::vec3(0, 0, 0), 0));
-	Wall->body->gravityOn = true;
+	Wall->GetComponent<Transform>()->rotation = glm::vec3(0, 0, 1);
+	Wall->AddComponent<Body>();
+	Wall->GetComponent<Body>()->pm_velocity = glm::vec3(0, 0, 0);
+	Wall->GetComponent<Body>()->pm_mass = 0;
+	//Wall->AddComponent(new Body(glm::vec3(0, 0, 0), 0));
+	Wall->GetComponent<Body>()->gravityOn = true;
 	//Todo: add sprite and body components
-	Sprite * sprite = new Sprite();
-	sprite->depth = 0.0f;
+
+	Wall->AddComponent<Sprite>();
+	Wall->GetComponent<Sprite>()->depth = 0.0f;
 	//sprite->isFlipY = false;
-	sprite->texture_load("wall.png");
+	Wall->GetComponent<Sprite>()->texture_load("wall.png");
 	//TOdo : load textrue and get texture id
-	sprite->TextureId = 3;
-	sprite->ChangeColor(255, 255, 255, 255);
-	sprite->isPerspective = true;
-	Wall->AddComponent(sprite);
+	Wall->GetComponent<Sprite>()->TextureId = 3;
+	Wall->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+	Wall->GetComponent<Sprite>()->isPerspective = true;
+
+//	Wall->AddComponent(sprite);
 
 
 	Wall->Initialize();
@@ -350,44 +296,14 @@ Object * ObjectFactory::CreateWall(const glm::vec3 & pos, const glm::vec3& scale
 	return Wall;
 
 }
-Object * ObjectFactory::CreateTrigger(const glm::vec3 & pos, const glm::vec3& scale)
-{
-	Object* TriggerObject = CreateEmptyObject();
 
-	Transform * transform = new Transform();
-	Trigger * trigger = new Trigger();
-	transform->SetPosition(pos);
-	TriggerObject->AddComponent(transform);
-	TriggerObject->AddComponent(trigger);
-	TriggerObject->transform->SetScale(scale);
-
-	TriggerObject->transform->rotation = glm::vec3(0, 0, 1);
-	TriggerObject->AddComponent(new Body(glm::vec3(0, 0, 0), 0));
-	TriggerObject->body->gravityOn = true;
-	//Todo: add sprite and body components
-	Sprite * sprite = new Sprite();
-	sprite->depth = 0.0f;
-	//sprite->isFlipY = false;
-	sprite->texture_load("180trigger.png");
-	//TOdo : load textrue and get texture id
-	sprite->TextureId = 3;
-	sprite->ChangeColor(255, 255, 255, 255);
-	sprite->isPerspective = true;
-	TriggerObject->AddComponent(sprite);
-
-
-	TriggerObject->Initialize();
-	BodyID++;
-	return TriggerObject;
-
-}
 Object *  ObjectFactory::GetPlayer(void)
 {
 	Object *temp = nullptr;
 	for (auto Objects : FACTORY->ObjectIDMap)
 	{
-		if (Objects.second->GetComponent(ComponentType::CT_CONTROLLER) != nullptr)
-			temp = Objects.second;
+		if (Objects.second->HasComponent<PlayerController>() )
+			return Objects.second;
 
 	}
  	return temp;
@@ -401,63 +317,8 @@ unsigned int TE::ObjectFactory::GetAllObjectNumbers(void)
 	}
 	return ObjectCount;
 }
-Object * ObjectFactory::CreateButton(const glm::vec3 & pos, const glm::vec3& scale)
-{
-	Object* mbutton = CreateEmptyObject();
-
-	Transform * transform = new Transform();
-	Button * button = new Button();
-	transform->position = pos;
-	mbutton->AddComponent(transform);
-	mbutton->AddComponent(button);
-	mbutton->transform->scale = scale;
-	mbutton->transform->rotation = glm::vec3(0, 0, 1);
-	mbutton->objectstyle = Objectstyle::Button;
-	//Todo: add sprite and body components
-	Sprite * sprite = new Sprite();
-	//sprite->isFlipY = false;
-	//TOdo : load textrue and get texture id
-	//sprite->TextureId = 4;
-	sprite->depth = 0.0f;
-	sprite->ChangeColor(255, 255, 255, 255);
-	sprite->isPerspective = true;
-	mbutton->AddComponent(sprite);
 
 
-	mbutton->Initialize();
-
-	return mbutton;
-
-}
-
-Object * ObjectFactory::CreateBox(const glm::vec3 & pos, const glm::vec3 & scale)
-{
-	Object* Box = CreateEmptyObject();
-	Box->objectstyle = Objectstyle::Box;
-	Transform * transform = new Transform();
-	transform->SetPosition(pos);
-	Box->AddComponent(transform);
-	Box->transform->SetScale(scale);
-	Box->transform->rotation = glm::vec3(0, 0, 1);
-	Box->AddComponent(new Body(glm::vec3(0, 0, 0), 1));
-	Box->body->gravityOn = false;
-	Box->body->restitution = 0;
-	//Todo: add sprite and body components
-	Sprite * sprite = new Sprite();
-
-	//TOdo : load textrue and get texture id
-	//sprite->TextureId = 5;
-	sprite->depth = 0.0f;
-	//sprite->isFlipY = false;
-	sprite->ChangeColor(255, 255, 255, 255);
-	sprite->isPerspective = true;
-	Box->AddComponent(sprite);
-
-
-	Box->Initialize();
-	BodyID++;
-	return Box;
-}
 
 void ObjectFactory::CreateBoundary(void)
 {
@@ -471,22 +332,22 @@ Object * TE::ObjectFactory::CreateHUD(const glm::vec3 & pos, const glm::vec3 & s
 	Object* Hud = CreateEmptyObject();
 	
 	Hud->objectstyle = Objectstyle::Button;
-	Transform * transform = new Transform();
-	transform->SetPosition(pos);
-	Hud->AddComponent(transform);
-	Hud->transform->SetScale(scale);
-	Hud->transform->rotation = glm::vec3(0, 0, 1);
+//	Transform * transform = new Transform();
+	Hud->AddComponent<Transform>();
+	Hud->GetComponent<Transform>()->SetPosition(pos);
+	
+	
+	Hud->GetComponent<Transform>()->SetScale(scale);
+	Hud->GetComponent<Transform>()->rotation = glm::vec3(0, 0, 1);
 
-	//Todo: add sprite and body components
-	Sprite * sprite = new Sprite();
-
-	//TOdo : load textrue and get texture id
-	sprite->isPerspective = false;
+	Hud->AddComponent<Sprite>();
+	Hud->GetComponent<Sprite>()->isPerspective = false;
 	//sprite->isFlipY = false;
-	sprite->depth = 1.0f;
-	sprite->TextureId = 5;
-	sprite->ChangeColor(255, 255, 255, 255);
-	Hud->AddComponent(sprite);
+	Hud->GetComponent<Sprite>()->depth = 1.0f;
+	Hud->GetComponent<Sprite>()->TextureId = 5;
+	Hud->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+
+//	Hud->AddComponent(sprite);
 
 
 	Hud->Initialize();
@@ -494,74 +355,73 @@ Object * TE::ObjectFactory::CreateHUD(const glm::vec3 & pos, const glm::vec3 & s
 }
 Object * TE::ObjectFactory::LeftBoundary(void)
 {
-	std::map<ObjectID, Object*>::iterator max;
-	auto Objects = FACTORY->ObjectIDMap;
-	auto min = FACTORY->ObjectIDMap.begin()->second->transform->position.x;
-	auto test = std::find_if(FACTORY->ObjectIDMap.begin(), FACTORY->ObjectIDMap.end(),
-		[&](std::pair<ObjectID, Object*> t)
-	{
-		if (t.second->objectstyle == Objectstyle::Wall)
+	std::vector<Object*> WallObject;
+	for (auto walls : FACTORY->ObjectIDMap) {
+		
+		if (walls.second->objectstyle == Objectstyle::Wall)
 		{
-			if (t.second->transform->position.x < min)
-				min = t.second->transform->position.x;
+			WallObject.push_back(walls.second);
 		}
-		return min;
 	}
-	);
-	return test->second;
+	Object * minObject = WallObject[0];
+	for (int i = 1; i < WallObject.size(); i++)
+	{
+		if (minObject->GetComponent<Transform>()->position.x > WallObject[i]->GetComponent<Transform>()->position.x)
+			minObject = WallObject[i];
+	}
+	return minObject;
 }
 Object * TE::ObjectFactory::RightBoundary(void)
 {
-	auto Objects = FACTORY->ObjectIDMap;
-	auto max = FACTORY->ObjectIDMap.begin()->second->transform->position.x;
-	auto test = std::find_if(FACTORY->ObjectIDMap.begin(), FACTORY->ObjectIDMap.end(),
-		[&](std::pair<ObjectID, Object*> t)
-	{
-		if (t.second->objectstyle == Objectstyle::Wall)
-		{
-			if (t.second->transform->position.x > max)
-				max = t.second->transform->position.x;
-		}
-		return max;
-	});
+	std::vector<Object*> WallObject;
+	for (auto walls : FACTORY->ObjectIDMap) {
 
-	return test->second;
+		if (walls.second->objectstyle == Objectstyle::Wall)
+		{
+			WallObject.push_back(walls.second);
+		}
+	}
+	Object * maxObject = WallObject[0];
+	for (int i = 1; i < WallObject.size(); i++)
+	{
+		if (maxObject->GetComponent<Transform>()->position.x < WallObject[i]->GetComponent<Transform>()->position.x)
+			maxObject = WallObject[i];
+	}
+	return maxObject;
 }
 Object * TE::ObjectFactory::UpBoundary(void)
 {
-	auto Objects = FACTORY->ObjectIDMap;
-	auto max = FACTORY->ObjectIDMap.begin()->second->transform->position.y;
-	auto test = std::find_if(FACTORY->ObjectIDMap.begin(), FACTORY->ObjectIDMap.end(),
-		[&](std::pair<ObjectID, Object*> t)
-	{
-		if (t.second->objectstyle == Objectstyle::Wall)
-		{
-			if (t.second->transform->position.y > max)
-				max = t.second->transform->position.y;
-		}
-		return max;
-	});
+	std::vector<Object*> WallObject;
+	for (auto walls : FACTORY->ObjectIDMap) {
 
-	return test->second;
+		if (walls.second->objectstyle == Objectstyle::Wall)
+		{
+			WallObject.push_back(walls.second);
+		}
+	}
+	Object * maxObject = WallObject[0];
+	for (int i = 1; i < WallObject.size(); i++)
+	{
+		if (maxObject->GetComponent<Transform>()->position.y < WallObject[i]->GetComponent<Transform>()->position.y)
+			maxObject = WallObject[i];
+	}
+	return maxObject;
 }
 Object * TE::ObjectFactory::DownBoundary(void)
 {
-	std::map<ObjectID, Object*>::iterator max;
-	auto min = FACTORY->ObjectIDMap.begin()->second->transform->position.y;
-	auto Objects = FACTORY->ObjectIDMap.begin();
-	for (Objects; Objects != FACTORY->ObjectIDMap.end(); ++Objects)
-	{
-		if ((Objects)->second->objectstyle == Objectstyle::Wall)
+	std::vector<Object*> WallObject;
+	for (auto walls : FACTORY->ObjectIDMap) {
+
+		if (walls.second->objectstyle == Objectstyle::Wall)
 		{
-			if (Objects->second->transform->position.y < min)
-			{
-				max = Objects;
-			}
-
+			WallObject.push_back(walls.second);
 		}
-
-
 	}
-
-	return max->second;
+	Object * minObject = WallObject[0];
+	for (int i = 1; i < WallObject.size(); i++)
+	{
+		if (minObject->GetComponent<Transform>()->position.y > WallObject[i]->GetComponent<Transform>()->position.y)
+			minObject = WallObject[i];
+	}
+	return minObject;
 }

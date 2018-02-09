@@ -194,34 +194,34 @@ void ImGuiUpdate(void) {
 						}
 					}
 					// Transform Component
-					if (FACTORY->ObjectIDMap[i.first]->GetComponent(ComponentType::CT_TRANSFORM) != nullptr)
+					if (FACTORY->ObjectIDMap[i.first]->HasComponent<Transform>() )
 					{
 						if (ImGui::TreeNode(("Transform " + std::to_string(i.second->objID)).c_str()))
 						{
 
-							ImGui::SliderFloat((ObjectScale + "x").c_str(), &FACTORY->ObjectIDMap[i.first]->transform->scale.x, 0, (float)APP->_screenWidth);
-							ImGui::SliderFloat((ObjectScale + "y").c_str(), &FACTORY->ObjectIDMap[i.first]->transform->scale.y, 0, (float)APP->_screenHeight);
-							ImGui::SliderFloat((ObjectScale + "z").c_str(), &FACTORY->ObjectIDMap[i.first]->transform->scale.z, 0, 1);
-							ImGui::SliderFloat((ObjectPosition + "x").c_str(), &FACTORY->ObjectIDMap[i.first]->transform->position.x, -1000.f, 1000.f);
-							ImGui::SliderFloat((ObjectPosition + "y").c_str(), &FACTORY->ObjectIDMap[i.first]->transform->position.y, -1000.f, 1000.f);
-							ImGui::SliderFloat((ObjectPosition + "z").c_str(), &FACTORY->ObjectIDMap[i.first]->transform->position.z, -1000.f, 1000.f);
-							ImGui::SliderFloat((ObjectRotation + "z").c_str(), &FACTORY->ObjectIDMap[i.first]->transform->angle, 0, TUMath::PI);
+							ImGui::SliderFloat((ObjectScale + "x").c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Transform>()->scale.x, 0, (float)APP->_screenWidth);
+							ImGui::SliderFloat((ObjectScale + "y").c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Transform>()->scale.y, 0, (float)APP->_screenHeight);
+							ImGui::SliderFloat((ObjectScale + "z").c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Transform>()->scale.z, 0, 1);
+							ImGui::SliderFloat((ObjectPosition + "x").c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Transform>()->position.x, -1000.f, 1000.f);
+							ImGui::SliderFloat((ObjectPosition + "y").c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Transform>()->position.y, -1000.f, 1000.f);
+							ImGui::SliderFloat((ObjectPosition + "z").c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Transform>()->position.z, -1000.f, 1000.f);
+							ImGui::SliderFloat((ObjectRotation + "z").c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Transform>()->angle, 0, TUMath::PI);
 
 							ImGui::TreePop();
 						}
 					}
-					if (FACTORY->ObjectIDMap[i.first]->GetComponent(ComponentType::CT_BODY) != nullptr)
+					if (FACTORY->ObjectIDMap[i.first]->HasComponent<Body>())
 					{
 
 						if (ImGui::TreeNode(("Body " + std::to_string(i.second->objID)).c_str()))
 						{
-							ImGui::SliderFloat((ObjectVelocity + "x").c_str(), &FACTORY->ObjectIDMap[i.first]->body->pm_velocity.x, -1000.f, 1000.f);
-							ImGui::SliderFloat((ObjectVelocity + "y").c_str(), &FACTORY->ObjectIDMap[i.first]->body->pm_velocity.y, -1000.f, 1000.f);
-							ImGui::SliderFloat(ObjectMass.c_str(), &FACTORY->ObjectIDMap[i.first]->body->pm_mass, 0, (float)APP->_screenHeight);
+							ImGui::SliderFloat((ObjectVelocity + "x").c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Body>()->pm_velocity.x, -1000.f, 1000.f);
+							ImGui::SliderFloat((ObjectVelocity + "y").c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Body>()->pm_velocity.y, -1000.f, 1000.f);
+							ImGui::SliderFloat(ObjectMass.c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Body>()->pm_mass, 0, (float)APP->_screenHeight);
 							ImGui::TreePop();
 						}
 					}
-					if (FACTORY->ObjectIDMap[i.first]->GetComponent(ComponentType::CT_SPRITE) != nullptr)
+					if (FACTORY->ObjectIDMap[i.first]->HasComponent<Sprite>())
 					{
 
 						if (ImGui::TreeNode(("Sprite " + std::to_string(i.second->objID)).c_str()))
@@ -237,11 +237,11 @@ void ImGuiUpdate(void) {
 							ImGui::Combo("Levels", &j, cppTextureitems, (int)ENGINE->mVsTexturenamelist.size());
 							if (ImGui::Button("Load"))
 							{
-								i.second->sprite->texture_load(cppTextureitems[j]);
+								i.second->GetComponent<Sprite>()->texture_load(cppTextureitems[j]);
 
 							}
-							ImGui::ColorEdit4("Color", FACTORY->ObjectIDMap[i.second->objID]->sprite->Color, ImGuiColorEditFlags_Uint8);
-							ImGui::SliderFloat("Depth", &FACTORY->ObjectIDMap[i.second->objID]->sprite->depth, 0, 1);
+							ImGui::ColorEdit4("Color", FACTORY->ObjectIDMap[i.second->objID]->GetComponent<Sprite>()->Color, ImGuiColorEditFlags_Uint8);
+							ImGui::SliderFloat("Depth", &FACTORY->ObjectIDMap[i.second->objID]->GetComponent<Sprite>()->depth, 0, 1);
 
 							ImGui::TreePop();
 						}

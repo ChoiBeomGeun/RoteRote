@@ -1,4 +1,3 @@
-
 /**
 \file        Sprite.h
 \author      HyunJun Yoo
@@ -17,7 +16,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #pragma once
 
 #include "Component.h"
-#include "GameLogic.h"
+
 //#include "vector3.h"
 #include "Transform.h"
 #include  <string>

@@ -120,15 +120,15 @@ void Option::Init()
 void Option::Update(float dt)
 {
 	if(APP->_isfull)
-		TE::FACTORY->ObjectIDMap[7]->sprite->texture_load("On.png");
+		TE::FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("On.png");
 	else
-		TE::FACTORY->ObjectIDMap[7]->sprite->texture_load("OFF.png");
+		TE::FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("OFF.png");
 
 	
 		if (SOUNDMANAGER->SoundOnOffCheck())
-			TE::FACTORY->ObjectIDMap[4]->sprite->texture_load("on.png");
+			TE::FACTORY->ObjectIDMap[4]->GetComponent<Sprite>()->texture_load("on.png");
 		else
-			TE::FACTORY->ObjectIDMap[4]->sprite->texture_load("off.png");
+			TE::FACTORY->ObjectIDMap[4]->GetComponent<Sprite>()->texture_load("off.png");
 	dt = dt;
 	if (Input::IsTriggered(SDL_SCANCODE_UP))
 		if (index1 >= 0)
@@ -152,15 +152,15 @@ void Option::Update(float dt)
 	{
 
 	case 1:
-		TE::FACTORY->ObjectIDMap[8]->transform->position.y = 0;
+		TE::FACTORY->ObjectIDMap[8]->GetComponent<Transform>()->position.y = 0;
 		APP->ResolutionNumber = 1;
 		break;
 	case 2:
-		TE::FACTORY->ObjectIDMap[8]->transform->position.y = -96;
+		TE::FACTORY->ObjectIDMap[8]->GetComponent<Transform>()->position.y = -96;
 		APP->ResolutionNumber = 2;
 		break;
 	case 3:
-		TE::FACTORY->ObjectIDMap[8]->transform->position.y = -203;
+		TE::FACTORY->ObjectIDMap[8]->GetComponent<Transform>()->position.y = -203;
 		APP->ResolutionNumber = 3;
 		break;
 
@@ -169,28 +169,28 @@ void Option::Update(float dt)
 	switch (index1)
 	{
 	case 0:
-		TE::FACTORY->ObjectIDMap[1]->sprite->ChangeColor(255, 255, 0, 255);
-		TE::FACTORY->ObjectIDMap[2]->sprite->ChangeColor(255, 255, 255, 255);
-		TE::FACTORY->ObjectIDMap[3]->sprite->ChangeColor(255, 255, 255, 255);
-		TE::FACTORY->ObjectIDMap[6]->sprite->ChangeColor(255, 255, 255, 255);
+		TE::FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
+		TE::FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		TE::FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		TE::FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
 		break;
 	case 2:
-		TE::FACTORY->ObjectIDMap[2]->sprite->ChangeColor(255, 255, 0, 255);
-		TE::FACTORY->ObjectIDMap[1]->sprite->ChangeColor(255, 255, 255, 255);
-		TE::FACTORY->ObjectIDMap[3]->sprite->ChangeColor(255, 255, 255, 255);
-		TE::FACTORY->ObjectIDMap[6]->sprite->ChangeColor(255, 255, 255, 255);
+		TE::FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
+		TE::FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		TE::FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		TE::FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
 		break;
 	case 3:
-		TE::FACTORY->ObjectIDMap[3]->sprite->ChangeColor(255, 255, 0, 255);
-		TE::FACTORY->ObjectIDMap[2]->sprite->ChangeColor(255, 255, 255, 255);
-		TE::FACTORY->ObjectIDMap[1]->sprite->ChangeColor(255, 255, 255, 255);
-		TE::FACTORY->ObjectIDMap[6]->sprite->ChangeColor(255, 255, 255, 255);
+		TE::FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
+		TE::FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		TE::FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		TE::FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
 		break;
 	case 1:
-		TE::FACTORY->ObjectIDMap[6]->sprite->ChangeColor(255, 255, 0, 255);
-		TE::FACTORY->ObjectIDMap[2]->sprite->ChangeColor(255, 255, 255, 255);
-		TE::FACTORY->ObjectIDMap[1]->sprite->ChangeColor(255, 255, 255, 255);
-		TE::FACTORY->ObjectIDMap[3]->sprite->ChangeColor(255, 255, 255, 255);
+		TE::FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
+		TE::FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		TE::FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		TE::FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
 		break;
 
 	}

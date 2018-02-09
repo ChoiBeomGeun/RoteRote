@@ -43,10 +43,12 @@ InGameLogic::InGameLogic()
 {
  // 	LOGGINGSYSTEM = new LoggingSystem;
 	INGAMELOGIC = this;
+
 }
 
 InGameLogic::~InGameLogic()
 {
+
 	printf("ff");
 }
 
@@ -59,9 +61,7 @@ void InGameLogic::InGameInit()
 	//std::unique_ptr<> p = make_unique<TriggerLogic>();
 	//std::shared_ptr<> p = make_shared<T>();
 	//Add<TriggerLogic>();
-	InGameLogicAdd(new TriggerLogic());
-	InGameLogicAdd(new ClearzoneLogic());
-	InGameLogicAdd(new LoseconditionLogic());
+
 
 	for (auto IngameLogics : GameLogicList)
 		IngameLogics->Initialize();
@@ -76,7 +76,7 @@ void InGameLogic::InGameInit()
 	}
 
 	if (!(b_playerExist || b_colorzoneExist))
-		DEBUG_ASSERT(true, "Opps ! There is no player or clearzone");
+	//	DEBUG_ASSERT(true, "Opps ! There is no player or clearzone");
 	APP->b_Win = false;
 	APP->b_Lose = false;
 	LOGGINGSYSTEM->Initialize();
@@ -113,20 +113,10 @@ void InGameLogic::InGameShutdown(void)
 
 
 	
-	/*for (auto IngameLogics : GameLogicList)
-		delete IngameLogics;*/
 
 
-	if (TRIGGERLOGIC)
-		delete TRIGGERLOGIC;
-	if (LOSECONDITIONLOGIC)
-		delete LOSECONDITIONLOGIC;
-	if (CLEARZONELOGIC)
-		delete CLEARZONELOGIC;
 
-	GameLogicList.erase(GameLogicList.begin(), GameLogicList.end());
-	if(INGAMELOGIC != nullptr)
-	delete INGAMELOGIC;
+	
 //	PHYSICS->Initialize();
 //	LOGGINGSYSTEM->Free();
 	//CAMERA->view.RotateZ(TUMath::DegreeToRadian(0));

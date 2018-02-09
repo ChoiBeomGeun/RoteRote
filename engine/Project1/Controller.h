@@ -22,10 +22,10 @@ namespace TE {
 
 	class Controller : public Component
 	{
-	public: 
+	public:
 		Controller() : Component(ComponentType::CT_CONTROLLER)
 		{
-		
+
 		}
 		~Controller() { GAMELOGIC->ControllerList.erase(myController); }
 
@@ -37,7 +37,7 @@ namespace TE {
 		virtual void Update(float dt) { dt = dt; }
 
 	protected:
-		 std::list<Controller*>::iterator myController;
+		std::list<Controller*>::iterator myController;
 	};
 
 }

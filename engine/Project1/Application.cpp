@@ -196,7 +196,7 @@ void Application::PollWindowEvent(SDL_Event & currEvent)
 	case SDL_QUIT:
 		if (confirmationa == NULL) {
 			confirmationa = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(1.5, 0.7, 0));
-			confirmationa->sprite->texture_load("Sure.png");
+			confirmationa->GetComponent<Sprite>()->texture_load("Sure.png");
 		}
 		RealExit = true;
 

@@ -28,11 +28,11 @@ namespace TE
 		void Update(float dt) override;
 		//Lists of controller components
 		std::list<Controller*> ControllerList;
-		
+
 	private:
-	
+
 	};
-	
+
 	extern GameLogic * GAMELOGIC;
 
 }

@@ -19,9 +19,10 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "StateManager.h"
 #include "SoundManager.h"
 #include "Timer.h"
+#include "PlayerController.h"
 
 using namespace TE;
-Object * oPlayerInTrigger;
+//Object * FACTORY->GamePlayer;
 std::vector<Object*> TriggerList;
 
 typedef std::vector<std::pair<Object*, int>> ButtonObjectList;
@@ -43,7 +44,7 @@ void RotateButtons(float angles) {
 
 		for (auto it : buttonsobj) {
 
-			it.first->transform->angle += angles;
+			it.first->GetComponent<Transform>()->angle += angles;
 
 
 
@@ -72,22 +73,22 @@ void TriggerLogic::Initialize(void)
 	for (auto Objects : FACTORY->ObjectIDMap)
 	{
 		
-		if (FACTORY->ObjectIDMap[Objects.first]->GetComponent(ComponentType::CT_CONTROLLER) != nullptr)
-			oPlayerInTrigger = Objects.second;
+		if (FACTORY->ObjectIDMap[Objects.first]->HasComponent<PlayerController>() )
+			FACTORY->GamePlayer = Objects.second;
 
 		if (FACTORY->ObjectIDMap[Objects.first]->objectstyle == Objectstyle::Trigger90)
 		{
-			//Objects.second->trigger->i_innertimer = 100;
-			Objects.second->trigger->i_innertimer = 0;
-			Objects.second->trigger->Trigger_useable = true;
+			//Objects.second->GetComponent<Trigger>()->i_innertimer = 100;
+			Objects.second->GetComponent<Trigger>()->i_innertimer = 0;
+			Objects.second->GetComponent<Trigger>()->Trigger_useable = true;
 			TriggerList.push_back(Objects.second);
 
 		}
 		if (FACTORY->ObjectIDMap[Objects.first]->objectstyle == Objectstyle::Trigger180)
 		{
-			//Objects.second->trigger->i_innertimer = 100;
-			Objects.second->trigger->i_innertimer = 0;
-			Objects.second->trigger->Trigger_useable = true;
+			//Objects.second->GetComponent<Trigger>()->i_innertimer = 100;
+			Objects.second->GetComponent<Trigger>()->i_innertimer = 0;
+			Objects.second->GetComponent<Trigger>()->Trigger_useable = true;
 			TriggerList.push_back(Objects.second);
 
 		}
@@ -118,6 +119,7 @@ void TriggerLogic::Initialize(void)
 
 void TriggerLogic::Update(float dt)
 {
+	//FACTORY->GamePlayer = FACTORY->GamePlayer;
 
 	dt = dt;
 	for (auto TriggerObjects : TriggerList)
@@ -127,13 +129,13 @@ void TriggerLogic::Update(float dt)
 			continue;
 		if (TriggerObjects->objectstyle == Objectstyle::Trigger90)
 		{
-			if (PHYSICS->RectvsRectCollisionCheck(oPlayerInTrigger->transform, TriggerObjects->transform) && TriggerObjects->trigger->Trigger_useable)
+			if (PHYSICS->RectvsRectCollisionCheck(FACTORY->GamePlayer->GetComponent<Transform>(), TriggerObjects->GetComponent<Transform>()) && TriggerObjects->GetComponent<Trigger>()->Trigger_useable)
 			{
 				STATEMANAGER->b_IsGravityChanged = true;
 				STATEMANAGER->b_IsRot90 = true;
 				STATEMANAGER->b_IsRot180 = false;
 				//NumberOfTriggersActivation++;
-				if (TriggerObjects->trigger->Trigger_useable)
+				if (TriggerObjects->GetComponent<Trigger>()->Trigger_useable)
 				{
 					if (STATEMANAGER->b_IsRot90 && !STATEMANAGER->b_IsRot180)
 						_90anglebutton(TriggerObjects);
@@ -144,13 +146,13 @@ void TriggerLogic::Update(float dt)
 		}
 		if (TriggerObjects->objectstyle == Objectstyle::Trigger180)
 		{
-			if (PHYSICS->RectvsRectCollisionCheck(oPlayerInTrigger->transform, TriggerObjects->transform) && TriggerObjects->trigger->Trigger_useable)
+			if (PHYSICS->RectvsRectCollisionCheck(FACTORY->GamePlayer->GetComponent<Transform>(), TriggerObjects->GetComponent<Transform>()) && TriggerObjects->GetComponent<Trigger>()->Trigger_useable)
 			{
 				
 				STATEMANAGER->b_IsGravityChanged = true;
 				STATEMANAGER->b_IsRot90 = false;
 				STATEMANAGER->b_IsRot180 = true;
-				if (TriggerObjects->trigger->Trigger_useable)
+				if (TriggerObjects->GetComponent<Trigger>()->Trigger_useable)
 				{
 					if (STATEMANAGER->b_IsRot180 && !STATEMANAGER->b_IsRot90)
 					{
@@ -158,34 +160,34 @@ void TriggerLogic::Update(float dt)
 						NumberOfTriggersActivation++;
 					}
 				} 
-				//_180anglebutton(TriggerObjects->trigger);
+				//_180anglebutton(TriggerObjects->GetComponent<Trigger>());
 			}
 		}
-		if (!TriggerObjects->trigger->Trigger_useable)
-			TriggerObjects->trigger->i_innertimer += 0.25f;
+		if (!TriggerObjects->GetComponent<Trigger>()->Trigger_useable)
+			TriggerObjects->GetComponent<Trigger>()->i_innertimer += 0.25f;
 
 
-		if (TriggerObjects->trigger->i_innertimer > 30)
+		if (TriggerObjects->GetComponent<Trigger>()->i_innertimer > 30)
 		{
 			
-			TriggerObjects->trigger->Trigger_useable = true;
-			TriggerObjects->trigger->i_innertimer = 0;
+			TriggerObjects->GetComponent<Trigger>()->Trigger_useable = true;
+			TriggerObjects->GetComponent<Trigger>()->i_innertimer = 0;
 		}
 
-		if (!TriggerObjects->trigger->Trigger_useable)
+		if (!TriggerObjects->GetComponent<Trigger>()->Trigger_useable)
 		{
 			if (TriggerObjects->objectstyle == Objectstyle::Trigger180)
-			TriggerObjects->sprite->texture_load("180buttonPushed.png");
+			TriggerObjects->GetComponent<Sprite>()->texture_load("180buttonPushed.png");
 			if (TriggerObjects->objectstyle == Objectstyle::Trigger90)
-			TriggerObjects->sprite->texture_load("90buttonPushed.png");
+			TriggerObjects->GetComponent<Sprite>()->texture_load("90buttonPushed.png");
 		}
 
-		if (TriggerObjects->trigger->Trigger_useable)
+		if (TriggerObjects->GetComponent<Trigger>()->Trigger_useable)
 		{
 			if (TriggerObjects->objectstyle == Objectstyle::Trigger180)
-			TriggerObjects->sprite->texture_load("180button.png");
+			TriggerObjects->GetComponent<Sprite>()->texture_load("180button.png");
 			if (TriggerObjects->objectstyle == Objectstyle::Trigger90)
-				TriggerObjects->sprite->texture_load("90button.png");
+				TriggerObjects->GetComponent<Sprite>()->texture_load("90button.png");
 		}
 	}
 
@@ -214,13 +216,13 @@ void TE::TriggerLogic::Free(void)
 	{
 		if (FACTORY->ObjectIDMap[Objects.first]->objectstyle == Objectstyle::Trigger90)
 		{
-			Objects.second->trigger->i_innertimer = 0;
-			Objects.second->trigger->Trigger_useable = false;
+			Objects.second->GetComponent<Trigger>()->i_innertimer = 0;
+			Objects.second->GetComponent<Trigger>()->Trigger_useable = false;
 		}
 		if (FACTORY->ObjectIDMap[Objects.first]->objectstyle == Objectstyle::Trigger180)
 		{
-			Objects.second->trigger->i_innertimer = 0;
-			Objects.second->trigger->Trigger_useable = false;
+			Objects.second->GetComponent<Trigger>()->i_innertimer = 0;
+			Objects.second->GetComponent<Trigger>()->Trigger_useable = false;
 		}
 	}
 
@@ -234,9 +236,9 @@ TriggerLogic::~TriggerLogic()
 	
 }
 
-void TE::TriggerLogic::_90anglebutton(Object* Trigger)
+void TE::TriggerLogic::_90anglebutton(Object* pTrigger)
 {
-	Trigger->trigger->i_innertimer += .025f;
+	pTrigger->GetComponent<Trigger>()->i_innertimer += .025f;
 
 	// from 0
 	if (CAMERA->cameraUp.x == 0 && CAMERA->cameraUp.y >= 1)
@@ -250,7 +252,7 @@ void TE::TriggerLogic::_90anglebutton(Object* Trigger)
 		if (CAMERA->cameraUp.x <= 1.f && CAMERA->cameraUp.y >= 0.f)
 		{
 			RotateButtons(-2.25);
-			FACTORY->GetPlayer()->transform->angle -= 2.25;
+			FACTORY->GetPlayer()->GetComponent<Transform>()->angle -= 2.25;
 			CAMERA->cameraUp.x += .025f;
 			CAMERA->cameraUp.y -= .025f;
 			STATEMANAGER->b_IsRotating = true;
@@ -259,13 +261,13 @@ void TE::TriggerLogic::_90anglebutton(Object* Trigger)
 		else
 		{
 			RotateButtons(2.25);
-			FACTORY->GetPlayer()->transform->angle += 2.25;
+			FACTORY->GetPlayer()->GetComponent<Transform>()->angle += 2.25;
 			CAMERA->cameraUp.x = 1.f;
 			CAMERA->cameraUp.y = 0.f;
 			STATEMANAGER->b_IsRot90 = false;
 			STATEMANAGER->b_IsGravityChanged = false;
 			STATEMANAGER->b_IsRotating = false;
-			Trigger->trigger->Trigger_useable = false;
+			pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 			isDegree[0] = false;
 	
 		}
@@ -282,7 +284,7 @@ void TE::TriggerLogic::_90anglebutton(Object* Trigger)
 	{
 		if (CAMERA->cameraUp.x >= 0 && CAMERA->cameraUp.y >= -1)
 		{
-			FACTORY->GetPlayer()->transform->angle -= 2.25;
+			FACTORY->GetPlayer()->GetComponent<Transform>()->angle -= 2.25;
 			RotateButtons(-2.25);
 			CAMERA->cameraUp.x -= .025f;
 			CAMERA->cameraUp.y -= .025f;
@@ -291,14 +293,14 @@ void TE::TriggerLogic::_90anglebutton(Object* Trigger)
 		else
 		{
 			RotateButtons(2.25);
-			FACTORY->GetPlayer()->transform->angle += 2.25;
-			//FACTORY->GetPlayer()->transform->angle = ;
+			FACTORY->GetPlayer()->GetComponent<Transform>()->angle += 2.25;
+			//FACTORY->GetPlayer()->GetComponent<Transform>()->angle = ;
 			CAMERA->cameraUp.x = 0.f;
 			CAMERA->cameraUp.y = -1.f;
 			STATEMANAGER->b_IsRot90 = false;
 			STATEMANAGER->b_IsGravityChanged = false;
 			STATEMANAGER->b_IsRotating = false;
-			Trigger->trigger->Trigger_useable = false;
+			pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 			isDegree[1] = false;
 
 		}
@@ -316,7 +318,7 @@ void TE::TriggerLogic::_90anglebutton(Object* Trigger)
 		if (CAMERA->cameraUp.x >= -1 && CAMERA->cameraUp.y <= 0)
 		{
 			RotateButtons(-2.25);
-			FACTORY->GetPlayer()->transform->angle -= 2.25;
+			FACTORY->GetPlayer()->GetComponent<Transform>()->angle -= 2.25;
 			CAMERA->cameraUp.x -= .025f;
 			CAMERA->cameraUp.y += .025f;
 			STATEMANAGER->b_IsRotating = true;
@@ -325,14 +327,14 @@ void TE::TriggerLogic::_90anglebutton(Object* Trigger)
 		else
 		{
 			RotateButtons(2.25);
-			FACTORY->GetPlayer()->transform->angle += 2.25;
+			FACTORY->GetPlayer()->GetComponent<Transform>()->angle += 2.25;
 			
 			CAMERA->cameraUp.x = -1.f;
 			CAMERA->cameraUp.y = 0.f;
 			STATEMANAGER->b_IsRot90 = false;
 			STATEMANAGER->b_IsGravityChanged = false;
 			STATEMANAGER->b_IsRotating = false;
-			Trigger->trigger->Trigger_useable = false;
+			pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 			isDegree[2] = false;
 		}
 	}
@@ -349,7 +351,7 @@ void TE::TriggerLogic::_90anglebutton(Object* Trigger)
 		if (CAMERA->cameraUp.x <= 0 && CAMERA->cameraUp.y <= 1)
 		{
 			RotateButtons(-2.25);
-			FACTORY->GetPlayer()->transform->angle -= 2.25;
+			FACTORY->GetPlayer()->GetComponent<Transform>()->angle -= 2.25;
 			CAMERA->cameraUp.x += .025f;
 			CAMERA->cameraUp.y += .025f;
 			STATEMANAGER->b_IsRotating = true;
@@ -358,22 +360,22 @@ void TE::TriggerLogic::_90anglebutton(Object* Trigger)
 		else
 		{
 			RotateButtons(2.25);
-			FACTORY->GetPlayer()->transform->angle += 2.25;
+			FACTORY->GetPlayer()->GetComponent<Transform>()->angle += 2.25;
 			CAMERA->cameraUp.x = 0.f;
 			CAMERA->cameraUp.y = 1.f;
 			STATEMANAGER->b_IsRot90 = false;
 			STATEMANAGER->b_IsGravityChanged = false;
 			STATEMANAGER->b_IsRotating = false;
-			Trigger->trigger->Trigger_useable = false;
+			pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 			isDegree[3] = false;
 
 		}
 	}
 }
 
-void TE::TriggerLogic::_180anglebutton(Object* Trigger)
+void TE::TriggerLogic::_180anglebutton(Object* pTrigger)
 {
-	Trigger->trigger->i_innertimer += .025f;
+	pTrigger->GetComponent<Trigger>()->i_innertimer += .025f;
 
 	// from 0
 	if (CAMERA->cameraUp.x == 0 && CAMERA->cameraUp.y == 1)
@@ -416,7 +418,7 @@ void TE::TriggerLogic::_180anglebutton(Object* Trigger)
 		if (CAMERA->cameraUp.x <= 1 && CAMERA->cameraUp.y >= 0.f)
 		{
 			RotateButtons(-4.5);
-			FACTORY->GetPlayer()->transform->angle -= 4.5;
+			FACTORY->GetPlayer()->GetComponent<Transform>()->angle -= 4.5;
 			CAMERA->cameraUp.x += .025f;
 			CAMERA->cameraUp.y -= .025f;
 			STATEMANAGER->b_IsRotating = true;
@@ -440,13 +442,13 @@ void TE::TriggerLogic::_180anglebutton(Object* Trigger)
 			else
 			{
 				RotateButtons(4.5);
-				FACTORY->GetPlayer()->transform->angle += 4.5;
+				FACTORY->GetPlayer()->GetComponent<Transform>()->angle += 4.5;
 				CAMERA->cameraUp.x = 0.f;
 				CAMERA->cameraUp.y = -1.f;
 				STATEMANAGER->b_IsGravityChanged = false;
 				STATEMANAGER->b_IsRot180 = false;
 				STATEMANAGER->b_IsRotating = false;
-				Trigger->trigger->Trigger_useable = false;
+				pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 				isDegree180double[0] = false;
 				isDegree180[0] = false;
 		
@@ -463,7 +465,7 @@ void TE::TriggerLogic::_180anglebutton(Object* Trigger)
 		if (CAMERA->cameraUp.x >= 0 && CAMERA->cameraUp.y >= -1.f)
 		{
 			RotateButtons(-4.5);
-			FACTORY->GetPlayer()->transform->angle -= 4.5;
+			FACTORY->GetPlayer()->GetComponent<Transform>()->angle -= 4.5;
 			CAMERA->cameraUp.x -= .025f;
 			CAMERA->cameraUp.y -= .025f;
 			STATEMANAGER->b_IsRotating = true;
@@ -485,13 +487,13 @@ void TE::TriggerLogic::_180anglebutton(Object* Trigger)
 			else
 			{
 				RotateButtons(4.5);
-				FACTORY->GetPlayer()->transform->angle += 4.5;
+				FACTORY->GetPlayer()->GetComponent<Transform>()->angle += 4.5;
 				CAMERA->cameraUp.x = -1.f;
 				CAMERA->cameraUp.y = 0.f;
 				STATEMANAGER->b_IsGravityChanged = false;
 				STATEMANAGER->b_IsRot180 = false;
 				STATEMANAGER->b_IsRotating = false;
-				Trigger->trigger->Trigger_useable = false;
+				pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 				isDegree180double[1] = false;
 				isDegree180[1] = false;
 			
@@ -507,7 +509,7 @@ void TE::TriggerLogic::_180anglebutton(Object* Trigger)
 		if (CAMERA->cameraUp.x >= -1 && CAMERA->cameraUp.y <= 0.f)
 		{
 			RotateButtons(-4.5);
-			FACTORY->GetPlayer()->transform->angle -= 4.5;
+			FACTORY->GetPlayer()->GetComponent<Transform>()->angle -= 4.5;
 			CAMERA->cameraUp.x -= .025f;
 			CAMERA->cameraUp.y += .025f;
 			STATEMANAGER->b_IsRotating = true;
@@ -529,13 +531,13 @@ void TE::TriggerLogic::_180anglebutton(Object* Trigger)
 			else
 			{
 				RotateButtons(4.5);
-				FACTORY->GetPlayer()->transform->angle += 4.5;
+				FACTORY->GetPlayer()->GetComponent<Transform>()->angle += 4.5;
 				CAMERA->cameraUp.x = 0.f;
 				CAMERA->cameraUp.y = 1.f;
 				STATEMANAGER->b_IsGravityChanged = false;
 				STATEMANAGER->b_IsRot180 = false;
 				STATEMANAGER->b_IsRotating = false;
-				Trigger->trigger->Trigger_useable = false;
+				pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 				isDegree180double[2] = false;
 			
 				isDegree180[2] = false;
@@ -552,7 +554,7 @@ void TE::TriggerLogic::_180anglebutton(Object* Trigger)
 		if (CAMERA->cameraUp.x <= 0 && CAMERA->cameraUp.y <= 1.f)
 		{
 			RotateButtons(-4.5);
-			FACTORY->GetPlayer()->transform->angle -= 4.5;
+			FACTORY->GetPlayer()->GetComponent<Transform>()->angle -= 4.5;
 			CAMERA->cameraUp.x += .025f;
 			CAMERA->cameraUp.y += .025f;
 			STATEMANAGER->b_IsRotating = true;
@@ -575,13 +577,13 @@ void TE::TriggerLogic::_180anglebutton(Object* Trigger)
 			else
 			{
 				RotateButtons(4.5);
-				FACTORY->GetPlayer()->transform->angle += 4.5;
+				FACTORY->GetPlayer()->GetComponent<Transform>()->angle += 4.5;
 				CAMERA->cameraUp.x = 1.f;
 				CAMERA->cameraUp.y = 0.f;
 				STATEMANAGER->b_IsGravityChanged = false;
 				STATEMANAGER->b_IsRot180 = false;
 				STATEMANAGER->b_IsRotating = false;
-				Trigger->trigger->Trigger_useable = false;
+				pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 				isDegree180double[3] = false;
 				isDegree180[3] = false;
 	

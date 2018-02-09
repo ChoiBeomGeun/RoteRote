@@ -88,7 +88,7 @@ void Quitgame(void)
 
 
 	oconfirmation = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(1.5, 0.7, 0));
-	oconfirmation->sprite->texture_load("Sure.png");
+	oconfirmation->GetComponent<Sprite>()->texture_load("Sure.png");
 
 	oExitornot = true;
 }
@@ -99,7 +99,7 @@ void HowToPlay(void)
 
 
 	oHowToPlay = FACTORY->CreateHUD(glm::vec3(0, 0,0), glm::vec3(2, 1.5, 0));
-	oHowToPlay->sprite->texture_load("howtoplay.png");
+	oHowToPlay->GetComponent<Sprite>()->texture_load("howtoplay.png");
 
 	HowTOplay = true;
 }
@@ -126,17 +126,17 @@ void Pause::Init()
 	SOUNDMANAGER->PauseAllSound();
 
 	oBackbutton = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion.x, Vec3buttonPostion.y + .3f, Vec3buttonPostion.z), Vec3Buttonscale);
-	oBackbutton->sprite->texture_load("back.png");
+	oBackbutton->GetComponent<Sprite>()->texture_load("back.png");
 	oRestartbutton = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion.x, Vec3buttonPostion.y, Vec3buttonPostion.z), Vec3Buttonscale);
-	oRestartbutton->sprite->texture_load("retry.png");
+	oRestartbutton->GetComponent<Sprite>()->texture_load("retry.png");
 	oLevelbutton = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion.x, Vec3buttonPostion.y - .3f, Vec3buttonPostion.z), Vec3Buttonscale);
-	oLevelbutton->sprite->texture_load("levelselect.png");
+	oLevelbutton->GetComponent<Sprite>()->texture_load("levelselect.png");
 	oQuitthegame = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion.x, Vec3buttonPostion.y - .6f, Vec3buttonPostion.z), Vec3Buttonscale);
-	oQuitthegame->sprite->texture_load("box.png");
+	oQuitthegame->GetComponent<Sprite>()->texture_load("box.png");
 	oHUD = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion.x, Vec3buttonPostion.y-.1f, Vec3buttonPostion.z), glm::vec3(0.8,2,0));
-	oHUD->sprite->texture_load("pausehud.png");
+	oHUD->GetComponent<Sprite>()->texture_load("pausehud.png");
 	oHowToPlayIcon = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion.x, Vec3buttonPostion.y-.9f, Vec3buttonPostion.z), Vec3Buttonscale);
-	oHowToPlayIcon->sprite->texture_load("question.png");
+	oHowToPlayIcon->GetComponent<Sprite>()->texture_load("question.png");
 
 
 }
@@ -145,15 +145,15 @@ void Pause::Update(float dt)
 {
 
 	dt = dt;
-	if (oBackbutton->transform->position.x <= -.7f)
+	if (oBackbutton->GetComponent<Transform>()->position.x <= -.7f)
 	{
 		
-		oBackbutton->transform->position.x += 0.02f;
-		oRestartbutton->transform->position.x += 0.02f;
-		oLevelbutton->transform->position.x += 0.02f;
-		oQuitthegame->transform->position.x += 0.02f;
-		oHowToPlayIcon->transform->position.x += 0.02f;
-		oHUD->transform->position.x += 0.02f;
+		oBackbutton->GetComponent<Transform>()->position.x += 0.02f;
+		oRestartbutton->GetComponent<Transform>()->position.x += 0.02f;
+		oLevelbutton->GetComponent<Transform>()->position.x += 0.02f;
+		oQuitthegame->GetComponent<Transform>()->position.x += 0.02f;
+		oHowToPlayIcon->GetComponent<Transform>()->position.x += 0.02f;
+		oHUD->GetComponent<Transform>()->position.x += 0.02f;
 	}
 	if (!HowTOplay && !oExitornot) {
 		if (Input::IsTriggered(SDL_SCANCODE_DOWN ))
@@ -177,39 +177,39 @@ void Pause::Update(float dt)
 	switch (pauseindex)
 	{
 	case 1:
-		oRestartbutton->sprite->ChangeColor(255, 255, 0,255);
-		oBackbutton->sprite->ChangeColor(255, 255, 255, 255);
-		oLevelbutton->sprite->ChangeColor(255, 255, 255, 255);
-		oQuitthegame->sprite->ChangeColor(255, 255, 255, 255);
-		oHowToPlayIcon->sprite->ChangeColor(255, 255, 255, 255);
+		oRestartbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 0,255);
+		oBackbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		oLevelbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		oQuitthegame->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		oHowToPlayIcon->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
 		break;
 	case 0:
-		oBackbutton->sprite->ChangeColor(255, 255, 0, 255);
-		oRestartbutton->sprite->ChangeColor(255, 255, 255, 255);
-		oLevelbutton->sprite->ChangeColor(255, 255, 255, 255);
-		oQuitthegame->sprite->ChangeColor(255, 255, 255, 255);
-		oHowToPlayIcon->sprite->ChangeColor(255, 255, 255, 255);
+		oBackbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
+		oRestartbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		oLevelbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		oQuitthegame->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		oHowToPlayIcon->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
 		break;
 	case 2:
-		oLevelbutton->sprite->ChangeColor(255, 255, 0, 255);
-		oRestartbutton->sprite->ChangeColor(255, 255, 255, 255);
-		oBackbutton->sprite->ChangeColor(255, 255, 255, 255);
-		oQuitthegame->sprite->ChangeColor(255, 255, 255, 255);
-		oHowToPlayIcon->sprite->ChangeColor(255, 255, 255, 255);
+		oLevelbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
+		oRestartbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		oBackbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		oQuitthegame->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		oHowToPlayIcon->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
 		break;
 	case 3:
-		oLevelbutton->sprite->ChangeColor(255, 255, 255, 255);
-		oRestartbutton->sprite->ChangeColor(255, 255, 255, 255);
-		oBackbutton->sprite->ChangeColor(255, 255, 255, 255);
-		oQuitthegame->sprite->ChangeColor(255, 255, 0, 255);
-		oHowToPlayIcon->sprite->ChangeColor(255, 255, 255, 255);
+		oLevelbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		oRestartbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		oBackbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		oQuitthegame->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
+		oHowToPlayIcon->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
 		break;
 	case 4:
-		oLevelbutton->sprite->ChangeColor(255, 255, 255, 255);
-		oRestartbutton->sprite->ChangeColor(255, 255, 255, 255);
-		oBackbutton->sprite->ChangeColor(255, 255, 255, 255);
-		oQuitthegame->sprite->ChangeColor(255, 255, 255, 255);
-		oHowToPlayIcon->sprite->ChangeColor(255, 255, 0, 255);
+		oLevelbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		oRestartbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		oBackbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		oQuitthegame->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+		oHowToPlayIcon->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
 		break;
 	}
 	if (!HowTOplay && !oExitornot) {

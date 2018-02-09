@@ -51,23 +51,33 @@ void TE::LoseconditionLogic::Update(float dt)
 	{
 
 
-		if (Objects.second->objectstyle != Objectstyle::Player && Objects.second->objectstyle != Objectstyle::Clearzone&& Objects.second->objectstyle != Objectstyle::Button && Objects.second->objectstyle != Objectstyle::Trigger180 && Objects.second->objectstyle != Objectstyle::Trigger90)
-			obj = Objects.second;
-
+		if (Objects.second->objectstyle != Objectstyle::Player &&
+			Objects.second->objectstyle != Objectstyle::Clearzone&&
+			Objects.second->objectstyle != Objectstyle::Button &&
+			Objects.second->objectstyle != Objectstyle::Trigger180 &&
+			Objects.second->objectstyle != Objectstyle::Trigger90 &&
+			Objects.second->objectstyle != Objectstyle::Camera)
+		{
+				obj = Objects.second;
+		}
+		else
+		{
+			return;
+		}
 		
 
 
 		if (Loseplayer != nullptr && obj != nullptr)
 		{
-			if (Loseplayer->transform->position.x > 2000 || Loseplayer->transform->position.x < -2000||
-				Loseplayer->transform->position.y > 2000 || Loseplayer->transform->position.y < -2000)
+			if (Loseplayer->GetComponent<Transform>()->position.x > 2000 || Loseplayer->GetComponent<Transform>()->position.x < -2000||
+				Loseplayer->GetComponent<Transform>()->position.y > 2000 || Loseplayer->GetComponent<Transform>()->position.y < -2000)
 			{
 
 				if (Losesoundonce)
 					//	SOUNDMANAGER->PlaySounds(LoseSound, false);
 
 					LoseSound = false;
-				FACTORY->GetPlayer()->sprite->ChangeColor(255, 0, 0, 255);
+				FACTORY->GetPlayer()->GetComponent<Sprite>()->ChangeColor(255, 0, 0, 255);
 				APP->b_Lose = true;
 				//STATEMANAGER->ReplayPosition.clear();
 				//STATEMANAGER->ReplayPosition.clear();
@@ -75,15 +85,15 @@ void TE::LoseconditionLogic::Update(float dt)
 				STATEMANAGER->Restart();
 
 			}
-			float xnormal = (float)(Loseplayer->transform->position.x - obj->transform->position.x);
-			float ynormal = (float)(Loseplayer->transform->position.y - obj->transform->position.y);
-			int xdis = (int)(Loseplayer->transform->scale.x * 0.5f + obj->transform->scale.x * 0.5f);
-			int ydis = (int)(Loseplayer->transform->scale.y * 0.5f + obj->transform->scale.y * 0.5f);
+			float xnormal = (float)(Loseplayer->GetComponent<Transform>()->position.x - obj->GetComponent<Transform>()->position.x);
+			float ynormal = (float)(Loseplayer->GetComponent<Transform>()->position.y - obj->GetComponent<Transform>()->position.y);
+			int xdis = (int)(Loseplayer->GetComponent<Transform>()->scale.x * 0.5f + obj->GetComponent<Transform>()->scale.x * 0.5f);
+			int ydis = (int)(Loseplayer->GetComponent<Transform>()->scale.y * 0.5f + obj->GetComponent<Transform>()->scale.y * 0.5f);
 
 			int int_xnormal = TUMath::Round(xnormal);
 			int int_ynormal = TUMath::Round(ynormal);
 
-			if (Physics::RectvsRectCollisionCheck(Loseplayer->transform, obj->transform))
+			if (Physics::RectvsRectCollisionCheck(Loseplayer->GetComponent<Transform>(), obj->GetComponent<Transform>()))
 			{
 				if (std::abs(int_xnormal) + 10.f < std::abs(xdis) && std::abs(int_ynormal) + 10.f < std::abs(ydis))
 				{
@@ -92,7 +102,7 @@ void TE::LoseconditionLogic::Update(float dt)
 				//	SOUNDMANAGER->PlaySounds(LoseSound, false);
 
  					LoseSound = false;
-					FACTORY->GetPlayer()->sprite->ChangeColor(255, 0, 0, 255);
+					FACTORY->GetPlayer()->GetComponent<Sprite>()->ChangeColor(255, 0, 0, 255);
 					APP->b_Lose = true;
 					STATEMANAGER->ReplayPosition.clear();
 					//STATEMANAGER->ReplayPosition.clear();

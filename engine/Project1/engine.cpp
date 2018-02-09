@@ -23,7 +23,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "Graphics.h"
 #include "Object.h"
 #include <iostream>
-#include"GameLogic.h"
+
 //#include "Transform.h"
 #include "Factory.h"
 #include "StateManager.h"
@@ -77,7 +77,11 @@ void Engine::Initialize()
 	AddSystem(new Physics());
 	AddSystem(new Graphics());
 	AddSystem(new StateManager());
+
+
 	AddSystem(new SoundManager());
+
+
 	Filenameloading();
 
 	//  Initialize systems after being added
@@ -97,47 +101,39 @@ void Engine::Quit()
 //This is where all systems update
 void Engine::GameLoop()
 {
-	float tracker = 0.f;
+
 	//Initialize Timer
 	Timer::Initialize();
 	//Testing Object creation 
 
 	STATEMANAGER->Initialize();
-
+	
 
 	while (GameIsRunning)
 	{
-		dt = Timer::GetDelta();
-		pm_accumulator += dt;
-		//To precent spiral of death ; just a user defined random number
-		if (pm_accumulator > pm_accumulock)
-			pm_accumulator = pm_accumulock;
-
-		tracker += dt;
-		//Todo : Update the dt
-		if (tracker >= 2.f)
-		{
-
-			tracker = 0.f;
-		}
+		float frametime = Timer::GetDelta();
+		pm_accumulator += frametime;
 
 		HowMuchTimePassedInGame += dt;
-		for (unsigned int i = 0; i < 7; ++i) {
-			SystemList[i]->Update(dt);
+		for (unsigned int i = 0; i <7; ++i) {
+		
+			SystemList[i]->Update(frametime);
 			if (!GameIsRunning)
 				break;
 		}
+		if (pm_accumulator > pm_accumulock)
+			pm_accumulator = pm_accumulock;
 
-
-		while (pm_accumulator > pm_fixeddt)
+		while (pm_accumulator >= pm_fixeddt)
 		{
-			PHYSICS->Update(dt);
 			pm_accumulator -= pm_fixeddt;
+			PHYSICS->Update(pm_fixeddt);
 		}
 
 
+		const float t = pm_accumulator / pm_fixeddt;
 
-		GRAPHICS->Update(dt);
+		GRAPHICS->Update(pm_accumulator);
 
 	}
 	
