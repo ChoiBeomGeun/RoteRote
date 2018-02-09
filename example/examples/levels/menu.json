@@ -1,0 +1,148 @@
+{
+	"DefalutCamera" : 
+	{
+		"EYE" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 528.88201904296875
+		},
+		"TARGET" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : -1.0
+		},
+		"UP" : 
+		{
+			"x" : 0.0,
+			"y" : 1.0,
+			"z" : 0.0
+		}
+	},
+	"Level" : 1,
+	"NumberOfObjects" : 6,
+	"Object1" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"ObjectID" : 1,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : -200.0,
+			"y" : -100.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 50.0,
+			"y" : 50.0
+		},
+		"TextureDir" : "start.png"
+	},
+	"Object2" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"ObjectID" : 2,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : -63.123001098632813,
+			"y" : -100.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 50.0,
+			"y" : 50.0
+		},
+		"TextureDir" : "setting.png"
+	},
+	"Object3" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"ObjectID" : 3,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 202.65800476074219,
+			"y" : -100.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 50.0,
+			"y" : 50.0
+		},
+		"TextureDir" : "box.png"
+	},
+	"Object4" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"GravityOn" : false,
+		"Mass" : 0.0,
+		"ObjectID" : 4,
+		"ObjectType" : "Wall",
+		"Position" : 
+		{
+			"x" : 1.0,
+			"y" : 75.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 200.0,
+			"y" : 75.0
+		},
+		"TextureDir" : "title.png"
+	},
+	"Object5" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"GravityOn" : false,
+		"Mass" : 0.0,
+		"ObjectID" : 5,
+		"ObjectType" : "Wall",
+		"Position" : 
+		{
+			"x" : -21.807001113891602,
+			"y" : 134.45401000976563,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 171.46400451660156,
+			"y" : 35.88800048828125
+		},
+		"TextureDir" : "PP.png"
+	},
+	"Object6" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"ObjectID" : 6,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 69.767005920410156,
+			"y" : -100.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 50.0,
+			"y" : 47.84100341796875
+		},
+		"TextureDir" : "question.png"
+	},
+	"WorldSize" : 
+	{
+		"x" : 800,
+		"y" : 600
+	}
+}

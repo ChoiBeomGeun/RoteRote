@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\GameLogic">
+      <UniqueIdentifier>{79b51d9a-a07d-4813-b089-c1018ef23602}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameLogic\Clearzone">
+      <UniqueIdentifier>{174f33ec-8189-49d6-997a-d68cfd47a7f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameLogic\Trigger">
+      <UniqueIdentifier>{bbe9cfe8-49b3-4f9a-b143-e135337f502e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameLogic\Replay">
+      <UniqueIdentifier>{c0c0abd7-bf6e-4766-a54a-fa9d1df934d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameLogic\Losecondition">
+      <UniqueIdentifier>{2e068794-8254-4269-a19d-fe1e617ec001}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Log">
+      <UniqueIdentifier>{081a54ce-2fa6-4320-b4c7-aecaa2fe8525}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MapEditor">
+      <UniqueIdentifier>{4973d0d8-ee4f-4525-8a8c-7e3b17002278}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="splash.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Option.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Pause.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelSelect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Trigger.cpp">
+      <Filter>Source Files\GameLogic\Trigger</Filter>
+    </ClCompile>
+    <ClCompile Include="Clearzone.cpp">
+      <Filter>Source Files\GameLogic\Clearzone</Filter>
+    </ClCompile>
+    <ClCompile Include="InGameLogic.cpp">
+      <Filter>Source Files\GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="Replay.cpp">
+      <Filter>Source Files\GameLogic\Replay</Filter>
+    </ClCompile>
+    <ClCompile Include="LoseconditionLogic.cpp">
+      <Filter>Source Files\GameLogic\Losecondition</Filter>
+    </ClCompile>
+    <ClCompile Include="logging.cpp">
+      <Filter>Source Files\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorData.cpp">
+      <Filter>Source Files\MapEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="MapEditor.cpp">
+      <Filter>Source Files\MapEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="Level1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="splash.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Option.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Level1.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pause.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelSelect.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Trigger.h">
+      <Filter>Source Files\GameLogic\Trigger</Filter>
+    </ClInclude>
+    <ClInclude Include="Clearzone.h">
+      <Filter>Source Files\GameLogic\Clearzone</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogicSystem.h">
+      <Filter>Source Files\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Replay.h">
+      <Filter>Source Files\GameLogic\Replay</Filter>
+    </ClInclude>
+    <ClInclude Include="LoseconditionLogic.h">
+      <Filter>Source Files\GameLogic\Losecondition</Filter>
+    </ClInclude>
+    <ClInclude Include="logging.h">
+      <Filter>Source Files\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="InGameLogic.h">
+      <Filter>Source Files\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorData.h">
+      <Filter>Source Files\MapEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="MapEditor.h">
+      <Filter>Source Files\MapEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="StateLists.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>

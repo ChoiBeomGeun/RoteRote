@@ -1,0 +1,236 @@
+{
+	"DefalutCamera" : 
+	{
+		"EYE" : 
+		{
+			"x" : -849.19140625,
+			"y" : -65.100006103515625,
+			"z" : 1000.0
+		},
+		"TARGET" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : -1.0
+		},
+		"UP" : 
+		{
+			"x" : 0.0,
+			"y" : 1.0,
+			"z" : 0.0
+		}
+	},
+	"Level" : 1,
+	"NumberOfObjects" : 10,
+	"Object1" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"GravityOn" : true,
+		"Mass" : 0.0,
+		"ObjectID" : 1,
+		"ObjectType" : "Wall",
+		"Position" : 
+		{
+			"x" : -350.0,
+			"y" : 750.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 1300.0,
+			"y" : 100.0
+		},
+		"TextureDir" : "wall.png"
+	},
+	"Object10" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"ObjectID" : 10,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.89999997615814209,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 0.10000000149011612,
+			"y" : 0.20000000298023224
+		},
+		"TextureDir" : "1.png"
+	},
+	"Object2" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"GravityOn" : true,
+		"Mass" : 0.0,
+		"ObjectID" : 2,
+		"ObjectType" : "Wall",
+		"Position" : 
+		{
+			"x" : -1000.0,
+			"y" : 300.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 100.0,
+			"y" : 1000.0
+		},
+		"TextureDir" : "wall.png"
+	},
+	"Object3" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"GravityOn" : true,
+		"Mass" : 0.0,
+		"ObjectID" : 3,
+		"ObjectType" : "Wall",
+		"Position" : 
+		{
+			"x" : 250.0,
+			"y" : 300.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 100.0,
+			"y" : 1000.0
+		},
+		"TextureDir" : "wall.png"
+	},
+	"Object4" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "CONTROLLER", "ANIMATION" ],
+		"GravityOn" : true,
+		"Mass" : 1.0,
+		"ObjectID" : 4,
+		"ObjectType" : "Player",
+		"Position" : 
+		{
+			"x" : -849.19140625,
+			"y" : -65.100006103515625,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 70.0,
+			"y" : 70.0
+		},
+		"TextureDir" : "spritestrip.png"
+	},
+	"Object5" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"GravityOn" : true,
+		"Mass" : 0.0,
+		"ObjectID" : 5,
+		"ObjectType" : "Wall",
+		"Position" : 
+		{
+			"x" : -400.0,
+			"y" : -150.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 1300.0,
+			"y" : 100.0
+		},
+		"TextureDir" : "wall.png"
+	},
+	"Object6" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"ObjectID" : 6,
+		"ObjectType" : "Clearzone",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 150.0,
+			"z" : 0.0
+		},
+		"Rotation" : 4236.0,
+		"Scale" : 
+		{
+			"x" : 50.0,
+			"y" : 50.0
+		},
+		"TextureDir" : "clearzone2.png"
+	},
+	"Object7" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"GravityOn" : false,
+		"Mass" : 1.0,
+		"ObjectID" : 7,
+		"ObjectType" : "Box",
+		"Position" : 
+		{
+			"x" : -550.0,
+			"y" : -75.100006103515625,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 50.0,
+			"y" : 50.0
+		},
+		"TextureDir" : "box.png"
+	},
+	"Object8" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"GravityOn" : true,
+		"Mass" : 0.0,
+		"ObjectID" : 8,
+		"ObjectType" : "Wall",
+		"Position" : 
+		{
+			"x" : -400.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 150.0,
+			"y" : 50.0
+		},
+		"TextureDir" : "wall.png"
+	},
+	"Object9" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"GravityOn" : true,
+		"Mass" : 0.0,
+		"ObjectID" : 9,
+		"ObjectType" : "Wall",
+		"Position" : 
+		{
+			"x" : -175.0,
+			"y" : 75.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 250.0,
+			"y" : 50.0
+		},
+		"TextureDir" : "wall.png"
+	},
+	"WorldSize" : 
+	{
+		"x" : 1400,
+		"y" : 900
+	}
+}
