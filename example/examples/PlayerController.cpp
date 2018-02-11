@@ -37,6 +37,7 @@ void PlayerController::Initialize()
 	JumpSpeed = 300.f;
 
 	JumpEnough = false;
+	JumpTriggered = false;
 
 	maxAltitude = 50.f;
 	//pos = this->GetOwner()->GetComponent<Transform>()->GetPosition();
@@ -64,30 +65,47 @@ void PlayerController::Movement(float /*dt*/)
 {
 	if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Left || this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Right)
 		printf("Is Wall\n");
-	if (Input::IsPressed(SDL_SCANCODE_RIGHT))
-	{
-		this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(SPEED, 0, 0);
-	}
 
-	if (Input::IsPressed(SDL_SCANCODE_LEFT))
+	if (PHYSICS->GravityType == Gravity::y_Minus)
 	{
-		this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(-SPEED, 0, 0);
-	}
-	
-	if (!JumpEnough)
-	{
-		if (Input::IsPressed(SDL_SCANCODE_UP))
+		if (Input::IsPressed(SDL_SCANCODE_RIGHT))
 		{
-			this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(0, JumpSpeed, 0);
+			this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(SPEED, 0, 0);
+		}
+
+		if (Input::IsPressed(SDL_SCANCODE_LEFT))
+		{
+			this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(-SPEED, 0, 0);
+		}
+
+		if (!JumpEnough)
+		{
+			if (Input::IsPressed(SDL_SCANCODE_UP))
+			{
+				this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(0, JumpSpeed, 0);
+				JumpTriggered = true;
+			}
+		}
+		else if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Air)
+			this->GetOwner()->GetComponent<Body>()->pm_velocity.y -= 50.f;
+
+		if (this->GetOwner()->GetComponent<Body>()->GroundType != Grounded::Ground && JumpTriggered)
+			this->GetOwner()->GetComponent<Body>()->pm_velocity.y -= 200.f;
+
+		if (Input::IsPressed(SDL_SCANCODE_DOWN))
+		{
+
 		}
 	}
-	else if(this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Air)
-		this->GetOwner()->GetComponent<Body>()->pm_velocity.y -= 50.f;
+	else if (PHYSICS->GravityType == Gravity::y_Plus)
+	{
 
-	if (this->GetOwner()->GetComponent<Body>()->GroundType != Grounded::Ground && delta_pos == 0)
-		this->GetOwner()->GetComponent<Body>()->pm_velocity.y -= 200.f;
+	}
+	else if (PHYSICS->GravityType == Gravity::x_Plus)
+	{
 
-	if (Input::IsPressed(SDL_SCANCODE_DOWN))
+	}
+	else if (PHYSICS->GravityType == Gravity::x_Minus)
 	{
 
 	}
@@ -138,9 +156,11 @@ void PlayerController::MaxJump()
 {
 	if (delta_pos >= maxAltitude)
 		JumpEnough = true;
-	else if(this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
+	else if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
+	{
 		JumpEnough = false;
-
+		JumpTriggered = false;
+	}
 
 	//if(JumpEnough && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Air && 
 }

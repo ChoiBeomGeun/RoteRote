@@ -42,6 +42,8 @@ namespace TE
 
 		bool JumpEnough;
 
+		bool JumpTriggered;
+
 		bool GravityOn;
 	};
 }
