@@ -39,8 +39,11 @@ void ReStartgame3(void)
 	//STATEMANAGER->b_Relplay = false;
 	//STATEMANAGER->b_IsPauseFirst = true;
 	//STATEMANAGER->Restart();
+	while (!STATEMANAGER->Replayerinfo.empty())
+		STATEMANAGER->Replayerinfo.pop();
 	FreeReplayer();
 	STATEMANAGER->Restart();
+
 }
 
 void LevelSelect3(void)
@@ -52,7 +55,8 @@ void LevelSelect3(void)
 	STATEMANAGER->b_Relplay = false;
 	STATEMANAGER->b_IsPauseFirst = true;
 	STATEMANAGER->MoveState(3);
-
+	while (!STATEMANAGER->Replayerinfo.empty())
+		STATEMANAGER->Replayerinfo.pop();
 }
 
 void Backgame3(void)
@@ -66,7 +70,7 @@ void Backgame3(void)
 
 	CAMERA->cameraUp.x = 0;
 	CAMERA->cameraUp.y = 1;
-	STATEMANAGER->ReplayPosition.clear();
+
 	std::string level = "level";
 	level += std::to_string(++STATEMANAGER->i_LevelSelect);
 	level += +".json";
@@ -95,6 +99,8 @@ void MakeReplayerUI(void) {
 //	STATEMANAGER->Replayerinfo.reverse();
 //	itor = STATEMANAGER->Replayerinfo.;
 	STATEMANAGER->ReplayInit = false;
+	TRIGGERLOGIC->Free();
+	TRIGGERLOGIC->Initialize();
 	IsButtonAvailable = true;
 	itor = STATEMANAGER->Replayerinfo;
 }
@@ -109,6 +115,7 @@ void SetReplayer(void) {
 	replayer->GetComponent<Animation>()->setFlipX(itor.front().mouseinfo);
 	itor.pop();
 	if (itor.size() <=0) {
+
 		//itor = STATEMANAGER->Replayerinfo.begin();
 		FACTORY->DestroyAllObjects();
 		LEVELMANAGER->LoadLevel(STATEMANAGER->Loadtolevelname);

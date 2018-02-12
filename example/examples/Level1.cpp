@@ -315,7 +315,8 @@ void Level1::Update(float dt)
 
 void Level1::Free(void)
 {
-
+	while (!STATEMANAGER->Replayerinfo.empty())
+		STATEMANAGER->Replayerinfo.pop();
 	CAMERA->isCentered = true;
 	movingToCenter = false;
 	CAMERA->IsCameraShaking = false;
@@ -334,7 +335,7 @@ void Level1::Free(void)
 	STATEMANAGER->b_IsReplayStart = true;
 	STATEMANAGER->b_IsReplay = false;
 	STATEMANAGER->b_Relplay = false;
-	//INGAMELOGIC->InGameShutdown();
+	INGAMELOGIC->InGameShutdown();
 	//SOUNDMANAGER->DeleteSounds();
 	FACTORY->DestroyAllObjects();
 //	delete LEVELMANAGER;

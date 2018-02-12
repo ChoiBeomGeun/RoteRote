@@ -27,9 +27,9 @@ PlayerController::PlayerController()
 
 void PlayerController::Initialize()
 {
-	
+
 	//   pos = this->GetOwner()->GetComponent<Transform>()->GetPosition();
-//	this->GetOwner()->GetComponent<Transform>() = GetOwner()->GetComponent<Transform>();
+	//	this->GetOwner()->GetComponent<Transform>() = GetOwner()->GetComponent<Transform>();
 	//this->GetOwner()->GetComponent<Body>() =GetOwner()->GetComponent<Body>();
 
 	pre_pos = 0;
@@ -48,7 +48,7 @@ void PlayerController::Initialize()
 void PlayerController::Update(float dt)
 {
 	if (!(STATEMANAGER->b_IsPauseOn) && !STATEMANAGER->b_IsRot180 && !STATEMANAGER->b_IsRot90 && (!STATEMANAGER->b_IsReplay)
-		&& (!STATEMANAGER->b_IsAutoplaying)&&(!CAMERA->IsCameraShaking) && !STATEMANAGER->IsDrawing) {
+		&& (!STATEMANAGER->b_IsAutoplaying) && (!CAMERA->IsCameraShaking) && !STATEMANAGER->IsDrawing) {
 		JumpInit();
 		MaxJump();
 		Movement(dt);
@@ -89,7 +89,7 @@ void PlayerController::Movement(float /*dt*/)
 		else if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Air)
 			this->GetOwner()->GetComponent<Body>()->pm_velocity.y -= 50.f;
 
-		if (this->GetOwner()->GetComponent<Body>()->GroundType != Grounded::Ground && JumpTriggered)
+		if (this->GetOwner()->GetComponent<Body>()->GroundType != Grounded::Ground && !JumpTriggered)
 			this->GetOwner()->GetComponent<Body>()->pm_velocity.y -= 200.f;
 
 		if (Input::IsPressed(SDL_SCANCODE_DOWN))
