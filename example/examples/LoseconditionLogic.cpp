@@ -49,6 +49,20 @@ void TE::LoseconditionLogic::Update(float dt)
 		return;
 	for (auto Objects : FACTORY->ObjectIDMap)
 	{
+		if (Objects.second->objectstyle == Objectstyle::Hazard)
+		{
+			if (Physics::RectvsRectCollisionCheck(Loseplayer->GetComponent<Transform>(), Objects.second->GetComponent<Transform>()))
+			{
+				LoseSound = false;
+				APP->b_Lose = true;
+				//STATEMANAGER->ReplayPosition.clear();
+				//STATEMANAGER->ReplayPosition.clear();
+				CAMERA->IsCameraShaking = true;
+				STATEMANAGER->Restart();
+			}
+
+
+		}
 
 
 		if (Objects.second->objectstyle != Objectstyle::Player &&
@@ -56,19 +70,25 @@ void TE::LoseconditionLogic::Update(float dt)
 			Objects.second->objectstyle != Objectstyle::Button &&
 			Objects.second->objectstyle != Objectstyle::Trigger180 &&
 			Objects.second->objectstyle != Objectstyle::Trigger90 &&
-			Objects.second->objectstyle != Objectstyle::Camera)
+			Objects.second->objectstyle != Objectstyle::Camera
+			
+			)
 		{
 				obj = Objects.second;
 		}
 		else
 		{
-			return;
+			continue;
 		}
 		
 
 
 		if (Loseplayer != nullptr && obj != nullptr)
 		{
+
+
+
+
 			if (Loseplayer->GetComponent<Transform>()->position.x > 2000 || Loseplayer->GetComponent<Transform>()->position.x < -2000||
 				Loseplayer->GetComponent<Transform>()->position.y > 2000 || Loseplayer->GetComponent<Transform>()->position.y < -2000)
 			{

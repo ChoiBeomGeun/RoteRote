@@ -187,8 +187,8 @@ void Level1::Init()
 	//FACTORY->Destroy(Loading);
 	/////////////////////////////////////////////////////
 
-
-
+	FACTORY->CreateArchetype(ReadingArchetype("Hazardthing.json"));
+	
 
 	lookAtMap();
 }
