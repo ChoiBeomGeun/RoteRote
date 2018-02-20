@@ -27,8 +27,9 @@ namespace TE{
 	CT_BUTTON,
 	CT_TRIGGER,
 	CT_ANIMATION,
+	CT_AutoMoving,
 	CT_NUMCOMPONENT
-
+	
 
 	}ComponentType;
 

@@ -167,6 +167,9 @@
     <ClCompile Include="Controller.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="cAutoMoving.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DebugUtil.h">
@@ -317,6 +320,9 @@
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="Controller.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="cAutoMoving.h">
       <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
