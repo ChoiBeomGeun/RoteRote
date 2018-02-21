@@ -58,6 +58,7 @@ namespace TE {
 		float gravityScale;
 		void Gravity180();
 		void Gravity90();
+		bool GetIsPlayerGround();
 		bool IsMapEditorOn = false;
 
 		static bool MouseVsRect(glm::vec3 mouse, Transform *Object);

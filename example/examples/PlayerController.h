@@ -35,9 +35,19 @@ namespace TE
 		Body * body;
 
 		float pre_pos;
+		
 		float maxAltitude;
+		
 		float JumpSpeed;
+		
+		float WallSlideMax;
 
+		float FallSpeedMax;
+
+		float WallStickTime;
+
+		float timeToWallUnStick;
+		
 		float delta_pos;
 
 		bool JumpEnough;
@@ -45,5 +55,8 @@ namespace TE
 		bool JumpTriggered;
 
 		bool GravityOn;
+
+		bool OffFromWall;
+
 	};
 }

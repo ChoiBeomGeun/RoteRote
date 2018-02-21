@@ -101,7 +101,7 @@ void Physics::ExplictEulerIntegrator(float dt) {
 		{
 			if (STATEMANAGER->b_IsGravityChanged)
 				(*i).second->pm_velocity.x = 0;
-			(*i).second->pm_velocity.y *= 0.98f * dt;
+			(*i).second->pm_velocity.y *= 0.99f * dt * 50.f;
 			// if Gravity Change, vel.y = 0 
 		}
 
@@ -109,7 +109,7 @@ void Physics::ExplictEulerIntegrator(float dt) {
 		{
 			if (STATEMANAGER->b_IsGravityChanged)
 				(*i).second->pm_velocity.y = 0;
-			(*i).second->pm_velocity.x *= 0.98f * dt;
+			(*i).second->pm_velocity.x *= 0.99f * dt * 50.f;
 		}
 
 		(*i).second->m_force = glm::vec3(0);
@@ -761,4 +761,9 @@ void Physics::Gravity90()
 		gravity = glm::vec3(gravityScale, 0, 0);
 		GravityType = Gravity::x_Minus;
 	}
+}
+
+bool Physics::GetIsPlayerGround()
+{
+	return IsPlayerGround;
 }
