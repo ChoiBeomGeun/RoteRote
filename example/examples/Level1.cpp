@@ -35,6 +35,8 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "Transform.h"
 #include <random>
 #include "PlayerController.h"
+#include "cAutoMoving.h"
+#include "Automoving.h"
 #define LOGGINGSTART false
 
 using namespace TE;
@@ -62,7 +64,7 @@ Jsonclass file;
 Json::Value root;
 Object * player;
 
-
+Object * Movingtest;
 
 Level1::Level1()
 {
@@ -85,19 +87,19 @@ void Level1::Init()
 	/*Object * Loading = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(2, 2, 0));
 	Loading->IsLoadingObject = true;
 	Loading->GetComponent<Sprite>()->texture_load("loading.png");
-*/ 
+*/
 
 
 	camAct.isCamToPlayer = true;
-    LosesoundOnetime = true;
- 	CenterToPlayer = true;
+	LosesoundOnetime = true;
+	CenterToPlayer = true;
 	ZoomInToPlayer = false;
 	XmovedCompleted = false;
 	YmovedCompleted = false;
 	path2 = STATEMANAGER->Loadtolevelname;
 	_camPaceSpeed = 100.0f;
-		char * Userinfo;
-		size_t len = path2.size();
+	char * Userinfo;
+	size_t len = path2.size();
 	_dupenv_s(&Userinfo, &len, "USERPROFILE");
 
 	moving = false;
@@ -131,18 +133,44 @@ void Level1::Init()
 	STATEMANAGER->b_Relplay = false;
 	STATEMANAGER->ReplayPosition.clear();
 	STATEMANAGER->AniSave.clear();
-	
+
 
 	LEVELMANAGER->LoadLevel(STATEMANAGER->Loadtolevelname);
-	
+
 	std::string levelname = std::to_string(STATEMANAGER->i_LevelSelect) + ".png";
 	HUDLevelname = FACTORY->CreateHUD(glm::vec3(0, 0.9, 0), glm::vec3(0.1, 0.2, 0));
 	HUDLevelname->GetComponent<Sprite>()->texture_load(levelname);
 	HUDLevelname->objectstyle = Objectstyle::Button;
 
+	
+	/////////////// MovingObject TestCode 
+	/////////////// If you want to test Moving Object, delete below comment
+	//Movingtest = FACTORY->CreateArchetype(ReadingArchetype("Wall.json"));
+	//Movingtest->GetComponent<Transform>()->SetPosition(glm::vec3(-550, -75, 0));
+	//Movingtest->AddComponent<AutoMoving>();
+	//Paths tempinit;
+	//tempinit.pathway.x = -550;
+	//tempinit.pathway.y = -75;
+	//Paths temp;
+	//temp.pathway.x = -950;
+	//temp.pathway.y = 450;
+	//Paths temp2;
+	//temp2.pathway.x = -550;
+	//temp2.pathway.y = 650;
+	//Paths temp3;
+	//temp3.pathway.x = 250;
+	//temp3.pathway.y = 450;
+	//Movingtest->GetComponent<AutoMoving>()->mPaths.push_back(tempinit);
+	//Movingtest->GetComponent<AutoMoving>()->mPaths.push_back(temp);
+	//Movingtest->GetComponent<AutoMoving>()->mPaths.push_back(temp2);
+	//Movingtest->GetComponent<AutoMoving>()->mPaths.push_back(temp3);
+
+
+
+
 	INGAMELOGIC->InGameInit();
 	SOUNDMANAGER->PlaySounds(Background, true);
-  	FACTORY->GetPlayer()->GetComponent<Body>()->GroundType = Grounded::Ground;
+	FACTORY->GetPlayer()->GetComponent<Body>()->GroundType = Grounded::Ground;
 	player = FACTORY->GetPlayer();
 	STATEMANAGER->InitplayerPos = player->GetComponent<Transform>()->GetPosition();
 	player->GetComponent<Animation>()->setFrame(1.0f / 8);
@@ -155,7 +183,7 @@ void Level1::Init()
 	CAMERA->cameraUp.x = 0;
 	CAMERA->cameraUp.y = 1;
 
-	
+
 	camAct.cameraOriginPos = CAMERA->cameraPos;
 	CAMERA->cameraPos.z = 1000.f;
 	CAMERA->CenterOfCamera.x = FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x + (FACTORY->RightBoundary()->GetComponent<Transform>()->position.x - FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x) *.5f;
@@ -165,8 +193,8 @@ void Level1::Init()
 	movingToCenter = false;
 	STATEMANAGER->IsDrawing = false;
 	//CAMERA->lookatMap(false); 
-	
-	
+
+
 //	camerObj = FACTORY->CreateArchetype(ReadingArchetype("Button.json"));
 //	camerObj->objectstyle = Objectstyle::Camera;
 

@@ -31,7 +31,7 @@ namespace TE {
 	struct Paths
 	{
 		glm::vec3 pathway;
-		bool checkingPath;
+		bool checkingPath = true;
 
 	};
 	class AutoMoving : public Component
@@ -42,7 +42,8 @@ namespace TE {
 		~AutoMoving();
 
 		virtual void Initialize() override;
-
+		glm::vec3 mOriginPosition;
+		unsigned int NumberOfTowardPath = 0;
 		std::vector <Paths> mPaths;
 
 

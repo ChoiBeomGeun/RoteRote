@@ -38,7 +38,7 @@ AutoMoving::~AutoMoving()
 
 void AutoMoving::Initialize()
 {
-
+	mOriginPosition = GetOwner()->GetComponent<Transform>()->GetPosition();
 
 }
 

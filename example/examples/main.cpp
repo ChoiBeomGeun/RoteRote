@@ -36,6 +36,8 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "Clearzone.h"
 #include "LoseconditionLogic.h"
 #include "Trigger.h"
+#include "cAutoMoving.h"
+#include "Automoving.h"
 using namespace TE;
 int main(int,char**)
 {
@@ -58,7 +60,7 @@ int main(int,char**)
 	INGAMELOGIC->InGameLogicAdd(new TriggerLogic());
 	INGAMELOGIC->InGameLogicAdd(new ClearzoneLogic());
 	INGAMELOGIC->InGameLogicAdd(new LoseconditionLogic());
-
+	INGAMELOGIC->InGameLogicAdd(new AutoMovingLogic());
 	STATEMANAGER->AddState(new splash);
 	STATEMANAGER->AddState(new Menu);
 	STATEMANAGER->AddState(new Option);
