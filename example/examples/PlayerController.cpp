@@ -21,6 +21,7 @@ JUMP SHOULDN'T WORK WHILE PLAYER IS ON AIR
 #include "Graphics.h"
 #include <iostream>
 #define SPEED 200.f
+#define WALLJUMP 100.f
 #define WALLATTACH 10.f
 using namespace TE;
 
@@ -39,6 +40,7 @@ void PlayerController::Initialize()
 	pre_pos = 0;
 	delta_pos = 0;
 	JumpSpeed = 500.f;
+	WallJump = WALLJUMP;
 
 	JumpEnough = false;
 	JumpTriggered = false;
@@ -140,7 +142,7 @@ void PlayerController::Movement(float dt)
 				if (Input::IsTriggered(SDL_SCANCODE_SPACE))
 				{
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -1400;
-					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = JumpSpeed * 6;
+					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump * 6;
 				}
 			}
 			if (Input::IsPressed(SDL_SCANCODE_SPACE))
@@ -148,7 +150,7 @@ void PlayerController::Movement(float dt)
 				if (Input::IsPressed(SDL_SCANCODE_LEFT))
 				{
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -1000;
-					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = JumpSpeed * 8;
+					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump * 8;
 				}
 			}
 			else if (Input::IsTriggered(SDL_SCANCODE_LEFT))
@@ -156,7 +158,7 @@ void PlayerController::Movement(float dt)
 				OffFromWall = true;
 
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -SPEED;
-				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = JumpSpeed;
+				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump;
 			}
 		}
 		if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Right)
@@ -166,7 +168,7 @@ void PlayerController::Movement(float dt)
 				if (Input::IsTriggered(SDL_SCANCODE_SPACE))
 				{
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = 1400;
-					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = JumpSpeed * 6;
+					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump * 6;
 				}
 			}
 			if (Input::IsPressed(SDL_SCANCODE_SPACE))
@@ -174,7 +176,7 @@ void PlayerController::Movement(float dt)
 				if (Input::IsPressed(SDL_SCANCODE_RIGHT))
 				{
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = 1000;
-					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = JumpSpeed * 8;
+					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump * 8;
 				}
 			}
 			else if (Input::IsTriggered(SDL_SCANCODE_RIGHT))
@@ -182,19 +184,24 @@ void PlayerController::Movement(float dt)
 				OffFromWall = true;
 
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = SPEED;
-				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = JumpSpeed;
+				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump;
 			}
 		}
 
 		if (!JumpEnough)
 		{
-			if (Input::IsPressed(SDL_SCANCODE_SPACE))
+			if (Input::IsPressed(SDL_SCANCODE_SPACE) && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
 			{
-				this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(0, JumpSpeed, 0);
+				this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(0, JumpSpeed, 0);
 				JumpTriggered = true;
 			}
+			if (Input::IsReleased(SDL_SCANCODE_SPACE))
+			{
+				if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y > minJumpVelocity)
+					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = minJumpVelocity;
+			}
 		}
-		else if (this->GetOwner()->GetComponent<Body>()->GroundType != Grounded::Ground)
+		if (this->GetOwner()->GetComponent<Body>()->GroundType != Grounded::Ground)
 		{
 			this->GetOwner()->GetComponent<Body>()->pm_velocity.y -= 50.f;
 			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y < -FallSpeedMax)
@@ -222,7 +229,7 @@ void PlayerController::Movement(float dt)
 		}
 
 		/*Wall Slide*/
-		if ((this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Left || this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Right) && this->GetOwner()->GetComponent<Body>()->pm_velocity.y < 0)
+		if ((this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Left || this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Right) && this->GetOwner()->GetComponent<Body>()->pm_velocity.y > 0)
 			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y > WallSlideMax)
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallSlideMax;
 
@@ -231,9 +238,9 @@ void PlayerController::Movement(float dt)
 			if (Input::IsPressed(SDL_SCANCODE_RIGHT))
 			{
 				if (Input::IsTriggered(SDL_SCANCODE_SPACE))
-				{
+ 				{
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = 1400;
-					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = JumpSpeed * 6;
+  					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump * 6;
 				}
 			}
 			if (Input::IsPressed(SDL_SCANCODE_SPACE))
@@ -241,7 +248,7 @@ void PlayerController::Movement(float dt)
 				if (Input::IsPressed(SDL_SCANCODE_LEFT))
 				{
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = 1000;
-					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = JumpSpeed * 8;
+					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump * 8;
 				}
 			}
 			else if (Input::IsTriggered(SDL_SCANCODE_LEFT))
@@ -249,7 +256,7 @@ void PlayerController::Movement(float dt)
 				OffFromWall = true;
 
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = SPEED;
-				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -JumpSpeed;
+				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -WallJump;
 			}
 		}
 		if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Right)
@@ -259,7 +266,7 @@ void PlayerController::Movement(float dt)
 				if (Input::IsTriggered(SDL_SCANCODE_SPACE))
 				{
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -1400;
-					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = JumpSpeed * 6;
+					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump * 6;
 				}
 			}
 			if (Input::IsPressed(SDL_SCANCODE_SPACE))
@@ -267,7 +274,7 @@ void PlayerController::Movement(float dt)
 				if (Input::IsPressed(SDL_SCANCODE_RIGHT))
 				{
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -1000;
-					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = JumpSpeed * 8;
+					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump * 8;
 				}
 			}
 			else if (Input::IsTriggered(SDL_SCANCODE_RIGHT))
@@ -275,19 +282,24 @@ void PlayerController::Movement(float dt)
 				OffFromWall = true;
 
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -SPEED;
-				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = JumpSpeed;
+				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump;
 			}
 		}
 
 		if (!JumpEnough)
 		{
-			if (Input::IsPressed(SDL_SCANCODE_SPACE))
+			if (Input::IsPressed(SDL_SCANCODE_SPACE) && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
 			{
-				this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(0, JumpSpeed, 0);
+ 				this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(0, JumpSpeed, 0);
 				JumpTriggered = true;
 			}
+			if (Input::IsReleased(SDL_SCANCODE_SPACE))
+			{
+				if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y < -minJumpVelocity)
+					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -minJumpVelocity;
+			}
 		}
-		else if (this->GetOwner()->GetComponent<Body>()->GroundType != Grounded::Ground)
+		if (this->GetOwner()->GetComponent<Body>()->GroundType != Grounded::Ground)
 		{
 			this->GetOwner()->GetComponent<Body>()->pm_velocity.y += 50.f;
 			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y > FallSpeedMax)
@@ -309,7 +321,7 @@ void PlayerController::Movement(float dt)
 			this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(0, SPEED, 0);
 		}
 
-		if (Input::IsPressed(SDL_SCANCODE_LEFT) && !WallAttached)
+ 		if (Input::IsPressed(SDL_SCANCODE_LEFT) && !WallAttached)
 		{
 			this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(0, -SPEED, 0);
 		}
@@ -325,7 +337,7 @@ void PlayerController::Movement(float dt)
 				if (Input::IsTriggered(SDL_SCANCODE_SPACE))
 				{
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -1400;
-					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = JumpSpeed * 6;
+					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = WallJump * 6;
 				}
 			}
 			if (Input::IsPressed(SDL_SCANCODE_SPACE))
@@ -333,7 +345,7 @@ void PlayerController::Movement(float dt)
 				if (Input::IsPressed(SDL_SCANCODE_LEFT))
 				{
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -1000;
-					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = JumpSpeed * 8;
+					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = WallJump * 8;
 				}
 			}
 			else if (Input::IsTriggered(SDL_SCANCODE_LEFT))
@@ -341,7 +353,7 @@ void PlayerController::Movement(float dt)
 				OffFromWall = true;
 
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -SPEED;
-				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = JumpSpeed;
+				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = WallJump;
 			}
 		}
 		if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Right)
@@ -351,7 +363,7 @@ void PlayerController::Movement(float dt)
 				if (Input::IsTriggered(SDL_SCANCODE_SPACE))
 				{
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = 1400;
-					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = JumpSpeed * 6;
+					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = WallJump * 6;
 				}
 			}
 			if (Input::IsPressed(SDL_SCANCODE_SPACE))
@@ -359,7 +371,7 @@ void PlayerController::Movement(float dt)
 				if (Input::IsPressed(SDL_SCANCODE_RIGHT))
 				{
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = 1000;
-					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = JumpSpeed * 8;
+					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = WallJump * 8;
 				}
 			}
 			else if (Input::IsTriggered(SDL_SCANCODE_RIGHT))
@@ -367,19 +379,24 @@ void PlayerController::Movement(float dt)
 				OffFromWall = true;
 
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = SPEED;
-				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = JumpSpeed;
+				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = WallJump;
 			}
 		}
 
 		if (!JumpEnough)
 		{
-			if (Input::IsPressed(SDL_SCANCODE_SPACE))
+			if (Input::IsPressed(SDL_SCANCODE_SPACE) && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
 			{
-				this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(JumpSpeed, 0, 0);
+				this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(0, JumpSpeed, 0);
 				JumpTriggered = true;
 			}
+			if (Input::IsReleased(SDL_SCANCODE_SPACE))
+			{
+				if (this->GetOwner()->GetComponent<Body>()->pm_velocity.x > minJumpVelocity)
+					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = minJumpVelocity;
+			}
 		}
-		else if (this->GetOwner()->GetComponent<Body>()->GroundType != Grounded::Ground)
+		if (this->GetOwner()->GetComponent<Body>()->GroundType != Grounded::Ground)
 		{
 			this->GetOwner()->GetComponent<Body>()->pm_velocity.x += 50.f;
 			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.x > FallSpeedMax)
@@ -417,7 +434,7 @@ void PlayerController::Movement(float dt)
 				if (Input::IsTriggered(SDL_SCANCODE_SPACE))
 				{
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = 1400;
-					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = JumpSpeed * 6;
+					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = WallJump * 6;
 				}
 			}
 			if (Input::IsPressed(SDL_SCANCODE_SPACE))
@@ -425,7 +442,7 @@ void PlayerController::Movement(float dt)
 				if (Input::IsPressed(SDL_SCANCODE_LEFT))
 				{
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = 1000;
-					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = JumpSpeed * 8;
+					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = WallJump * 8;
 				}
 			}
 			else if (Input::IsTriggered(SDL_SCANCODE_LEFT))
@@ -433,7 +450,7 @@ void PlayerController::Movement(float dt)
 				OffFromWall = true;
 
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = SPEED;
-				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = JumpSpeed;
+				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = WallJump;
 			}
 		}
 		if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Right)
@@ -443,7 +460,7 @@ void PlayerController::Movement(float dt)
 				if (Input::IsTriggered(SDL_SCANCODE_SPACE))
 				{
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -1400;
-					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = JumpSpeed * 6;
+					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = WallJump * 6;
 				}
 			}
 			if (Input::IsPressed(SDL_SCANCODE_SPACE))
@@ -451,7 +468,7 @@ void PlayerController::Movement(float dt)
 				if (Input::IsPressed(SDL_SCANCODE_RIGHT))
 				{
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -1000;
-					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = JumpSpeed * 8;
+					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = WallJump * 8;
 				}
 			}
 			else if (Input::IsTriggered(SDL_SCANCODE_RIGHT))
@@ -459,19 +476,24 @@ void PlayerController::Movement(float dt)
 				OffFromWall = true;
 
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -SPEED;
-				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = JumpSpeed;
+				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = WallJump;
 			}
 		}
 
 		if (!JumpEnough)
 		{
-			if (Input::IsPressed(SDL_SCANCODE_SPACE))
+			if (Input::IsPressed(SDL_SCANCODE_SPACE) && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
 			{
-				this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(JumpSpeed, 0, 0);
+				this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(0, JumpSpeed, 0);
 				JumpTriggered = true;
 			}
+			if (Input::IsReleased(SDL_SCANCODE_SPACE))
+			{
+				if (this->GetOwner()->GetComponent<Body>()->pm_velocity.x < -minJumpVelocity)
+					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -minJumpVelocity;
+			}
 		}
-		else if (this->GetOwner()->GetComponent<Body>()->GroundType != Grounded::Ground)
+		if (this->GetOwner()->GetComponent<Body>()->GroundType != Grounded::Ground)
 		{
 			this->GetOwner()->GetComponent<Body>()->pm_velocity.x -= 50.f;
 			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.x < -FallSpeedMax)
@@ -499,6 +521,7 @@ void PlayerController::JumpInit()
 		}
 		delta_pos = this->GetOwner()->GetComponent<Body>()->m_pTransform->position.y - pre_pos;
 		JumpSpeed = JUMP_SPEED;
+		WallJump = WALLJUMP;
 	}
 	else if (PHYSICS->gravity.x < 0)
 	{
@@ -508,6 +531,7 @@ void PlayerController::JumpInit()
 		}
 		delta_pos = this->GetOwner()->GetComponent<Body>()->m_pTransform->position.x - pre_pos;
 		JumpSpeed = JUMP_SPEED;
+		WallJump = WALLJUMP;
 	}
 	else if (PHYSICS->gravity.y > 0)
 	{
@@ -517,6 +541,7 @@ void PlayerController::JumpInit()
 		}
 		delta_pos = pre_pos - this->GetOwner()->GetComponent<Body>()->m_pTransform->position.y;
 		JumpSpeed = -JUMP_SPEED;
+		WallJump = -WALLJUMP;
 	}
 	else if (PHYSICS->gravity.x > 0)
 	{
@@ -526,6 +551,7 @@ void PlayerController::JumpInit()
 		}
 		delta_pos = pre_pos - this->GetOwner()->GetComponent<Body>()->m_pTransform->position.x;
 		JumpSpeed = -JUMP_SPEED;
+		WallJump = -WALLJUMP;
 	}
 }
 

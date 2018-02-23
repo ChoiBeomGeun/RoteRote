@@ -13,7 +13,7 @@ PlayerController state class.
 #include "Controller.h"
 #include "Transform.h"
 
-#define JUMP_SPEED 100.f
+#define JUMP_SPEED 600.f
 
 namespace TE
 
@@ -57,6 +57,12 @@ namespace TE
 		bool GravityOn;
 
 		bool OffFromWall;
+
+		float WallJump;
+
+		/* For variable Jump */
+
+		float minJumpVelocity = 350;
 
 	};
 }

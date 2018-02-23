@@ -112,7 +112,7 @@ void Physics::ExplictEulerIntegrator(float dt) {
 			(*i).second->pm_velocity.x *= 0.99f * dt * 50.f;
 		}
 
-		(*i).second->m_force = glm::vec3(0);
+		//(*i).second->m_force = glm::vec3(0);
 	}
 
 }

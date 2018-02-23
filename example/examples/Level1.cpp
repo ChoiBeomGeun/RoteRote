@@ -143,8 +143,8 @@ void Level1::Init()
 	HUDLevelname->objectstyle = Objectstyle::Button;
 
 	
-	/////////////// MovingObject TestCode 
-	/////////////// If you want to test Moving Object, delete below comment
+	///////////// MovingObject TestCode 
+	///////////// If you want to test Moving Object, delete below comment
 	//Movingtest = FACTORY->CreateArchetype(ReadingArchetype("Wall.json"));
 	//Movingtest->GetComponent<Transform>()->SetPosition(glm::vec3(-550, -75, 0));
 	//Movingtest->AddComponent<AutoMoving>();
