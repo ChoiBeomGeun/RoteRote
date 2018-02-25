@@ -25,12 +25,13 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 namespace TE {
 	enum Resolution
 	{
-	
 
-		_1280x720 = 1 ,
-		_1280x960, 
 
-		_1920x1080
+		_800X600 = 1,
+		_1024X768,
+		_1280X960,
+		_1600X900,
+		_1920X1080
 	};
 
 	class Application : public Systems
@@ -49,7 +50,7 @@ namespace TE {
 		//FullScreen
 		int _screenWidth;			// 
 		int _screenHeight;
-		const Uint8 *keyboard_state_array ;
+		const Uint8 *keyboard_state_array;
 		// 
 		SDL_Event event;	// Events from ths OS
 		SDL_Window * pWnd; // window data 
@@ -78,7 +79,7 @@ namespace TE {
 		*		960x720 = 1,
 		*		_1024x576,
 		*		_1280x720,
-		*		_1280x960, 
+		*		_1280x960,
 		*		_1440x1080, // 4:3
 		*		_1920x1080
 		*

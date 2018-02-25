@@ -24,7 +24,8 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "imgui_impl_sdl_gl3.h"
 #include <glm\glm.hpp>
 #include <glm\gtx\transform.hpp>
-void copyFile( std::string  src, std::string dest);
+#include <fstream>
+void copyFile(std::string  src, std::string dest);
 
 using namespace TE;
 bool RealExit = false;
@@ -32,14 +33,66 @@ Object * confirmationa;
 
 namespace TE {
 
+
 	Application * APP = nullptr;
 }
-Application::Application() : _screenWidth(1280), _screenHeight(720), pWnd(nullptr), ResolutionNumber(2)
+Application::Application() : pWnd(nullptr), ResolutionNumber(2)
 {
+	std::ifstream ifile;
+
+	char line[200]; // 한 줄씩 읽어서 임시로 저장할 공간
+
+	ifile.open(".\\temp.txt");  // 파일 열기
+
+	if (ifile.is_open())
+	{
+		while (ifile.getline(line, sizeof(line))) // 한 줄씩 읽어 처리를 시작한다.
+		{
+			std::cout << line << std::endl; // 내용 출력
+
+			if (!strcmp(line, "1920 X 1080"))
+			{
+				_screenHeight = 1080;
+				_screenWidth = 1920;
+
+				_resolution = Resolution::_1920X1080;
+			}
+			if (!strcmp(line, "1600 X 900"))
+			{
+				_screenHeight = 900;
+				_screenWidth = 1600;
+				_resolution = Resolution::_1600X900;
+			}
+			if (!strcmp(line, "1280 X 960"))
+			{
+				_screenHeight = 960;
+				_screenWidth = 1280;
+				_resolution = Resolution::_1280X960;
+			}
+			if (!strcmp(line, "1024 X 768"))
+			{
+				_screenHeight = 768;
+				_screenWidth = 1024;
+				_resolution = Resolution::_1024X768;
+			}
+			if (!strcmp(line, "800 X 600"))
+			{
+				_screenHeight = 600;
+				_screenWidth = 800;
+				_resolution = Resolution::_800X600;
+			}
+			if (!strcmp(line, "True"))
+				_isfull = true;
+		}
+	}
+
+	ifile.close(); // 파일 닫기
+
+
 
 	DEBUG_ASSERT(APP != nullptr, "No more than 1 instnace of Application system! Stupid!");
 	APP = this;
-	
+
 }
 
 Application::~Application()
@@ -56,7 +109,7 @@ Application::~Application()
 void Application::Initialize()
 {
 
-	_resolution = Resolution::_1280x720;
+	//_resolution = Resolution::_1280x720;
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		DEBUG_PRINT("SDL couldn't init! SD_Error : %s\n", SDL_GetError());
@@ -97,10 +150,39 @@ void Application::Initialize()
 	// check the OpenGL version
 	std::printf(" *** OpenGL Version %s ****\n", glGetString(GL_VERSION));
 
-	glClearColor(1.f, 1.f, 1.f ,1.f);
+	glClearColor(1.f, 1.f, 1.f, 1.f);
 
 	glEnable(GL_ALPHA);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA);
+
+	if (_resolution == Resolution::_1280X960)
+	{
+
+
+		SDL_SetWindowSize(this->pWnd, 1280, 960);
+		glViewport(0, 0, 1280, 960);
+
+		std::cout << ResolutionNumber << '\n';
+		SDL_SetWindowPosition(this->pWnd, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+		SDL_SetWindowBordered(this->pWnd, SDL_TRUE);
+
+	}
+	if (_resolution == Resolution::_1920X1080)
+	{
+
+
+		SDL_SetWindowSize(this->pWnd, 1920, 1080);
+		glViewport(0, 0, 1920, 1080);
+
+		std::cout << ResolutionNumber << '\n';
+		SDL_SetWindowPosition(this->pWnd, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+		SDL_SetWindowBordered(this->pWnd, SDL_TRUE);
+
+	}
+
+	if (_isfull)
+		SDL_SetWindowFullscreen(pWnd, SDL_WINDOW_FULLSCREEN);
+
 #ifndef _DEBUG
 	int32_t cursorData[2] = { 0, 0 };
 	cursor = SDL_CreateCursor((Uint8 *)cursorData, (Uint8 *)cursorData, 8, 8, 4, 4);
@@ -119,9 +201,9 @@ void Application::Update(float /*dt*/)
 
 void Application::SwapWindow(void)
 {
-	
+
 	SDL_GL_SwapWindow(pWnd);
-	
+
 }
 
 glm::vec3  Application::ConvertToNDC(const glm::vec3 & position)
@@ -163,13 +245,13 @@ void Application::PollEvents(void)
 		{
 			SDL_RestoreWindow(getWindow());
 		}
-		if(event.window.event == SDL_WINDOWEVENT_FOCUS_LOST)
+		if (event.window.event == SDL_WINDOWEVENT_FOCUS_LOST)
 		{
 			//windowIsActive = true;
 		}
 
 		if (event.window.event == SDL_WINDOWEVENT_FOCUS_GAINED) {
-	
+
 			windowIsActive = false;
 		}
 		PollWindowEvent(event);
@@ -212,13 +294,13 @@ void Application::PollWindowEvent(SDL_Event & currEvent)
 		if (filetype == "png") {
 			TCHAR buffer[MAX_PATH];
 			GetCurrentDirectory(MAX_PATH, buffer);
-		
+
 			desname = buffer;
 			desname += "\\texture\\" + filename;
 			CopyFile(name.c_str(), desname.c_str(), TRUE);
 			ENGINE->mVsTexturenamelist.push_back(filename);
-	
-		//	copyFile(name, desname);
+
+			//	copyFile(name, desname);
 		}
 		else if (filetype == "mp3") {
 			TCHAR buffer[MAX_PATH];
@@ -243,7 +325,7 @@ void Application::PollWindowEvent(SDL_Event & currEvent)
 
 }
 
-void Application::PollKeyEvent(SDL_Event & currEvent) 
+void Application::PollKeyEvent(SDL_Event & currEvent)
 {
 	if (RealExit) {
 
@@ -256,7 +338,7 @@ void Application::PollKeyEvent(SDL_Event & currEvent)
 			RealExit = false;
 			FACTORY->Destroy(confirmationa);
 			FACTORY->Update(0);
-			
+
 		}
 	}
 
@@ -300,38 +382,38 @@ void Application::ChangeScreenSize(SDL_Window * window, Resolution resolution)
 		{
 
 
-		case Resolution::_1280x720:
-			// 16:9
-			SDL_SetWindowSize(window, 1280, 720);
-			glViewport(0, 0, 1280, 720);
-			ResolutionNumber = resolution;
-			std::cout << ResolutionNumber << '\n';
-			SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-			SDL_SetWindowBordered(window, SDL_TRUE);
-			CAMERA->angle = 45.f;
-			break;
-		case Resolution::_1280x960:
-			//4:3
-			SDL_SetWindowSize(window, 1280, 960);
-			glViewport(0, 0, 1280, 960);
-			ResolutionNumber = resolution;
-			std::cout << ResolutionNumber << '\n';
-			SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-			SDL_SetWindowBordered(window, SDL_TRUE);
-			CAMERA->angle = 45.f;
-			break;
+			//case Resolution::_1280x720:
+			//	// 16:9
+			//	SDL_SetWindowSize(window, 1280, 720);
+			//	glViewport(0, 0, 1280, 720);
+			//	ResolutionNumber = resolution;
+			//	std::cout << ResolutionNumber << '\n';
+			//	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+			//	SDL_SetWindowBordered(window, SDL_TRUE);
+			//	CAMERA->angle = 45.f;
+			//	break;
+			//case Resolution::_1280x960:
+			//	//4:3
+			//	SDL_SetWindowSize(window, 1280, 960);
+			//	glViewport(0, 0, 1280, 960);
+			//	ResolutionNumber = resolution;
+			//	std::cout << ResolutionNumber << '\n';
+			//	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+			//	SDL_SetWindowBordered(window, SDL_TRUE);
+			//	CAMERA->angle = 45.f;
+			//	break;
 
-		case Resolution::_1920x1080:
-			SDL_SetWindowSize(window, 1920, 1080);
-			glViewport(0, 0, 1920, 1080);
-			ResolutionNumber = resolution;
-			std::cout << ResolutionNumber << '\n';
-			SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-			SDL_SetWindowBordered(window, SDL_TRUE);
-			CAMERA->angle = 45.f;
-			break;
-		default:
-			break;
+			//case Resolution::_1920x1080:
+			//	SDL_SetWindowSize(window, 1920, 1080);
+			//	glViewport(0, 0, 1920, 1080);
+			//	ResolutionNumber = resolution;
+			//	std::cout << ResolutionNumber << '\n';
+			//	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+			//	SDL_SetWindowBordered(window, SDL_TRUE);
+			//	CAMERA->angle = 45.f;
+			//	break;
+			//default:
+			//	break;
 
 		}
 	}
@@ -339,45 +421,45 @@ void Application::ChangeScreenSize(SDL_Window * window, Resolution resolution)
 	{
 		switch (resolution)
 		{
-		//case Resolution::_960x720:
-		//	// 0 16:9
-		//	SDL_SetWindowSize(window, 960, 720);
-		//	glViewport(0, 0, 960, 720);
-		//	ResolutionNumber = resolution;
-		//	std::cout << ResolutionNumber << '\n';
-		//	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-		//	CAMERA->angle = 45.f;
-		//	break;
+			//case Resolution::_960x720:
+			//	// 0 16:9
+			//	SDL_SetWindowSize(window, 960, 720);
+			//	glViewport(0, 0, 960, 720);
+			//	ResolutionNumber = resolution;
+			//	std::cout << ResolutionNumber << '\n';
+			//	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+			//	CAMERA->angle = 45.f;
+			//	break;
 
-		case Resolution::_1280x720:
-			// 16:9
-			SDL_SetWindowSize(window, 1280, 720);
-			glViewport(0, 0, 1280, 720);
-			ResolutionNumber = resolution;
-			std::cout << ResolutionNumber << '\n';
-			SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-			CAMERA->angle = 45.f;
-			break;
-		case Resolution::_1280x960:
-			//4:3
-			SDL_SetWindowSize(window, 1280, 960);
-			glViewport(0, 0, 1280, 960);
-			ResolutionNumber = resolution;
-			std::cout << ResolutionNumber << '\n';
-			SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-			CAMERA->angle = 45.f;
-			break;
+			//case Resolution::_1280x720:
+			//	// 16:9
+			//	SDL_SetWindowSize(window, 1280, 720);
+			//	glViewport(0, 0, 1280, 720);
+			//	ResolutionNumber = resolution;
+			//	std::cout << ResolutionNumber << '\n';
+			//	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+			//	CAMERA->angle = 45.f;
+			//	break;
+			//case Resolution::_1280x960:
+			//	//4:3
+			//	SDL_SetWindowSize(window, 1280, 960);
+			//	glViewport(0, 0, 1280, 960);
+			//	ResolutionNumber = resolution;
+			//	std::cout << ResolutionNumber << '\n';
+			//	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+			//	CAMERA->angle = 45.f;
+			//	break;
 
-		case Resolution::_1920x1080:
-			SDL_SetWindowSize(window, 1920, 1080);
-			glViewport(0, 0, 1920, 1080);
-			ResolutionNumber = resolution;
-			std::cout << ResolutionNumber << '\n';
-			SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-			CAMERA->angle = 45.f;
-			break;
-		default:
-			break;
+			//case Resolution::_1920x1080:
+			//	SDL_SetWindowSize(window, 1920, 1080);
+			//	glViewport(0, 0, 1920, 1080);
+			//	ResolutionNumber = resolution;
+			//	std::cout << ResolutionNumber << '\n';
+			//	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+			//	CAMERA->angle = 45.f;
+			//	break;
+			//default:
+			//	break;
 
 		}
 	}
@@ -402,7 +484,7 @@ void Application::toggle_fullscreen(SDL_Window * window, bool isfull)
 	}
 
 }
-void copyFile( std::string src, std::string dest)
+void copyFile(std::string src, std::string dest)
 {
 	FILE* f_src;
 	FILE* f_dest;

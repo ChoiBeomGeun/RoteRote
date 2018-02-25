@@ -115,7 +115,7 @@ void TE::Camera::proj()
 {
 	if (APP->_isfull)
 	{
-		if (/*APP->_resolution == Resolution::_960x720 ||*/ APP->_resolution == Resolution::_1280x960)
+		if (/*APP->_resolution == Resolution::_960x720 ||*/ APP->_resolution == Resolution::_1280X960)
 		{
 			_aspect = (float)4 / 3;
 			projection = glm::perspective(glm::radians(angle), _aspect, _zNear, _zFar);
@@ -129,7 +129,7 @@ void TE::Camera::proj()
 	}
 	else
 	{
-		if (/*APP->_resolution == Resolution::_960x720 ||*/ APP->_resolution == Resolution::_1280x960)
+		if (/*APP->_resolution == Resolution::_960x720 ||*/ APP->_resolution == Resolution::_1280X960)
 		{
 			_aspect = (float)4 / 3;
 			projection = glm::perspective(glm::radians(angle), _aspect, _zNear, _zFar);

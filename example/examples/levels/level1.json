@@ -4,8 +4,8 @@
 		"EYE" : 
 		{
 			"x" : -849.19140625,
-			"y" : -65.100006103515625,
-			"z" : 1000.0
+			"y" : -65.050003051757813,
+			"z" : 999.0
 		},
 		"TARGET" : 
 		{
@@ -21,7 +21,7 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 10,
+	"NumberOfObjects" : 12,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
@@ -61,6 +61,45 @@
 			"y" : 0.20000000298023224
 		},
 		"TextureDir" : "1.png"
+	},
+	"Object11" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"ObjectID" : 11,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.89999997615814209,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 0.10000000149011612,
+			"y" : 0.20000000298023224
+		},
+		"TextureDir" : "1.png"
+	},
+	"Object12" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
+		"ObjectID" : 12,
+		"ObjectType" : "Button",
+		"ParticleType" : "ET_EXPLOSION",
+		"Position" : 
+		{
+			"x" : -849.19140625,
+			"y" : -15.050003051757813,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 10.0,
+			"y" : 10.0
+		},
+		"TextureDir" : "test.png"
 	},
 	"Object2" : 
 	{
@@ -157,7 +196,7 @@
 			"y" : 150.0,
 			"z" : 0.0
 		},
-		"Rotation" : 4236.0,
+		"Rotation" : 4284.310546875,
 		"Scale" : 
 		{
 			"x" : 50.0,
@@ -175,7 +214,7 @@
 		"Position" : 
 		{
 			"x" : -550.0,
-			"y" : -75.100006103515625,
+			"y" : -75.050003051757813,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,

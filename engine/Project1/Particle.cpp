@@ -9,7 +9,7 @@
 #include "ParticleManager.h"
 
 namespace TE {
-	Emitter::Emitter() : Component(ComponentType::CT_PARTICLE)
+	Emitter::Emitter() : Component(ComponentType::CT_EMITTER)
 	{
 		GRAPHICS->EmitterList.push_back(this);
 	}
@@ -21,7 +21,7 @@ namespace TE {
 	}
 	void Emitter::Initialize()
 	{
-
+		
 	}
 
 	void Emitter::ParticleInit(int maxCount, float lifetime)

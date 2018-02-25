@@ -21,7 +21,9 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include  "StateManager.h"
 #include  "stdlib.h"
 #include "camera.h"
+#include "Particle.h"
 #include "..\..\example\examples\PlayerController.h"
+#include "ParticleManager.h"
 #define JSON_FILE "jsonFile.json"
 #define JSON_FILE_WRITE "jsonFileWrite.json"
 using namespace TE;
@@ -171,6 +173,20 @@ void LevelManager::LoadLevel(std::string  path)
 				
 
 			}
+
+			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "PARTICLE") {
+
+				tempObject->AddComponent<Emitter>();
+				tempObject->GetComponent<Transform>()->position = tempObject->GetComponent<Transform>()->position;
+				tempObject->GetComponent<Transform>()->scale = glm::vec3(10.0f);
+				//particle->GetComponent<Emitter>()->ParticleInit(30 , 20.f);
+				tempObject->GetComponent<Sprite>()->texture_load("test.png");
+				PARTICLEMANAGER->EmitterInit(2);
+				PARTICLEMANAGER->AddEmitter(20, tempObject->GetComponent<Transform>()->position, glm::vec3(2.0f, 0.0f, 0.0f), tempObject->GetComponent<Sprite>()->TextureId, ET_TRAIL);
+				PARTICLEMANAGER->GetEmitters()[PARTICLEMANAGER->GetEmitters()->emitterID].pos = tempObject->GetComponent<Transform>()->position;
+
+
+			}
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "")
 				break;
 		}
@@ -231,137 +247,145 @@ void LevelManager::LoadLevel(std::string  path)
 		tempObject->Initialize();
  	}
 
-}
+  }
 
 void LevelManager::SaveLevel(std::string  path)
 {
-//	char * Userinfo;
-//	size_t len = path.size();
-//	_dupenv_s(&Userinfo, &len, "USERPROFILE");
-//	
-//
-//		
-//	
-//	std::string saveLevel = path;
-//#ifdef _DEBUG
-//	path = ".\\levels.\\" + path;
-//#else
-//	path = Userinfo;
-//	path += "/Documents/RoteRote/levels/" + saveLevel;
-//#endif
-//	free(Userinfo);
-//	Jsonclass file;
-//	Json::Value root;
-//	std::string object = "Object";
-//
-//
-//	root["Level"] = 1;
-//	root["WorldSize"]["x"] = STATEMANAGER->v_StatesLists[STATEMANAGER->i_CurrentStateNumber]->WorldSizeX;
-//	root["WorldSize"]["y"] = STATEMANAGER->v_StatesLists[STATEMANAGER->i_CurrentStateNumber]->WorldSizeY;
-//	root["DefalutCamera"]["EYE"]["x"] = CAMERA->cameraPos.x;
-//	root["DefalutCamera"]["EYE"]["y"] = CAMERA->cameraPos.y;
-//	root["DefalutCamera"]["EYE"]["z"] = CAMERA->cameraPos.z;
-//	root["DefalutCamera"]["TARGET"]["x"] = CAMERA->cameraTarget.x;
-//	root["DefalutCamera"]["TARGET"]["y"] = CAMERA->cameraTarget.y;
-//	root["DefalutCamera"]["TARGET"]["z"] = CAMERA->cameraTarget.z;
-//	root["DefalutCamera"]["UP"]["x"] = CAMERA->cameraUp.x;
-//	root["DefalutCamera"]["UP"]["y"] = CAMERA->cameraUp.y;
-//	root["DefalutCamera"]["UP"]["z"] = CAMERA->cameraUp.z;
-//	root["NumberOfObjects"] = FACTORY->ObjectIDMap.size();
-//	int  i = 1;
-//	for (auto it : FACTORY->ObjectIDMap)
-//	{
-//		it.second->transform->position.z = 0;
-//		static unsigned index = 0;
-//
-//		if (it.second->GetComponent(CT_TRANSFORM) != nullptr) {
-//			root[object + to_string(i)]["Components"][index] = "TRANSFORM";
-//			index++;
-//		}
-//		if (it.second->GetComponent(CT_SPRITE) != nullptr) {
-//			root[object + to_string(i)]["Components"][index] = "SPRITE";
-//			index++;
-//		}
-//		if (it.second->GetComponent(CT_BODY) != nullptr) {
-//			root[object + to_string(i)]["Components"][index] = "BODY";
-//
-//			if(it.second->objectstyle == Objectstyle::Box)
-//				it.second->body->gravityOn = false;
-//			root[object + to_string(i)]["GravityOn"] = it.second->body->gravityOn;
-//			index++;
-//		}
-//		if (it.second->GetComponent(CT_TRIGGER) != nullptr) {
-//			root[object + to_string(i)]["Components"][index] = "TRIGGER";
-//			root[object + to_string(i)]["TriggerType"] = it.second->trigger->TriggerType;
-//			index++;
-//		}
-//		if (it.second->GetComponent(CT_BUTTON) != nullptr) {
-//			root[object + to_string(i)]["Components"][index] = "BUTTON";
-//			index++;
-//		}
-//		if (it.second->GetComponent(CT_CONTROLLER) != nullptr) {
-//			root[object + to_string(i)]["Components"][index] = "CONTROLLER";
-//			index++;
-//		}
-//		if (it.second->GetComponent(CT_ANIMATION) != nullptr) {
-//			root[object + to_string(i)]["Components"][index] = "ANIMATION";
-//			index++;
-//		}
-//		index = 0;
-//
-//		switch (it.second->objectstyle)
-//		{
-//		case Objectstyle::Player:
-//			root[object + to_string(i)]["ObjectType"] = "Player";
-//			break;
-//		case Objectstyle::Asteriod:
-//			root[object + to_string(i)]["ObjectType"] = "Asteriod";
-//			break;
-//		case Objectstyle::Wall:
-//			root[object + to_string(i)]["ObjectType"] = "Wall";
-//			break;
-//		case Objectstyle::Button:
-//			root[object + to_string(i)]["ObjectType"] = "Button";
-//			break;
-//		case Objectstyle::Box:
-//			root[object + to_string(i)]["ObjectType"] = "Box";
-//			break;
-//		case Objectstyle::Trigger90:
-//			root[object + to_string(i)]["ObjectType"] = "Trigger90";
-//			break;
-//		case Objectstyle::Trigger180:
-//			root[object + to_string(i)]["ObjectType"] = "Trigger180";
-//			break;
-//		case Objectstyle::Clearzone:
-//			root[object + to_string(i)]["ObjectType"] = "Clearzone";
-//			break;
-//			/*case Objectstyle::Camera:
-//			root[object + to_string(i)]["ObjectType"] = "Camera";
-//			break;*/
-//		default:
-//			DEBUG_ASSERT(true, "Invaild Object Style");
-//
-//
-//		}
-//		root[object + to_string(i)]["ObjectID"] = i;
-//		root[object + to_string(i)]["Position"]["x"] = it.second->transform->position.x;
-//		root[object + to_string(i)]["Position"]["y"] = it.second->transform->position.y;
-//		root[object + to_string(i)]["Position"]["z"] = it.second->transform->position.z;
-//		root[object + to_string(i)]["Scale"]["x"] = it.second->transform->scale.x;
-//		root[object + to_string(i)]["Scale"]["y"] = it.second->transform->scale.y;
-//		if (FACTORY->ObjectIDMap[it.first]->GetComponent(ComponentType::CT_BODY) != nullptr)
-//			root[object + to_string(i)]["Mass"] = it.second->body->pm_mass;
-//		root[object + to_string(i)]["Rotation"] = it.second->transform->angle;
-//
-//
-//		root[object + to_string(i)]["TextureDir"] = FACTORY->ObjectIDMap[it.first]->sprite->mTexutureDir;
-//		i++;
-//	}
-//
-//
-//	file.WriteFile(path, root);
-//
-//
+	char * Userinfo;
+	size_t len = path.size();
+	_dupenv_s(&Userinfo, &len, "USERPROFILE");
+	
+
+		
+	
+	std::string saveLevel = path;
+#ifdef _DEBUG
+	path = ".\\levels.\\" + path;
+#else
+	path = Userinfo;
+	path += "/Documents/RoteRote/levels/" + saveLevel;
+#endif
+	free(Userinfo);
+	Jsonclass file;
+	Json::Value root;
+	std::string object = "Object";
+
+
+	root["Level"] = 1;
+	root["WorldSize"]["x"] = STATEMANAGER->v_StatesLists[STATEMANAGER->i_CurrentStateNumber]->WorldSizeX;
+	root["WorldSize"]["y"] = STATEMANAGER->v_StatesLists[STATEMANAGER->i_CurrentStateNumber]->WorldSizeY;
+	root["DefalutCamera"]["EYE"]["x"] = CAMERA->cameraPos.x;
+	root["DefalutCamera"]["EYE"]["y"] = CAMERA->cameraPos.y;
+	root["DefalutCamera"]["EYE"]["z"] = CAMERA->cameraPos.z;
+	root["DefalutCamera"]["TARGET"]["x"] = CAMERA->cameraTarget.x;
+	root["DefalutCamera"]["TARGET"]["y"] = CAMERA->cameraTarget.y;
+	root["DefalutCamera"]["TARGET"]["z"] = CAMERA->cameraTarget.z;
+	root["DefalutCamera"]["UP"]["x"] = CAMERA->cameraUp.x;
+	root["DefalutCamera"]["UP"]["y"] = CAMERA->cameraUp.y;
+	root["DefalutCamera"]["UP"]["z"] = CAMERA->cameraUp.z;
+	root["NumberOfObjects"] = FACTORY->ObjectIDMap.size();
+	int  i = 1;
+	for (auto it : FACTORY->ObjectIDMap)
+	{
+		it.second->GetComponent<Transform>()->position.z = 0;
+		static unsigned index = 0;
+
+		if (it.second->GetComponent<Transform>() != nullptr) {
+			root[object + to_string(i)]["Components"][index] = "TRANSFORM";
+			index++;
+		}
+		if (it.second->GetComponent<Sprite>() != nullptr) {
+			root[object + to_string(i)]["Components"][index] = "SPRITE";
+			index++;
+		}
+		if (it.second->GetComponent<Body>() != nullptr) {
+			root[object + to_string(i)]["Components"][index] = "BODY";
+
+			if(it.second->objectstyle == Objectstyle::Box)
+				it.second->GetComponent<Body>()->gravityOn = false;
+			root[object + to_string(i)]["GravityOn"] = it.second->GetComponent<Body>()->gravityOn;
+			index++;
+		}
+		if (it.second->GetComponent<Trigger>() != nullptr) {
+			root[object + to_string(i)]["Components"][index] = "TRIGGER";
+			root[object + to_string(i)]["TriggerType"] = it.second->GetComponent<Trigger>()->TriggerType;
+			index++;
+		}
+		if (it.second->GetComponent<Button>() != nullptr) {
+			root[object + to_string(i)]["Components"][index] = "BUTTON";
+			index++;
+		}
+		if (it.second->GetComponent<PlayerController>() != nullptr) {
+			root[object + to_string(i)]["Components"][index] = "CONTROLLER";
+			index++;
+		}
+		if (it.second->GetComponent<Animation>() != nullptr) {
+			root[object + to_string(i)]["Components"][index] = "ANIMATION";
+			index++;
+		}
+		if (it.second->GetComponent<Emitter>() != nullptr) {
+			root[object + to_string(i)]["Components"][index] = "PARTICLE";
+			if(it.second->GetComponent<Emitter>()->type == EmitterType::ET_TRAIL)
+				root[object + to_string(i)]["ParticleType"] = "TRAIL";
+			if (it.second->GetComponent<Emitter>()->type == EmitterType::ET_EXPLOSION)
+				root[object + to_string(i)]["ParticleType"] = "ET_EXPLOSION";
+			index++;
+		}
+		index = 0;
+
+		switch (it.second->objectstyle)
+		{
+		case Objectstyle::Player:
+			root[object + to_string(i)]["ObjectType"] = "Player";
+			break;
+		case Objectstyle::Asteriod:
+			root[object + to_string(i)]["ObjectType"] = "Asteriod";
+			break;
+		case Objectstyle::Wall:
+			root[object + to_string(i)]["ObjectType"] = "Wall";
+			break;
+		case Objectstyle::Button:
+			root[object + to_string(i)]["ObjectType"] = "Button";
+			break;
+		case Objectstyle::Box:
+			root[object + to_string(i)]["ObjectType"] = "Box";
+			break;
+		case Objectstyle::Trigger90:
+			root[object + to_string(i)]["ObjectType"] = "Trigger90";
+			break;
+		case Objectstyle::Trigger180:
+			root[object + to_string(i)]["ObjectType"] = "Trigger180";
+			break;
+		case Objectstyle::Clearzone:
+			root[object + to_string(i)]["ObjectType"] = "Clearzone";
+			break;
+			/*case Objectstyle::Camera:
+			root[object + to_string(i)]["ObjectType"] = "Camera";
+			break;*/
+		default:
+			DEBUG_ASSERT(true, "Invaild Object Style");
+
+
+		}
+		root[object + to_string(i)]["ObjectID"] = i;
+		root[object + to_string(i)]["Position"]["x"] = it.second->GetComponent<Transform>()->position.x;
+		root[object + to_string(i)]["Position"]["y"] = it.second->GetComponent<Transform>()->position.y;
+		root[object + to_string(i)]["Position"]["z"] = it.second->GetComponent<Transform>()->position.z;
+		root[object + to_string(i)]["Scale"]["x"] = it.second->GetComponent<Transform>()->scale.x;
+		root[object + to_string(i)]["Scale"]["y"] = it.second->GetComponent<Transform>()->scale.y;
+		if (FACTORY->ObjectIDMap[it.first]->GetComponent<Body>() != nullptr)
+			root[object + to_string(i)]["Mass"] = it.second->GetComponent<Body>()->pm_mass;
+		root[object + to_string(i)]["Rotation"] = it.second->GetComponent<Transform>()->angle;
+
+
+		root[object + to_string(i)]["TextureDir"] = FACTORY->ObjectIDMap[it.first]->GetComponent<Sprite>()->mTexutureDir;
+		i++;
+	}
+
+
+	file.WriteFile(path, root);
+
+
 }
 
 

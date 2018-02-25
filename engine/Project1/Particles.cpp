@@ -9,7 +9,7 @@
 #include "ParticleManager.h"
 
 namespace TE {
-	Emitter::Emitter() : Component(ComponentType::CT_PARTICLE)
+	Emitter::Emitter() : Component(ComponentType::CT_EMITTER)
 	{
 		GRAPHICS->EmitterList.push_back(this);
 	}
@@ -35,7 +35,7 @@ namespace TE {
 		//	pParticles[i].scale = 20.f;
 		//	pParticles[i].vel = PARTICLEMANAGER->GetEmitters()[i].vel;
 		//}
-		pos = FACTORY->GetPlayer()->GetComponent<Transform>()->position;
+		//pos = this->pOwner->GetComponent<Transform>()->position;
 		vel = glm::vec3(0.0f);
 		size = maxCount;
 		capacity = maxCount;

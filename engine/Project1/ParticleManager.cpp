@@ -151,7 +151,8 @@ namespace TE {
 		m_expLife = 20;
 
 		trailNumber = 0;
-		this->GetEmitters()->ParticleInit(maxCount, 20);
+		m_pEmitters->ParticleInit(maxCount, 20);
+		//this->GetEmitters()->ParticleInit(maxCount, 20);
 	}
 	void ParticleManager::Update(float dt)
 	{
