@@ -9,6 +9,7 @@
 Helper function for Thumbup Engine
 */
 #include "TUMath.h"
+#include <random>
 float TUMath::DegreeToRadian(float degrees)
 {
 	return (PI / 180) * degrees;
@@ -17,6 +18,21 @@ float TUMath::DegreeToRadian(float degrees)
 float TUMath::RadianToDegree(float radians)
 {
 	return (radians * 180.f) / PI;
+}
+
+float TUMath::GetRandomFloat(float floata, float floatb)
+{
+	float temp;
+	temp = floata + static_cast<float> (rand()) / (static_cast<float> (RAND_MAX / (floatb - floata)));
+
+	return temp;
+}
+
+int TUMath::GetRandomInt(int randA, int randB)
+{
+	int temp;
+	temp = rand() % randB + randA;
+	return temp;
 }
 
 float TUMath::Clamp(float x, float low, float high)
@@ -76,7 +92,7 @@ int TUMath::Round(float num)
 Round Function For Grid Based MapEditor
 
 //par
-   float num : number for round
+float num : number for round
 */
 
 int TUMath::GridRound(float num)

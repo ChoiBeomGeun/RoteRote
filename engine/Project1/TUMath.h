@@ -11,43 +11,47 @@ Helper function for Thumbup Engine
 #pragma once
 namespace TUMath
 {
-				float  DegreeToRadian(float degrees);
+	float  DegreeToRadian(float degrees);
 
-				float  RadianToDegree(float radians);
+	float  RadianToDegree(float radians);
 
-				float  Clamp(float x, float low, float high);
+	float GetRandomFloat(float floata, float floatb);
 
-				float  Wrap(float x, float low, float high);
+	int GetRandomInt(int randA, int randB);
 
-				float  Min(float x, float y);
+	float  Clamp(float x, float low, float high);
 
-				float  Max(float x, float y);
+	float  Wrap(float x, float low, float high);
 
-				bool  IsInRange(float x, float low, float high);
+	float  Min(float x, float y);
 
-				bool  IsFloatEqual(float x, float y);
+	float  Max(float x, float y);
 
-				bool  IsPowerOf2(int x);
+	bool  IsInRange(float x, float low, float high);
 
-				int  GetNextPowerOf2(int x);
+	bool  IsFloatEqual(float x, float y);
 
-				int  Lerp(int start, int end, float time);
+	bool  IsPowerOf2(int x);
 
-				char  Lerp(char start, char end, float time);
+	int  GetNextPowerOf2(int x);
 
-				float  Lerp(float start, float end, float time);
+	int  Lerp(int start, int end, float time);
 
-				int Round(float num);
+	char  Lerp(char start, char end, float time);
 
-				int GridRound(float num);
+	float  Lerp(float start, float end, float time);
 
-				const float  EPSILON = 0.00001f;
+	int Round(float num);
 
-				const float  PI = 3.1415926535897932384626433832795f;
+	int GridRound(float num);
 
-				const float  HALF_PI = (PI * .5f);
+	const float  EPSILON = 0.00001f;
 
-				const float  TWO_PI = (PI * 2.0f);
-				
+	const float  PI = 3.1415926535897932384626433832795f;
+
+	const float  HALF_PI = (PI * .5f);
+
+	const float  TWO_PI = (PI * 2.0f);
+
 
 };

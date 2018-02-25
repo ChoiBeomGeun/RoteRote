@@ -90,7 +90,7 @@ namespace TE {
 	void Object::AddComponent()
 	{
 		if (HasComponent<ComponentType>()) {
-			std::cout << "Object Number : "<<this->objID<<"already has this component " << typeid(ComponentType).name();
+		//	std::cout << "Object Number : "<<this->objID<<"already has this component " << typeid(ComponentType).name();
 			return;
 		}
 		ComponentType * temp = new ComponentType();
@@ -110,7 +110,7 @@ namespace TE {
 			if (typeid(*inComponentList).name() == typeid(ComponentType).name())
 				return dynamic_cast<ComponentType*>(inComponentList);
 		}
-		std::cout << "Object Number : " << this->objID << "doesn't have this component : " << typeid(ComponentType).name();
+		//std::cout << "Object Number : " << this->objID << "doesn't have this component : " << typeid(ComponentType).name();
 		return nullptr;
 
 	}

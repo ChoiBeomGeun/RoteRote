@@ -1,0 +1,23 @@
+{
+	"ArchtypeName" : "Particle",
+	"DefaultGravity" : false,
+	"DefaultMass" : 0.0,
+	"DefaultPosition" : 
+	{
+		"x" : 0.0,
+		"y" : 0.0,
+		"z" : 0.0
+	},
+	"DefaultRotation" : 0.0,
+	"DefaultScale" : 
+	{
+		"x" : 0.0,
+		"y" : 0.0,
+		"z" : 0.0
+	},
+	"DefaultTexture" : "10.png",
+	"DefaultTrigger180ornot" : false,
+	"HavingComponents" : [ "TRANSFORM", "SPRITE" ],
+	"HavingComponentsNumbers" : 2,
+	"ObjectStyle" : "Particle"
+}

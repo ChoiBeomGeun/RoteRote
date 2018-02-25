@@ -1,4 +1,4 @@
-#include "particle.h"
+#include "Particles.h"
 #include "TUMath.h"
 
 #include "glm\glm.hpp"

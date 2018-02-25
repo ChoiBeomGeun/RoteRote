@@ -29,6 +29,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "StateManager.h"
 #include "SoundManager.h"
 #include "LevelManager.h"
+#include "ParticleManager.h"
 
 //#include "..\..\example\examples\PlayerController.h"
 #include "Physics.h"
@@ -41,10 +42,6 @@ namespace TE {
 	//Global Pointer to the Engine
 
 	Engine * ENGINE = nullptr;
-
-
-
-
 
 }
 
@@ -75,6 +72,8 @@ void Engine::Initialize()
 	AddSystem(new GameLogic());
 	AddSystem(new ObjectFactory());
 	AddSystem(new Physics());
+	AddSystem(new ParticleManager());
+
 	AddSystem(new Graphics());
 	AddSystem(new StateManager());
 
@@ -115,7 +114,7 @@ void Engine::GameLoop()
 		pm_accumulator += frametime;
 
 		HowMuchTimePassedInGame += dt;
-		for (unsigned int i = 0; i <7; ++i) {
+		for (unsigned int i = 0; i <8; ++i) {
 		
 			SystemList[i]->Update(frametime);
 			if (!GameIsRunning)

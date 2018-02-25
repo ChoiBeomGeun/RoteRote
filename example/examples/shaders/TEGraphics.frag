@@ -8,17 +8,19 @@ in vec2 fragmentUV;
 
 uniform sampler2D texture2D;
 uniform int texturing;
+uniform vec4 colorOffset;
 
 void main()
 {
 	
 	vec4 texel = texture(texture2D,fragmentUV );
-	if(texel.a < 0.5)
+	if(texel.a < 0.1)
 		discard;
 
+	vec4 tempcolor = fragmentColor * colorOffset;
+	//fragmentColor = tempcolor;
 	if(texturing ==1)
-	color = texel * fragmentColor; // texel , texture(texture2D,fragmentUV)
+	color = texel * tempcolor; // texel , texture(texture2D,fragmentUV)
 	else	 
-	color = fragmentColor;
+	color = tempcolor;
 }
-

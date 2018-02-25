@@ -6,15 +6,15 @@ in vec2 vertexUV;
 
 //layout (location = 2) in vec4 color;
 
-uniform vec4 colorOffset;
+
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
-uniform int isHud;
+uniform int drawingStatus;
 uniform mat4 hudmodel;
+uniform bool isAnimation;
 uniform int flipx;
 uniform int isJumping;
-uniform bool isAnimation;
 uniform float animationx;
 uniform float timer;
 
@@ -62,31 +62,19 @@ void main()
 		UV = vertexUV;
 	}
 	
-	vec4 position = vec4(vertexPosition.x, vertexPosition.yz, 1.0);
-	if(isHud == 1)
+	vec4 position = vec4(vertexPosition.xyz, 1.0);
+	
+	if(drawingStatus == 0)
 	{	
-		gl_Position =  hudmodel * vec4(vertexPosition.xyz, 1.0);
-	}
-	else
-	{
 		gl_Position = projection * view * model * position;
 	}
+	else if (drawingStatus == 1)
+	{
+		gl_Position =  hudmodel * vec4(vertexPosition.xyz, 1.0);
+	}
+	
 	
 	fragmentPosition = vertexPosition;
-	fragmentColor =  vertexColor * colorOffset; // *colorOffset
+	fragmentColor =  vertexColor;// *vec4(colorOffset);// * colorOffset; // *colorOffset
 	fragmentUV = UV;
 }
-
-//void Animation(vec2 UV, float timeframe, float newUV ,int FlipX, float frame)
-//{
-	//if (FlipX == 1)
-	//{
-		//newUV = float((1.0f - UV.x) *timeframe);
-	//	UV = vec2(newUV + frame , vertexUV.y);
-//	}
-	//else if (FlipX == 0)
-	//{
-	//	abc = float(abc + animationx);
-	//	UV = vec2(abc, vertexUV.y);
-	//}
-//}

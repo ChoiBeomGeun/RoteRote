@@ -22,7 +22,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{BE048D66-55C3-4ECE-8931-49431EB0AC06}</ProjectGuid>
     <RootNamespace>Project1</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -211,6 +211,8 @@
     <ClCompile Include="Mat44.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="ParticleManager.cpp" />
+    <ClCompile Include="Particles.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Soundmanager.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -239,6 +241,8 @@
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="ObjectStyle.h" />
     <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleManager.h" />
+    <ClInclude Include="Particles.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SpriteBatch.h" />
     <ClInclude Include="TE.h" />

@@ -63,6 +63,9 @@
     <Filter Include="IMGUIDEBUG">
       <UniqueIdentifier>{fc1edec9-4319-46b7-95ce-f07621b68b1a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\Particle">
+      <UniqueIdentifier>{b5557283-f369-4571-aaa4-5774231e805d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="vector3.cpp">
@@ -169,6 +172,12 @@
     </ClCompile>
     <ClCompile Include="cAutoMoving.cpp">
       <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleManager.cpp">
+      <Filter>Graphics\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Particles.cpp">
+      <Filter>Graphics\Particle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -324,6 +333,12 @@
     </ClInclude>
     <ClInclude Include="cAutoMoving.h">
       <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleManager.h">
+      <Filter>Graphics\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Particles.h">
+      <Filter>Graphics\Particle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

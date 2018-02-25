@@ -66,6 +66,7 @@ Object * player;
 
 Object * Movingtest;
 
+Object * particle;
 Level1::Level1()
 {
 	//   _centerOfScreen = { 0.f ,0.f };
@@ -215,6 +216,15 @@ void Level1::Init()
 	//FACTORY->Destroy(Loading);
 	/////////////////////////////////////////////////////
 
+	particle = FACTORY->CreateArchetype(ReadingArchetype("Particle.json"));
+	particle->AddComponent<Emitter>();
+	particle->GetComponent<Transform>()->position = player->GetComponent<Transform>()->position;
+	particle->GetComponent<Transform>()->scale = glm::vec3(10.0f);
+	//particle->GetComponent<Emitter>()->ParticleInit(30 , 20.f);
+	particle->GetComponent<Sprite>()->texture_load("test.png");
+	PARTICLEMANAGER->EmitterInit(2);
+	PARTICLEMANAGER->AddEmitter(20, particle->GetComponent<Transform>()->position, glm::vec3(2.0f, 0.0f, 0.0f), particle->GetComponent<Sprite>()->TextureId, ET_TRAIL);
+	PARTICLEMANAGER->GetEmitters()[PARTICLEMANAGER->GetEmitters()->emitterID].pos = particle->GetComponent<Transform>()->position;
 
 
 	lookAtMap();
@@ -230,9 +240,9 @@ void Level1::Update(float dt)
 #endif
 	//std::cout << CAMERA->cameraPos.x << " " << CAMERA->cameraPos.y << " \n";
 
-
-
-
+	particle->GetComponent<Transform>()->position = player->GetComponent<Transform>()->position + glm::vec3(0.f, 50.0f, 0.0f);
+	particle->GetComponent<Sprite>()->depth = 1.0f;
+	PARTICLEMANAGER->UpdateEmitter(PARTICLEMANAGER->GetEmitters(), dt);
 
 	if (STATEMANAGER->b_IsReplayStart) {
 
