@@ -38,6 +38,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "Trigger.h"
 #include "cAutoMoving.h"
 #include "Automoving.h"
+//#include <vld.h>
 using namespace TE;
 int main(int,char**)
 {

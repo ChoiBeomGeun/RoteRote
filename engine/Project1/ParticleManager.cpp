@@ -105,37 +105,31 @@ namespace TE {
 	{
 		// Delete all particle in the emitters
 		for (int i = 0; i < m_capacity; ++i)
+		{
 			delete[] m_pEmitters[i].pParticles;
+			m_pEmitters[i].pParticles = 0;
+		}
 		// and delete emitter array
 		delete[] m_pEmitters;
 		m_pEmitters = 0;
 	}
 	void ParticleManager::Initialize(void)
 	{
-	}
-	void ParticleManager::EmitterInit(int maxCount)
-	{
-		// allocate emitter based on maxcount
-		m_pEmitters = new Emitter[maxCount];
+		if (m_pEmitters == NULL)
+			return;
+		//m_pEmitters->pParticles = 0;
+		m_pEmitters->capacity = 10;
+		m_pEmitters->emitterID = 0;
+		m_pEmitters->lifeTime = 0;
+		m_pEmitters->pos = { 0, 0,0 };
+		m_pEmitters->size = 0;
+		m_pEmitters->m_textureID = 0;
+		m_pEmitters->type = ET_TRAIL;
+		m_pEmitters->vel = { 0, 0 ,0 };
 
-		// initialize all emitter data as well
-		for (int i = 0; i < maxCount; ++i)
-		{
-			m_pEmitters[i].pParticles = 0;
-			m_pEmitters[i].capacity = 0;
-			m_pEmitters[i].emitterID = 0;
-			m_pEmitters[i].lifeTime = 0;
-			m_pEmitters[i].pos = { 0, 0,0 };
-			m_pEmitters[i].size = 0;
-			m_pEmitters[i].m_textureID = 0;
-			m_pEmitters[i].type = ET_TRAIL;
-			m_pEmitters[i].vel = { 0, 0 ,0 };
-		}
-
-		// initializes class members
-		m_capacity = maxCount;      // Capacity of emitter
-		m_size = 0;           // Number of emitter
-		m_currentID = 0;        // ID of emitter
+		m_capacity = 0;      // Capacity of emitter
+		m_size = 0;					// Number of emitter
+		m_currentID = 0;			// ID of emitter
 
 		m_minExpVel = 0;
 		m_maxExpVel = 100;
@@ -151,7 +145,45 @@ namespace TE {
 		m_expLife = 20;
 
 		trailNumber = 0;
-		m_pEmitters->ParticleInit(maxCount, 20);
+	}
+	void ParticleManager::CreateMaxNumEmitter(int maxCount)
+	{
+		// allocate emitter based on maxcount
+		m_pEmitters = new Emitter[maxCount];
+
+		// initialize all emitter data as well
+		for (int i = 0; i < maxCount; ++i)
+		{
+			m_pEmitters[i].pParticles = 0;
+			m_pEmitters[i].capacity = 10;
+			m_pEmitters[i].emitterID = 0;
+			m_pEmitters[i].lifeTime = 0;
+			m_pEmitters[i].pos = { 0, 0,0 };
+			m_pEmitters[i].size = 0;
+			m_pEmitters[i].m_textureID = 0;
+			m_pEmitters[i].type = ET_TRAIL;
+			m_pEmitters[i].vel = { 0, 0 ,0 };
+		}
+
+		// initializes class members
+		m_capacity = maxCount;      // Capacity of emitter
+		m_size = 0;					// Number of emitter
+		m_currentID = 0;			// ID of emitter
+
+		m_minExpVel = 0;
+		m_maxExpVel = 100;
+		m_minExpScale = 0;
+		m_maxExpScale = 100;
+
+		m_minTrailVel = 0;
+		m_maxTrailVel = 100;
+		m_minTrailScale = 0;
+		m_maxTrailScale = 100;
+
+		m_scaleFactor = 30;
+		m_expLife = 20;
+
+		trailNumber = 0;
 		//this->GetEmitters()->ParticleInit(maxCount, 20);
 	}
 	void ParticleManager::Update(float dt)
@@ -449,37 +481,6 @@ namespace TE {
 		}
 		}
 	}
-	/******************************************************************************/
-	/*!
-
-	We want to draw the emitter as efficiently as possible so we want to set
-	the texture just once before our particle loop.
-
-	\param pEmitter
-	emitter to draw particles
-
-	\attention
-	don't forget initialize m_objectCount, m_buttonCount
-
-	*/
-	/******************************************************************************/
-	//void     ParticleManager::DrawEmitter(const Emitter* pEmitter)
-	//{
-	//	//Draw Emitter
-	//	WEMtx44 transform;
-	//	WEGraphics::SetTexture(pEmitter->textureID);
-	//	//set texture only once
-	//	for (int i = 0; i < pEmitter->size; ++i)
-	//	{
-	//		WEGraphics::SetTextureColor(pEmitter->pParitcles[i].color);
-	//		WEMtx44::MakeTransform(transform,
-	//			pEmitter->pParitcles[i].scale, pEmitter->pParitcles[i].scale,
-	//			0.f,
-	//			pEmitter->pParitcles[i].pos.x, pEmitter->pParitcles[i].pos.y, 0.f);
-	//		WEGraphics::Draw(transform);
-	//	}
-	//}
-	/******************************************************************************/
 	/*!
 
 	Initialize explosion with many mathematical function.

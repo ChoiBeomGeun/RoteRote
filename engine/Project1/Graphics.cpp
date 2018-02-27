@@ -253,19 +253,13 @@ void Graphics::Update(float dt)
 			drawOrthogonal(it);
 
 		drawParticles(it);
-
 		glUniformMatrix4fv(uniformLocation[VIEW], 1, GL_FALSE, &view[0][0]);
 		glUniformMatrix4fv(uniformLocation[PROJ], 1, GL_FALSE, &CAMERA->projection[0][0]);
 		glUniform4f(uniformLocation[COLOR], (*it)->Color[0], (*it)->Color[1], (*it)->Color[2], (*it)->Color[3]);
 		glUniform1i(uniformLocation[DRAWINGSTATUS], drawStats);
 		glPushAttrib(GL_CURRENT_BIT);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
-		//isParticle = true;
-
-
 	}
-
-
 
 #ifdef _DEBUG
 	ImGuiUpdate();
@@ -317,32 +311,6 @@ void TE::Graphics::drawPerspective(std::vector<Sprite*>::iterator iter)
 		glUniform1i(uniformLocation[PTEXTURE], 0);
 		glUniformMatrix4fv(uniformLocation[MODEL], 1, GL_FALSE, &model[0][0]);
 	}
-
-	//else
-	//{
-	//	glBindTexture(GL_TEXTURE_2D, (*iter)->TextureId);
-	//	_particleProgram.use();
-	//	for (int i = 0; i < PARTICLEMANAGER->GetEmmiterCount(); ++i) {
-	//		for (int j = 0; j < PARTICLEMANAGER->GetEmitters()->size; ++j) {
-	//			drawStats = 3;
-	//			particlemodel = glm::mat4(1.0f);
-	//			CAMERA->proj();
-	//			particlemodel = glm::translate(particlemodel, PARTICLEMANAGER->GetEmitters()[i].pParticles[j].pos);
-	//			//std::cout << i <<". " << j << ": " <<PARTICLEMANAGER->GetEmitters()[i].pParticles[j].pos.x << ", " << PARTICLEMANAGER->GetEmitters()[i].pParticles[j].pos.y << "\n";
-	//			particlemodel = glm::rotate(particlemodel, glm::radians((*iter)->pTransform->angle), (*iter)->pTransform->rotation);
-	//			particlemodel = glm::scale(particlemodel, glm::vec3(PARTICLEMANAGER->GetEmitters()[i].pParticles[j].scale));
-	//			glUniform4f(particleLoc[PCOLOR], PARTICLEMANAGER->GetEmitters()[i].pParticles[j].color.r, PARTICLEMANAGER->GetEmitters()[i].pParticles[j].color.g,
-	//				PARTICLEMANAGER->GetEmitters()[i].pParticles[j].color.b, PARTICLEMANAGER->GetEmitters()[i].pParticles[j].color.a);
-	//			glUniformMatrix4fv(particleLoc[PARTICLEMODEL], 1, GL_FALSE, &particlemodel[0][0]);
-	//			glUniformMatrix4fv(particleLoc[PARTICLEVIEW], 1, GL_FALSE, &view[0][0]);
-	//			glUniformMatrix4fv(particleLoc[PARTICLEPROJ], 1, GL_FALSE, &CAMERA->projection[0][0]);
-	//			glUniform1i(uniformLocation[PTEXTURE], 1);
-	//			glUniform1i(particleLoc[PSTATS], drawStats);
-	//			glPushAttrib(GL_CURRENT_BIT);
-	//			glDrawArrays(GL_TRIANGLES, 0, 6);
-	//		}
-	//	}
-	//}
 }
 
 void TE::Graphics::drawOrthogonal(std::vector<Sprite*>::iterator iter)
@@ -365,7 +333,7 @@ void TE::Graphics::drawOrthogonal(std::vector<Sprite*>::iterator iter)
 
 void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 {
-	if ((*iter)->pOwner->GetComponent<Emitter>())
+	if ((*iter)->pOwner->HasComponent<Emitter>())
 	{
 		_particleProgram.use();
 		for (auto p : EmitterList)
@@ -394,34 +362,6 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 		}
 		_particleProgram.unuse();
 	}
-	/*if ((*iter)->isPerspective)
-	{
-	if ((*iter)->pOwner->GetComponent<Emitter>())
-	{
-	glBindTexture(GL_TEXTURE_2D, (*iter)->TextureId);
-	_particleProgram.use();
-	for (int i = 0; i < PARTICLEMANAGER->GetEmmiterCount(); ++i) {
-	for (int j = 0; j < PARTICLEMANAGER->GetEmitters()->size; ++j) {
-	drawStats = 3;
-	particlemodel = glm::mat4(1.0f);
-	CAMERA->proj();
-	particlemodel = glm::translate(particlemodel, PARTICLEMANAGER->GetEmitters()[i].pParticles[j].pos);
-	std::cout << i <<". " << j << ": " <<PARTICLEMANAGER->GetEmitters()[i].pParticles[j].pos.x << ", " << PARTICLEMANAGER->GetEmitters()[i].pParticles[j].pos.y << "\n";
-	particlemodel = glm::rotate(particlemodel, glm::radians((*iter)->pTransform->angle), (*iter)->pTransform->rotation);
-	particlemodel = glm::scale(particlemodel, glm::vec3(PARTICLEMANAGER->GetEmitters()[i].pParticles[j].scale));
-	glUniform4f(particleLoc[PCOLOR], PARTICLEMANAGER->GetEmitters()[i].pParticles[j].color.r, PARTICLEMANAGER->GetEmitters()[i].pParticles[j].color.g,
-	PARTICLEMANAGER->GetEmitters()[i].pParticles[j].color.b, PARTICLEMANAGER->GetEmitters()[i].pParticles[j].color.a);
-	glUniformMatrix4fv(particleLoc[PARTICLEMODEL], 1, GL_FALSE, &particlemodel[0][0]);
-	glUniformMatrix4fv(particleLoc[PARTICLEVIEW], 1, GL_FALSE, &view[0][0]);
-	glUniformMatrix4fv(particleLoc[PARTICLEPROJ], 1, GL_FALSE, &CAMERA->projection[0][0]);
-	glUniform1i(uniformLocation[PTEXTURE], 1);
-	glUniform1i(particleLoc[PSTATS], drawStats);
-	glPushAttrib(GL_CURRENT_BIT);
-	glDrawArrays(GL_TRIANGLES, 0, 6);
-	}
-	}
-	}
-	}*/
 }
 
 void TE::Graphics::setbasicUniformLoc()

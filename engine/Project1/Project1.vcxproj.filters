@@ -158,9 +158,6 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Particle.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="CameraMovement.cpp">
       <Filter>Graphics\Camera</Filter>
     </ClCompile>
@@ -317,9 +314,6 @@
       <Filter>IMGUIDEBUG</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Particle.h">
       <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="CameraMovement.h">

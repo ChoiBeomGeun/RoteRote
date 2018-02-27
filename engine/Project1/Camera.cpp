@@ -36,6 +36,8 @@ Camera::Camera()
 }
 Camera::~Camera()
 {
+	delete m_camerObject;
+	m_camerObject = NULL;
 
 }
 

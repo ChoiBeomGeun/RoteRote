@@ -35,7 +35,7 @@ namespace TE {
 		Emitter();
 		~Emitter();
 		virtual void Initialize() override;
-		void ParticleInit(int maxCount, float lifetime);
+		void CreateParticle(int maxCount, float lifetime);
 		void Update(float dt);
 		void setTextureID(unsigned int textureID);
 

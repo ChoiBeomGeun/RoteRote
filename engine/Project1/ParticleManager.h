@@ -16,7 +16,7 @@ This file has the implementation of the functions for Assignment3
 
 #include "glm\glm.hpp"
 #include "Component.h"
-#include "particle.h"
+#include "Particles.h"
 #include <vector>
 
 
@@ -52,7 +52,7 @@ namespace TE {
 		~ParticleManager(void);
 
 		void Initialize(void) override;
-		void EmitterInit(int maxCount);
+		void CreateMaxNumEmitter(int maxCount);
 
 
 		void Update(float dt) override;

@@ -15,8 +15,8 @@ namespace TE {
 	}
 	Emitter::~Emitter()
 	{
-		//GRAPHICS->EmitterList.erase(std::find(GRAPHICS->EmitterList.begin(), GRAPHICS->EmitterList.end(), this));
-		/*delete []pParticles;
+		std::cout << "Emitter DEEEEEELEETTTE" << std::endl;
+		/*delete [] pParticles;
 		pParticles = NULL;*/
 	}
 	void Emitter::Initialize()
@@ -24,32 +24,34 @@ namespace TE {
 
 	}
 
-	void Emitter::ParticleInit(int maxCount, float lifetime)
+	void Emitter::CreateParticle(int maxCount, float lifetime)
 	{
-		//pParticles = new Particle[maxCount];
-		//
-		//for (int i = 0; i < maxCount; ++i)
-		//{
-		//	pParticles[i].pos = FACTORY->GetPlayer()->GetComponent<Transform>()->position;// PARTICLEMANAGER->GetEmitters()[PARTICLEMANAGER->GetEmitters()->emitterID].pos;
-		//	pParticles[i].color = 255;
-		//	pParticles[i].scale = 20.f;
-		//	pParticles[i].vel = PARTICLEMANAGER->GetEmitters()[i].vel;
-		//}
-		//pos = this->pOwner->GetComponent<Transform>()->position;
-		vel = glm::vec3(0.0f);
+ 		vel = glm::vec3(0.0f);
 		size = maxCount;
 		capacity = maxCount;
 		emitterID = PARTICLEMANAGER->GetEmitters()->emitterID;
 		lifeTime = lifetime;
+		pParticles = new Particle[maxCount];
+		for (int i = 0; i < maxCount; ++i)
+		{
+			pParticles[i].color.r = 255;
+			pParticles[i].color.g = 255;
+			pParticles[i].color.b = 255;
+			pParticles[i].color.a = 255;
+			pParticles[i].pos = PARTICLEMANAGER->GetEmitters()->pos;
+			pParticles[i].scale = 20;
+			pParticles[i].vel = glm::vec3(0);
+		}
 	}
 
 	void Emitter::Update(float dt)
 	{
+		dt;
 		for (int i = 0; i < PARTICLEMANAGER->GetEmitters()->size; ++i)
 		{
-
+			
 		}
-		//PARTICLEMANAGER->
+		
 	}
 
 	void Emitter::setTextureID(unsigned int textureID)

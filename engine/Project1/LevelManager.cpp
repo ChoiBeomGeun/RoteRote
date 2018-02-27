@@ -21,7 +21,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include  "StateManager.h"
 #include  "stdlib.h"
 #include "camera.h"
-#include "Particle.h"
+#include "Particles.h"
 #include "..\..\example\examples\PlayerController.h"
 #include "ParticleManager.h"
 #define JSON_FILE "jsonFile.json"
@@ -179,9 +179,9 @@ void LevelManager::LoadLevel(std::string  path)
 				tempObject->AddComponent<Emitter>();
 				tempObject->GetComponent<Transform>()->position = tempObject->GetComponent<Transform>()->position;
 				tempObject->GetComponent<Transform>()->scale = glm::vec3(10.0f);
-				//particle->GetComponent<Emitter>()->ParticleInit(30 , 20.f);
 				tempObject->GetComponent<Sprite>()->texture_load("test.png");
-				PARTICLEMANAGER->EmitterInit(2);
+				PARTICLEMANAGER->CreateMaxNumEmitter(2);
+				PARTICLEMANAGER->GetEmitters()[0].CreateParticle(30, 20.0f);
 				PARTICLEMANAGER->AddEmitter(20, tempObject->GetComponent<Transform>()->position, glm::vec3(2.0f, 0.0f, 0.0f), tempObject->GetComponent<Sprite>()->TextureId, ET_TRAIL);
 				PARTICLEMANAGER->GetEmitters()[PARTICLEMANAGER->GetEmitters()->emitterID].pos = tempObject->GetComponent<Transform>()->position;
 

@@ -229,12 +229,7 @@ void Level1::Update(float dt)
 #ifdef _DEBUG
 	CheatKeyFunctions();
 #endif
-	//std::cout << CAMERA->cameraPos.x << " " << CAMERA->cameraPos.y << " \n";
-
-	//particle->GetComponent<Transform>()->position = player->GetComponent<Transform>()->position + glm::vec3(0.f, 50.0f, 0.0f);
-	//particle->GetComponent<Sprite>()->depth = 1.0f;
-	PARTICLEMANAGER->UpdateEmitter(PARTICLEMANAGER->GetEmitters(), dt);
-
+		
 	if (STATEMANAGER->b_IsReplayStart) {
 
 		ReplayerInfo temp;
@@ -244,9 +239,7 @@ void Level1::Update(float dt)
 		temp.mouseinfo = player->GetComponent<Animation>()->isFlippedX();
 		STATEMANAGER->Replayerinfo.push(temp);
 	}
-
 	
-
 
 	if (!ENGINE->GetGameStateIsOn())
 	{
@@ -333,10 +326,13 @@ void Level1::Update(float dt)
 			PHYSICS->gravityScale = -20.f;
 			PHYSICS->GravityType = Gravity::y_Minus;
 			PHYSICS->gravity = glm::vec3(0, PHYSICS->gravityScale, 0);
-		}
+			PARTICLEMANAGER->Initialize();
+		}		
 		first = false;
 		SetReplayer();
 	}
+	PARTICLEMANAGER->GetEmitters()->pos = FACTORY->GetPlayer()->GetComponent<Transform>()->GetPosition();
+	PARTICLEMANAGER->UpdateEmitter(&(PARTICLEMANAGER->GetEmitters()[0]), dt);
 
 
 }

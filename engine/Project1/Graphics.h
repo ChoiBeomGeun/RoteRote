@@ -29,7 +29,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "Camera.h"
 #include "GLSLProgram.h"
 #include "Vertex.h"
-#include "particle.h"
+#include "Particles.h"
 #include "Animation.h"
 
 #include <vector>

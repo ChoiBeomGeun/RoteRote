@@ -30,7 +30,7 @@ entities in the game engine will be built upon.
 #include "Camera.h"
 #include  "TriggerC.h"
 #include "Animation.h"
-#include "Particle.h"
+#include "Particles.h"
 
 
 namespace TE {
