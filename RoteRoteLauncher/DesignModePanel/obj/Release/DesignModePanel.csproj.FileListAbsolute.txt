@@ -1,0 +1,4 @@
+E:\Work\Project\HowTo\컨트롤드래그앤드랍추가및크기조절\DesignModePanel\bin\Release\DesignModePanel.dll
+E:\Work\Project\HowTo\컨트롤드래그앤드랍추가및크기조절\DesignModePanel\bin\Release\DesignModePanel.pdb
+E:\Work\Project\HowTo\컨트롤드래그앤드랍추가및크기조절\DesignModePanel\obj\Release\DesignModePanel.dll
+E:\Work\Project\HowTo\컨트롤드래그앤드랍추가및크기조절\DesignModePanel\obj\Release\DesignModePanel.pdb
