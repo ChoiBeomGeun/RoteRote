@@ -54,12 +54,15 @@ namespace TE
 
 		bool JumpTriggered;
 
+		bool WallJumpTriggered;
+
 		bool GravityOn;
 
 		bool OffFromWall;
 
 		float WallJump;
 
+		bool WallAttached;
 		/* For variable Jump */
 
 		float minJumpVelocity = 350;
