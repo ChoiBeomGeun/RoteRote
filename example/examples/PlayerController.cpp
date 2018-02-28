@@ -100,9 +100,10 @@ void PlayerController::Movement(float dt)
 	if (PHYSICS->GetIsPlayerGround() && WallAttached)
 		this->GetOwner()->GetComponent<Body>()->GroundType = Grounded::Ground;
 
-	/*
+	
 	if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
-		std::cout << "Ground" << '\n';
+		FACTORY->GetPlayer()->GetComponent<Animation>()->isJumping = false;
+	/*
 	else if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Left || this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Right)
 	{
 		std::cout << "Wall" << '\n';
@@ -115,13 +116,21 @@ void PlayerController::Movement(float dt)
 		/* player not attached to wall */
 		if (Input::IsPressed(SDL_SCANCODE_RIGHT) && !WallAttached)
 		{
+			FACTORY->GetPlayer()->GetComponent<Animation>()->setFlipX(false);
+			FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(true);
 			this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(SPEED, 0, 0);
 		}
+		else if (!FACTORY->GetPlayer()->GetComponent<Animation>()->isFlippedX())
+			FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(false);
 		/* player not attached to wall */
 		if (Input::IsPressed(SDL_SCANCODE_LEFT) && !WallAttached)
 		{
+			FACTORY->GetPlayer()->GetComponent<Animation>()->setFlipX(true);
+			FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(true);
 			this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(-SPEED, 0, 0);
 		}
+		else if (FACTORY->GetPlayer()->GetComponent<Animation>()->isFlippedX())
+			FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(false);
 
 		/*Wall Slide*/
 		if ((this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Left || this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Right) && this->GetOwner()->GetComponent<Body>()->pm_velocity.y < 0)
@@ -144,6 +153,7 @@ void PlayerController::Movement(float dt)
 
 		if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Left)
 		{
+			FACTORY->GetPlayer()->GetComponent<Animation>()->setFlipX(false);
 			if (Input::IsPressed(SDL_SCANCODE_RIGHT))
 			{
 				if (Input::IsTriggered(SDL_SCANCODE_SPACE))
@@ -171,6 +181,7 @@ void PlayerController::Movement(float dt)
 		}
 		if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Right)
 		{
+			FACTORY->GetPlayer()->GetComponent<Animation>()->setFlipX(true);
 			if (Input::IsPressed(SDL_SCANCODE_LEFT))
 			{
 				if (Input::IsTriggered(SDL_SCANCODE_SPACE))
@@ -201,11 +212,13 @@ void PlayerController::Movement(float dt)
 		{
 			if (Input::IsPressed(SDL_SCANCODE_SPACE) && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
 			{
+				FACTORY->GetPlayer()->GetComponent<Animation>()->isJumping = true;
 				this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(0, JumpSpeed, 0);
 				JumpTriggered = true;
 			}
 			if (Input::IsReleased(SDL_SCANCODE_SPACE))
 			{
+				FACTORY->GetPlayer()->GetComponent<Animation>()->isJumping = true;
 				if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y > minJumpVelocity)
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = minJumpVelocity;
 			}
@@ -232,13 +245,21 @@ void PlayerController::Movement(float dt)
 	{
 		if (Input::IsPressed(SDL_SCANCODE_RIGHT) && !WallAttached)
 		{
+			FACTORY->GetPlayer()->GetComponent<Animation>()->setFlipX(false);
+			FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(true);
 			this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(-SPEED, 0, 0);
 		}
+		else if (!FACTORY->GetPlayer()->GetComponent<Animation>()->isFlippedX())
+			FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(false);
 
 		if (Input::IsPressed(SDL_SCANCODE_LEFT) && !WallAttached)
 		{
+			FACTORY->GetPlayer()->GetComponent<Animation>()->setFlipX(true);
+			FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(true);
 			this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(+SPEED, 0, 0);
 		}
+		else if (FACTORY->GetPlayer()->GetComponent<Animation>()->isFlippedX())
+			FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(false);
 
 		/*Wall Slide*/
 		if ((this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Left || this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Right) && this->GetOwner()->GetComponent<Body>()->pm_velocity.y > 0)
@@ -260,6 +281,7 @@ void PlayerController::Movement(float dt)
 			{
 				if (Input::IsPressed(SDL_SCANCODE_LEFT))
 				{
+					FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(true);
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = 1000;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump * 8;
 				}
@@ -267,7 +289,7 @@ void PlayerController::Movement(float dt)
 			else if (Input::IsTriggered(SDL_SCANCODE_LEFT))
 			{
 				OffFromWall = true;
-
+				FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(false);
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = SPEED;
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -WallJump;
 			}
@@ -287,6 +309,7 @@ void PlayerController::Movement(float dt)
 			{
 				if (Input::IsPressed(SDL_SCANCODE_RIGHT))
 				{
+					FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(true);
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -1000;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump * 8;
 				}
@@ -294,7 +317,7 @@ void PlayerController::Movement(float dt)
 			else if (Input::IsTriggered(SDL_SCANCODE_RIGHT))
 			{
 				OffFromWall = true;
-
+				FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(false);
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -SPEED;
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump;
 			}
@@ -304,6 +327,7 @@ void PlayerController::Movement(float dt)
 		{
 			if (Input::IsPressed(SDL_SCANCODE_SPACE) && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
 			{
+				FACTORY->GetPlayer()->GetComponent<Animation>()->isJumping = true;
  				this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(0, JumpSpeed, 0);
 				JumpTriggered = true;
 			}
