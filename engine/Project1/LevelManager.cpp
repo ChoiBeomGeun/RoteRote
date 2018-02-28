@@ -121,23 +121,13 @@ void LevelManager::LoadLevel(std::string  path)
 			}
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "CONTROLLER") {
 				tempObject->AddComponent<PlayerController>();
-
-
-
 			}
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "BODY") {
-
-
-
 		//		Body * body = new Body(glm::vec3(0, 0, 0), mass);
  				tempObject->AddComponent<Body>();
 				tempObject->GetComponent<Body>()->gravityOn = GravityOn;
 				tempObject->GetComponent<Body>()->pm_invmass = mass;
 				tempObject->GetComponent<Body>()->restitution = 0;
-		
-
-				
-
 			}
 	
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "BUTTON") {
@@ -169,9 +159,6 @@ void LevelManager::LoadLevel(std::string  path)
 					tempObject->GetComponent<Trigger>()->TriggerType = "90";
 					tempObject->objectstyle = Objectstyle::Trigger90;
 				}
-
-				
-
 			}
 
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "PARTICLE") {
@@ -184,8 +171,6 @@ void LevelManager::LoadLevel(std::string  path)
 				PARTICLEMANAGER->GetEmitters()[0].CreateParticle(30, 20.0f);
 				PARTICLEMANAGER->AddEmitter(20, tempObject->GetComponent<Transform>()->position, glm::vec3(2.0f, 0.0f, 0.0f), tempObject->GetComponent<Sprite>()->TextureId, ET_TRAIL);
 				PARTICLEMANAGER->GetEmitters()[PARTICLEMANAGER->GetEmitters()->emitterID].pos = tempObject->GetComponent<Transform>()->position;
-
-
 			}
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "")
 				break;
@@ -234,6 +219,10 @@ void LevelManager::LoadLevel(std::string  path)
 		{
 			//tempObject = FACTORY->CreateButton(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0));
 			tempObject->objectstyle = Objectstyle::Clearzone;
+		}
+		else if (Objectstyle == "Particle")
+		{
+			tempObject->objectstyle = Objectstyle::Particle;
 		}
 		else
 			DEBUG_ASSERT(true, "Invaild Object Style");
@@ -358,6 +347,9 @@ void LevelManager::SaveLevel(std::string  path)
 			break;
 		case Objectstyle::Clearzone:
 			root[object + to_string(i)]["ObjectType"] = "Clearzone";
+			break;
+		case Objectstyle::Particle:
+			root[object + to_string(i)]["ObjectType"] = "Particle";
 			break;
 			/*case Objectstyle::Camera:
 			root[object + to_string(i)]["ObjectType"] = "Camera";

@@ -3,9 +3,9 @@
 	{
 		"EYE" : 
 		{
-			"x" : -350.0,
+			"x" : -407.35302734375,
 			"y" : 298.94952392578125,
-			"z" : 1000.0
+			"z" : 999.0
 		},
 		"TARGET" : 
 		{
@@ -21,7 +21,7 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 10,
+	"NumberOfObjects" : 12,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
@@ -61,6 +61,45 @@
 			"y" : 0.20000000298023224
 		},
 		"TextureDir" : "3.png"
+	},
+	"Object11" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"ObjectID" : 11,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.89999997615814209,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 0.10000000149011612,
+			"y" : 0.20000000298023224
+		},
+		"TextureDir" : "3.png"
+	},
+	"Object12" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
+		"ObjectID" : 12,
+		"ObjectType" : "Button",
+		"ParticleType" : "ET_EXPLOSION",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0
+		},
+		"TextureDir" : ""
 	},
 	"Object2" : 
 	{
@@ -114,7 +153,7 @@
 		"Position" : 
 		{
 			"x" : -857.84320068359375,
-			"y" : -65.100006103515625,
+			"y" : -65.050003051757813,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -157,7 +196,7 @@
 			"y" : 360.00003051757813,
 			"z" : 0.0
 		},
-		"Rotation" : 2650.0,
+		"Rotation" : 3075.298583984375,
 		"Scale" : 
 		{
 			"x" : 50.0,
@@ -175,7 +214,7 @@
 		"Position" : 
 		{
 			"x" : -600.0,
-			"y" : -75.100006103515625,
+			"y" : -75.050003051757813,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -196,7 +235,7 @@
 		"Position" : 
 		{
 			"x" : -450.0,
-			"y" : -50.099998474121094,
+			"y" : -50.050006866455078,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -217,7 +256,7 @@
 		"Position" : 
 		{
 			"x" : -300.0,
-			"y" : 99.899986267089844,
+			"y" : 99.949996948242188,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,

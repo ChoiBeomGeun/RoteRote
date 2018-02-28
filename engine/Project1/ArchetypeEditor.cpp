@@ -74,6 +74,8 @@ Archetype TE::ReadingArchetype(std::string path)
 			temp.HavingComponents.push_back(CT_TRIGGER);
 		if (file.mRoot["HavingComponents"][i].asString() == "BUTTON")
 			temp.HavingComponents.push_back(CT_BUTTON);
+		if (file.mRoot["HavingComponents"][i].asString() == "PARTICLE")
+			temp.HavingComponents.push_back(CT_EMITTER);
 	}
 
 	return temp;
@@ -138,6 +140,9 @@ void TE::SavingArchtype(Archetype pArche)
 			break;
 		case CT_TRIGGER:
 			root["HavingComponents"][i] = "TRIGGER";
+			break;
+		case CT_EMITTER:
+			root["HavingComponents"][i] = "PARTICLE";
 			break;
 
 	

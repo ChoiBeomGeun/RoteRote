@@ -3,8 +3,8 @@
 	{
 		"EYE" : 
 		{
-			"x" : -235.0,
-			"y" : 495.0,
+			"x" : -799.331298828125,
+			"y" : -65.050003051757813,
 			"z" : 999.0
 		},
 		"TARGET" : 
@@ -21,7 +21,7 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 19,
+	"NumberOfObjects" : 21,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
@@ -53,7 +53,7 @@
 		"Position" : 
 		{
 			"x" : 500.0,
-			"y" : 200.0,
+			"y" : 199.96714782714844,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -251,7 +251,7 @@
 			"y" : 50.0
 		},
 		"TextureDir" : "90button.png",
-		"TriggerType" : "180"
+		"TriggerType" : "90"
 	},
 	"Object2" : 
 	{
@@ -274,6 +274,45 @@
 		},
 		"TextureDir" : "wall.png"
 	},
+	"Object20" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"ObjectID" : 20,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.89999997615814209,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 0.10000000149011612,
+			"y" : 0.20000000298023224
+		},
+		"TextureDir" : "11.png"
+	},
+	"Object21" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
+		"ObjectID" : 21,
+		"ObjectType" : "Button",
+		"ParticleType" : "ET_EXPLOSION",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0
+		},
+		"TextureDir" : ""
+	},
 	"Object3" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "CONTROLLER", "ANIMATION" ],
@@ -283,8 +322,8 @@
 		"ObjectType" : "Player",
 		"Position" : 
 		{
-			"x" : -825.7716064453125,
-			"y" : -65.100006103515625,
+			"x" : -799.331298828125,
+			"y" : -65.050003051757813,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -327,7 +366,7 @@
 			"y" : 400.0,
 			"z" : 0.0
 		},
-		"Rotation" : 7922.0,
+		"Rotation" : 7983.3916015625,
 		"Scale" : 
 		{
 			"x" : 50.0,
@@ -345,7 +384,7 @@
 		"Position" : 
 		{
 			"x" : -300.0,
-			"y" : 0.0,
+			"y" : -0.027777779847383499,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -366,7 +405,7 @@
 		"Position" : 
 		{
 			"x" : -300.0,
-			"y" : 200.0,
+			"y" : 199.96714782714844,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -387,7 +426,7 @@
 		"Position" : 
 		{
 			"x" : -500.0,
-			"y" : -0.099997915327548981,
+			"y" : -0.049994248896837234,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -408,7 +447,7 @@
 		"Position" : 
 		{
 			"x" : 500.0,
-			"y" : 0.0,
+			"y" : -0.027777779847383499,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,

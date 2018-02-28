@@ -235,12 +235,18 @@ Object * ObjectFactory::CreateArchetype(Archetype path)
 
 		}
 
+		if (path.HavingComponents[i] == ComponentType::CT_EMITTER)
+		{
+			Emitter * emitter = new Emitter();
+	
+			temp->AddComponent<Emitter>();
+
+		}
 
 	}
 
 	if (path.DefaultObjectStyle == "Wall")
 		temp->objectstyle = Objectstyle::Wall;
-
 	if (path.DefaultObjectStyle == "Box")
 		temp->objectstyle = Objectstyle::Box;
 	if (path.DefaultObjectStyle == "Player")
@@ -254,6 +260,8 @@ Object * ObjectFactory::CreateArchetype(Archetype path)
 	
 	if (path.DefaultObjectStyle == "Hazard")
 		temp->objectstyle = Objectstyle::Hazard;
+	if (path.DefaultObjectStyle == "Particle")
+		temp->objectstyle = Objectstyle::Particle;
 	temp->Initialize();
 
 	return temp;

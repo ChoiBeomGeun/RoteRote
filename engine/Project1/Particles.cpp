@@ -8,6 +8,7 @@
 #include "Graphics.h"
 #include "ParticleManager.h"
 
+static int teesssss = 0;
 namespace TE {
 	Emitter::Emitter() : Component(ComponentType::CT_EMITTER)
 	{
@@ -16,6 +17,8 @@ namespace TE {
 	Emitter::~Emitter()
 	{
 		std::cout << "Emitter DEEEEEELEETTTE" << std::endl;
+		std::cout << teesssss << std::endl;
+		teesssss++;
 		/*delete [] pParticles;
 		pParticles = NULL;*/
 	}
@@ -31,7 +34,10 @@ namespace TE {
 		capacity = maxCount;
 		emitterID = PARTICLEMANAGER->GetEmitters()->emitterID;
 		lifeTime = lifetime;
-		pParticles = new Particle[maxCount];
+		if (pParticles == NULL)
+			pParticles = new Particle[maxCount];
+		else
+			return;
 		for (int i = 0; i < maxCount; ++i)
 		{
 			pParticles[i].color.r = 255;

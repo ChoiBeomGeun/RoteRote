@@ -3,8 +3,8 @@
 	{
 		"EYE" : 
 		{
-			"x" : -627.17572021484375,
-			"y" : 265.23599243164063,
+			"x" : -382.35302734375,
+			"y" : 294.11752319335938,
 			"z" : 999.0
 		},
 		"TARGET" : 
@@ -21,7 +21,7 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 10,
+	"NumberOfObjects" : 12,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
@@ -54,13 +54,52 @@
 			"y" : -15.0,
 			"z" : 0.0
 		},
-		"Rotation" : 610.0,
+		"Rotation" : 679.40850830078125,
 		"Scale" : 
 		{
 			"x" : 50.0,
 			"y" : 50.0
 		},
 		"TextureDir" : "clearzone2.png"
+	},
+	"Object11" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"ObjectID" : 11,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.89999997615814209,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 0.10000000149011612,
+			"y" : 0.20000000298023224
+		},
+		"TextureDir" : "6.png"
+	},
+	"Object12" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
+		"ObjectID" : 12,
+		"ObjectType" : "Button",
+		"ParticleType" : "ET_EXPLOSION",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0
+		},
+		"TextureDir" : ""
 	},
 	"Object2" : 
 	{
@@ -72,7 +111,7 @@
 		"Position" : 
 		{
 			"x" : -550.0,
-			"y" : 200.0,
+			"y" : 215.28598022460938,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -93,7 +132,7 @@
 		"Position" : 
 		{
 			"x" : 50.0,
-			"y" : 200.0,
+			"y" : 215.28598022460938,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -178,7 +217,7 @@
 		"Position" : 
 		{
 			"x" : -887.17572021484375,
-			"y" : -74.764007568359375,
+			"y" : -74.714004516601563,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,

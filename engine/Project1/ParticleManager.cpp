@@ -149,7 +149,10 @@ namespace TE {
 	void ParticleManager::CreateMaxNumEmitter(int maxCount)
 	{
 		// allocate emitter based on maxcount
-		m_pEmitters = new Emitter[maxCount];
+		if (m_pEmitters == NULL)
+			m_pEmitters = new Emitter[maxCount];
+		else
+			return;
 
 		// initialize all emitter data as well
 		for (int i = 0; i < maxCount; ++i)

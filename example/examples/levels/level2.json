@@ -3,9 +3,9 @@
 	{
 		"EYE" : 
 		{
-			"x" : -245.0,
-			"y" : -70.882476806640625,
-			"z" : 1000.0
+			"x" : -669.28192138671875,
+			"y" : -74.714004516601563,
+			"z" : 999.0
 		},
 		"TARGET" : 
 		{
@@ -21,7 +21,7 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 10,
+	"NumberOfObjects" : 12,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
@@ -61,6 +61,44 @@
 			"y" : 0.20000000298023224
 		},
 		"TextureDir" : "2.png"
+	},
+	"Object11" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"ObjectID" : 11,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.89999997615814209,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 0.10000000149011612,
+			"y" : 0.20000000298023224
+		},
+		"TextureDir" : "2.png"
+	},
+	"Object12" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"ObjectID" : 12,
+		"ObjectType" : "Player",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0
+		},
+		"TextureDir" : "test.png"
 	},
 	"Object2" : 
 	{
@@ -135,8 +173,8 @@
 		"ObjectType" : "Player",
 		"Position" : 
 		{
-			"x" : -248.76264953613281,
-			"y" : -74.764007568359375,
+			"x" : -669.28192138671875,
+			"y" : -74.714004516601563,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -179,7 +217,7 @@
 			"y" : 495.3270263671875,
 			"z" : 0.0
 		},
-		"Rotation" : 7076.0,
+		"Rotation" : 7291.9970703125,
 		"Scale" : 
 		{
 			"x" : 50.0,
@@ -197,7 +235,7 @@
 		"Position" : 
 		{
 			"x" : -840.00006103515625,
-			"y" : -84.764007568359375,
+			"y" : -84.714004516601563,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,

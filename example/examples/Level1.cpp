@@ -332,6 +332,7 @@ void Level1::Update(float dt)
 		SetReplayer();
 	}
 	PARTICLEMANAGER->GetEmitters()->pos = FACTORY->GetPlayer()->GetComponent<Transform>()->GetPosition();
+	
 	PARTICLEMANAGER->UpdateEmitter(&(PARTICLEMANAGER->GetEmitters()[0]), dt);
 
 

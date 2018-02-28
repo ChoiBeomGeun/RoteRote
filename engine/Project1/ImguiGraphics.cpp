@@ -21,7 +21,7 @@ char** cppLevelitems;
 char** cppTextureitems;
 char** cppSounditems;
 char** cppArchetypesditems;
-char** cppComponentitems = new char*[6];
+char** cppComponentitems = new char*[7];
 
 glm::vec3 * points;
 static int j = -1;
@@ -44,6 +44,7 @@ void ImGuiUpdate(void) {
 	cppComponentitems[3] = "Body";
 	cppComponentitems[4] = "Button";
 	cppComponentitems[5] = "Trigger";
+	cppComponentitems[6] = "Particle";
 
 	ImGui_ImplSdlGL3_NewFrame(APP->pWnd);
 	if (Input::IsTriggered(SDL_SCANCODE_F5))
@@ -171,6 +172,9 @@ void ImGuiUpdate(void) {
 				case Objectstyle::Box:
 					ObjectStyle = "Box";
 					break;
+				case Objectstyle::Particle:
+					ObjectStyle = "Particle";
+					break;
 				}
 				std::string Object = "Object" + std::to_string(i.second->objID) + " - ";
 				std::string ObjectScale = "Scale";
@@ -246,6 +250,17 @@ void ImGuiUpdate(void) {
 							ImGui::TreePop();
 						}
 					}
+					if (FACTORY->ObjectIDMap[i.first]->HasComponent<Emitter>())
+					{
+						if (ImGui::TreeNode(("Particle " + std::to_string(i.second->objID)).c_str()))
+						{
+							ImGui::SliderFloat((ObjectPosition + "x").c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Transform>()->position.x, -1000.f, 1000.f);
+							ImGui::SliderFloat((ObjectPosition + "y").c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Transform>()->position.y, -1000.f, 1000.f);
+							ImGui::SliderFloat((ObjectPosition + "z").c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Transform>()->position.z, -1000.f, 1000.f);
+							ImGui::TreePop();
+						}
+					}
+
 				}
 			}
 			static int t = -1;
@@ -290,7 +305,7 @@ void ImGuiUpdate(void) {
 		static int t3 = 1;
 		static bool GravityOn = false;
 		static float Mass = 0.f;
-		static bool Componentlist[6]{ false };
+		static bool Componentlist[7]{ false };
 		static bool triggerType180ornot = false;
 		if (ImGui::CollapsingHeader("Archetype Editor"))
 		{
@@ -328,7 +343,7 @@ void ImGuiUpdate(void) {
 					
 
 				}
-				for (int i = 0; i < 6; i++) {
+				for (int i = 0; i < 7; i++) {
 					if (Componentlist[i]) {
 						ImGui::Text(cppComponentitems[i]);
 
@@ -338,7 +353,7 @@ void ImGuiUpdate(void) {
 				}
 
 
-				ImGui::Combo("ComponentAdd", &t3, cppComponentitems, 6);
+				ImGui::Combo("ComponentAdd", &t3, cppComponentitems, 7);
 				if (!Componentlist[t3]) {
 					if (ImGui::Button("Add"))
 						Componentlist[t3] = true;
@@ -441,6 +456,7 @@ void SaveingLevel(std::string path, int WorldX, int WorldY)
 				root[object + to_string(i)]["ObjectType"] = "Trigger90";
 			if (selected[q].Name == 'C')
 				root[object + to_string(i)]["ObjectType"] = "Clearzone";
+			
 
 			root[object + to_string(i)]["ObjectID"] = i;
 			root[object + to_string(i)]["Position"]["x"] = points[j].x;
