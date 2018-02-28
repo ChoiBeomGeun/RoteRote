@@ -104,29 +104,33 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="180button.png">
+    <EmbeddedResource Include="180button.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="90button.png">
+    </EmbeddedResource>
+    <EmbeddedResource Include="90button.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="box.png">
+    </EmbeddedResource>
+    <EmbeddedResource Include="box.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="button.png">
+    </EmbeddedResource>
+    <EmbeddedResource Include="button.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="camera.png">
+    </EmbeddedResource>
+    <EmbeddedResource Include="camera.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="clearzone.png">
+    </EmbeddedResource>
+    <EmbeddedResource Include="clearzone.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="hazard.png">
+    </EmbeddedResource>
+    <EmbeddedResource Include="hazard.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="player.png" />
-    <Content Include="wall.png" />
+    </EmbeddedResource>
+    <EmbeddedResource Include="player.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wall.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

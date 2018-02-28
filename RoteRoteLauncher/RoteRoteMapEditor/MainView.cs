@@ -27,7 +27,7 @@ namespace RoteRoteMapView
 
         public MainView()
         {
-            
+         
             JObject videogameRatings =
     new JObject(
         new JProperty("channel",
@@ -148,6 +148,7 @@ namespace RoteRoteMapView
         /// <param name="e"></param>
         private void treeControls_ItemDrag(object sender, ItemDragEventArgs e)
         {
+         
           
             TreeNode selectedNode = (e.Item as TreeNode);
             Control control = null;
@@ -161,7 +162,6 @@ namespace RoteRoteMapView
                         {
                             control = new PictureBox()
                             {
-
                                 Image = Image.FromFile("./player.png"),
                                 SizeMode = PictureBoxSizeMode.StretchImage,
 
