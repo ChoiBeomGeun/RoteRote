@@ -92,7 +92,7 @@ void Physics::ExplictEulerIntegrator(float dt) {
 		if (!(*i).second->gravityOn)
 		{
 			//(*i).second->pm_velocity.SetZero();
-			(*i).second->pm_velocity += gravity * 5.f * dt;
+			(*i).second->pm_velocity += gravity * 50.f * dt;
 		}
 		else if(!(*i).second->pOwner->objectstyle == Player)
 			(*i).second->pm_velocity += (gravity + (*i).second->m_force * (*i).second->pm_invmass)*dt;
