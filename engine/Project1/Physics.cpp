@@ -552,20 +552,6 @@ void Physics::PositionalCorrection(Pair *M)
 	{
 		KinematicBoxCollision(lhs_invmass, rhs_invmass, M);
 	}
-	//if (!M->m_rhs->gravityOn && !M->m_lhs->gravityOn)
-	//{
-	//            if (M->m_rhs->m_pTransform->Position.y < M->m_lhs->m_pTransform->Position.y)
-	//            {
-	//                        lhs_invmass = 1;
-	//                        rhs_invmass = 0;
-	//            }
-	//            else if (M->m_rhs->m_pTransform->Position.y > M->m_lhs->m_pTransform->Position.y)
-	//            {
-	//                        lhs_invmass = 0;
-	//                        rhs_invmass = 1;
-	//            }
-	//}
-
 
 	glm::vec3 correction = TUMath::Max(M->penetration - slop, 0.0f) / (lhs_invmass + rhs_invmass) * percent * M->normal;
 

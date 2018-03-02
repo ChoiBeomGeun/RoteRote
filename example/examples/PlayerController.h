@@ -28,6 +28,7 @@ namespace TE
 		void Movement(float dt);
 		void JumpInit();
 		void MaxJump();
+		void PlayerAnimation();
 
 	private:
 		glm::vec3 pos;

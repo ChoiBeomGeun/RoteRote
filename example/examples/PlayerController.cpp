@@ -46,7 +46,7 @@ void PlayerController::Initialize()
 	JumpTriggered = false;
 	WallJumpTriggered = false;
 	WallSlideMax = 150.f;
-	FallSpeedMax = 600.f;
+	FallSpeedMax = 400.f;
 	maxAltitude = 40.f;
 	WallAttached = false;
 	/* delay for wall jump or wall off */
@@ -66,6 +66,7 @@ void PlayerController::Update(float dt)
 		JumpInit();
 		MaxJump();
 		Movement(dt);
+		PlayerAnimation();
 	}
 	else if (STATEMANAGER->b_IsRot180 || STATEMANAGER->b_IsRot90)
 	{
@@ -236,7 +237,7 @@ void PlayerController::Movement(float dt)
 		if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Air && !JumpTriggered && !WallJumpTriggered)
 		{
 			std::cout << "-100" << '\n';
-			this->GetOwner()->GetComponent<Body>()->pm_velocity.y -= 100.f;
+			this->GetOwner()->GetComponent<Body>()->pm_velocity.y -= 50.f;
 			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y < -FallSpeedMax)
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -FallSpeedMax;
 		}
@@ -347,7 +348,7 @@ void PlayerController::Movement(float dt)
 
 		if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Air && !JumpTriggered && !WallJumpTriggered)
 		{
-			this->GetOwner()->GetComponent<Body>()->pm_velocity.y += 100.f;
+			this->GetOwner()->GetComponent<Body>()->pm_velocity.y += 50.f;
 			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y > FallSpeedMax)
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = FallSpeedMax;
 		}
@@ -446,7 +447,7 @@ void PlayerController::Movement(float dt)
 
 		if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Air && !JumpTriggered && !WallJumpTriggered)
 		{
-			this->GetOwner()->GetComponent<Body>()->pm_velocity.x += 100.f;
+			this->GetOwner()->GetComponent<Body>()->pm_velocity.x += 50.f;
 			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.x > FallSpeedMax)
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = FallSpeedMax;
 		}
@@ -545,7 +546,7 @@ void PlayerController::Movement(float dt)
 
 		if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Air && !JumpTriggered && !WallJumpTriggered)
 		{
-			this->GetOwner()->GetComponent<Body>()->pm_velocity.x -= 100.f;
+			this->GetOwner()->GetComponent<Body>()->pm_velocity.x -= 50.f;
 			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.x < -FallSpeedMax)
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -FallSpeedMax;
 		}
@@ -614,6 +615,62 @@ void PlayerController::MaxJump()
 
 
 	//if(JumpEnough && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Air && 
+}
+
+void PlayerController::PlayerAnimation()
+{
+	/* player not attached to wall */
+	if (Input::IsPressed(SDL_SCANCODE_RIGHT) && !WallAttached)
+	{
+		FACTORY->GetPlayer()->GetComponent<Animation>()->setFlipX(false);
+		FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(true);
+	}
+	else if (!FACTORY->GetPlayer()->GetComponent<Animation>()->isFlippedX())
+		FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(false);
+	/* player not attached to wall */
+	if (Input::IsPressed(SDL_SCANCODE_LEFT) && !WallAttached)
+	{
+		FACTORY->GetPlayer()->GetComponent<Animation>()->setFlipX(true);
+		FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(true);
+	}
+	else if (FACTORY->GetPlayer()->GetComponent<Animation>()->isFlippedX())
+		FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(false);
+
+	if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Left)
+	{
+		FACTORY->GetPlayer()->GetComponent<Animation>()->setFlipX(false);
+	}
+	if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Right)
+	{
+		FACTORY->GetPlayer()->GetComponent<Animation>()->setFlipX(true);
+	}
+
+	if (!JumpEnough)
+	{
+		if (Input::IsPressed(SDL_SCANCODE_SPACE) && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
+			FACTORY->GetPlayer()->GetComponent<Animation>()->isJumping = true;
+		if (Input::IsReleased(SDL_SCANCODE_SPACE))
+			FACTORY->GetPlayer()->GetComponent<Animation>()->isJumping = true;
+	}
+
+
+	if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Air)
+	{
+		FACTORY->GetPlayer()->GetComponent<Animation>()->_isOnWall = false;
+		FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(false);
+	}
+	else if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Left)
+	{
+		FACTORY->GetPlayer()->GetComponent<Animation>()->_isOnWall = true;
+	}
+	else if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Right)
+	{
+		FACTORY->GetPlayer()->GetComponent<Animation>()->_isOnWall = true;
+	}
+	else if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
+	{
+		FACTORY->GetPlayer()->GetComponent<Animation>()->_isOnWall = false;
+	}
 }
 
 PlayerController::~PlayerController()
