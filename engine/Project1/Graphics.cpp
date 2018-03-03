@@ -98,8 +98,8 @@ void Graphics::Initialize(void)
 		glGenBuffers(1, &buffer);
 	if (basicVAO == 0)
 		glGenVertexArrays(1, &basicVAO);
-	if (particleVAO == 0)
-		glGenBuffers(1, &particleVAO);
+	/*if (particleVAO == 0)
+		glGenBuffers(1, &particleVAO);*/
 
 
 	// first triangle
@@ -137,16 +137,16 @@ void Graphics::Initialize(void)
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
 
 	glBindVertexArray(basicVAO);
-	glBindVertexArray(particleVAO);
+	//glBindVertexArray(particleVAO);
 	// unbind the buffer
-	//glBindBuffer(GL_ARRAY_BUFFER, 0); // 0 mean unbind
+	glBindBuffer(GL_ARRAY_BUFFER, 0); // 0 mean unbind
 
 	drawbasic_attributes();
 	CAMERA->cameraPos = eye;
 	CAMERA->cameraTarget = target;
 	CAMERA->cameraUp = up;
 
-	//_spriteBatch.init();
+	
 	setbasicUniformLoc();
 	initparticleShader();
 	drawparticle_attributes();
@@ -245,7 +245,9 @@ void Graphics::Update(float dt)
 	view = CAMERA->view;
 	for (std::vector<Sprite*>::iterator it = SpriteList.begin();
 		it != SpriteList.end(); ++it) {
+		glBindTexture(GL_TEXTURE_2D, (*it)->TextureId);
 		animationSetting();
+		_colorProgram.use();
 
 		if ((*it)->isPerspective)
 			drawPerspective(it);
@@ -295,11 +297,11 @@ void TE::Graphics::drawPerspective(std::vector<Sprite*>::iterator iter)
 {
 	if (!(*iter)->pOwner->HasComponent<Emitter>())
 	{
-		_colorProgram.use();
+		
 		if ((*iter)->pOwner->HasComponent<Animation>()) {
 			glUniform1i(uniformLocation[ISANIMATION], 1);
 		}
-		glBindTexture(GL_TEXTURE_2D, (*iter)->TextureId);
+		
 
 		drawStats = 0;
 		CAMERA->proj();
@@ -307,7 +309,7 @@ void TE::Graphics::drawPerspective(std::vector<Sprite*>::iterator iter)
 		model = glm::translate(model, glm::vec3((*iter)->pTransform->position.x, (*iter)->pTransform->position.y, (*iter)->pTransform->position.z));
 		model = glm::rotate(model, glm::radians((*iter)->pTransform->angle), (*iter)->pTransform->rotation);
 		model = glm::scale(model, glm::vec3((*iter)->pTransform->scale.x, (*iter)->pTransform->scale.y, (*iter)->pTransform->scale.z));
-		glUniform1i(particleLoc[PSTATS], drawStats);
+		//glUniform1i(particleLoc[PSTATS], drawStats);
 		glUniform1i(uniformLocation[PTEXTURE], 0);
 		glUniformMatrix4fv(uniformLocation[MODEL], 1, GL_FALSE, &model[0][0]);
 	}
@@ -317,14 +319,14 @@ void TE::Graphics::drawOrthogonal(std::vector<Sprite*>::iterator iter)
 {
 	if (!(*iter)->pOwner->HasComponent<Emitter>())
 	{
-		_colorProgram.use();
-		glBindTexture(GL_TEXTURE_2D, (*iter)->TextureId);
+		//_colorProgram.use();
+		//glBindTexture(GL_TEXTURE_2D, (*iter)->TextureId);
 
 		drawStats = 1;
 		hudmodel = glm::mat4(1.0f);
 		hudmodel = glm::translate(hudmodel, (*iter)->pTransform->position);
 		hudmodel = glm::scale(hudmodel, (*iter)->pTransform->scale);
-		glUniform1i(particleLoc[PSTATS], drawStats);
+		//glUniform1i(particleLoc[PSTATS], drawStats);
 		glUniform1i(uniformLocation[PTEXTURE], 0);
 		glUniformMatrix4fv(uniformLocation[HUDMODEL], 1, GL_FALSE, &hudmodel[0][0]);
 		//_colorProgram.unuse();
@@ -357,14 +359,14 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 				glUniformMatrix4fv(particleLoc[PARTICLEMODEL], 1, GL_FALSE, &particlemodel[0][0]);
 				glUniformMatrix4fv(particleLoc[PARTICLEVIEW], 1, GL_FALSE, &view[0][0]);
 				glUniformMatrix4fv(particleLoc[PARTICLEPROJ], 1, GL_FALSE, &CAMERA->projection[0][0]);
-				glUniform1i(uniformLocation[PTEXTURE], 1);
+				glUniform1i(particleLoc[PTEXTURE], 1);
 				glUniform1i(particleLoc[PSTATS], drawStats);
 				glPushAttrib(GL_CURRENT_BIT);
 				glDrawArrays(GL_TRIANGLES, 0, 6);
 			}
 		}
 		//}
-		_particleProgram.unuse();
+		//_particleProgram.unuse();
 	}
 }
 
@@ -417,6 +419,7 @@ void TE::Graphics::animationSetting()
 					if ((*aniIter)->isPressed())
 					{
 						(*aniIter)->IterateFrame((*aniIter)->getTime());
+						std::cout << "a key is pressed: " << (*aniIter)->getTime() << std::endl;
 					}
 					if ((*aniIter)->isJumping)
 					{
@@ -436,6 +439,8 @@ void TE::Graphics::animationSetting()
 					time = 0.0f;
 					//std::cout << (*aniIter)->getFrame() << '\n';
 				}
+				
+				
 
 				// if player is flipped it should face other direction
 				if ((*aniIter)->isFlippedX())

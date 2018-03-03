@@ -128,7 +128,7 @@ namespace TE {
 		int drawStats;
 		int particleDraw;
 		bool isParticle;
-		GLuint buffer, basicVAO, particleVAO;
+		GLuint buffer, basicVAO/*, particleVAO*/;
 		//GLuint particlebuffer;
 		glm::mat4 model = glm::mat4(1.0f);
 		glm::mat4 hudmodel = glm::mat4(1.f);

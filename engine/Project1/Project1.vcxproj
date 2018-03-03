@@ -278,6 +278,8 @@
   <ItemGroup>
     <None Include="..\..\example\examples\shaders\TEGraphics.frag" />
     <None Include="..\..\example\examples\shaders\TEGraphics.vert" />
+    <None Include="..\..\example\examples\shaders\TEParticle.frag" />
+    <None Include="..\..\example\examples\shaders\TEParticle.vert" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

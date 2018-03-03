@@ -343,5 +343,11 @@
     <None Include="..\..\example\examples\shaders\TEGraphics.vert">
       <Filter>Graphics\Shader</Filter>
     </None>
+    <None Include="..\..\example\examples\shaders\TEParticle.frag">
+      <Filter>Graphics\Shader</Filter>
+    </None>
+    <None Include="..\..\example\examples\shaders\TEParticle.vert">
+      <Filter>Graphics\Shader</Filter>
+    </None>
   </ItemGroup>
 </Project>
