@@ -8,23 +8,36 @@
 #include "Graphics.h"
 #include "ParticleManager.h"
 
-static int teesssss = 0;
+
 namespace TE {
 	Emitter::Emitter() : Component(ComponentType::CT_EMITTER)
 	{
-		GRAPHICS->EmitterList.push_back(this);
+		//GRAPHICS->EmitterList.push_back(this);
 	}
 	Emitter::~Emitter()
 	{
 		std::cout << "Emitter DEEEEEELEETTTE" << std::endl;
-		std::cout << teesssss << std::endl;
-		teesssss++;
+		//GRAPHICS->EmitterList.erase(std::find(GRAPHICS->EmitterList.begin(), GRAPHICS->EmitterList.end(), this));
 		/*delete [] pParticles;
 		pParticles = NULL;*/
 	}
 	void Emitter::Initialize()
 	{
-
+		if (pParticles == NULL)
+			return;
+		else
+		{
+			for (int i = 0; i < PARTICLEMANAGER->GetEmmiterCount(); ++i)
+			{
+				pParticles[i].pos = glm::vec3(0);
+				pParticles[i].scale = 20;
+				pParticles[i].vel = glm::vec3(0);
+				pParticles[i].color.r = 255;
+				pParticles[i].color.g = 255;
+				pParticles[i].color.b = 255;
+				pParticles[i].color.a = 255;
+			}
+		}
 	}
 
 	void Emitter::CreateParticle(int maxCount, float lifetime)

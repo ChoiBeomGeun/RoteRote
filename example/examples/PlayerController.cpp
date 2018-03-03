@@ -227,7 +227,7 @@ void PlayerController::Movement(float dt)
 		if (this->GetOwner()->GetComponent<Body>()->GroundType != Grounded::Ground)
 		{
 			
-			std::cout << "-50" << '\n';
+			//std::cout << "-50" << '\n';
 			this->GetOwner()->GetComponent<Body>()->pm_velocity.y -= 50.f;
 			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y < -FallSpeedMax)
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -FallSpeedMax;

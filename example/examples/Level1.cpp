@@ -90,7 +90,7 @@ void Level1::Init()
 	Loading->GetComponent<Sprite>()->texture_load("loading.png");
 */
 
-
+	
 	camAct.isCamToPlayer = true;
 	LosesoundOnetime = true;
 	CenterToPlayer = true;
@@ -216,8 +216,7 @@ void Level1::Init()
 	//FACTORY->Destroy(Loading);
 	/////////////////////////////////////////////////////
 
-
-
+	
 	lookAtMap();
 }
 
@@ -331,8 +330,7 @@ void Level1::Update(float dt)
 		first = false;
 		SetReplayer();
 	}
-	PARTICLEMANAGER->GetEmitters()->pos = FACTORY->GetPlayer()->GetComponent<Transform>()->GetPosition();
-	
+	PARTICLEMANAGER->GetEmitters()[0].pos = FACTORY->GetPlayer()->GetComponent<Transform>()->GetPosition();
 	PARTICLEMANAGER->UpdateEmitter(&(PARTICLEMANAGER->GetEmitters()[0]), dt);
 
 
@@ -365,7 +363,8 @@ void Level1::Free(void)
 	FACTORY->DestroyAllObjects();
 //	delete LEVELMANAGER;
 	//delete LOGGINGSYSTEM;
-
+	PARTICLEMANAGER->Initialize();
+	PARTICLEMANAGER->GetEmitters()[0].Initialize();
 }
 void Level1::Unload()
 {

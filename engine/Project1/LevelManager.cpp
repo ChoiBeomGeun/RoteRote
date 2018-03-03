@@ -169,8 +169,9 @@ void LevelManager::LoadLevel(std::string  path)
 				tempObject->GetComponent<Sprite>()->texture_load("test.png");
 				PARTICLEMANAGER->CreateMaxNumEmitter(2);
 				PARTICLEMANAGER->GetEmitters()[0].CreateParticle(30, 20.0f);
+				PARTICLEMANAGER->GetEmitters()[0].m_textureID = tempObject->GetComponent<Sprite>()->TextureId;
 				PARTICLEMANAGER->AddEmitter(20, tempObject->GetComponent<Transform>()->position, glm::vec3(2.0f, 0.0f, 0.0f), tempObject->GetComponent<Sprite>()->TextureId, ET_TRAIL);
-				PARTICLEMANAGER->GetEmitters()[PARTICLEMANAGER->GetEmitters()->emitterID].pos = tempObject->GetComponent<Transform>()->position;
+				PARTICLEMANAGER->GetEmitters()[/*PARTICLEMANAGER->GetEmitters()->emitterID*/0].pos = tempObject->GetComponent<Transform>()->position;
 			}
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "")
 				break;

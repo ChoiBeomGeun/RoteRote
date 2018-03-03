@@ -336,21 +336,24 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 	if ((*iter)->pOwner->HasComponent<Emitter>())
 	{
 		_particleProgram.use();
-		for (auto p : EmitterList)
+		/*for (auto p : EmitterList)
+		{*/
+		auto p = PARTICLEMANAGER->GetEmitters();
+		for (int j = 0; j < PARTICLEMANAGER->GetEmmiterCount(); ++j)
 		{
-			glBindTexture(GL_TEXTURE_2D, p->m_textureID);
+			glBindTexture(GL_TEXTURE_2D, p[j].m_textureID);
 			for (int i = 0; i < p->size; ++i)
 			{
 
 				drawStats = 3;
 				particlemodel = glm::mat4(1.0f);
 				CAMERA->proj();
-				particlemodel = glm::translate(particlemodel, p->pParticles[i].pos);
+				particlemodel = glm::translate(particlemodel, p[j].pParticles[i].pos);
 				//std::cout << i <<". " << j << ": " <<PARTICLEMANAGER->GetEmitters()[i].pParticles[j].pos.x << ", " << PARTICLEMANAGER->GetEmitters()[i].pParticles[j].pos.y << "\n";
 				particlemodel = glm::rotate(particlemodel, glm::radians((*iter)->pTransform->angle), (*iter)->pTransform->rotation);
-				particlemodel = glm::scale(particlemodel, glm::vec3(p->pParticles[i].scale));
-				glUniform4f(particleLoc[PCOLOR], p->pParticles[i].color.r, p->pParticles[i].color.g,
-					p->pParticles[i].color.b, p->pParticles[i].color.a);
+				particlemodel = glm::scale(particlemodel, glm::vec3(p[j].pParticles[i].scale));
+				glUniform4f(particleLoc[PCOLOR], p[j].pParticles[i].color.r, p[j].pParticles[i].color.g,
+					p[j].pParticles[i].color.b, p[j].pParticles[i].color.a);
 				glUniformMatrix4fv(particleLoc[PARTICLEMODEL], 1, GL_FALSE, &particlemodel[0][0]);
 				glUniformMatrix4fv(particleLoc[PARTICLEVIEW], 1, GL_FALSE, &view[0][0]);
 				glUniformMatrix4fv(particleLoc[PARTICLEPROJ], 1, GL_FALSE, &CAMERA->projection[0][0]);
@@ -360,6 +363,7 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 				glDrawArrays(GL_TRIANGLES, 0, 6);
 			}
 		}
+		//}
 		_particleProgram.unuse();
 	}
 }

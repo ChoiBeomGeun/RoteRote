@@ -3,7 +3,7 @@
 	{
 		"EYE" : 
 		{
-			"x" : -669.28192138671875,
+			"x" : -655.052001953125,
 			"y" : -74.714004516601563,
 			"z" : 999.0
 		},
@@ -21,7 +21,7 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 12,
+	"NumberOfObjects" : 14,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
@@ -85,7 +85,46 @@
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
 		"ObjectID" : 12,
-		"ObjectType" : "Player",
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.89999997615814209,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 0.10000000149011612,
+			"y" : 0.20000000298023224
+		},
+		"TextureDir" : "2.png"
+	},
+	"Object13" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"ObjectID" : 13,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.89999997615814209,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 0.10000000149011612,
+			"y" : 0.20000000298023224
+		},
+		"TextureDir" : "2.png"
+	},
+	"Object14" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
+		"ObjectID" : 14,
+		"ObjectType" : "Button",
+		"ParticleType" : "ET_EXPLOSION",
 		"Position" : 
 		{
 			"x" : 0.0,
@@ -98,7 +137,7 @@
 			"x" : 0.0,
 			"y" : 0.0
 		},
-		"TextureDir" : "test.png"
+		"TextureDir" : ""
 	},
 	"Object2" : 
 	{
@@ -173,7 +212,7 @@
 		"ObjectType" : "Player",
 		"Position" : 
 		{
-			"x" : -669.28192138671875,
+			"x" : -655.052001953125,
 			"y" : -74.714004516601563,
 			"z" : 0.0
 		},
@@ -217,7 +256,7 @@
 			"y" : 495.3270263671875,
 			"z" : 0.0
 		},
-		"Rotation" : 7291.9970703125,
+		"Rotation" : 8096.32861328125,
 		"Scale" : 
 		{
 			"x" : 50.0,
