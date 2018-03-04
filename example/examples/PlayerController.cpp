@@ -428,7 +428,7 @@ void PlayerController::Movement(float dt)
 		{
 			if (Input::IsPressed(SDL_SCANCODE_SPACE) && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
 			{
-				this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(-JumpSpeed, 0, 0);
+				this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(JumpSpeed, 0, 0);
 				JumpTriggered = true;
 			}
 			if (Input::IsReleased(SDL_SCANCODE_SPACE))
