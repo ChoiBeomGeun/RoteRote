@@ -84,6 +84,7 @@ void Backgame3(void)
 
 
 void MakeReplayerUI(void) {
+	SOUNDMANAGER->DeleteSounds();
 	FACTORY->DestroyAllObjects();
 	LEVELMANAGER->LoadLevel(STATEMANAGER->Loadtolevelname);
 	oReBackbutton = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion3.x, Vec3buttonPostion3.y + .5f, Vec3buttonPostion3.z), Vec3Buttonscale3);
@@ -103,6 +104,9 @@ void MakeReplayerUI(void) {
 	TRIGGERLOGIC->Initialize();
 	IsButtonAvailable = true;
 	itor = STATEMANAGER->Replayerinfo;
+	rlmove = SOUNDMANAGER->LoadSound("menumove.mp3");
+	rlback = SOUNDMANAGER->LoadSound("menuselect.mp3");
+	rlselect = SOUNDMANAGER->LoadSound("menuselect.mp3");
 }
 
 void SetReplayer(void) {
