@@ -21,6 +21,7 @@ JUMP SHOULDN'T WORK WHILE PLAYER IS ON AIR
 #include "Graphics.h"
 #include <iostream>
 #define SPEED 200.f
+#define MAXSPEED 500.f
 #define WALLJUMP 100.f
 #define WALLATTACH 10.f
 using namespace TE;
@@ -119,7 +120,9 @@ void PlayerController::Movement(float dt)
 		{
 			FACTORY->GetPlayer()->GetComponent<Animation>()->setFlipX(false);
 			FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(true);
-			this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(SPEED, 0, 0);
+			
+			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.x < MAXSPEED)
+				this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(SPEED, 0, 0);
 		}
 		else if (!FACTORY->GetPlayer()->GetComponent<Animation>()->isFlippedX())
 			FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(false);
@@ -128,6 +131,7 @@ void PlayerController::Movement(float dt)
 		{
 			FACTORY->GetPlayer()->GetComponent<Animation>()->setFlipX(true);
 			FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(true);
+			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.x > -MAXSPEED)
 			this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(-SPEED, 0, 0);
 		}
 		else if (FACTORY->GetPlayer()->GetComponent<Animation>()->isFlippedX())
@@ -248,7 +252,8 @@ void PlayerController::Movement(float dt)
 		{
 			FACTORY->GetPlayer()->GetComponent<Animation>()->setFlipX(false);
 			FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(true);
-			this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(-SPEED, 0, 0);
+			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.x > -MAXSPEED)
+				this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(-SPEED, 0, 0);
 		}
 		else if (!FACTORY->GetPlayer()->GetComponent<Animation>()->isFlippedX())
 			FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(false);
@@ -257,7 +262,8 @@ void PlayerController::Movement(float dt)
 		{
 			FACTORY->GetPlayer()->GetComponent<Animation>()->setFlipX(true);
 			FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(true);
-			this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(+SPEED, 0, 0);
+			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.x < MAXSPEED)
+				this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(+SPEED, 0, 0);
 		}
 		else if (FACTORY->GetPlayer()->GetComponent<Animation>()->isFlippedX())
 			FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(false);
@@ -357,12 +363,14 @@ void PlayerController::Movement(float dt)
 	{
 		if (Input::IsPressed(SDL_SCANCODE_RIGHT) && !WallAttached)
 		{
-			this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(0, SPEED, 0);
+			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y < MAXSPEED)
+				this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(0, SPEED, 0);
 		}
 
  		if (Input::IsPressed(SDL_SCANCODE_LEFT) && !WallAttached)
 		{
-			this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(0, -SPEED, 0);
+			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y > -MAXSPEED)
+				this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(0, -SPEED, 0);
 		}
 
 		if ((this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Left || this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Right) && this->GetOwner()->GetComponent<Body>()->pm_velocity.y < 0)
@@ -456,12 +464,14 @@ void PlayerController::Movement(float dt)
 	{
 		if (Input::IsPressed(SDL_SCANCODE_RIGHT) && !WallAttached)
 		{
+			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y > -MAXSPEED)
 			this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(0, -SPEED, 0);
 		}
 
 		if (Input::IsPressed(SDL_SCANCODE_LEFT) && !WallAttached)
 		{
-			this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(0, SPEED, 0);
+			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y < MAXSPEED)
+				this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(0, SPEED, 0);
 		}
 
 		if ((this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Left || this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Right) && this->GetOwner()->GetComponent<Body>()->pm_velocity.y < 0)

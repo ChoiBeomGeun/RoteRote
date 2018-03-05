@@ -51,7 +51,6 @@ void Body::Initialize()
 	//gravityOn = true;
 	//Put the pointer to component to the vector container,
 	//so that Physics system can iterate through
-
 }
 
 void TE::Body::Update(float dt)
