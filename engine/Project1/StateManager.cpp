@@ -150,14 +150,9 @@ void StateManager::Update(float dt)
 
 	if (b_IsPauseOn)
 	{
-
-
 		if (b_IsPauseFirst) {
-
-
 			this->v_StatesLists[i_PauseStageNumber]->Load();
 			this->v_StatesLists[i_PauseStageNumber]->Init();
-
 			b_IsPauseFirst = false;
 		}
 

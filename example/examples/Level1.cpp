@@ -318,6 +318,8 @@ void Level1::Update(float dt)
 		static bool first = true;
 		if (STATEMANAGER->ReplayInit)
 		{
+			//PARTICLEMANAGER->Initialize();
+			PARTICLEMANAGER->GetEmitters()[0].Initialize();
 			MakeReplayerUI();
 			TRIGGERLOGIC->Initialize();
 			CAMERA->cameraUp.x = 0;
@@ -325,7 +327,7 @@ void Level1::Update(float dt)
 			PHYSICS->gravityScale = -20.f;
 			PHYSICS->GravityType = Gravity::y_Minus;
 			PHYSICS->gravity = glm::vec3(0, PHYSICS->gravityScale, 0);
-			PARTICLEMANAGER->Initialize();
+			//PARTICLEMANAGER->Initialize();
 		}		
 		first = false;
 		SetReplayer();
@@ -363,8 +365,7 @@ void Level1::Free(void)
 	FACTORY->DestroyAllObjects();
 //	delete LEVELMANAGER;
 	//delete LOGGINGSYSTEM;
-	PARTICLEMANAGER->Initialize();
-	PARTICLEMANAGER->GetEmitters()[0].Initialize();
+	
 }
 void Level1::Unload()
 {

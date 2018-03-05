@@ -137,7 +137,7 @@ namespace TE {
 		Camera * pCamera;
 		GLint uniformLocation[END];
 		GLint particleLoc[PEND];
-		GLSLProgram _colorProgram;
+		GLSLProgram _basicProgram;
 		GLSLProgram _particleProgram;
 
 		Vertex vertexData[6];

@@ -163,15 +163,22 @@ void LevelManager::LoadLevel(std::string  path)
 
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "PARTICLE") {
 
+				PARTICLEMANAGER->CreateMaxNumEmitter(2);
+				PARTICLEMANAGER->Initialize();
+				PARTICLEMANAGER->GetEmitters()[0].Initialize();
 				tempObject->AddComponent<Emitter>();
 				tempObject->GetComponent<Transform>()->position = tempObject->GetComponent<Transform>()->position;
 				tempObject->GetComponent<Transform>()->scale = glm::vec3(10.0f);
-				tempObject->GetComponent<Sprite>()->texture_load("test.png");
-				PARTICLEMANAGER->CreateMaxNumEmitter(2);
+				tempObject->GetComponent<Sprite>()->texture_load("test.png"); 
 				PARTICLEMANAGER->GetEmitters()[0].CreateParticle(30, 20.0f);
-				PARTICLEMANAGER->GetEmitters()[0].m_textureID = tempObject->GetComponent<Sprite>()->TextureId;
-				PARTICLEMANAGER->AddEmitter(20, tempObject->GetComponent<Transform>()->position, glm::vec3(2.0f, 0.0f, 0.0f), tempObject->GetComponent<Sprite>()->TextureId, ET_TRAIL);
+				PARTICLEMANAGER->GetEmitters()[0].setTextureID(tempObject->GetComponent<Sprite>()->TextureId);
 				PARTICLEMANAGER->GetEmitters()[/*PARTICLEMANAGER->GetEmitters()->emitterID*/0].pos = tempObject->GetComponent<Transform>()->position;
+				PARTICLEMANAGER->AddEmitter(30, tempObject->GetComponent<Transform>()->position, glm::vec3(2.0f, 0.0f, 0.0f), tempObject->GetComponent<Sprite>()->TextureId, ET_TRAIL);
+				//tempObject->GetComponent<Emitter>()->CreateParticle(30, 20.0f);
+				//tempObject->GetComponent<Emitter>()->m_textureID = tempObject->GetComponent<Sprite>()->TextureId;
+				//tempObject->GetComponent<Emitter>()->pos = tempObject->GetComponent<Transform>()->position;
+				
+				
 			}
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "")
 				break;
@@ -244,9 +251,6 @@ void LevelManager::SaveLevel(std::string  path)
 	char * Userinfo;
 	size_t len = path.size();
 	_dupenv_s(&Userinfo, &len, "USERPROFILE");
-	
-
-		
 	
 	std::string saveLevel = path;
 #ifdef _DEBUG

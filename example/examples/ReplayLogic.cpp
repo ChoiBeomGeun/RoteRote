@@ -49,8 +49,6 @@ void ReStartgame3(void)
 void LevelSelect3(void)
 {
 	FreeReplayer();
-
-
 	STATEMANAGER->b_IsReplay = false;
 	STATEMANAGER->b_Relplay = false;
 	STATEMANAGER->b_IsPauseFirst = true;

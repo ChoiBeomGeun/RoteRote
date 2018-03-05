@@ -27,10 +27,10 @@ namespace TE {
 			return;
 		else
 		{
-			for (int i = 0; i < PARTICLEMANAGER->GetEmmiterCount(); ++i)
+			for (int i = 0; i < PARTICLEMANAGER->GetEmitters()->capacity; ++i)
 			{
 				pParticles[i].pos = glm::vec3(0);
-				pParticles[i].scale = 20;
+				pParticles[i].scale = 0;
 				pParticles[i].vel = glm::vec3(0);
 				pParticles[i].color.r = 255;
 				pParticles[i].color.g = 255;
@@ -75,8 +75,12 @@ namespace TE {
 
 	void Emitter::setTextureID(unsigned int textureID)
 	{
-		m_textureID = textureID;
+		if (m_textureID == NULL)
+			m_textureID = textureID;
+		else
+			return;
 	}
+
 
 
 	void defaultParticleUpdate(Particle & particle, float deltaTime)

@@ -90,7 +90,7 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\external\glew\include\GL;$(ProjectDir)..\..\external\soil\src;$(ProjectDir)..\..\external\SDL2\include;$(ProjectDir)..\..\external\gl3w\include\GL;$(ProjectDir)..\..\external\fmod\inc;$(ProjectDir)..\..\external\;C:\Users\hyunj\Desktop\vld-2.5.1\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\external\glew\include\GL;$(ProjectDir)..\..\external\soil\src;$(ProjectDir)..\..\external\SDL2\include;$(ProjectDir)..\..\external\gl3w\include\GL;$(ProjectDir)..\..\external\fmod\inc;$(ProjectDir)..\..\external\;C:\Users\PC\Desktop\vld-2.5.1\vld-2.5.1\src</AdditionalIncludeDirectories>
       <TreatWarningAsError>false</TreatWarningAsError>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -112,7 +112,7 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\external\glew\include\GL;$(ProjectDir)..\..\external\soil\src;$(ProjectDir)..\..\external\SDL2\include;$(ProjectDir)..\..\external\gl3w\include\GL;$(ProjectDir)..\..\external\fmod\inc;$(ProjectDir)..\..\external\;C:\Users\hyunj\Desktop\vld-2.5.1\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\external\glew\include\GL;$(ProjectDir)..\..\external\soil\src;$(ProjectDir)..\..\external\SDL2\include;$(ProjectDir)..\..\external\gl3w\include\GL;$(ProjectDir)..\..\external\fmod\inc;$(ProjectDir)..\..\external\;C:\Users\PC\Desktop\vld-2.5.1\vld-2.5.1\src</AdditionalIncludeDirectories>
       <TreatWarningAsError>false</TreatWarningAsError>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -136,7 +136,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\external\glew\include\GL;$(ProjectDir)..\..\external\soil\src;$(ProjectDir)..\..\external\SDL2\include;$(ProjectDir)..\..\external\gl3w\include\GL;$(ProjectDir)..\..\external\fmod\inc;$(ProjectDir)..\..\external\;C:\Users\hyunj\Desktop\vld-2.5.1\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\external\glew\include\GL;$(ProjectDir)..\..\external\soil\src;$(ProjectDir)..\..\external\SDL2\include;$(ProjectDir)..\..\external\gl3w\include\GL;$(ProjectDir)..\..\external\fmod\inc;$(ProjectDir)..\..\external\;C:\Users\PC\Desktop\vld-2.5.1\vld-2.5.1\src</AdditionalIncludeDirectories>
       <TreatWarningAsError>false</TreatWarningAsError>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <AdditionalOptions>/Ylsymbol %(AdditionalOptions)</AdditionalOptions>
@@ -163,7 +163,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\external\glew\include\GL;$(ProjectDir)..\..\external\soil\src;$(ProjectDir)..\..\external\SDL2\include;$(ProjectDir)..\..\external\gl3w\include\GL;$(ProjectDir)..\..\external\fmod\inc;$(ProjectDir)..\..\external\;C:\Users\hyunj\Desktop\vld-2.5.1\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\external\glew\include\GL;$(ProjectDir)..\..\external\soil\src;$(ProjectDir)..\..\external\SDL2\include;$(ProjectDir)..\..\external\gl3w\include\GL;$(ProjectDir)..\..\external\fmod\inc;$(ProjectDir)..\..\external\;C:\Users\PC\Desktop\vld-2.5.1\vld-2.5.1\src</AdditionalIncludeDirectories>
       <TreatWarningAsError>false</TreatWarningAsError>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <AdditionalOptions>/Ylsymbol %(AdditionalOptions)</AdditionalOptions>

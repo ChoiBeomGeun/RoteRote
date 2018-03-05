@@ -44,12 +44,12 @@ void TE::Graphics::initbasicShader()
 	path += "/Documents/RoteRote/shaders/" + saveLevel;
 #endif
 	free(Userinfo);
-	_colorProgram.compileShaders(path + ".vert", path + ".frag");
-	_colorProgram.addAttribute("vertexPosition");
-	_colorProgram.addAttribute("vertexColor");
-	_colorProgram.addAttribute("vertexUV");
+	_basicProgram.compileShaders(path + ".vert", path + ".frag");
+	_basicProgram.addAttribute("vertexPosition");
+	_basicProgram.addAttribute("vertexColor");
+	_basicProgram.addAttribute("vertexUV");
 
-	_colorProgram.linkShaders();
+	_basicProgram.linkShaders();
 }
 
 void TE::Graphics::initparticleShader()
@@ -225,8 +225,6 @@ void Graphics::drawparticle_attributes()
 // ALL systems are updated every frame
 void Graphics::Update(float dt)
 {
-
-
 	Sprite::sortSprites(SortType::FRONT_TO_BACK);
 
 	glClearColor(1.f, 1.f, 1.f, .5f);
@@ -237,7 +235,6 @@ void Graphics::Update(float dt)
 
 	glUniform1i(uniformLocation[TEXTURE], 1);/*True*/
 	glUniform1i(uniformLocation[SAMPLER], 0);
-
 	glUniform1i(uniformLocation[PTEXTURE], 1);
 	glUniform1i(uniformLocation[PSAMPLER], 0);
 	cameraSetting();
@@ -247,7 +244,7 @@ void Graphics::Update(float dt)
 		it != SpriteList.end(); ++it) {
 		glBindTexture(GL_TEXTURE_2D, (*it)->TextureId);
 		animationSetting();
-		_colorProgram.use();
+		_basicProgram.use();
 
 		if ((*it)->isPerspective)
 			drawPerspective(it);
@@ -282,7 +279,7 @@ void Graphics::framebuffer_size_callback(SDL_Window* window, int width, int heig
 
 Graphics::~Graphics()
 {
-	_colorProgram.unuse();
+	_basicProgram.unuse();
 	_particleProgram.unuse();
 	delete pCamera;
 	pCamera = NULL;
@@ -302,7 +299,6 @@ void TE::Graphics::drawPerspective(std::vector<Sprite*>::iterator iter)
 			glUniform1i(uniformLocation[ISANIMATION], 1);
 		}
 		
-
 		drawStats = 0;
 		CAMERA->proj();
 		model = glm::mat4(1.0f);
@@ -319,7 +315,7 @@ void TE::Graphics::drawOrthogonal(std::vector<Sprite*>::iterator iter)
 {
 	if (!(*iter)->pOwner->HasComponent<Emitter>())
 	{
-		//_colorProgram.use();
+		//_basicProgram.use();
 		//glBindTexture(GL_TEXTURE_2D, (*iter)->TextureId);
 
 		drawStats = 1;
@@ -329,7 +325,7 @@ void TE::Graphics::drawOrthogonal(std::vector<Sprite*>::iterator iter)
 		//glUniform1i(particleLoc[PSTATS], drawStats);
 		glUniform1i(uniformLocation[PTEXTURE], 0);
 		glUniformMatrix4fv(uniformLocation[HUDMODEL], 1, GL_FALSE, &hudmodel[0][0]);
-		//_colorProgram.unuse();
+		//_basicProgram.unuse();
 	}
 }
 
@@ -340,22 +336,21 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 		_particleProgram.use();
 		/*for (auto p : EmitterList)
 		{*/
-		auto p = PARTICLEMANAGER->GetEmitters();
 		for (int j = 0; j < PARTICLEMANAGER->GetEmmiterCount(); ++j)
 		{
-			glBindTexture(GL_TEXTURE_2D, p[j].m_textureID);
-			for (int i = 0; i < p->size; ++i)
+			auto p = PARTICLEMANAGER->GetEmitters()[j];
+			glBindTexture(GL_TEXTURE_2D, p.m_textureID);
+			for (int i = 0; i < p.capacity; ++i)
 			{
-
 				drawStats = 3;
 				particlemodel = glm::mat4(1.0f);
 				CAMERA->proj();
-				particlemodel = glm::translate(particlemodel, p[j].pParticles[i].pos);
+				particlemodel = glm::translate(particlemodel, p.pParticles[i].pos);
 				//std::cout << i <<". " << j << ": " <<PARTICLEMANAGER->GetEmitters()[i].pParticles[j].pos.x << ", " << PARTICLEMANAGER->GetEmitters()[i].pParticles[j].pos.y << "\n";
 				particlemodel = glm::rotate(particlemodel, glm::radians((*iter)->pTransform->angle), (*iter)->pTransform->rotation);
-				particlemodel = glm::scale(particlemodel, glm::vec3(p[j].pParticles[i].scale));
-				glUniform4f(particleLoc[PCOLOR], p[j].pParticles[i].color.r, p[j].pParticles[i].color.g,
-					p[j].pParticles[i].color.b, p[j].pParticles[i].color.a);
+				particlemodel = glm::scale(particlemodel, glm::vec3(p.pParticles[i].scale));
+				glUniform4f(particleLoc[PCOLOR], p.pParticles[i].color.r, p.pParticles[i].color.g,
+					p.pParticles[i].color.b, p.pParticles[i].color.a);
 				glUniformMatrix4fv(particleLoc[PARTICLEMODEL], 1, GL_FALSE, &particlemodel[0][0]);
 				glUniformMatrix4fv(particleLoc[PARTICLEVIEW], 1, GL_FALSE, &view[0][0]);
 				glUniformMatrix4fv(particleLoc[PARTICLEPROJ], 1, GL_FALSE, &CAMERA->projection[0][0]);
@@ -373,19 +368,19 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 void TE::Graphics::setbasicUniformLoc()
 {
 
-	uniformLocation[TEXTURE] = _colorProgram.getUniformLocation("texturing");
-	uniformLocation[SAMPLER] = _colorProgram.getUniformLocation("texture2D");
-	uniformLocation[COLOR] = _colorProgram.getUniformLocation("colorOffset");
-	uniformLocation[MODEL] = _colorProgram.getUniformLocation("model");
-	uniformLocation[VIEW] = _colorProgram.getUniformLocation("view");
-	uniformLocation[PROJ] = _colorProgram.getUniformLocation("projection");
-	uniformLocation[DRAWINGSTATUS] = _colorProgram.getUniformLocation("drawingStatus");
-	uniformLocation[HUDMODEL] = _colorProgram.getUniformLocation("hudmodel");
-	uniformLocation[ISANIMATION] = _colorProgram.getUniformLocation("isAnimation");
-	uniformLocation[FLIPX] = _colorProgram.getUniformLocation("flipx");
-	uniformLocation[ISJUMPING] = _colorProgram.getUniformLocation("isJumping");
-	uniformLocation[ANIMATIONX] = _colorProgram.getUniformLocation("animationx");
-	uniformLocation[TIME] = _colorProgram.getUniformLocation("timer");
+	uniformLocation[TEXTURE] = _basicProgram.getUniformLocation("texturing");
+	uniformLocation[SAMPLER] = _basicProgram.getUniformLocation("texture2D");
+	uniformLocation[COLOR] = _basicProgram.getUniformLocation("colorOffset");
+	uniformLocation[MODEL] = _basicProgram.getUniformLocation("model");
+	uniformLocation[VIEW] = _basicProgram.getUniformLocation("view");
+	uniformLocation[PROJ] = _basicProgram.getUniformLocation("projection");
+	uniformLocation[DRAWINGSTATUS] = _basicProgram.getUniformLocation("drawingStatus");
+	uniformLocation[HUDMODEL] = _basicProgram.getUniformLocation("hudmodel");
+	uniformLocation[ISANIMATION] = _basicProgram.getUniformLocation("isAnimation");
+	uniformLocation[FLIPX] = _basicProgram.getUniformLocation("flipx");
+	uniformLocation[ISJUMPING] = _basicProgram.getUniformLocation("isJumping");
+	uniformLocation[ANIMATIONX] = _basicProgram.getUniformLocation("animationx");
+	uniformLocation[TIME] = _basicProgram.getUniformLocation("timer");
 
 
 }
