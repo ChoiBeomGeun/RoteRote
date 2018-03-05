@@ -105,7 +105,7 @@ namespace TE {
 
 		std::vector<Sprite*> SpriteList;
 		std::vector<Animation *> AnimationList;
-		std::vector<Emitter *> EmitterList;
+		//std::vector<Emitter *> EmitterList;
 
 		void initbasicShader();
 		void initparticleShader();

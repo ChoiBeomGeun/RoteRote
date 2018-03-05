@@ -165,7 +165,7 @@ void LevelManager::LoadLevel(std::string  path)
 
 				PARTICLEMANAGER->CreateMaxNumEmitter(2);
 				PARTICLEMANAGER->Initialize();
-				PARTICLEMANAGER->GetEmitters()[0].Initialize();
+				//PARTICLEMANAGER->Initialize();
 				tempObject->AddComponent<Emitter>();
 				tempObject->GetComponent<Transform>()->position = tempObject->GetComponent<Transform>()->position;
 				tempObject->GetComponent<Transform>()->scale = glm::vec3(10.0f);

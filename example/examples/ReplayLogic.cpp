@@ -7,6 +7,7 @@
 #include "LevelManager.h"
 #include "Level1.h"
 #include "Trigger.h"
+#include "ParticleManager.h"
 using namespace TE;
 unsigned int index = 0;
 void ButtonLogic(void);
@@ -43,7 +44,8 @@ void ReStartgame3(void)
 		STATEMANAGER->Replayerinfo.pop();
 	FreeReplayer();
 	STATEMANAGER->Restart();
-
+	PARTICLEMANAGER->Initialize();
+	//PARTICLEMANAGER->GetEmitters()[0].Initialize();
 }
 
 void LevelSelect3(void)
@@ -55,8 +57,10 @@ void LevelSelect3(void)
 	STATEMANAGER->MoveState(3);
 	while (!STATEMANAGER->Replayerinfo.empty())
 		STATEMANAGER->Replayerinfo.pop();
+	PARTICLEMANAGER->Initialize();
+	//PARTICLEMANAGER->GetEmitters()[0].Initialize();
 }
-
+//Move next
 void Backgame3(void)
 {
 	FreeReplayer();
@@ -77,7 +81,8 @@ void Backgame3(void)
 	STATEMANAGER->b_Relplay = false;
 	STATEMANAGER->b_IsPauseFirst = true;
 	STATEMANAGER->MoveState(4);
-
+	PARTICLEMANAGER->Initialize();
+	//PARTICLEMANAGER->GetEmitters()[0].Initialize();
 }
 
 
@@ -115,9 +120,11 @@ void SetReplayer(void) {
 	replayer->GetComponent<Animation>()->setFrame(itor.front().aniframe);
 	replayer->GetComponent<Animation>()->setTime(itor.front().anitime);
 	replayer->GetComponent<Animation>()->setFlipX(itor.front().mouseinfo);
+	
+	//PARTICLEMANAGER->GetEmitters()[0].Initialize();
 	itor.pop();
 	if (itor.size() <=0) {
-
+		
 		//itor = STATEMANAGER->Replayerinfo.begin();
 		FACTORY->DestroyAllObjects();
 		LEVELMANAGER->LoadLevel(STATEMANAGER->Loadtolevelname);
@@ -137,6 +144,7 @@ void SetReplayer(void) {
 		PHYSICS->GravityType = Gravity::y_Minus;
 		PHYSICS->gravity = glm::vec3(0, PHYSICS->gravityScale, 0);
 		itor = STATEMANAGER->Replayerinfo;
+		//PARTICLEMANAGER->Initialize();
 	}
 
 

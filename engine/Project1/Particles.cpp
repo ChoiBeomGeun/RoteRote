@@ -16,14 +16,14 @@ namespace TE {
 	}
 	Emitter::~Emitter()
 	{
-		std::cout << "Emitter DEEEEEELEETTTE" << std::endl;
+		//std::cout << "Emitter DEEEEEELEETTTE" << std::endl;
 		//GRAPHICS->EmitterList.erase(std::find(GRAPHICS->EmitterList.begin(), GRAPHICS->EmitterList.end(), this));
 		/*delete [] pParticles;
 		pParticles = NULL;*/
 	}
 	void Emitter::Initialize()
 	{
-		if (pParticles == NULL)
+		/*if (pParticles == NULL)
 			return;
 		else
 		{
@@ -37,7 +37,7 @@ namespace TE {
 				pParticles[i].color.b = 255;
 				pParticles[i].color.a = 255;
 			}
-		}
+		}*/
 	}
 
 	void Emitter::CreateParticle(int maxCount, float lifetime)

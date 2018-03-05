@@ -104,7 +104,7 @@ namespace TE {
 	/******************************************************************************/
 	ParticleManager::~ParticleManager(void)
 	{
-		std::cout << "Emitter DEEEEEELEETTTE" << std::endl;
+		std::cout << "PARTICLEMANAGER DEEEEEELEETTTE" << std::endl;
 		// Delete all particle in the emitters
 		for (int i = 0; i < m_capacity; ++i)
 		{
@@ -123,6 +123,16 @@ namespace TE {
 		{
 			for (int i = 0; i < m_size; ++i)
 			{
+				for (int j = 0; j< m_pEmitters[i].size; ++j)
+				{
+					m_pEmitters[i].pParticles[j].pos = glm::vec3(0.0f);
+					m_pEmitters[i].pParticles[j].scale = 0.0f;
+					m_pEmitters[i].pParticles[j].vel = glm::vec3(0.0f);
+					m_pEmitters[i].pParticles[j].color.r = 0.f;
+					m_pEmitters[i].pParticles[j].color.g = 0.f;
+					m_pEmitters[i].pParticles[j].color.b = 0.f;
+					m_pEmitters[i].pParticles[j].color.a = 0.f;
+				}
 				m_pEmitters[i].capacity = 10;
 				m_pEmitters[i].emitterID = 0;
 				m_pEmitters[i].lifeTime = 0;
