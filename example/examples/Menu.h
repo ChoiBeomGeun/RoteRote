@@ -16,7 +16,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 
 #pragma once
 #include "BaseStage.h"
-
+#include "StateLists.h"
 
 class Menu  :public BaseStage
 {
@@ -28,7 +28,14 @@ public:
 	void Update(float dt);
 	void Free(void);
 	void Unload(void);
+	
+	void MoveToState(void);
 
 private:
-	int MenuCounter;
+
+	StatesList::StateList State;
+
+	unsigned int MenuSound;
+	unsigned int MoveSound;
+	unsigned int SelectSound;
 };

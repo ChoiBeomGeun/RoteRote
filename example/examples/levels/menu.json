@@ -21,7 +21,7 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 6,
+	"NumberOfObjects" : 5,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
@@ -29,15 +29,15 @@
 		"ObjectType" : "Button",
 		"Position" : 
 		{
-			"x" : -200.0,
-			"y" : -100.0,
+			"x" : 0.0,
+			"y" : 100.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 50.0,
-			"y" : 50.0
+			"x" : 40.0,
+			"y" : 40.0
 		},
 		"TextureDir" : "start.png"
 	},
@@ -48,15 +48,15 @@
 		"ObjectType" : "Button",
 		"Position" : 
 		{
-			"x" : -63.123001098632813,
-			"y" : -100.0,
+			"x" : -100.0,
+			"y" : 0.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 50.0,
-			"y" : 50.0
+			"x" : 40.0,
+			"y" : 40.0
 		},
 		"TextureDir" : "setting.png"
 	},
@@ -67,78 +67,55 @@
 		"ObjectType" : "Button",
 		"Position" : 
 		{
-			"x" : 202.65800476074219,
+			"x" : 0.0,
 			"y" : -100.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 50.0,
-			"y" : 50.0
+			"x" : 30.0,
+			"y" : 30.0
 		},
-		"TextureDir" : "box.png"
+		"TextureDir" : "quit.png"
 	},
 	"Object4" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
-		"GravityOn" : false,
-		"Mass" : 0.0,
-		"ObjectID" : 4,
-		"ObjectType" : "Wall",
-		"Position" : 
-		{
-			"x" : 1.0,
-			"y" : 75.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 200.0,
-			"y" : 75.0
-		},
-		"TextureDir" : "title.png"
-	},
-	"Object5" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
-		"GravityOn" : false,
-		"Mass" : 0.0,
-		"ObjectID" : 5,
-		"ObjectType" : "Wall",
-		"Position" : 
-		{
-			"x" : -21.807001113891602,
-			"y" : 134.45401000976563,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 171.46400451660156,
-			"y" : 35.88800048828125
-		},
-		"TextureDir" : "PP.png"
-	},
-	"Object6" : 
-	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
-		"ObjectID" : 6,
+		"ObjectID" : 4,
 		"ObjectType" : "Button",
 		"Position" : 
 		{
-			"x" : 69.767005920410156,
-			"y" : -100.0,
+			"x" : 100.0,
+			"y" : 0.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 50.0,
-			"y" : 47.84100341796875
+			"x" : 40.0,
+			"y" : 40.0
 		},
 		"TextureDir" : "question.png"
+	},
+	"Object5" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"ObjectID" : 5,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 250.0,
+			"y" : 250.0
+		},
+		"TextureDir" : "Menu.png"
 	},
 	"WorldSize" : 
 	{
