@@ -61,12 +61,12 @@ TriggerLogic::TriggerLogic()
 {
 
 	TRIGGERLOGIC = this;
-	RotationSound = SOUNDMANAGER->LoadSound("rotation.mp3");
+	
 
 }
 void TriggerLogic::Initialize(void)
 {
-
+	RotationSound = SOUNDMANAGER->LoadSound("rotation.mp3");
 	TriggerList.clear();
 	buttonsobj.clear();
 

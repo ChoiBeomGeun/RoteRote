@@ -38,12 +38,13 @@ namespace TE {
  ClearzoneLogic::ClearzoneLogic()
 {
 	 CLEARZONELOGIC = this;
-	 WinSound = SOUNDMANAGER->LoadSound("win.mp3");
+
 
 }
 void ClearzoneLogic::Initialize()
 {
 	player = FACTORY->GetPlayer();
+
 }
 
 
@@ -67,6 +68,7 @@ void ClearzoneLogic::Update(float dt)
 		player = FACTORY->GetPlayer();
 		if (PHYSICS->RectvsRectCollisionCheck(player->GetComponent<Transform>(), obj->GetComponent<Transform>()) )
 		{
+			WinSound = SOUNDMANAGER->LoadSound("win3.mp3");
 			SOUNDMANAGER->PlaySounds(WinSound, false);
 			APP->b_Win = true;//	LevelInit.b_Win = true;
 			//STATEMANAGER->b_Relplay = true;

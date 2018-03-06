@@ -72,7 +72,7 @@ int main(int,char**)
 	STATEMANAGER->AddState(new MapEditor);
 	STATEMANAGER->SetPauseState(StatesList::Pause);
 	STATEMANAGER->SetStartState(StatesList::Splash);
-	STATEMANAGER->SetReplayState(6);
+//	STATEMANAGER->SetReplayState(6);
 
 
 	//Todo : Main Loop
