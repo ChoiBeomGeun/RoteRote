@@ -50,10 +50,12 @@ void Menu::Load()
 	 State = StatesList::StateList::LevelSelect;
 	 rotation_radius = 120.f;
 	 Selection = MenuList::Menu_Start;
-	 delta_angle = 0;
+	 delta_angle = 90;
 	 LeftRotate = false;
 	 RightRotate = false;
 	 IsRotating = false;
+
+	 selection_angle = 0;
 
 	 LEVELMANAGER->LoadLevel("Menu.json");
 	 SOUNDMANAGER->PlaySounds(MenuSound, true);
@@ -65,7 +67,7 @@ void Menu::Update(float dt)
 	if (FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle == 360.f)
 	{
 		FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle = 0.f;
-		delta_angle = 0;
+		selection_angle = 0;
 	}
 
 
@@ -74,8 +76,8 @@ void Menu::Update(float dt)
 		if (IsRotating)
 			for (int i = 1; i < 2; ++i) {
 				int angle = i * 90;
-				FACTORY->ObjectIDMap[i]->GetComponent<Transform>()->position.x = cos(FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle + delta_angle) *  rotation_radius;
-				FACTORY->ObjectIDMap[i]->GetComponent<Transform>()->position.y = sin(FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle + delta_angle) *  rotation_radius;
+				FACTORY->ObjectIDMap[i]->GetComponent<Transform>()->position.x = cos(FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle + angle) *  rotation_radius;
+				FACTORY->ObjectIDMap[i]->GetComponent<Transform>()->position.y = sin(FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle + angle) *  rotation_radius;
 			}
 	}
 
@@ -129,7 +131,7 @@ void Menu::DeltaAngle(void)
 	if (FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle  - delta_angle >= 90)
 	{
 		IsRotating = false;
-		delta_angle += 90;
+		selection_angle += 90;
 		FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle =  90 * (delta_angle % 90);
 	}
 	else if (FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle - delta_angle <= -90)

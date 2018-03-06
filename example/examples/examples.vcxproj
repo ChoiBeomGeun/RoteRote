@@ -246,7 +246,6 @@ copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(T
     <ClInclude Include="EditorData.h" />
     <ClInclude Include="GameLogicSystem.h" />
     <ClInclude Include="GameSystem.h" />
-    <ClInclude Include="MenuList.h" />
     <ClInclude Include="InGameLogic.h" />
     <ClInclude Include="Level1.h" />
     <ClInclude Include="LevelSelect.h" />
@@ -254,6 +253,7 @@ copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(T
     <ClInclude Include="LoseconditionLogic.h" />
     <ClInclude Include="MapEditor.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="MenuList.h" />
     <ClInclude Include="Option.h" />
     <ClInclude Include="Pause.h" />
     <ClInclude Include="ReplayLogic.h" />
