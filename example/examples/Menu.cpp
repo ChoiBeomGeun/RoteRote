@@ -49,12 +49,24 @@ void Menu::Load()
 {
 	 State = StatesList::StateList::LevelSelect;
 
-	 SOUNDMANAGER->PlaySounds(MenuSound, true);
 	 LEVELMANAGER->LoadLevel("Menu.json");
+	 SOUNDMANAGER->PlaySounds(MenuSound, true);
 }
 
 void Menu::Update(float dt)
 {
+
+	if (Input::IsTriggered(SDL_SCANCODE_SPACE))
+		STATEMANAGER->MoveState(StatesList::LevelSelect);
+
+	if (Input::IsPressed(SDL_SCANCODE_LEFT))
+	{
+		FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle += 100 * dt;
+	}
+	if (Input::IsPressed(SDL_SCANCODE_RIGHT))
+	{
+		FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle -= 100 * dt;
+	}
 }
 
 void Menu::Free(void)
