@@ -37,6 +37,9 @@
     <Filter Include="Source Files\GameLogic\AutoMoving">
       <UniqueIdentifier>{97a31951-2bb7-4964-9983-2da0c783afdb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Menu">
+      <UniqueIdentifier>{49257d8b-59a4-406b-a85a-7731e3ab7220}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -46,9 +49,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="splash.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Option.cpp">
@@ -90,15 +90,15 @@
     <ClCompile Include="AutoMoving.cpp">
       <Filter>Source Files\GameLogic\AutoMoving</Filter>
     </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="splash.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Option.h">
@@ -148,6 +148,12 @@
     </ClInclude>
     <ClInclude Include="Automoving.h">
       <Filter>Source Files\GameLogic\AutoMoving</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Source Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuList.h">
+      <Filter>Source Files\Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

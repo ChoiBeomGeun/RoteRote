@@ -17,6 +17,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #pragma once
 #include "BaseStage.h"
 #include "StateLists.h"
+#include "MenuList.h"
 
 class Menu  :public BaseStage
 {
@@ -31,9 +32,22 @@ public:
 	
 	void MoveToState(void);
 
+	void DeltaAngle(void);
+
 private:
 
+	bool LeftRotate;
+	bool RightRotate;
+
+	bool IsRotating;
+
 	StatesList::StateList State;
+	MenuList Selection;
+
+	int delta_angle;
+	int selection_angle;
+
+	int rotation_radius;
 
 	unsigned int MenuSound;
 	unsigned int MoveSound;
