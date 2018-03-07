@@ -55,47 +55,33 @@ void Menu::Load()
 	 RightRotate = false;
 	 IsRotating = false;
 
-	 angle = 0;
-
 	 selection_angle = 0;
-
+	 select_index = 0;
 	 LEVELMANAGER->LoadLevel("Menu.json");
 	 SOUNDMANAGER->PlaySounds(MenuSound, true);
 }
 
 void Menu::Update(float dt)
 {
-	if (FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle == 360.f)
+	if (FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle == 360.f || FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle == -360.f)
 	{
 		FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle = 0.f;
 		delta_angle = 0;
+		select_index = 0;
 	}
 
 
 	if (IsRotating) {
 		DeltaAngle();
-		if (angle < 90)
-		{
-			angle += 100 * dt;
-			FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position.x = cos(TUMath::DegreeToRadian(selection_angle + angle)) * rotation_radius;
-			FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position.y = sin(TUMath::DegreeToRadian(selection_angle + angle)) * rotation_radius;
-		}
-		else
-			angle = 0;
-	
+
+		for (int i = 1; i < 5; ++i) {
+
+			FACTORY->ObjectIDMap[i]->GetComponent<Transform>()->position.x = cos(TUMath::DegreeToRadian(FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle + (i) * 90)) * rotation_radius;
+			FACTORY->ObjectIDMap[i]->GetComponent<Transform>()->position.y = sin(TUMath::DegreeToRadian(FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle + (i) * 90)) * rotation_radius;
+		}	
 	}
 	else
 	{
-		if (FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position.x > 0)
-			selection_angle = 0;
-		else if (FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position.y > 0)
-			selection_angle = 90;
-		else if (FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position.x < 0)
-			selection_angle = 180;
-		else if (FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position.y < 0)
-			selection_angle = 270;
-
-
 		delta_angle = FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle;
 	}
 		
@@ -103,15 +89,17 @@ void Menu::Update(float dt)
 	if (Input::IsTriggered(SDL_SCANCODE_SPACE))
 		STATEMANAGER->MoveState(StatesList::LevelSelect);
 
-	if(!LeftRotate)
+	if(!LeftRotate && !IsRotating)
 		if (Input::IsPressed(SDL_SCANCODE_LEFT)){
 			LeftRotate = true;
 			IsRotating = true;
+			++select_index;
 		}
-	else if(!RightRotate)
+	else if(!RightRotate && !IsRotating)
 		if (Input::IsPressed(SDL_SCANCODE_RIGHT)){
 			RightRotate = true;
 			IsRotating = true;
+			--select_index;
 		}
 
 	if (LeftRotate)
@@ -148,16 +136,14 @@ void Menu::MoveToState(void)
 
 void Menu::DeltaAngle(void)
 {
-	if (FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle  - delta_angle >= 90)
+	if (abs(FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle  - delta_angle) >= 90)
 	{
 		IsRotating = false;
 		delta_angle = FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle;
-		FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle = 90 * (delta_angle % 90);
-	}
-	else if (FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle - delta_angle <= -90)
-	{
-		IsRotating = false;
-		delta_angle = FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle;
-		FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle = -90 * (delta_angle % 90);
+		if (delta_angle = FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle > 0)
+		FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle = 90 * select_index;
+
+		if(FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle < 0)
+		FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle = -90 * abs(select_index);
 	}
 }

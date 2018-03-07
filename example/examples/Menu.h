@@ -41,6 +41,8 @@ private:
 
 	bool IsRotating;
 
+	int select_index;
+
 	StatesList::StateList State;
 	MenuList Selection;
 
@@ -48,8 +50,6 @@ private:
 	int selection_angle;
 
 	int rotation_radius;
-
-	float angle;
 
 	unsigned int MenuSound;
 	unsigned int MoveSound;
