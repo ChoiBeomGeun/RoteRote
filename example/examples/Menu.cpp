@@ -70,14 +70,30 @@ void Menu::Update(float dt)
 	}
 
 
-	if (LeftRotate || RightRotate) {
+	if (IsRotating) {
 		DeltaAngle();
-		selection_angle += 100 * dt;
-		FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position.x = cos(selection_angle) * rotation_radius;
-		FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position.y = -sin(selection_angle) * rotation_radius;
+		std::cout << FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle << '\n';
+
+		float angle = selection_angle + FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle;
+		std::cout << "Fucking Angle: " << angle << '\n';
+		FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position.x = cos(selection_angle + FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle) * rotation_radius;
+		FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position.y = sin(selection_angle + FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle) * rotation_radius;
 	}
 	else
+	{
+		if (FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position.x > 0)
+			selection_angle = 0;
+		else if (FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position.y > 0)
+			selection_angle = 90;
+		else if (FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position.x < 0)
+			selection_angle = 180;
+		else if (FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position.y < 0)
+			selection_angle = 270;
+
+
 		delta_angle = FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle;
+	}
+		
 
 	if (Input::IsTriggered(SDL_SCANCODE_SPACE))
 		STATEMANAGER->MoveState(StatesList::LevelSelect);
@@ -96,8 +112,9 @@ void Menu::Update(float dt)
 	if (LeftRotate)
 	{
 		if (IsRotating){
-			//std::cout << FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle << '\n';
+			
 			FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle += 100 * dt;
+			
 		}
 		else
 			LeftRotate = false;
@@ -130,7 +147,8 @@ void Menu::DeltaAngle(void)
 	{
 		IsRotating = false;
 		delta_angle = FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle;
-		FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle =  90 * (delta_angle % 90);
+		FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle = 90 * (delta_angle % 90);
+
 	}
 	else if (FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle - delta_angle <= -90)
 	{
