@@ -55,6 +55,8 @@ void Menu::Load()
 	 RightRotate = false;
 	 IsRotating = false;
 
+	 angle = 0;
+
 	 selection_angle = 0;
 
 	 LEVELMANAGER->LoadLevel("Menu.json");
@@ -72,12 +74,15 @@ void Menu::Update(float dt)
 
 	if (IsRotating) {
 		DeltaAngle();
-		std::cout << FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle << '\n';
-
-		float angle = selection_angle + FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle;
-		std::cout << "Fucking Angle: " << angle << '\n';
-		FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position.x = cos(selection_angle + FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle) * rotation_radius;
-		FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position.y = sin(selection_angle + FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle) * rotation_radius;
+		if (angle < 90)
+		{
+			angle += 100 * dt;
+			FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position.x = cos(TUMath::DegreeToRadian(selection_angle + angle)) * rotation_radius;
+			FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position.y = sin(TUMath::DegreeToRadian(selection_angle + angle)) * rotation_radius;
+		}
+		else
+			angle = 0;
+	
 	}
 	else
 	{
@@ -148,7 +153,6 @@ void Menu::DeltaAngle(void)
 		IsRotating = false;
 		delta_angle = FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle;
 		FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle = 90 * (delta_angle % 90);
-
 	}
 	else if (FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle - delta_angle <= -90)
 	{

@@ -49,6 +49,8 @@ private:
 
 	int rotation_radius;
 
+	float angle;
+
 	unsigned int MenuSound;
 	unsigned int MoveSound;
 	unsigned int SelectSound;
