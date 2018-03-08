@@ -3,8 +3,8 @@
 	{
 		"EYE" : 
 		{
-			"x" : -661.007568359375,
-			"y" : 259.94998168945313,
+			"x" : -912.4615478515625,
+			"y" : -65.050003051757813,
 			"z" : 999.0
 		},
 		"TARGET" : 
@@ -21,7 +21,7 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 20,
+	"NumberOfObjects" : 21,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
@@ -141,7 +141,7 @@
 			"y" : 50.0,
 			"z" : 0.0
 		},
-		"Rotation" : 90.0,
+		"Rotation" : 0.0,
 		"Scale" : 
 		{
 			"x" : 100.0,
@@ -279,7 +279,7 @@
 		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
 		"ObjectID" : 20,
 		"ObjectType" : "Button",
-		"ParticleType" : "ET_EXPLOSION",
+		"ParticleType" : "TRAIL",
 		"Position" : 
 		{
 			"x" : 0.0,
@@ -289,10 +289,29 @@
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 0.0,
-			"y" : 0.0
+			"x" : 10.0,
+			"y" : 10.0
 		},
 		"TextureDir" : ""
+	},
+	"Object21" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"ObjectID" : 21,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.89999997615814209,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 0.10000000149011612,
+			"y" : 0.20000000298023224
+		},
+		"TextureDir" : "10.png"
 	},
 	"Object3" : 
 	{
@@ -324,8 +343,8 @@
 		"ObjectType" : "Player",
 		"Position" : 
 		{
-			"x" : -661.007568359375,
-			"y" : 259.94998168945313,
+			"x" : -912.4615478515625,
+			"y" : -65.050003051757813,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -368,7 +387,7 @@
 			"y" : 400.0,
 			"z" : 0.0
 		},
-		"Rotation" : 17505.447265625,
+		"Rotation" : 17697.591796875,
 		"Scale" : 
 		{
 			"x" : 100.0,
