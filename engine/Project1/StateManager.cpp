@@ -184,7 +184,7 @@ void StateManager::Update(float dt)
 
 	if (!b_IsRotating && b_IsGameLevel && !b_IsReplay)
 	{
-		if (Input::IsTriggered(SDL_SCANCODE_ESCAPE))
+		if (Input::IsTriggered(SDL_SCANCODE_ESCAPE) && APP->b_Lose == false)
 			PauseReturn();
 		if (APP->windowIsActive) {
 			PauseReturn();

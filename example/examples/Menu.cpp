@@ -86,8 +86,10 @@ void Menu::Update(float dt)
 		
 	if (!IsSelected && !IsRotating)
 		if (Input::IsTriggered(SDL_SCANCODE_SPACE))
+		{
+			SOUNDMANAGER->PlaySounds(SelectSound, false);
 			IsSelected = true;
-
+		}
 	if (IsSelected)
 	{
 		switch (Selection)
@@ -96,7 +98,7 @@ void Menu::Update(float dt)
 			break;
 		case MenuList::Menu_HowToPlay:
 			break;
-		case MenuList::Menu_Quit: STATEMANAGER->Quit();
+		case MenuList::Menu_Quit: ENGINE->Quit();
 			break;
 		case MenuList::Menu_Option: STATEMANAGER->MoveState(StatesList::Option);
 			break;
@@ -110,6 +112,7 @@ void Menu::Update(float dt)
 			IsRotating = true;
 			++select_index;
 			Selection_plus();
+			SOUNDMANAGER->PlaySounds(MoveSound, false);
 		}
 	else if(!RightRotate && !IsRotating)
 		if (Input::IsPressed(SDL_SCANCODE_RIGHT)){
@@ -117,6 +120,7 @@ void Menu::Update(float dt)
 			IsRotating = true;
 			--select_index;
 			Selection_minus();
+			SOUNDMANAGER->PlaySounds(MoveSound, false);
 		}
 
 	if (LeftRotate)

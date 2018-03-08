@@ -21,7 +21,7 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 7,
+	"NumberOfObjects" : 8,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
@@ -29,8 +29,8 @@
 		"ObjectType" : "Button",
 		"Position" : 
 		{
-			"x" : 0.0,
-			"y" : 100.0,
+			"x" : -100.0,
+			"y" : -8.7422777141910046e-06,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -48,8 +48,8 @@
 		"ObjectType" : "Button",
 		"Position" : 
 		{
-			"x" : -100.0,
-			"y" : 0.0,
+			"x" : 1.1924880709557328e-06,
+			"y" : -100.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -67,8 +67,8 @@
 		"ObjectType" : "Button",
 		"Position" : 
 		{
-			"x" : 0.0,
-			"y" : -100.0,
+			"x" : 100.0,
+			"y" : 1.7484555428382009e-05,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -86,8 +86,8 @@
 		"ObjectType" : "Button",
 		"Position" : 
 		{
-			"x" : 100.0,
-			"y" : 0.0,
+			"x" : 1.3907091670262162e-05,
+			"y" : 100.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -109,7 +109,7 @@
 			"y" : 0.0,
 			"z" : 0.0
 		},
-		"Rotation" : 0.0,
+		"Rotation" : 90.0,
 		"Scale" : 
 		{
 			"x" : 250.0,
@@ -139,7 +139,7 @@
 	},
 	"Object7" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"Components" : [ "TRANSFORM", "SPRITE" ],
 		"ObjectID" : 7,
 		"ObjectType" : "Button",
 		"Position" : 
@@ -154,7 +154,26 @@
 			"x" : 150.0,
 			"y" : 150.0
 		},
-		"TextureDir" : "Menu_Start.png"
+		"TextureDir" : "Menu_HowToPlay.png"
+	},
+	"Object8" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"ObjectID" : 8,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 178.86201477050781,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 156.09800720214844,
+			"y" : 52.683002471923828
+		},
+		"TextureDir" : "title.png"
 	},
 	"WorldSize" : 
 	{
