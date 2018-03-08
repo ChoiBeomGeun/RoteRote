@@ -74,9 +74,9 @@ void splash::Update(float dt)
 
 
 
-	if(CAMERA->cameraPos.x <= 1788 && Timer2 >= 200)
+	if(CAMERA->cameraPos.x <= 2560 && Timer2 >= 200)
 	CAMERA->cameraPos.x += 10.5;
-	if (CAMERA->cameraPos.x >= 1788)
+	if (CAMERA->cameraPos.x >= 2560)
 	{
 		STATEMANAGER->Next();
 

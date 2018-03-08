@@ -20,7 +20,7 @@ namespace TE {
 		glm::vec3 pos; //!< position of particle
 		glm::vec3 vel; //!< velocity of Particle
 		float scale;  //!< scale of Particle
-		Color color; //!< color of Particle
+		float color[4]; //!< color of Particle
 	};
 
 	enum EmitterType //!< enum for Type

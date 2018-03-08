@@ -56,10 +56,10 @@ namespace TE {
 			return;
 		for (int i = 0; i < capacity; ++i)
 		{
-			pParticles[i].color.r = 255;
-			pParticles[i].color.g = 255;
-			pParticles[i].color.b = 255;
-			pParticles[i].color.a = 255;
+			pParticles[i].color[0] = 255;
+			pParticles[i].color[1] = 255;
+			pParticles[i].color[2] = 255;
+			pParticles[i].color[3] = 255;
 			pParticles[i].scale = 0.0f;
 			pParticles[i].scale = 20;
 			pParticles[i].vel = glm::vec3(0);

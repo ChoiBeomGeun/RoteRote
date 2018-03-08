@@ -163,7 +163,10 @@ void LevelManager::LoadLevel(std::string  path)
 
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "PARTICLE") {
 
-				if (STATEMANAGER->Loadtolevelname == "level1.json")
+				if (STATEMANAGER->Loadtolevelname == "level1.json" || STATEMANAGER->Loadtolevelname == "level2.json" || STATEMANAGER->Loadtolevelname == "level3.json"
+					|| STATEMANAGER->Loadtolevelname == "level4.json" || STATEMANAGER->Loadtolevelname == "level5.json" || STATEMANAGER->Loadtolevelname == "leve6.json"
+					|| STATEMANAGER->Loadtolevelname == "level7.json" || STATEMANAGER->Loadtolevelname == "level8.json" || STATEMANAGER->Loadtolevelname == "level9.json"
+					|| STATEMANAGER->Loadtolevelname == "level10.json" || STATEMANAGER->Loadtolevelname == "level11.json" || STATEMANAGER->Loadtolevelname == "level12.json")
 				{
 					tempObject->AddComponent<Emitter>();
 					tempObject->GetComponent<Sprite>()->texture_load("test.png");

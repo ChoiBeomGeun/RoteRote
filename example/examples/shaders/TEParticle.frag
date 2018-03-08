@@ -8,24 +8,24 @@ in vec2 fragParticleUV;
 
 uniform sampler2D ptexture2D;
 uniform int ptexturing;
-uniform vec4 colorOffset;
+uniform vec4 pcolorOffset;
 uniform int particleStats;
 
 void main()
 {
 	
 	vec4 texel = texture(ptexture2D,fragParticleUV );
-	if(texel.a < 0.1)
+	if(texel.a < 0.2)
 		discard;
 			
-	vec4 tempcolor = fragParticleCol * colorOffset;
+	vec4 tempcolor = fragParticleCol * pcolorOffset;
 	
 	if(particleStats == 3)
 	{
 		if(ptexturing == 1)
 			color = texel * tempcolor; // texel , texture(texture2D,fragParticleUV)
 		else	 
-			color = tempcolor;
+			color = texel * tempcolor;
 	}
 	else
 		color = texel * fragParticleCol;

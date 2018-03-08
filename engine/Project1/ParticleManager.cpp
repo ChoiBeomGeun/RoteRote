@@ -127,7 +127,7 @@ namespace TE {
 		m_minTrailVel = 0;
 		m_maxTrailVel = 100;
 		m_minTrailScale = 0;
-		m_maxTrailScale = 100;
+		m_maxTrailScale = 50;
 
 		m_scaleFactor = 30;
 		m_expLife = 20;
@@ -177,10 +177,10 @@ namespace TE {
 						(*emitterIT)->pParticles[i].scale
 							= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
 						// set color with g_colors
-						(*emitterIT)->pParticles[i].color.r = 0;
-						(*emitterIT)->pParticles[i].color.g = 255;
-						(*emitterIT)->pParticles[i].color.b = 255;
-						(*emitterIT)->pParticles[i].color.a = 255;
+						(*emitterIT)->pParticles[i].color[0] = 0 / 255.f;
+						(*emitterIT)->pParticles[i].color[1] = 255/255.f;
+						(*emitterIT)->pParticles[i].color[2] = 255 /255.f;
+						(*emitterIT)->pParticles[i].color[3] = 255 /255.f;
 					}
 				}
 				break;
@@ -221,10 +221,10 @@ namespace TE {
 					TUMath::Clamp(particle.scale, 0, m_maxTrailScale);
 
 					// set colour with RED
-					particle.color.r = 204;
-					particle.color.g = 153;
-					particle.color.b = 0;
-					particle.color.a = 255;
+					particle.color[0] = 127 /255.f;
+					particle.color[1] = 104 / 255.f;
+					particle.color[2] = 81 / 255.f;
+					particle.color[3] = 180 / 255.f;
 
 
 				}
@@ -285,10 +285,10 @@ namespace TE {
 			pEmitter->pParticles[i].scale
 				= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
 			// set color with g_colors
-			pEmitter->pParticles[i].color.r = g_colors[TUMath::GetRandomInt(-1, MAX_COLORS - 1)];
-			pEmitter->pParticles[i].color.g = g_colors[TUMath::GetRandomInt(-1, MAX_COLORS - 1)];
-			pEmitter->pParticles[i].color.b = g_colors[TUMath::GetRandomInt(-1, MAX_COLORS - 1)];
-			pEmitter->pParticles[i].color.a = g_colors[TUMath::GetRandomInt(-1, MAX_COLORS - 1)];
+			pEmitter->pParticles[i].color[0] = g_colors[TUMath::GetRandomInt(-1, MAX_COLORS - 1)];
+			pEmitter->pParticles[i].color[1] = g_colors[TUMath::GetRandomInt(-1, MAX_COLORS - 1)];
+			pEmitter->pParticles[i].color[2] = g_colors[TUMath::GetRandomInt(-1, MAX_COLORS - 1)];
+			pEmitter->pParticles[i].color[3] = g_colors[TUMath::GetRandomInt(-1, MAX_COLORS - 1)];
 		}
 
 	}
@@ -308,10 +308,10 @@ namespace TE {
 		for (int i = 0; i < pEmitter->capacity; ++i)
 		{
 			pEmitter->pParticles[i].scale = 0;
-			pEmitter->pParticles[i].color.r = 255;
-			pEmitter->pParticles[i].color.g = 128;
-			pEmitter->pParticles[i].color.b = 128;
-			pEmitter->pParticles[i].color.a = 255;
+			pEmitter->pParticles[i].color[0] = 255 / 255.f;
+			pEmitter->pParticles[i].color[1] = 128 / 255.f;
+			pEmitter->pParticles[i].color[2] = 128 / 255.f;
+			pEmitter->pParticles[i].color[3] = 255 / 255.f;
 		}
 	}
 

@@ -81,6 +81,12 @@ Application::Application() : pWnd(nullptr), ResolutionNumber(2)
 				_screenWidth = 800;
 				_resolution = Resolution::_800X600;
 			}
+			if (!strcmp(line, "1280 X 720"))
+			{
+				_screenWidth = 1280;
+				_screenHeight = 720;
+				_resolution = Resolution::_1280X720;
+			}
 			if (!strcmp(line, "True"))
 				_isfull = true;
 		}
@@ -174,6 +180,27 @@ void Application::Initialize()
 		SDL_SetWindowSize(this->pWnd, 1920, 1080);
 		glViewport(0, 0, 1920, 1080);
 
+		std::cout << ResolutionNumber << '\n';
+		SDL_SetWindowPosition(this->pWnd, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+		SDL_SetWindowBordered(this->pWnd, SDL_TRUE);
+
+	}
+	if (_resolution == Resolution::_800X600)
+	{
+
+
+		SDL_SetWindowSize(this->pWnd, 800, 600);
+		glViewport(0, 0, 800, 600);
+
+		std::cout << ResolutionNumber << '\n';
+		SDL_SetWindowPosition(this->pWnd, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+		SDL_SetWindowBordered(this->pWnd, SDL_TRUE);
+
+	}
+	if (_resolution == Resolution::_1280X720)
+	{
+		SDL_SetWindowSize(this->pWnd, 1280, 720);
+		glViewport(0, 0, 1280, 720);
 		std::cout << ResolutionNumber << '\n';
 		SDL_SetWindowPosition(this->pWnd, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 		SDL_SetWindowBordered(this->pWnd, SDL_TRUE);
