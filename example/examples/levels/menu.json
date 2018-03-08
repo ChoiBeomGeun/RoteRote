@@ -21,7 +21,7 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 6,
+	"NumberOfObjects" : 7,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
@@ -132,10 +132,29 @@
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 0.0,
-			"y" : 0.0
+			"x" : 10.0,
+			"y" : 10.0
 		},
 		"TextureDir" : ""
+	},
+	"Object7" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"ObjectID" : 7,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 150.0,
+			"y" : 150.0
+		},
+		"TextureDir" : "Menu_Start.png"
 	},
 	"WorldSize" : 
 	{

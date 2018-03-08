@@ -164,13 +164,13 @@ void Menu::Selection_plus(void)
 {
 	switch (Selection)
 	{
-	case MenuList::Menu_Start:  Selection = MenuList::Menu_HowToPlay;
+	case MenuList::Menu_Start:  Selection = MenuList::Menu_HowToPlay; FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Menu_HowToPlay.png");
 		break;
-	case MenuList::Menu_HowToPlay: Selection = MenuList::Menu_Quit;
+	case MenuList::Menu_HowToPlay: Selection = MenuList::Menu_Quit;	FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Menu_Quit.png");
 		break;
-	case MenuList::Menu_Quit: Selection = MenuList::Menu_Option;
+	case MenuList::Menu_Quit: Selection = MenuList::Menu_Option; FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Menu_Option.png");
 		break;
-	case MenuList::Menu_Option: Selection = MenuList::Menu_Start;
+	case MenuList::Menu_Option: Selection = MenuList::Menu_Start; FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Menu_Start.png");
 		break;
 	default:
 		break;
@@ -181,13 +181,13 @@ void Menu::Selection_minus(void)
 {
 	switch (Selection)
 	{
-	case MenuList::Menu_HowToPlay:  Selection = MenuList::Menu_Start;
+	case MenuList::Menu_HowToPlay:  Selection = MenuList::Menu_Start; FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Menu_Start.png");
 		break;
-	case MenuList::Menu_Quit: Selection = MenuList::Menu_HowToPlay;
+	case MenuList::Menu_Quit: Selection = MenuList::Menu_HowToPlay; FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Menu_HowToPlay.png");
 		break;
-	case MenuList::Menu_Option: Selection = MenuList::Menu_Quit;
+	case MenuList::Menu_Option: Selection = MenuList::Menu_Quit; FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Menu_Quit.png");
 		break;
-	case MenuList::Menu_Start: Selection = MenuList::Menu_Option;
+	case MenuList::Menu_Start: Selection = MenuList::Menu_Option; FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Menu_Option.png");
 		break;
 	default:
 		break;
