@@ -35,9 +35,10 @@ namespace TE {
 		Emitter();
 		~Emitter();
 		virtual void Initialize() override;
-		void CreateParticle(int maxCount, float lifetime);
+		void CreateParticle();
 		void Update(float dt);
-		void setTextureID(unsigned int textureID);
+		void SetEmitter(glm::vec3 EmitterPos, glm::vec3 EmitterVel, int pSize, int pCapacity, int plifeTime, EmitterType ptype);
+		void SetTexture(int textureID);
 
 		Particle*   pParticles; //!< pointer of Paritcles in this Emitter
 		EmitterType type; //!< type of Emitter

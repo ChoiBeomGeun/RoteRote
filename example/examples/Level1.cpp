@@ -319,7 +319,7 @@ void Level1::Update(float dt)
 		if (STATEMANAGER->ReplayInit)
 		{
 			//PARTICLEMANAGER->Initialize();
-			PARTICLEMANAGER->GetEmitters()[0].Initialize();
+			
 			MakeReplayerUI();
 			TRIGGERLOGIC->Initialize();
 			CAMERA->cameraUp.x = 0;
@@ -332,8 +332,8 @@ void Level1::Update(float dt)
 		first = false;
 		SetReplayer();
 	}
-	PARTICLEMANAGER->GetEmitters()[0].pos = FACTORY->GetPlayer()->GetComponent<Transform>()->GetPosition();
-	PARTICLEMANAGER->UpdateEmitter(&(PARTICLEMANAGER->GetEmitters()[0]), dt);
+	if (!PARTICLEMANAGER->m_EmitterList.empty() && FACTORY->GetPlayer() != nullptr)
+		PARTICLEMANAGER->m_EmitterList[0]->pos = FACTORY->GetPlayer()->GetComponent<Transform>()->position;
 
 
 }

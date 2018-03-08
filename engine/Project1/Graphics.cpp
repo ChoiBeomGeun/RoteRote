@@ -99,7 +99,7 @@ void Graphics::Initialize(void)
 	if (basicVAO == 0)
 		glGenVertexArrays(1, &basicVAO);
 	/*if (particleVAO == 0)
-		glGenBuffers(1, &particleVAO);*/
+	glGenBuffers(1, &particleVAO);*/
 
 
 	// first triangle
@@ -146,7 +146,7 @@ void Graphics::Initialize(void)
 	CAMERA->cameraTarget = target;
 	CAMERA->cameraUp = up;
 
-	
+
 	setbasicUniformLoc();
 	initparticleShader();
 	drawparticle_attributes();
@@ -294,11 +294,11 @@ void TE::Graphics::drawPerspective(std::vector<Sprite*>::iterator iter)
 {
 	if (!(*iter)->pOwner->HasComponent<Emitter>())
 	{
-		
+
 		if ((*iter)->pOwner->HasComponent<Animation>()) {
 			glUniform1i(uniformLocation[ISANIMATION], 1);
 		}
-		
+
 		drawStats = 0;
 		CAMERA->proj();
 		model = glm::mat4(1.0f);
@@ -334,23 +334,21 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 	if ((*iter)->pOwner->HasComponent<Emitter>())
 	{
 		_particleProgram.use();
-		/*for (auto p : EmitterList)
-		{*/
-		for (int j = 0; j < PARTICLEMANAGER->GetEmmiterCount(); ++j)
+
+		for (auto p : PARTICLEMANAGER->m_EmitterList)
 		{
-			auto p = PARTICLEMANAGER->GetEmitters()[j];
-			glBindTexture(GL_TEXTURE_2D, p.m_textureID);
-			for (int i = 0; i < p.capacity; ++i)
+			glBindTexture(GL_TEXTURE_2D, p->m_textureID);
+			for (int i = 0; i<p->capacity; ++i)
 			{
 				drawStats = 3;
 				particlemodel = glm::mat4(1.0f);
 				CAMERA->proj();
-				particlemodel = glm::translate(particlemodel, p.pParticles[i].pos);
+				particlemodel = glm::translate(particlemodel, p->pParticles[i].pos);
 				//std::cout << i <<". " << j << ": " <<PARTICLEMANAGER->GetEmitters()[i].pParticles[j].pos.x << ", " << PARTICLEMANAGER->GetEmitters()[i].pParticles[j].pos.y << "\n";
 				particlemodel = glm::rotate(particlemodel, glm::radians((*iter)->pTransform->angle), (*iter)->pTransform->rotation);
-				particlemodel = glm::scale(particlemodel, glm::vec3(p.pParticles[i].scale));
-				glUniform4f(particleLoc[PCOLOR], p.pParticles[i].color.r, p.pParticles[i].color.g,
-					p.pParticles[i].color.b, p.pParticles[i].color.a);
+				particlemodel = glm::scale(particlemodel, glm::vec3(p->pParticles[i].scale));
+				glUniform4f(particleLoc[PCOLOR], p->pParticles[i].color.r, p->pParticles[i].color.g,
+					p->pParticles[i].color.b, p->pParticles[i].color.a);
 				glUniformMatrix4fv(particleLoc[PARTICLEMODEL], 1, GL_FALSE, &particlemodel[0][0]);
 				glUniformMatrix4fv(particleLoc[PARTICLEVIEW], 1, GL_FALSE, &view[0][0]);
 				glUniformMatrix4fv(particleLoc[PARTICLEPROJ], 1, GL_FALSE, &CAMERA->projection[0][0]);
@@ -360,6 +358,30 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 				glDrawArrays(GL_TRIANGLES, 0, 6);
 			}
 		}
+		//for (int j = 0; j < PARTICLEMANAGER->GetEmmiterCount(); ++j)
+		//{
+		//	auto p = PARTICLEMANAGER->GetEmitters()[j];
+		//	glBindTexture(GL_TEXTURE_2D, p.m_textureID);
+		//	for (int i = 0; i < p.capacity; ++i)
+		//	{
+		//		drawStats = 3;
+		//		particlemodel = glm::mat4(1.0f);
+		//		CAMERA->proj();
+		//		particlemodel = glm::translate(particlemodel, p.pParticles[i].pos);
+		//		//std::cout << i <<". " << j << ": " <<PARTICLEMANAGER->GetEmitters()[i].pParticles[j].pos.x << ", " << PARTICLEMANAGER->GetEmitters()[i].pParticles[j].pos.y << "\n";
+		//		particlemodel = glm::rotate(particlemodel, glm::radians((*iter)->pTransform->angle), (*iter)->pTransform->rotation);
+		//		particlemodel = glm::scale(particlemodel, glm::vec3(p.pParticles[i].scale));
+		//		glUniform4f(particleLoc[PCOLOR], p.pParticles[i].color.r, p.pParticles[i].color.g,
+		//			p.pParticles[i].color.b, p.pParticles[i].color.a);
+		//		glUniformMatrix4fv(particleLoc[PARTICLEMODEL], 1, GL_FALSE, &particlemodel[0][0]);
+		//		glUniformMatrix4fv(particleLoc[PARTICLEVIEW], 1, GL_FALSE, &view[0][0]);
+		//		glUniformMatrix4fv(particleLoc[PARTICLEPROJ], 1, GL_FALSE, &CAMERA->projection[0][0]);
+		//		glUniform1i(particleLoc[PTEXTURE], 1);
+		//		glUniform1i(particleLoc[PSTATS], drawStats);
+		//		glPushAttrib(GL_CURRENT_BIT);
+		//		glDrawArrays(GL_TRIANGLES, 0, 6);
+		//	}
+		//}
 		//}
 		//_particleProgram.unuse();
 	}
@@ -434,8 +456,8 @@ void TE::Graphics::animationSetting()
 					time = 0.0f;
 					//std::cout << (*aniIter)->getFrame() << '\n';
 				}
-				
-				
+
+
 
 				// if player is flipped it should face other direction
 				if ((*aniIter)->isFlippedX())

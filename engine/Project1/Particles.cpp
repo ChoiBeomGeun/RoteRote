@@ -12,52 +12,55 @@
 namespace TE {
 	Emitter::Emitter() : Component(ComponentType::CT_EMITTER)
 	{
-		//GRAPHICS->EmitterList.push_back(this);
+		//PARTICLEMANAGER->m_EmitterList.push_back(this);
 	}
 	Emitter::~Emitter()
 	{
 		//std::cout << "Emitter DEEEEEELEETTTE" << std::endl;
+		delete pParticles;
+		pParticles = NULL;
+		PARTICLEMANAGER->m_EmitterList.erase(std::find(PARTICLEMANAGER->m_EmitterList.begin(), PARTICLEMANAGER->m_EmitterList.end(), this));
+
 		//GRAPHICS->EmitterList.erase(std::find(GRAPHICS->EmitterList.begin(), GRAPHICS->EmitterList.end(), this));
-		/*delete [] pParticles;
-		pParticles = NULL;*/
+
 	}
 	void Emitter::Initialize()
 	{
-		/*if (pParticles == NULL)
-			return;
-		else
+		/*auto iter = PARTICLEMANAGER->m_EmitterList.begin();
+		for (; iter!= PARTICLEMANAGER->m_EmitterList.end(); ++iter)
+		{*/
+
+		if (PARTICLEMANAGER->m_EmitterList.empty())
 		{
-			for (int i = 0; i < PARTICLEMANAGER->GetEmitters()->capacity; ++i)
-			{
-				pParticles[i].pos = glm::vec3(0);
-				pParticles[i].scale = 0;
-				pParticles[i].vel = glm::vec3(0);
-				pParticles[i].color.r = 255;
-				pParticles[i].color.g = 255;
-				pParticles[i].color.b = 255;
-				pParticles[i].color.a = 255;
-			}
-		}*/
+			pParticles = NULL;
+			type = ET_EXPLOSION;
+			pos = glm::vec3(0);
+			vel = glm::vec3(0);
+			m_textureID = 0;
+			size = 0;
+			capacity = 0;
+			emitterID = 0;
+			lifeTime = 0;
+		}
+		else
+			return;
+
 	}
 
-	void Emitter::CreateParticle(int maxCount, float lifetime)
+	void Emitter::CreateParticle()
 	{
- 		vel = glm::vec3(0.0f);
-		size = maxCount;
-		capacity = maxCount;
-		emitterID = PARTICLEMANAGER->GetEmitters()->emitterID;
-		lifeTime = lifetime;
+		vel = glm::vec3(0.0f);
 		if (pParticles == NULL)
-			pParticles = new Particle[maxCount];
+			pParticles = new Particle[capacity];
 		else
 			return;
-		for (int i = 0; i < maxCount; ++i)
+		for (int i = 0; i < capacity; ++i)
 		{
 			pParticles[i].color.r = 255;
 			pParticles[i].color.g = 255;
 			pParticles[i].color.b = 255;
 			pParticles[i].color.a = 255;
-			pParticles[i].pos = PARTICLEMANAGER->GetEmitters()->pos;
+			pParticles[i].scale = 0.0f;
 			pParticles[i].scale = 20;
 			pParticles[i].vel = glm::vec3(0);
 		}
@@ -65,21 +68,28 @@ namespace TE {
 
 	void Emitter::Update(float dt)
 	{
-		dt;
-		for (int i = 0; i < PARTICLEMANAGER->GetEmitters()->size; ++i)
+		for (auto p : PARTICLEMANAGER->m_EmitterList)
 		{
-			
+			p->pos = this->GetOwner()->GetComponent<Transform>()->position;
 		}
-		
 	}
 
-	void Emitter::setTextureID(unsigned int textureID)
+	void Emitter::SetTexture(int textureID)
 	{
-		if (m_textureID == NULL)
-			m_textureID = textureID;
-		else
-			return;
+		m_textureID = textureID;
 	}
+
+	void Emitter::SetEmitter(glm::vec3 EmitterPos, glm::vec3 EmitterVel, int pSize, int pCapacity, int plifeTime, EmitterType ptype)
+	{
+		pos = EmitterPos;
+		vel = EmitterVel;
+		size = pSize;
+		capacity = pCapacity;
+		lifeTime = plifeTime;
+		type = ptype;
+	}
+
+
 
 
 

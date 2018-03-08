@@ -163,21 +163,30 @@ void LevelManager::LoadLevel(std::string  path)
 
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "PARTICLE") {
 
-				PARTICLEMANAGER->CreateMaxNumEmitter(2);
-				PARTICLEMANAGER->Initialize();
-				//PARTICLEMANAGER->Initialize();
-				tempObject->AddComponent<Emitter>();
-				tempObject->GetComponent<Transform>()->position = tempObject->GetComponent<Transform>()->position;
-				tempObject->GetComponent<Transform>()->scale = glm::vec3(10.0f);
-				tempObject->GetComponent<Sprite>()->texture_load("test.png"); 
-				PARTICLEMANAGER->GetEmitters()[0].CreateParticle(30, 20.0f);
-				PARTICLEMANAGER->GetEmitters()[0].setTextureID(tempObject->GetComponent<Sprite>()->TextureId);
-				PARTICLEMANAGER->GetEmitters()[/*PARTICLEMANAGER->GetEmitters()->emitterID*/0].pos = tempObject->GetComponent<Transform>()->position;
-				PARTICLEMANAGER->AddEmitter(30, tempObject->GetComponent<Transform>()->position, glm::vec3(2.0f, 0.0f, 0.0f), tempObject->GetComponent<Sprite>()->TextureId, ET_TRAIL);
-				//tempObject->GetComponent<Emitter>()->CreateParticle(30, 20.0f);
-				//tempObject->GetComponent<Emitter>()->m_textureID = tempObject->GetComponent<Sprite>()->TextureId;
-				//tempObject->GetComponent<Emitter>()->pos = tempObject->GetComponent<Transform>()->position;
-				
+				if (STATEMANAGER->Loadtolevelname == "level1.json")
+				{
+					tempObject->AddComponent<Emitter>();
+					tempObject->GetComponent<Sprite>()->texture_load("test.png");
+					tempObject->GetComponent<Transform>()->position = tempObject->GetComponent<Transform>()->position;
+					tempObject->GetComponent<Emitter>()->SetEmitter(tempObject->GetComponent<Transform>()->position, glm::vec3(0.0f), 0, 400, 20.f, ET_TRAIL);
+					tempObject->GetComponent<Emitter>()->SetTexture(tempObject->GetComponent<Sprite>()->TextureId);
+					tempObject->GetComponent<Emitter>()->CreateParticle();
+					tempObject->GetComponent<Transform>()->scale = glm::vec3(10.0f);
+
+					PARTICLEMANAGER->AddEmitter(tempObject->GetComponent<Emitter>());
+				}
+				else if (STATEMANAGER->Loadtolevelname == "Menu.json")
+				{
+					tempObject->AddComponent<Emitter>();
+					tempObject->GetComponent<Sprite>()->texture_load("test.png");
+					tempObject->GetComponent<Transform>()->position = tempObject->GetComponent<Transform>()->position;
+					tempObject->GetComponent<Emitter>()->SetEmitter(tempObject->GetComponent<Transform>()->position, glm::vec3(0.0f), 0, 400, 20.f, ET_EXPLOSION);
+					tempObject->GetComponent<Emitter>()->SetTexture(tempObject->GetComponent<Sprite>()->TextureId);
+					tempObject->GetComponent<Emitter>()->CreateParticle();
+					tempObject->GetComponent<Transform>()->scale = glm::vec3(10.0f);
+
+					PARTICLEMANAGER->AddEmitter(tempObject->GetComponent<Emitter>());
+				}
 				
 			}
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "")

@@ -48,33 +48,25 @@ namespace TE {
 	{
 	public:
 		ParticleManager();
-		//ParticleManager(int maxCount);
 		~ParticleManager(void);
 
 		void Initialize(void) override;
-		void CreateMaxNumEmitter(int maxCount);
 
 
 		void Update(float dt) override;
 
 
-		//void     LoadFile(const char* pFileName);
-
-
-		Emitter* GetEmitters(void);
-		int      GetEmmiterCount(void);
-		int      AddEmitter(int count, const glm::vec3& pos,
-			const glm::vec3& vel, int textureID, EmitterType type);
-		void     DeleteEmitter(int emitterID);
-		void     UpdateEmitter(Emitter* pEmitter, float dt);
+		void AddEmitter(Emitter* pEmitter);
+		void DeleteEmitter(std::vector <Emitter*>::iterator emitterIt);
+		void UpdateEmitter(Emitter* pEmitter, float dt);
 		//void     DrawEmitter(const Emitter* pEmitter);
+		std::vector <Emitter*> m_EmitterList;
 
 	private:
 		void InitExplosionSystem(Emitter* pEmitter);
 		void InitTrailSystem(Emitter* pEmitter);
 
-		//std::vector <Emitter*> m_EmitterList;
-		Emitter* m_pEmitters; //!< pointer of Emitter
+		//Emitter* m_pEmitters; //!< pointer of Emitter
 		int m_capacity;       //!< max amount of Emitter
 		int m_size;           //!< number of Emitter
 		int m_currentID;      //!< current ID of Emitter
