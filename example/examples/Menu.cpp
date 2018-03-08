@@ -47,14 +47,13 @@ void Menu::Load()
 
  void Menu::Init()
 {
-	 State = StatesList::StateList::LevelSelect;
-	 rotation_radius = 120.f;
+	 rotation_radius = 100.f;
 	 Selection = MenuList::Menu_Start;
 	 delta_angle = 90;
 	 LeftRotate = false;
 	 RightRotate = false;
 	 IsRotating = false;
-
+	 IsSelected = false;
 	 selection_angle = 0;
 	 select_index = 0;
 	 LEVELMANAGER->LoadLevel("Menu.json");
@@ -85,21 +84,39 @@ void Menu::Update(float dt)
 		delta_angle = FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle;
 	}
 		
+	if (!IsSelected && !IsRotating)
+		if (Input::IsTriggered(SDL_SCANCODE_SPACE))
+			IsSelected = true;
 
-	if (Input::IsTriggered(SDL_SCANCODE_SPACE))
-		STATEMANAGER->MoveState(StatesList::LevelSelect);
+	if (IsSelected)
+	{
+		switch (Selection)
+		{
+		case MenuList::Menu_Start: STATEMANAGER->MoveState(StatesList::LevelSelect);
+			break;
+		case MenuList::Menu_HowToPlay:
+			break;
+		case MenuList::Menu_Quit: STATEMANAGER->Quit();
+			break;
+		case MenuList::Menu_Option: STATEMANAGER->MoveState(StatesList::Option);
+			break;
+		}
+	}
+
 
 	if(!LeftRotate && !IsRotating)
 		if (Input::IsPressed(SDL_SCANCODE_LEFT)){
 			LeftRotate = true;
 			IsRotating = true;
 			++select_index;
+			Selection_plus();
 		}
 	else if(!RightRotate && !IsRotating)
 		if (Input::IsPressed(SDL_SCANCODE_RIGHT)){
 			RightRotate = true;
 			IsRotating = true;
 			--select_index;
+			Selection_minus();
 		}
 
 	if (LeftRotate)
@@ -129,11 +146,6 @@ void Menu::Unload()
 {
 }
 
-void Menu::MoveToState(void)
-{
-	STATEMANAGER->MoveState(State);
-}
-
 void Menu::DeltaAngle(void)
 {
 	if (abs(FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle  - delta_angle) >= 90)
@@ -145,5 +157,39 @@ void Menu::DeltaAngle(void)
 
 		if(FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle < 0)
 		FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle = -90 * abs(select_index);
+	}
+}
+
+void Menu::Selection_plus(void)
+{
+	switch (Selection)
+	{
+	case MenuList::Menu_Start:  Selection = MenuList::Menu_HowToPlay;
+		break;
+	case MenuList::Menu_HowToPlay: Selection = MenuList::Menu_Quit;
+		break;
+	case MenuList::Menu_Quit: Selection = MenuList::Menu_Option;
+		break;
+	case MenuList::Menu_Option: Selection = MenuList::Menu_Start;
+		break;
+	default:
+		break;
+	}
+}
+
+void Menu::Selection_minus(void)
+{
+	switch (Selection)
+	{
+	case MenuList::Menu_HowToPlay:  Selection = MenuList::Menu_Start;
+		break;
+	case MenuList::Menu_Quit: Selection = MenuList::Menu_HowToPlay;
+		break;
+	case MenuList::Menu_Option: Selection = MenuList::Menu_Quit;
+		break;
+	case MenuList::Menu_Start: Selection = MenuList::Menu_Option;
+		break;
+	default:
+		break;
 	}
 }

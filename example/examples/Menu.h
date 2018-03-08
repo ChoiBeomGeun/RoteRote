@@ -29,21 +29,21 @@ public:
 	void Update(float dt);
 	void Free(void);
 	void Unload(void);
-	
-	void MoveToState(void);
 
 	void DeltaAngle(void);
 
+	void Selection_plus(void);
+	void Selection_minus(void);
 private:
 
 	bool LeftRotate;
 	bool RightRotate;
 
 	bool IsRotating;
+	bool IsSelected;
 
 	int select_index;
 
-	StatesList::StateList State;
 	MenuList Selection;
 
 	int delta_angle;
