@@ -35,9 +35,9 @@ namespace TE {
 
 
 
- ClearzoneLogic::ClearzoneLogic()
+ClearzoneLogic::ClearzoneLogic()
 {
-	 CLEARZONELOGIC = this;
+	CLEARZONELOGIC = this;
 
 
 }
@@ -53,25 +53,24 @@ void ClearzoneLogic::Update(float dt)
 {
 
 
-	
+
 	for (auto Objects : FACTORY->ObjectIDMap)
 	{
 
 		if (Objects.second->objectstyle == Objectstyle::Clearzone)
 			obj = Objects.second;
-		
+
 	}
-	if(obj !=NULL)
-	obj->GetComponent<Transform>()->angle += 20 *dt;
+	if (obj != NULL)
+		obj->GetComponent<Transform>()->angle += 20 * dt;
 	if (obj != NULL)
 	{
 		player = FACTORY->GetPlayer();
-		if (PHYSICS->RectvsRectCollisionCheck(player->GetComponent<Transform>(), obj->GetComponent<Transform>()) )
+		if (PHYSICS->RectvsRectCollisionCheck(player->GetComponent<Transform>(), obj->GetComponent<Transform>()))
 		{
-			WinSound = SOUNDMANAGER->LoadSound("win3.mp3");
-			SOUNDMANAGER->PlaySounds(WinSound, false);
+
 			APP->b_Win = true;//	LevelInit.b_Win = true;
-			//STATEMANAGER->b_Relplay = true;
+							  //STATEMANAGER->b_Relplay = true;
 			PHYSICS->gravityScale = -20.f;
 			PHYSICS->GravityType = Gravity::y_Minus;
 			PHYSICS->gravity = glm::vec3(0, PHYSICS->gravityScale, 0);
@@ -98,5 +97,5 @@ void TE::ClearzoneLogic::Free(void)
 	SOUNDMANAGER->DeleteSounds();
 }
 ClearzoneLogic::~ClearzoneLogic()
- {
- }
+{
+}

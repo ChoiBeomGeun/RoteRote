@@ -23,7 +23,7 @@ unsigned int rlselect;
 unsigned int rlback;
 unsigned int rlwin;
 bool SettingItor = false;
-Object * replayer ;
+Object * replayer;
 Object * oReBackbutton;
 Object * oReRestartbutton;
 Object * oReLevelbutton;
@@ -100,8 +100,8 @@ void MakeReplayerUI(void) {
 	ReeplayImage->GetComponent<Sprite>()->texture_load("replay.png");
 	//IsButtonAvailable = true;
 	replayer = FACTORY->GetPlayer();
-//	STATEMANAGER->Replayerinfo.reverse();
-//	itor = STATEMANAGER->Replayerinfo.;
+	//	STATEMANAGER->Replayerinfo.reverse();
+	//	itor = STATEMANAGER->Replayerinfo.;
 	STATEMANAGER->ReplayInit = false;
 	TRIGGERLOGIC->Free();
 	TRIGGERLOGIC->Initialize();
@@ -110,21 +110,24 @@ void MakeReplayerUI(void) {
 	rlmove = SOUNDMANAGER->LoadSound("menumove.mp3");
 	rlback = SOUNDMANAGER->LoadSound("menuselect.mp3");
 	rlselect = SOUNDMANAGER->LoadSound("menuselect.mp3");
+	rlwin = SOUNDMANAGER->LoadSound("win3.mp3");
+	SOUNDMANAGER->PlaySounds(rlwin, false);
+
 }
 
 void SetReplayer(void) {
 
-	
-	
+
+
 	replayer->GetComponent<Transform>()->SetPosition(itor.front().Pos);
 	replayer->GetComponent<Animation>()->setFrame(itor.front().aniframe);
 	replayer->GetComponent<Animation>()->setTime(itor.front().anitime);
 	replayer->GetComponent<Animation>()->setFlipX(itor.front().mouseinfo);
-	
+
 	//PARTICLEMANAGER->GetEmitters()[0].Initialize();
 	itor.pop();
-	if (itor.size() <=0) {
-		
+	if (itor.size() <= 0) {
+		SOUNDMANAGER->PlaySounds(rlwin, false);
 		//itor = STATEMANAGER->Replayerinfo.begin();
 		FACTORY->DestroyAllObjects();
 		LEVELMANAGER->LoadLevel(STATEMANAGER->Loadtolevelname);
@@ -235,5 +238,5 @@ void FreeReplayer(void) {
 	STATEMANAGER->b_Relplay = false;
 	STATEMANAGER->ReplayInit = true;
 	STATEMANAGER->b_IsGameLevel = true;
-//	STATEMANAGER->Replayerinfo.clear();
+	//	STATEMANAGER->Replayerinfo.clear();
 }

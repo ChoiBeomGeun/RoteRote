@@ -58,8 +58,7 @@ void splash::Init()
 
 
 	LEVELMANAGER->LoadLevel(path2);
-	FACTORY->ObjectIDMap[1]->GetComponent<Animation>()->setFrame(1.0f / 16);
-	FACTORY->ObjectIDMap[1]->GetComponent<Animation>()->setTime(1.0f / 32);
+
 	printf("splashInit\n");
 
 }
@@ -72,21 +71,18 @@ void splash::Update(float dt)
 	Timer2 += 5;
 	if (Input::IsAnyTriggered())
 		STATEMANAGER->Next();
-	if (Timer2 >= 400)
+
+
+
+	if(CAMERA->cameraPos.x <= 1788 && Timer2 >= 200)
+	CAMERA->cameraPos.x += 10.5;
+	if (CAMERA->cameraPos.x >= 1788)
 	{
-		FACTORY->Destroy(FACTORY->ObjectIDMap[1]);
-		FACTORY->CreateArchetype(ReadingArchetype("Wall.json"));
-		FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->SetScale(glm::vec3(500,90,0));
-		FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->texture_load("FMOD.png");
-
 		STATEMANAGER->Next();
-		Timer2 = 0;
-
 
 	}
-	//   FACTORY->ObjectIDMap[1]->sprite->ChangeColor(0, 0, 255, 0);
-	//FACTORY->ObjectIDMap[1]->transform->SetRotationZ(angle);
-	angle += 5;
+	//}
+
 
 }
 

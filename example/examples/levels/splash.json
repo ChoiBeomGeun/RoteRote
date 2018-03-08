@@ -21,10 +21,10 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 1,
+	"NumberOfObjects" : 3,
 	"Object1" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "ANIMATION" ],
+		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
 		"ObjectID" : 1,
 		"ObjectType" : "Button",
 		"Position" : 
@@ -36,10 +36,48 @@
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 1500.0,
-			"y" : 920.0
+			"x" : 604.8780517578125,
+			"y" : 163.41500854492188
 		},
-		"TextureDir" : "splash.png"
+		"TextureDir" : "digipen.png"
+	},
+	"Object2" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"ObjectID" : 2,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 869.9190673828125,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 800.00006103515625,
+			"y" : 473.1710205078125
+		},
+		"TextureDir" : "fmodlogo.png"
+	},
+	"Object3" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"ObjectID" : 3,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 1800.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 800.00006103515625,
+			"y" : 600.0
+		},
+		"TextureDir" : "thumbup.png"
 	},
 	"WorldSize" : 
 	{
