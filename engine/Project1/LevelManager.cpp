@@ -86,16 +86,9 @@ void LevelManager::LoadLevel(std::string  path)
 		CAMERA->cameraPos.x = file.mRoot.get("DefalutCamera", false).get("EYE", false).get("x", false).asFloat();
 		CAMERA->cameraPos.y = file.mRoot.get("DefalutCamera", false).get("EYE", false).get("y", false).asFloat();
 		CAMERA->cameraPos.z = file.mRoot.get("DefalutCamera", false).get("EYE", false).get("z", false).asFloat();
-		CAMERA->cameraTarget.x = file.mRoot.get("DefalutCamera", false).get("TARGET", false).get("x", false).asFloat();
-		CAMERA->cameraTarget.y = file.mRoot.get("DefalutCamera", false).get("TARGET", false).get("y", false).asFloat();
-		CAMERA->cameraTarget.z = file.mRoot.get("DefalutCamera", false).get("TARGET", false).get("z", false).asFloat();
-		CAMERA->cameraUp.x = file.mRoot.get("DefalutCamera", false).get("UP", false).get("x", false).asFloat();
-		CAMERA->cameraUp.y = file.mRoot.get("DefalutCamera", false).get("UP", false).get("y", false).asFloat();
-		CAMERA->cameraUp.z = file.mRoot.get("DefalutCamera", false).get("UP", false).get("z", false).asFloat();
 		float mass = file.mRoot.get(object + to_string(i), false).get("Mass", false).asFloat();
 		
-		STATEMANAGER->v_StatesLists[STATEMANAGER->i_CurrentStateNumber]->WorldSizeX = file.mRoot.get("WorldSize", false).get("x", false).asInt();
-		STATEMANAGER->v_StatesLists[STATEMANAGER->i_CurrentStateNumber]->WorldSizeY = file.mRoot.get("WorldSize", false).get("y", false).asInt();
+
 		
 		
 		for (unsigned int indexC = 0; ;indexC++) {
