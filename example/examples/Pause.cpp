@@ -53,7 +53,7 @@ bool HowTOplay = false;
  void(*pausefunction[5])(void) = { Backgame,ReStartgame,LevelSelect ,Quitgame,HowToPlay };
 void ReStartgame(void)
 {
-	STATEMANAGER->ReplayPosition.clear();
+	
 	STATEMANAGER->b_IsReplay = false;
 	STATEMANAGER->b_Relplay = false;
 	STATEMANAGER->b_IsPauseFirst = true;
@@ -66,7 +66,7 @@ void ReStartgame(void)
 
 void LevelSelect(void)
 {
-	STATEMANAGER->ReplayPosition.clear();
+
 	STATEMANAGER->b_IsReplay = false;
 	STATEMANAGER->b_Relplay = false;
 	STATEMANAGER->b_IsPauseFirst = true;
