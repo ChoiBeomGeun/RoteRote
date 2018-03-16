@@ -131,7 +131,7 @@ void Level1::Init()
 	STATEMANAGER->b_IsReplayStart = true;
 	STATEMANAGER->b_IsReplay = false;
 	STATEMANAGER->b_Relplay = false;
-	STATEMANAGER->ReplayPosition.clear();
+
 	STATEMANAGER->AniSave.clear();
 
 
@@ -412,7 +412,7 @@ void CheatKeyFunctions(void) {
 
 		CAMERA->cameraUp.x = 0;
 		CAMERA->cameraUp.y = 1;
-		STATEMANAGER->ReplayPosition.clear();
+	
 		STATEMANAGER->AniSave.clear();
 		std::string level = "level";
 		level += std::to_string(++STATEMANAGER->i_LevelSelect);
