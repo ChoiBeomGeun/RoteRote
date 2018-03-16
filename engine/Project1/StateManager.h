@@ -67,8 +67,6 @@ namespace TE {
 		bool ReplayInit = true;
 		glm::vec3 InitplayerPos{ 0,0,0 };
 		std::queue<ReplayerInfo> Replayerinfo;
-		std::forward_list <std::pair<glm::vec3, bool>>  ReplayPosition;
-		std::vector <Object>  ReplayPlayer;
 		std::vector <std::pair<float, float>> AniSave;
 		std::vector<BaseStage*> v_StatesLists;
 		std::string Loadtolevelname;
