@@ -34,6 +34,7 @@ public:
 
 	void Selection_plus(void);
 	void Selection_minus(void);
+	void Selection_Text(void);
 private:
 
 	bool LeftRotate;
@@ -41,8 +42,13 @@ private:
 
 	bool IsRotating;
 	bool IsSelected;
+	bool IsTextChanged;
 
 	int select_index;
+	unsigned int Menu_Start;
+	unsigned int Menu_HowToPlay;
+	unsigned int Menu_Quit;
+	unsigned int Menu_Option;
 
 	MenuList Selection;
 

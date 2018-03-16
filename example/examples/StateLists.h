@@ -19,10 +19,7 @@ namespace StatesList {
 	enum  StateList {
 
 		Splash = 0,
-		Menu, Option, LevelSelect, Level1, Pause, Replay,MapEditor
-
-
-
+		Menu, Option, LevelSelect, Level1, Pause, Replay, MapEditor
 
 	};
 

@@ -21,7 +21,7 @@ JUMP SHOULDN'T WORK WHILE PLAYER IS ON AIR
 #include "Graphics.h"
 #include <iostream>
 #define SPEED 200.f
-#define MAXSPEED 500.f
+#define MAXSPEED 300.f
 #define WALLJUMP 100.f
 #define WALLATTACH 10.f
 using namespace TE;
@@ -79,7 +79,7 @@ void PlayerController::Update(float dt)
 
 void PlayerController::Movement(float dt)
 {
-	//std::cout << "GroundType: " << this->GetOwner()->GetComponent<Body>()->GroundType << '\n';
+	////std::cout << "GroundType: " << this->GetOwner()->GetComponent<Body>()->GroundType << '\n';
 
 	WallAttached = false;
 
@@ -95,7 +95,7 @@ void PlayerController::Movement(float dt)
 	if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Air)
 	{
 		OffFromWall = false;
-		//std::cout << "OffFromWall = False" << '\n';
+		////std::cout << "OffFromWall = False" << '\n';
 	}
 	
 	/* Make sure player is able to jump on ground while attached on wall */
@@ -108,8 +108,8 @@ void PlayerController::Movement(float dt)
 	/*
 	else if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Left || this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Right)
 	{
-		std::cout << "Wall" << '\n';
-		std::cout << JumpEnough << '\n';
+		//std::cout << "Wall" << '\n';
+		//std::cout << JumpEnough << '\n';
 	}
 	*/
 
@@ -180,7 +180,7 @@ void PlayerController::Movement(float dt)
 			{
 				OffFromWall = true;
 
-				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -SPEED;
+				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -SPEED * dt;
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump;
 			}
 		}
@@ -208,7 +208,7 @@ void PlayerController::Movement(float dt)
 			{
 				OffFromWall = true;
 
-				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = SPEED;
+				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = SPEED * dt;
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump;
 			}
 		}
@@ -231,7 +231,7 @@ void PlayerController::Movement(float dt)
 		if (this->GetOwner()->GetComponent<Body>()->GroundType != Grounded::Ground)
 		{
 			
-			//std::cout << "-50" << '\n';
+			////std::cout << "-50" << '\n';
 			this->GetOwner()->GetComponent<Body>()->pm_velocity.y -= 50.f;
 			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y < -FallSpeedMax)
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -FallSpeedMax;
@@ -240,7 +240,7 @@ void PlayerController::Movement(float dt)
 
 		if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Air && !JumpTriggered && !WallJumpTriggered)
 		{
-			std::cout << "-100" << '\n';
+			////std::cout << "-100" << '\n';
 			this->GetOwner()->GetComponent<Body>()->pm_velocity.y -= 50.f;
 			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y < -FallSpeedMax)
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -FallSpeedMax;
@@ -612,13 +612,13 @@ void PlayerController::MaxJump()
 {
 	if (delta_pos >= maxAltitude)
 	{
-		//std::cout << "JumpEnough True" << '\n';
+		////std::cout << "JumpEnough True" << '\n';
 		JumpEnough = true;
 	}
 	else if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
 	{
-		//std::cout << "JumpEnough False" << '\n';
-		//std::cout << "JumpTriggered False" << '\n';
+		////std::cout << "JumpEnough False" << '\n';
+		////std::cout << "JumpTriggered False" << '\n';
 		JumpEnough = false;
 		JumpTriggered = false;
 	}
