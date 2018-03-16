@@ -126,7 +126,7 @@ void TE::LoseconditionLogic::Update(float dt)
 					FACTORY->GetPlayer()->GetComponent<Sprite>()->ChangeColor(255, 0, 0, 255);
 					FACTORY->GetPlayer()->GetComponent<Body>()->pm_velocity = glm::vec3(0);
 					APP->b_Lose = true;
-					STATEMANAGER->ReplayPosition.clear();
+			
 					//STATEMANAGER->ReplayPosition.clear();
 					CAMERA->IsCameraShaking = true;
 					STATEMANAGER->Restart();
