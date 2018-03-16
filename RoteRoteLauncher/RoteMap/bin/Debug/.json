@@ -1,0 +1,188 @@
+{
+  "Level": "Levelname",
+  "NumberOfObjects": 6,
+
+  "Object1": {
+    "ObjectID": 1,
+    "GravityOn": true,
+    "Mass": 1,
+    "Position": {
+      "x": -845,
+      "y": 531,
+      "z": 0
+    },
+    "Rotation": 0,
+    "Scale": {
+      "x": 100,
+      "y": 50,
+      "z": 0
+    },
+    "TextureDir": "spritestrip.png",
+    "DefaultTrigger180ornot": false,
+    "Components": [
+      "TRANSFORM",
+      "SPRITE",
+      "BODY",
+      "CONTROLLER",
+      "ANIMATION"
+    ],
+    "HavingComponentsNumbers": 5,
+    "ObjectType": "Player"
+  },
+
+  "Object2": {
+    "ObjectID": 2,
+    "GravityOn": false,
+    "Mass": 0,
+    "Position": {
+      "x": -845,
+      "y": 531,
+      "z": 0
+    },
+    "Rotation": 0,
+    "Scale": {
+      "x": 100,
+      "y": 50,
+      "z": 0
+    },
+    "TextureDir": "wall.png",
+    "DefaultTrigger180ornot": false,
+    "Components": [
+      "TRANSFORM",
+      "SPRITE",
+      "BODY"
+    ],
+    "HavingComponentsNumbers": 3,
+    "ObjectType": "Wall"
+  },
+
+  "Object3": {
+    "ObjectID": 3,
+    "GravityOn": true,
+    "Mass": 0,
+    "Position": {
+      "x": -845,
+      "y": 531,
+      "z": 0
+    },
+    "Rotation": 0,
+    "Scale": {
+      "x": 100,
+      "y": 50,
+      "z": 0
+    },
+    "TextureDir": "1.png",
+    "DefaultTrigger180ornot": false,
+    "Components": [
+      "TRANSFORM",
+      "SPRITE"
+    ],
+    "HavingComponentsNumbers": 2,
+    "ObjectType": "Button"
+  },
+
+  "Object4": {
+    "ObjectID": 4,
+    "GravityOn": false,
+    "Mass": 0,
+    "Position": {
+      "x": -845,
+      "y": 531,
+      "z": 0
+    },
+    "Rotation": 0,
+    "Scale": {
+      "x": 100,
+      "y": 50,
+      "z": 0
+    },
+    "TextureDir": "hazard.png",
+    "DefaultTrigger180ornot": false,
+    "Components": [
+      "TRANSFORM",
+      "SPRITE",
+      "BODY"
+    ],
+    "HavingComponentsNumbers": 3,
+    "ObjectType": "Hazard"
+  },
+
+  "Object5": {
+    "ObjectID": 5,
+    "GravityOn": false,
+    "Mass": 0,
+    "Position": {
+      "x": -845,
+      "y": 531,
+      "z": 0
+    },
+    "Rotation": 0,
+    "Scale": {
+      "x": 100,
+      "y": 50,
+      "z": 0
+    },
+    "TextureDir": "90button.png",
+    "DefaultTrigger180ornot": false,
+    "Components": [
+      "TRANSFORM",
+      "SPRITE",
+      "BODY",
+      "TRIGGER"
+    ],
+    "HavingComponentsNumbers": 4,
+    "ObjectType": "Trigger90"
+  },
+
+  "Object6": {
+    "ObjectID": 6,
+    "GravityOn": false,
+    "Mass": 0,
+    "Position": {
+      "x": -845,
+      "y": 531,
+      "z": 0
+    },
+    "Rotation": 0,
+    "Scale": {
+      "x": 100,
+      "y": 50,
+      "z": 0
+    },
+    "TextureDir": "180button.png",
+    "DefaultTrigger180ornot": false,
+    "Components": [
+      "TRANSFORM",
+      "SPRITE",
+      "BODY",
+      "TRIGGER"
+    ],
+    "HavingComponentsNumbers": 4,
+    "ObjectType": "Trigger180"
+  },
+
+  "Object7": {
+    "ObjectID": 7,
+    "GravityOn": false,
+    "Mass": 0,
+    "Position": {
+      "x": -845,
+      "y": 531,
+      "z": 0
+    },
+    "Rotation": 0,
+    "Scale": {
+      "x": 100,
+      "y": 50,
+      "z": 0
+    },
+    "TextureDir": "clearzone2.png",
+    "DefaultTrigger180ornot": false,
+    "Components": [
+      "TRANSFORM",
+      "SPRITE"
+    ],
+    "HavingComponentsNumbers": 2,
+    "ObjectType": "Clearzone"
+  }
+}

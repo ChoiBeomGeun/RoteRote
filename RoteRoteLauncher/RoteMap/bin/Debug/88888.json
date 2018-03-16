@@ -1,0 +1,58 @@
+{
+  "Level": "Levelname",
+  "NumberOfObjects": 1,
+
+  "Object1": {
+    "ObjectID": 1,
+    "GravityOn": true,
+    "Mass": 1,
+    "Position": {
+      "x": -845,
+      "y": 511,
+      "z": 0
+    },
+    "Rotation": 0,
+    "Scale": {
+      "x": 100,
+      "y": 50,
+      "z": 0
+    },
+    "TextureDir": "spritestrip.png",
+    "DefaultTrigger180ornot": false,
+    "Components": [
+      "TRANSFORM",
+      "SPRITE",
+      "BODY",
+      "CONTROLLER",
+      "ANIMATION"
+    ],
+    "HavingComponentsNumbers": 5,
+    "ObjectType": "Player"
+  },
+
+  "Object2": {
+    "ObjectID": 2,
+    "GravityOn": false,
+    "Mass": 0,
+    "Position": {
+      "x": -845,
+      "y": 511,
+      "z": 0
+    },
+    "Rotation": 0,
+    "Scale": {
+      "x": 100,
+      "y": 50,
+      "z": 0
+    },
+    "TextureDir": "wall.png",
+    "DefaultTrigger180ornot": false,
+    "Components": [
+      "TRANSFORM",
+      "SPRITE",
+      "BODY"
+    ],
+    "HavingComponentsNumbers": 3,
+    "ObjectType": "Wall"
+  }
+}

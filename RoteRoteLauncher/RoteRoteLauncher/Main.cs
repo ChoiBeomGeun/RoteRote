@@ -9,9 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
-using DesignModePanel;
-using RoteRoteMapEditor;
-using RoteRoteMapView;
+using RoteMapView;
+
 namespace RoteRoteLauncherView
 {
     public partial class Main : Form
@@ -81,7 +80,7 @@ namespace RoteRoteLauncherView
 
         private void button2_Click(object sender, EventArgs e)
         {
-            RoteRoteMapView.MainView mainView = new RoteRoteMapView.MainView();
+            RoteMapView.MainView mainView = new RoteMapView.MainView();
             mainView.ShowDialog();
         }
     }

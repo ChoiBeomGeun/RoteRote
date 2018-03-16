@@ -1,0 +1,23 @@
+{
+	"ArchtypeName" : "Trigger180",
+	"DefaultGravity" : true,
+	"DefaultMass" : 0.0,
+	"DefaultPosition" : 
+	{
+		"x" : 0.0,
+		"y" : 0.0,
+		"z" : 0.0
+	},
+	"DefaultRotation" : 0.0,
+	"DefaultScale" : 
+	{
+		"x" : 50.0,
+		"y" : 50.0,
+		"z" : 0.0
+	},
+	"DefaultTexture" : "180button.png",
+	"DefaultTrigger180ornot" : true,
+	"HavingComponents" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
+	"HavingComponentsNumbers" : 4,
+	"ObjectStyle" : "Trigger180"
+}

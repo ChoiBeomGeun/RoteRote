@@ -98,9 +98,9 @@
       <Project>{d34ecae4-3092-43ce-9c27-88dfe82c4810}</Project>
       <Name>DesignModePanel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RoteRoteMapEditor\RoteRoteMapEditor.csproj">
+    <ProjectReference Include="..\RoteMap\RoteMapEditorView.csproj">
       <Project>{039c2c31-3b06-4741-ba49-714cc4ae2f41}</Project>
-      <Name>RoteRoteMapEditor</Name>
+      <Name>RoteMapEditorView</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

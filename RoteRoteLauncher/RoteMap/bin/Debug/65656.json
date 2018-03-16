@@ -1,0 +1,79 @@
+{
+  "Object1": {
+    "GravityOn": false,
+    "Mass": 0,
+    "Position": {
+      "x": 213,
+      "y": 121,
+      "z": 0
+    },
+    "Rotation": 0,
+    "Scale": {
+      "x": 100,
+      "y": 50,
+      "z": 0
+    },
+    "TextureDir": null,
+    "DefaultTrigger180ornot": false,
+    "Components": [
+      "TRANSFORM",
+      "SPRITE",
+      "BODY",
+      "CONTROLLER",
+      "ANIMATION"
+    ],
+    "HavingComponentsNumbers": 5,
+    "ObjectStyle": "Player"
+  },
+
+  "Object2": {
+    "GravityOn": false,
+    "Mass": 0,
+    "Position": {
+      "x": 196,
+      "y": 217,
+      "z": 0
+    },
+    "Rotation": 0,
+    "Scale": {
+      "x": 100,
+      "y": 50,
+      "z": 0
+    },
+    "TextureDir": null,
+    "DefaultTrigger180ornot": false,
+    "Components": [
+      "TRANSFORM",
+      "SPRITE",
+      "BODY"
+    ],
+    "HavingComponentsNumbers": 3,
+    "ObjectStyle": "Wall"
+  },
+
+  "Object3": {
+    "GravityOn": false,
+    "Mass": 0,
+    "Position": {
+      "x": 498,
+      "y": 171,
+      "z": 0
+    },
+    "Rotation": 0,
+    "Scale": {
+      "x": 100,
+      "y": 50,
+      "z": 0
+    },
+    "TextureDir": null,
+    "DefaultTrigger180ornot": false,
+    "Components": [
+      "TRANSFORM",
+      "SPRITE",
+      "BODY",
+      "TRIGGER"
+    ],
+    "HavingComponentsNumbers": 4,
+    "ObjectStyle": "Trigger90"
+  }
+}

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-
 namespace ControlDesignMode
 {
     /// <summary>
@@ -30,7 +29,6 @@ namespace ControlDesignMode
     /// </summary>
     internal class SelectedControlViewport
     {
-        
         /// <summary>
         /// 최소 컨트롤 크기
         /// </summary>
@@ -53,12 +51,9 @@ namespace ControlDesignMode
 
         public void Draw(Graphics g, Control selectedObject)
         {
-           
             //define the border to be drawn, it will be offset by DRAG_HANDLE_SIZE / 2
             //around the control, so when the drag handles are drawn they will be seem
             //connected in the middle.
-
-
             Rectangle border = new Rectangle(
                 new Point(selectedObject.Location.X - DRAG_HANDLE_SIZE / 2,
                     selectedObject.Location.Y - DRAG_HANDLE_SIZE / 2),
