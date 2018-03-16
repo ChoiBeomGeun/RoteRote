@@ -111,28 +111,26 @@ void Engine::GameLoop()
 	while (GameIsRunning)
 	{
 		float frametime = Timer::GetDelta();
-		pm_accumulator += frametime;
 
-		HowMuchTimePassedInGame += dt;
-		for (unsigned int i = 0; i <8; ++i) {
+
+
+		if (frametime >= 0.25f)
+			frametime = 0.25;
+
+		if (frametime <= 0.016f)
+			frametime = 0.016f;
+		for (unsigned int i = 0; i <SystemList.size(); ++i) {
 		
+
+			
+
+
+
 			SystemList[i]->Update(frametime);
 			if (!GameIsRunning)
 				break;
 		}
-		if (pm_accumulator > pm_accumulock)
-			pm_accumulator = pm_accumulock;
 
-		while (pm_accumulator >= pm_fixeddt)
-		{
-			pm_accumulator -= pm_fixeddt;
-			PHYSICS->Update(pm_fixeddt);
-		}
-
-
-		const float t = pm_accumulator / pm_fixeddt;
-
-		GRAPHICS->Update(pm_accumulator);
 
 	}
 	

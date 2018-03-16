@@ -210,6 +210,8 @@ void Application::Initialize()
 	if (_isfull)
 		SDL_SetWindowFullscreen(pWnd, SDL_WINDOW_FULLSCREEN);
 
+
+	SDL_GL_SetSwapInterval(1);
 #ifndef _DEBUG
 	int32_t cursorData[2] = { 0, 0 };
 	cursor = SDL_CreateCursor((Uint8 *)cursorData, (Uint8 *)cursorData, 8, 8, 4, 4);
