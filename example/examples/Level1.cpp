@@ -78,7 +78,6 @@ Level1::~Level1()
 
 void Level1::Load()
 {
-
 	INGAMELOGIC->InGameInit();
 }
 
@@ -143,7 +142,8 @@ void Level1::Init()
 	HUDLevelname->GetComponent<Sprite>()->texture_load(levelname);
 	HUDLevelname->objectstyle = Objectstyle::Button;
 
-	
+	//PARTICLEMANAGER->LoadEmitter("particle1.json");
+
 	///////////// MovingObject TestCode 
 	///////////// If you want to test Moving Object, delete below comment
 	//Movingtest = FACTORY->CreateArchetype(ReadingArchetype("Wall.json"));

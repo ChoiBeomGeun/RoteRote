@@ -51,10 +51,12 @@ namespace TE {
 		~ParticleManager(void);
 
 		void Initialize(void) override;
-
+		Object * LoadEmitter(Object* pobject, std::string  path);
+		void SaveEmitter(std::string  path);
 
 		void Update(float dt) override;
 
+		
 
 		void AddEmitter(Emitter* pEmitter);
 		void DeleteEmitter(std::vector <Emitter*>::iterator emitterIt);

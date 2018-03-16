@@ -129,9 +129,9 @@ void Graphics::Initialize(void)
 	vertexData[5].setUV(0.0f, 1.0f); // 0, 1 // flip 1, 1
 
 
-									 //create opengl buffer object
+	//create opengl buffer object
 
-									 // tell opengl to bind our vertex buffer object
+	// tell opengl to bind our vertex buffer object
 	glBindBuffer(GL_ARRAY_BUFFER, buffer);
 	// upload the data to the GPU
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);

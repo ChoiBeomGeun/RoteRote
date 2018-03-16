@@ -16,20 +16,12 @@ namespace TE {
 	}
 	Emitter::~Emitter()
 	{
-		//std::cout << "Emitter DEEEEEELEETTTE" << std::endl;
 		delete pParticles;
 		pParticles = NULL;
 		PARTICLEMANAGER->m_EmitterList.erase(std::find(PARTICLEMANAGER->m_EmitterList.begin(), PARTICLEMANAGER->m_EmitterList.end(), this));
-
-		//GRAPHICS->EmitterList.erase(std::find(GRAPHICS->EmitterList.begin(), GRAPHICS->EmitterList.end(), this));
-
 	}
 	void Emitter::Initialize()
 	{
-		/*auto iter = PARTICLEMANAGER->m_EmitterList.begin();
-		for (; iter!= PARTICLEMANAGER->m_EmitterList.end(); ++iter)
-		{*/
-
 		if (PARTICLEMANAGER->m_EmitterList.empty())
 		{
 			pParticles = NULL;
@@ -88,25 +80,16 @@ namespace TE {
 		lifeTime = plifeTime;
 		type = ptype;
 	}
-
-
-
-
-
+	
 	void defaultParticleUpdate(Particle & particle, float deltaTime)
 	{
-		//particle.position += particle.velocity * deltaTime;
-		//particle.position.z = 0.f;
 		particle.scale -= particle.scale *deltaTime;
 	}
 
 	void trailParticleUpdate(Particle & particle, float deltaTime)
 	{
-		//particle.position += particle.velocity * deltaTime;
 		particle.pos.z = 0.f;
 		particle.scale -= particle.scale *deltaTime;
-		//particle.color = 255;
 	}
-
 
 }

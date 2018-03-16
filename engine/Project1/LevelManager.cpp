@@ -68,9 +68,13 @@ void LevelManager::LoadLevel(std::string  path)
 
 	for (int i = 1; i< file.mRoot.get("NumberOfObjects", false).asInt() + 1; i++)
 	{
+		std::string Objectstyle = file.mRoot.get(object + to_string(i), false).get("ObjectType", false).asString();
+
+
 		Object *tempObject = FACTORY->CreateEmptyObject();
 	//	int objectID = file.mRoot.get(object + to_string(i), false).get("ObjectID", false).asInt();
- 		std::string Objectstyle = file.mRoot.get(object + to_string(i), false).get("ObjectType", false).asString();
+ 		
+
 		bool GravityOn = file.mRoot.get(object + to_string(i), false).get("GravityOn", false).asBool();
 		float Xpos = file.mRoot.get(object + to_string(i), false).get("Position", false).get("x", false).asFloat();
 		float Ypos = file.mRoot.get(object + to_string(i), false).get("Position", false).get("y", false).asFloat();
@@ -168,7 +172,9 @@ void LevelManager::LoadLevel(std::string  path)
 					|| STATEMANAGER->Loadtolevelname == "level7.json" || STATEMANAGER->Loadtolevelname == "level8.json" || STATEMANAGER->Loadtolevelname == "level9.json"
 					|| STATEMANAGER->Loadtolevelname == "level10.json" || STATEMANAGER->Loadtolevelname == "level11.json" || STATEMANAGER->Loadtolevelname == "level12.json")
 				{
-					tempObject->AddComponent<Emitter>();
+					tempObject = PARTICLEMANAGER->LoadEmitter(tempObject,"particle1.json");
+
+					/*tempObject->AddComponent<Emitter>();
 					tempObject->GetComponent<Sprite>()->texture_load("test.png");
 					tempObject->GetComponent<Transform>()->position = tempObject->GetComponent<Transform>()->position;
 					tempObject->GetComponent<Emitter>()->SetEmitter(tempObject->GetComponent<Transform>()->position, glm::vec3(0.0f), 0, 400, 20.f, ET_TRAIL);
@@ -176,7 +182,9 @@ void LevelManager::LoadLevel(std::string  path)
 					tempObject->GetComponent<Emitter>()->CreateParticle();
 					tempObject->GetComponent<Transform>()->scale = glm::vec3(10.0f);
 
-					PARTICLEMANAGER->AddEmitter(tempObject->GetComponent<Emitter>());
+					PARTICLEMANAGER->AddEmitter(tempObject->GetComponent<Emitter>());*/
+
+					
 				}
 				else if (STATEMANAGER->Loadtolevelname == "Menu.json")
 				{

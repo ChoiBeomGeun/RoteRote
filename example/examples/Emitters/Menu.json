@@ -1,0 +1,29 @@
+{
+	"Level" : 1,
+	"NumberOfEmitter" : 1,
+	"NumberOfComponents" : 3,
+	"Emitter1" : 
+	{		
+		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
+		"EmitterID" : 1,
+		"EmitterType" : "ET_EXPLOSION",
+		"ObjectType" : "Particle",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Vel" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"TextureDir" : "test.png",
+		"EmitterSize" : 0,
+		"EmitterID" : 0,
+		"EmitterLifeTime" : 20,
+		"Emittercapacity" : 400
+	}
+}
