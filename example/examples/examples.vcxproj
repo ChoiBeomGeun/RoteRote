@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\Microsoft.CppCoreCheck.14.0.24210.1\build\native\Microsoft.CppCoreCheck.props" Condition="Exists('..\..\packages\Microsoft.CppCoreCheck.14.0.24210.1\build\native\Microsoft.CppCoreCheck.props')" />
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8486F910-0077-4BDF-B654-1496D8A5F604}</ProjectGuid>
+    <RootNamespace>examples</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)..\..\output\$(ProjectName)\$(Configuration)_$(Platform)\</OutDir>
+    <IntDir>$(ProjectDir)..\..\temp\$(SolutionName)\$(Configuration)_$(Platform)\$(ProjectName)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)..\..\output\$(ProjectName)\$(Configuration)_$(Platform)\</OutDir>
+    <IntDir>$(ProjectDir)..\..\temp\$(SolutionName)\$(Configuration)_$(Platform)\$(ProjectName)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(ProjectDir)..\..\output\$(ProjectName)\$(Configuration)_$(Platform)\</OutDir>
+    <IntDir>$(ProjectDir)..\..\temp\$(SolutionName)\$(Configuration)_$(Platform)\$(ProjectName)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(ProjectDir)..\..\output\$(ProjectName)\$(Configuration)_$(Platform)\</OutDir>
+    <IntDir>$(ProjectDir)..\..\temp\$(SolutionName)\$(Configuration)_$(Platform)\$(ProjectName)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)\external\fmod\inc;$(SolutionDir)\external\SDL2\include\;$(SolutionDir)\external\soil\src;$(SolutionDir)\external\glew\include\GL;$(SolutionDir)\engine\Project1;$(SolutionDir)\external\;C:\Users\PC\Desktop\vld-2.5.1\vld-2.5.1\src</AdditionalIncludeDirectories>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <WarningVersion>
+      </WarningVersion>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MinimalRebuild>false</MinimalRebuild>
+      <AdditionalOptions>/Ylsymbol %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>4099</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)\external\fmod\lib;$(SolutionDir)\external\glfw\lib-vc2010-32;$(SolutionDir)\engine\external\tuEngine\lib\$(PlatformTarget)\;$(SolutionDir)\external\soil\lib\$(PlatformTarget)\;$(SolutionDir)external\gl3w\lib;$(SolutionDir)\external\glew\lib\Release\$(Platform)\;$(SolutionDir)\external\SDL2\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SOIL.lib;SDL2.lib;SDL2main.lib;Project1.lib;glew32.lib;opengl32.lib;gl3w.lib;gl3w_d.lib;fmodex64_vc.lib;fmodex_vc.lib;fmodex_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalOptions>/IGNORE:4099 /IGNORE:4075 /IGNORE:4098 %(AdditionalOptions)</AdditionalOptions>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
+      <LinkStatus>true</LinkStatus>
+    </Link>
+    <PreBuildEvent />
+    <PreBuildEvent>
+      <Command>copy /y /b "$(SolutionDir)external\SDL2\lib\$(PlatformTarget)\SDL2.dll" "$(TargetDir)"
+copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(TargetDir)"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)\external\fmod\inc;$(SolutionDir)\external\SDL2\include\;$(SolutionDir)\external\soil\src;$(SolutionDir)\external\glew\include\GL;$(SolutionDir)\engine\Project1;$(SolutionDir)\external\;C:\Users\PC\Desktop\vld-2.5.1\vld-2.5.1\src</AdditionalIncludeDirectories>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <WarningVersion>
+      </WarningVersion>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MinimalRebuild>false</MinimalRebuild>
+      <AdditionalOptions>/Ylsymbol %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>4099</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)\external\fmod\lib;$(SolutionDir)\external\glfw\lib-vc2010-32;$(SolutionDir)\engine\external\tuEngine\lib\$(PlatformTarget)\;$(SolutionDir)\external\soil\lib\$(PlatformTarget)\;$(SolutionDir)external\gl3w\lib;$(SolutionDir)\external\glew\lib\Release\$(Platform)\;$(SolutionDir)\external\SDL2\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SOIL.lib;SDL2.lib;SDL2main.lib;Project1.lib;glew32.lib;opengl32.lib;gl3w.lib;gl3w_d.lib;fmodex64_vc.lib;fmodex_vc.lib;fmodex_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalOptions>/IGNORE:4099 /IGNORE:4075 /IGNORE:4098 %(AdditionalOptions)</AdditionalOptions>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
+      <LinkStatus>true</LinkStatus>
+    </Link>
+    <PreBuildEvent />
+    <PreBuildEvent>
+      <Command>copy /y /b "$(SolutionDir)external\SDL2\lib\$(PlatformTarget)\SDL2.dll" "$(TargetDir)"
+copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(TargetDir)"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)\external\fmod\inc;$(SolutionDir)\external\SDL2\include\;$(SolutionDir)\external\soil\src;$(SolutionDir)\external\glew\include\GL;$(SolutionDir)\engine\Project1;$(SolutionDir)\external\;C:\Users\PC\Desktop\vld-2.5.1\vld-2.5.1\src</AdditionalIncludeDirectories>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <WarningVersion>
+      </WarningVersion>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <AdditionalOptions>/Ylsymbol %(AdditionalOptions)</AdditionalOptions>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4099</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)\external\fmod\lib;$(SolutionDir)\external\glfw\lib-vc2010-32;$(SolutionDir)\engine\external\tuEngine\lib\$(PlatformTarget)\;$(SolutionDir)\external\soil\lib\$(PlatformTarget)\;$(SolutionDir)external\gl3w\lib;$(SolutionDir)\external\glew\lib\Release\$(Platform)\;$(SolutionDir)\external\SDL2\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SOIL.lib;SDL2.lib;SDL2main.lib;Project1.lib;glew32.lib;opengl32.lib;gl3w.lib;gl3w_d.lib;fmodex64_vc.lib;fmodex_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalOptions>/IGNORE:4099 /IGNORE:4075 /IGNORE:4098 %(AdditionalOptions)</AdditionalOptions>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
+      <LinkStatus>true</LinkStatus>
+    </Link>
+    <PreBuildEvent />
+    <PreBuildEvent>
+      <Command>copy /y /b "$(SolutionDir)external\SDL2\lib\$(PlatformTarget)\SDL2.dll" "$(TargetDir)"
+copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(TargetDir)"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)\external\fmod\inc;$(SolutionDir)\external\SDL2\include\;$(SolutionDir)\external\soil\src;$(SolutionDir)\external\glew\include\GL;$(SolutionDir)\engine\Project1;$(SolutionDir)\external\;C:\Users\PC\Desktop\vld-2.5.1\vld-2.5.1\src</AdditionalIncludeDirectories>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <WarningVersion>
+      </WarningVersion>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <AdditionalOptions>/Ylsymbol %(AdditionalOptions)</AdditionalOptions>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4099</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)\external\fmod\lib;$(SolutionDir)\external\glfw\lib-vc2010-32;$(SolutionDir)\engine\external\tuEngine\lib\$(PlatformTarget)\;$(SolutionDir)\external\soil\lib\$(PlatformTarget)\;$(SolutionDir)external\gl3w\lib;$(SolutionDir)\external\glew\lib\Release\$(Platform)\;$(SolutionDir)\external\SDL2\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SOIL.lib;SDL2.lib;SDL2main.lib;Project1.lib;glew32.lib;opengl32.lib;gl3w.lib;gl3w_d.lib;fmodex64_vc.lib;fmodex_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalOptions>/IGNORE:4099 /IGNORE:4075 /IGNORE:4098 %(AdditionalOptions)</AdditionalOptions>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
+      <LinkStatus>true</LinkStatus>
+    </Link>
+    <PreBuildEvent />
+    <PreBuildEvent>
+      <Command>copy /y /b "$(SolutionDir)external\SDL2\lib\$(PlatformTarget)\SDL2.dll" "$(TargetDir)"
+copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(TargetDir)"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\engine\Project1\Project1.vcxproj">
+      <Project>{be048d66-55c3-4ece-8931-49431eb0ac06}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AutoMoving.cpp" />
+    <ClCompile Include="Clearzone.cpp" />
+    <ClCompile Include="EditorData.cpp" />
+    <ClCompile Include="InGameLogic.cpp" />
+    <ClCompile Include="Level1.cpp" />
+    <ClCompile Include="LevelSelect.cpp" />
+    <ClCompile Include="logging.cpp" />
+    <ClCompile Include="LoseconditionLogic.cpp" />
+    <ClCompile Include="MapEditor.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Option.cpp" />
+    <ClCompile Include="Pause.cpp" />
+    <ClCompile Include="ReplayLogic.cpp" />
+    <ClCompile Include="splash.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlayerController.cpp" />
+    <ClCompile Include="Trigger.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Automoving.h" />
+    <ClInclude Include="Clearzone.h" />
+    <ClInclude Include="EditorData.h" />
+    <ClInclude Include="GameLogicSystem.h" />
+    <ClInclude Include="GameSystem.h" />
+    <ClInclude Include="InGameLogic.h" />
+    <ClInclude Include="Level1.h" />
+    <ClInclude Include="LevelSelect.h" />
+    <ClInclude Include="logging.h" />
+    <ClInclude Include="LoseconditionLogic.h" />
+    <ClInclude Include="MapEditor.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="MenuList.h" />
+    <ClInclude Include="Option.h" />
+    <ClInclude Include="Pause.h" />
+    <ClInclude Include="ReplayLogic.h" />
+    <ClInclude Include="splash.h" />
+    <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="StateLists.h" />
+    <ClInclude Include="Trigger.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets" Condition="Exists('..\..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets')" />
+    <Import Project="..\..\packages\Microsoft.CppCoreCheck.14.0.24210.1\build\native\Microsoft.CppCoreCheck.targets" Condition="Exists('..\..\packages\Microsoft.CppCoreCheck.14.0.24210.1\build\native\Microsoft.CppCoreCheck.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.CppCoreCheck.14.0.24210.1\build\native\Microsoft.CppCoreCheck.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CppCoreCheck.14.0.24210.1\build\native\Microsoft.CppCoreCheck.props'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.CppCoreCheck.14.0.24210.1\build\native\Microsoft.CppCoreCheck.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CppCoreCheck.14.0.24210.1\build\native\Microsoft.CppCoreCheck.targets'))" />
+  </Target>
+</Project>
