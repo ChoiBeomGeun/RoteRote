@@ -158,8 +158,7 @@ void Application::Initialize()
 
 	glClearColor(1.f, 1.f, 1.f, 1.f);
 
-	glEnable(GL_ALPHA);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA);
+	
 
 	if (_resolution == Resolution::_1280X960)
 	{

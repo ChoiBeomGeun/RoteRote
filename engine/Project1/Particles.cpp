@@ -33,6 +33,7 @@ namespace TE {
 			capacity = 0;
 			emitterID = 0;
 			lifeTime = 0;
+			isBlened = true;
 		}
 		else
 			return;
@@ -70,6 +71,7 @@ namespace TE {
 	{
 		m_textureID = textureID;
 	}
+
 
 	void Emitter::SetEmitter(glm::vec3 EmitterPos, glm::vec3 EmitterVel, int pSize, int pCapacity, int plifeTime, EmitterType ptype)
 	{

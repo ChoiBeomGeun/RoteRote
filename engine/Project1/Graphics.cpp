@@ -159,6 +159,8 @@ void Graphics::Initialize(void)
 	time = 0.f;
 	splashtime = 0.f;
 	//   ImGuiIO& io = ImGui::GetIO();
+	/*glEnable(GL_ALPHA);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA);*/
 }
 
 
@@ -244,6 +246,8 @@ void Graphics::Update(float dt)
 		it != SpriteList.end(); ++it) {
 		glBindTexture(GL_TEXTURE_2D, (*it)->TextureId);
 		animationSetting();
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 		_basicProgram.use();
 
 		if ((*it)->isPerspective)
@@ -334,7 +338,14 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 	if ((*iter)->pOwner->HasComponent<Emitter>())
 	{
 		_particleProgram.use();
-
+		glEnable(GL_BLEND);
+		if((*iter)->pOwner->GetComponent<Emitter>()->isBlened)
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		else if(!(*iter)->pOwner->GetComponent<Emitter>()->isBlened)
+		{
+			glDepthMask(GL_TRUE);
+			glBlendFunc(GL_ONE, GL_ONE);
+		}
 		for (auto p : PARTICLEMANAGER->m_EmitterList)
 		{
 			glBindTexture(GL_TEXTURE_2D, p->m_textureID);

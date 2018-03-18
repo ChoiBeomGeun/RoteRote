@@ -26,7 +26,8 @@ namespace TE {
 	enum EmitterType //!< enum for Type
 	{
 		ET_EXPLOSION, //!< type of explosion
-		ET_TRAIL      //!<  type of trail
+		ET_TRAIL,      //!<  type of trail
+		ET_BACKGROUND //!< type of Background
 	};
 
 	class Emitter : public Component//!< struct of Emitter
@@ -40,6 +41,8 @@ namespace TE {
 		void SetEmitter(glm::vec3 EmitterPos, glm::vec3 EmitterVel, int pSize, int pCapacity, int plifeTime, EmitterType ptype);
 		void SetTexture(int textureID);
 
+		int FindUnusedParticle();
+
 		Particle*   pParticles; //!< pointer of Paritcles in this Emitter
 		EmitterType type; //!< type of Emitter
 		glm::vec3      pos;  //!< position of Emitter
@@ -49,6 +52,7 @@ namespace TE {
 		int         capacity; //!< max amount for this Emitter
 		int         emitterID; //!< ID of this Emitter
 		float       lifeTime;  //!< lifeTime of this Emitter
+		bool		isBlened; // !< addtive or bleneded
 	};
 
 

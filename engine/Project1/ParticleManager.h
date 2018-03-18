@@ -52,10 +52,10 @@ namespace TE {
 
 		void Initialize(void) override;
 		Object * LoadEmitter(Object* pobject, std::string  path);
-		void SaveEmitter(std::string  path);
+		//void SaveEmitter(std::string  path);
 
 		void Update(float dt) override;
-
+		void Initialize(Emitter * pEmitter);
 		
 
 		void AddEmitter(Emitter* pEmitter);
@@ -67,6 +67,7 @@ namespace TE {
 	private:
 		void InitExplosionSystem(Emitter* pEmitter);
 		void InitTrailSystem(Emitter* pEmitter);
+		void InitBackgroundSystem(Emitter* pEmitter);
 
 		//Emitter* m_pEmitters; //!< pointer of Emitter
 		int m_capacity;       //!< max amount of Emitter
@@ -84,6 +85,10 @@ namespace TE {
 		float m_maxTrailVel;  //!< maximum velocity of trail
 		float m_minTrailScale;//!< minimum scale of trail
 		float m_maxTrailScale;//!< maximum scale of trail
+
+		float m_minBackgroundDist; //!< minimum Distance of Background
+		float m_maxBackgroundDist; //!< maximum Distance of Background
+
 
 		float m_scaleFactor;  //!< scale factor
 		float m_expLife;      //!< explosion life

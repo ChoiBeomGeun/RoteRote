@@ -24,6 +24,7 @@
 		"EmitterSize" : 0,
 		"EmitterID" : 0,
 		"EmitterLifeTime" : 5,
-		"Emittercapacity" : 200
+		"Emittercapacity" : 200,
+		"RenderMode" : 1
 	}
 }

@@ -181,7 +181,9 @@ void LevelManager::LoadLevel(std::string  path)
 				}
 				else if (STATEMANAGER->Loadtolevelname == "Menu.json")
 				{
-					tempObject->AddComponent<Emitter>();
+					tempObject = PARTICLEMANAGER->LoadEmitter(tempObject, "Menu.json");
+
+					/*tempObject->AddComponent<Emitter>();
 					tempObject->GetComponent<Sprite>()->texture_load("test.png");
 					tempObject->GetComponent<Transform>()->position = tempObject->GetComponent<Transform>()->position;
 					tempObject->GetComponent<Emitter>()->SetEmitter(tempObject->GetComponent<Transform>()->position, glm::vec3(0.0f), 0, 400, 20.f, ET_EXPLOSION);
@@ -189,7 +191,7 @@ void LevelManager::LoadLevel(std::string  path)
 					tempObject->GetComponent<Emitter>()->CreateParticle();
 					tempObject->GetComponent<Transform>()->scale = glm::vec3(10.0f);
 
-					PARTICLEMANAGER->AddEmitter(tempObject->GetComponent<Emitter>());
+					PARTICLEMANAGER->AddEmitter(tempObject->GetComponent<Emitter>());*/
 				}
 				
 			}
