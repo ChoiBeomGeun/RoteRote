@@ -89,6 +89,24 @@ namespace RoteMapView
             bmp.RotateFlip(RotateFlipType.Rotate180FlipX);
             return bmp;
         }
+
+        public void SynchronizationObjects()
+        {
+            foreach(var temp in objectList)
+            {
+                if (temp.Tag.ToString() == "Camera")
+                    continue;
+
+                temp.Refresh();
+                int ObjectID = Int32.Parse(temp.Tag.ToString());
+                RoteobjectList[ObjectID].PositionX = temp.Location.X;
+                RoteobjectList[ObjectID].PositionY = temp.Location.X;
+                RoteobjectList[ObjectID].ScaleX = temp.Size.Width;
+                RoteobjectList[ObjectID].ScaleY = temp.Size.Height;
+            }
+
+
+        }
         /// <summary>
         /// 컨트롤이 마우스 클릭되면 발생한다.
         /// </summary>
@@ -104,19 +122,23 @@ namespace RoteMapView
         void drawPanel1_MouseLeftClick(object sender, MouseDownEventArgs args)
         {
             JsonTextUpdate();
+            
 
+     
 
-            if (args.Control != null && args.Control.Tag.ToString() == "Camera")
+            if (args.Control != null&& args.Control.Tag != null)
             {
-                roCamera.PositionX = args.Control.Location.X;
-                roCamera.PositionY = args.Control.Location.Y;
-                propertyGrid1.SelectedObject = roCamera;
-                return;
-            }
+
+                if (args.Control.Tag.ToString() == "Camera")
+                {
+                    roCamera.PositionX = args.Control.Location.X;
+                    roCamera.PositionY = args.Control.Location.Y;
+                    propertyGrid1.SelectedObject = roCamera;
 
 
-            if (args.Control != null)
-            {
+                    return;
+                }
+
                 RoteobjectList[Int32.Parse(args.Control.Tag.ToString())].PositionX = args.Control.Location.X;
                 RoteobjectList[Int32.Parse(args.Control.Tag.ToString())].PositionY = args.Control.Location.Y;
                 RoteobjectList[Int32.Parse(args.Control.Tag.ToString())].ScaleX = args.Control.Size.Width;
@@ -182,8 +204,11 @@ namespace RoteMapView
                 {
                     case ControlNodeType.Player:
                         {
-                          
-
+                            if (IsTherePlayer)
+                            {
+                                MessageBox.Show("There is already player in the map", "Object Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
                             control = new PictureBox()
                             {
 
@@ -401,6 +426,7 @@ namespace RoteMapView
 
         private void button1_Click(object sender, EventArgs e)
         {
+         
             string file_path = null;
             string file = null;
             saveFileDialog1.InitialDirectory = Application.StartupPath;
@@ -773,7 +799,12 @@ namespace RoteMapView
 
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
         {
+            
+        }
 
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            SynchronizationObjects();
         }
     }
 }
