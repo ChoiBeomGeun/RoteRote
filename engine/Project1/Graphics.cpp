@@ -229,7 +229,7 @@ void Graphics::Update(float dt)
 {
 	Sprite::sortSprites(SortType::FRONT_TO_BACK);
 
-	glClearColor(1.f, 1.f, 1.f, .5f);
+	glClearColor(0.f, 0.f, 0.f, 0.f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	time += dt;
