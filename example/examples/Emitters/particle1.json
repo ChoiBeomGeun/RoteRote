@@ -20,11 +20,11 @@
 			"y" : 0.0,
 			"z" : 0.0
 		},
-		"TextureDir" : "Fire.png",
+		"TextureDir" : "test.png",
 		"EmitterSize" : 0,
 		"EmitterID" : 0,
 		"EmitterLifeTime" : 5,
 		"Emittercapacity" : 200,
-		"RenderMode" : 0
+		"RenderMode" : 1
 	}
 }

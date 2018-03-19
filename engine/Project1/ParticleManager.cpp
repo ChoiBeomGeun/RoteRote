@@ -263,9 +263,9 @@ namespace TE {
 							= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
 						// set color with g_colors
 						(*emitterIT)->pParticles[i].color[0] = 255 / 255.f;
-						(*emitterIT)->pParticles[i].color[1] = 255/255.f;
-						(*emitterIT)->pParticles[i].color[2] = 255 /255.f;
-						(*emitterIT)->pParticles[i].color[3] = 255 /255.f;
+						(*emitterIT)->pParticles[i].color[1] = 255 / 255.f;
+						(*emitterIT)->pParticles[i].color[2] = 255 / 255.f;
+						(*emitterIT)->pParticles[i].color[3] = 255 / 255.f;
 					}
 				}
 				break;
