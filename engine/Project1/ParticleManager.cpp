@@ -40,68 +40,14 @@ namespace TE {
 		unsigned  g_colors[MAX_COLORS] = { 0xFF0000FF, 0xFF00FFFF };
 		//!< color array with unsigned
 	}//end unnamed namespace
-	 // /******************************************************************************/
-	 // /*!
-
-	 // function which load file for this function
-
-	 // \param pFileName
-	 // name of file to load
-
-	 // */
-	 // /******************************************************************************/
-	 //void ParticleManager::LoadFile(const char* pFileName)
-	 //{
-	 //	FILE* pFile = 0;
-	 //	fopen_s(&pFile, pFileName, "rt");
-	 //	if (!pFile)
-	 //		return;
-
-	 //	fscanf_s(pFile, "%f", &m_minExpVel);
-	 //	fscanf_s(pFile, "%f", &m_maxExpVel);
-	 //	fscanf_s(pFile, "%f", &m_minExpScale);
-	 //	fscanf_s(pFile, "%f", &m_maxExpScale);
-
-	 //	fscanf_s(pFile, "%f", &m_minTrailVel);
-	 //	fscanf_s(pFile, "%f", &m_maxTrailVel);
-	 //	fscanf_s(pFile, "%f", &m_minTrailScale);
-	 //	fscanf_s(pFile, "%f", &m_maxTrailScale);
-
-	 //	fscanf_s(pFile, "%f", &m_scaleFactor);
-	 //	fscanf_s(pFile, "%f", &m_expLife);
-
-	 //	fscanf_s(pFile, "%x", &g_colors[0]);
-	 //	fscanf_s(pFile, "%x", &g_colors[1]);
-
-	 //	fclose(pFile);
-	 //}
-
-
+	
 	ParticleManager::ParticleManager()
 	{
 		DEBUG_ASSERT(PARTICLEMANAGER != nullptr, "There should be only one ParticleManager");
 		PARTICLEMANAGER = this;
 
 	}
-	/******************************************************************************/
-	/*!
-
-	function which load file for this function
-
-	\param maxCount
-	Max count of emitter. Set new emitter with this.
-
-	*/
-	/******************************************************************************/
-	//ParticleManager::ParticleManager(int maxCount)
-	//{
-	//	
-	//	
-
-	//	// Load file with ParticleProperties.txt
-
-	//	//LoadFile("ParticleProperties.txt");
-	//}
+	
 	/******************************************************************************/
 	/*!
 
@@ -132,19 +78,19 @@ namespace TE {
 		m_minExpVel = 0;
 		m_maxExpVel = 100;
 		m_minExpScale = 0;
-		m_maxExpScale = 100;
+		m_maxExpScale = 50;
 
 		m_minTrailVel = 0;
 		m_maxTrailVel = 100;
 		m_minTrailScale = 0;
 		m_maxTrailScale = 50;
 
-		m_minBackgroundDist = -(APP->_screenWidth * .5f);
-		m_maxBackgroundDist = APP->_screenWidth * .5f;
+		m_minBackgroundDist = -(APP->_screenWidth * .3f);
+		m_maxBackgroundDist = APP->_screenWidth * .3f;
+		m_maxBackLifeTime = 20;
 
 		m_scaleFactor = 30;
 		m_expLife = 20;
-
 
 		trailNumber = 0;
 	}
@@ -201,16 +147,10 @@ namespace TE {
 
 		for (int i = 1; i < file.mRoot.get("NumberOfEmitter", false).asInt() + 1; i++)
 		{
-			// initialize PARTICLEMANAGER member variables
-		
-			
-			//	int objectID = file.mRoot.get(object + to_string(i), false).get("ObjectID", false).asInt();
 			std::string Objectstyle = file.mRoot.get(object + to_string(i), false).get("ObjectType", false).asString();
-
 			std::string emitterType = file.mRoot.get(object + to_string(i), false).get("EmitterType", false).asString();
-
 			unsigned int emitterTypeID;
-			if(emitterType == "ET_EXPLOSION")
+			if (emitterType == "ET_EXPLOSION")
 			{
 				emitterTypeID = ET_EXPLOSION;
 			}
@@ -218,10 +158,12 @@ namespace TE {
 			{
 				emitterTypeID = ET_TRAIL;
 			}
-			else if(emitterType == "ET_BACKGROUND")
+			else if (emitterType == "ET_BACKGROUND")
 			{
 				emitterTypeID = ET_BACKGROUND;
 			}
+			else if (emitterType == "ET_ROCKET")
+				emitterTypeID = ET_ROCKET;
 			std::cout << emitterType <<  std::endl;;
 			
 			float Xpos = file.mRoot.get(object + to_string(i), false).get("Position", false).get("x", false).asFloat();
@@ -276,105 +218,7 @@ namespace TE {
 				pobject->Initialize();
 			}
 		}
-		
-
 	}
-	
-
-//	void ParticleManager::SaveEmitter(std::string path)
-//	{
-//		char * Userinfo;
-//		size_t len = path.size();
-//		_dupenv_s(&Userinfo, &len, "USERPROFILE");
-//
-//		std::string saveLevel = path;
-//#ifdef _DEBUG
-//		path = ".\\Emitters.\\" + path;
-//#else
-//		path = Userinfo;
-//		path += "/Documents/RoteRote/Emitters/" + saveLevel;
-//#endif
-//		free(Userinfo);
-//		Jsonclass file;
-//		Json::Value root;
-//		std::string object = "Object";
-//
-//
-//		root["EmitterTypel"] = 1;
-//		root["WorldSize"]["x"] = STATEMANAGER->v_StatesLists[STATEMANAGER->i_CurrentStateNumber]->WorldSizeX;
-//		root["WorldSize"]["y"] = STATEMANAGER->v_StatesLists[STATEMANAGER->i_CurrentStateNumber]->WorldSizeY;
-//		root["DefalutCamera"]["EYE"]["x"] = CAMERA->cameraPos.x;
-//		root["DefalutCamera"]["EYE"]["y"] = CAMERA->cameraPos.y;
-//		root["DefalutCamera"]["EYE"]["z"] = CAMERA->cameraPos.z;
-//		root["DefalutCamera"]["TARGET"]["x"] = CAMERA->cameraTarget.x;
-//		root["DefalutCamera"]["TARGET"]["y"] = CAMERA->cameraTarget.y;
-//		root["DefalutCamera"]["TARGET"]["z"] = CAMERA->cameraTarget.z;
-//		root["DefalutCamera"]["UP"]["x"] = CAMERA->cameraUp.x;
-//		root["DefalutCamera"]["UP"]["y"] = CAMERA->cameraUp.y;
-//		root["DefalutCamera"]["UP"]["z"] = CAMERA->cameraUp.z;
-//		root["NumberOfObjects"] = FACTORY->ObjectIDMap.size();
-//		int  i = 1;
-//		for (auto it : FACTORY->ObjectIDMap)
-//		{
-//			if (it.second->HasComponent<Emitter>())
-//			{
-//
-//				it.second->GetComponent<Transform>()->position.z = 0;
-//				static unsigned particleSaveIndex = 0;
-//				if (it.second->GetComponent<Emitter>() != nullptr) {
-//					root[object + to_string(i)]["Components"][particleSaveIndex] = "PARTICLE";
-//					if (it.second->GetComponent<Emitter>()->type == EmitterType::ET_TRAIL)
-//						root[object + to_string(i)]["EmitterType"] = "TRAIL";
-//					else if (it.second->GetComponent<Emitter>()->type == EmitterType::ET_EXPLOSION)
-//						root[object + to_string(i)]["EmitterType"] = "ET_EXPLOSION";
-//
-//					root[object + to_string(i)]["EmitterPos"]["x"] = it.second->GetComponent<Transform>()->position.x;
-//					root[object + to_string(i)]["EmitterPos"]["y"] = it.second->GetComponent<Transform>()->position.y;
-//					root[object + to_string(i)]["EmitterPos"]["z"] = it.second->GetComponent<Transform>()->position.z;
-//					
-//					root[object + to_string(i)]["EmitterVel"]["x"] = it.second->GetComponent<Emitter>()->vel.x;
-//					root[object + to_string(i)]["EmitterVel"]["y"] = it.second->GetComponent<Emitter>()->vel.y;
-//					root[object + to_string(i)]["EmitterVel"]["z"] = it.second->GetComponent<Emitter>()->vel.z;
-//
-//					root[object + to_string(i)]["textureID"] = it.second->GetComponent<Emitter>()->m_textureID;
-//					root[object + to_string(i)]["Emittersize"] = it.second->GetComponent<Emitter>()->size;
-//					root[object + to_string(i)]["EmitterID"] = it.second->GetComponent<Emitter>()->emitterID;
-//					root[object + to_string(i)]["EmitterlifeTime"] = it.second->GetComponent<Emitter>()->lifeTime;
-//					root[object + to_string(i)]["Emittercapacity"] = it.second->GetComponent<Emitter>()->capacity;
-//
-//
-//					particleSaveIndex++;
-//				}
-//				particleSaveIndex = 0;
-//			}
-//			switch (it.second->objectstyle)
-//			{
-//			case Objectstyle::Particle:
-//				root[object + to_string(i)]["ObjectType"] = "Particle";
-//				break;
-//			default:
-//				DEBUG_ASSERT(true, "Invaild Object Style");
-//
-//
-//			}
-//			/*root[object + to_string(i)]["ObjectID"] = i;
-//			root[object + to_string(i)]["Position"]["x"] = it.second->GetComponent<Transform>()->position.x;
-//			root[object + to_string(i)]["Position"]["y"] = it.second->GetComponent<Transform>()->position.y;
-//			root[object + to_string(i)]["Position"]["z"] = it.second->GetComponent<Transform>()->position.z;
-//			root[object + to_string(i)]["Scale"]["x"] = it.second->GetComponent<Transform>()->scale.x;
-//			root[object + to_string(i)]["Scale"]["y"] = it.second->GetComponent<Transform>()->scale.y;
-//			if (FACTORY->ObjectIDMap[it.first]->GetComponent<Body>() != nullptr)
-//				root[object + to_string(i)]["Mass"] = it.second->GetComponent<Body>()->pm_mass;
-//			root[object + to_string(i)]["Rotation"] = it.second->GetComponent<Transform>()->angle;
-//	
-//			root[object + to_string(i)]["TextureDir"] = FACTORY->ObjectIDMap[it.first]->GetComponent<Sprite>()->mTexutureDir;*/
-//			i++;
-//		}
-//
-//
-//		file.WriteFile(path, root);
-//
-//	}
 
 	void ParticleManager::Update(float dt)
 	{
@@ -418,7 +262,7 @@ namespace TE {
 						(*emitterIT)->pParticles[i].scale
 							= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
 						// set color with g_colors
-						(*emitterIT)->pParticles[i].color[0] = 0 / 255.f;
+						(*emitterIT)->pParticles[i].color[0] = 255 / 255.f;
 						(*emitterIT)->pParticles[i].color[1] = 255/255.f;
 						(*emitterIT)->pParticles[i].color[2] = 255 /255.f;
 						(*emitterIT)->pParticles[i].color[3] = 255 /255.f;
@@ -462,12 +306,10 @@ namespace TE {
 					TUMath::Clamp(particle.scale, 0, m_maxTrailScale);
 
 					// set colour with RED
-					particle.color[0] = 127 /255.f;
-					particle.color[1] = 104 / 255.f;
-					particle.color[2] = 81 / 255.f;
-					particle.color[3] = 180 / 255.f;
-
-
+					particle.color[0] = 255 /255.f;
+					particle.color[1] = 255 / 255.f;
+					particle.color[2] = 255 / 255.f;
+					particle.color[3] = 255 / 255.f;
 				}
 				break;
 			}
@@ -481,35 +323,33 @@ namespace TE {
 					//Update particle position based on velocity and dt
 					//particle.scale -= m_scaleFactor * dt;
 					//Clamp particle scale to 0 and maxExpScale
-					if (particle.scale <= 0)
-						particle.scale = 0;
-				}
-				//Update emitter lifetime based on dt
-				//(*emitterIT)->lifeTime += dt;
-				//If lifetime is greater than expLife delete this emitter
-				if ((*emitterIT)->lifeTime >= m_expLife)
-				{
-					//(*emitterIT)->lifeTime = 0.0f;
-					//float rotation = 0.0f;
-					//for (int i = 0; i < (*emitterIT)->capacity; ++i)
-					//{
-					//	// set position of particle to emitter
-					//	(*emitterIT)->pParticles[i].pos = (*emitterIT)->pos;
-					//	// set rotation with random
-					//	rotation = TUMath::GetRandomFloat(0, TUMath::TWO_PI);
-					//	// Then Get a random rotation between 0 and 2PI
-					//	// and set the velocity x and y based on the rotation.
-					//	(*emitterIT)->pParticles[i].vel = { cosf(rotation), sinf(rotation) , 0.0f };
-					//	(*emitterIT)->pParticles[i].vel
-					//		*= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);;
-					//	(*emitterIT)->pParticles[i].scale
-					//		= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
-					//	// set color with g_colors
-					//	(*emitterIT)->pParticles[i].color[0] = 0 / 255.f;
-					//	(*emitterIT)->pParticles[i].color[1] = 255 / 255.f;
-					//	(*emitterIT)->pParticles[i].color[2] = 255 / 255.f;
-					//	(*emitterIT)->pParticles[i].color[3] = 255 / 255.f;
-					//}
+					//particle.scale = 
+					//Update particle lifetime based on dt
+					particle.lifetime += dt;
+					float sizefactor = rand() % 2;
+					if (sizefactor == 0)
+						sizefactor = -1;
+					particle.scale += sizefactor;
+					particle.angle += sizefactor * .2f;
+					//If lifetime is greater than expLife delete this emitter
+					if (particle.lifetime >= m_maxBackLifeTime)
+					{
+						if (particle.scale >= m_maxExpScale)
+						{
+							particle.scale = 0.0f;
+							particle.lifetime = 0.0f;
+							particle.scale = TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
+							break;
+						}
+						else if (particle.scale < m_minExpScale)
+						{
+							particle.scale = 0.0f;
+							particle.lifetime = 0.0f;
+							particle.scale = TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
+							break;
+						}
+						
+					}
 				}
 				break;
 			}
@@ -574,6 +414,8 @@ namespace TE {
 			pEmitter->pParticles[i].color[1] = g_colors[TUMath::GetRandomInt(-1, MAX_COLORS - 1)];
 			pEmitter->pParticles[i].color[2] = g_colors[TUMath::GetRandomInt(-1, MAX_COLORS - 1)];
 			pEmitter->pParticles[i].color[3] = g_colors[TUMath::GetRandomInt(-1, MAX_COLORS - 1)];
+			pEmitter->pParticles[i].lifetime = 0.0f;
+			pEmitter->pParticles[i].angle = rotation;
 		}
 
 	}
@@ -594,9 +436,12 @@ namespace TE {
 		{
 			pEmitter->pParticles[i].scale = 0;
 			pEmitter->pParticles[i].color[0] = 255 / 255.f;
-			pEmitter->pParticles[i].color[1] = 128 / 255.f;
+			pEmitter->pParticles[i].color[1] = 0 / 255.f;
 			pEmitter->pParticles[i].color[2] = 128 / 255.f;
 			pEmitter->pParticles[i].color[3] = 255 / 255.f;
+			pEmitter->pParticles[i].lifetime = 0.0f;
+			pEmitter->pParticles[i].angle = 0.f;
+
 		}
 	}
 	/******************************************************************************/
@@ -615,26 +460,24 @@ namespace TE {
 
 		std::mt19937 gen(rd());
 		std::uniform_real_distribution<> dis(m_minBackgroundDist, m_maxBackgroundDist);
+		std::uniform_real_distribution<> rot(0, TUMath::TWO_PI);
 		for(int i=0;i< pEmitter->capacity; ++i)
 		{
 			//CAMERA->cameraPos = cameraOriginPos + glm::vec3(dis(gen) * shakeAmount, dis(gen) * shakeAmount, 1);
 			pEmitter->pParticles[i].pos = glm::vec3(dis(gen), dis(gen), 0);
 			// set rotation with random
 			float rotation = TUMath::GetRandomFloat(0, TUMath::TWO_PI);
-			// Then Get a random rotation between 0 and 2PI
-			// and set the velocity x and y based on the rotation.
-			pEmitter->pParticles[i].vel = { cosf(rotation), sinf(rotation) , 0.0f };
-			pEmitter->pParticles[i].vel
-				*= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);;
 			pEmitter->pParticles[i].scale
 				= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
 			//pEmitter->pParticles[i].pos = glm::vec3(0);
 			pEmitter->pParticles[i].scale = TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
 			pEmitter->pParticles[i].color[0] = 255 / 255.f;
-			pEmitter->pParticles[i].color[1] = 0 / 255.f;
+			pEmitter->pParticles[i].color[1] = 255 / 255.f;
 			pEmitter->pParticles[i].color[2] = 255 / 255.f;
 			pEmitter->pParticles[i].color[3] = 128 / 255.f;
 			pEmitter->pParticles[i].vel = glm::vec3(0);
+			pEmitter->pParticles[i].lifetime = TUMath::GetRandomFloat(0, m_maxBackLifeTime);
+			pEmitter->pParticles[i].angle = rot(gen);
 		}
 	}
 }

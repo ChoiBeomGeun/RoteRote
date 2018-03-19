@@ -246,7 +246,7 @@ void Graphics::Update(float dt)
 		it != SpriteList.end(); ++it) {
 		glBindTexture(GL_TEXTURE_2D, (*it)->TextureId);
 		animationSetting();
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		_basicProgram.use();
 
@@ -355,7 +355,7 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 				particlemodel = glm::mat4(1.0f);
 				CAMERA->proj();
 				particlemodel = glm::translate(particlemodel, p->pParticles[i].pos);
-				particlemodel = glm::rotate(particlemodel, glm::radians((*iter)->pTransform->angle), (*iter)->pTransform->rotation);
+				particlemodel = glm::rotate(particlemodel, glm::radians(p->pParticles[i].angle), (*iter)->pTransform->rotation);
 				particlemodel = glm::scale(particlemodel, glm::vec3(p->pParticles[i].scale));
 				glUniform4f(particleLoc[PCOLOR], p->pParticles[i].color[0], p->pParticles[i].color[1],
 					p->pParticles[i].color[2], p->pParticles[i].color[3]);

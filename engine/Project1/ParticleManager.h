@@ -88,7 +88,8 @@ namespace TE {
 
 		float m_minBackgroundDist; //!< minimum Distance of Background
 		float m_maxBackgroundDist; //!< maximum Distance of Background
-
+		float m_maxBackLifeTime; //!< maximum lifetime of Background
+		//float m_maxBackLimitsize; //!< maximum size of Background
 
 		float m_scaleFactor;  //!< scale factor
 		float m_expLife;      //!< explosion life

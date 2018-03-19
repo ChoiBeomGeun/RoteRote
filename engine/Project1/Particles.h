@@ -19,15 +19,18 @@ namespace TE {
 	{
 		glm::vec3 pos; //!< position of particle
 		glm::vec3 vel; //!< velocity of Particle
+		float lifetime; //!< lifetime of Particle
 		float scale;  //!< scale of Particle
 		float color[4]; //!< color of Particle
+		float angle; //!< rotation of particle
 	};
 
 	enum EmitterType //!< enum for Type
 	{
 		ET_EXPLOSION, //!< type of explosion
 		ET_TRAIL,      //!<  type of trail
-		ET_BACKGROUND //!< type of Background
+		ET_BACKGROUND, //!< type of Background
+		ET_ROCKET //!< player Exhaust
 	};
 
 	class Emitter : public Component//!< struct of Emitter
