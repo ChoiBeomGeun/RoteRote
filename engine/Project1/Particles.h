@@ -56,6 +56,7 @@ namespace TE {
 		int         emitterID; //!< ID of this Emitter
 		float       lifeTime;  //!< lifeTime of this Emitter
 		bool		isBlened; // !< addtive or bleneded
+		std::string m_particlePath;
 	};
 
 

@@ -78,7 +78,7 @@ namespace TE {
 		m_minExpVel = 0;
 		m_maxExpVel = 100;
 		m_minExpScale = 0;
-		m_maxExpScale = 50;
+		m_maxExpScale = 75;
 
 		m_minTrailVel = 0;
 		m_maxTrailVel = 100;
@@ -124,11 +124,8 @@ namespace TE {
 
 	Object * ParticleManager::LoadEmitter(Object* pobject, std::string path)
 	{
-		char * Userinfo;
-		size_t len = path.size();
-		_dupenv_s(&Userinfo, &len, "USERPROFILE");
 
-
+/*
 		std::string loadParticle = path;
 #ifdef _DEBUG
 		path = ".\\Emitters.\\" + path;
@@ -136,7 +133,7 @@ namespace TE {
 		path = Userinfo;
 		path += "/Documents/RoteRote/Emitters/" + loadParticle;
 #endif
-		free(Userinfo);
+		free(Userinfo);*/
 
 		Jsonclass file;
 		std::string object = "Emitter";
@@ -326,11 +323,12 @@ namespace TE {
 					//particle.scale = 
 					//Update particle lifetime based on dt
 					particle.lifetime += dt;
-					float sizefactor = rand() % 2;
+					float sizefactor = rand()%2;
 					if (sizefactor == 0)
 						sizefactor = -1;
-					particle.scale += sizefactor;
-					particle.angle += sizefactor * .2f;
+
+					//particle.scale += sizefactor;
+					particle.angle += sizefactor;
 					//If lifetime is greater than expLife delete this emitter
 					if (particle.lifetime >= m_maxBackLifeTime)
 					{
@@ -441,7 +439,6 @@ namespace TE {
 			pEmitter->pParticles[i].color[3] = 255 / 255.f;
 			pEmitter->pParticles[i].lifetime = 0.0f;
 			pEmitter->pParticles[i].angle = 0.f;
-
 		}
 	}
 	/******************************************************************************/
@@ -457,14 +454,13 @@ namespace TE {
 	void ParticleManager::InitBackgroundSystem(Emitter* pEmitter)
 	{
 		std::random_device rd;
-
 		std::mt19937 gen(rd());
 		std::uniform_real_distribution<> dis(m_minBackgroundDist, m_maxBackgroundDist);
 		std::uniform_real_distribution<> rot(0, TUMath::TWO_PI);
 		for(int i=0;i< pEmitter->capacity; ++i)
 		{
 			//CAMERA->cameraPos = cameraOriginPos + glm::vec3(dis(gen) * shakeAmount, dis(gen) * shakeAmount, 1);
-			pEmitter->pParticles[i].pos = glm::vec3(dis(gen), dis(gen), 0);
+			pEmitter->pParticles[i].pos = glm::vec3(dis(gen) *.9f, dis(gen)*.5f, 0);
 			// set rotation with random
 			float rotation = TUMath::GetRandomFloat(0, TUMath::TWO_PI);
 			pEmitter->pParticles[i].scale

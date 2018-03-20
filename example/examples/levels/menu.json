@@ -21,7 +21,7 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 11,
+	"NumberOfObjects" : 12,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
@@ -43,7 +43,7 @@
 	},
 	"Object10" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"Components" : [ "TRANSFORM", "SPRITE" ],
 		"ObjectID" : 10,
 		"ObjectType" : "Button",
 		"Position" : 
@@ -62,7 +62,7 @@
 	},
 	"Object11" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"Components" : [ "TRANSFORM", "SPRITE" ],
 		"ObjectID" : 11,
 		"ObjectType" : "Button",
 		"Position" : 
@@ -78,6 +78,27 @@
 			"y" : 43.902000427246094
 		},
 		"TextureDir" : "space.png"
+	},
+	"Object12" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
+		"ObjectID" : 12,
+		"ObjectType" : "Button",
+		"ParticleType" : "ET_EXPLOSION",
+		"ParticlePath" : "MenuParticle.json",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0
+		},
+		"TextureDir" : ""
 	},
 	"Object2" : 
 	{
@@ -160,6 +181,7 @@
 		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
 		"ObjectID" : 6,
 		"ObjectType" : "Button",
+		"ParticlePath" : "StarParticle.json",
 		"Position" : 
 		{
 			"x" : 0.0,
@@ -214,7 +236,7 @@
 	},
 	"Object9" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"Components" : [ "TRANSFORM", "SPRITE" ],
 		"ObjectID" : 9,
 		"ObjectType" : "Button",
 		"Position" : 

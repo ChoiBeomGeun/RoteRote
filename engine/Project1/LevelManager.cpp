@@ -40,6 +40,7 @@ namespace TE {
 
 void LevelManager::LoadLevel(std::string  path)
 {
+	string PaticlePath;
 	char * Userinfo;
 	size_t len = path.size();
 	_dupenv_s(&Userinfo, &len, "USERPROFILE");
@@ -50,9 +51,11 @@ void LevelManager::LoadLevel(std::string  path)
 	std::string saveLevel = path;
 #ifdef _DEBUG
 	path = ".\\levels.\\" + path;
+
 #else
 	path = Userinfo;
 	path += "/Documents/RoteRote/levels/" + saveLevel;
+
 #endif
 	free(Userinfo);
 
@@ -64,6 +67,7 @@ void LevelManager::LoadLevel(std::string  path)
 	
 	//	char *path = (char*)JSON_FILE;
 	file.ReadFile(path);
+
 
 
 	for (int i = 1; i< file.mRoot.get("NumberOfObjects", false).asInt() + 1; i++)
@@ -181,7 +185,16 @@ void LevelManager::LoadLevel(std::string  path)
 				}
 				else if (STATEMANAGER->Loadtolevelname == "Menu.json")
 				{
-					tempObject = PARTICLEMANAGER->LoadEmitter(tempObject, "Menu.json");
+					PaticlePath = ".\\Emitters.\\" + file.mRoot.get(object + to_string(i), false).get("ParticlePath", false).asString();
+
+					tempObject = PARTICLEMANAGER->LoadEmitter(tempObject, PaticlePath);
+					//pfile.ReadFile(PaticlePath);
+
+				
+
+
+
+
 
 					/*tempObject->AddComponent<Emitter>();
 					tempObject->GetComponent<Sprite>()->texture_load("test.png");
@@ -338,6 +351,9 @@ void LevelManager::SaveLevel(std::string  path)
 				root[object + to_string(i)]["ParticleType"] = "TRAIL";
 			if (it.second->GetComponent<Emitter>()->type == EmitterType::ET_EXPLOSION)
 				root[object + to_string(i)]["ParticleType"] = "ET_EXPLOSION";
+
+
+			root[object + to_string(i)]["ParticlePath"] = it.second->GetComponent<Emitter>()->m_particlePath;
 			index++;
 		}
 		index = 0;
