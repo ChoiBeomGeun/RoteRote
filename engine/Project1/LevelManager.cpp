@@ -169,7 +169,7 @@ void LevelManager::LoadLevel(std::string  path)
 					|| STATEMANAGER->Loadtolevelname == "level7.json" || STATEMANAGER->Loadtolevelname == "level8.json" || STATEMANAGER->Loadtolevelname == "level9.json"
 					|| STATEMANAGER->Loadtolevelname == "level10.json" || STATEMANAGER->Loadtolevelname == "level11.json" || STATEMANAGER->Loadtolevelname == "level12.json")
 				{
-					tempObject = PARTICLEMANAGER->LoadEmitter(tempObject,"particle1.json");
+					tempObject = PARTICLEMANAGER->LoadEmitter(tempObject,".\\Emitters.\\particle1.json");
 
 					/*tempObject->AddComponent<Emitter>();
 					tempObject->GetComponent<Sprite>()->texture_load("test.png");
