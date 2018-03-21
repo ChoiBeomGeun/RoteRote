@@ -26,7 +26,10 @@ namespace RoteMapView
 
         enum ControlNodeType
         {
-            Player, Wall, Button, Box, Trigger90, Trigger180, Clearzone, Hazard, Camera
+            Player, Wall, Button, Box,
+            Trigger90_0, Trigger90_90, Trigger90_180,_Trigger90_270,
+            Trigger180_0, Trigger180_90, Trigger180_180,Trigger180_270,
+            Clearzone, Hazard, Camera
         };
 
         public MainView()
@@ -76,7 +79,7 @@ namespace RoteMapView
                 }
             }
         }
-        public Image RotateImage(Image img)
+        public Image RotateImage(Image img, RotateFlipType Rotation)
         {
             var bmp = new Bitmap(img);
 
@@ -86,7 +89,7 @@ namespace RoteMapView
                 gfx.DrawImage(img, 0, 0, img.Width, img.Height);
             }
 
-            bmp.RotateFlip(RotateFlipType.Rotate180FlipX);
+            bmp.RotateFlip(Rotation);
             return bmp;
         }
 
@@ -146,8 +149,7 @@ namespace RoteMapView
                
                 propertyGrid1.SelectedObject = RoteobjectList[Int32.Parse(args.Control.Tag.ToString())];
 
-                if (RoteobjectList[Int32.Parse(args.Control.Tag.ToString())].Rotation ==90)
-                    ((System.Windows.Forms.PictureBox)args.Control).Image = RotateImage(((System.Windows.Forms.PictureBox)args.Control).Image);
+               
                
 
             }
@@ -299,7 +301,7 @@ namespace RoteMapView
 
                         }
                         break;
-                    case ControlNodeType.Trigger180:
+                    case ControlNodeType.Trigger180_0:
                         {
                             control = new PictureBox()
                             {
@@ -308,6 +310,8 @@ namespace RoteMapView
                                 SizeMode = PictureBoxSizeMode.StretchImage,
 
                             };
+
+                            
                             RoteObject temp = new RoteObject();
                             temp.objectstyle = "Trigger180";
                             temp.PositionX = control.Location.X;
@@ -322,7 +326,86 @@ namespace RoteMapView
 
                         }
                         break;
-                    case ControlNodeType.Trigger90:
+                    case ControlNodeType.Trigger180_90:
+                        {
+                            control = new PictureBox()
+                            {
+
+                                Image = Image.FromFile("./180button.png"),
+                               
+                                SizeMode = PictureBoxSizeMode.StretchImage,
+
+                            };
+                            ((System.Windows.Forms.PictureBox)control).Image=
+                                RotateImage(((System.Windows.Forms.PictureBox)control).Image,RotateFlipType.Rotate90FlipX);
+                            RoteObject temp = new RoteObject();
+                            temp.objectstyle = "Trigger180";
+                            temp.PositionX = control.Location.X;
+                            temp.PositionY = control.Location.Y;
+                            temp.ScaleX = control.Size.Width;
+                            temp.ScaleY = control.Size.Height;
+                            temp.ObjectID = RoteobjectList.Count;
+                            temp.Rotation = 90;
+                            control.Tag = temp.ObjectID;
+                            RoteobjectList.Add(temp);
+                            objectList.Add(control);
+
+
+                        }
+                        break;
+                    case ControlNodeType.Trigger180_180:
+                        {
+                            control = new PictureBox()
+                            {
+
+                                Image = Image.FromFile("./180button.png"),
+                                SizeMode = PictureBoxSizeMode.StretchImage,
+
+                            };
+                            ((System.Windows.Forms.PictureBox)control).Image =
+     RotateImage(((System.Windows.Forms.PictureBox)control).Image, RotateFlipType.Rotate180FlipX);
+                            RoteObject temp = new RoteObject();
+                            temp.objectstyle = "Trigger180";
+                            temp.PositionX = control.Location.X;
+                            temp.PositionY = control.Location.Y;
+                            temp.ScaleX = control.Size.Width;
+                            temp.ScaleY = control.Size.Height;
+                            temp.ObjectID = RoteobjectList.Count;
+                            temp.Rotation = 180;
+                            control.Tag = temp.ObjectID;
+                            RoteobjectList.Add(temp);
+                            objectList.Add(control);
+
+
+                        }
+                        break;
+                    case ControlNodeType.Trigger180_270:
+                        {
+                            control = new PictureBox()
+                            {
+
+                                Image = Image.FromFile("./180button.png"),
+                                SizeMode = PictureBoxSizeMode.StretchImage,
+
+                            };
+                            ((System.Windows.Forms.PictureBox)control).Image =
+        RotateImage(((System.Windows.Forms.PictureBox)control).Image, RotateFlipType.Rotate270FlipX);
+                            RoteObject temp = new RoteObject();
+                            temp.objectstyle = "Trigger180";
+                            temp.PositionX = control.Location.X;
+                            temp.PositionY = control.Location.Y;
+                            temp.ScaleX = control.Size.Width;
+                            temp.ScaleY = control.Size.Height;
+                            temp.ObjectID = RoteobjectList.Count;
+                            temp.Rotation = 270;
+                            control.Tag = temp.ObjectID;
+                            RoteobjectList.Add(temp);
+                            objectList.Add(control);
+
+
+                        }
+                        break;
+                    case ControlNodeType.Trigger90_0:
                         {
                             control = new PictureBox()
                             {
@@ -342,6 +425,84 @@ namespace RoteMapView
                             RoteobjectList.Add(temp);
                             objectList.Add(control);
                
+
+                        }
+                        break;
+                    case ControlNodeType.Trigger90_90:
+                        {
+                            control = new PictureBox()
+                            {
+
+                                Image = Image.FromFile("./90button.png"),
+                                SizeMode = PictureBoxSizeMode.StretchImage,
+
+                            };
+                            ((System.Windows.Forms.PictureBox)control).Image =
+     RotateImage(((System.Windows.Forms.PictureBox)control).Image, RotateFlipType.Rotate90FlipX);
+                            RoteObject temp = new RoteObject();
+                            temp.objectstyle = "Trigger90";
+                            temp.PositionX = control.Location.X;
+                            temp.PositionY = control.Location.Y;
+                            temp.ScaleX = control.Size.Width;
+                            temp.ScaleY = control.Size.Height;
+                            temp.ObjectID = RoteobjectList.Count;
+                            temp.Rotation = 90;
+                            control.Tag = temp.ObjectID;
+                            RoteobjectList.Add(temp);
+                            objectList.Add(control);
+
+
+                        }
+                        break;
+                    case ControlNodeType.Trigger90_180:
+                        {
+                            control = new PictureBox()
+                            {
+
+                                Image = Image.FromFile("./90button.png"),
+                                SizeMode = PictureBoxSizeMode.StretchImage,
+
+                            };
+                            ((System.Windows.Forms.PictureBox)control).Image =
+     RotateImage(((System.Windows.Forms.PictureBox)control).Image, RotateFlipType.Rotate180FlipX);
+                            RoteObject temp = new RoteObject();
+                            temp.objectstyle = "Trigger90";
+                            temp.PositionX = control.Location.X;
+                            temp.PositionY = control.Location.Y;
+                            temp.ScaleX = control.Size.Width;
+                            temp.ScaleY = control.Size.Height;
+                            temp.ObjectID = RoteobjectList.Count;
+                            temp.Rotation = 180;
+                            control.Tag = temp.ObjectID;
+                            RoteobjectList.Add(temp);
+                            objectList.Add(control);
+
+
+                        }
+                        break;
+                    case ControlNodeType._Trigger90_270:
+                        {
+                            control = new PictureBox()
+                            {
+
+                                Image = Image.FromFile("./90button.png"),
+                                SizeMode = PictureBoxSizeMode.StretchImage,
+
+                            };
+                            ((System.Windows.Forms.PictureBox)control).Image =
+     RotateImage(((System.Windows.Forms.PictureBox)control).Image, RotateFlipType.Rotate270FlipX);
+                            RoteObject temp = new RoteObject();
+                            temp.objectstyle = "Trigger90";
+                            temp.PositionX = control.Location.X;
+                            temp.PositionY = control.Location.Y;
+                            temp.ScaleX = control.Size.Width;
+                            temp.ScaleY = control.Size.Height;
+                            temp.ObjectID = RoteobjectList.Count;
+                            temp.Rotation = 270;
+                            control.Tag = temp.ObjectID;
+                            RoteobjectList.Add(temp);
+                            objectList.Add(control);
+
 
                         }
                         break;
@@ -569,7 +730,7 @@ namespace RoteMapView
                 {
                     Componentlist.Add(tempinComp.ToString());
                 }
-                temp.PositionX = temp.PositionX - (designModePanel.Size.Width/2);
+                temp.PositionX = (temp.PositionX - (designModePanel.Size.Width / 2)) + (temp.ScaleX/2);
                 temp.PositionY = -(temp.PositionY - ((designModePanel.Size.Height / 2)));
   
                 tempObject = new JObject(
