@@ -260,6 +260,10 @@ void LevelManager::LoadLevel(std::string  path)
 		{
 			tempObject->objectstyle = Objectstyle::Particle;
 		}
+		else if (Objectstyle == "Hazard")
+		{
+			tempObject->objectstyle = Objectstyle::Hazard;
+		}
 		else
 			DEBUG_ASSERT(true, "Invaild Object Style");
 
