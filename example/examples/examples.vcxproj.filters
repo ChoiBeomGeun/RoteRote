@@ -40,6 +40,9 @@
     <Filter Include="Source Files\Menu">
       <UniqueIdentifier>{49257d8b-59a4-406b-a85a-7731e3ab7220}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\LevelSelect">
+      <UniqueIdentifier>{b27b49d6-d5e7-4cae-a5cb-57f80fc04812}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -55,9 +58,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Pause.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelSelect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Trigger.cpp">
@@ -93,6 +93,9 @@
     <ClCompile Include="Menu.cpp">
       <Filter>Source Files\Menu</Filter>
     </ClCompile>
+    <ClCompile Include="LevelSelect.cpp">
+      <Filter>Source Files\LevelSelect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerController.h">
@@ -108,9 +111,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Pause.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelSelect.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Trigger.h">
@@ -154,6 +154,12 @@
     </ClInclude>
     <ClInclude Include="MenuList.h">
       <Filter>Source Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelSelect.h">
+      <Filter>Source Files\LevelSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelList.h">
+      <Filter>Source Files\LevelSelect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -12,6 +12,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/
 
+#include "StateLists.h"
 #include "LevelSelect.h"
 #include <stdio.h>
 #include "Object.h"
@@ -27,44 +28,6 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include <vector>
 #include "InGameLogic.h"
 using namespace TE;
-int levelindex = 0;
-void level1(void);
-void level2(void);
-void level3(void);
-void backmenu(void);
-unsigned int Menus;
-unsigned int moves;
-unsigned int selectts;
-typedef std::vector<std::pair<Object*, int>> ButtonObjectList;
-ButtonObjectList buttons;
-void(*levelfunction[4])(void) = { level1,level2,level3,backmenu };
-
-void level1(void)
-{
-	STATEMANAGER->Loadtolevelname = "level1.json";
-	STATEMANAGER->MoveState(4);
-	STATEMANAGER->i_LevelSelect = 1;
-
-}
-void level2(void)
-{
-	STATEMANAGER->Loadtolevelname = "level2.json";
-	STATEMANAGER->MoveState(4);
-	STATEMANAGER->i_LevelSelect = 2;
-}
-void level3(void)
-{
-	
-	STATEMANAGER->Loadtolevelname = "level3.json";
-	STATEMANAGER->MoveState(4);
-	STATEMANAGER->i_LevelSelect = 3;
-}
-void backmenu(void)
-{
-	
-	STATEMANAGER->MoveState(1);
-
-}
 
 LevelSelect::LevelSelect()
 {
@@ -73,110 +36,113 @@ LevelSelect::LevelSelect()
 
 LevelSelect::~LevelSelect()
 {
+
 }
 
+/*
+Load texture & Initialize a value of texture to Levelpng[i]
+*/
 void LevelSelect::Load()
 {
-	 Menus = SOUNDMANAGER->LoadSound("menu.mp3");
+	LEVELMANAGER->LoadLevel("selectlevel.json");
 
-	
-	 moves = TE::SOUNDMANAGER->LoadSound("menumove.mp3");
-	 selectts = TE::SOUNDMANAGER->LoadSound("menuselect.mp3");
+	for (int i = 0; i <= LevelList::quit; ++i)
+		Levelpng[i] = FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->texture_load(toString(i));
+
+
 }
 
 
 void LevelSelect::Init()
 {
-	Object * Init;
-	int i = 0;
-	SOUNDMANAGER->PlaySounds(Menus, true);
-	LEVELMANAGER->LoadLevel("selectlevel.json");
-	for (auto it : FACTORY->ObjectIDMap) {
-		if (it.second->objectstyle == Objectstyle::Button)
-		{
-			if (it.second->GetComponent<Sprite>()->mTexutureDir == "back.png")
-			{
-
-				Init = it.second;
-				continue;
-			}
-			buttons.push_back(ButtonObjectList::value_type(it.second,i));
-			i++;
-		}
-
-
-	}
-	buttons.push_back(ButtonObjectList::value_type(Init, i));
+	FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->TextureId = Levelpng[0];
+	LevelList = LevelList::level1;
+	IsRotating = false;
+	IsLeftPressed = false;
+	selectAngle = 0;
 }
 
 void LevelSelect::Update(float dt)
 {
-	
 	dt = dt;
-	//CAMERA->lookat(Vector3(0, 0, 3), Vector3(0.0f, 0.0f, -1.0f), Vector3(0.0f, 1.0f, 0.0f));
 
-	if (Input::IsTriggered(SDL_SCANCODE_LEFT))
-		if (levelindex >= 0)
-		{
-			SOUNDMANAGER->PlaySounds(moves, false);
-			levelindex--;
-			if (levelindex == -1)
-				levelindex = 13;
-		}
+	if (std::abs(FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle == 360.f))
+		FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle = 0.f;
 
-	if (Input::IsTriggered(SDL_SCANCODE_RIGHT))
-		if (levelindex <= 13)
-		{
-			SOUNDMANAGER->PlaySounds(moves, false);
-			levelindex++;
-			if (levelindex == 14)
-				levelindex = 0;
-		}
-	if (buttons.size() > 1) {
-		for (unsigned int i = 0; i < buttons.size(); i++)
-		{
-			if (buttons[i].second == levelindex)
-				buttons[i].first->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
+
+	if (!IsRotating)	{
+		if (Input::IsPressed(SDL_SCANCODE_RIGHT)) {
+			if (LevelList == LevelList::quit)
+				LevelList = LevelList::level1;
 			else
-				buttons[i].first->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+				++LevelList;
+
+			selectAngle = FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle;
+
+			IsRotating = true;
+			IsLeftPressed = true;
+		}
+		if (Input::IsPressed(SDL_SCANCODE_LEFT)) {
+			if (LevelList == LevelList::level1)
+				LevelList = LevelList::quit;
+			else
+				--LevelList;
+
+			selectAngle = FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle;
+
+			IsRotating = true;
+			IsLeftPressed = false;
 		}
 
-	}
-	if (Input::IsTriggered(SDL_SCANCODE_ESCAPE)) {
-
-		STATEMANAGER->MoveState(1);
-		buttons.clear();
-
-
-	}
-	if (Input::IsTriggered(SDL_SCANCODE_SPACE)|| Input::IsTriggered(SDL_SCANCODE_RETURN)) {
-		if (levelindex != 13) {
-			SOUNDMANAGER->PlaySounds(selectts, false);
-			std::string levelname = "level";
-			levelname += std::to_string(levelindex + 1);
-			levelname += ".json";
-			STATEMANAGER->Loadtolevelname = levelname;
-			STATEMANAGER->MoveState(4);
-			STATEMANAGER->i_LevelSelect = levelindex + 1;
-			buttons.clear();
-		}
-		else if (levelindex ==13)
-		{
-			STATEMANAGER->MoveState(1);
-			buttons.clear();
+		if (Input::IsPressed(SDL_SCANCODE_SPACE)) {
+			STATEMANAGER->Loadtolevelname = "level1.json";
+			STATEMANAGER->MoveState(StatesList::Level1);
+			STATEMANAGER->i_LevelSelect = LevelList;
 		}
 	}
+
+	if (IsRotating)
+	{
+		if (IsLeftPressed)
+			FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle -= 100 * dt;
+		else
+			FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle += 100 * dt;
+
+		Rotation();
+	}
+
 }
 
 void LevelSelect::Free(void)
 {
-	//INGAMELOGIC->InGameShutdown();
-	levelindex = 0;
-	SOUNDMANAGER->DeleteSounds();
+
 }
 
 
 void LevelSelect::Unload()
 {
-	printf("gd");
+}
+
+void LevelSelect::Rotation(void)
+{
+	if (IsRotating)		{
+		if (FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle - selectAngle > 0) {
+			if (std::abs(FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle - selectAngle) > 90) {
+				FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle = LevelList * 90.f;
+				IsRotating = false;
+				FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->TextureId = Levelpng[LevelList];
+			}
+
+		}
+		else if (FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle - selectAngle < 0) {
+			if (std::abs(FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle - selectAngle) > 90) {
+				FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle = -LevelList * 90.f;
+				IsRotating = false;
+				FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->TextureId = Levelpng[LevelList];
+			}
+
+		}
+
+	}
+
 }

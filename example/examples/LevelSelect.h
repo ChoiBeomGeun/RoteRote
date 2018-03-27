@@ -15,7 +15,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 
 #pragma once
 #include "BaseStage.h"
-
+#include "LevelList.h"
 
 class LevelSelect :public BaseStage
 {
@@ -29,5 +29,14 @@ public:
 	void Unload(void);
 
 private:
-	int LevelSelectCounter;
+
+	int LevelList;
+	bool IsRotating;
+
+	float selectAngle;
+	bool IsLeftPressed = true;
+
+	void Rotation(void);
+
+	unsigned int Levelpng[LevelList::quit + 1] = {0};
 };

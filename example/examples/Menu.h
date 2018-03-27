@@ -45,7 +45,7 @@ private:
 	bool IsTextChanged;
 
 	int select_index;
-	unsigned int Menu_Start;
+	unsigned int Menu_Start;		//Is it Okay To sign texture as just int not unsigned int
 	unsigned int Menu_HowToPlay;
 	unsigned int Menu_Quit;
 	unsigned int Menu_Option;
