@@ -289,6 +289,8 @@ namespace ControlDesignMode
             InvalidateSelectedObject();
 
             point.Offset(-childControlClickedPoint.X, -childControlClickedPoint.Y);
+            if (selectedControl == null)
+                return;
             selectedControl.Location = point;
             
             InvalidateSelectedObject();

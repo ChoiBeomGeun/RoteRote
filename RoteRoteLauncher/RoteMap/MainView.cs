@@ -27,7 +27,7 @@ namespace RoteMapView
         enum ControlNodeType
         {
             Player, Wall, Button, Box,
-            Trigger90_0, Trigger90_90, Trigger90_180,_Trigger90_270,
+            Trigger90_0, Trigger90_90, Trigger90_180,Trigger90_270,
             Trigger180_0, Trigger180_90, Trigger180_180,Trigger180_270,
             Clearzone, Hazard, Camera
         };
@@ -41,7 +41,7 @@ namespace RoteMapView
             this.chkDesignMode.CheckedChanged += chkDesignMode_CheckedChanged;
             this.InitDesignModePanel();
             textBox2.ScrollBars = ScrollBars.Vertical;
-
+            this.KeyPreview = true;
 
 
 
@@ -54,12 +54,12 @@ namespace RoteMapView
         {
 
          //   this.designModePanel.Controls.Add(new Button() { Text = "Test", Location = new Point(10, 10) });
-
+       
             this.designModePanel.MouseRightClick += drawPanel1_MouseRightClick;
             this.designModePanel.MouseLeftClick += drawPanel1_MouseLeftClick;
             this.designModePanel.Painted += designModePanel_Painted;
 
-
+        
         }
 
         /// <summary>
@@ -95,18 +95,28 @@ namespace RoteMapView
 
         public void SynchronizationObjects()
         {
-            foreach(var temp in objectList)
+            for(int i=0; i < this.designModePanel.Controls.Count;i++)
             {
-                if (temp.Tag.ToString() == "Camera")
+                if (this.designModePanel.Controls[i].Tag == null ||
+                    this.designModePanel.Controls[i].Tag.ToString() == "Camera" 
+                   )
                     continue;
 
-                temp.Refresh();
-                int ObjectID = Int32.Parse(temp.Tag.ToString());
-                RoteobjectList[ObjectID].PositionX = temp.Location.X;
-                RoteobjectList[ObjectID].PositionY = temp.Location.X;
-                RoteobjectList[ObjectID].ScaleX = temp.Size.Width;
-                RoteobjectList[ObjectID].ScaleY = temp.Size.Height;
+                int ObjectID = Int32.Parse(this.designModePanel.Controls[i].Tag.ToString());
+                this.designModePanel.Controls[i].Refresh();
+            
+                RoteobjectList[ObjectID].PositionX = this.designModePanel.Controls[i].Location.X;
+                RoteobjectList[ObjectID].PositionY = this.designModePanel.Controls[i].Location.Y;
+                RoteobjectList[ObjectID].ScaleX = this.designModePanel.Controls[i].Size.Width;
+                RoteobjectList[ObjectID].ScaleY = this.designModePanel.Controls[i].Size.Height;
+
+
+
             }
+
+
+
+      
 
 
         }
@@ -121,6 +131,8 @@ namespace RoteMapView
         void drawPanel1_MouseRightClick(object sender, MouseDownEventArgs args)
         {
             args.Control.BringToFront();
+
+           
         }
         void drawPanel1_MouseLeftClick(object sender, MouseDownEventArgs args)
         {
@@ -141,7 +153,8 @@ namespace RoteMapView
 
                     return;
                 }
-
+                if (RoteobjectList.Count-1 < Int32.Parse(args.Control.Tag.ToString()))
+                    return;
                 RoteobjectList[Int32.Parse(args.Control.Tag.ToString())].PositionX = args.Control.Location.X;
                 RoteobjectList[Int32.Parse(args.Control.Tag.ToString())].PositionY = args.Control.Location.Y;
                 RoteobjectList[Int32.Parse(args.Control.Tag.ToString())].ScaleX = args.Control.Size.Width;
@@ -153,17 +166,6 @@ namespace RoteMapView
                
 
             }
-
-
-
-
-       
-            // args.Control.BringToFront();
-           // propertyGrid1.SelectedObject = args.Control;
-
-    
-        
-            //     propertyGrid1.SelectedObject = args.Control;
 
         }
         /// <summary>
@@ -198,7 +200,7 @@ namespace RoteMapView
        
             TreeNode selectedNode = (e.Item as TreeNode);
             Control control = null;
-  
+            
             ControlNodeType nodeType;
             if (Enum.TryParse<ControlNodeType>(selectedNode.Text, out nodeType))
             {
@@ -213,7 +215,7 @@ namespace RoteMapView
                             }
                             control = new PictureBox()
                             {
-
+                                
                                 Image = Image.FromFile("./player.png"),
                                 SizeMode = PictureBoxSizeMode.StretchImage,
 
@@ -226,7 +228,8 @@ namespace RoteMapView
                             temp.ScaleY = control.Size.Height;
                             temp.ObjectID = RoteobjectList.Count;
                             control.Tag = temp.ObjectID;
-                          
+                            control.Width = 20;
+                            control.Height = 20;
                             objectList.Add(control);
                             RoteobjectList.Add(temp);
                             IsTherePlayer = true;
@@ -248,6 +251,8 @@ namespace RoteMapView
                             temp.ScaleX = control.Size.Width;
                             temp.ScaleY = control.Size.Height;
                             temp.ObjectID = RoteobjectList.Count;
+                            control.Width = 20;
+                            control.Height = 20;
                             control.Tag = temp.ObjectID;
                             RoteobjectList.Add(temp);
                             objectList.Add(control);
@@ -271,6 +276,8 @@ namespace RoteMapView
                             temp.ScaleX = control.Size.Width;
                             temp.ScaleY = control.Size.Height;
                             temp.ObjectID = RoteobjectList.Count;
+                            control.Width = 20;
+                            control.Height = 20;
                             control.Tag = temp.ObjectID;
                             RoteobjectList.Add(temp);
                             objectList.Add(control);
@@ -295,6 +302,8 @@ namespace RoteMapView
                             temp.ScaleY = control.Size.Height;
                             temp.ObjectID = RoteobjectList.Count;
                             control.Tag = temp.ObjectID;
+                            control.Width = 20;
+                            control.Height = 20;
                             RoteobjectList.Add(temp);
                             objectList.Add(control);
                 
@@ -320,6 +329,8 @@ namespace RoteMapView
                             temp.ScaleY = control.Size.Height;
                             temp.ObjectID = RoteobjectList.Count;
                             control.Tag = temp.ObjectID;
+                            control.Width = 20;
+                            control.Height = 20;
                             RoteobjectList.Add(temp);
                             objectList.Add(control);
                       
@@ -347,6 +358,8 @@ namespace RoteMapView
                             temp.ObjectID = RoteobjectList.Count;
                             temp.Rotation = 90;
                             control.Tag = temp.ObjectID;
+                            control.Width = 20;
+                            control.Height = 20;
                             RoteobjectList.Add(temp);
                             objectList.Add(control);
 
@@ -373,6 +386,8 @@ namespace RoteMapView
                             temp.ObjectID = RoteobjectList.Count;
                             temp.Rotation = 180;
                             control.Tag = temp.ObjectID;
+                            control.Width = 20;
+                            control.Height = 20;
                             RoteobjectList.Add(temp);
                             objectList.Add(control);
 
@@ -399,6 +414,8 @@ namespace RoteMapView
                             temp.ObjectID = RoteobjectList.Count;
                             temp.Rotation = 270;
                             control.Tag = temp.ObjectID;
+                            control.Width = 20;
+                            control.Height = 20;
                             RoteobjectList.Add(temp);
                             objectList.Add(control);
 
@@ -422,6 +439,8 @@ namespace RoteMapView
                             temp.ScaleY = control.Size.Height;
                             temp.ObjectID = RoteobjectList.Count;
                             control.Tag = temp.ObjectID;
+                            control.Width = 20;
+                            control.Height = 20;
                             RoteobjectList.Add(temp);
                             objectList.Add(control);
                
@@ -448,6 +467,8 @@ namespace RoteMapView
                             temp.ObjectID = RoteobjectList.Count;
                             temp.Rotation = 90;
                             control.Tag = temp.ObjectID;
+                            control.Width = 20;
+                            control.Height = 20;
                             RoteobjectList.Add(temp);
                             objectList.Add(control);
 
@@ -474,13 +495,15 @@ namespace RoteMapView
                             temp.ObjectID = RoteobjectList.Count;
                             temp.Rotation = 180;
                             control.Tag = temp.ObjectID;
+                            control.Width = 20;
+                            control.Height = 20;
                             RoteobjectList.Add(temp);
                             objectList.Add(control);
 
 
                         }
                         break;
-                    case ControlNodeType._Trigger90_270:
+                    case ControlNodeType.Trigger90_270:
                         {
                             control = new PictureBox()
                             {
@@ -500,6 +523,8 @@ namespace RoteMapView
                             temp.ObjectID = RoteobjectList.Count;
                             temp.Rotation = 270;
                             control.Tag = temp.ObjectID;
+                            control.Width = 20;
+                            control.Height = 20;
                             RoteobjectList.Add(temp);
                             objectList.Add(control);
 
@@ -523,6 +548,8 @@ namespace RoteMapView
                             temp.ScaleY = control.Size.Height;
                             temp.ObjectID = RoteobjectList.Count;
                             control.Tag = temp.ObjectID;
+                            control.Width = 20;
+                            control.Height = 20;
                             RoteobjectList.Add(temp);
                             objectList.Add(control);
                      
@@ -545,7 +572,8 @@ namespace RoteMapView
                             temp.ScaleY = control.Size.Height;
                             temp.ObjectID = RoteobjectList.Count;
                             control.Tag = "Camera";
-                  
+                            control.Width = 20;
+                            control.Height = 20;
                             objectList.Add(control);
 
                             IsThereCamera = true;
@@ -568,6 +596,8 @@ namespace RoteMapView
                             temp.ScaleY = control.Size.Height;
                             temp.ObjectID = RoteobjectList.Count;
                             control.Tag = temp.ObjectID;
+                            control.Width = 20;
+                            control.Height = 20;
                             RoteobjectList.Add(temp);
                             objectList.Add(control);
 
@@ -579,7 +609,7 @@ namespace RoteMapView
 
             }
             selectedNode.Tag = control;
-
+  
 
             DoDragDrop(e.Item, DragDropEffects.Move);
 
@@ -587,7 +617,7 @@ namespace RoteMapView
 
         private void button1_Click(object sender, EventArgs e)
         {
-         
+            SynchronizationObjects();
             string file_path = null;
             string file = null;
             saveFileDialog1.InitialDirectory = Application.StartupPath;
@@ -731,7 +761,7 @@ namespace RoteMapView
                     Componentlist.Add(tempinComp.ToString());
                 }
                 temp.PositionX = (temp.PositionX - (designModePanel.Size.Width / 2)) + (temp.ScaleX/2);
-                temp.PositionY = -(temp.PositionY - ((designModePanel.Size.Height / 2)));
+                temp.PositionY = -(temp.PositionY - ((designModePanel.Size.Height / 2))) - (temp.ScaleY / 2);
   
                 tempObject = new JObject(
 
@@ -784,6 +814,8 @@ namespace RoteMapView
 
          internal void JsonTextUpdate()
         {
+
+           // SynchronizationObjects();
             JArray Componentlist = new JArray();
             List<string> components = new List<string>();
 
@@ -966,6 +998,78 @@ namespace RoteMapView
         private void button1_Click_1(object sender, EventArgs e)
         {
             SynchronizationObjects();
+        }
+
+        private void propertyGrid1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void propertyGrid1_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        {
+
+        
+            RoteObject temp = (RoteObject)(propertyGrid1.SelectedObject);
+            Point tempPoint = new Point(temp.PositionX, temp.PositionY);
+            Control temp2 = null;
+
+               for (int i = 0; i < this.designModePanel.Controls.Count; i++)
+                {
+                    if (this.designModePanel.Controls[i].Tag != null &&
+                        (temp.ObjectID == Int32.Parse(this.designModePanel.Controls[i].Tag.ToString())))
+                    {
+                      this.designModePanel.Controls[i].Width = temp.ScaleX;
+                        this.designModePanel.Controls[i].Height = temp.ScaleY;
+                    this.designModePanel.Controls[i].Location = tempPoint;
+                }
+
+                }
+
+           
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+           
+            
+        }
+
+        private void MainView_KeyDown(object sender, KeyEventArgs e)
+        {
+            RoteObject temp = (RoteObject)(propertyGrid1.SelectedObject);
+            Control temp2 = null;
+
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (temp == null)
+                    return;
+
+                for(int i =0; i < this.designModePanel.Controls.Count; i++)
+                {
+                    if (this.designModePanel.Controls[i].Tag != null &&
+                        (temp.ObjectID == Int32.Parse(this.designModePanel.Controls[i].Tag.ToString())))
+                    {
+                        if (temp.objectstyle == "Player")
+                            IsTherePlayer = false;
+                        if (temp.objectstyle == "Camera")
+                            break;
+                        if (temp.objectstyle == "Clearzone")
+                            IsThereClearZone = false;
+                        RoteobjectList.Remove(temp);
+                        this.designModePanel.Controls.Remove(this.designModePanel.Controls[i]);
+
+
+                    }
+
+                }
+
+            }
+        }
+
+        private void MainView_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           
         }
     }
 }
