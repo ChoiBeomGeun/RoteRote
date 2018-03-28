@@ -33,12 +33,13 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.savebutton = new System.Windows.Forms.Button();
-            this.chkDesignMode = new System.Windows.Forms.CheckBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.treeControls = new System.Windows.Forms.TreeView();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.designModePanel = new ControlDesignMode.ControlDesignModePanel();
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.chkDesignMode = new System.Windows.Forms.CheckBox();
+            this.InstantSavingCheck = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -90,6 +91,7 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.InstantSavingCheck);
             this.splitContainer2.Panel1.Controls.Add(this.textBox1);
             this.splitContainer2.Panel1.Controls.Add(this.savebutton);
             this.splitContainer2.Panel1.Controls.Add(this.chkDesignMode);
@@ -120,18 +122,6 @@
             this.savebutton.Text = "Save Level";
             this.savebutton.UseVisualStyleBackColor = true;
             this.savebutton.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // chkDesignMode
-            // 
-            this.chkDesignMode.AutoSize = true;
-            this.chkDesignMode.Checked = true;
-            this.chkDesignMode.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDesignMode.Location = new System.Drawing.Point(11, 12);
-            this.chkDesignMode.Name = "chkDesignMode";
-            this.chkDesignMode.Size = new System.Drawing.Size(89, 17);
-            this.chkDesignMode.TabIndex = 0;
-            this.chkDesignMode.Text = "Design Mode";
-            this.chkDesignMode.UseVisualStyleBackColor = true;
             // 
             // textBox2
             // 
@@ -172,6 +162,29 @@
             this.propertyGrid1.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid1_PropertyValueChanged);
             this.propertyGrid1.Click += new System.EventHandler(this.propertyGrid1_Click);
             // 
+            // chkDesignMode
+            // 
+            this.chkDesignMode.AutoSize = true;
+            this.chkDesignMode.Checked = true;
+            this.chkDesignMode.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkDesignMode.Location = new System.Drawing.Point(11, 12);
+            this.chkDesignMode.Name = "chkDesignMode";
+            this.chkDesignMode.Size = new System.Drawing.Size(74, 17);
+            this.chkDesignMode.TabIndex = 0;
+            this.chkDesignMode.Text = "Edit Mode";
+            this.chkDesignMode.UseVisualStyleBackColor = true;
+            this.chkDesignMode.CheckedChanged += new System.EventHandler(this.chkDesignMode_CheckedChanged_1);
+            // 
+            // InstantSavingCheck
+            // 
+            this.InstantSavingCheck.AutoSize = true;
+            this.InstantSavingCheck.Location = new System.Drawing.Point(105, 13);
+            this.InstantSavingCheck.Name = "InstantSavingCheck";
+            this.InstantSavingCheck.Size = new System.Drawing.Size(116, 17);
+            this.InstantSavingCheck.TabIndex = 3;
+            this.InstantSavingCheck.Text = "Instant Save Mode";
+            this.InstantSavingCheck.UseVisualStyleBackColor = true;
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -205,13 +218,14 @@
         private System.Windows.Forms.Panel pnlControls;
         private System.Windows.Forms.TreeView treeControls;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.CheckBox chkDesignMode;
         private ControlDesignMode.ControlDesignModePanel designModePanel;
         private System.Windows.Forms.PropertyGrid propertyGrid1;
         private System.Windows.Forms.Button savebutton;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.CheckBox chkDesignMode;
+        private System.Windows.Forms.CheckBox InstantSavingCheck;
     }
 }
 

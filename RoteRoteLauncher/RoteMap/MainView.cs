@@ -69,15 +69,7 @@ namespace RoteMapView
         /// <param name="e"></param>
         void designModePanel_Painted(object sender, PaintEventArgs e)
         {
-            if (designModePanel.IsDesignMode)
-            {
-                using (Pen pen = new Pen(Brushes.Red, 10))
-                {
-                    Rectangle rect = this.designModePanel.ClientRectangle;
-                    rect.Inflate(new Size(-50, -50));
-                    e.Graphics.DrawRectangle(pen, rect);
-                }
-            }
+         
         }
         public Image RotateImage(Image img, RotateFlipType Rotation)
         {
@@ -620,15 +612,18 @@ namespace RoteMapView
             SynchronizationObjects();
             string file_path = null;
             string file = null;
-            saveFileDialog1.InitialDirectory = Application.StartupPath;
 
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            if (!InstantSavingCheck.Checked)
             {
-                file_path = saveFileDialog1.FileName;
-                file = file_path.Split('\\')[file_path.Split('\\').Length - 1];
+                saveFileDialog1.InitialDirectory = Application.StartupPath;
+
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    file_path = saveFileDialog1.FileName;
+                    file = file_path.Split('\\')[file_path.Split('\\').Length - 1];
+                }
+
             }
-
-
             JArray Componentlist = new JArray();
             List<string> components= new List<string>();
 
@@ -807,8 +802,10 @@ namespace RoteMapView
                 MessageBox.Show("There is no Player", "Object Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             if (!IsTherePlayer || !IsThereClearZone || !IsThereCamera)
                 return;
-
-            File.WriteAllText(file_path + ".json", result);
+            if(InstantSavingCheck.Checked)
+            File.WriteAllText("levels.\\"+ textBox1.Text + ".json", result);
+            else
+                File.WriteAllText(file_path + ".json", result);
         }
 
 
@@ -1070,6 +1067,11 @@ namespace RoteMapView
         private void MainView_KeyPress(object sender, KeyPressEventArgs e)
         {
            
+        }
+
+        private void chkDesignMode_CheckedChanged_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
