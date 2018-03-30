@@ -59,13 +59,11 @@ void LevelSelect::Init()
 	LevelList = LevelList::level1;
 	IsRotating = false;
 	IsLeftPressed = false;
-	selectAngle = 0;
+	IsRightPreesed = false;
 }
 
 void LevelSelect::Update(float dt)
 {
-	dt = dt;
-
 	if (std::abs(FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle == 360.f))
 		FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle = 0.f;
 
@@ -81,6 +79,7 @@ void LevelSelect::Update(float dt)
 
 			IsRotating = true;
 			IsLeftPressed = true;
+			IsRightPreesed = false;
 		}
 		if (Input::IsPressed(SDL_SCANCODE_LEFT)) {
 			if (LevelList == LevelList::level1)
@@ -91,10 +90,12 @@ void LevelSelect::Update(float dt)
 			selectAngle = FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle;
 
 			IsRotating = true;
+			IsRightPreesed = true;
 			IsLeftPressed = false;
 		}
+		
 
-		if (Input::IsPressed(SDL_SCANCODE_SPACE)) {
+		if (Input::IsTriggered(SDL_SCANCODE_SPACE)) {
 			STATEMANAGER->Loadtolevelname = "level1.json";
 			STATEMANAGER->MoveState(StatesList::Level1);
 			STATEMANAGER->i_LevelSelect = LevelList;

@@ -34,7 +34,9 @@ private:
 	bool IsRotating;
 
 	float selectAngle;
-	bool IsLeftPressed = true;
+	bool IsLeftPressed = false;
+	bool IsRightPreesed = false;
+
 
 	void Rotation(void);
 
