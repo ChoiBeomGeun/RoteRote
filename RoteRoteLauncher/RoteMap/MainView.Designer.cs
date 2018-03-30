@@ -31,15 +31,18 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.pnlControls = new System.Windows.Forms.Panel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.InstantSavingCheck = new System.Windows.Forms.CheckBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.savebutton = new System.Windows.Forms.Button();
+            this.chkDesignMode = new System.Windows.Forms.CheckBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.treeControls = new System.Windows.Forms.TreeView();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.designModePanel = new ControlDesignMode.ControlDesignModePanel();
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
-            this.chkDesignMode = new System.Windows.Forms.CheckBox();
-            this.InstantSavingCheck = new System.Windows.Forms.CheckBox();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.Loadbutton = new System.Windows.Forms.Button();
+            this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -91,6 +94,7 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.Loadbutton);
             this.splitContainer2.Panel1.Controls.Add(this.InstantSavingCheck);
             this.splitContainer2.Panel1.Controls.Add(this.textBox1);
             this.splitContainer2.Panel1.Controls.Add(this.savebutton);
@@ -104,9 +108,19 @@
             this.splitContainer2.SplitterDistance = 81;
             this.splitContainer2.TabIndex = 1;
             // 
+            // InstantSavingCheck
+            // 
+            this.InstantSavingCheck.AutoSize = true;
+            this.InstantSavingCheck.Location = new System.Drawing.Point(105, 9);
+            this.InstantSavingCheck.Name = "InstantSavingCheck";
+            this.InstantSavingCheck.Size = new System.Drawing.Size(116, 17);
+            this.InstantSavingCheck.TabIndex = 3;
+            this.InstantSavingCheck.Text = "Instant Save Mode";
+            this.InstantSavingCheck.UseVisualStyleBackColor = true;
+            // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(105, 35);
+            this.textBox1.Location = new System.Drawing.Point(105, 31);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 2;
@@ -115,13 +129,26 @@
             // 
             // savebutton
             // 
-            this.savebutton.Location = new System.Drawing.Point(11, 35);
+            this.savebutton.Location = new System.Drawing.Point(11, 27);
             this.savebutton.Name = "savebutton";
             this.savebutton.Size = new System.Drawing.Size(88, 23);
             this.savebutton.TabIndex = 1;
             this.savebutton.Text = "Save Level";
             this.savebutton.UseVisualStyleBackColor = true;
             this.savebutton.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // chkDesignMode
+            // 
+            this.chkDesignMode.AutoSize = true;
+            this.chkDesignMode.Checked = true;
+            this.chkDesignMode.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkDesignMode.Location = new System.Drawing.Point(11, 9);
+            this.chkDesignMode.Name = "chkDesignMode";
+            this.chkDesignMode.Size = new System.Drawing.Size(74, 17);
+            this.chkDesignMode.TabIndex = 0;
+            this.chkDesignMode.Text = "Edit Mode";
+            this.chkDesignMode.UseVisualStyleBackColor = true;
+            this.chkDesignMode.CheckedChanged += new System.EventHandler(this.chkDesignMode_CheckedChanged_1);
             // 
             // textBox2
             // 
@@ -162,28 +189,24 @@
             this.propertyGrid1.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid1_PropertyValueChanged);
             this.propertyGrid1.Click += new System.EventHandler(this.propertyGrid1_Click);
             // 
-            // chkDesignMode
+            // Loadbutton
             // 
-            this.chkDesignMode.AutoSize = true;
-            this.chkDesignMode.Checked = true;
-            this.chkDesignMode.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDesignMode.Location = new System.Drawing.Point(11, 12);
-            this.chkDesignMode.Name = "chkDesignMode";
-            this.chkDesignMode.Size = new System.Drawing.Size(74, 17);
-            this.chkDesignMode.TabIndex = 0;
-            this.chkDesignMode.Text = "Edit Mode";
-            this.chkDesignMode.UseVisualStyleBackColor = true;
-            this.chkDesignMode.CheckedChanged += new System.EventHandler(this.chkDesignMode_CheckedChanged_1);
+            this.Loadbutton.Location = new System.Drawing.Point(12, 55);
+            this.Loadbutton.Name = "Loadbutton";
+            this.Loadbutton.Size = new System.Drawing.Size(87, 23);
+            this.Loadbutton.TabIndex = 3;
+            this.Loadbutton.Text = "Load Level";
+            this.Loadbutton.UseVisualStyleBackColor = true;
+            this.Loadbutton.Click += new System.EventHandler(this.Loadbutton_Click);
             // 
-            // InstantSavingCheck
+            // saveFileDialog2
             // 
-            this.InstantSavingCheck.AutoSize = true;
-            this.InstantSavingCheck.Location = new System.Drawing.Point(105, 13);
-            this.InstantSavingCheck.Name = "InstantSavingCheck";
-            this.InstantSavingCheck.Size = new System.Drawing.Size(116, 17);
-            this.InstantSavingCheck.TabIndex = 3;
-            this.InstantSavingCheck.Text = "Instant Save Mode";
-            this.InstantSavingCheck.UseVisualStyleBackColor = true;
+            this.saveFileDialog2.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog2_FileOk);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
             // MainView
             // 
@@ -226,6 +249,9 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.CheckBox chkDesignMode;
         private System.Windows.Forms.CheckBox InstantSavingCheck;
+        private System.Windows.Forms.Button Loadbutton;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog2;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

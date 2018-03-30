@@ -31,7 +31,7 @@ namespace RoteMapView
             Trigger180_0, Trigger180_90, Trigger180_180,Trigger180_270,
             Clearzone, Hazard, Camera
         };
-
+        
         public MainView()
         {
             InitializeComponent();
@@ -1070,6 +1070,75 @@ namespace RoteMapView
         }
 
         private void chkDesignMode_CheckedChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveFileDialog2_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void Loadbutton_Click(object sender, EventArgs e)
+        {
+            RoteobjectList.Clear();
+            this.designModePanel.Controls.Clear();
+
+            string file_path = null;
+            string file = null;
+
+            if (!InstantSavingCheck.Checked)
+            {
+                openFileDialog1.InitialDirectory = Application.StartupPath;
+
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    file_path = openFileDialog1.FileName;
+                    file = file_path.Split('\\')[file_path.Split('\\').Length - 1];
+                }
+
+            }
+
+            
+       
+                JObject Reading = JObject.Parse(File.ReadAllText(file_path));
+
+            int iNumberOfObjects = Int32.Parse(Reading["NumberOfObjects"].ToString());
+            RoteObject temp =null;
+            for(int i = 0; i <= iNumberOfObjects; i++)
+            {
+                string ObjectNumberString = "Object" + (i + 1).ToString();
+                temp.PositionX = Int32.Parse(Reading[ObjectNumberString]["Position"]["x"].ToString());
+                temp.PositionY = Int32.Parse(Reading[ObjectNumberString]["Position"]["y"].ToString());
+                temp.PositionZ = Int32.Parse(Reading[ObjectNumberString]["Position"]["z"].ToString());
+                temp.ScaleX = Int32.Parse(Reading[ObjectNumberString]["Scale"]["x"].ToString());
+                temp.ScaleY = Int32.Parse(Reading[ObjectNumberString]["Scale"]["y"].ToString());
+                temp.Rotation = Int32.Parse(Reading[ObjectNumberString]["Rotation"].ToString());
+                temp.ObjectID = Int32.Parse(Reading[ObjectNumberString]["ObjectID"].ToString());
+                temp.objectstyle =Reading[ObjectNumberString]["ObjectType"].ToString();
+                temp.Texture = Reading[ObjectNumberString]["Position"]["z"].ToString();
+
+                RoteobjectList.Add(temp);
+            }
+
+
+            for (int i = 0; i <= iNumberOfObjects; i++)
+            {
+                Control tempC = new PictureBox();
+                tempC.Tag = RoteobjectList[i].ObjectID;
+                ((System.Windows.Forms.PictureBox)tempC).Image = Image.FromFile("./" + RoteobjectList[i].Texture);
+                ((System.Windows.Forms.PictureBox)tempC).Image = Image.FromFile("./" + RoteobjectList[i].Texture);
+
+
+
+
+
+
+            }
+
+            }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
 
         }
