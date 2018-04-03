@@ -21,12 +21,12 @@ namespace RoteRoteLauncherView
     {
    
         private string m_strName;
-        private int m_posX;
-        private int m_posY;
-        private int m_posZ;
-        private int m_scaleX;
-        private int m_scaleY;
-        private int m_scaleZ;
+        private float m_posX;
+        private float m_posY;
+        private float m_posZ;
+        private float m_scaleX;
+        private float m_scaleY;
+        private float m_scaleZ;
 
         private bool m_defaultGravity;
         private int m_defaultMass;
@@ -42,21 +42,21 @@ namespace RoteRoteLauncherView
         #region Position
         [Category("Transform")]
         [DisplayName("PositionX")]
-        public int PositionX
+        public float PositionX
         {
             set { m_posX = value; }
             get { return m_posX; }
         }
         [Category("Transform")]
         [DisplayName("PositionY")]
-        public int PositionY
+        public float PositionY
         {
             set { m_posY = value; }
             get { return m_posY; }
         }
         [Category("Transform")]
         [DisplayName("PositionZ")]
-        public int PositionZ
+        public float PositionZ
         {
             set { m_posZ = value; }
             get { return m_posZ; }
@@ -65,21 +65,21 @@ namespace RoteRoteLauncherView
         #region Scale 
         [Category("Transform")]
         [DisplayName("ScaleX")]
-        public int ScaleX
+        public float ScaleX
         {
             set { m_scaleX = value; }
             get { return m_scaleX; }
         }
         [Category("Transform")]
         [DisplayName("ScaleY")]
-        public int ScaleY
+        public float ScaleY
         {
             set { m_scaleY = value; }
             get { return m_scaleY; }
         }
         [Category("Transform")]
         [DisplayName("ScaleZ")]
-        public int ScaleZ
+        public float ScaleZ
         {
             set { m_scaleZ = value; }
             get { return m_scaleZ; }

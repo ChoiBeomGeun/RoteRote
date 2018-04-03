@@ -68,3 +68,17 @@ C:\Users\PC\Desktop\NewRote\RoteRoteLauncher\RoteMap\obj\Debug\RoteMapEditorView
 C:\Users\PC\Desktop\NewRote\RoteRoteLauncher\RoteMap\obj\Debug\RoteMapEditorView.csproj.CoreCompileInputs.cache
 C:\Users\PC\Desktop\NewRote\RoteRoteLauncher\RoteMap\obj\Debug\RoteMap.exe
 C:\Users\PC\Desktop\NewRote\RoteRoteLauncher\RoteMap\obj\Debug\RoteMap.pdb
+C:\Users\o7716\Desktop\re\RoteRoteLauncher\RoteMap\bin\Debug\Chrysanthemum.jpg
+C:\Users\o7716\Desktop\re\RoteRoteLauncher\RoteMap\bin\Debug\RoteMap.exe
+C:\Users\o7716\Desktop\re\RoteRoteLauncher\RoteMap\bin\Debug\RoteMap.pdb
+C:\Users\o7716\Desktop\re\RoteRoteLauncher\RoteMap\bin\Debug\DesignModePanel.dll
+C:\Users\o7716\Desktop\re\RoteRoteLauncher\RoteMap\bin\Debug\Newtonsoft.Json.dll
+C:\Users\o7716\Desktop\re\RoteRoteLauncher\RoteMap\bin\Debug\DesignModePanel.pdb
+C:\Users\o7716\Desktop\re\RoteRoteLauncher\RoteMap\bin\Debug\Newtonsoft.Json.xml
+C:\Users\o7716\Desktop\re\RoteRoteLauncher\RoteMap\obj\Debug\RoteMapEditorView.csprojResolveAssemblyReference.cache
+C:\Users\o7716\Desktop\re\RoteRoteLauncher\RoteMap\obj\Debug\RoteMapView.MainView.resources
+C:\Users\o7716\Desktop\re\RoteRoteLauncher\RoteMap\obj\Debug\RoteMap.Properties.Resources.resources
+C:\Users\o7716\Desktop\re\RoteRoteLauncher\RoteMap\obj\Debug\RoteMapEditorView.csproj.GenerateResource.Cache
+C:\Users\o7716\Desktop\re\RoteRoteLauncher\RoteMap\obj\Debug\RoteMapEditorView.csproj.CoreCompileInputs.cache
+C:\Users\o7716\Desktop\re\RoteRoteLauncher\RoteMap\obj\Debug\RoteMap.exe
+C:\Users\o7716\Desktop\re\RoteRoteLauncher\RoteMap\obj\Debug\RoteMap.pdb

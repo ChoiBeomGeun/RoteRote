@@ -31,6 +31,7 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.pnlControls = new System.Windows.Forms.Panel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.Loadbutton = new System.Windows.Forms.Button();
             this.InstantSavingCheck = new System.Windows.Forms.CheckBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.savebutton = new System.Windows.Forms.Button();
@@ -40,7 +41,6 @@
             this.designModePanel = new ControlDesignMode.ControlDesignModePanel();
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.Loadbutton = new System.Windows.Forms.Button();
             this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -70,7 +70,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.designModePanel);
-            this.splitContainer1.Size = new System.Drawing.Size(906, 817);
+            this.splitContainer1.Size = new System.Drawing.Size(1057, 754);
             this.splitContainer1.SplitterDistance = 227;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 0;
@@ -82,7 +82,7 @@
             this.pnlControls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlControls.Location = new System.Drawing.Point(0, 0);
             this.pnlControls.Name = "pnlControls";
-            this.pnlControls.Size = new System.Drawing.Size(227, 817);
+            this.pnlControls.Size = new System.Drawing.Size(227, 754);
             this.pnlControls.TabIndex = 0;
             // 
             // splitContainer2
@@ -104,34 +104,44 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.textBox2);
             this.splitContainer2.Panel2.Controls.Add(this.treeControls);
-            this.splitContainer2.Size = new System.Drawing.Size(227, 817);
-            this.splitContainer2.SplitterDistance = 81;
+            this.splitContainer2.Size = new System.Drawing.Size(227, 754);
+            this.splitContainer2.SplitterDistance = 74;
             this.splitContainer2.TabIndex = 1;
+            // 
+            // Loadbutton
+            // 
+            this.Loadbutton.Location = new System.Drawing.Point(14, 51);
+            this.Loadbutton.Name = "Loadbutton";
+            this.Loadbutton.Size = new System.Drawing.Size(101, 21);
+            this.Loadbutton.TabIndex = 3;
+            this.Loadbutton.Text = "Load Level";
+            this.Loadbutton.UseVisualStyleBackColor = true;
+            this.Loadbutton.Click += new System.EventHandler(this.Loadbutton_Click);
             // 
             // InstantSavingCheck
             // 
             this.InstantSavingCheck.AutoSize = true;
-            this.InstantSavingCheck.Location = new System.Drawing.Point(105, 9);
+            this.InstantSavingCheck.Location = new System.Drawing.Point(122, 8);
             this.InstantSavingCheck.Name = "InstantSavingCheck";
-            this.InstantSavingCheck.Size = new System.Drawing.Size(116, 17);
+            this.InstantSavingCheck.Size = new System.Drawing.Size(129, 16);
             this.InstantSavingCheck.TabIndex = 3;
             this.InstantSavingCheck.Text = "Instant Save Mode";
             this.InstantSavingCheck.UseVisualStyleBackColor = true;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(105, 31);
+            this.textBox1.Location = new System.Drawing.Point(122, 29);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.Size = new System.Drawing.Size(116, 21);
             this.textBox1.TabIndex = 2;
             this.textBox1.Text = "Levelname";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // savebutton
             // 
-            this.savebutton.Location = new System.Drawing.Point(11, 27);
+            this.savebutton.Location = new System.Drawing.Point(13, 25);
             this.savebutton.Name = "savebutton";
-            this.savebutton.Size = new System.Drawing.Size(88, 23);
+            this.savebutton.Size = new System.Drawing.Size(103, 21);
             this.savebutton.TabIndex = 1;
             this.savebutton.Text = "Save Level";
             this.savebutton.UseVisualStyleBackColor = true;
@@ -142,9 +152,9 @@
             this.chkDesignMode.AutoSize = true;
             this.chkDesignMode.Checked = true;
             this.chkDesignMode.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDesignMode.Location = new System.Drawing.Point(11, 9);
+            this.chkDesignMode.Location = new System.Drawing.Point(13, 8);
             this.chkDesignMode.Name = "chkDesignMode";
-            this.chkDesignMode.Size = new System.Drawing.Size(74, 17);
+            this.chkDesignMode.Size = new System.Drawing.Size(81, 16);
             this.chkDesignMode.TabIndex = 0;
             this.chkDesignMode.Text = "Edit Mode";
             this.chkDesignMode.UseVisualStyleBackColor = true;
@@ -152,17 +162,18 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(3, 149);
+            this.textBox2.Location = new System.Drawing.Point(3, 138);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(224, 664);
+            this.textBox2.Size = new System.Drawing.Size(261, 613);
             this.textBox2.TabIndex = 2;
             // 
             // treeControls
             // 
+            this.treeControls.AllowDrop = true;
             this.treeControls.Location = new System.Drawing.Point(0, 0);
             this.treeControls.Name = "treeControls";
-            this.treeControls.Size = new System.Drawing.Size(227, 143);
+            this.treeControls.Size = new System.Drawing.Size(264, 132);
             this.treeControls.TabIndex = 1;
             this.treeControls.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeControls_ItemDrag);
             // 
@@ -176,28 +187,18 @@
             this.designModePanel.IsDesignMode = true;
             this.designModePanel.Location = new System.Drawing.Point(0, 0);
             this.designModePanel.Name = "designModePanel";
-            this.designModePanel.Size = new System.Drawing.Size(676, 817);
+            this.designModePanel.Size = new System.Drawing.Size(827, 754);
             this.designModePanel.TabIndex = 0;
             // 
             // propertyGrid1
             // 
             this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.propertyGrid1.Location = new System.Drawing.Point(532, 0);
+            this.propertyGrid1.Location = new System.Drawing.Point(659, 0);
             this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.Size = new System.Drawing.Size(142, 815);
+            this.propertyGrid1.Size = new System.Drawing.Size(166, 752);
             this.propertyGrid1.TabIndex = 1;
             this.propertyGrid1.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid1_PropertyValueChanged);
             this.propertyGrid1.Click += new System.EventHandler(this.propertyGrid1_Click);
-            // 
-            // Loadbutton
-            // 
-            this.Loadbutton.Location = new System.Drawing.Point(12, 55);
-            this.Loadbutton.Name = "Loadbutton";
-            this.Loadbutton.Size = new System.Drawing.Size(87, 23);
-            this.Loadbutton.TabIndex = 3;
-            this.Loadbutton.Text = "Load Level";
-            this.Loadbutton.UseVisualStyleBackColor = true;
-            this.Loadbutton.Click += new System.EventHandler(this.Loadbutton_Click);
             // 
             // saveFileDialog2
             // 
@@ -210,9 +211,9 @@
             // 
             // MainView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(906, 817);
+            this.ClientSize = new System.Drawing.Size(1057, 754);
             this.Controls.Add(this.splitContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "MainView";

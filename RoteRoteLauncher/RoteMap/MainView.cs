@@ -680,7 +680,7 @@ namespace RoteMapView
                     components.Add("BODY");
                     components.Add("CONTROLLER");
                     components.Add("ANIMATION");
-                    temp.Texture = "spritestrip.png";
+                    temp.Texture = "player.png";
                     temp.Mass = 1;
                     temp.Gravity = true;
                 }
@@ -734,7 +734,7 @@ namespace RoteMapView
                 {
                     components.Add("TRANSFORM");
                     components.Add("SPRITE");
-                    temp.Texture = "clearzone2.png";
+                    temp.Texture = "clearzone.png";
                 }
 
                 if (temp.objectstyle == "Hazard")
@@ -1007,7 +1007,7 @@ namespace RoteMapView
 
         
             RoteObject temp = (RoteObject)(propertyGrid1.SelectedObject);
-            Point tempPoint = new Point(temp.PositionX, temp.PositionY);
+            Point tempPoint = new Point((int)(temp.PositionX), (int)temp.PositionY);
             Control temp2 = null;
 
                for (int i = 0; i < this.designModePanel.Controls.Count; i++)
@@ -1015,8 +1015,8 @@ namespace RoteMapView
                     if (this.designModePanel.Controls[i].Tag != null &&
                         (temp.ObjectID == Int32.Parse(this.designModePanel.Controls[i].Tag.ToString())))
                     {
-                      this.designModePanel.Controls[i].Width = temp.ScaleX;
-                        this.designModePanel.Controls[i].Height = temp.ScaleY;
+                      this.designModePanel.Controls[i].Width = (int)temp.ScaleX;
+                        this.designModePanel.Controls[i].Height = (int)temp.ScaleY;
                     this.designModePanel.Controls[i].Location = tempPoint;
                 }
 
@@ -1036,7 +1036,7 @@ namespace RoteMapView
         {
             RoteObject temp = (RoteObject)(propertyGrid1.SelectedObject);
             Control temp2 = null;
-
+            int tempi = 3;
             if (e.KeyCode == Keys.Delete)
             {
                 if (temp == null)
@@ -1044,7 +1044,10 @@ namespace RoteMapView
 
                 for(int i =0; i < this.designModePanel.Controls.Count; i++)
                 {
-                    if (this.designModePanel.Controls[i].Tag != null &&
+                    if (temp.objectstyle == null)
+                        return;
+                     if( this.designModePanel.Controls[i].Tag != null &&
+                         Int32.TryParse(this.designModePanel.Controls[i].Tag.ToString(), out tempi) &&
                         (temp.ObjectID == Int32.Parse(this.designModePanel.Controls[i].Tag.ToString())))
                     {
                         if (temp.objectstyle == "Player")
@@ -1082,8 +1085,9 @@ namespace RoteMapView
         private void Loadbutton_Click(object sender, EventArgs e)
         {
             RoteobjectList.Clear();
-            this.designModePanel.Controls.Clear();
-
+          //  this.designModePanel.Controls.Clear();
+            objectList.Clear();
+            
             string file_path = null;
             string file = null;
 
@@ -1096,47 +1100,79 @@ namespace RoteMapView
                     file_path = openFileDialog1.FileName;
                     file = file_path.Split('\\')[file_path.Split('\\').Length - 1];
                 }
+                else
+                {
+                    return;
+                }
 
             }
 
-            
-       
-                JObject Reading = JObject.Parse(File.ReadAllText(file_path));
+            JObject Reading = null;
+            if (InstantSavingCheck.Checked)
+                Reading = JObject.Parse(File.ReadAllText("levels.\\" + textBox1.Text + ".json"));
+            else
+             Reading = JObject.Parse(File.ReadAllText(file_path));
 
             int iNumberOfObjects = Int32.Parse(Reading["NumberOfObjects"].ToString());
-            RoteObject temp =null;
-            for(int i = 0; i <= iNumberOfObjects; i++)
+            
+            for(int i = 0; i < iNumberOfObjects; i++)
             {
+                RoteObject temp = new RoteObject();
                 string ObjectNumberString = "Object" + (i + 1).ToString();
-                temp.PositionX = Int32.Parse(Reading[ObjectNumberString]["Position"]["x"].ToString());
-                temp.PositionY = Int32.Parse(Reading[ObjectNumberString]["Position"]["y"].ToString());
-                temp.PositionZ = Int32.Parse(Reading[ObjectNumberString]["Position"]["z"].ToString());
-                temp.ScaleX = Int32.Parse(Reading[ObjectNumberString]["Scale"]["x"].ToString());
-                temp.ScaleY = Int32.Parse(Reading[ObjectNumberString]["Scale"]["y"].ToString());
-                temp.Rotation = Int32.Parse(Reading[ObjectNumberString]["Rotation"].ToString());
-                temp.ObjectID = Int32.Parse(Reading[ObjectNumberString]["ObjectID"].ToString());
+                
+                temp.PositionX = System.Single.Parse(Reading[ObjectNumberString]["Position"]["x"].ToString());
+                temp.PositionY = System.Single.Parse(Reading[ObjectNumberString]["Position"]["y"].ToString());
+
+                temp.PositionZ = System.Single.Parse(Reading[ObjectNumberString]["Position"]["z"].ToString());
+                temp.ScaleX = System.Single.Parse(Reading[ObjectNumberString]["Scale"]["x"].ToString());
+                temp.ScaleY = System.Single.Parse(Reading[ObjectNumberString]["Scale"]["y"].ToString());
+
+
+                ///////////////////////////////////Convert Position
+                temp.PositionX = ((temp.PositionX + (designModePanel.Size.Width / 2)) - (temp.ScaleX / 2));
+                temp.PositionY = (-temp.PositionY + ((designModePanel.Size.Height / 2))) ;
+                /// ///////////////////////////////
+                temp.Rotation = System.Single.Parse(Reading[ObjectNumberString]["Rotation"].ToString());
+                temp.ObjectID = i;
                 temp.objectstyle =Reading[ObjectNumberString]["ObjectType"].ToString();
-                temp.Texture = Reading[ObjectNumberString]["Position"]["z"].ToString();
+                temp.Texture = Reading[ObjectNumberString]["TextureDir"].ToString();
 
                 RoteobjectList.Add(temp);
             }
+            Control tempCamera = new PictureBox();
+            Point tempCameraLocation = new Point (Int32.Parse(Reading["DefalutCamera"]["EYE"]["x"].ToString())
+            , Int32.Parse(Reading["DefalutCamera"]["EYE"]["y"].ToString()));
+            tempCamera.Location = tempCameraLocation;
+            tempCamera.Size = new Size(50, 50);
+            ((System.Windows.Forms.PictureBox)tempCamera).Image = Image.FromFile("./" + "camera.png");
+            ((System.Windows.Forms.PictureBox)tempCamera).SizeMode = PictureBoxSizeMode.StretchImage;
+            tempCamera.Tag = 0;
+            this.designModePanel.Controls.Add(tempCamera);
+            objectList.Add(tempCamera);
 
-
-            for (int i = 0; i <= iNumberOfObjects; i++)
+            for (int i = 0; i < iNumberOfObjects; i++)
             {
                 Control tempC = new PictureBox();
+                Point tempLocation = new Point((int)RoteobjectList[i].PositionX, (int)RoteobjectList[i].PositionY);
+                Size tempScale = new Size((int)RoteobjectList[i].ScaleX, (int)RoteobjectList[i].ScaleY);
                 tempC.Tag = RoteobjectList[i].ObjectID;
+                if(RoteobjectList[i].Texture =="0")
+                    ((System.Windows.Forms.PictureBox)tempC).Image = Image.FromFile("./" + "wall.png");
+                else
                 ((System.Windows.Forms.PictureBox)tempC).Image = Image.FromFile("./" + RoteobjectList[i].Texture);
-                ((System.Windows.Forms.PictureBox)tempC).Image = Image.FromFile("./" + RoteobjectList[i].Texture);
+                ((System.Windows.Forms.PictureBox) tempC).SizeMode = PictureBoxSizeMode.StretchImage;
+                tempC.Location = tempLocation;
+                tempC.Size = tempScale;
 
-
-
-
-
+                this.designModePanel.Controls.Add(tempC);
+                objectList.Add(tempC);
 
             }
+            
+    
 
-            }
+
+        }
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
