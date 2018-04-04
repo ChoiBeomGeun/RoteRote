@@ -355,7 +355,7 @@ namespace RoteMapView
                             control.Height = 20;
                             RoteobjectList.Add(temp);
                             objectList.Add(control);
-
+                             
 
                         }
                         break;
@@ -922,6 +922,8 @@ namespace RoteMapView
                     file_path = saveFileDialog1.FileName;
                     file = file_path.Split('\\')[file_path.Split('\\').Length - 1];
                 }
+                else
+                    return;
 
             }
             JArray Componentlist = new JArray();
