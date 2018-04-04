@@ -83,5 +83,10 @@ namespace RoteRoteLauncherView
             RoteMapView.MainView mainView = new RoteMapView.MainView();
             mainView.ShowDialog();
         }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }

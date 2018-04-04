@@ -41,9 +41,9 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(135, 91);
+            this.button1.Location = new System.Drawing.Point(157, 84);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(137, 122);
+            this.button1.Size = new System.Drawing.Size(160, 113);
             this.button1.TabIndex = 0;
             this.button1.Text = "Game Start";
             this.button1.UseVisualStyleBackColor = true;
@@ -52,17 +52,18 @@
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(9, 91);
+            this.listBox1.ItemHeight = 12;
+            this.listBox1.Location = new System.Drawing.Point(10, 84);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(120, 121);
+            this.listBox1.Size = new System.Drawing.Size(139, 112);
             this.listBox1.TabIndex = 1;
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(9, 220);
+            this.checkBox1.Location = new System.Drawing.Point(10, 203);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(76, 17);
+            this.checkBox1.Size = new System.Drawing.Size(84, 16);
             this.checkBox1.TabIndex = 2;
             this.checkBox1.Text = "FullScreen";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -70,9 +71,9 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(14, 1);
+            this.pictureBox1.Location = new System.Drawing.Point(10, 1);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(260, 83);
+            this.pictureBox1.Size = new System.Drawing.Size(303, 77);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
@@ -80,9 +81,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(171, 220);
+            this.button3.Location = new System.Drawing.Point(199, 203);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 25);
+            this.button3.Size = new System.Drawing.Size(117, 23);
             this.button3.TabIndex = 5;
             this.button3.Text = "ArchetypeEditor";
             this.button3.UseVisualStyleBackColor = true;
@@ -92,9 +93,9 @@
             // button2
             // 
             this.button2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button2.Location = new System.Drawing.Point(171, 227);
+            this.button2.Location = new System.Drawing.Point(199, 210);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 23);
+            this.button2.Size = new System.Drawing.Size(117, 21);
             this.button2.TabIndex = 6;
             this.button2.Text = "Map Editor";
             this.button2.UseVisualStyleBackColor = true;
@@ -103,10 +104,10 @@
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(331, 241);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.pictureBox1);
@@ -114,8 +115,8 @@
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(300, 300);
-            this.MinimumSize = new System.Drawing.Size(300, 300);
+            this.MaximumSize = new System.Drawing.Size(347, 280);
+            this.MinimumSize = new System.Drawing.Size(347, 280);
             this.Name = "Main";
             this.Text = "RoteLauncher";
             this.Load += new System.EventHandler(this.Form1_Load);

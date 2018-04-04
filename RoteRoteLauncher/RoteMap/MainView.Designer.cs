@@ -28,21 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.pnlControls = new System.Windows.Forms.Panel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.Loadbutton = new System.Windows.Forms.Button();
             this.InstantSavingCheck = new System.Windows.Forms.CheckBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.savebutton = new System.Windows.Forms.Button();
             this.chkDesignMode = new System.Windows.Forms.CheckBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.treeControls = new System.Windows.Forms.TreeView();
             this.designModePanel = new ControlDesignMode.ControlDesignModePanel();
-            this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -53,6 +57,7 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.designModePanel.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -94,11 +99,10 @@
             // 
             // splitContainer2.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.Loadbutton);
             this.splitContainer2.Panel1.Controls.Add(this.InstantSavingCheck);
             this.splitContainer2.Panel1.Controls.Add(this.textBox1);
-            this.splitContainer2.Panel1.Controls.Add(this.savebutton);
             this.splitContainer2.Panel1.Controls.Add(this.chkDesignMode);
+            this.splitContainer2.Panel1.Controls.Add(this.menuStrip1);
             // 
             // splitContainer2.Panel2
             // 
@@ -108,20 +112,10 @@
             this.splitContainer2.SplitterDistance = 74;
             this.splitContainer2.TabIndex = 1;
             // 
-            // Loadbutton
-            // 
-            this.Loadbutton.Location = new System.Drawing.Point(14, 51);
-            this.Loadbutton.Name = "Loadbutton";
-            this.Loadbutton.Size = new System.Drawing.Size(101, 21);
-            this.Loadbutton.TabIndex = 3;
-            this.Loadbutton.Text = "Load Level";
-            this.Loadbutton.UseVisualStyleBackColor = true;
-            this.Loadbutton.Click += new System.EventHandler(this.Loadbutton_Click);
-            // 
             // InstantSavingCheck
             // 
             this.InstantSavingCheck.AutoSize = true;
-            this.InstantSavingCheck.Location = new System.Drawing.Point(122, 8);
+            this.InstantSavingCheck.Location = new System.Drawing.Point(12, 51);
             this.InstantSavingCheck.Name = "InstantSavingCheck";
             this.InstantSavingCheck.Size = new System.Drawing.Size(129, 16);
             this.InstantSavingCheck.TabIndex = 3;
@@ -130,29 +124,19 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(122, 29);
+            this.textBox1.Location = new System.Drawing.Point(99, 27);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(116, 21);
             this.textBox1.TabIndex = 2;
             this.textBox1.Text = "Levelname";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // savebutton
-            // 
-            this.savebutton.Location = new System.Drawing.Point(13, 25);
-            this.savebutton.Name = "savebutton";
-            this.savebutton.Size = new System.Drawing.Size(103, 21);
-            this.savebutton.TabIndex = 1;
-            this.savebutton.Text = "Save Level";
-            this.savebutton.UseVisualStyleBackColor = true;
-            this.savebutton.Click += new System.EventHandler(this.button1_Click);
-            // 
             // chkDesignMode
             // 
             this.chkDesignMode.AutoSize = true;
             this.chkDesignMode.Checked = true;
             this.chkDesignMode.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDesignMode.Location = new System.Drawing.Point(13, 8);
+            this.chkDesignMode.Location = new System.Drawing.Point(12, 29);
             this.chkDesignMode.Name = "chkDesignMode";
             this.chkDesignMode.Size = new System.Drawing.Size(81, 16);
             this.chkDesignMode.TabIndex = 0;
@@ -189,6 +173,59 @@
             this.designModePanel.Name = "designModePanel";
             this.designModePanel.Size = new System.Drawing.Size(827, 754);
             this.designModePanel.TabIndex = 0;
+            this.designModePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.designModePanel_Paint);
+            // 
+            // saveFileDialog2
+            // 
+            this.saveFileDialog2.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog2_FileOk);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.Window;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.menuStrip1.Size = new System.Drawing.Size(227, 24);
+            this.menuStrip1.TabIndex = 4;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveToolStripMenuItem,
+            this.loadToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadToolStripMenuItem.Text = "Load";
+            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // propertyGrid1
             // 
@@ -200,15 +237,6 @@
             this.propertyGrid1.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid1_PropertyValueChanged);
             this.propertyGrid1.Click += new System.EventHandler(this.propertyGrid1_Click);
             // 
-            // saveFileDialog2
-            // 
-            this.saveFileDialog2.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog2_FileOk);
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
-            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -216,8 +244,9 @@
             this.ClientSize = new System.Drawing.Size(1057, 754);
             this.Controls.Add(this.splitContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainView";
-            this.Text = "MainView";
+            this.Text = "RoteMapEditor";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainView_KeyDown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainView_KeyPress);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -232,6 +261,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.designModePanel.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -243,16 +274,19 @@
         private System.Windows.Forms.TreeView treeControls;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private ControlDesignMode.ControlDesignModePanel designModePanel;
-        private System.Windows.Forms.PropertyGrid propertyGrid1;
-        private System.Windows.Forms.Button savebutton;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.CheckBox chkDesignMode;
         private System.Windows.Forms.CheckBox InstantSavingCheck;
-        private System.Windows.Forms.Button Loadbutton;
         private System.Windows.Forms.SaveFileDialog saveFileDialog2;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.PropertyGrid propertyGrid1;
     }
 }
 

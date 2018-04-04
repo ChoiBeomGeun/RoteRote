@@ -59,7 +59,7 @@ namespace RoteMapView
             this.designModePanel.MouseLeftClick += drawPanel1_MouseLeftClick;
             this.designModePanel.Painted += designModePanel_Painted;
 
-        
+            //this.designModePanel.Controls.Clear();
         }
 
         /// <summary>
@@ -122,6 +122,7 @@ namespace RoteMapView
 
         void drawPanel1_MouseRightClick(object sender, MouseDownEventArgs args)
         {
+     
             args.Control.BringToFront();
 
            
@@ -609,203 +610,7 @@ namespace RoteMapView
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SynchronizationObjects();
-            string file_path = null;
-            string file = null;
 
-            if (!InstantSavingCheck.Checked)
-            {
-                saveFileDialog1.InitialDirectory = Application.StartupPath;
-
-                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    file_path = saveFileDialog1.FileName;
-                    file = file_path.Split('\\')[file_path.Split('\\').Length - 1];
-                }
-
-            }
-            JArray Componentlist = new JArray();
-            List<string> components= new List<string>();
-
-            JObject tempObject= null;
-            JObject camObject = null;
-            JObject LevelInfo = null;
-            string result = null;
-            string objectinfo = null;
-            string LevelInfoString = null;
-
-
-            LevelInfo = new JObject(
-
-                     new JProperty("Level" ,textBox1.Text),
-                       new JProperty("NumberOfObjects", RoteobjectList.Count)
-                     );
-
-            LevelInfoString = LevelInfo.ToString();
-            LevelInfoString = LevelInfoString.Remove(0, 1);
-            LevelInfoString = LevelInfoString.Remove(LevelInfoString.Count() - 1, 1);
-            LevelInfoString = LevelInfoString.Remove(LevelInfoString.Count() - 2, 1);
-            LevelInfoString = LevelInfoString.Insert(LevelInfoString.Count() - 1, ",");
-            result += LevelInfoString;
-            foreach (var temp in RoteobjectList)
-            {
-
-                if (temp.ObjectID ==1)
-                {
-                    string camString = null;
-                    camObject = new JObject(
-
-                        new JProperty("DefalutCamera",
-                        new JObject(
-
-                        new JProperty("EYE", new JObject(new JProperty("x", roCamera.PositionX), new JProperty("y", roCamera.PositionY), new JProperty("z", 999))))
-                        )
-                        );
-
-                    camString = camObject.ToString();
-                    camString = camString.Remove(0, 1);
-                    camString = camString.Remove(camString.Count() - 1, 1);
-                    camString = camString.Remove(camString.Count() - 2, 1);
-                   
-                        camString = camString.Insert(camString.Count() - 1, ",");
-                    result += camString;
-                }
-
-
-
-                if (temp.objectstyle == "Player")
-                {
-                    components.Add("TRANSFORM");
-                    components.Add("SPRITE");
-                    components.Add("BODY");
-                    components.Add("CONTROLLER");
-                    components.Add("ANIMATION");
-                    temp.Texture = "player.png";
-                    temp.Mass = 1;
-                    temp.Gravity = true;
-                }
-
-                if (temp.objectstyle == "Wall")
-                {
-                    components.Add("TRANSFORM");
-                    components.Add("SPRITE");
-                    components.Add("BODY");
-                    temp.Texture = "wall.png";
-                    temp.Mass = 0;
-                }
-
-                if (temp.objectstyle == "Button")
-                {
-                    components.Add("TRANSFORM");
-                    components.Add("SPRITE");
-                    temp.Texture = "1.png";
-                    temp.Gravity = true;
-                }
-
-                if (temp.objectstyle == "Box")
-                {
-                    components.Add("TRANSFORM");
-                    components.Add("SPRITE");
-                    components.Add("BODY");
-                    temp.Texture = "box.png";
-                    temp.Gravity = false;
-                    temp.Mass = 1;
-                }
-
-                if (temp.objectstyle == "Trigger90")
-                {
-                    components.Add("TRANSFORM");
-                    components.Add("SPRITE");
-                    components.Add("BODY");
-                    components.Add("TRIGGER");
-                    temp.Texture = "90button.png";
-                }
-
-                if (temp.objectstyle == "Trigger180")
-                {
-                    components.Add("TRANSFORM");
-                    components.Add("SPRITE");
-                    components.Add("BODY");
-                    components.Add("TRIGGER");
-                    temp.Texture = "180button.png";
-                }
-
-                if (temp.objectstyle == "Clearzone")
-                {
-                    components.Add("TRANSFORM");
-                    components.Add("SPRITE");
-                    temp.Texture = "clearzone.png";
-                }
-
-                if (temp.objectstyle == "Hazard")
-                {
-                    components.Add("TRANSFORM");
-                    components.Add("SPRITE");
-                    components.Add("BODY");
-                    temp.Texture = "hazard.png";
-                }
-
-
-
-               
-                
-
-
-                foreach (var tempinComp in components)
-                {
-                    Componentlist.Add(tempinComp.ToString());
-                }
-                temp.PositionX = (temp.PositionX - (designModePanel.Size.Width / 2)) + (temp.ScaleX/2);
-                temp.PositionY = -(temp.PositionY - ((designModePanel.Size.Height / 2))) - (temp.ScaleY / 2);
-  
-                tempObject = new JObject(
-
-                     new JProperty("Object"+(temp.ObjectID+1).ToString(),
-                         new JObject(
-                    new JProperty("ObjectID", temp.ObjectID + 1),
-                      new JProperty("GravityOn", temp.Gravity),
-                    new JProperty("Mass", temp.Mass),
-                    new JProperty("Position", new JObject(new JProperty("x", temp.PositionX), new JProperty("y", temp.PositionY), new JProperty("z", temp.PositionZ))),
-                    new JProperty("Rotation", temp.Rotation),
-                    new JProperty("Scale", new JObject(new JProperty("x", temp.ScaleX), new JProperty("y", temp.ScaleY), new JProperty("z", temp.ScaleZ))),
-                    new JProperty("TextureDir", temp.Texture),
-                    new JProperty("DefaultTrigger180ornot", temp.Trigger180check),
-                    new JProperty("Components", Componentlist),
-                    new JProperty("HavingComponentsNumbers", Componentlist.Count),
-                    new JProperty("ObjectType", temp.objectstyle))
-                    )
-                    );
-                objectinfo = tempObject.ToString();
-                objectinfo = objectinfo.Remove(0, 1);
-                objectinfo = objectinfo.Remove(objectinfo.Count() - 1, 1);
-                objectinfo = objectinfo.Remove(objectinfo.Count() - 2, 1);
-                Componentlist.Clear();
-                components.Clear();
-                if (temp.ObjectID+1 != RoteobjectList.Count())
-                objectinfo = objectinfo.Insert(objectinfo.Count() - 1, ",");
-                result += objectinfo;
-                
-            }
-         
-
-
-
-
-
-            result= result.Insert(0, "{");
-            result= result.Insert(result.Count(), "}");
-            if(!IsThereCamera)
-                MessageBox.Show("There is no Camera", "Object Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            if (!IsThereClearZone)
-                MessageBox.Show("There is no ClearZone", "Object Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            if (!IsTherePlayer)
-                MessageBox.Show("There is no Player", "Object Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            if (!IsTherePlayer || !IsThereClearZone || !IsThereCamera)
-                return;
-            if(InstantSavingCheck.Checked)
-            File.WriteAllText("levels.\\"+ textBox1.Text + ".json", result);
-            else
-                File.WriteAllText(file_path + ".json", result);
         }
 
 
@@ -1084,10 +889,236 @@ namespace RoteMapView
 
         private void Loadbutton_Click(object sender, EventArgs e)
         {
+          
+
+       
+    
+
+
+        }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SynchronizationObjects();
+            string file_path = null;
+            string file = null;
+
+            if (!InstantSavingCheck.Checked)
+            {
+                saveFileDialog1.InitialDirectory = Application.StartupPath;
+
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    file_path = saveFileDialog1.FileName;
+                    file = file_path.Split('\\')[file_path.Split('\\').Length - 1];
+                }
+
+            }
+            JArray Componentlist = new JArray();
+            List<string> components = new List<string>();
+
+            JObject tempObject = null;
+            JObject camObject = null;
+            JObject LevelInfo = null;
+            string result = null;
+            string objectinfo = null;
+            string LevelInfoString = null;
+
+
+            LevelInfo = new JObject(
+
+                     new JProperty("Level", textBox1.Text),
+                       new JProperty("NumberOfObjects", RoteobjectList.Count)
+                     );
+
+            LevelInfoString = LevelInfo.ToString();
+            LevelInfoString = LevelInfoString.Remove(0, 1);
+            LevelInfoString = LevelInfoString.Remove(LevelInfoString.Count() - 1, 1);
+            LevelInfoString = LevelInfoString.Remove(LevelInfoString.Count() - 2, 1);
+            LevelInfoString = LevelInfoString.Insert(LevelInfoString.Count() - 1, ",");
+            result += LevelInfoString;
+            foreach (var temp in RoteobjectList)
+            {
+
+                if (temp.ObjectID == 1)
+                {
+                    string camString = null;
+                    camObject = new JObject(
+
+                        new JProperty("DefalutCamera",
+                        new JObject(
+
+                        new JProperty("EYE", new JObject(new JProperty("x", roCamera.PositionX), new JProperty("y", roCamera.PositionY), new JProperty("z", 999))))
+                        )
+                        );
+
+                    camString = camObject.ToString();
+                    camString = camString.Remove(0, 1);
+                    camString = camString.Remove(camString.Count() - 1, 1);
+                    camString = camString.Remove(camString.Count() - 2, 1);
+
+                    camString = camString.Insert(camString.Count() - 1, ",");
+                    result += camString;
+                }
+
+
+
+                if (temp.objectstyle == "Player")
+                {
+                    components.Add("TRANSFORM");
+                    components.Add("SPRITE");
+                    components.Add("BODY");
+                    components.Add("CONTROLLER");
+                    components.Add("ANIMATION");
+                    temp.Texture = "player.png";
+                    temp.Mass = 1;
+                    temp.Gravity = true;
+                }
+
+                if (temp.objectstyle == "Wall")
+                {
+                    components.Add("TRANSFORM");
+                    components.Add("SPRITE");
+                    components.Add("BODY");
+                    temp.Texture = "wall.png";
+                    temp.Mass = 0;
+                }
+
+                if (temp.objectstyle == "Button")
+                {
+                    components.Add("TRANSFORM");
+                    components.Add("SPRITE");
+                    temp.Texture = "1.png";
+                    temp.Gravity = true;
+                }
+
+                if (temp.objectstyle == "Box")
+                {
+                    components.Add("TRANSFORM");
+                    components.Add("SPRITE");
+                    components.Add("BODY");
+                    temp.Texture = "box.png";
+                    temp.Gravity = false;
+                    temp.Mass = 1;
+                }
+
+                if (temp.objectstyle == "Trigger90")
+                {
+                    components.Add("TRANSFORM");
+                    components.Add("SPRITE");
+                    components.Add("BODY");
+                    components.Add("TRIGGER");
+                    temp.Texture = "90button.png";
+                }
+
+                if (temp.objectstyle == "Trigger180")
+                {
+                    components.Add("TRANSFORM");
+                    components.Add("SPRITE");
+                    components.Add("BODY");
+                    components.Add("TRIGGER");
+                    temp.Texture = "180button.png";
+                }
+
+                if (temp.objectstyle == "Clearzone")
+                {
+                    components.Add("TRANSFORM");
+                    components.Add("SPRITE");
+                    temp.Texture = "clearzone.png";
+                }
+
+                if (temp.objectstyle == "Hazard")
+                {
+                    components.Add("TRANSFORM");
+                    components.Add("SPRITE");
+                    components.Add("BODY");
+                    temp.Texture = "hazard.png";
+                }
+
+
+
+
+
+
+
+                foreach (var tempinComp in components)
+                {
+                    Componentlist.Add(tempinComp.ToString());
+                }
+                temp.PositionX = (temp.PositionX - (designModePanel.Size.Width / 2)) + (temp.ScaleX / 2);
+                temp.PositionY = -(temp.PositionY - ((designModePanel.Size.Height / 2))) - (temp.ScaleY / 2);
+
+                tempObject = new JObject(
+
+                     new JProperty("Object" + (temp.ObjectID + 1).ToString(),
+                         new JObject(
+                    new JProperty("ObjectID", temp.ObjectID + 1),
+                      new JProperty("GravityOn", temp.Gravity),
+                    new JProperty("Mass", temp.Mass),
+                    new JProperty("Position", new JObject(new JProperty("x", temp.PositionX), new JProperty("y", temp.PositionY), new JProperty("z", temp.PositionZ))),
+                    new JProperty("Rotation", temp.Rotation),
+                    new JProperty("Scale", new JObject(new JProperty("x", temp.ScaleX), new JProperty("y", temp.ScaleY), new JProperty("z", temp.ScaleZ))),
+                    new JProperty("TextureDir", temp.Texture),
+                    new JProperty("DefaultTrigger180ornot", temp.Trigger180check),
+                    new JProperty("Components", Componentlist),
+                    new JProperty("HavingComponentsNumbers", Componentlist.Count),
+                    new JProperty("ObjectType", temp.objectstyle))
+                    )
+                    );
+                objectinfo = tempObject.ToString();
+                objectinfo = objectinfo.Remove(0, 1);
+                objectinfo = objectinfo.Remove(objectinfo.Count() - 1, 1);
+                objectinfo = objectinfo.Remove(objectinfo.Count() - 2, 1);
+                Componentlist.Clear();
+                components.Clear();
+                if (temp.ObjectID + 1 != RoteobjectList.Count())
+                    objectinfo = objectinfo.Insert(objectinfo.Count() - 1, ",");
+                result += objectinfo;
+
+            }
+
+
+
+
+
+
+            result = result.Insert(0, "{");
+            result = result.Insert(result.Count(), "}");
+            if (!IsThereCamera)
+                MessageBox.Show("There is no Camera", "Object Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (!IsThereClearZone)
+                MessageBox.Show("There is no ClearZone", "Object Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (!IsTherePlayer)
+                MessageBox.Show("There is no Player", "Object Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (!IsTherePlayer || !IsThereClearZone || !IsThereCamera)
+                return;
+            if (InstantSavingCheck.Checked)
+                File.WriteAllText("levels.\\" + textBox1.Text + ".json", result);
+            else
+                File.WriteAllText(file_path + ".json", result);
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             RoteobjectList.Clear();
-          //  this.designModePanel.Controls.Clear();
+
             objectList.Clear();
-            
+
+            for (int i = 0, objectcount = this.designModePanel.Controls.Count - 2; i < objectcount; i++)
+            {
+
+                this.designModePanel.Controls.RemoveAt(this.designModePanel.Controls.Count - 1);
+            }
             string file_path = null;
             string file = null;
 
@@ -1111,15 +1142,15 @@ namespace RoteMapView
             if (InstantSavingCheck.Checked)
                 Reading = JObject.Parse(File.ReadAllText("levels.\\" + textBox1.Text + ".json"));
             else
-             Reading = JObject.Parse(File.ReadAllText(file_path));
+                Reading = JObject.Parse(File.ReadAllText(file_path));
 
             int iNumberOfObjects = Int32.Parse(Reading["NumberOfObjects"].ToString());
-            
-            for(int i = 0; i < iNumberOfObjects; i++)
+
+            for (int i = 0; i < iNumberOfObjects; i++)
             {
                 RoteObject temp = new RoteObject();
                 string ObjectNumberString = "Object" + (i + 1).ToString();
-                
+
                 temp.PositionX = System.Single.Parse(Reading[ObjectNumberString]["Position"]["x"].ToString());
                 temp.PositionY = System.Single.Parse(Reading[ObjectNumberString]["Position"]["y"].ToString());
 
@@ -1130,17 +1161,23 @@ namespace RoteMapView
 
                 ///////////////////////////////////Convert Position
                 temp.PositionX = ((temp.PositionX + (designModePanel.Size.Width / 2)) - (temp.ScaleX / 2));
-                temp.PositionY = (-temp.PositionY + ((designModePanel.Size.Height / 2))) ;
+                temp.PositionY = (-temp.PositionY + ((designModePanel.Size.Height / 2)));
                 /// ///////////////////////////////
                 temp.Rotation = System.Single.Parse(Reading[ObjectNumberString]["Rotation"].ToString());
                 temp.ObjectID = i;
-                temp.objectstyle =Reading[ObjectNumberString]["ObjectType"].ToString();
+                temp.objectstyle = Reading[ObjectNumberString]["ObjectType"].ToString();
+                if (temp.objectstyle == "Player")
+                    IsTherePlayer = true;
+                if (temp.objectstyle == "Clearzone")
+                    IsThereClearZone = true;
+                IsThereCamera = true;
+                 
                 temp.Texture = Reading[ObjectNumberString]["TextureDir"].ToString();
 
                 RoteobjectList.Add(temp);
             }
             Control tempCamera = new PictureBox();
-            Point tempCameraLocation = new Point (Int32.Parse(Reading["DefalutCamera"]["EYE"]["x"].ToString())
+            Point tempCameraLocation = new Point(Int32.Parse(Reading["DefalutCamera"]["EYE"]["x"].ToString())
             , Int32.Parse(Reading["DefalutCamera"]["EYE"]["y"].ToString()));
             tempCamera.Location = tempCameraLocation;
             tempCamera.Size = new Size(50, 50);
@@ -1156,11 +1193,11 @@ namespace RoteMapView
                 Point tempLocation = new Point((int)RoteobjectList[i].PositionX, (int)RoteobjectList[i].PositionY);
                 Size tempScale = new Size((int)RoteobjectList[i].ScaleX, (int)RoteobjectList[i].ScaleY);
                 tempC.Tag = RoteobjectList[i].ObjectID;
-                if(RoteobjectList[i].Texture =="0")
+                if (RoteobjectList[i].Texture == "0")
                     ((System.Windows.Forms.PictureBox)tempC).Image = Image.FromFile("./" + "wall.png");
                 else
-                ((System.Windows.Forms.PictureBox)tempC).Image = Image.FromFile("./" + RoteobjectList[i].Texture);
-                ((System.Windows.Forms.PictureBox) tempC).SizeMode = PictureBoxSizeMode.StretchImage;
+                    ((System.Windows.Forms.PictureBox)tempC).Image = Image.FromFile("./" + RoteobjectList[i].Texture);
+                ((System.Windows.Forms.PictureBox)tempC).SizeMode = PictureBoxSizeMode.StretchImage;
                 tempC.Location = tempLocation;
                 tempC.Size = tempScale;
 
@@ -1168,15 +1205,17 @@ namespace RoteMapView
                 objectList.Add(tempC);
 
             }
-            
-    
-
 
         }
 
-        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        private void designModePanel_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
