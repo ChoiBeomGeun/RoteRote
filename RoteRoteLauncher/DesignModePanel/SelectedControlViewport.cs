@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+
 namespace ControlDesignMode
 {
     /// <summary>
@@ -48,7 +49,20 @@ namespace ControlDesignMode
         {
             get { return cursorStatus; }
         }
+        public int NumberChanged(int num)
+        {
+            bool IsMinus = (num < 0) ? true : false;
+            string number = num.ToString();
 
+            int Lastnumber = Int32.Parse(number[number.Length - 1].ToString());
+
+
+            if (!IsMinus)
+                return num - Lastnumber;
+            else
+                return num + Lastnumber;
+
+        }
         public void Draw(Graphics g, Control selectedObject)
         {
             //define the border to be drawn, it will be offset by DRAG_HANDLE_SIZE / 2
@@ -212,11 +226,16 @@ namespace ControlDesignMode
             Point newLocation;
             Size newSize;
             bool isHeightSmall, isWidthSmall;
+           
             if (cursorStatus == CusorStatus.NW)
             {
                 newLocation = new Point(pos.X, pos.Y);
+                
+                newLocation = new Point(NumberChanged(newLocation.X), NumberChanged(newLocation.Y));
                 newSize = new Size(selectedObject.Size.Width - (newLocation.X - selectedObject.Location.X),
                     selectedObject.Size.Height - (newLocation.Y - selectedObject.Location.Y));
+
+                
                 CheckControlMinimumSize(ref newSize, out isHeightSmall, out isWidthSmall);
                 if (isHeightSmall)
                 {
@@ -226,22 +245,31 @@ namespace ControlDesignMode
                 {
                     newLocation.X = selectedObject.Bounds.Right - MinControlSize;
                 }
+
+                newSize = new Size(NumberChanged(newSize.Width), NumberChanged(newSize.Height));
+                
                 selectedObject.Size = newSize;
                 selectedObject.Location = newLocation;
             }
             else if (cursorStatus == CusorStatus.SE)
             {
                 newLocation = new Point(pos.X, pos.Y);
+                newLocation = new Point(NumberChanged(newLocation.X), NumberChanged(newLocation.Y));
                 newSize = new Size(selectedObject.Size.Width + (newLocation.X - selectedObject.Size.Width - selectedObject.Location.X),
                     selectedObject.Height + (newLocation.Y - selectedObject.Height - selectedObject.Location.Y));
+                
                 CheckControlMinimumSize(ref newSize);
+                newSize = new Size(NumberChanged(newSize.Width), NumberChanged(newSize.Height));
+
                 selectedObject.Size = newSize;
             }
             else if (cursorStatus == CusorStatus.N)
             {
                 newLocation = new Point(selectedObject.Location.X, pos.Y);
+                newLocation = new Point(NumberChanged(newLocation.X), NumberChanged(newLocation.Y));
                 newSize = new Size(selectedObject.Width,
                     selectedObject.Height - (pos.Y - selectedObject.Location.Y));
+               
                 CheckControlMinimumSize(ref newSize, out isHeightSmall, out isWidthSmall);
                 if (isHeightSmall)
                 {
@@ -251,22 +279,31 @@ namespace ControlDesignMode
                 {
                     newLocation.X = selectedObject.Bounds.Right - MinControlSize;
                 }
+                newSize = new Size(NumberChanged(newSize.Width), NumberChanged(newSize.Height));
+                
                 selectedObject.Size = newSize;
                 selectedObject.Location = newLocation;
             }
             else if (cursorStatus == CusorStatus.S)
             {
                 newLocation = new Point(pos.X, pos.Y);
+                newLocation = new Point(NumberChanged(newLocation.X), NumberChanged(newLocation.Y));
                 newSize = new Size(selectedObject.Width,
                     pos.Y - selectedObject.Location.Y);
+
+               
                 CheckControlMinimumSize(ref newSize);
+                newSize = new Size(NumberChanged(newSize.Width), NumberChanged(newSize.Height));
+               
                 selectedObject.Size = newSize;
             }
             else if (cursorStatus == CusorStatus.W)
             {
                 newLocation = new Point(pos.X, selectedObject.Location.Y);
+                newLocation = new Point(NumberChanged(newLocation.X), NumberChanged(newLocation.Y));
                 newSize = new Size(selectedObject.Width - (pos.X - selectedObject.Location.X),
                     selectedObject.Height);
+              
                 CheckControlMinimumSize(ref newSize, out isHeightSmall, out isWidthSmall);
                 if (isHeightSmall)
                 {
@@ -276,22 +313,32 @@ namespace ControlDesignMode
                 {
                     newLocation.X = selectedObject.Bounds.Right - MinControlSize;
                 }
+                newSize = new Size(NumberChanged(newSize.Width), NumberChanged(newSize.Height));
+               
                 selectedObject.Size = newSize;
                 selectedObject.Location = newLocation;
             }
             else if (cursorStatus == CusorStatus.E)
             {
                 newLocation = new Point(pos.X, pos.Y);
+                newLocation = new Point(NumberChanged(newLocation.X), NumberChanged(newLocation.Y));
                 newSize = new Size(pos.X - selectedObject.Location.X,
                     selectedObject.Height);
+                
                 CheckControlMinimumSize(ref newSize);
+
+
+                newSize = new Size(NumberChanged(newSize.Width), NumberChanged(newSize.Height));
+               
                 selectedObject.Size = newSize;
             }
             else if (cursorStatus == CusorStatus.SW)
             {
                 newLocation = new Point(pos.X, selectedObject.Location.Y);
+                newLocation = new Point(NumberChanged(newLocation.X), NumberChanged(newLocation.Y));
                 newSize = new Size(selectedObject.Width - (pos.X - selectedObject.Location.X),
                     pos.Y - selectedObject.Location.Y);
+
                 CheckControlMinimumSize(ref newSize, out isHeightSmall, out isWidthSmall);
                 if (isHeightSmall)
                 {
@@ -301,14 +348,18 @@ namespace ControlDesignMode
                 {
                     newLocation.X = selectedObject.Bounds.Right - MinControlSize;
                 }
+                newSize = new Size(NumberChanged(newSize.Width), NumberChanged(newSize.Height));
+                
                 selectedObject.Size = newSize;
                 selectedObject.Location = newLocation;
             }
             else if (cursorStatus == CusorStatus.NE)
             {
                 newLocation = new Point(selectedObject.Location.X, pos.Y);
+                newLocation = new Point(NumberChanged(newLocation.X), NumberChanged(newLocation.Y));
                 newSize = new Size(pos.X - selectedObject.Location.X,
                     selectedObject.Height - (pos.Y - selectedObject.Location.Y));
+              
                 CheckControlMinimumSize(ref newSize, out isHeightSmall, out isWidthSmall);
                 if (isHeightSmall)
                 {
@@ -318,6 +369,9 @@ namespace ControlDesignMode
                 {
                     newLocation.X = selectedObject.Bounds.Left;
                 }
+
+                               
+                newSize = new Size(NumberChanged(newSize.Width), NumberChanged(newSize.Height));
                 selectedObject.Size = newSize;
                 selectedObject.Location = newLocation;
             }

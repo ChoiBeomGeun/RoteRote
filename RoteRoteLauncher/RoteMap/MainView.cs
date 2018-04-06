@@ -10,6 +10,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ControlDesignMode;
 using System.IO;
+using System.Windows.Forms.VisualStyles;
+
 namespace RoteMapView
 {
 
@@ -135,8 +137,8 @@ namespace RoteMapView
      
 
             if (args.Control != null&& args.Control.Tag != null)
-            {
-
+            { 
+          
                 if (args.Control.Tag.ToString() == "Camera")
                 {
                     roCamera.PositionX = args.Control.Location.X;
@@ -612,9 +614,22 @@ namespace RoteMapView
         {
 
         }
+        public int NumberChanged(int num)
+        {
+            bool IsMinus = (num <0)? true:false;
+            string number = num.ToString();
 
+            int Lastnumber = Int32.Parse(number[number.Length - 1].ToString());
 
-         internal void JsonTextUpdate()
+            
+            if(!IsMinus)
+                return num - Lastnumber;
+            else
+                return num + Lastnumber;
+
+        }
+
+        internal void JsonTextUpdate()
         {
 
            // SynchronizationObjects();
@@ -809,8 +824,9 @@ namespace RoteMapView
 
         private void propertyGrid1_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
+            
+            
 
-        
             RoteObject temp = (RoteObject)(propertyGrid1.SelectedObject);
             Point tempPoint = new Point((int)(temp.PositionX), (int)temp.PositionY);
             Control temp2 = null;
@@ -839,6 +855,7 @@ namespace RoteMapView
 
         private void MainView_KeyDown(object sender, KeyEventArgs e)
         {
+        
             RoteObject temp = (RoteObject)(propertyGrid1.SelectedObject);
             Control temp2 = null;
             int tempi = 3;
@@ -1220,4 +1237,7 @@ namespace RoteMapView
             Application.Exit();
         }
     }
+
+ 
+
 }

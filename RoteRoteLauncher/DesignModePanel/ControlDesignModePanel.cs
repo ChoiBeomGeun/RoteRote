@@ -210,7 +210,20 @@ namespace ControlDesignMode
                 this.Invalidate(GetSelectedObjectRect(), true);
             }
         }
+        public int NumberChanged(int num)
+        {
+            bool IsMinus = (num < 0) ? true : false;
+            string number = num.ToString();
 
+            int Lastnumber = Int32.Parse(number[number.Length - 1].ToString());
+
+
+            if (!IsMinus)
+                return num - Lastnumber;
+            else
+                return num + Lastnumber;
+
+        }
         /// <summary>
         /// 마우스가 이동하면 발생한다.
         /// </summary>
@@ -228,7 +241,9 @@ namespace ControlDesignMode
                 {
                     if (isControlMoving)
                     {
-                        MoveControl(e.Location);
+                        Point NewPoint = new Point(NumberChanged(e.Location.X),
+                            NumberChanged(e.Location.Y));
+                        MoveControl(NewPoint);
                     }
                     else if (isControlChanging)
                     {
@@ -466,6 +481,9 @@ namespace ControlDesignMode
             this.transparentPanel.BringToFront();
 
             Control control = sender as Control;
+
+            control.Location = new Point(NumberChanged(control.Location.X),
+                NumberChanged(control.Location.Y));
             Point location;
 
             if(control != this)

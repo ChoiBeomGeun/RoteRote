@@ -35,17 +35,17 @@
             this.InstantSavingCheck = new System.Windows.Forms.CheckBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.chkDesignMode = new System.Windows.Forms.CheckBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.treeControls = new System.Windows.Forms.TreeView();
-            this.designModePanel = new ControlDesignMode.ControlDesignModePanel();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.treeControls = new System.Windows.Forms.TreeView();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.designModePanel = new ControlDesignMode.ControlDesignModePanel();
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -56,8 +56,8 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            this.designModePanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.designModePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -115,7 +115,7 @@
             // InstantSavingCheck
             // 
             this.InstantSavingCheck.AutoSize = true;
-            this.InstantSavingCheck.Location = new System.Drawing.Point(12, 51);
+            this.InstantSavingCheck.Location = new System.Drawing.Point(12, 54);
             this.InstantSavingCheck.Name = "InstantSavingCheck";
             this.InstantSavingCheck.Size = new System.Drawing.Size(129, 16);
             this.InstantSavingCheck.TabIndex = 3;
@@ -144,46 +144,6 @@
             this.chkDesignMode.UseVisualStyleBackColor = true;
             this.chkDesignMode.CheckedChanged += new System.EventHandler(this.chkDesignMode_CheckedChanged_1);
             // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(3, 138);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(261, 613);
-            this.textBox2.TabIndex = 2;
-            // 
-            // treeControls
-            // 
-            this.treeControls.AllowDrop = true;
-            this.treeControls.Location = new System.Drawing.Point(0, 0);
-            this.treeControls.Name = "treeControls";
-            this.treeControls.Size = new System.Drawing.Size(264, 132);
-            this.treeControls.TabIndex = 1;
-            this.treeControls.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeControls_ItemDrag);
-            // 
-            // designModePanel
-            // 
-            this.designModePanel.AllowDrop = true;
-            this.designModePanel.BackColor = System.Drawing.SystemColors.Control;
-            this.designModePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.designModePanel.Controls.Add(this.propertyGrid1);
-            this.designModePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.designModePanel.IsDesignMode = true;
-            this.designModePanel.Location = new System.Drawing.Point(0, 0);
-            this.designModePanel.Name = "designModePanel";
-            this.designModePanel.Size = new System.Drawing.Size(827, 754);
-            this.designModePanel.TabIndex = 0;
-            this.designModePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.designModePanel_Paint);
-            // 
-            // saveFileDialog2
-            // 
-            this.saveFileDialog2.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog2_FileOk);
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
-            // 
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.SystemColors.Window;
@@ -209,23 +169,63 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(3, 138);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(261, 613);
+            this.textBox2.TabIndex = 2;
+            // 
+            // treeControls
+            // 
+            this.treeControls.AllowDrop = true;
+            this.treeControls.Location = new System.Drawing.Point(0, -5);
+            this.treeControls.Name = "treeControls";
+            this.treeControls.Size = new System.Drawing.Size(264, 137);
+            this.treeControls.TabIndex = 1;
+            this.treeControls.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeControls_ItemDrag);
+            // 
+            // saveFileDialog2
+            // 
+            this.saveFileDialog2.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog2_FileOk);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            // 
+            // designModePanel
+            // 
+            this.designModePanel.AllowDrop = true;
+            this.designModePanel.BackColor = System.Drawing.SystemColors.Control;
+            this.designModePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.designModePanel.Controls.Add(this.propertyGrid1);
+            this.designModePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.designModePanel.IsDesignMode = true;
+            this.designModePanel.Location = new System.Drawing.Point(0, 0);
+            this.designModePanel.Name = "designModePanel";
+            this.designModePanel.Size = new System.Drawing.Size(827, 754);
+            this.designModePanel.TabIndex = 0;
+            this.designModePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.designModePanel_Paint);
             // 
             // propertyGrid1
             // 
@@ -260,9 +260,9 @@
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            this.designModePanel.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.designModePanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
