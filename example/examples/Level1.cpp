@@ -137,7 +137,7 @@ void Level1::Init()
 
 	LEVELMANAGER->LoadLevel(STATEMANAGER->Loadtolevelname);
 
-	std::string levelname = std::to_string(STATEMANAGER->i_LevelSelect) + ".png";
+ 	std::string levelname = std::to_string(STATEMANAGER->i_LevelSelect+1) + ".png";
 	HUDLevelname = FACTORY->CreateHUD(glm::vec3(0, 0.9, 0), glm::vec3(0.1, 0.2, 0));
 	HUDLevelname->GetComponent<Sprite>()->texture_load(levelname);
 	HUDLevelname->objectstyle = Objectstyle::Button;
@@ -403,7 +403,7 @@ void Level1::lookAtMap()
 void CheatKeyFunctions(void) {
 
 	if (Input::IsTriggered(SDL_SCANCODE_F7))
-		STATEMANAGER->MoveState(StatesList::MapEditor);
+		STATEMANAGER->MoveState(StatesList::MapEditor-1);
 
 
 
