@@ -84,7 +84,7 @@
 		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
 		"ObjectID" : 12,
 		"ObjectType" : "Button",
-		"ParticleType" : "ET_EXPLOSION",
+		"ParticleType" : "ET_BACKGROUND",
 		"ParticlePath" : "MenuParticle.json",
 		"Position" : 
 		{
@@ -98,7 +98,7 @@
 			"x" : 0.0,
 			"y" : 0.0
 		},
-		"TextureDir" : ""
+		"TextureDir" : "box.png"
 	},
 	"Object2" : 
 	{
@@ -181,6 +181,7 @@
 		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
 		"ObjectID" : 6,
 		"ObjectType" : "Button",
+		"ParticleType" : "ET_BACKGROUND",
 		"ParticlePath" : "StarParticle.json",
 		"Position" : 
 		{
@@ -194,7 +195,7 @@
 			"x" : 10.0,
 			"y" : 10.0
 		},
-		"TextureDir" : ""
+		"TextureDir" : "Twinkle.png"
 	},
 	"Object7" : 
 	{

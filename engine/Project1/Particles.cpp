@@ -13,6 +13,7 @@ namespace TE {
 	Emitter::Emitter() : Component(ComponentType::CT_EMITTER)
 	{
 		//PARTICLEMANAGER->m_EmitterList.push_back(this);
+		//m_BaseGraphicsList.push_back(this);
 	}
 	Emitter::~Emitter()
 	{
@@ -33,7 +34,7 @@ namespace TE {
 			capacity = 0;
 			emitterID = 0;
 			lifeTime = 0;
-			isBlened = true;
+			isAdditive = true;
 		}
 		else
 			return;
@@ -73,7 +74,7 @@ namespace TE {
 	}
 
 
-	void Emitter::SetEmitter(glm::vec3 EmitterPos, glm::vec3 EmitterVel, int pSize, int pCapacity, int plifeTime, EmitterType ptype)
+	void Emitter::SetEmitter(glm::vec3 EmitterPos, glm::vec3 EmitterVel, int pSize, int pCapacity, float plifeTime, EmitterType ptype)
 	{
 		pos = EmitterPos;
 		vel = EmitterVel;
@@ -82,7 +83,7 @@ namespace TE {
 		lifeTime = plifeTime;
 		type = ptype;
 	}
-	
+
 	void defaultParticleUpdate(Particle & particle, float deltaTime)
 	{
 		particle.scale -= particle.scale *deltaTime;

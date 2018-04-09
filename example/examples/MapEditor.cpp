@@ -65,7 +65,6 @@ void MapEditor::Init(void)
 	gamedata.mousePosBefore = glm::vec3(0, 0, 0);
 
 	PHYSICS->IsMapEditorOn = true;
-	GRAPHICS->isMapEditorOn = true;
 
 	FACTORY->GetPlayer()->GetComponent<Animation>()->setFrame(1.0f / 6);
 	FACTORY->GetPlayer()->GetComponent<Animation>()->setTime(1.0f / 6);
@@ -248,7 +247,7 @@ void MapEditor::Free(void)
 {
 	gamedata.ClearData();
 	PHYSICS->IsMapEditorOn = false;
-	GRAPHICS->isMapEditorOn = false;
+
 	FACTORY->DestroyAllObjects();
 }
 

@@ -55,7 +55,7 @@ void LevelSelect::Load()
 
 void LevelSelect::Init()
 {
-	FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->TextureId = Levelpng[0];
+	FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Levelpng[0];
 	LevelList = LevelList::level1;
 	IsRotating = false;
 	IsLeftPressed = false;
@@ -131,7 +131,7 @@ void LevelSelect::Rotation(void)
 			if (std::abs(FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle - selectAngle) > 90) {
 				FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle = LevelList * 90.f;
 				IsRotating = false;
-				FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->TextureId = Levelpng[LevelList];
+				FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Levelpng[LevelList];
 			}
 
 		}
@@ -139,7 +139,7 @@ void LevelSelect::Rotation(void)
 			if (std::abs(FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle - selectAngle) > 90) {
 				FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle = -LevelList * 90.f;
 				IsRotating = false;
-				FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->TextureId = Levelpng[LevelList];
+				FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Levelpng[LevelList];
 			}
 
 		}

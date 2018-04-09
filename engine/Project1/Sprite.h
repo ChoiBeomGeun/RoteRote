@@ -24,6 +24,8 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "glew.h"
 #include "SDL.h"
 
+
+
 enum class SortType
 {
 	NONE,
@@ -34,34 +36,33 @@ enum class SortType
 
 
 namespace TE {
-	
 	class Sprite : public Component
 	{
 	public:
 		Sprite();
-			
+
 		~Sprite();
-	
+
 		virtual void Initialize() override;
 
-		GLuint  texture_load( std::string filepath);
-		
-		
-		Transform * pTransform;
-		GLuint pTexureID;
+		GLuint  texture_load(std::string filepath);
+
+
+		//Transform * pTransform;
+		GLuint m_TextureID;
 		std::string mTexutureDir;
+		static void LoadAllSprites(std::string path);
+
 		void ChangeColor(float r, float g, float b, float a); // You can actually put numbers from 0~255.f 
 		void ChangeBackgroundColor(float r, float g, float b, float a);
-		void framebuffer_size_callback( int width, int height);
+		void framebuffer_size_callback(int width, int height);
 		bool isPerspective;
-		float depth;
 		static void sortSprites(SortType sortType = SortType::FRONT_TO_BACK);
 		static bool compareBackToFront(Sprite *a, Sprite* b);
 		static bool compareFrontToBack(Sprite *a, Sprite* b);
 		static bool compareTextureID(Sprite *a, Sprite* b);
-		
-		float Color[4]={255,255,255,255};
-		GLint TextureId;
+		float depth;
+		float Color[4] = { 255,255,255,255 };
 	private:
 		SortType _sortType;
 

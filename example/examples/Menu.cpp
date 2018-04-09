@@ -217,13 +217,13 @@ void Menu::Selection_Text(void)
 {
 	switch (Selection)
 	{
-	case MenuList::Menu_HowToPlay: FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->TextureId = Menu_HowToPlay;
+	case MenuList::Menu_HowToPlay: FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->m_TextureID = Menu_HowToPlay;
 		break;
-	case MenuList::Menu_Quit: FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->TextureId = Menu_Quit;
+	case MenuList::Menu_Quit: FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->m_TextureID = Menu_Quit;
 		break;
-	case MenuList::Menu_Option: FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->TextureId = Menu_Option;
+	case MenuList::Menu_Option: FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->m_TextureID = Menu_Option;
 		break;
-	case MenuList::Menu_Start: FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->TextureId = Menu_Start;
+	case MenuList::Menu_Start: FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->m_TextureID = Menu_Start;
 		break;
 	default:
 		break;

@@ -105,6 +105,7 @@ namespace TE {
 
 		std::vector<Sprite*> SpriteList;
 		std::vector<Animation *> AnimationList;
+		std::map<std::string, GLuint> m_textureMap;
 		//std::vector<Emitter *> EmitterList;
 
 		void initbasicShader();
@@ -119,10 +120,9 @@ namespace TE {
 		void setparticleUniformLoc();
 		void animationSetting();
 		void cameraSetting();
+		void MergeList();
+		void FreeList();
 
-		bool isMapEditorOn;
-		bool drawGrid;
-		bool moving;
 		//void drawLine(bool isdraw);
 	private:
 		int drawStats;

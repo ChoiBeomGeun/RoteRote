@@ -292,7 +292,7 @@ Object * ObjectFactory::CreateWall(const glm::vec3 & pos, const glm::vec3& scale
 	//sprite->isFlipY = false;
 	Wall->GetComponent<Sprite>()->texture_load("wall.png");
 	//TOdo : load textrue and get texture id
-	Wall->GetComponent<Sprite>()->TextureId = 3;
+	Wall->GetComponent<Sprite>()->m_TextureID = 3;
 	Wall->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
 	Wall->GetComponent<Sprite>()->isPerspective = true;
 
@@ -352,7 +352,7 @@ Object * TE::ObjectFactory::CreateHUD(const glm::vec3 & pos, const glm::vec3 & s
 	Hud->GetComponent<Sprite>()->isPerspective = false;
 	//sprite->isFlipY = false;
 	Hud->GetComponent<Sprite>()->depth = 1.0f;
-	Hud->GetComponent<Sprite>()->TextureId = 5;
+	Hud->GetComponent<Sprite>()->m_TextureID = 5;
 	Hud->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
 
 //	Hud->AddComponent(sprite);

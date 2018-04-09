@@ -11,7 +11,6 @@
 #include <functional>
 #include "Vertex.h"
 
-
 namespace TE {
 
 
@@ -33,7 +32,7 @@ namespace TE {
 		ET_ROCKET //!< player Exhaust
 	};
 
-	class Emitter : public Component//!< struct of Emitter
+	class Emitter : public Component //!< struct of Emitter
 	{
 	public:
 		Emitter();
@@ -41,10 +40,12 @@ namespace TE {
 		virtual void Initialize() override;
 		void CreateParticle();
 		void Update(float dt);
-		void SetEmitter(glm::vec3 EmitterPos, glm::vec3 EmitterVel, int pSize, int pCapacity, int plifeTime, EmitterType ptype);
+		void SetEmitter(glm::vec3 EmitterPos, glm::vec3 EmitterVel, int pSize, int pCapacity, float plifeTime, EmitterType ptype);
 		void SetTexture(int textureID);
+		//float getDepth() { return depth; }
 
 		int FindUnusedParticle();
+
 
 		Particle*   pParticles; //!< pointer of Paritcles in this Emitter
 		EmitterType type; //!< type of Emitter
@@ -55,7 +56,7 @@ namespace TE {
 		int         capacity; //!< max amount for this Emitter
 		int         emitterID; //!< ID of this Emitter
 		float       lifeTime;  //!< lifeTime of this Emitter
-		bool		isBlened; // !< addtive or bleneded
+		bool		isAdditive; // !< addtive or bleneded
 		std::string m_particlePath;
 	};
 
