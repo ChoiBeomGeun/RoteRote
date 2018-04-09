@@ -20,7 +20,7 @@
 			"y" : 0.0,
 			"z" : 0.0
 		},
-		"TextureDir" : "test.png",
+		"TextureDir" : "basicParticle.png",
 		"EmitterSize" : 0,
 		"EmitterID" : 0,
 		"EmitterLifeTime" : 5,
