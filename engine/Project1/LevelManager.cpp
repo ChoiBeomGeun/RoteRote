@@ -264,6 +264,10 @@ void LevelManager::LoadLevel(std::string  path)
 		{
 			tempObject->objectstyle = Objectstyle::Hazard;
 		}
+		else if (Objectstyle == "AttachWall")
+		{
+			tempObject->objectstyle = Objectstyle::AttachWall;
+		}
 		else
 			DEBUG_ASSERT(true, "Invaild Object Style");
 

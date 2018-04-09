@@ -30,6 +30,8 @@ namespace TE
 		void MaxJump();
 		void PlayerAnimation();
 
+		bool IsAttachable;
+
 	private:
 		glm::vec3 pos;
 		Transform * transform;
@@ -64,6 +66,7 @@ namespace TE
 		float WallJump;
 
 		bool WallAttached;
+
 		/* For variable Jump */
 
 		float minJumpVelocity = 350;

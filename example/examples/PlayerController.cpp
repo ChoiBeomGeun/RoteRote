@@ -43,6 +43,9 @@ void PlayerController::Initialize()
 	JumpSpeed = 600.f;
 	WallJump = WALLJUMP;
 
+	/* verifies whether player is on attachable wall or not */
+	IsAttachable = false;
+
 	JumpEnough = false;
 	JumpTriggered = false;
 	WallJumpTriggered = false;
@@ -64,6 +67,8 @@ void PlayerController::Update(float dt)
 {
 	if (!(STATEMANAGER->b_IsPauseOn) && !STATEMANAGER->b_IsRot180 && !STATEMANAGER->b_IsRot90 && (!STATEMANAGER->b_IsReplay)
 		&& (!STATEMANAGER->b_IsAutoplaying) && (!CAMERA->IsCameraShaking) && !STATEMANAGER->IsDrawing) {
+
+
 		JumpInit();
 		MaxJump();
 		Movement(dt);
@@ -163,14 +168,14 @@ void PlayerController::Movement(float dt)
 			FACTORY->GetPlayer()->GetComponent<Animation>()->setFlipX(false);
 			if (Input::IsPressed(SDL_SCANCODE_RIGHT))
 			{
-				if (Input::IsTriggered(SDL_SCANCODE_SPACE))
+				if (Input::IsTriggered(SDL_SCANCODE_SPACE) && IsAttachable)
 				{
 					WallJumpTriggered = true;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -WallJump;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = 800;
 				}
 			}
-			if (Input::IsPressed(SDL_SCANCODE_SPACE))
+			if (Input::IsPressed(SDL_SCANCODE_SPACE) && IsAttachable)
 			{
 				if (Input::IsPressed(SDL_SCANCODE_LEFT))
 				{
@@ -191,14 +196,14 @@ void PlayerController::Movement(float dt)
 			FACTORY->GetPlayer()->GetComponent<Animation>()->setFlipX(true);
 			if (Input::IsPressed(SDL_SCANCODE_LEFT))
 			{
-				if (Input::IsTriggered(SDL_SCANCODE_SPACE))
+				if (Input::IsTriggered(SDL_SCANCODE_SPACE) && IsAttachable)
 				{
 					WallJumpTriggered = true;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = WallJump;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = 800;
 				}
 			}
-			if (Input::IsPressed(SDL_SCANCODE_SPACE))
+			if (Input::IsPressed(SDL_SCANCODE_SPACE) && IsAttachable)
 			{
 				if (Input::IsPressed(SDL_SCANCODE_RIGHT))
 				{
@@ -279,14 +284,14 @@ void PlayerController::Movement(float dt)
 		{
 			if (Input::IsPressed(SDL_SCANCODE_RIGHT))
 			{
-				if (Input::IsTriggered(SDL_SCANCODE_SPACE))
+				if (Input::IsTriggered(SDL_SCANCODE_SPACE) && IsAttachable)
  				{
 					WallJumpTriggered = true;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -WallJump;
   					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -800;
 				}
 			}
-			if (Input::IsPressed(SDL_SCANCODE_SPACE))
+			if (Input::IsPressed(SDL_SCANCODE_SPACE) && IsAttachable)
 			{
 				if (Input::IsPressed(SDL_SCANCODE_LEFT))
 				{
@@ -307,14 +312,14 @@ void PlayerController::Movement(float dt)
 		{
 			if (Input::IsPressed(SDL_SCANCODE_LEFT))
 			{
-				if (Input::IsTriggered(SDL_SCANCODE_SPACE))
+				if (Input::IsTriggered(SDL_SCANCODE_SPACE) && IsAttachable)
 				{
 					WallJumpTriggered = true;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = WallJump;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -800;
 				}
 			}
-			if (Input::IsPressed(SDL_SCANCODE_SPACE))
+			if (Input::IsPressed(SDL_SCANCODE_SPACE) && IsAttachable)
 			{
 				if (Input::IsPressed(SDL_SCANCODE_RIGHT))
 				{
@@ -383,14 +388,14 @@ void PlayerController::Movement(float dt)
 		{
 			if (Input::IsPressed(SDL_SCANCODE_RIGHT))
 			{
-				if (Input::IsTriggered(SDL_SCANCODE_SPACE))
+				if (Input::IsTriggered(SDL_SCANCODE_SPACE) && IsAttachable)
 				{
 					WallJumpTriggered = true;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -800;
 				}
 			}
-			if (Input::IsPressed(SDL_SCANCODE_SPACE))
+			if (Input::IsPressed(SDL_SCANCODE_SPACE) && IsAttachable)
 			{
 				if (Input::IsPressed(SDL_SCANCODE_LEFT))
 				{
@@ -410,14 +415,14 @@ void PlayerController::Movement(float dt)
 		{
 			if (Input::IsPressed(SDL_SCANCODE_LEFT))
 			{
-				if (Input::IsTriggered(SDL_SCANCODE_SPACE))
+				if (Input::IsTriggered(SDL_SCANCODE_SPACE) && IsAttachable)
 				{
 					WallJumpTriggered = true;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -WallJump;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -800;
 				}
 			}
-			if (Input::IsPressed(SDL_SCANCODE_SPACE))
+			if (Input::IsPressed(SDL_SCANCODE_SPACE) && IsAttachable)
 			{
 				if (Input::IsPressed(SDL_SCANCODE_RIGHT))
 				{
@@ -484,14 +489,14 @@ void PlayerController::Movement(float dt)
 		{
 			if (Input::IsPressed(SDL_SCANCODE_RIGHT))
 			{
-				if (Input::IsTriggered(SDL_SCANCODE_SPACE))
+				if (Input::IsTriggered(SDL_SCANCODE_SPACE) && IsAttachable)
 				{
 					WallJumpTriggered = true;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = 800;
 				}
 			}
-			if (Input::IsPressed(SDL_SCANCODE_SPACE))
+			if (Input::IsPressed(SDL_SCANCODE_SPACE) && IsAttachable)
 			{
 				if (Input::IsPressed(SDL_SCANCODE_LEFT))
 				{
@@ -511,14 +516,14 @@ void PlayerController::Movement(float dt)
 		{
 			if (Input::IsPressed(SDL_SCANCODE_LEFT))
 			{
-				if (Input::IsTriggered(SDL_SCANCODE_SPACE))
+				if (Input::IsTriggered(SDL_SCANCODE_SPACE) && IsAttachable)
 				{
 					WallJumpTriggered = true;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -WallJump;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = 800;
 				}
 			}
-			if (Input::IsPressed(SDL_SCANCODE_SPACE))
+			if (Input::IsPressed(SDL_SCANCODE_SPACE) && IsAttachable)
 			{
 				if (Input::IsPressed(SDL_SCANCODE_RIGHT))
 				{

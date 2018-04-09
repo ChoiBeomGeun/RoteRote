@@ -23,9 +23,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "../../example/examples/PlayerController.h"
 
 namespace TE {
-
 	Physics * PHYSICS = nullptr;
-
 }
 
 
@@ -120,6 +118,9 @@ void Physics::ExplictEulerIntegrator(float dt) {
 void Physics::BroadPhase() {
 	//k; number of objects
 	//Big O Notation : O (n^2 / 2 )
+
+	bool Attached = false;
+
 	if (FACTORY->GetPlayer())
 	{
 		FACTORY->GetPlayer()->GetComponent<Body>()->Jump = false;
@@ -132,6 +133,15 @@ void Physics::BroadPhase() {
 			//put the pair into the container
 
 			Pair ij(i->second, j->second);
+
+			if (i->second->GetOwner()->objectstyle == Objectstyle::AttachWall && j->second->GetOwner()->objectstyle == Objectstyle::Player) {
+				if (AABBvsAABB(i->second, j->second, &ij))
+					Attached = true;
+			}
+			else if (i->second->GetOwner()->objectstyle == Objectstyle::Player && j->second->GetOwner()->objectstyle == Objectstyle::AttachWall) {
+				if (AABBvsAABB(i->second, j->second, &ij))
+					Attached = true;
+			}
 
 			if (i->second->pm_invmass == 0 && j->second->pm_invmass == 0)
 				continue;
@@ -162,6 +172,11 @@ void Physics::BroadPhase() {
 	if (FACTORY->GetPlayer()) {
 		if (!(FACTORY->GetPlayer()->GetComponent<Body>()->Jump))
 			FACTORY->GetPlayer()->GetComponent<Body>()->GroundType = Grounded::Air;
+
+		if (Attached)
+			FACTORY->GetPlayer()->GetComponent<PlayerController>()->IsAttachable = true;
+		else
+			FACTORY->GetPlayer()->GetComponent<PlayerController>()->IsAttachable = false;
 	}
 	IsPlayerGround = false;
 }

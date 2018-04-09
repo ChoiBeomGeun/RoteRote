@@ -35,7 +35,7 @@ entities in the game engine will be built upon.
 
 namespace TE {
 	typedef unsigned int ObjectID;
-	
+
 	class Object
 	{
 

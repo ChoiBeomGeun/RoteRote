@@ -40,7 +40,6 @@ namespace TE {
 		Transform * m_pTransform;
 		bool ToDelete = false;
 		friend class Physics;
-
 		Grounded GroundType;
 
 		bool Jump;
@@ -56,13 +55,5 @@ namespace TE {
 		float restitution;
 	protected:
 		std::list<Body*>::iterator myBody;
-	};
-
-	class AttachWall : public Body
-	{
-	public:
-		AttachWall(float invmass);
-	private:
-
 	};
 }

@@ -37,7 +37,6 @@ Body::~Body()
 void Body::Initialize()
 {
 	m_pTransform = GetOwner()->GetComponent<Transform>();
-
 	//restitution = 0.2f;
 	m_force = glm::vec3(0);
 
@@ -63,9 +62,4 @@ void TE::Body::Update(float dt)
 void Body::SetRestitution(float r)
 {
 	restitution = r;
-}
-
-TE::AttachWall::AttachWall(float invmass) : Body(glm::vec3(0,0,0),invmass)
-{
-
 }
