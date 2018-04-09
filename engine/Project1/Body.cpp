@@ -64,3 +64,8 @@ void Body::SetRestitution(float r)
 {
 	restitution = r;
 }
+
+TE::AttachWall::AttachWall(float invmass) : Body(glm::vec3(0,0,0),invmass)
+{
+
+}

@@ -57,4 +57,12 @@ namespace TE {
 	protected:
 		std::list<Body*>::iterator myBody;
 	};
+
+	class AttachWall : public Body
+	{
+	public:
+		AttachWall(float invmass);
+	private:
+
+	};
 }
