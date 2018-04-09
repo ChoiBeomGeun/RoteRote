@@ -16,6 +16,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #pragma once
 #include "BaseStage.h"
 #include "LevelList.h"
+#include "CameraMovement.h"
 
 class LevelSelect :public BaseStage
 {
@@ -29,6 +30,7 @@ public:
 	void Unload(void);
 
 private:
+	TE::CameraAction LvlSelectCam;
 
 	int LevelList;
 	bool IsRotating;

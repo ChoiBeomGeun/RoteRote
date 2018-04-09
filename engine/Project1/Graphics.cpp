@@ -241,8 +241,7 @@ void Graphics::Update(float dt)
 	glUniform1i(uniformLocation[SAMPLER], 0);
 	glUniform1i(particleLoc[PTEXTURE], 1);
 	glUniform1i(particleLoc[PSAMPLER], 0);
-	cameraSetting();
-
+	
 	view = CAMERA->view;
 	/*for(auto sdf : m_BaseGraphicsList)
 	{
@@ -505,22 +504,7 @@ void TE::Graphics::animationSetting()
 	glUniform1i(uniformLocation[ISANIMATION], 0);
 }
 
-void TE::Graphics::cameraSetting()
-{
-	if (CAMERA->isCentered)
-		CAMERA->lookat(CAMERA->cameraPos, CAMERA->cameraTarget, CAMERA->cameraUp);
-	else
-	{
-		if (FACTORY->GetPlayer())
-		{
-			if (!CAMERA->IsCameraShaking)
-				CAMERA->cameraPos = FACTORY->GetPlayer()->GetComponent<Transform>()->position;
 
-			CAMERA->cameraPos.z = 999.f;
-			CAMERA->lookat(CAMERA->cameraPos, CAMERA->cameraTarget, CAMERA->cameraUp);
-		}
-	}
-}
 
 //void TE::Graphics::MergeList()
 //{

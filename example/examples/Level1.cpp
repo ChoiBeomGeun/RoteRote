@@ -191,7 +191,6 @@ void Level1::Init()
 	CAMERA->CenterOfCamera.y = FACTORY->DownBoundary()->GetComponent<Transform>()->position.y + (FACTORY->UpBoundary()->GetComponent<Transform>()->position.y - FACTORY->DownBoundary()->GetComponent<Transform>()->position.y)*.5f;
 	CAMERA->cameraPos.x = CAMERA->CenterOfCamera.x;
 	CAMERA->cameraPos.y = CAMERA->CenterOfCamera.y;
-	movingToCenter = false;
 	STATEMANAGER->IsDrawing = false;
 	//CAMERA->lookatMap(false); 
 
@@ -215,15 +214,13 @@ void Level1::Init()
 	//Loading->IsLoadingObject = false;
 	//FACTORY->Destroy(Loading);
 	/////////////////////////////////////////////////////
-
-	
-	lookAtMap();
+	camAct.DisplayTheWholeMap();
 }
 
 void Level1::Update(float dt)
 {
 	MakingInstructions();
-
+	
 
 #ifdef _DEBUG
 	CheatKeyFunctions();
@@ -238,7 +235,6 @@ void Level1::Update(float dt)
 		temp.mouseinfo = player->GetComponent<Animation>()->isFlippedX();
 		STATEMANAGER->Replayerinfo.push(temp);
 	}
-	
 
 	if (!ENGINE->GetGameStateIsOn())
 	{
@@ -269,35 +265,18 @@ void Level1::Update(float dt)
 	}
 	if (APP->b_Win)
 	{
-	
-
-    		STATEMANAGER->b_IsReplayStart = false;
+		STATEMANAGER->b_IsReplayStart = false;
 		STATEMANAGER->b_IsReplay = true;
-	
-		
 	}
-	
+	_playerPosition.x = player->GetComponent<Transform>()->GetPosition().x;
+	_playerPosition.y = player->GetComponent<Transform>()->GetPosition().y;
+	_playerPosition.z = 500.f;
 	if (Input::IsAnyTriggered())
 	{
-		movingToCenter = true;
+		camAct.cameraSetting(_playerPosition);
 	}
 
-	if (movingToCenter)
-	{
-		if (CenterToPlayer)
-		{
-			camAct.FollowPlayer(&CAMERA->m_camerObject->pos, &CAMERA->m_camerObject->scale, dt);
-			//FollowPlayer(CAMERA->cameraPos, dt);
-			
-		}
-		else
-		{			
-			CAMERA->cameraPos.x = FACTORY->GamePlayer->GetComponent<Transform>()->GetPosition().x;
-			CAMERA->cameraPos.y = FACTORY->GamePlayer->GetComponent<Transform>()->GetPosition().y;
-		}
-	}
-
-
+	
 	if (APP->b_Lose)
 	{
 		if(LosesoundOnetime)
@@ -318,8 +297,6 @@ void Level1::Update(float dt)
 		static bool first = true;
 		if (STATEMANAGER->ReplayInit)
 		{
-			//PARTICLEMANAGER->Initialize();
-			
 			MakeReplayerUI();
 			TRIGGERLOGIC->Initialize();
 			CAMERA->cameraUp.x = 0;
@@ -327,7 +304,6 @@ void Level1::Update(float dt)
 			PHYSICS->gravityScale = -20.f;
 			PHYSICS->GravityType = Gravity::y_Minus;
 			PHYSICS->gravity = glm::vec3(0, PHYSICS->gravityScale, 0);
-			//PARTICLEMANAGER->Initialize();
 		}		
 		first = false;
 		SetReplayer();
@@ -343,7 +319,6 @@ void Level1::Free(void)
 	while (!STATEMANAGER->Replayerinfo.empty())
 		STATEMANAGER->Replayerinfo.pop();
 	CAMERA->isCentered = true;
-	movingToCenter = false;
 	CAMERA->IsCameraShaking = false;
 	STATEMANAGER->b_IsAutoplaying = false;
 	IsAutoplay = false;
@@ -373,32 +348,8 @@ void Level1::Unload()
 	STATEMANAGER->b_IsReplay = false;
 }
 
-void Level1::zoomintoPlayer()
-{
-	if (ZoomInToPlayer)
-	{
-		
-		if (CAMERA->cameraPos.z >= 800.f)
-			CAMERA->cameraPos.z -= 5.f;
-		if (CAMERA->cameraPos.z <= 800.f)
-		{
-			CAMERA->cameraPos.z = 800.f;
-			ZoomInToPlayer = false;
-		}
-	}
-}
 
 
-void Level1::lookAtMap()
-{
-	CAMERA->CenterOfCamera.x = FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x + (FACTORY->RightBoundary()->GetComponent<Transform>()->position.x - FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x) *.5f;
-	CAMERA->CenterOfCamera.y = FACTORY->DownBoundary()->GetComponent<Transform>()->position.y + (FACTORY->UpBoundary()->GetComponent<Transform>()->position.y - FACTORY->DownBoundary()->GetComponent<Transform>()->position.y)*.5f;
-	std::cout << "CenterOfX: " << CAMERA->CenterOfCamera.x << '\n';
-	std::cout << "CenterOfY: " << CAMERA->CenterOfCamera.y << '\n';
-
-	CAMERA->cameraPos = glm::vec3(glm::vec2(CAMERA->CenterOfCamera.x, CAMERA->CenterOfCamera.y), CAMERA->cameraPos.z);
-	CAMERA->cameraPos.z = 999.f;
-}
 
 void CheatKeyFunctions(void) {
 

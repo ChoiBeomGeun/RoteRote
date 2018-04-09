@@ -16,7 +16,8 @@ namespace TE
 		glm::vec3 cameraOriginPos;
 		void FollowPlayer(glm::vec3 * cameraPos, glm::vec3 * cameraScale, float dt);
 		bool isCamToPlayer;
-	
+		void cameraSetting(glm::vec3 cameraPOS);
+		bool DisplayTheWholeMap();
 
 	private:
 		// how long the object should shake for

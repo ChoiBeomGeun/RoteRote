@@ -64,6 +64,7 @@ void LevelSelect::Init()
 
 void LevelSelect::Update(float dt)
 {
+	//LvlSelectCam.cameraSetting(glm::vec3(0,0,0));
 	if (std::abs(FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle == 360.f))
 		FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle = 0.f;
 

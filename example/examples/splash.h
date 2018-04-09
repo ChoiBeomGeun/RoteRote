@@ -16,7 +16,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 
 #pragma once
 #include "BaseStage.h"
-
+#include "CameraMovement.h"
 
 class splash :public BaseStage
 {
@@ -32,4 +32,6 @@ public:
 
 private:
 	int MenuCounter;
+	TE::CameraAction camActSplash;
+
 };

@@ -119,10 +119,7 @@ namespace TE {
 		void setbasicUniformLoc();
 		void setparticleUniformLoc();
 		void animationSetting();
-		void cameraSetting();
-		void MergeList();
-		void FreeList();
-
+		
 		//void drawLine(bool isdraw);
 	private:
 		int drawStats;

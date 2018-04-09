@@ -16,7 +16,6 @@ namespace TE {
 		shakeAmount = 3.0f;
 		isCamToPlayer = false;
 		_camPaceSpeed = 10.f;
-		//glm::vec3 cameraOriginPos = CAMERA->cameraPos;
 	}
 	CameraAction::~CameraAction()
 	{
@@ -30,10 +29,6 @@ namespace TE {
 
 			std::mt19937 gen(rd());
 			std::uniform_real_distribution<> dis(-10.0, 10.0);
-
-			//std::cout << "dis(gen): " << dis(gen) << '\n';
-			//std::cout << "camerapos.x : " << glm::vec3(dis(gen) * shakeAmount, dis(gen) * shakeAmount, 1).x <<'\n';
-			//std::cout << "camerapos.y : " << glm::vec3(dis(gen) * shakeAmount, dis(gen) * shakeAmount, 1).y << '\n';
 			CAMERA->cameraPos = cameraOriginPos + glm::vec3(dis(gen) * shakeAmount, dis(gen) * shakeAmount, 1);
 			std::cout << "Camera.x : " << CAMERA->cameraPos.x << '\n';
 			std::cout << "Camera.y : " << CAMERA->cameraPos.y << '\n';
@@ -76,5 +71,44 @@ namespace TE {
 			isCamToPlayer = false;
 		}
 	}
+
+	void CameraAction::cameraSetting(glm::vec3 cameraPOS)
+	{
+		CAMERA->cameraPos = cameraPOS;
+		CAMERA->lookat(CAMERA->cameraPos, CAMERA->cameraTarget, CAMERA->cameraUp);
+		/*if (CAMERA->isCentered)
+			CAMERA->lookat(CAMERA->cameraPos, CAMERA->cameraTarget, CAMERA->cameraUp);
+		else
+		{
+			if (FACTORY->GetPlayer())
+			{
+				if (!CAMERA->IsCameraShaking)
+					CAMERA->cameraPos = FACTORY->GetPlayer()->GetComponent<Transform>()->position;
+
+				CAMERA->cameraPos.z = 500.f;
+				CAMERA->lookat(CAMERA->cameraPos, CAMERA->cameraTarget, CAMERA->cameraUp);
+			}
+		}*/
+	}
+	bool CameraAction::DisplayTheWholeMap() {
+		if (!FACTORY->GetPlayer())
+			return false;
+		CAMERA->CenterOfCamera.x = FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x + (FACTORY->RightBoundary()->GetComponent<Transform>()->position.x - FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x) *.5f;
+		CAMERA->CenterOfCamera.y = FACTORY->DownBoundary()->GetComponent<Transform>()->position.y + (FACTORY->UpBoundary()->GetComponent<Transform>()->position.y - FACTORY->DownBoundary()->GetComponent<Transform>()->position.y)*.5f;
+		CAMERA->cameraPos = glm::vec3(glm::vec2(CAMERA->CenterOfCamera.x, CAMERA->CenterOfCamera.y), CAMERA->cameraPos.z);
+		return true;
+	}
+
+	/*void Level1::lookAtMap()
+	{
+		CAMERA->CenterOfCamera.x = FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x + (FACTORY->RightBoundary()->GetComponent<Transform>()->position.x - FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x) *.5f;
+		CAMERA->CenterOfCamera.y = FACTORY->DownBoundary()->GetComponent<Transform>()->position.y + (FACTORY->UpBoundary()->GetComponent<Transform>()->position.y - FACTORY->DownBoundary()->GetComponent<Transform>()->position.y)*.5f;
+		std::cout << "CenterOfX: " << CAMERA->CenterOfCamera.x << '\n';
+		std::cout << "CenterOfY: " << CAMERA->CenterOfCamera.y << '\n';
+
+		CAMERA->cameraPos = glm::vec3(glm::vec2(CAMERA->CenterOfCamera.x, CAMERA->CenterOfCamera.y), CAMERA->cameraPos.z);
+		CAMERA->cameraPos.z = 999.f;
+	}*/
+
 
 }

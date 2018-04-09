@@ -72,7 +72,7 @@ void splash::Update(float dt)
 	if (Input::IsAnyTriggered())
 		STATEMANAGER->Next();
 
-
+	camActSplash.cameraSetting(glm::vec3(0, 0, 999.f));
 
 	if(CAMERA->cameraPos.x <= 2560 && Timer2 >= 200)
 	CAMERA->cameraPos.x += 10.5;

@@ -30,8 +30,8 @@ public:
 	void Unload(void);
 
 
-	void zoomintoPlayer();
-	void lookAtMap();
+	
+	
 	//void CamMoveToCenter();
 	
 	
@@ -44,10 +44,9 @@ public:
 
 
 	bool moving;
-	bool movingToCenter;
 	glm::vec3 playerInitPos;
 private:
-	
+	glm::vec3 _playerPosition;
 	float _camPaceSpeed;
 	glm::vec3 _camPacedirction;
 	glm::vec3 _camStartPosition;
