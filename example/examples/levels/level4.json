@@ -143,7 +143,7 @@
 			"x" : 70.0,
 			"y" : 70.0
 		},
-		"TextureDir" : "spritestrip.png"
+		"TextureDir" : "player.png"
 	},
 	"Object5" : 
 	{
@@ -205,7 +205,7 @@
 			"x" : 50.0,
 			"y" : 50.0
 		},
-		"TextureDir" : "clearzone2.png"
+		"TextureDir" : "clearzone.png"
 	},
 	"Object8" : 
 	{
