@@ -188,7 +188,7 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="ArchetypeEditor.cpp" />
+    <ClCompile Include="Archetype.cpp" />
     <ClCompile Include="BaseStage.cpp" />
     <ClCompile Include="Body.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -226,7 +226,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Application.h" />
-    <ClInclude Include="ArchetypeEditor.h" />
+    <ClInclude Include="Archetype.h" />
     <ClInclude Include="BaseStage.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />

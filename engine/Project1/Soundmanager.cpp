@@ -109,18 +109,12 @@ void SoundManager::ERRORCheck(FMOD_RESULT presult)
 
 SOUNDID SoundManager::LoadSound(std::string SoundDir)
 {
-	char * Userinfo;
-   	size_t len = SoundDir.size();
-	_dupenv_s(&Userinfo, &len, "USERPROFILE");
+
 
 	std::string saveLevel = SoundDir;
-#ifdef _DEBUG
+
 	SoundDir = ".\\sounds.\\" + SoundDir;
-#else
-	SoundDir = Userinfo;
-	SoundDir += "/Documents/RoteRote/sounds/" + saveLevel;
-#endif
-	free(Userinfo);
+
 	if (b_SoundOnOff)
 	{
 		if (added) {

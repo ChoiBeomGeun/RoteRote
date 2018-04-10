@@ -152,9 +152,6 @@
     <ClCompile Include="SpriteBatch.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="ArchetypeEditor.cpp">
-      <Filter>IMGUIDEBUG</Filter>
-    </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
@@ -175,6 +172,9 @@
     </ClCompile>
     <ClCompile Include="Particles.cpp">
       <Filter>Graphics\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Archetype.cpp">
+      <Filter>IMGUIDEBUG</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -310,9 +310,6 @@
     <ClInclude Include="SpriteBatch.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="ArchetypeEditor.h">
-      <Filter>IMGUIDEBUG</Filter>
-    </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Graphics</Filter>
     </ClInclude>
@@ -333,6 +330,9 @@
     </ClInclude>
     <ClInclude Include="Particles.h">
       <Filter>Graphics\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Archetype.h">
+      <Filter>IMGUIDEBUG</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

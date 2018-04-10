@@ -181,6 +181,11 @@ BOOL Engine::IsWow64()
 
 void Engine::Filenameloading(void)
 {
+	mVsArchtypenamelist.clear();
+	mVsLevelnamelist.clear();
+	mVsLognamelist.clear();
+	mVsSoundnamelist.clear();
+	mVsTexturenamelist.clear();
 	std::string path;
 	char * Userinfo;
 	size_t len =100;
@@ -188,37 +193,27 @@ void Engine::Filenameloading(void)
 	path = Userinfo;
 	free(Userinfo);
 
-	_finddata_t level32;
-	__finddata64_t level64;
-
-	_finddata_t texture32;;
-	__finddata64_t texture64;
-
-	_finddata_t log32;;
-	__finddata64_t log64;
-
-	_finddata_t sound32;;
-	__finddata64_t sound64;
-
-	_finddata_t archtype32;
-	__finddata64_t archtype64;
-
-	long levelhandle;
-	intptr_t levelhandle64;
-
-	long texturehandle;
-	intptr_t texturehandle64;
-
-	long loghandle;
-	intptr_t loghandle64;
-
-	long soundhandle;
-	intptr_t soundhandle64;
-
-
-	long archtypehandle;
+		_finddata_t level32;
+		_finddata_t texture32;
+		_finddata_t log32;
+		_finddata_t sound32;
+		_finddata_t archtype32;
+		long levelhandle;
+		long texturehandle;
+		long loghandle;
+		long soundhandle;
+		long archtypehandle;
+	
 	intptr_t archtypehandle64;
-
+	intptr_t soundhandle64;
+	intptr_t loghandle64;
+	intptr_t texturehandle64;
+	intptr_t levelhandle64;
+	__finddata64_t archtype64;
+	__finddata64_t sound64;
+	__finddata64_t log64;
+	__finddata64_t texture64;
+	__finddata64_t level64;
 	int result = 1;
 	int result2 = 1;
 	int result3 = 1;
@@ -227,20 +222,20 @@ void Engine::Filenameloading(void)
 	//
 #ifdef _DEBUG
 	levelhandle = (long)_findfirst(".\\levels.\\*.json", &level32);
-	levelhandle64 = (long)_findfirst64(".\\levels.\\*.json", &level64);
+	levelhandle64 = (intptr_t)_findfirst64(".\\levels.\\*.json", &level64);
 
 	texturehandle = (long)_findfirst(".\\texture.\\*.png", &texture32);
-	texturehandle64 = (long)_findfirst64(".\\texture.\\*.png", &texture64);
+	texturehandle64 = (intptr_t)_findfirst64(".\\texture.\\*.png", &texture64);
 
 	loghandle = (long)_findfirst(".\\logging.\\*.json", &log32);
-	loghandle64 = (long)_findfirst64(".\\logging.\\*.json", &log64);
+	loghandle64 = (intptr_t)_findfirst64(".\\logging.\\*.json", &log64);
 
 
 	soundhandle = (long)_findfirst(".\\sounds.\\*.mp3", &sound32);
-	soundhandle64 = (long)_findfirst64(".\\sounds.\\*.mp3", &sound64);
+	soundhandle64 = (intptr_t)_findfirst64(".\\sounds.\\*.mp3", &sound64);
 
 	archtypehandle = (long)_findfirst(".\\Archtypes.\\*.json", &archtype32);
-	archtypehandle64 = (long)_findfirst64(".\\Archtypes.\\*.json", &archtype64);
+	archtypehandle64 = (intptr_t)_findfirst64(".\\Archtypes.\\*.json", &archtype64);
 #else
  	levelhandle = (long)_findfirst((path + "/Documents/RoteRote/levels/*.json").c_str(), &level32);
 	levelhandle64 = _findfirst64((path + "/Documents/RoteRote/levels/*.json").c_str(), &level64);
@@ -326,7 +321,7 @@ void Engine::Filenameloading(void)
 		}
 		else
 		{
-			result2 = _findnext64(texturehandle64, &texture64);
+			result2 = _findnexti64(texturehandle64, &texture64);
 		}
 
 	}
@@ -393,19 +388,20 @@ void Engine::Filenameloading(void)
 		}
 
 	}
-
+	if (IsWow64()) {
 		_findclose(levelhandle);
 		_findclose(texturehandle);
 		_findclose(loghandle);
 		_findclose(soundhandle);
 		_findclose(archtypehandle);
-
+	}
+	else {
 		_findclose(levelhandle64);
 		_findclose(texturehandle64);
 		_findclose(loghandle64);
 		_findclose(soundhandle64);
 		_findclose(archtypehandle64);
-
+	}
 		
 
 }

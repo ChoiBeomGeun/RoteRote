@@ -12,7 +12,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/
 #pragma once
-#include "ArchetypeEditor.h"
+#include "Archetype.h"
 
 #include "Graphics.h"
 void ImGuiUpdate(void);

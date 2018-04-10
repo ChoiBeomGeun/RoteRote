@@ -23,7 +23,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include  "Timer.h"
 #include "Application.h"
 #include "SoundManager.h"
-#include "ArchetypeEditor.h"
+#include "Archetype.h"
 #include "InGameLogic.h"
 #include "Trigger.h"
 
@@ -98,9 +98,7 @@ void Level1::Init()
 	YmovedCompleted = false;
 	path2 = STATEMANAGER->Loadtolevelname;
 	_camPaceSpeed = 100.0f;
-	char * Userinfo;
-	size_t len = path2.size();
-	_dupenv_s(&Userinfo, &len, "USERPROFILE");
+
 
 	moving = false;
 	//increasing = false;
@@ -110,13 +108,9 @@ void Level1::Init()
 
 
 	std::string saveLevel = path2;
-#ifdef _DEBUG
+
 	path2 = ".\\autoplays.\\" + path2;
-#else
-	path2 = Userinfo;
-	path2 += "/Documents/RoteRote/autoplays/" + saveLevel;
-#endif
-	free(Userinfo);
+
 
 	file.ReadFile(path2);
 

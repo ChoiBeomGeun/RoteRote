@@ -30,18 +30,11 @@ Graphics::Graphics()
 void TE::Graphics::initbasicShader()
 {
 	std::string path = "TEGraphics";
-	char * Userinfo;
-	size_t len = path.size();
-	_dupenv_s(&Userinfo, &len, "USERPROFILE");
 
-	std::string saveLevel = path;
-#ifdef _DEBUG
+
+
 	path = ".\\shaders.\\" + path;
-#else
-	path = Userinfo;
-	path += "/Documents/RoteRote/shaders/" + saveLevel;
-#endif
-	free(Userinfo);
+	
 	_basicProgram.compileShaders(path + ".vert", path + ".frag");
 	_basicProgram.addAttribute("vertexPosition");
 	_basicProgram.addAttribute("vertexColor");
@@ -53,18 +46,12 @@ void TE::Graphics::initbasicShader()
 void TE::Graphics::initparticleShader()
 {
 	std::string path = "TEParticle";
-	char * Userinfo;
-	size_t len = path.size();
-	_dupenv_s(&Userinfo, &len, "USERPROFILE");
+
 
 	std::string saveLevel = path;
-#ifdef _DEBUG
+
 	path = ".\\shaders.\\" + path;
-#else
-	path = Userinfo;
-	path += "/Documents/RoteRote/shaders/" + saveLevel;
-#endif
-	free(Userinfo);
+
 
 	_particleProgram.compileShaders(path + ".vert", path + ".frag");
 	_particleProgram.addAttribute("verParticlePos");

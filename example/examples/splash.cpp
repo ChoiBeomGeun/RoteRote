@@ -25,7 +25,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "Application.h"
 #include "SoundManager.h"
 #include "InGameLogic.h"
-#include "ArchetypeEditor.h"
+#include "Archetype.h"
 using namespace TE;
 float Timer2 = 0;
 float angle = 0;

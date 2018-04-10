@@ -18,7 +18,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "Object.h"
 #include <map>
 #include <glm/glm.hpp>
-#include "ArchetypeEditor.h"
+#include "Archetype.h"
 
 namespace TE {
 	struct ReplayerInfo {

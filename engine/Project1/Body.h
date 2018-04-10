@@ -41,7 +41,7 @@ namespace TE {
 		bool ToDelete = false;
 		friend class Physics;
 		Grounded GroundType;
-
+		
 		bool Jump;
 		Body();
 
