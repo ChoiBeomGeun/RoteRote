@@ -1,0 +1,259 @@
+{
+	"DefalutCamera" : 
+	{
+		"EYE" : 
+		{
+			"x" : -270.0,
+			"y" : -87.0,
+			"z" : 999.0
+		},
+		"TARGET" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : -1.0
+		},
+		"UP" : 
+		{
+			"x" : 0.0,
+			"y" : 1.0,
+			"z" : 0.0
+		}
+	},
+	"Level" : 1,
+	"NumberOfObjects" : 11,
+	"Object1" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"GravityOn" : false,
+		"Mass" : 0.0,
+		"ObjectID" : 1,
+		"ObjectType" : "Wall",
+		"Position" : 
+		{
+			"x" : -545.0,
+			"y" : -97.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 20.0,
+			"y" : 380.0
+		},
+		"TextureDir" : "wall.png"
+	},
+	"Object10" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
+		"GravityOn" : false,
+		"Mass" : 0.0,
+		"ObjectID" : 10,
+		"ObjectType" : "Trigger180",
+		"Position" : 
+		{
+			"x" : -455.0,
+			"y" : -257.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 20.0,
+			"y" : 20.0
+		},
+		"TextureDir" : "180button.png",
+		"TriggerType" : "180"
+	},
+	"Object11" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"ObjectID" : 11,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.89999997615814209,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 0.10000000149011612,
+			"y" : 0.20000000298023224
+		},
+		"TextureDir" : "7.png"
+	},
+	"Object2" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"GravityOn" : false,
+		"Mass" : 0.0,
+		"ObjectID" : 2,
+		"ObjectType" : "Wall",
+		"Position" : 
+		{
+			"x" : -270.0,
+			"y" : -277.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 530.0,
+			"y" : 20.0
+		},
+		"TextureDir" : "wall.png"
+	},
+	"Object3" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"GravityOn" : false,
+		"Mass" : 0.0,
+		"ObjectID" : 3,
+		"ObjectType" : "Wall",
+		"Position" : 
+		{
+			"x" : -280.0,
+			"y" : 103.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 550.0,
+			"y" : 20.0
+		},
+		"TextureDir" : "wall.png"
+	},
+	"Object4" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"GravityOn" : false,
+		"Mass" : 0.0,
+		"ObjectID" : 4,
+		"ObjectType" : "Wall",
+		"Position" : 
+		{
+			"x" : 5.0,
+			"y" : -87.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 20.0,
+			"y" : 400.0
+		},
+		"TextureDir" : "wall.png"
+	},
+	"Object5" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "CONTROLLER", "ANIMATION" ],
+		"GravityOn" : true,
+		"Mass" : 1.0,
+		"ObjectID" : 5,
+		"ObjectType" : "Player",
+		"Position" : 
+		{
+			"x" : -485.0,
+			"y" : -257.05001831054688,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 20.0,
+			"y" : 20.0
+		},
+		"TextureDir" : "player.png"
+	},
+	"Object6" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
+		"GravityOn" : false,
+		"Mass" : 0.0,
+		"ObjectID" : 6,
+		"ObjectType" : "Trigger90",
+		"Position" : 
+		{
+			"x" : -245.0,
+			"y" : -257.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 20.0,
+			"y" : 20.0
+		},
+		"TextureDir" : "90button.png",
+		"TriggerType" : "90"
+	},
+	"Object7" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"ObjectID" : 7,
+		"ObjectType" : "Clearzone",
+		"Position" : 
+		{
+			"x" : -145.0,
+			"y" : -97.0,
+			"z" : 0.0
+		},
+		"Rotation" : 96.319923400878906,
+		"Scale" : 
+		{
+			"x" : 20.0,
+			"y" : 20.0
+		},
+		"TextureDir" : "clearzone.png"
+	},
+	"Object8" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"GravityOn" : false,
+		"Mass" : 1.0,
+		"ObjectID" : 8,
+		"ObjectType" : "Box",
+		"Position" : 
+		{
+			"x" : -335.0,
+			"y" : -127.05000305175781,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 120.0,
+			"y" : 280.0
+		},
+		"TextureDir" : "box.png"
+	},
+	"Object9" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"GravityOn" : false,
+		"Mass" : 1.0,
+		"ObjectID" : 9,
+		"ObjectType" : "Box",
+		"Position" : 
+		{
+			"x" : -145.0,
+			"y" : -127.05000305175781,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 120.0,
+			"y" : 280.0
+		},
+		"TextureDir" : "box.png"
+	},
+	"WorldSize" : 
+	{
+		"x" : 0,
+		"y" : 0
+	}
+}
