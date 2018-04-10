@@ -22,7 +22,9 @@ namespace TE
 }
 
 using namespace TE;
-
+static glm::vec3 eye = { 0,0,999 };
+static glm::vec3 target{ 0,0,-1 };
+static glm::vec3 up{ 0,1,0 };
 Camera::Camera()
 {
 	CenterOfCamera = { 0.f, 0.f };
@@ -43,6 +45,9 @@ Camera::~Camera()
 
 void Camera::Initialize()
 {
+	cameraPos = eye;
+	cameraTarget = target;
+	cameraUp = up;
 	_zNear = 1.f;
 	_zFar = 1000.f;
 	angle = 45.f;

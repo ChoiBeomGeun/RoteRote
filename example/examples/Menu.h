@@ -18,6 +18,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "BaseStage.h"
 #include "StateLists.h"
 #include "MenuList.h"
+#include "CameraMovement.h"
 
 class Menu  :public BaseStage
 {
@@ -36,7 +37,7 @@ public:
 	void Selection_minus(void);
 	void Selection_Text(void);
 private:
-
+	TE::CameraAction MenuCam;
 	bool LeftRotate;
 	bool RightRotate;
 

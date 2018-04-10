@@ -119,7 +119,9 @@ namespace TE {
 		void setbasicUniformLoc();
 		void setparticleUniformLoc();
 		void animationSetting();
-		
+		/*static void LoadAllSprites(std::string path);
+		static void UnLoadAllSprites();
+		static GLuint find_texture_id(std::string filepath);*/
 		//void drawLine(bool isdraw);
 	private:
 		int drawStats;

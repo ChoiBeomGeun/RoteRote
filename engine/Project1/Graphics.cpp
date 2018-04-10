@@ -14,9 +14,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "Graphics.h"
 #include <algorithm>
 
-static glm::vec3 eye = { 0,0,999 };
-static glm::vec3 target{ 0,0,-1 };
-static glm::vec3 up{ 0,1,0 };
+
 //bool moving;
 
 namespace TE {
@@ -142,9 +140,9 @@ void Graphics::Initialize(void)
 	glBindBuffer(GL_ARRAY_BUFFER, 0); // 0 mean unbind
 
 	drawbasic_attributes();
-	CAMERA->cameraPos = eye;
+	/*CAMERA->cameraPos = eye;
 	CAMERA->cameraTarget = target;
-	CAMERA->cameraUp = up;
+	CAMERA->cameraUp = up;*/
 
 
 	setbasicUniformLoc();
@@ -161,6 +159,7 @@ void Graphics::Initialize(void)
 	//   ImGuiIO& io = ImGui::GetIO();
 	/*glEnable(GL_ALPHA);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA);*/
+	Sprite::LoadAllSprites();
 
 }
 
@@ -243,17 +242,13 @@ void Graphics::Update(float dt)
 	glUniform1i(particleLoc[PSAMPLER], 0);
 	
 	view = CAMERA->view;
-	/*for(auto sdf : m_BaseGraphicsList)
-	{
-
-	}*/
 
 	for (std::vector<Sprite*>::iterator it = SpriteList.begin();
 		it != SpriteList.end(); ++it) {
 		glBindTexture(GL_TEXTURE_2D, (*it)->m_TextureID);
 		animationSetting();
 		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		m_textureMap;
+		//m_textureMap;
 		_basicProgram.use();
 
 		if ((*it)->isPerspective)
@@ -288,6 +283,11 @@ void Graphics::framebuffer_size_callback(SDL_Window* window, int width, int heig
 
 Graphics::~Graphics()
 {
+	for (auto texID : GRAPHICS->SpriteList)
+	{
+		//std::cout << "texID->pTextureID : " << texID->pTexureID << '\n';
+		glDeleteTextures(1, &texID->m_TextureID);
+	}
 	_basicProgram.unuse();
 	_particleProgram.unuse();
 	delete pCamera;
@@ -296,6 +296,8 @@ Graphics::~Graphics()
 	ImguiFree();
 	ImGui_ImplSdlGL3_Shutdown();
 #endif
+
+	Sprite::UnLoadAllSprites();
 }
 
 void TE::Graphics::drawPerspective(std::vector<Sprite*>::iterator iter)

@@ -15,7 +15,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 /******************************************************************************/
 #pragma once
 #include "BaseStage.h"
-
+#include "CameraMovement.h"
 
 class Pause :public BaseStage
 {
@@ -30,4 +30,5 @@ public:
 
 private:
 	int PauseCounter;
+	TE::CameraAction PauseCam;
 };

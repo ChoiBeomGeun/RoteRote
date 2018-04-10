@@ -241,7 +241,7 @@ void ImGuiUpdate(void) {
 							ImGui::Combo("Levels", &j, cppTextureitems, (int)ENGINE->mVsTexturenamelist.size());
 							if (ImGui::Button("Load"))
 							{
-								i.second->GetComponent<Sprite>()->texture_load(cppTextureitems[j]);
+								i.second->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(cppTextureitems[j]);
 
 							}
 							ImGui::ColorEdit4("Color", FACTORY->ObjectIDMap[i.second->objID]->GetComponent<Sprite>()->Color, ImGuiColorEditFlags_Uint8);

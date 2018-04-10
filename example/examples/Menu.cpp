@@ -45,10 +45,10 @@ void Menu::Load()
 	MoveSound = SOUNDMANAGER->LoadSound("menumove.mp3");
 	SelectSound = SOUNDMANAGER->LoadSound("menuselect.mp3");
 
-	Menu_Start = FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Menu_Start.png");
-	Menu_HowToPlay = FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Menu_HowToPlay.png");
-	Menu_Quit = FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Menu_Quit.png");
-	Menu_Option = FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Menu_Option.png");
+	Menu_Start = FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Start.png");
+	Menu_HowToPlay = FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_HowToPlay.png");
+	Menu_Quit = FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Quit.png");
+	Menu_Option = FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Option.png");
 }
 
  void Menu::Init()
@@ -63,7 +63,7 @@ void Menu::Load()
 	 IsSelected = false;
 	 selection_angle = 0;
 	 select_index = 0;
-	 
+	 MenuCam.cameraSetting(glm::vec3(0, 0, 999.f));
 	 SOUNDMANAGER->PlaySounds(MenuSound, true);
 }
 
@@ -77,7 +77,7 @@ void Menu::Update(float dt)
 		delta_angle = 0;
 		select_index = 0;
 	}
-
+	MenuCam.Update(dt);
 
 	if (IsRotating) {
 		DeltaAngle();

@@ -189,7 +189,7 @@ namespace TE {
 
 				if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "PARTICLE") {
 					pobject->AddComponent<Emitter>();
-					pobject->GetComponent<Sprite>()->texture_load(textureDir);
+					pobject->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(textureDir);
 					pobject->GetComponent<Sprite>()->depth = -2.0f;
 
 					pobject->GetComponent<Transform>()->position = glm::vec3(Xpos, Ypos, 0);

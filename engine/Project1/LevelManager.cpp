@@ -115,7 +115,7 @@ void LevelManager::LoadLevel(std::string  path)
 				tempObject->GetComponent<Sprite>()->depth = 0.0f;
 				tempObject->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
 				tempObject->GetComponent<Sprite>()->isPerspective = true;
-				tempObject->GetComponent<Sprite>()->texture_load(textureDir);
+				tempObject->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(textureDir);
 			//	tempObject->AddComponent(sprite);
 				
 				
@@ -274,7 +274,7 @@ void LevelManager::LoadLevel(std::string  path)
 		if (tempObject->GetComponent<Sprite>())
 		{
 			FACTORY->ObjectIDMap[tempObject->objID]->GetComponent<Sprite>()->mTexutureDir = (const_cast<char*>(textureDir.c_str()));
-			tempObject->GetComponent<Sprite>()->texture_load(const_cast<char*>(textureDir.c_str()));
+			tempObject->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(const_cast<char*>(textureDir.c_str()));
 		}
 	
 		tempObject->Initialize();

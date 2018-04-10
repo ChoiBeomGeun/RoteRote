@@ -17,7 +17,6 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 
 #include "Component.h"
 
-//#include "vector3.h"
 #include "Transform.h"
 #include  <string>
 
@@ -47,14 +46,18 @@ namespace TE {
 
 		GLuint  texture_load(std::string filepath);
 
-
 		//Transform * pTransform;
 		GLuint m_TextureID;
 		std::string mTexutureDir;
-		static void LoadAllSprites(std::string path);
+		static void LoadAllSprites();
+		static void UnLoadAllSprites();
+		static GLuint find_texture_id(std::string filepath);
+		static void SetTextureID(std::string filepath);
 
 		void ChangeColor(float r, float g, float b, float a); // You can actually put numbers from 0~255.f 
 		void ChangeBackgroundColor(float r, float g, float b, float a);
+
+
 		void framebuffer_size_callback(int width, int height);
 		bool isPerspective;
 		static void sortSprites(SortType sortType = SortType::FRONT_TO_BACK);

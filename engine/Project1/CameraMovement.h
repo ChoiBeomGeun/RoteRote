@@ -18,7 +18,8 @@ namespace TE
 		bool isCamToPlayer;
 		void cameraSetting(glm::vec3 cameraPOS);
 		bool DisplayTheWholeMap();
-
+		void moveCameraPos(glm::vec2 cameraPOS);
+		void Update(float dt);
 	private:
 		// how long the object should shake for
 		float shakeDuration;

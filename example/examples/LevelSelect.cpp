@@ -47,7 +47,7 @@ void LevelSelect::Load()
 	LEVELMANAGER->LoadLevel("selectlevel.json");
 
 	for (int i = 0; i <= LevelList::quit; ++i)
-		Levelpng[i] = FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->texture_load(toString(i));
+		Levelpng[i] = FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(toString(i));
 
 
 }
@@ -60,6 +60,7 @@ void LevelSelect::Init()
 	IsRotating = false;
 	IsLeftPressed = false;
 	IsRightPreesed = false;
+	LvlSelectCam.cameraSetting(glm::vec3(0, 0, 500.f));
 }
 
 void LevelSelect::Update(float dt)
@@ -68,7 +69,7 @@ void LevelSelect::Update(float dt)
 	if (std::abs(FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle == 360.f))
 		FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle = 0.f;
 
-
+	LvlSelectCam.Update(dt);
 	if (!IsRotating)	{
 		if (Input::IsPressed(SDL_SCANCODE_RIGHT)) {
 			if (LevelList == LevelList::quit)

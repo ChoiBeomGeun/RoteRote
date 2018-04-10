@@ -88,7 +88,7 @@ void Quitgame(void)
 
 
 	oconfirmation = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(1.5, 0.7, 0));
-	oconfirmation->GetComponent<Sprite>()->texture_load("Sure.png");
+	oconfirmation->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Sure.png");
 
 	oExitornot = true;
 }
@@ -99,7 +99,7 @@ void HowToPlay(void)
 
 
 	oHowToPlay = FACTORY->CreateHUD(glm::vec3(0, 0,0), glm::vec3(2, 1.5, 0));
-	oHowToPlay->GetComponent<Sprite>()->texture_load("howtoplay.png");
+	oHowToPlay->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("howtoplay.png");
 
 	HowTOplay = true;
 }
@@ -126,24 +126,24 @@ void Pause::Init()
 	SOUNDMANAGER->PauseAllSound();
 
 	oBackbutton = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion.x, Vec3buttonPostion.y + .3f, Vec3buttonPostion.z), Vec3Buttonscale);
-	oBackbutton->GetComponent<Sprite>()->texture_load("back.png");
+	oBackbutton->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("back.png");
 	oRestartbutton = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion.x, Vec3buttonPostion.y, Vec3buttonPostion.z), Vec3Buttonscale);
-	oRestartbutton->GetComponent<Sprite>()->texture_load("retry.png");
+	oRestartbutton->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("retry.png");
 	oLevelbutton = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion.x, Vec3buttonPostion.y - .3f, Vec3buttonPostion.z), Vec3Buttonscale);
-	oLevelbutton->GetComponent<Sprite>()->texture_load("levelselect.png");
+	oLevelbutton->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("levelselect.png");
 	oQuitthegame = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion.x, Vec3buttonPostion.y - .6f, Vec3buttonPostion.z), Vec3Buttonscale);
-	oQuitthegame->GetComponent<Sprite>()->texture_load("box.png");
+	oQuitthegame->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("box.png");
 	oHUD = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion.x, Vec3buttonPostion.y-.1f, Vec3buttonPostion.z), glm::vec3(0.8,2,0));
-	oHUD->GetComponent<Sprite>()->texture_load("pausehud.png");
+	oHUD->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("pausehud.png");
 	oHowToPlayIcon = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion.x, Vec3buttonPostion.y-.9f, Vec3buttonPostion.z), Vec3Buttonscale);
-	oHowToPlayIcon->GetComponent<Sprite>()->texture_load("question.png");
+	oHowToPlayIcon->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("question.png");
 
-
+	PauseCam.cameraSetting(glm::vec3(FACTORY->GetPlayer()->GetComponent<Transform>()->position.x, FACTORY->GetPlayer()->GetComponent<Transform>()->position.y, 999.f));
 }
 
 void Pause::Update(float dt)
 {
-
+	
 	dt = dt;
 	if (oBackbutton->GetComponent<Transform>()->position.x <= -.7f)
 	{
@@ -252,11 +252,12 @@ void Pause::Update(float dt)
 			FACTORY->Destroy(oHowToPlay);
 		}
 	}
-	
+	PauseCam.Update(dt);
 }
 
 void Pause::Free(void)
 {
+	PauseCam.cameraSetting(glm::vec3(FACTORY->GetPlayer()->GetComponent<Transform>()->position.x, FACTORY->GetPlayer()->GetComponent<Transform>()->position.y, 999.f));
 
 	pauseindex = 0;
 	SOUNDMANAGER->ResumeAllSound();
@@ -274,7 +275,7 @@ void Pause::Free(void)
 		FACTORY->Destroy(oconfirmation);
 	if (oHowToPlayIcon)
 		FACTORY->Destroy(oHowToPlayIcon);
-
+	PauseCam.cameraSetting(glm::vec3(FACTORY->GetPlayer()->GetComponent<Transform>()->position.x, FACTORY->GetPlayer()->GetComponent<Transform>()->position.y, 999.f));
 //	SOUNDMANAGER->DeleteSounds();
 }
 

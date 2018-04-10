@@ -120,15 +120,15 @@ void Option::Init()
 void Option::Update(float dt)
 {
 	if(APP->_isfull)
-		TE::FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("On.png");
+		TE::FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("On.png");
 	else
-		TE::FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("OFF.png");
+		TE::FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("OFF.png");
 
 	
 		if (SOUNDMANAGER->SoundOnOffCheck())
-			TE::FACTORY->ObjectIDMap[4]->GetComponent<Sprite>()->texture_load("on.png");
+			TE::FACTORY->ObjectIDMap[4]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("on.png");
 		else
-			TE::FACTORY->ObjectIDMap[4]->GetComponent<Sprite>()->texture_load("off.png");
+			TE::FACTORY->ObjectIDMap[4]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("off.png");
 	dt = dt;
 	if (Input::IsTriggered(SDL_SCANCODE_UP))
 		if (index1 >= 0)

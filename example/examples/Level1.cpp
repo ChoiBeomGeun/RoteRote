@@ -139,7 +139,7 @@ void Level1::Init()
 
  	std::string levelname = std::to_string(STATEMANAGER->i_LevelSelect+1) + ".png";
 	HUDLevelname = FACTORY->CreateHUD(glm::vec3(0, 0.9, 0), glm::vec3(0.1, 0.2, 0));
-	HUDLevelname->GetComponent<Sprite>()->texture_load(levelname);
+	HUDLevelname->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(levelname);
 	HUDLevelname->objectstyle = Objectstyle::Button;
 
 	//PARTICLEMANAGER->LoadEmitter("particle1.json");
@@ -214,6 +214,9 @@ void Level1::Init()
 	//Loading->IsLoadingObject = false;
 	//FACTORY->Destroy(Loading);
 	/////////////////////////////////////////////////////
+	_playerPosition.x = player->GetComponent<Transform>()->GetPosition().x;
+	_playerPosition.y = player->GetComponent<Transform>()->GetPosition().y;
+	_playerPosition.z = 500.f;
 	camAct.DisplayTheWholeMap();
 }
 
@@ -268,11 +271,11 @@ void Level1::Update(float dt)
 		STATEMANAGER->b_IsReplayStart = false;
 		STATEMANAGER->b_IsReplay = true;
 	}
-	_playerPosition.x = player->GetComponent<Transform>()->GetPosition().x;
-	_playerPosition.y = player->GetComponent<Transform>()->GetPosition().y;
-	_playerPosition.z = 500.f;
+	camAct.cameraSetting(_playerPosition);
 	if (Input::IsAnyTriggered())
 	{
+		_playerPosition.x = player->GetComponent<Transform>()->GetPosition().x;
+		_playerPosition.y = player->GetComponent<Transform>()->GetPosition().y;
 		camAct.cameraSetting(_playerPosition);
 	}
 
@@ -401,18 +404,18 @@ void MakingInstructions(void) {
 
 		Indicator = FACTORY->CreateArchetype(ReadingArchetype("Button.json"));
 		Indicator->GetComponent<Transform>()->SetPosition(glm::vec3(FACTORY->GetPlayer()->GetComponent<Transform>()->position.x - 80, 130 + FACTORY->GetPlayer()->GetComponent<Transform>()->position.y, FACTORY->GetPlayer()->GetComponent<Transform>()->position.z));
-		Indicator->GetComponent<Sprite>()->texture_load("left.png");
+		Indicator->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("left.png");
 		Indicator->GetComponent<Transform>()->scale.x = 80;
 		Indicator->GetComponent<Transform>()->scale.y = 80;
 
 		Indicator1 = FACTORY->CreateArchetype(ReadingArchetype("Button.json"));
 		Indicator1->GetComponent<Transform>()->SetPosition(glm::vec3(FACTORY->GetPlayer()->GetComponent<Transform>()->position.x + 80, 130 + FACTORY->GetPlayer()->GetComponent<Transform>()->position.y, FACTORY->GetPlayer()->GetComponent<Transform>()->position.z));
-		Indicator1->GetComponent<Sprite>()->texture_load("right.png");
+		Indicator1->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("right.png");
 		Indicator1->GetComponent<Transform>()->scale.x = 80;
 		Indicator1->GetComponent<Transform>()->scale.y = 80;
 
 		Indicator2 = FACTORY->CreateArchetype(ReadingArchetype("Button.json"));
-		Indicator2->GetComponent<Sprite>()->texture_load("space.png");
+		Indicator2->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("space.png");
 		Indicator2->GetComponent<Transform>()->SetPosition(glm::vec3(FACTORY->GetPlayer()->GetComponent<Transform>()->position.x, 210 + FACTORY->GetPlayer()->GetComponent<Transform>()->position.y, FACTORY->GetPlayer()->GetComponent<Transform>()->position.z));
 		Indicator2->GetComponent<Transform>()->scale.x = 210;
 		Indicator2->GetComponent<Transform>()->scale.y = 80;

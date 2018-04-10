@@ -204,7 +204,7 @@ Object * ObjectFactory::CreateArchetype(Archetype path)
 			temp->GetComponent<Sprite>()->depth = 0.0f;
 			temp->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
 			temp->GetComponent<Sprite>()->isPerspective = true;
-			temp->GetComponent<Sprite>()->texture_load(path.DefaultTexture);
+			temp->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(path.DefaultTexture);
 			
 	
 
@@ -290,7 +290,7 @@ Object * ObjectFactory::CreateWall(const glm::vec3 & pos, const glm::vec3& scale
 	Wall->AddComponent<Sprite>();
 	Wall->GetComponent<Sprite>()->depth = 0.0f;
 	//sprite->isFlipY = false;
-	Wall->GetComponent<Sprite>()->texture_load("wall.png");
+	Wall->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("wall.png");
 	//TOdo : load textrue and get texture id
 	Wall->GetComponent<Sprite>()->m_TextureID = 3;
 	Wall->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);

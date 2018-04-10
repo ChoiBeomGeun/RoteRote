@@ -35,30 +35,13 @@ Sprite::Sprite() : Component(ComponentType::CT_SPRITE)
 
 Sprite::~Sprite()
 {
-	//SOIL_free_image_data();
-
 	GRAPHICS->SpriteList.erase(std::find(GRAPHICS->SpriteList.begin(), GRAPHICS->SpriteList.end(), this));
-	for (auto texID : GRAPHICS->SpriteList)
-	{
-		//std::cout << "texID->pTextureID : " << texID->pTexureID << '\n';
-		glDeleteTextures(1, &texID->m_TextureID);
-	}
-	/*for (auto map: m_textureMap)
-	{
-	m_textureMap.clear();
-	}*/
+	
+
 }
 
 void Sprite::Initialize()
 {
-
-	/*pTransform =this->GetOwner()->GetComponent<Transform>();
-	if (pTransform == nullptr)
-	{
-	DEBUG_PRINT("Sprite Component Init Fail");
-
-	}*/
-	//_isPressed = false;
 	_sortType = SortType::FRONT_TO_BACK;
 }
 
@@ -81,27 +64,6 @@ GLuint  Sprite::texture_load(std::string filepath)
 
 	m_TextureID = SOIL_load_OGL_texture(filepath.c_str(), SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID, SOIL_FLAG_POWER_OF_TWO | SOIL_FLAG_MULTIPLY_ALPHA | SOIL_FLAG_INVERT_Y);
 
-	/*if (GRAPHICS->m_textureMap.empty())
-	{
-	GRAPHICS->m_textureMap[mTexutureDir] = m_TextureID;
-	}
-	else
-	{
-	auto it = GRAPHICS->m_textureMap.find(mTexutureDir);
-	for (auto texture : GRAPHICS->m_textureMap)
-	{
-	if (it == GRAPHICS->m_textureMap.find(texture.first))
-	return texture.second;
-	else
-	{
-	m_TextureID = SOIL_load_OGL_texture(filepath.c_str(), SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID, SOIL_FLAG_POWER_OF_TWO | SOIL_FLAG_MULTIPLY_ALPHA | SOIL_FLAG_INVERT_Y);
-	GRAPHICS->m_textureMap[mTexutureDir] = m_TextureID;
-	}
-	}
-	}*/
-
-
-
 	glActiveTexture(GL_TEXTURE0);
 	/*glBindTexture(GL_TEXTURE_2D, m_TextureID);*/
 
@@ -114,34 +76,46 @@ GLuint  Sprite::texture_load(std::string filepath)
 	return m_TextureID;
 }
 
-void Sprite::LoadAllSprites(std::string path)
+GLuint Sprite::find_texture_id(std::string filepath)
 {
-	char * Userinfo;
-	size_t len = path.size();
-	_dupenv_s(&Userinfo, &len, "USERPROFILE");
-
-	std::string saveLevel = path;
-	//std::string imgpath;
-#ifdef _DEBUG
-	path = ".\\texture.\\" + path;
-	//imgpath = ".\\texture.\\";
-#else
-	path = Userinfo;
-	path += "/Documents/RoteRote/texture/" + saveLevel;
-#endif
-	free(Userinfo);
-
-
-	Jsonclass file;
-	std::string object = "Images";
-	file.ReadFile(path);
-
-	for (int i = 1; i < file.mRoot.get("NumberOfImages", false).asInt() + 1; i++)
+	std::string temp = ".\\texture.\\";
+	temp += filepath;
+	for(auto texID : GRAPHICS->m_textureMap)
 	{
-		std::string textureDir = file.mRoot.get(object + std::to_string(i), false).get("TextureDir", false).asString();
-		textureDir = std::string(".\\texture.\\") + textureDir;
-		GLuint tempTextureID = SOIL_load_OGL_texture(textureDir.c_str(), SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID, SOIL_FLAG_POWER_OF_TWO | SOIL_FLAG_MULTIPLY_ALPHA | SOIL_FLAG_INVERT_Y);
-		GRAPHICS->m_textureMap[textureDir] = tempTextureID;
+		if ((texID.first == temp))
+			return texID.second;
+	}
+	return false;
+}
+
+void TE::Sprite::SetTextureID(std::string filepath)
+{
+	
+}
+
+void Sprite::LoadAllSprites()
+{
+	if (GRAPHICS->m_textureMap.empty())
+	{
+		for (auto texID : ENGINE->mVsTexturenamelist)
+		{
+			std::string textureDir = texID;
+			textureDir = std::string(".\\texture.\\") + textureDir;
+			GLuint tempTextureID = SOIL_load_OGL_texture(textureDir.c_str(), SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID, SOIL_FLAG_POWER_OF_TWO | SOIL_FLAG_MULTIPLY_ALPHA | SOIL_FLAG_INVERT_Y);
+			glActiveTexture(GL_TEXTURE0);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_REPEAT);
+			GRAPHICS->m_textureMap[textureDir] = tempTextureID;
+		}
+	}
+}
+
+void Sprite::UnLoadAllSprites()
+{
+	for (auto texID : GRAPHICS->m_textureMap)
+	{
+		//std::cout << "texID->pTextureID : " << texID->pTexureID << '\n';
+		glDeleteTextures(1, &texID.second);
 	}
 }
 

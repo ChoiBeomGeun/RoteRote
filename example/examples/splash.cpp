@@ -58,9 +58,9 @@ void splash::Init()
 
 
 	LEVELMANAGER->LoadLevel(path2);
+	camActSplash.cameraSetting(glm::vec3(0, 0, 999.f));
 
 	printf("splashInit\n");
-
 }
 
 void splash::Update(float dt)
@@ -72,10 +72,10 @@ void splash::Update(float dt)
 	if (Input::IsAnyTriggered())
 		STATEMANAGER->Next();
 
-	camActSplash.cameraSetting(glm::vec3(0, 0, 999.f));
-
+	camActSplash.Update(dt);
 	if(CAMERA->cameraPos.x <= 2560 && Timer2 >= 200)
-	CAMERA->cameraPos.x += 10.5;
+		camActSplash.moveCameraPos(glm::vec3(10.5, 0, 0));
+	
 	if (CAMERA->cameraPos.x >= 2560)
 	{
 		STATEMANAGER->Next();

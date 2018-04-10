@@ -177,17 +177,17 @@ void TriggerLogic::Update(float dt)
 		if (!TriggerObjects->GetComponent<Trigger>()->Trigger_useable)
 		{
 			if (TriggerObjects->objectstyle == Objectstyle::Trigger180)
-			TriggerObjects->GetComponent<Sprite>()->texture_load("180buttonPushed.png");
+			TriggerObjects->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("180buttonPushed.png");
 			if (TriggerObjects->objectstyle == Objectstyle::Trigger90)
-			TriggerObjects->GetComponent<Sprite>()->texture_load("90buttonPushed.png");
+			TriggerObjects->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("90buttonPushed.png");
 		}
 
 		if (TriggerObjects->GetComponent<Trigger>()->Trigger_useable)
 		{
 			if (TriggerObjects->objectstyle == Objectstyle::Trigger180)
-			TriggerObjects->GetComponent<Sprite>()->texture_load("180button.png");
+			TriggerObjects->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("180button.png");
 			if (TriggerObjects->objectstyle == Objectstyle::Trigger90)
-				TriggerObjects->GetComponent<Sprite>()->texture_load("90button.png");
+				TriggerObjects->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("90button.png");
 		}
 	}
 
