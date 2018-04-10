@@ -63,7 +63,7 @@ void Menu::Load()
 	 IsSelected = false;
 	 selection_angle = 0;
 	 select_index = 0;
-	 MenuCam.cameraSetting(glm::vec3(0, 0, 999.f));
+	 MenuCam.cameraSetting(CameraPosType::EN_Menu);
 	 SOUNDMANAGER->PlaySounds(MenuSound, true);
 }
 

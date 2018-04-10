@@ -138,13 +138,12 @@ void Pause::Init()
 	oHowToPlayIcon = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion.x, Vec3buttonPostion.y-.9f, Vec3buttonPostion.z), Vec3Buttonscale);
 	oHowToPlayIcon->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("question.png");
 
-	PauseCam.cameraSetting(glm::vec3(FACTORY->GetPlayer()->GetComponent<Transform>()->position.x, FACTORY->GetPlayer()->GetComponent<Transform>()->position.y, 999.f));
+	PauseCam.cameraSetting(CameraPosType::EN_BOUNDARY);
 }
 
 void Pause::Update(float dt)
 {
-	
-	dt = dt;
+	PauseCam.Update(dt);
 	if (oBackbutton->GetComponent<Transform>()->position.x <= -.7f)
 	{
 		
@@ -257,7 +256,8 @@ void Pause::Update(float dt)
 
 void Pause::Free(void)
 {
-	PauseCam.cameraSetting(glm::vec3(FACTORY->GetPlayer()->GetComponent<Transform>()->position.x, FACTORY->GetPlayer()->GetComponent<Transform>()->position.y, 999.f));
+
+	PauseCam.cameraSetting(CameraPosType::EN_BOUNDARY);
 
 	pauseindex = 0;
 	SOUNDMANAGER->ResumeAllSound();
@@ -275,7 +275,6 @@ void Pause::Free(void)
 		FACTORY->Destroy(oconfirmation);
 	if (oHowToPlayIcon)
 		FACTORY->Destroy(oHowToPlayIcon);
-	PauseCam.cameraSetting(glm::vec3(FACTORY->GetPlayer()->GetComponent<Transform>()->position.x, FACTORY->GetPlayer()->GetComponent<Transform>()->position.y, 999.f));
 //	SOUNDMANAGER->DeleteSounds();
 }
 

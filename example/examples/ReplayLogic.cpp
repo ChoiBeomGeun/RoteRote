@@ -8,6 +8,8 @@
 #include "Level1.h"
 #include "Trigger.h"
 #include "ParticleManager.h"
+#include "CameraMovement.h"
+
 using namespace TE;
 unsigned int index = 0;
 void ButtonLogic(void);
@@ -29,6 +31,7 @@ Object * oReRestartbutton;
 Object * oReLevelbutton;
 Object * ReeplayImage;
 Object * ReeplayUI;
+TE::CameraAction replayCam;
 std::queue<ReplayerInfo> itor;
 static bool IsButtonAvailable = true;
 
@@ -117,7 +120,7 @@ void MakeReplayerUI(void) {
 
 void SetReplayer(void) {
 
-
+	replayCam.cameraSetting(CameraPosType::EN_BOUNDARY);
 
 	replayer->GetComponent<Transform>()->SetPosition(itor.front().Pos);
 	replayer->GetComponent<Animation>()->setFrame(itor.front().aniframe);

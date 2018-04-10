@@ -89,8 +89,8 @@ void TE::LoseconditionLogic::Update(float dt)
 
 
 
-			if (Loseplayer->GetComponent<Transform>()->position.x > 2000 || Loseplayer->GetComponent<Transform>()->position.x < -2000||
-				Loseplayer->GetComponent<Transform>()->position.y > 2000 || Loseplayer->GetComponent<Transform>()->position.y < -2000)
+			if ((Loseplayer->GetComponent<Transform>()->position.x > 2000 || Loseplayer->GetComponent<Transform>()->position.x < -2000||
+				Loseplayer->GetComponent<Transform>()->position.y > 2000 || Loseplayer->GetComponent<Transform>()->position.y < -2000))
 			{
 
 				if (Losesoundonce)

@@ -121,11 +121,6 @@ void Engine::GameLoop()
 			frametime = 0.016f;
 		for (unsigned int i = 0; i <SystemList.size(); ++i) {
 		
-
-			
-
-
-
 			SystemList[i]->Update(frametime);
 			if (!GameIsRunning)
 				break;

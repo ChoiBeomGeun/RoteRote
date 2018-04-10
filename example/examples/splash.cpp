@@ -58,7 +58,7 @@ void splash::Init()
 
 
 	LEVELMANAGER->LoadLevel(path2);
-	camActSplash.cameraSetting(glm::vec3(0, 0, 999.f));
+	camActSplash.cameraSetting(CameraPosType::EN_Splash);
 
 	printf("splashInit\n");
 }

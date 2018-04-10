@@ -60,7 +60,7 @@ void LevelSelect::Init()
 	IsRotating = false;
 	IsLeftPressed = false;
 	IsRightPreesed = false;
-	LvlSelectCam.cameraSetting(glm::vec3(0, 0, 500.f));
+	LvlSelectCam.cameraSetting(CameraPosType::EN_LevelSelect);
 }
 
 void LevelSelect::Update(float dt)

@@ -72,12 +72,30 @@ namespace TE {
 		}
 	}
 
-	void CameraAction::cameraSetting(glm::vec3 cameraPOS)
+	void CameraAction::cameraSetting(CameraPosType camPosType)
 	{
-		CAMERA->cameraPos = cameraPOS;		
-		CAMERA->lookat(CAMERA->cameraPos, CAMERA->cameraTarget, CAMERA->cameraUp);
-		std::cout << "cameraPos.x " << CAMERA->cameraPos.x << " .y " << CAMERA->cameraPos.y << ". z " << CAMERA->cameraPos.z << std::endl;
-		std::cout << "cameraTarget.x " << CAMERA->cameraTarget.x << " .y " << CAMERA->cameraTarget.y << "/z " << CAMERA->cameraTarget.z << std::endl;
+		switch (camPosType)
+		{
+		case EN_Default:
+			CAMERA->cameraPos = glm::vec3(0, 0, 999.f);
+			break;
+		case EN_Splash:
+			CAMERA->cameraPos = glm::vec3(0, 0, 999.f);
+			break;
+		case EN_Menu:
+			CAMERA->cameraPos = glm::vec3(0, 0, 999.f);
+			break;
+		case EN_LevelSelect:
+			CAMERA->cameraPos = glm::vec3(0, 0, 999.f);
+			break;
+		case EN_playerPos:
+			CAMERA->cameraPos = glm::vec3(glm::vec3(FACTORY->GetPlayer()->GetComponent<Transform>()->position.x , FACTORY->GetPlayer()->GetComponent<Transform>()->position.y ,0));
+			break;
+		case EN_BOUNDARY:
+			CAMERA->cameraPos = glm::vec3(glm::vec3(CAMERA->CenterOfCamera.x, CAMERA->CenterOfCamera.y, CAMERA->cameraPos.z));
+		case End:
+			break;
+		}	
 	}
 	bool CameraAction::DisplayTheWholeMap() {
 		if (!FACTORY->GetPlayer())
