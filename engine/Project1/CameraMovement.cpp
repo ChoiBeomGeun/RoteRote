@@ -72,6 +72,108 @@ namespace TE {
 		}
 	}
 
+	int CameraAction::Rotating90DegreesCam()
+	{
+		// when degree is 0 
+		if (CAMERA->cameraUp.x == 0 && CAMERA->cameraUp.y >= 1)
+		{
+			if (FACTORY->LeftBoundary()->HasComponent<Transform>())
+			{
+				CAMERA->CenterOfCamera.x = FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x + (FACTORY->RightBoundary()->GetComponent<Transform>()->position.x - FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x) *.5f;
+				CAMERA->CenterOfCamera.y = FACTORY->DownBoundary()->GetComponent<Transform>()->position.y + (FACTORY->UpBoundary()->GetComponent<Transform>()->position.y - FACTORY->DownBoundary()->GetComponent<Transform>()->position.y)*.5f;
+			}
+			return EN_0;
+		}
+		// when degree is 90
+		else if (CAMERA->cameraUp.x == 1 && CAMERA->cameraUp.y >= 0)
+		{
+			//CAMERA->CenterOfCamera.x = FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x + (FACTORY->RightBoundary()->GetComponent<Transform>()->position.x - FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x) *.5f;
+			
+			// Left boundary has become as Up boundry , right boundary -> down boundary
+			CAMERA->CenterOfCamera.x = FACTORY->UpBoundary()->GetComponent<Transform>()->position.x + (FACTORY->DownBoundary()->GetComponent<Transform>()->position.x - FACTORY->UpBoundary()->GetComponent<Transform>()->position.x) *.5f;
+			
+			//CAMERA->CenterOfCamera.y = FACTORY->DownBoundary()->GetComponent<Transform>()->position.y + (FACTORY->UpBoundary()->GetComponent<Transform>()->position.y - FACTORY->DownBoundary()->GetComponent<Transform>()->position.y)*.5f;
+
+			// changed;
+			CAMERA->CenterOfCamera.y = FACTORY->LeftBoundary()->GetComponent<Transform>()->position.y + (FACTORY->RightBoundary()->GetComponent<Transform>()->position.y - FACTORY->LeftBoundary()->GetComponent<Transform>()->position.y)*.5f;
+			std::cout << "ITSSSSSSS 90000000000000000 degrees" << std::endl;
+			return EN_90;
+
+		}
+		// when degree is 180
+		else if (CAMERA->cameraUp.x == 0 && CAMERA->cameraUp.y == -1)
+		{
+			return EN_180;
+
+		}
+		// when degree is 270
+		else if (CAMERA->cameraUp.x == -1 && CAMERA->cameraUp.y == 0)
+		{
+			return EN_270;
+
+		}
+	}
+
+	void CameraAction::Rotating180DegreesCam()
+	{
+		// when degree is 0 
+		if (CAMERA->cameraUp.x == 0 && CAMERA->cameraUp.y >= 1)
+		{
+
+		}
+		// when degree is 90
+		else if (CAMERA->cameraUp.x == 1 && CAMERA->cameraUp.y >= 0)
+		{
+
+		}
+		// when degree is 180
+		else if (CAMERA->cameraUp.x == 0 && CAMERA->cameraUp.y == -1)
+		{
+
+		}
+		// when degree is 270
+		else if (CAMERA->cameraUp.x == -1 && CAMERA->cameraUp.y == 0)
+		{
+
+		}
+	}
+
+	void CameraAction::LimitOnXaxis()
+	{
+		glm::vec3 rightblock, leftblock, upblock, downblock;
+		// this is current block of map 
+		upblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
+		downblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
+		leftblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
+		rightblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
+
+
+		CAMERA->CenterOfCamera.y = leftblock.x + ((rightblock.x - leftblock.x)*.5f);
+		CAMERA->CenterOfCamera.x = downblock.y + ((upblock.y - downblock.y)*.5f);
+
+		float UpYLimit, DownYLimit;
+		UpYLimit = (upblock.y - (upblock.y - CAMERA->cameraPos.y));
+		DownYLimit = (downblock.y + (CAMERA->cameraPos.y - downblock.y));
+
+		if(((CAMERA->cameraPos.y <= UpYLimit) && (CAMERA->cameraPos.y >= DownYLimit)) && (CAMERA->cameraPos.y <= CAMERA->CenterOfCamera.y))
+			CAMERA->cameraPos.y = FACTORY->GetPlayer()->GetComponent<Transform>()->position.y;
+		/*if()
+			CAMERA->cameraPos.y = FACTORY->GetPlayer()->GetComponent<Transform>()->position.y;*/
+		CAMERA->cameraPos.z = 999.f;
+
+		CAMERA->cameraPos = glm::vec3(CAMERA->cameraPos.y, CAMERA->CenterOfCamera.x, 999.f);
+		
+		
+		float cameraOriginalPos = CAMERA->cameraPos.x;
+		DEBUG_ASSERT(CAMERA->cameraPos.x != cameraOriginalPos, "CAMERA X SHOULD BE FIXED");
+	}
+
+	void CameraAction::LimitOnYaxis()
+	{
+		float cameraOriginalPos = CAMERA->cameraPos.y;
+		DEBUG_ASSERT(CAMERA->cameraPos.y != cameraOriginalPos, "CAMERA Y SHOULD BE FIXED");
+	}
+
 	void CameraAction::cameraSetting(CameraPosType camPosType)
 	{
 		switch (camPosType)
@@ -113,6 +215,23 @@ namespace TE {
 
 	void CameraAction::Update(float dt)
 	{
+		if (STATEMANAGER->i_LevelSelect == 4)
+		{
+			switch (Rotating90DegreesCam())
+			{
+			case EN_0:
+				break;
+			case EN_90:
+				LimitOnXaxis();
+				break;
+			case EN_180:
+				break;
+			case EN_270:
+				break;
+			default: break;
+
+			}
+		}
 		CAMERA->lookat(CAMERA->cameraPos, CAMERA->cameraTarget, CAMERA->cameraUp);
 	}
 

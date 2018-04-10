@@ -11,27 +11,44 @@ enum CameraPosType {
 	EN_BOUNDARY,
 	End,
 };
+
+enum CameraRotation
+{
+	EN_0 =0,
+	EN_90,
+	EN_180,
+	EN_270,
+	EN_END
+};
 namespace TE
 {
 	class CameraAction
 	{
 	public:
-		
+		// Cont Dest
 		CameraAction();
 		~CameraAction();
-		void ShakeCamera(float dt);
-		void Setshakeduration(float duration) { shakeDuration = duration;}
 
+	public: // shaking camera
+		void ShakeCamera(float dt);
+		void Setshakeduration(float duration) { shakeDuration = duration; }
 		glm::vec3 cameraOriginPos;
+
+	public: // setting the camera
+		void cameraSetting(CameraPosType camPosType);
+		void Update(float dt);
+		void moveCameraPos(glm::vec2 cameraPOS);
+
+	public: // camera movement
+		bool DisplayTheWholeMap();
 		void FollowPlayer(glm::vec3 * cameraPos, glm::vec3 * cameraScale, float dt);
 		bool isCamToPlayer;
-		void cameraSetting(CameraPosType camPosType);
-		bool DisplayTheWholeMap();
-		void moveCameraPos(glm::vec2 cameraPOS);
-		void Update(float dt);
-		void Rotating90DegreesCam();
-		void Rotating180DegreesCam();
 
+	public: // camera rotating changing walls;
+		int Rotating90DegreesCam();
+		void Rotating180DegreesCam();
+		void LimitOnXaxis();
+		void LimitOnYaxis();
 
 	private:
 		// how long the object should shake for
@@ -44,5 +61,4 @@ namespace TE
 
 
 	};
-
 }

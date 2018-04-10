@@ -43,6 +43,9 @@
     <Filter Include="Source Files\LevelSelect">
       <UniqueIdentifier>{b27b49d6-d5e7-4cae-a5cb-57f80fc04812}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameLogic\CameraLogic">
+      <UniqueIdentifier>{1f63dc9a-08aa-4e82-a948-cb5073587107}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -95,6 +98,9 @@
     </ClCompile>
     <ClCompile Include="LevelSelect.cpp">
       <Filter>Source Files\LevelSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Jason%27s\example\examples\CameraLogic.cpp">
+      <Filter>Source Files\GameLogic\CameraLogic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,8 +167,8 @@
     <ClInclude Include="LevelList.h">
       <Filter>Source Files\LevelSelect</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <ClInclude Include="..\..\..\Jason%27s\example\examples\CameraLogic.h">
+      <Filter>Source Files\GameLogic\CameraLogic</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -211,12 +211,12 @@ void Level1::Init()
 	_playerPosition.x = player->GetComponent<Transform>()->GetPosition().x;
 	_playerPosition.y = player->GetComponent<Transform>()->GetPosition().y;
 	_playerPosition.z = 500.f;
-	camAct.DisplayTheWholeMap();
 }
 
 void Level1::Update(float dt)
 {
 	MakingInstructions();
+	
 	camAct.Update(dt);
 
 #ifdef _DEBUG

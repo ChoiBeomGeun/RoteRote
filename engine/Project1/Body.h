@@ -23,7 +23,21 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include <glm/gtx/transform.hpp>
 #include  <list>
 namespace TE {
+	/*class GravityBox : public Body
+	{
+	public:
+		GravityBox();
+		~GravityBox();
 
+		void PlayerIsColliding();
+		bool IsBoxTriggered();
+		virtual void Initialize() override;
+	private:
+		bool IsColliding = false;
+		bool IsTriggered = false;
+
+		Gravity GravityType;
+	};*/
 	class Body : public Component
 	{
 	public:
@@ -54,22 +68,8 @@ namespace TE {
 		float restitution;
 	protected:
 		std::list<Body*>::iterator myBody;
-		std::vector<GravityBox*> GravityBoxBody;
+		//std::vector<GravityBox*> GravityBoxBody;
 	};
 
-	class GravityBox : public Body
-	{
-	public:
-		GravityBox();
-		~GravityBox();
 
-		void PlayerIsColliding();
-		bool IsBoxTriggered();
-		virtual void Initialize() override;
-	private:
-		bool IsColliding = false;
-		bool IsTriggered = false;
-
-		Gravity GravityType;
-	};
 }
