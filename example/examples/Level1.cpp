@@ -268,8 +268,7 @@ void Level1::Update(float dt)
 	camAct.cameraSetting(_playerPosition);
 	if (Input::IsAnyTriggered())
 	{
-		_playerPosition.x = player->GetComponent<Transform>()->GetPosition().x;
-		_playerPosition.y = player->GetComponent<Transform>()->GetPosition().y;
+		
 		camAct.cameraSetting(_playerPosition);
 	}
 
