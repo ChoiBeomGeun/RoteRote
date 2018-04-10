@@ -124,12 +124,18 @@ void TriggerLogic::Update(float dt)
 	dt = dt;
 	for (auto TriggerObjects : TriggerList)
 	{
+		if((APP->b_Lose)  )
+			continue;
+
+
 		if (TriggerObjects->objectstyle != Objectstyle::Trigger90 &&
 			(TriggerObjects->objectstyle != Objectstyle::Trigger180))
 			continue;
 		if (TriggerObjects->objectstyle == Objectstyle::Trigger90)
 		{
-			if (PHYSICS->RectvsRectCollisionCheck(FACTORY->GamePlayer->GetComponent<Transform>(), TriggerObjects->GetComponent<Transform>()) && TriggerObjects->GetComponent<Trigger>()->Trigger_useable)
+			if ((PHYSICS->RectvsRectCollisionCheck(FACTORY->GamePlayer->GetComponent<Transform>(), 
+				TriggerObjects->GetComponent<Transform>()) &&
+				TriggerObjects->GetComponent<Trigger>()->Trigger_useable))
 			{
 				STATEMANAGER->b_IsGravityChanged = true;
 				STATEMANAGER->b_IsRot90 = true;

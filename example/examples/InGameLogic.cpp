@@ -49,7 +49,7 @@ InGameLogic::InGameLogic()
 InGameLogic::~InGameLogic()
 {
 
-	printf("ff");
+
 }
 
 
@@ -58,10 +58,6 @@ InGameLogic::~InGameLogic()
 
 void InGameLogic::InGameInit()
 {
-	//std::unique_ptr<> p = make_unique<TriggerLogic>();
-	//std::shared_ptr<> p = make_shared<T>();
-	//Add<TriggerLogic>();
-
 
 	for (auto IngameLogics : GameLogicList)
 		IngameLogics->Initialize();

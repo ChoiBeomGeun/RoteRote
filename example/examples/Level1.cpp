@@ -131,7 +131,7 @@ void Level1::Init()
 
 	LEVELMANAGER->LoadLevel(STATEMANAGER->Loadtolevelname);
 
- 	std::string levelname = std::to_string(STATEMANAGER->i_LevelSelect+1) + ".png";
+ 	std::string levelname = std::to_string(STATEMANAGER->i_LevelSelect) + ".png";
 	HUDLevelname = FACTORY->CreateHUD(glm::vec3(0, 0.9, 0), glm::vec3(0.1, 0.2, 0));
 	HUDLevelname->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(levelname);
 	HUDLevelname->objectstyle = Objectstyle::Button;
@@ -217,7 +217,7 @@ void Level1::Init()
 void Level1::Update(float dt)
 {
 	MakingInstructions();
-	
+	camAct.Update(dt);
 
 #ifdef _DEBUG
 	CheatKeyFunctions();
@@ -265,11 +265,11 @@ void Level1::Update(float dt)
 		STATEMANAGER->b_IsReplayStart = false;
 		STATEMANAGER->b_IsReplay = true;
 	}
-	camAct.cameraSetting(_playerPosition);
+	camAct.cameraSetting(CameraPosType::EN_BOUNDARY);
 	if (Input::IsAnyTriggered())
 	{
 		
-		camAct.cameraSetting(_playerPosition);
+		camAct.cameraSetting(CameraPosType::EN_BOUNDARY);
 	}
 
 	

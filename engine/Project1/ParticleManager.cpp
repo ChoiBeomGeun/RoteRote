@@ -125,21 +125,21 @@ namespace TE {
 	Object * ParticleManager::LoadEmitter(Object* pobject, std::string path)
 	{
 
-		/*
+		
 		std::string loadParticle = path;
-		#ifdef _DEBUG
-		path = ".\\Emitters.\\" + path;
+	/*	#ifdef _DEBUG
+		
 		#else
 		path = Userinfo;
 		path += "/Documents/RoteRote/Emitters/" + loadParticle;
 		#endif
 		free(Userinfo);*/
-
+	
 		Jsonclass file;
 		std::string object = "Emitter";
 
 		//	char *path = (char*)JSON_FILE;
-		file.ReadFile(path);
+		file.ReadFile(loadParticle);
 
 
 		for (int i = 1; i < file.mRoot.get("NumberOfEmitter", false).asInt() + 1; i++)
@@ -325,7 +325,7 @@ namespace TE {
 					//particle.scale = 
 					//Update particle lifetime based on dt
 					particle.lifetime += dt;
-					float sizefactor = rand() % 2;
+					auto sizefactor = rand() % 2;
 					if (sizefactor == 0)
 						sizefactor = -1;
 

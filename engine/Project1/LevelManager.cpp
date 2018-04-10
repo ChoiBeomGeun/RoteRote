@@ -41,23 +41,16 @@ namespace TE {
 void LevelManager::LoadLevel(std::string  path)
 {
 	string PaticlePath;
-	char * Userinfo;
-	size_t len = path.size();
-	_dupenv_s(&Userinfo, &len, "USERPROFILE");
+
 	
 
 
 	
 	std::string saveLevel = path;
-#ifdef _DEBUG
+
 	path = ".\\levels.\\" + path;
 
-#else
-	path = Userinfo;
-	path += "/Documents/RoteRote/levels/" + saveLevel;
 
-#endif
-	free(Userinfo);
 
 	//FACTORY->DestroyAllObjects();
 
@@ -289,12 +282,12 @@ void LevelManager::SaveLevel(std::string  path)
 	_dupenv_s(&Userinfo, &len, "USERPROFILE");
 	
 	std::string saveLevel = path;
-#ifdef _DEBUG
+
 	path = ".\\levels.\\" + path;
-#else
-	path = Userinfo;
-	path += "/Documents/RoteRote/levels/" + saveLevel;
-#endif
+
+	//path = Userinfo;
+	//path += "/Documents/RoteRote/levels/" + saveLevel;
+//#endif
 	free(Userinfo);
 	Jsonclass file;
 	Json::Value root;

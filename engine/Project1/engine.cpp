@@ -215,7 +215,7 @@ void Engine::Filenameloading(void)
 	int result4 = 1;
 	int result5 = 1;
 	//
-#ifdef _DEBUG
+
 	levelhandle = (long)_findfirst(".\\levels.\\*.json", &level32);
 	levelhandle64 = (intptr_t)_findfirst64(".\\levels.\\*.json", &level64);
 
@@ -231,23 +231,9 @@ void Engine::Filenameloading(void)
 
 	archtypehandle = (long)_findfirst(".\\Archtypes.\\*.json", &archtype32);
 	archtypehandle64 = (intptr_t)_findfirst64(".\\Archtypes.\\*.json", &archtype64);
-#else
- 	levelhandle = (long)_findfirst((path + "/Documents/RoteRote/levels/*.json").c_str(), &level32);
-	levelhandle64 = _findfirst64((path + "/Documents/RoteRote/levels/*.json").c_str(), &level64);
 
-	texturehandle = (long)_findfirst((path + "/Documents/RoteRote/texture/*.png").c_str(), &texture32);
-	texturehandle64 = _findfirst64((path + "/Documents/RoteRote/texture/*.png").c_str(), &texture64);
 
-	loghandle = (long)_findfirst((path + "/Documents/RoteRote/logging/*.json").c_str(), &log32);
-	loghandle64 = _findfirst64((path + "/Documents/RoteRote/logging/*.json").c_str(), &log64);
 
-	soundhandle = (long)_findfirst((path + "/Documents/RoteRote/sounds/*.mp3").c_str(), &sound32);
-	soundhandle64 = _findfirst64((path + "/Documents/RoteRote/sounds/*.mp3").c_str(), &sound64);
-
-	archtypehandle = (long)_findfirst((path + "/Documents/RoteRote/Archtypes/*.json").c_str(), &archtype32);
-	archtypehandle64 = _findfirst64((path + "/Documents/RoteRote/Archtypes/*.json").c_str(), &archtype64);
-
-#endif
 	if (levelhandle == -1 || levelhandle64 == -1)
 	{
 		printf("Level : There were no files.\n");

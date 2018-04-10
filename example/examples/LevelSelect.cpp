@@ -100,7 +100,7 @@ void LevelSelect::Update(float dt)
 		if (Input::IsTriggered(SDL_SCANCODE_SPACE)) {
 			STATEMANAGER->Loadtolevelname = "level1.json";
 			STATEMANAGER->MoveState(StatesList::Level1);
-			STATEMANAGER->i_LevelSelect = LevelList;
+			STATEMANAGER->i_LevelSelect = LevelList+1;
 		}
 	}
 
