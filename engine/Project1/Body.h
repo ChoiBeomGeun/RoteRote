@@ -28,13 +28,13 @@ namespace TE {
 	{
 	public:
 		
+		Body();
 		Body(glm::vec3 vel, float invmass);
 		~Body();
 
-		virtual void Initialize();
-
+		virtual void Initialize() override;
 		unsigned int BodyID = 0;
-		virtual void Update(float dt);
+		void Update(float dt);
 		glm::vec3 m_force;
 		glm::vec3 m_gravity;
 		Transform * m_pTransform;
@@ -43,7 +43,6 @@ namespace TE {
 		Grounded GroundType;
 		
 		bool Jump;
-		Body();
 
 		void SetRestitution(float r);
 
@@ -55,5 +54,22 @@ namespace TE {
 		float restitution;
 	protected:
 		std::list<Body*>::iterator myBody;
+		std::vector<GravityBox*> GravityBoxBody;
+	};
+
+	class GravityBox : public Body
+	{
+	public:
+		GravityBox();
+		~GravityBox();
+
+		void PlayerIsColliding();
+		bool IsBoxTriggered();
+		virtual void Initialize() override;
+	private:
+		bool IsColliding = false;
+		bool IsTriggered = false;
+
+		Gravity GravityType;
 	};
 }

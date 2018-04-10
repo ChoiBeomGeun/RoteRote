@@ -14,5 +14,5 @@ Object Style List header file
 #pragma once
 enum Objectstyle
 {
-	Player,Asteriod,Wall,Button,Box,Trigger90,Trigger180,Clearzone,Hazard,Camera,Particle,AttachWall
+	Player,Asteriod,Wall,Button,Box,Trigger90,Trigger180,Clearzone,Hazard,Camera,Particle,AttachWall,GravityBox
 };
