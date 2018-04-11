@@ -47,8 +47,8 @@ namespace TE
 	public: // camera rotating changing walls;
 		int Rotating90DegreesCam();
 		void Rotating180DegreesCam();
-		void LimitOnXaxis();
-		void LimitOnYaxis();
+		void HorizontalLockCam(CameraRotation type);
+		void VerticalLockCam(CameraRotation type);
 
 	private:
 		// how long the object should shake for
@@ -58,6 +58,7 @@ namespace TE
 		float decreaseFactor;
 		float _camPaceSpeed;
 		
+		bool istest;
 
 
 	};

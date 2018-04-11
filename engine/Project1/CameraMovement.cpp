@@ -16,6 +16,7 @@ namespace TE {
 		shakeAmount = 3.0f;
 		isCamToPlayer = false;
 		_camPaceSpeed = 10.f;
+		istest = true;
 	}
 	CameraAction::~CameraAction()
 	{
@@ -95,9 +96,7 @@ namespace TE {
 			//CAMERA->CenterOfCamera.y = FACTORY->DownBoundary()->GetComponent<Transform>()->position.y + (FACTORY->UpBoundary()->GetComponent<Transform>()->position.y - FACTORY->DownBoundary()->GetComponent<Transform>()->position.y)*.5f;
 			// changed;
 			CAMERA->CenterOfCamera.y = FACTORY->LeftBoundary()->GetComponent<Transform>()->position.y + (FACTORY->RightBoundary()->GetComponent<Transform>()->position.y - FACTORY->LeftBoundary()->GetComponent<Transform>()->position.y)*.5f;
-			
-			std::cout << "center X : " << CAMERA->CenterOfCamera.x << "center Y : " << CAMERA->CenterOfCamera.y << std::endl;
-			std::cout << "ITSSSSSSS 90000000000000000 degrees" << std::endl;
+						
 			return EN_90;
 
 		}
@@ -139,39 +138,75 @@ namespace TE {
 		}
 	}
 
-	void CameraAction::LimitOnXaxis()
+	void CameraAction::HorizontalLockCam(CameraRotation type)
 	{
-		glm::vec3 rightblock, leftblock, upblock, downblock;
-		// this is current block of map 
-		upblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
-		downblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
-		leftblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
-		rightblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
+		if (type == CameraRotation::EN_90)
+		{
+			glm::vec3 rightblock, leftblock, upblock, downblock;
+			// this is current block of map 
+			upblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
+			downblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
+			leftblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
+			rightblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
+	
+			CAMERA->CenterOfCamera.y = leftblock.y + ((rightblock.y - leftblock.y)*.5f);
+			CAMERA->CenterOfCamera.x = downblock.x + ((upblock.x - downblock.x)*.5f);
 
+			float UpYLimit, DownYLimit;
+			// 90 degrees rotated x becomes Y 
+			// only this applies to 90 degrees, 
+			UpYLimit = (upblock.x - std::abs((upblock.x - CAMERA->CenterOfCamera.x))*.5f);
+			DownYLimit = (downblock.x + std::abs(CAMERA->CenterOfCamera.x - downblock.x)*.5f);
+			CAMERA->cameraPos.y = CAMERA->CenterOfCamera.y;
 
-		CAMERA->CenterOfCamera.y = leftblock.x + ((rightblock.x - leftblock.x)*.5f);
-		CAMERA->CenterOfCamera.x = downblock.y + ((upblock.y - downblock.y)*.5f);
+			if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x >= UpYLimit)
+				CAMERA->cameraPos.x = UpYLimit;
+			else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x <= DownYLimit)
+				CAMERA->cameraPos.x = DownYLimit;
+			else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x < UpYLimit || FACTORY->GetPlayer()->GetComponent<Transform>()->position.x > DownYLimit)
+				CAMERA->cameraPos.x = FACTORY->GetPlayer()->GetComponent<Transform>()->position.x;
+			CAMERA->cameraPos.z = 999.f;
+		}
+		else if (type == CameraRotation::EN_270)
+		{
+			glm::vec3 rightblock, leftblock, upblock, downblock;
+			// this is current block of map 
+			upblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
+			downblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
+			leftblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
+			rightblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
 
-		std::cout << "center X : " << CAMERA->CenterOfCamera.x << "center Y : " << CAMERA->CenterOfCamera.y << std::endl;
+			CAMERA->CenterOfCamera.y = leftblock.y + ((rightblock.y - leftblock.y)*.5f);
+			CAMERA->CenterOfCamera.x = downblock.x + ((upblock.x - downblock.x)*.5f);
 
+			float UpYLimit, DownYLimit;
+			// 90 degrees rotated x becomes Y 
+			// only this applies to 90 degrees, 
+			UpYLimit = (upblock.x + std::abs((upblock.x - CAMERA->CenterOfCamera.x))*.5f);
+			DownYLimit = (downblock.x - std::abs(CAMERA->CenterOfCamera.x - downblock.x)*.5f);
+			CAMERA->cameraPos.y = CAMERA->CenterOfCamera.y;
 
-		float UpYLimit, DownYLimit;
-		UpYLimit = (upblock.y - (upblock.y - CAMERA->cameraPos.y));
-		DownYLimit = (downblock.y + (CAMERA->cameraPos.y - downblock.y));
-
-		if(((CAMERA->cameraPos.y <= UpYLimit) && (CAMERA->cameraPos.y >= DownYLimit)) && (CAMERA->cameraPos.y <= CAMERA->CenterOfCamera.y))
-			CAMERA->cameraPos.y = FACTORY->GetPlayer()->GetComponent<Transform>()->position.y;
-		/*if()
-			CAMERA->cameraPos.y = FACTORY->GetPlayer()->GetComponent<Transform>()->position.y;*/
-		CAMERA->cameraPos.z = 999.f;
-
-		CAMERA->cameraPos = glm::vec3(CAMERA->cameraPos.y, CAMERA->CenterOfCamera.x, 999.f);
-		
+			std::cout << "UPYLIMIT. x " << UpYLimit << std::endl;
+			std::cout << "DOWNYLIMIT. x " << DownYLimit << std::endl;
+			if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x <= UpYLimit)
+				CAMERA->cameraPos.x = UpYLimit;
+			else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x >= DownYLimit)
+				CAMERA->cameraPos.x = DownYLimit;
+			else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x > UpYLimit || FACTORY->GetPlayer()->GetComponent<Transform>()->position.x < DownYLimit)
+				CAMERA->cameraPos.x = FACTORY->GetPlayer()->GetComponent<Transform>()->position.x;
+			CAMERA->cameraPos.z = 999.f;
+		}
+		/*
+		if (istest)
+		{
+			CAMERA->cameraPos = glm::vec3(CAMERA->cameraPos.y, CAMERA->CenterOfCamera.x, 999.f);
+			istest = false;
+		}*/
 		/*float cameraOriginalPos = CAMERA->cameraPos.x;
 		DEBUG_ASSERT(CAMERA->cameraPos.x != cameraOriginalPos, "CAMERA X SHOULD BE FIXED");*/
 	}
 
-	void CameraAction::LimitOnYaxis()
+	void CameraAction::VerticalLockCam(CameraRotation type)
 	{
 		float cameraOriginalPos = CAMERA->cameraPos.y;
 		DEBUG_ASSERT(CAMERA->cameraPos.y != cameraOriginalPos, "CAMERA Y SHOULD BE FIXED");
@@ -225,11 +260,12 @@ namespace TE {
 			case EN_0:
 				break;
 			case EN_90:
-				LimitOnXaxis();
+				HorizontalLockCam(CameraRotation::EN_90);
 				break;
 			case EN_180:
 				break;
 			case EN_270:
+				HorizontalLockCam(CameraRotation::EN_270);
 				break;
 			default: break;
 
