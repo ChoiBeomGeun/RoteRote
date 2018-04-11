@@ -99,7 +99,7 @@
     <ClCompile Include="LevelSelect.cpp">
       <Filter>Source Files\LevelSelect</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Jason%27s\example\examples\CameraLogic.cpp">
+    <ClCompile Include="CameraLogic.cpp">
       <Filter>Source Files\GameLogic\CameraLogic</Filter>
     </ClCompile>
   </ItemGroup>
@@ -167,7 +167,7 @@
     <ClInclude Include="LevelList.h">
       <Filter>Source Files\LevelSelect</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Jason%27s\example\examples\CameraLogic.h">
+    <ClInclude Include="CameraLogic.h">
       <Filter>Source Files\GameLogic\CameraLogic</Filter>
     </ClInclude>
   </ItemGroup>

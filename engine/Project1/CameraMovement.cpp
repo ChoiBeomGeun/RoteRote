@@ -93,9 +93,10 @@ namespace TE {
 			CAMERA->CenterOfCamera.x = FACTORY->UpBoundary()->GetComponent<Transform>()->position.x + (FACTORY->DownBoundary()->GetComponent<Transform>()->position.x - FACTORY->UpBoundary()->GetComponent<Transform>()->position.x) *.5f;
 			
 			//CAMERA->CenterOfCamera.y = FACTORY->DownBoundary()->GetComponent<Transform>()->position.y + (FACTORY->UpBoundary()->GetComponent<Transform>()->position.y - FACTORY->DownBoundary()->GetComponent<Transform>()->position.y)*.5f;
-
 			// changed;
 			CAMERA->CenterOfCamera.y = FACTORY->LeftBoundary()->GetComponent<Transform>()->position.y + (FACTORY->RightBoundary()->GetComponent<Transform>()->position.y - FACTORY->LeftBoundary()->GetComponent<Transform>()->position.y)*.5f;
+			
+			std::cout << "center X : " << CAMERA->CenterOfCamera.x << "center Y : " << CAMERA->CenterOfCamera.y << std::endl;
 			std::cout << "ITSSSSSSS 90000000000000000 degrees" << std::endl;
 			return EN_90;
 
@@ -151,6 +152,9 @@ namespace TE {
 		CAMERA->CenterOfCamera.y = leftblock.x + ((rightblock.x - leftblock.x)*.5f);
 		CAMERA->CenterOfCamera.x = downblock.y + ((upblock.y - downblock.y)*.5f);
 
+		std::cout << "center X : " << CAMERA->CenterOfCamera.x << "center Y : " << CAMERA->CenterOfCamera.y << std::endl;
+
+
 		float UpYLimit, DownYLimit;
 		UpYLimit = (upblock.y - (upblock.y - CAMERA->cameraPos.y));
 		DownYLimit = (downblock.y + (CAMERA->cameraPos.y - downblock.y));
@@ -163,9 +167,8 @@ namespace TE {
 
 		CAMERA->cameraPos = glm::vec3(CAMERA->cameraPos.y, CAMERA->CenterOfCamera.x, 999.f);
 		
-		
-		float cameraOriginalPos = CAMERA->cameraPos.x;
-		DEBUG_ASSERT(CAMERA->cameraPos.x != cameraOriginalPos, "CAMERA X SHOULD BE FIXED");
+		/*float cameraOriginalPos = CAMERA->cameraPos.x;
+		DEBUG_ASSERT(CAMERA->cameraPos.x != cameraOriginalPos, "CAMERA X SHOULD BE FIXED");*/
 	}
 
 	void CameraAction::LimitOnYaxis()

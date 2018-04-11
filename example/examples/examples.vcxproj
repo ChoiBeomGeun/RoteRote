@@ -225,8 +225,8 @@ copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(T
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Jason%27s\example\examples\CameraLogic.cpp" />
     <ClCompile Include="AutoMoving.cpp" />
+    <ClCompile Include="CameraLogic.cpp" />
     <ClCompile Include="Clearzone.cpp" />
     <ClCompile Include="EditorData.cpp" />
     <ClCompile Include="InGameLogic.cpp" />
@@ -245,8 +245,8 @@ copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(T
     <ClCompile Include="Trigger.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Jason%27s\example\examples\CameraLogic.h" />
     <ClInclude Include="Automoving.h" />
+    <ClInclude Include="CameraLogic.h" />
     <ClInclude Include="Clearzone.h" />
     <ClInclude Include="EditorData.h" />
     <ClInclude Include="GameLogicSystem.h" />
