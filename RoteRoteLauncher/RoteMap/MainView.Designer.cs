@@ -42,11 +42,11 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.treeControls = new System.Windows.Forms.TreeView();
+            this.designModePanel = new ControlDesignMode.ControlDesignModePanel();
+            this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.designModePanel = new ControlDesignMode.ControlDesignModePanel();
-            this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -204,15 +204,6 @@
             this.treeControls.TabIndex = 1;
             this.treeControls.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeControls_ItemDrag);
             // 
-            // saveFileDialog2
-            // 
-            this.saveFileDialog2.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog2_FileOk);
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
-            // 
             // designModePanel
             // 
             this.designModePanel.AllowDrop = true;
@@ -236,6 +227,15 @@
             this.propertyGrid1.TabIndex = 1;
             this.propertyGrid1.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid1_PropertyValueChanged);
             this.propertyGrid1.Click += new System.EventHandler(this.propertyGrid1_Click);
+            // 
+            // saveFileDialog2
+            // 
+            this.saveFileDialog2.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog2_FileOk);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
             // MainView
             // 

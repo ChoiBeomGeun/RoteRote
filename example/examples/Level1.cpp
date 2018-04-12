@@ -26,7 +26,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "Archetype.h"
 #include "InGameLogic.h"
 #include "Trigger.h"
-
+#include "System.h"
 #include "logging.h"
 #include "Clearzone.h"
 #include "StateLists.h"
@@ -40,7 +40,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #define LOGGINGSTART false
 
 using namespace TE;
-void MakingInstructions(void);
+void MakingInstructions(float dt);
 void CheatKeyFunctions(void);
 static int i = 0;
 static int j = 0;
@@ -215,7 +215,7 @@ void Level1::Init()
 
 void Level1::Update(float dt)
 {
-	MakingInstructions();
+	MakingInstructions(dt);
 	
 	camAct.Update(dt);
 
@@ -382,16 +382,23 @@ void CheatKeyFunctions(void) {
 		IsAutoplay = true;
 	}
 
+	if (Input::IsTriggered(SDL_SCANCODE_M))
+	{
+		
+
+		system("start RoteMap.exe");
+	}
 }
 
 
 
-void MakingInstructions(void) {
+void MakingInstructions(float dt) 
+{
 
-	static float timeringame = 200;
+	static float timeringame = 9;
 
 
-	timeringame -= Timer::GetDelta();
+	timeringame -= dt;
 	if (IndicatorCheck &&timeringame <= 0 && STATEMANAGER->Loadtolevelname == "level1.json")
 	{
 

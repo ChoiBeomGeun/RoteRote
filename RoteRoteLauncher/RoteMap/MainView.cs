@@ -22,16 +22,19 @@ namespace RoteMapView
        public bool IsThereClearZone = false;
        public bool IsThereCamera = false;
        public bool IsTherePlayer = false;
+
+        public bool IsMakingMovingWall = false;
         List<Control> objectList = new List<Control>();
         List<RoteObject> RoteobjectList = new List<RoteObject>();
         RoteObject roCamera = new RoteObject();
-
+        public int NumberOfPaths = 1;
+        public int NumberOfMovingWalls = 1;
         enum ControlNodeType
         {
             Player, Wall, Button, Box,
             Trigger90_0, Trigger90_90, Trigger90_180,Trigger90_270,
             Trigger180_0, Trigger180_90, Trigger180_180,Trigger180_270,
-            Clearzone, Hazard, Camera
+            Clearzone, Hazard, Camera,MovingWall
         };
         
         public MainView()
@@ -73,6 +76,23 @@ namespace RoteMapView
         {
          
         }
+
+        public Size GetSizeOfLastMovingWall()
+        { 
+            for (int i = RoteobjectList.Count; i > 0; i--)
+            {
+            
+                 if (RoteobjectList[i-1].objectstyle == "MovingWall")
+                {
+
+                    return new Size((int)(RoteobjectList[i-1].ScaleX), (int)(RoteobjectList[i-1].ScaleY));
+                }
+
+
+            }
+            return new Size(20, 20);
+        }
+
         public Image RotateImage(Image img, RotateFlipType Rotation)
         {
             var bmp = new Bitmap(img);
@@ -124,13 +144,42 @@ namespace RoteMapView
 
         void drawPanel1_MouseRightClick(object sender, MouseDownEventArgs args)
         {
-     
+            if (propertyGrid1.SelectedObject == null)
+                return;
+            if (args.Control != null && args.Control.Tag != null)
+            {
+
+                RoteObject temp = (RoteObject)(propertyGrid1.SelectedObject);
+                Point tempPoint = new Point((int)(temp.PositionX), (int)temp.PositionY);
+                Control temp2 = null;
+             
+                for (int i = 0; i < this.designModePanel.Controls.Count; i++)
+                {
+                    if (this.designModePanel.Controls[i].Tag != null &&
+                        (temp.ObjectID == Int32.Parse(this.designModePanel.Controls[i].Tag.ToString())))
+                    {
+                        if (temp.objectstyle == "MovingWall")
+                        {
+
+                            NumberOfMovingWalls++;
+                            NumberOfPaths = 1;
+                            IsMakingMovingWall = false;
+                        }
+                    }
+
+                }
+
+
+            }
+
             args.Control.BringToFront();
 
            
         }
         void drawPanel1_MouseLeftClick(object sender, MouseDownEventArgs args)
         {
+           
+            
             JsonTextUpdate();
             
 
@@ -199,10 +248,17 @@ namespace RoteMapView
             ControlNodeType nodeType;
             if (Enum.TryParse<ControlNodeType>(selectedNode.Text, out nodeType))
             {
+                
+
                 switch (nodeType)
                 {
                     case ControlNodeType.Player:
+                    {
+                        if (IsMakingMovingWall)
                         {
+                            MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
                             if (IsTherePlayer)
                             {
                                 MessageBox.Show("There is already player in the map", "Object Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -211,7 +267,7 @@ namespace RoteMapView
                             control = new PictureBox()
                             {
                                 
-                                Image = Image.FromFile("./player.png"),
+                                Image = Image.FromFile("texture\\player.png"),
                                 SizeMode = PictureBoxSizeMode.StretchImage,
 
                             };
@@ -232,10 +288,15 @@ namespace RoteMapView
                         break;
                     case ControlNodeType.Wall:
                         {
+                            if (IsMakingMovingWall)
+                            {
+                                MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
                             control = new PictureBox()
                             {
 
-                                Image = Image.FromFile("./wall.png"),
+                                Image = Image.FromFile("texture\\wall.png"),
                                 SizeMode = PictureBoxSizeMode.StretchImage,
 
                             };
@@ -257,10 +318,15 @@ namespace RoteMapView
                         break;
                     case ControlNodeType.Button:
                         {
+                            if (IsMakingMovingWall)
+                            {
+                                MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
                             control = new PictureBox()
                             {
 
-                                Image = Image.FromFile("./button.png"),
+                                Image = Image.FromFile("texture\\button.png"),
                                 SizeMode = PictureBoxSizeMode.StretchImage,
 
                             };
@@ -282,10 +348,15 @@ namespace RoteMapView
                         break;
                     case ControlNodeType.Box:
                         {
+                            if (IsMakingMovingWall)
+                            {
+                                MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
                             control = new PictureBox()
                             {
 
-                                Image = Image.FromFile("./box.png"),
+                                Image = Image.FromFile("texture\\box.png"),
                                 SizeMode = PictureBoxSizeMode.StretchImage,
 
                             };
@@ -307,10 +378,15 @@ namespace RoteMapView
                         break;
                     case ControlNodeType.Trigger180_0:
                         {
+                            if (IsMakingMovingWall)
+                            {
+                                MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
                             control = new PictureBox()
                             {
 
-                                Image = Image.FromFile("./180button.png"),
+                                Image = Image.FromFile("texture\\180button.png"),
                                 SizeMode = PictureBoxSizeMode.StretchImage,
 
                             };
@@ -334,16 +410,22 @@ namespace RoteMapView
                         break;
                     case ControlNodeType.Trigger180_90:
                         {
+                            if (IsMakingMovingWall)
+                            {
+                                MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
                             control = new PictureBox()
                             {
 
-                                Image = Image.FromFile("./180button.png"),
+                                Image = Image.FromFile("texture\\180button.png"),
                                
                                 SizeMode = PictureBoxSizeMode.StretchImage,
 
                             };
                             ((System.Windows.Forms.PictureBox)control).Image=
                                 RotateImage(((System.Windows.Forms.PictureBox)control).Image,RotateFlipType.Rotate90FlipX);
+                            
                             RoteObject temp = new RoteObject();
                             temp.objectstyle = "Trigger180";
                             temp.PositionX = control.Location.X;
@@ -363,10 +445,15 @@ namespace RoteMapView
                         break;
                     case ControlNodeType.Trigger180_180:
                         {
+                            if (IsMakingMovingWall)
+                            {
+                                MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
                             control = new PictureBox()
                             {
 
-                                Image = Image.FromFile("./180button.png"),
+                                Image = Image.FromFile("texture\\180button.png"),
                                 SizeMode = PictureBoxSizeMode.StretchImage,
 
                             };
@@ -391,10 +478,15 @@ namespace RoteMapView
                         break;
                     case ControlNodeType.Trigger180_270:
                         {
+                            if (IsMakingMovingWall)
+                            {
+                                MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
                             control = new PictureBox()
                             {
 
-                                Image = Image.FromFile("./180button.png"),
+                                Image = Image.FromFile("texture\\180button.png"),
                                 SizeMode = PictureBoxSizeMode.StretchImage,
 
                             };
@@ -419,10 +511,15 @@ namespace RoteMapView
                         break;
                     case ControlNodeType.Trigger90_0:
                         {
+                            if (IsMakingMovingWall)
+                            {
+                                MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
                             control = new PictureBox()
                             {
 
-                                Image = Image.FromFile("./90button.png"),
+                                Image = Image.FromFile("texture\\90button.png"),
                                 SizeMode = PictureBoxSizeMode.StretchImage,
 
                             };
@@ -444,10 +541,15 @@ namespace RoteMapView
                         break;
                     case ControlNodeType.Trigger90_90:
                         {
+                            if (IsMakingMovingWall)
+                            {
+                                MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
                             control = new PictureBox()
                             {
 
-                                Image = Image.FromFile("./90button.png"),
+                                Image = Image.FromFile("texture\\90button.png"),
                                 SizeMode = PictureBoxSizeMode.StretchImage,
 
                             };
@@ -472,10 +574,15 @@ namespace RoteMapView
                         break;
                     case ControlNodeType.Trigger90_180:
                         {
+                            if (IsMakingMovingWall)
+                            {
+                                MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
                             control = new PictureBox()
                             {
 
-                                Image = Image.FromFile("./90button.png"),
+                                Image = Image.FromFile("texture\\90button.png"),
                                 SizeMode = PictureBoxSizeMode.StretchImage,
 
                             };
@@ -500,10 +607,15 @@ namespace RoteMapView
                         break;
                     case ControlNodeType.Trigger90_270:
                         {
+                            if (IsMakingMovingWall)
+                            {
+                                MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
                             control = new PictureBox()
                             {
 
-                                Image = Image.FromFile("./90button.png"),
+                                Image = Image.FromFile("texture\\90button.png"),
                                 SizeMode = PictureBoxSizeMode.StretchImage,
 
                             };
@@ -528,10 +640,15 @@ namespace RoteMapView
                         break;
                     case ControlNodeType.Hazard:
                         {
+                            if (IsMakingMovingWall)
+                            {
+                                MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
                             control = new PictureBox()
                             {
 
-                                Image = Image.FromFile("./hazard.png"),
+                                Image = Image.FromFile("texture\\hazard.png"),
                                 SizeMode = PictureBoxSizeMode.StretchImage,
 
                             };
@@ -552,10 +669,16 @@ namespace RoteMapView
                         break;
                     case ControlNodeType.Camera:
                         {
+                            if (IsMakingMovingWall)
+                            {
+                                MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+
                             control = new PictureBox()
                             {
 
-                                Image = Image.FromFile("./camera.png"),
+                                Image = Image.FromFile("texture\\camera.png"),
                                 SizeMode = PictureBoxSizeMode.StretchImage,
 
                             };
@@ -576,10 +699,12 @@ namespace RoteMapView
                         break;
                     case ControlNodeType.Clearzone:
                         {
+                            if (IsMakingMovingWall)
+                                return;
                             control = new PictureBox()
                             {
 
-                                Image = Image.FromFile("./clearzone.png"),
+                                Image = Image.FromFile("texture\\clearzone.png"),
                                 SizeMode = PictureBoxSizeMode.StretchImage,
 
                             };
@@ -598,6 +723,42 @@ namespace RoteMapView
 
                             IsThereClearZone = true;
                         }
+                        break;
+                    case ControlNodeType.MovingWall:
+                    {
+                        
+                            control = new PictureBox()
+                        {
+                             Size= GetSizeOfLastMovingWall(),
+                            Image = Image.FromFile("texture\\wall.png"),
+                            SizeMode = PictureBoxSizeMode.StretchImage,
+
+                        };
+                        RoteObject temp = new RoteObject();
+
+                        temp.objectstyle = "MovingWall";
+                        temp.PositionX = control.Location.X;
+                        temp.PositionY = control.Location.Y;
+                        temp.ScaleX = control.Size.Width;
+                        temp.ScaleY = control.Size.Width;
+                        temp.ObjectID = RoteobjectList.Count;
+               
+                        control.Tag = temp.ObjectID;
+                        RoteobjectList.Add(temp);
+                        objectList.Add(control);
+                        IsMakingMovingWall = true;
+                        
+                            Brush blackBrush = new SolidBrush(Color.Red);                   
+                        FontFamily familyName = new FontFamily("굴림");                   
+                        System.Drawing.Font myFont = new System.Drawing.Font(familyName, 150, FontStyle.Regular, GraphicsUnit.Pixel);                                                        // 폰트생성
+                        PointF startPoint = new PointF(control.Location.X+10, control.Location.Y+10);                           
+
+                           Graphics g = Graphics.FromImage(((System.Windows.Forms.PictureBox)control).Image);
+                      
+                            g.DrawString(NumberOfMovingWalls.ToString() + " "+NumberOfPaths  , myFont, blackBrush, startPoint);
+                        NumberOfPaths++;
+                        }
+                
                         break;
                 }
 
@@ -1229,7 +1390,7 @@ namespace RoteMapView
 
         private void designModePanel_Paint(object sender, PaintEventArgs e)
         {
-
+         
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
