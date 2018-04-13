@@ -64,8 +64,19 @@ TriggerLogic::TriggerLogic()
 	
 
 }
+
 void TriggerLogic::Initialize(void)
 {
+	Limited180_3[0] = Sprite::find_texture_id("limited180_1.png");
+	Limited180_3[1] = Sprite::find_texture_id("limited180_2.png");
+	Limited180_3[2] = Sprite::find_texture_id("limited180_3.png");
+
+	Limited90_3[0] = Sprite::find_texture_id("limited90_1.png");
+	Limited90_3[1] = Sprite::find_texture_id("limited90_2.png");
+	Limited90_3[2] = Sprite::find_texture_id("limited90_3.png");
+
+	unusable_Trigger = Sprite::find_texture_id("trigger_unusable");
+
 	RotationSound = SOUNDMANAGER->LoadSound("rotation.mp3");
 	TriggerList.clear();
 	buttonsobj.clear();
@@ -84,7 +95,7 @@ void TriggerLogic::Initialize(void)
 			TriggerList.push_back(Objects.second);
 
 		}
-		if (FACTORY->ObjectIDMap[Objects.first]->objectstyle == Objectstyle::Trigger180)
+		else if (FACTORY->ObjectIDMap[Objects.first]->objectstyle == Objectstyle::Trigger180)
 		{
 			//Objects.second->GetComponent<Trigger>()->i_innertimer = 100;
 			Objects.second->GetComponent<Trigger>()->i_innertimer = 0;
@@ -92,7 +103,6 @@ void TriggerLogic::Initialize(void)
 			TriggerList.push_back(Objects.second);
 
 		}
-
 
 	}
 	for (int i = 0; i < 4; ++i)
@@ -127,6 +137,11 @@ void TriggerLogic::Update(float dt)
 		if((APP->b_Lose)  )
 			continue;
 
+		if (TriggerObjects->GetComponent<Trigger>()->LifeTime == 0)
+			TriggerObjects->GetComponent<Trigger>()->Trigger_useable = false;
+
+		if (!TriggerObjects->GetComponent<Trigger>()->Trigger_useable)
+			TriggerObjects->GetComponent<Sprite>()->m_TextureID = unusable_Trigger;
 
 		if (TriggerObjects->objectstyle != Objectstyle::Trigger90 &&
 			(TriggerObjects->objectstyle != Objectstyle::Trigger180))
@@ -143,8 +158,9 @@ void TriggerLogic::Update(float dt)
 				//NumberOfTriggersActivation++;
 				if (TriggerObjects->GetComponent<Trigger>()->Trigger_useable)
 				{
-					if (STATEMANAGER->b_IsRot90 && !STATEMANAGER->b_IsRot180)
+					if (STATEMANAGER->b_IsRot90 && !STATEMANAGER->b_IsRot180) {
 						_90anglebutton(TriggerObjects);
+					}
 				}
 
 			}
@@ -195,6 +211,8 @@ void TriggerLogic::Update(float dt)
 			if (TriggerObjects->objectstyle == Objectstyle::Trigger90)
 				TriggerObjects->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("90button.png");
 		}
+
+		LimitedTexture(TriggerObjects);
 	}
 
 
@@ -224,11 +242,13 @@ void TE::TriggerLogic::Free(void)
 		{
 			Objects.second->GetComponent<Trigger>()->i_innertimer = 0;
 			Objects.second->GetComponent<Trigger>()->Trigger_useable = false;
+			Objects.second->GetComponent<Trigger>()->LifeTime = Objects.second->GetComponent<Trigger>()->MaxLife;
 		}
 		if (FACTORY->ObjectIDMap[Objects.first]->objectstyle == Objectstyle::Trigger180)
 		{
 			Objects.second->GetComponent<Trigger>()->i_innertimer = 0;
 			Objects.second->GetComponent<Trigger>()->Trigger_useable = false;
+			Objects.second->GetComponent<Trigger>()->LifeTime = Objects.second->GetComponent<Trigger>()->MaxLife;
 		}
 	}
 
@@ -275,7 +295,10 @@ void TE::TriggerLogic::_90anglebutton(Object* pTrigger)
 			STATEMANAGER->b_IsRotating = false;
 			pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 			isDegree[0] = false;
-	
+			if (pTrigger->GetComponent<Trigger>()->LifeTime > 0) {
+				--pTrigger->GetComponent<Trigger>()->LifeTime;
+				LimitedTexture(pTrigger);
+			}
 		}
 	}
 	// from 90
@@ -308,6 +331,10 @@ void TE::TriggerLogic::_90anglebutton(Object* pTrigger)
 			STATEMANAGER->b_IsRotating = false;
 			pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 			isDegree[1] = false;
+			if (pTrigger->GetComponent<Trigger>()->LifeTime > 0) {
+				--pTrigger->GetComponent<Trigger>()->LifeTime;
+				LimitedTexture(pTrigger);
+			}
 
 		}
 	}
@@ -342,6 +369,10 @@ void TE::TriggerLogic::_90anglebutton(Object* pTrigger)
 			STATEMANAGER->b_IsRotating = false;
 			pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 			isDegree[2] = false;
+			if (pTrigger->GetComponent<Trigger>()->LifeTime > 0) {
+				--pTrigger->GetComponent<Trigger>()->LifeTime;
+				LimitedTexture(pTrigger);
+			}
 		}
 	}
 	// from 270
@@ -374,7 +405,10 @@ void TE::TriggerLogic::_90anglebutton(Object* pTrigger)
 			STATEMANAGER->b_IsRotating = false;
 			pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 			isDegree[3] = false;
-
+			if (pTrigger->GetComponent<Trigger>()->LifeTime > 0) {
+				--pTrigger->GetComponent<Trigger>()->LifeTime;
+				LimitedTexture(pTrigger);
+			}
 		}
 	}
 }
@@ -457,7 +491,10 @@ void TE::TriggerLogic::_180anglebutton(Object* pTrigger)
 				pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 				isDegree180double[0] = false;
 				isDegree180[0] = false;
-		
+				if (pTrigger->GetComponent<Trigger>()->LifeTime > 0) {
+					--pTrigger->GetComponent<Trigger>()->LifeTime;
+					LimitedTexture(pTrigger);
+				}
 			}
 		}
 	}
@@ -502,7 +539,10 @@ void TE::TriggerLogic::_180anglebutton(Object* pTrigger)
 				pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 				isDegree180double[1] = false;
 				isDegree180[1] = false;
-			
+				if (pTrigger->GetComponent<Trigger>()->LifeTime > 0) {
+					--pTrigger->GetComponent<Trigger>()->LifeTime;
+					LimitedTexture(pTrigger);
+				}
 			}
 		}
 	}
@@ -545,8 +585,11 @@ void TE::TriggerLogic::_180anglebutton(Object* pTrigger)
 				STATEMANAGER->b_IsRotating = false;
 				pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 				isDegree180double[2] = false;
-			
 				isDegree180[2] = false;
+				if (pTrigger->GetComponent<Trigger>()->LifeTime > 0) {
+					--pTrigger->GetComponent<Trigger>()->LifeTime;
+					LimitedTexture(pTrigger);
+				}
 			}
 		}
 	}
@@ -592,7 +635,10 @@ void TE::TriggerLogic::_180anglebutton(Object* pTrigger)
 				pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 				isDegree180double[3] = false;
 				isDegree180[3] = false;
-	
+				if (pTrigger->GetComponent<Trigger>()->LifeTime > 0) {
+					--pTrigger->GetComponent<Trigger>()->LifeTime;
+					LimitedTexture(pTrigger);
+				}
 			}
 		}
 	}
@@ -607,4 +653,41 @@ void TE::TriggerLogic::InitDegree(void)
 		isDegree180[i] = false;
 	for (int i = 0; i < 4; ++i)
 		isDegree180double[i] = false;
+}
+
+void TriggerLogic::LimitedTexture(Object* trigger)
+{
+	if (trigger->GetComponent<Trigger>()->MaxLife == 3)
+	{
+		if (trigger->objectstyle == Objectstyle::Trigger90)
+		{
+			switch (trigger->GetComponent<Trigger>()->LifeTime)
+			{
+			case 3:
+				trigger->GetComponent<Sprite>()->m_TextureID = Limited90_3[trigger->GetComponent<Trigger>()->MaxLife - 1];
+				break;
+			case 2:
+				trigger->GetComponent<Sprite>()->m_TextureID = Limited90_3[trigger->GetComponent<Trigger>()->MaxLife - 2];
+				break;
+			case 1:
+				trigger->GetComponent<Sprite>()->m_TextureID = Limited90_3[trigger->GetComponent<Trigger>()->MaxLife - 3];
+				break;
+			}
+		}
+		else if (trigger->objectstyle == Objectstyle::Trigger180)
+		{
+			switch (trigger->GetComponent<Trigger>()->LifeTime)
+			{
+			case 3:
+				trigger->GetComponent<Sprite>()->m_TextureID = Limited180_3[trigger->GetComponent<Trigger>()->MaxLife - 1];
+				break;
+			case 2:
+				trigger->GetComponent<Sprite>()->m_TextureID = Limited180_3[trigger->GetComponent<Trigger>()->MaxLife - 2];
+				break;
+			case 1:
+				trigger->GetComponent<Sprite>()->m_TextureID = Limited180_3[trigger->GetComponent<Trigger>()->MaxLife - 3];
+				break;
+			}
+		}
+	}
 }

@@ -24,7 +24,7 @@ namespace TE
 		virtual void Initialize() {};
 		//All systems are updated every frames
 		virtual void Update(float dt) = 0;
-		// All systems need a virtual destructor to their destructor caelled
+		// All systems need a virtual destructor to their destructor called
 		virtual  void Free(void) {};
 		virtual ~GameLogicSystem() {};
 

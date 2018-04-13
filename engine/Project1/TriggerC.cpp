@@ -38,7 +38,8 @@ Trigger::~Trigger()
 
 void Trigger::Initialize()
 {
-
+	MaxLife = 3;
+	LifeTime = MaxLife;
 
 }
 
@@ -47,17 +48,3 @@ void Trigger::ActionSet(Action * action)
 {
 	maction = action;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

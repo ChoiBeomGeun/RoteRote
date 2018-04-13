@@ -79,6 +79,7 @@ Level1::~Level1()
 void Level1::Load()
 {
 	INGAMELOGIC->InGameInit();
+
 }
 
 void Level1::Init()

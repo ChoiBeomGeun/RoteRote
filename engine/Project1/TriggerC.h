@@ -43,6 +43,16 @@ namespace TE {
 		void ActionSet(Action *action);
 		std::string TriggerType = "180";
 
-
+		int LifeTime;
+		int MaxLife;
 	};
+
+	//class LimitedTrigger : public Trigger
+	//{
+	//public:
+	//	LimitedTrigger();
+	//	~LimitedTrigger();
+	//private:
+	//	int LifeTime;
+	//};
 }

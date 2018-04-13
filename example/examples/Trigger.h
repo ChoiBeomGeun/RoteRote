@@ -37,6 +37,12 @@ namespace TE
 		bool isDegree180[4];
 		bool isDegree180double[4];
 
+		unsigned int Limited90_3[3];
+		unsigned int Limited180_3[3];
+
+		unsigned int unusable_Trigger;
+
+		void LimitedTexture(Object* trigger);
 	};
 
 
