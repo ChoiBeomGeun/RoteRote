@@ -142,7 +142,7 @@ void Menu::Update(float dt)
 	{
 		if (IsRotating){
 			
-			FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle += 100 * dt;
+			FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle += 250 * dt;
 			
 		}
 		else
@@ -151,7 +151,7 @@ void Menu::Update(float dt)
 	else if (RightRotate)
 	{
 		if (IsRotating)
-			FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle -= 100 * dt;
+			FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle -= 250 * dt;
 		else
 			RightRotate = false;
 	}

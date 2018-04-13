@@ -102,14 +102,17 @@ void LevelSelect::Update(float dt)
 			STATEMANAGER->MoveState(StatesList::Level1);
 			STATEMANAGER->i_LevelSelect = LevelList+1;
 		}
+
+		if (Input::IsTriggered(SDL_SCANCODE_ESCAPE))
+			STATEMANAGER->MoveState(StatesList::Menu);
 	}
 
 	if (IsRotating)
 	{
 		if (IsLeftPressed)
-			FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle -= 100 * dt;
+			FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle -= 300 * dt;
 		else
-			FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle += 100 * dt;
+			FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle += 300 * dt;
 
 		Rotation();
 	}
