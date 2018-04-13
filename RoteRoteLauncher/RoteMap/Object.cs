@@ -20,6 +20,7 @@ namespace RoteMapView
     public class RoteObject
     {
         private int m_ojbectid;
+        private int m_NumberOfPaths;
         private string m_strName;
         private string m_objectstyle;
         private float m_posX;
@@ -147,6 +148,14 @@ namespace RoteMapView
             get { return m_Trigger180ornot; }
         }
         #endregion
-
+        #region MovingPaths
+        [Category("MovingPaths")]
+        [DisplayName("NumberOfPaths")]
+        public int NumberOfPaths
+        {
+            set { m_NumberOfPaths = value; }
+            get { return m_NumberOfPaths; }
+        }
+        #endregion
     }
 }

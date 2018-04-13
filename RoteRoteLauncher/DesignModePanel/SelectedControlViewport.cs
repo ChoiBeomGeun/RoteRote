@@ -51,16 +51,18 @@ namespace ControlDesignMode
         }
         public int NumberChanged(int num)
         {
-            bool IsMinus = (num < 0) ? true : false;
-            string number = num.ToString();
-
-            int Lastnumber = Int32.Parse(number[number.Length - 1].ToString());
 
 
-            if (!IsMinus)
-                return num - Lastnumber;
+            int remain = num % 10;
+            int result =num;
+            if (remain <= 5)
+                result -= remain;
             else
-                return num + Lastnumber;
+                result += (10 - remain);
+
+
+
+            return result;
 
         }
         public void Draw(Graphics g, Control selectedObject)

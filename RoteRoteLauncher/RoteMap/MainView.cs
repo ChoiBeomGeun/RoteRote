@@ -26,9 +26,11 @@ namespace RoteMapView
         public bool IsMakingMovingWall = false;
         List<Control> objectList = new List<Control>();
         List<RoteObject> RoteobjectList = new List<RoteObject>();
+        List<RoteObject> PathsList = new List<RoteObject>();
         RoteObject roCamera = new RoteObject();
         public int NumberOfPaths = 1;
         public int NumberOfMovingWalls = 1;
+        public int TotalPaths = 0;
         enum ControlNodeType
         {
             Player, Wall, Button, Box,
@@ -197,7 +199,7 @@ namespace RoteMapView
 
                     return;
                 }
-                if (RoteobjectList.Count-1 < Int32.Parse(args.Control.Tag.ToString()))
+                if (args.Control.Tag.ToString() == "Path" || RoteobjectList.Count-1 < Int32.Parse(args.Control.Tag.ToString()))
                     return;
                 RoteobjectList[Int32.Parse(args.Control.Tag.ToString())].PositionX = args.Control.Location.X;
                 RoteobjectList[Int32.Parse(args.Control.Tag.ToString())].PositionY = args.Control.Location.Y;
@@ -735,16 +737,33 @@ namespace RoteMapView
 
                         };
                         RoteObject temp = new RoteObject();
-
+                            if(NumberOfPaths ==1)
                         temp.objectstyle = "MovingWall";
+                        else if (NumberOfPaths > 1)
+                        {
+                            temp.objectstyle = "Path";
+                             PathsList.Add(temp);
+
+                        }
+
                         temp.PositionX = control.Location.X;
                         temp.PositionY = control.Location.Y;
                         temp.ScaleX = control.Size.Width;
                         temp.ScaleY = control.Size.Width;
-                        temp.ObjectID = RoteobjectList.Count;
-               
-                        control.Tag = temp.ObjectID;
-                        RoteobjectList.Add(temp);
+                      
+                            temp.ObjectID = RoteobjectList.Count;
+                        
+                           
+                        temp.NumberOfPaths = NumberOfPaths;
+                        
+                            control.Tag = temp.ObjectID;
+                 
+
+
+                        
+                                RoteobjectList.Add(temp);
+                    
+                         
                         objectList.Add(control);
                         IsMakingMovingWall = true;
                         
@@ -757,7 +776,8 @@ namespace RoteMapView
                       
                             g.DrawString(NumberOfMovingWalls.ToString() + " "+NumberOfPaths  , myFont, blackBrush, startPoint);
                         NumberOfPaths++;
-                        }
+                        TotalPaths++;
+                    }
                 
                         break;
                 }
@@ -796,7 +816,8 @@ namespace RoteMapView
            // SynchronizationObjects();
             JArray Componentlist = new JArray();
             List<string> components = new List<string>();
-
+            List<Point> Paths = new List<Point>();
+            List<JProperty> PropertyList = new List<JProperty>();
             JObject tempObject = null;
             JObject camObject = null;
             JObject LevelInfo = null;
@@ -808,7 +829,7 @@ namespace RoteMapView
             LevelInfo = new JObject(
 
                      new JProperty("Level", textBox1.Text),
-                       new JProperty("NumberOfObjects", RoteobjectList.Count)
+                       new JProperty("NumberOfObjects", RoteobjectList.Count-PathsList.Count)
                      );
 
             LevelInfoString = LevelInfo.ToString();
@@ -817,8 +838,15 @@ namespace RoteMapView
             LevelInfoString = LevelInfoString.Remove(LevelInfoString.Count() - 2, 1);
             LevelInfoString = LevelInfoString.Insert(LevelInfoString.Count() - 1, ",");
             result += LevelInfoString;
+           int  indexOfPath = 0;
+
+
+
             foreach (var temp in RoteobjectList)
             {
+                if (temp.objectstyle == "Path")
+                    continue;
+
                 if (temp.ObjectID == 1)
                 {
                     string camString = null;
@@ -916,17 +944,41 @@ namespace RoteMapView
                     temp.Texture = "hazard.png";
                 }
 
+                if (temp.objectstyle == "MovingWall")
+                {
+                    components.Add("TRANSFORM");
+                    components.Add("SPRITE");
+                    components.Add("BODY");
+                    components.Add("AUTOMOVING");
+                    temp.Texture = "wall.png";
+                    foreach (var temp2 in RoteobjectList)
+                    {
 
-            
-                
+                        if (temp2.objectstyle == "Path")
+                        {
+                            Paths.Add(new Point((int)temp2.PositionX, (int)temp2.PositionY));
+                            PropertyList.Add(new JProperty("Path" + indexOfPath,
+                                new JObject(new JProperty("x", temp2.PositionX), new JProperty("y", temp2.PositionY))));
+                            indexOfPath++;
+                        }
+
+
+                    }
+                }
+              
+
+               
+
+
 
 
                 foreach (var tempinComp in components)
                 {
                     Componentlist.Add(tempinComp.ToString());
                 }
-          
 
+     
+                    
                 tempObject = new JObject(
 
                      new JProperty("Object" + (temp.ObjectID + 1).ToString(),
@@ -940,10 +992,12 @@ namespace RoteMapView
                     new JProperty("TextureDir", temp.Texture),
                     new JProperty("DefaultTrigger180ornot", temp.Trigger180check),
                     new JProperty("Components", Componentlist),
+                   
                     new JProperty("HavingComponentsNumbers", Componentlist.Count),
-                    new JProperty("ObjectType", temp.objectstyle))
+                    new JProperty("ObjectType", temp.objectstyle), PropertyList)
                     )
                     );
+              
                 objectinfo = tempObject.ToString();
                 objectinfo = objectinfo.Remove(0, 1);
                 objectinfo = objectinfo.Remove(objectinfo.Count() - 1, 1);
