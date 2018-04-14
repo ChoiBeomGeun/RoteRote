@@ -162,8 +162,11 @@ void LevelManager::LoadLevel(std::string  path)
 					|| STATEMANAGER->Loadtolevelname == "level7.json" || STATEMANAGER->Loadtolevelname == "level8.json" || STATEMANAGER->Loadtolevelname == "level9.json"
 					|| STATEMANAGER->Loadtolevelname == "level10.json" || STATEMANAGER->Loadtolevelname == "level11.json" || STATEMANAGER->Loadtolevelname == "level12.json")
 				{
-					tempObject = PARTICLEMANAGER->LoadEmitter(tempObject,".\\Emitters.\\particle1.json");
+					//tempObject = PARTICLEMANAGER->LoadEmitter(tempObject,".\\Emitters.\\particle1.json");
 
+					PaticlePath = ".\\Emitters.\\" + file.mRoot.get(object + to_string(i), false).get("ParticlePath", false).asString();
+
+					tempObject = PARTICLEMANAGER->LoadEmitter(tempObject, PaticlePath);
 					/*tempObject->AddComponent<Emitter>();
 					tempObject->GetComponent<Sprite>()->texture_load("test.png");
 					tempObject->GetComponent<Transform>()->position = tempObject->GetComponent<Transform>()->position;
@@ -182,12 +185,6 @@ void LevelManager::LoadLevel(std::string  path)
 
 					tempObject = PARTICLEMANAGER->LoadEmitter(tempObject, PaticlePath);
 					//pfile.ReadFile(PaticlePath);
-
-				
-
-
-
-
 
 					/*tempObject->AddComponent<Emitter>();
 					tempObject->GetComponent<Sprite>()->texture_load("test.png");

@@ -31,9 +31,6 @@ namespace TE {
 			std::mt19937 gen(rd());
 			std::uniform_real_distribution<> dis(-10.0, 10.0);
 			CAMERA->cameraPos = cameraOriginPos + glm::vec3(dis(gen) * shakeAmount, dis(gen) * shakeAmount, 1);
-			std::cout << "Camera.x : " << CAMERA->cameraPos.x << '\n';
-			std::cout << "Camera.y : " << CAMERA->cameraPos.y << '\n';
-
 			CAMERA->cameraPos.z = 999.f;
 			shakeDuration -= dt * decreaseFactor;
 		}
@@ -73,30 +70,35 @@ namespace TE {
 		}
 	}
 
-	int CameraAction::Rotating90DegreesCam()
+	void CameraAction::defaultCameraSetting()
+	{
+		CAMERA->cameraPos = glm::vec3(0, 0, 999.f);
+	}
+
+	int CameraAction::RotatingCam()
 	{
 		// when degree is 0 
 		if (CAMERA->cameraUp.x == 0 && CAMERA->cameraUp.y >= 1)
 		{
-			if (FACTORY->LeftBoundary()->HasComponent<Transform>())
+			/*if (FACTORY->LeftBoundary()->HasComponent<Transform>())
 			{
 				CAMERA->CenterOfCamera.x = FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x + (FACTORY->RightBoundary()->GetComponent<Transform>()->position.x - FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x) *.5f;
 				CAMERA->CenterOfCamera.y = FACTORY->DownBoundary()->GetComponent<Transform>()->position.y + (FACTORY->UpBoundary()->GetComponent<Transform>()->position.y - FACTORY->DownBoundary()->GetComponent<Transform>()->position.y)*.5f;
-			}
+			}*/
 			return EN_0;
 		}
 		// when degree is 90
 		else if (CAMERA->cameraUp.x == 1 && CAMERA->cameraUp.y >= 0)
 		{
-			//CAMERA->CenterOfCamera.x = FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x + (FACTORY->RightBoundary()->GetComponent<Transform>()->position.x - FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x) *.5f;
-			
-			// Left boundary has become as Up boundry , right boundary -> down boundary
-			CAMERA->CenterOfCamera.x = FACTORY->UpBoundary()->GetComponent<Transform>()->position.x + (FACTORY->DownBoundary()->GetComponent<Transform>()->position.x - FACTORY->UpBoundary()->GetComponent<Transform>()->position.x) *.5f;
-			
-			//CAMERA->CenterOfCamera.y = FACTORY->DownBoundary()->GetComponent<Transform>()->position.y + (FACTORY->UpBoundary()->GetComponent<Transform>()->position.y - FACTORY->DownBoundary()->GetComponent<Transform>()->position.y)*.5f;
-			// changed;
-			CAMERA->CenterOfCamera.y = FACTORY->LeftBoundary()->GetComponent<Transform>()->position.y + (FACTORY->RightBoundary()->GetComponent<Transform>()->position.y - FACTORY->LeftBoundary()->GetComponent<Transform>()->position.y)*.5f;
-						
+			////CAMERA->CenterOfCamera.x = FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x + (FACTORY->RightBoundary()->GetComponent<Transform>()->position.x - FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x) *.5f;
+			//
+			//// Left boundary has become as Up boundry , right boundary -> down boundary
+			//CAMERA->CenterOfCamera.x = FACTORY->UpBoundary()->GetComponent<Transform>()->position.x + (FACTORY->DownBoundary()->GetComponent<Transform>()->position.x - FACTORY->UpBoundary()->GetComponent<Transform>()->position.x) *.5f;
+			//
+			////CAMERA->CenterOfCamera.y = FACTORY->DownBoundary()->GetComponent<Transform>()->position.y + (FACTORY->UpBoundary()->GetComponent<Transform>()->position.y - FACTORY->DownBoundary()->GetComponent<Transform>()->position.y)*.5f;
+			//// changed;
+			//CAMERA->CenterOfCamera.y = FACTORY->LeftBoundary()->GetComponent<Transform>()->position.y + (FACTORY->RightBoundary()->GetComponent<Transform>()->position.y - FACTORY->LeftBoundary()->GetComponent<Transform>()->position.y)*.5f;
+			//			
 			return EN_90;
 
 		}
@@ -113,36 +115,32 @@ namespace TE {
 
 		}
 	}
-
-	void CameraAction::Rotating180DegreesCam()
+	
+	void CameraAction::ControlCamMovement(int type)
 	{
-		// when degree is 0 
-		if (CAMERA->cameraUp.x == 0 && CAMERA->cameraUp.y >= 1)
+		glm::vec3 rightblock = glm::vec3(0), leftblock = glm::vec3(0), upblock = glm::vec3(0), downblock = glm::vec3(0);
+		if (type == CameraRotation::EN_0)
 		{
+			// this is current block of map 
+			upblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
+			downblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
+			rightblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
+			leftblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
+
+			CAMERA->CenterOfCamera.x = leftblock.x + (std::abs(leftblock.x - rightblock.x)*.5f);
+			CAMERA->CenterOfCamera.y = downblock.y + (std::abs(upblock.y - downblock.y)*.5f);
+
+			CAMERA->cameraPos = glm::vec3(CAMERA->CenterOfCamera, 999.f);
+			// To do: seprate sections of map 
+			float UpYLimit, DownYLimit, LeftXLimit, RightXLimit;
+
+			UpYLimit = upblock.y - std::abs(upblock.y - CAMERA->CenterOfCamera.y)*.5f;
+
 
 		}
-		// when degree is 90
-		else if (CAMERA->cameraUp.x == 1 && CAMERA->cameraUp.y >= 0)
+		else if (type == CameraRotation::EN_90)
 		{
-
-		}
-		// when degree is 180
-		else if (CAMERA->cameraUp.x == 0 && CAMERA->cameraUp.y == -1)
-		{
-
-		}
-		// when degree is 270
-		else if (CAMERA->cameraUp.x == -1 && CAMERA->cameraUp.y == 0)
-		{
-
-		}
-	}
-
-	void CameraAction::HorizontalLockCam(CameraRotation type)
-	{
-		if (type == CameraRotation::EN_90)
-		{
-			glm::vec3 rightblock, leftblock, upblock, downblock;
+			
 			// this is current block of map 
 			upblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
 			downblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
@@ -167,9 +165,12 @@ namespace TE {
 				CAMERA->cameraPos.x = FACTORY->GetPlayer()->GetComponent<Transform>()->position.x;
 			CAMERA->cameraPos.z = 999.f;
 		}
+		else if (type == CameraRotation::EN_180)
+		{
+			
+		}
 		else if (type == CameraRotation::EN_270)
 		{
-			glm::vec3 rightblock, leftblock, upblock, downblock;
 			// this is current block of map 
 			upblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
 			downblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
@@ -186,8 +187,6 @@ namespace TE {
 			DownYLimit = (downblock.x - std::abs(CAMERA->CenterOfCamera.x - downblock.x)*.5f);
 			CAMERA->cameraPos.y = CAMERA->CenterOfCamera.y;
 
-			std::cout << "UPYLIMIT. x " << UpYLimit << std::endl;
-			std::cout << "DOWNYLIMIT. x " << DownYLimit << std::endl;
 			if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x <= UpYLimit)
 				CAMERA->cameraPos.x = UpYLimit;
 			else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x >= DownYLimit)
@@ -196,20 +195,6 @@ namespace TE {
 				CAMERA->cameraPos.x = FACTORY->GetPlayer()->GetComponent<Transform>()->position.x;
 			CAMERA->cameraPos.z = 999.f;
 		}
-		/*
-		if (istest)
-		{
-			CAMERA->cameraPos = glm::vec3(CAMERA->cameraPos.y, CAMERA->CenterOfCamera.x, 999.f);
-			istest = false;
-		}*/
-		/*float cameraOriginalPos = CAMERA->cameraPos.x;
-		DEBUG_ASSERT(CAMERA->cameraPos.x != cameraOriginalPos, "CAMERA X SHOULD BE FIXED");*/
-	}
-
-	void CameraAction::VerticalLockCam(CameraRotation type)
-	{
-		float cameraOriginalPos = CAMERA->cameraPos.y;
-		DEBUG_ASSERT(CAMERA->cameraPos.y != cameraOriginalPos, "CAMERA Y SHOULD BE FIXED");
 	}
 
 	void CameraAction::cameraSetting(CameraPosType camPosType)
@@ -253,37 +238,11 @@ namespace TE {
 
 	void CameraAction::Update(float dt)
 	{
-		if (STATEMANAGER->i_LevelSelect == 4)
+		if (STATEMANAGER->i_LevelSelect >=1)
 		{
-			switch (Rotating90DegreesCam())
-			{
-			case EN_0:
-				break;
-			case EN_90:
-				HorizontalLockCam(CameraRotation::EN_90);
-				break;
-			case EN_180:
-				break;
-			case EN_270:
-				HorizontalLockCam(CameraRotation::EN_270);
-				break;
-			default: break;
-
-			}
+			int degrees = RotatingCam();
+			ControlCamMovement(degrees);
 		}
 		CAMERA->lookat(CAMERA->cameraPos, CAMERA->cameraTarget, CAMERA->cameraUp);
 	}
-
-	/*void Level1::lookAtMap()
-	{
-		CAMERA->CenterOfCamera.x = FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x + (FACTORY->RightBoundary()->GetComponent<Transform>()->position.x - FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x) *.5f;
-		CAMERA->CenterOfCamera.y = FACTORY->DownBoundary()->GetComponent<Transform>()->position.y + (FACTORY->UpBoundary()->GetComponent<Transform>()->position.y - FACTORY->DownBoundary()->GetComponent<Transform>()->position.y)*.5f;
-		std::cout << "CenterOfX: " << CAMERA->CenterOfCamera.x << '\n';
-		std::cout << "CenterOfY: " << CAMERA->CenterOfCamera.y << '\n';
-
-		CAMERA->cameraPos = glm::vec3(glm::vec2(CAMERA->CenterOfCamera.x, CAMERA->CenterOfCamera.y), CAMERA->cameraPos.z);
-		CAMERA->cameraPos.z = 999.f;
-	}*/
-
-
 }

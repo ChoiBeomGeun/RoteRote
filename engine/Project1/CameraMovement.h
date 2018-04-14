@@ -43,13 +43,12 @@ namespace TE
 		bool DisplayTheWholeMap();
 		void FollowPlayer(glm::vec3 * cameraPos, glm::vec3 * cameraScale, float dt);
 		bool isCamToPlayer;
+		void defaultCameraSetting();
 
 	public: // camera rotating changing walls;
-		int Rotating90DegreesCam();
-		void Rotating180DegreesCam();
-		void HorizontalLockCam(CameraRotation type);
-		void VerticalLockCam(CameraRotation type);
-
+		int RotatingCam();
+		void ControlCamMovement(int type);
+	
 	private:
 		// how long the object should shake for
 		float shakeDuration;

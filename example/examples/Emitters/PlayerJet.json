@@ -6,7 +6,7 @@
 	{		
 		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
 		"EmitterID" : 1,
-		"EmitterType" : "ET_TRAIL",
+		"EmitterType" : "ET_ROCKET",
 		"ObjectType" : "Particle",
 		"Position" : 
 		{
@@ -20,10 +20,17 @@
 			"y" : 0.0,
 			"z" : 0.0
 		},
-		"TextureDir" : "test.png",
+		"Color" : 
+		{
+			"r" : 255.0,
+			"g" : 0.0,
+			"b" : 0.0,
+			"a" : 255.0
+		},
+		"TextureDir" : "Fire.png",
 		"EmitterSize" : 0,
 		"EmitterID" : 0,
-		"EmitterLifeTime" : 5,
+		"EmitterLifeTime" : 3,
 		"Emittercapacity" : 200,
 		"RenderMode" : 1
 	}

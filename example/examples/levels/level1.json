@@ -3,8 +3,8 @@
 	{
 		"EYE" : 
 		{
-			"x" : -849.19140625,
-			"y" : -65.050003051757813,
+			"x" : -375.0,
+			"y" : 300.0,
 			"z" : 999.0
 		},
 		"TARGET" : 
@@ -21,7 +21,7 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 12,
+	"NumberOfObjects" : 17,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
@@ -86,11 +86,12 @@
 		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
 		"ObjectID" : 12,
 		"ObjectType" : "Button",
-		"ParticleType" : "ET_EXPLOSION",
+		"ParticlePath" : "PlayerTrail.json",
+		"ParticleType" : "TRAIL",
 		"Position" : 
 		{
-			"x" : -849.19140625,
-			"y" : -15.050003051757813,
+			"x" : 0.0,
+			"y" : 0.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -100,6 +101,103 @@
 			"y" : 10.0
 		},
 		"TextureDir" : "basicParticle.png"
+	},
+	"Object13" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"ObjectID" : 13,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.89999997615814209,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 0.10000000149011612,
+			"y" : 0.20000000298023224
+		},
+		"TextureDir" : ""
+	},
+	"Object14" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"ObjectID" : 14,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : -607.5740966796875,
+			"y" : 114.1041259765625,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 80.0,
+			"y" : 80.0
+		},
+		"TextureDir" : ""
+	},
+	"Object15" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"ObjectID" : 15,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : -447.5740966796875,
+			"y" : 114.1041259765625,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 80.0,
+			"y" : 80.0
+		},
+		"TextureDir" : ""
+	},
+	"Object16" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"ObjectID" : 16,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : -527.5740966796875,
+			"y" : 194.1041259765625,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 210.0,
+			"y" : 80.0
+		},
+		"TextureDir" : ""
+	},
+	"Object17" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
+		"ObjectID" : 17,
+		"ObjectType" : "Button",
+		"ParticlePath" : "PlayerJet.json",
+		"ParticleType" : "ET_TRAIL",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0
+		},
+		"TextureDir" : "Fire.png"
 	},
 	"Object2" : 
 	{
@@ -152,8 +250,8 @@
 		"ObjectType" : "Player",
 		"Position" : 
 		{
-			"x" : -849.19140625,
-			"y" : -65.100006103515625,
+			"x" : -527.5740966796875,
+			"y" : -15.896571159362793,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -196,7 +294,7 @@
 			"y" : 150.0,
 			"z" : 0.0
 		},
-		"Rotation" : 4284.310546875,
+		"Rotation" : 4652.66015625,
 		"Scale" : 
 		{
 			"x" : 50.0,
@@ -269,7 +367,7 @@
 	},
 	"WorldSize" : 
 	{
-		"x" : 1400,
-		"y" : 900
+		"x" : 0,
+		"y" : 0
 	}
 }

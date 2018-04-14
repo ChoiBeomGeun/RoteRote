@@ -336,7 +336,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="..\..\example\examples\shaders\TEGraphics.frag">
       <Filter>Graphics\Shader</Filter>
     </None>

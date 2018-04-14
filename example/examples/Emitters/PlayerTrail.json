@@ -6,7 +6,7 @@
 	{		
 		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
 		"EmitterID" : 1,
-		"EmitterType" : "ET_BACKGROUND",
+		"EmitterType" : "ET_TRAIL",
 		"ObjectType" : "Particle",
 		"Position" : 
 		{
@@ -22,16 +22,16 @@
 		},
 		"Color" : 
 		{
-			"r" : 0.0,
-			"g" : 0.0,
-			"b" : 0.0,
-			"a" : 0.0
+			"r" : 255.0,
+			"g" : 255.0,
+			"b" : 255.0,
+			"a" : 255.0
 		},
-		"TextureDir" : "Twinkle.png",
+		"TextureDir" : "test.png",
 		"EmitterSize" : 0,
 		"EmitterID" : 0,
-		"EmitterLifeTime" : 10,
-		"Emittercapacity" : 25,
-		"RenderMode" : 1
+		"EmitterLifeTime" : 5,
+		"Emittercapacity" : 200,
+		"RenderMode" : 0
 	}
 }

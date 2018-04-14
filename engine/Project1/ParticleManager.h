@@ -60,7 +60,7 @@ namespace TE {
 
 		void AddEmitter(Emitter* pEmitter);
 		void DeleteEmitter(std::vector <Emitter*>::iterator emitterIt);
-		void UpdateEmitter(Emitter* pEmitter, float dt);
+		//void UpdateEmitter(Emitter* pEmitter, float dt);
 		//void     DrawEmitter(const Emitter* pEmitter);
 		std::vector <Emitter*> m_EmitterList;
 
@@ -68,6 +68,7 @@ namespace TE {
 		void InitExplosionSystem(Emitter* pEmitter);
 		void InitTrailSystem(Emitter* pEmitter);
 		void InitBackgroundSystem(Emitter* pEmitter);
+		void InitPlayerJetSystem(Emitter * pEmitter);
 
 		//Emitter* m_pEmitters; //!< pointer of Emitter
 		int m_capacity;       //!< max amount of Emitter

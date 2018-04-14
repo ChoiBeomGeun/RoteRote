@@ -97,7 +97,7 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\external\fmod\inc;$(SolutionDir)\external\SDL2\include\;$(SolutionDir)\external\soil\src;$(SolutionDir)\external\glew\include\GL;$(SolutionDir)\engine\Project1;$(SolutionDir)\external\;C:\Users\PC\Desktop\vld-2.5.1\vld-2.5.1\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\external\fmod\inc;$(SolutionDir)\external\SDL2\include\;$(SolutionDir)\external\soil\src;$(SolutionDir)\external\glew\include\GL;$(SolutionDir)\engine\Project1;$(SolutionDir)\external\</AdditionalIncludeDirectories>
       <TreatWarningAsError>false</TreatWarningAsError>
       <WarningVersion>
       </WarningVersion>
@@ -128,7 +128,7 @@ copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(T
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\external\fmod\inc;$(SolutionDir)\external\SDL2\include\;$(SolutionDir)\external\soil\src;$(SolutionDir)\external\glew\include\GL;$(SolutionDir)\engine\Project1;$(SolutionDir)\external\;C:\Users\PC\Desktop\vld-2.5.1\vld-2.5.1\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\external\fmod\inc;$(SolutionDir)\external\SDL2\include\;$(SolutionDir)\external\soil\src;$(SolutionDir)\external\glew\include\GL;$(SolutionDir)\engine\Project1;$(SolutionDir)\external\</AdditionalIncludeDirectories>
       <TreatWarningAsError>false</TreatWarningAsError>
       <WarningVersion>
       </WarningVersion>
@@ -160,7 +160,7 @@ copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(T
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\external\fmod\inc;$(SolutionDir)\external\SDL2\include\;$(SolutionDir)\external\soil\src;$(SolutionDir)\external\glew\include\GL;$(SolutionDir)\engine\Project1;$(SolutionDir)\external\;C:\Users\PC\Desktop\vld-2.5.1\vld-2.5.1\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\external\fmod\inc;$(SolutionDir)\external\SDL2\include\;$(SolutionDir)\external\soil\src;$(SolutionDir)\external\glew\include\GL;$(SolutionDir)\engine\Project1;$(SolutionDir)\external\</AdditionalIncludeDirectories>
       <TreatWarningAsError>false</TreatWarningAsError>
       <WarningVersion>
       </WarningVersion>
@@ -193,7 +193,7 @@ copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(T
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\external\fmod\inc;$(SolutionDir)\external\SDL2\include\;$(SolutionDir)\external\soil\src;$(SolutionDir)\external\glew\include\GL;$(SolutionDir)\engine\Project1;$(SolutionDir)\external\;C:\Users\PC\Desktop\vld-2.5.1\vld-2.5.1\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\external\fmod\inc;$(SolutionDir)\external\SDL2\include\;$(SolutionDir)\external\soil\src;$(SolutionDir)\external\glew\include\GL;$(SolutionDir)\engine\Project1;$(SolutionDir)\external\</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <WarningVersion>
       </WarningVersion>

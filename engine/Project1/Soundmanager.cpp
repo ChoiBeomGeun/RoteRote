@@ -21,11 +21,7 @@ using namespace TE;
 
 
 namespace TE {
-
-
 	SoundManager * SOUNDMANAGER = nullptr;
-
-
 }
 SoundManager::SoundManager()
 {

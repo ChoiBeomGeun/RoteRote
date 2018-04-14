@@ -291,11 +291,9 @@ void TE::Graphics::drawPerspective(std::vector<Sprite*>::iterator iter)
 {
 	if (!(*iter)->pOwner->HasComponent<Emitter>())
 	{
-
 		if ((*iter)->pOwner->HasComponent<Animation>()) {
 			glUniform1i(uniformLocation[ISANIMATION], 1);
 		}
-
 		drawStats = 0;
 		CAMERA->proj();
 		model = glm::mat4(1.0f);
@@ -334,12 +332,13 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 		glEnable(GL_BLEND);
 		if ((*iter)->pOwner->GetComponent<Emitter>()->isAdditive) {
 			glDepthMask(GL_FALSE);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			glBlendFunc(GL_ONE, GL_ONE);
+
 		}
 		else if (!(*iter)->pOwner->GetComponent<Emitter>()->isAdditive)
 		{
 			glDepthMask(GL_TRUE);
-			glBlendFunc(GL_ONE, GL_ONE);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		}
 
 		for (auto p : PARTICLEMANAGER->m_EmitterList)
@@ -366,31 +365,6 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 			}
 		}
 		glDisable(GL_BLEND);
-		//glBindTexture(GL_TEXTURE_2D, (*iter)->pOwner->GetComponent<Sprite>()->m_TextureID);
-		//for (int j = 0; j < PARTICLEMANAGER->m_EmitterList.capacity(); ++j)
-		//{
-		//	for (int i = 0; i < (*iter)->pOwner->GetComponent<Emitter>()->capacity; ++i)
-		//	{
-		//		drawStats = 3;
-		//		//auto & p = (*iter)->pOwner->GetComponent<Emitter>();
-		//		particlemodel = glm::mat4(1.0f);
-		//		CAMERA->proj();
-		//		particlemodel = glm::translate(particlemodel, (*iter)->pOwner->GetComponent<Emitter>()->pParticles[i].pos);
-		//		particlemodel = glm::rotate(particlemodel, glm::radians((*iter)->pOwner->GetComponent<Emitter>()->pParticles[i].angle), (*iter)->pOwner->GetComponent<Transform>()->rotation);
-		//		particlemodel = glm::scale(particlemodel, glm::vec3((*iter)->pOwner->GetComponent<Emitter>()->pParticles[i].scale));
-		//		glUniform4f(particleLoc[PCOLOR], (*iter)->pOwner->GetComponent<Emitter>()->pParticles[i].color[0], (*iter)->pOwner->GetComponent<Emitter>()->pParticles[i].color[1],
-		//			(*iter)->pOwner->GetComponent<Emitter>()->pParticles[i].color[2], (*iter)->pOwner->GetComponent<Emitter>()->pParticles[i].color[3]);
-		//		glUniformMatrix4fv(particleLoc[PARTICLEMODEL], 1, GL_FALSE, &particlemodel[0][0]);
-		//		glUniformMatrix4fv(particleLoc[PARTICLEVIEW], 1, GL_FALSE, &view[0][0]);
-		//		glUniformMatrix4fv(particleLoc[PARTICLEPROJ], 1, GL_FALSE, &CAMERA->projection[0][0]);
-		//		//glUniform1i(particleLoc[PTEXTURE], 1);
-		//		glUniform1i(particleLoc[PSTATS], drawStats);
-		//		glPushAttrib(GL_CURRENT_BIT);
-		//		glDrawArrays(GL_TRIANGLES, 0, 6);
-		//	}
-		//}
-
-
 	}
 }
 
@@ -462,8 +436,6 @@ void TE::Graphics::animationSetting()
 					time = 0.0f;
 					//std::cout << (*aniIter)->getFrame() << '\n';
 				}
-
-
 
 				// if player is flipped it should face other direction
 				if ((*aniIter)->isFlippedX())

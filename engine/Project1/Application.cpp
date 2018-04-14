@@ -50,6 +50,11 @@ Application::Application() : pWnd(nullptr), ResolutionNumber(2)
 		{
 			std::cout << line << std::endl; // 내용 출력
 
+			if (!strcmp(line, "1680 X 1050"))
+			{
+				_screenWidth = 1680;
+				_screenHeight = 1050;
+			}
 			if (!strcmp(line, "1920 X 1080"))
 			{
 				_screenHeight = 1080;
@@ -160,7 +165,13 @@ void Application::Initialize()
 
 	
 
-	if (_resolution == Resolution::_1280X960)
+	SDL_SetWindowSize(this->pWnd, _screenWidth, _screenHeight);
+	glViewport(0, 0, _screenWidth, _screenHeight);
+
+	std::cout << ResolutionNumber << '\n';
+	SDL_SetWindowPosition(this->pWnd, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+	SDL_SetWindowBordered(this->pWnd, SDL_TRUE);
+	/*if (_resolution == Resolution::_1280X960)
 	{
 
 
@@ -205,7 +216,7 @@ void Application::Initialize()
 		SDL_SetWindowBordered(this->pWnd, SDL_TRUE);
 
 	}
-
+*/
 	if (_isfull)
 		SDL_SetWindowFullscreen(pWnd, SDL_WINDOW_FULLSCREEN);
 

@@ -20,11 +20,18 @@
 			"y" : 0.0,
 			"z" : 0.0
 		},
+		"Color" : 
+		{
+			"r" : 0.0,
+			"g" : 0.0,
+			"b" : 0.0,
+			"a" : 0.0
+		},
 		"TextureDir" : "box.png",
 		"EmitterSize" : 0,
 		"EmitterID" : 0,
 		"EmitterLifeTime" : 10,
 		"Emittercapacity" : 25,
-		"RenderMode" : 0
+		"RenderMode" : 1
 	}
 }

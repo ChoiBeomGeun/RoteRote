@@ -124,7 +124,7 @@ void TE::Camera::proj()
 	{
 		if (APP->_resolution == Resolution::_1280X960)
 		{
-			_aspect = (float)4 / 3;
+			_aspect = (float)16 / 9;
 			projection = glm::perspective(glm::radians(angle), _aspect, _zNear, _zFar);
 
 		}
@@ -142,6 +142,11 @@ void TE::Camera::proj()
 			projection = glm::perspective(glm::radians(angle), _aspect, _zNear, _zFar);
 		}
 		else if(APP->_resolution == Resolution::_1280X720)
+		{
+			_aspect = (float)APP->_screenWidth / (float)APP->_screenHeight;
+			projection = glm::perspective(glm::radians(angle), _aspect, _zNear, _zFar);
+		}
+		else
 		{
 			_aspect = (float)APP->_screenWidth / (float)APP->_screenHeight;
 			projection = glm::perspective(glm::radians(angle), _aspect, _zNear, _zFar);
