@@ -33,10 +33,12 @@ namespace RoteMapView
         public int TotalPaths = 0;
         enum ControlNodeType
         {
-            Player, Wall, Button, Box,
+            Player, AttachWall, Button, Box,
             Trigger90_0, Trigger90_90, Trigger90_180,Trigger90_270,
             Trigger180_0, Trigger180_90, Trigger180_180,Trigger180_270,
-            Clearzone, Hazard, Camera,MovingWall
+            limited3Trigger90_0, limited3Trigger90_90, limited3Trigger90_180, limited3Trigger90_270,
+            limited3Trigger180_0, limited3Trigger180_90, limited3Trigger180_180, limited3Trigger180_270,
+            Clearzone, Hazard, Camera,MovingWall,Wall
         };
         
         public MainView()
@@ -298,7 +300,7 @@ namespace RoteMapView
                             control = new PictureBox()
                             {
 
-                                Image = Image.FromFile("texture\\wall.png"),
+                                Image = Image.FromFile("texture\\unattachwall.png"),
                                 SizeMode = PictureBoxSizeMode.StretchImage,
 
                             };
@@ -317,6 +319,36 @@ namespace RoteMapView
                  
 
                         }
+                        break;
+                    case ControlNodeType.AttachWall:
+                    {
+                        if (IsMakingMovingWall)
+                        {
+                            MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        control = new PictureBox()
+                        {
+
+                            Image = Image.FromFile("texture\\wall.png"),
+                            SizeMode = PictureBoxSizeMode.StretchImage,
+
+                        };
+                        RoteObject temp = new RoteObject();
+                        temp.objectstyle = "AttachWall";
+                        temp.PositionX = control.Location.X;
+                        temp.PositionY = control.Location.Y;
+                        temp.ScaleX = control.Size.Width;
+                        temp.ScaleY = control.Size.Height;
+                        temp.ObjectID = RoteobjectList.Count;
+                        control.Width = 20;
+                        control.Height = 20;
+                        control.Tag = temp.ObjectID;
+                        RoteobjectList.Add(temp);
+                        objectList.Add(control);
+
+
+                    }
                         break;
                     case ControlNodeType.Button:
                         {
@@ -378,7 +410,7 @@ namespace RoteMapView
 
                         }
                         break;
-                    case ControlNodeType.Trigger180_0:
+                    case ControlNodeType.limited3Trigger180_0:
                         {
                             if (IsMakingMovingWall)
                             {
@@ -388,7 +420,7 @@ namespace RoteMapView
                             control = new PictureBox()
                             {
 
-                                Image = Image.FromFile("texture\\180button.png"),
+                                Image = Image.FromFile("texture\\limited180_3.png"),
                                 SizeMode = PictureBoxSizeMode.StretchImage,
 
                             };
@@ -401,16 +433,17 @@ namespace RoteMapView
                             temp.ScaleX = control.Size.Width;
                             temp.ScaleY = control.Size.Height;
                             temp.ObjectID = RoteobjectList.Count;
+                            temp.m_TriggerliftimeSet = 3;
                             control.Tag = temp.ObjectID;
                             control.Width = 20;
                             control.Height = 20;
                             RoteobjectList.Add(temp);
                             objectList.Add(control);
-                      
+                            
 
                         }
                         break;
-                    case ControlNodeType.Trigger180_90:
+                    case ControlNodeType.limited3Trigger180_90:
                         {
                             if (IsMakingMovingWall)
                             {
@@ -420,7 +453,7 @@ namespace RoteMapView
                             control = new PictureBox()
                             {
 
-                                Image = Image.FromFile("texture\\180button.png"),
+                                Image = Image.FromFile("texture\\limited180_3.png"),
                                
                                 SizeMode = PictureBoxSizeMode.StretchImage,
 
@@ -436,12 +469,281 @@ namespace RoteMapView
                             temp.ScaleY = control.Size.Height;
                             temp.ObjectID = RoteobjectList.Count;
                             temp.Rotation = 90;
+                            temp.m_TriggerliftimeSet = 3;
                             control.Tag = temp.ObjectID;
                             control.Width = 20;
                             control.Height = 20;
                             RoteobjectList.Add(temp);
                             objectList.Add(control);
                              
+
+                        }
+                        break;
+                    case ControlNodeType.limited3Trigger180_180:
+                        {
+                            if (IsMakingMovingWall)
+                            {
+                                MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            control = new PictureBox()
+                            {
+
+                                Image = Image.FromFile("texture\\limited180_3.png"),
+                                SizeMode = PictureBoxSizeMode.StretchImage,
+
+                            };
+                            ((System.Windows.Forms.PictureBox)control).Image =
+     RotateImage(((System.Windows.Forms.PictureBox)control).Image, RotateFlipType.Rotate180FlipX);
+                            RoteObject temp = new RoteObject();
+                            temp.objectstyle = "Trigger180";
+                            temp.PositionX = control.Location.X;
+                            temp.PositionY = control.Location.Y;
+                            temp.ScaleX = control.Size.Width;
+                            temp.ScaleY = control.Size.Height;
+                            temp.ObjectID = RoteobjectList.Count;
+                            temp.Rotation = 180;
+                            temp.m_TriggerliftimeSet = 3;
+                            control.Tag = temp.ObjectID;
+                            control.Width = 20;
+                            control.Height = 20;
+                            RoteobjectList.Add(temp);
+                            objectList.Add(control);
+
+
+                        }
+                        break;
+                    case ControlNodeType.limited3Trigger180_270:
+                        {
+                            if (IsMakingMovingWall)
+                            {
+                                MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            control = new PictureBox()
+                            {
+
+                                Image = Image.FromFile("texture\\limited180_3.png"),
+                                SizeMode = PictureBoxSizeMode.StretchImage,
+
+                            };
+                            ((System.Windows.Forms.PictureBox)control).Image =
+        RotateImage(((System.Windows.Forms.PictureBox)control).Image, RotateFlipType.Rotate270FlipX);
+                            RoteObject temp = new RoteObject();
+                            temp.objectstyle = "Trigger180";
+                            temp.PositionX = control.Location.X;
+                            temp.PositionY = control.Location.Y;
+                            temp.ScaleX = control.Size.Width;
+                            temp.ScaleY = control.Size.Height;
+                            temp.ObjectID = RoteobjectList.Count;
+                            temp.m_TriggerliftimeSet = 3;
+                            temp.Rotation = 270;
+                            control.Tag = temp.ObjectID;
+                            control.Width = 20;
+                            control.Height = 20;
+                            RoteobjectList.Add(temp);
+                            objectList.Add(control);
+
+
+                        }
+                        break;
+                    case ControlNodeType.limited3Trigger90_0:
+                        {
+                            if (IsMakingMovingWall)
+                            {
+                                MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            control = new PictureBox()
+                            {
+
+                                Image = Image.FromFile("texture\\limited90_3.png"),
+                                SizeMode = PictureBoxSizeMode.StretchImage,
+
+                            };
+                            RoteObject temp = new RoteObject();
+                            temp.objectstyle = "Trigger90";
+                            temp.PositionX = control.Location.X;
+                            temp.PositionY = control.Location.Y;
+                            temp.ScaleX = control.Size.Width;
+                            temp.ScaleY = control.Size.Height;
+                            temp.ObjectID = RoteobjectList.Count;
+                            temp.m_TriggerliftimeSet = 3;
+                            control.Tag = temp.ObjectID;
+                            control.Width = 20;
+                            control.Height = 20;
+                            RoteobjectList.Add(temp);
+                            objectList.Add(control);
+               
+
+                        }
+                        break;
+                    case ControlNodeType.limited3Trigger90_90:
+                        {
+                            if (IsMakingMovingWall)
+                            {
+                                MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            control = new PictureBox()
+                            {
+
+                                Image = Image.FromFile("texture\\limited90_3.png"),
+                                SizeMode = PictureBoxSizeMode.StretchImage,
+
+                            };
+                            ((System.Windows.Forms.PictureBox)control).Image =
+     RotateImage(((System.Windows.Forms.PictureBox)control).Image, RotateFlipType.Rotate90FlipX);
+                            RoteObject temp = new RoteObject();
+                            temp.objectstyle = "Trigger90";
+                            temp.PositionX = control.Location.X;
+                            temp.PositionY = control.Location.Y;
+                            temp.ScaleX = control.Size.Width;
+                            temp.ScaleY = control.Size.Height;
+                            temp.ObjectID = RoteobjectList.Count;
+                            temp.m_TriggerliftimeSet = 3;
+                            temp.Rotation = 90;
+                            control.Tag = temp.ObjectID;
+                            control.Width = 20;
+                            control.Height = 20;
+                            RoteobjectList.Add(temp);
+                            objectList.Add(control);
+
+
+                        }
+                        break;
+                    case ControlNodeType.limited3Trigger90_180:
+                        {
+                            if (IsMakingMovingWall)
+                            {
+                                MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            control = new PictureBox()
+                            {
+
+                                Image = Image.FromFile("texture\\limited90_3.png"),
+                                SizeMode = PictureBoxSizeMode.StretchImage,
+
+                            };
+                            ((System.Windows.Forms.PictureBox)control).Image =
+     RotateImage(((System.Windows.Forms.PictureBox)control).Image, RotateFlipType.Rotate180FlipX);
+                            RoteObject temp = new RoteObject();
+                            temp.objectstyle = "Trigger90";
+                            temp.PositionX = control.Location.X;
+                            temp.PositionY = control.Location.Y;
+                            temp.ScaleX = control.Size.Width;
+                            temp.ScaleY = control.Size.Height;
+                            temp.ObjectID = RoteobjectList.Count;
+                            temp.m_TriggerliftimeSet = 3;
+                            temp.Rotation = 180;
+                            control.Tag = temp.ObjectID;
+                            control.Width = 20;
+                            control.Height = 20;
+                            RoteobjectList.Add(temp);
+                            objectList.Add(control);
+
+
+                        }
+                        break;
+                    case ControlNodeType.limited3Trigger90_270:
+                        {
+                            if (IsMakingMovingWall)
+                            {
+                                MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            control = new PictureBox()
+                            {
+
+                                Image = Image.FromFile("texture\\limited90_3.png"),
+                                SizeMode = PictureBoxSizeMode.StretchImage,
+
+                            };
+                            ((System.Windows.Forms.PictureBox)control).Image =
+     RotateImage(((System.Windows.Forms.PictureBox)control).Image, RotateFlipType.Rotate270FlipX);
+                            RoteObject temp = new RoteObject();
+                            temp.objectstyle = "Trigger90";
+                            temp.PositionX = control.Location.X;
+                            temp.PositionY = control.Location.Y;
+                            temp.ScaleX = control.Size.Width;
+                            temp.ScaleY = control.Size.Height;
+                            temp.ObjectID = RoteobjectList.Count;
+                            temp.Rotation = 270;
+                            temp.m_TriggerliftimeSet = 3;
+                            control.Tag = temp.ObjectID;
+                            control.Width = 20;
+                            control.Height = 20;
+                            RoteobjectList.Add(temp);
+                            objectList.Add(control);
+
+
+                        }
+                        break;
+                    case ControlNodeType.Trigger180_0:
+                        {
+                            if (IsMakingMovingWall)
+                            {
+                                MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            control = new PictureBox()
+                            {
+
+                                Image = Image.FromFile("texture\\180button.png"),
+                                SizeMode = PictureBoxSizeMode.StretchImage,
+
+                            };
+
+
+                            RoteObject temp = new RoteObject();
+                            temp.objectstyle = "Trigger180";
+                            temp.PositionX = control.Location.X;
+                            temp.PositionY = control.Location.Y;
+                            temp.ScaleX = control.Size.Width;
+                            temp.ScaleY = control.Size.Height;
+                            temp.ObjectID = RoteobjectList.Count;
+                            control.Tag = temp.ObjectID;
+                            control.Width = 20;
+                            control.Height = 20;
+                            RoteobjectList.Add(temp);
+                            objectList.Add(control);
+
+
+                        }
+                        break;
+                    case ControlNodeType.Trigger180_90:
+                        {
+                            if (IsMakingMovingWall)
+                            {
+                                MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            control = new PictureBox()
+                            {
+
+                                Image = Image.FromFile("texture\\180button.png"),
+
+                                SizeMode = PictureBoxSizeMode.StretchImage,
+
+                            };
+                            ((System.Windows.Forms.PictureBox)control).Image =
+                                RotateImage(((System.Windows.Forms.PictureBox)control).Image, RotateFlipType.Rotate90FlipX);
+
+                            RoteObject temp = new RoteObject();
+                            temp.objectstyle = "Trigger180";
+                            temp.PositionX = control.Location.X;
+                            temp.PositionY = control.Location.Y;
+                            temp.ScaleX = control.Size.Width;
+                            temp.ScaleY = control.Size.Height;
+                            temp.ObjectID = RoteobjectList.Count;
+                            temp.Rotation = 90;
+                            control.Tag = temp.ObjectID;
+                            control.Width = 20;
+                            control.Height = 20;
+                            RoteobjectList.Add(temp);
+                            objectList.Add(control);
+
 
                         }
                         break;
@@ -537,7 +839,7 @@ namespace RoteMapView
                             control.Height = 20;
                             RoteobjectList.Add(temp);
                             objectList.Add(control);
-               
+
 
                         }
                         break;
@@ -884,7 +1186,7 @@ namespace RoteMapView
                     temp.Gravity = true;
                 }
 
-                if (temp.objectstyle == "Wall")
+                if (temp.objectstyle == "AttachWall")
                 {
                     components.Add("TRANSFORM");
                     components.Add("SPRITE");
@@ -917,7 +1219,10 @@ namespace RoteMapView
                     components.Add("SPRITE");
                     components.Add("BODY");
                     components.Add("TRIGGER");
-                    temp.Texture = "90button.png";
+                    if (temp.m_TriggerliftimeSet == -1)
+                        temp.Texture = "90button.png";
+                    else
+                        temp.Texture = "limited90_3.png";
                 }
 
                 if (temp.objectstyle == "Trigger180")
@@ -926,7 +1231,10 @@ namespace RoteMapView
                     components.Add("SPRITE");
                     components.Add("BODY");
                     components.Add("TRIGGER");
-                    temp.Texture = "180button.png";
+                    if (temp.m_TriggerliftimeSet == -1)
+                        temp.Texture = "180button.png";
+                    else
+                        temp.Texture = "limited180_3.png";
                 }
 
                 if (temp.objectstyle == "Clearzone")
@@ -943,7 +1251,14 @@ namespace RoteMapView
                     components.Add("BODY");
                     temp.Texture = "hazard.png";
                 }
-
+                if (temp.objectstyle == "Wall")
+                {
+                    components.Add("TRANSFORM");
+                    components.Add("SPRITE");
+                    components.Add("BODY");
+                    temp.Texture = "unattachwall.png";
+                    temp.Mass = 0;
+                }
                 if (temp.objectstyle == "MovingWall")
                 {
                     components.Add("TRANSFORM");
@@ -992,7 +1307,7 @@ namespace RoteMapView
                     new JProperty("TextureDir", temp.Texture),
                     new JProperty("DefaultTrigger180ornot", temp.Trigger180check),
                     new JProperty("Components", Componentlist),
-                   
+                    new JProperty("TriggerLifeTime", temp.m_TriggerliftimeSet),
                     new JProperty("HavingComponentsNumbers", Componentlist.Count),
                     new JProperty("ObjectType", temp.objectstyle), PropertyList)
                     )
@@ -1160,14 +1475,15 @@ namespace RoteMapView
             }
             JArray Componentlist = new JArray();
             List<string> components = new List<string>();
-
+            List<JProperty> PropertyList = new List<JProperty>();
+            List<Point> Paths = new List<Point>();
             JObject tempObject = null;
             JObject camObject = null;
             JObject LevelInfo = null;
             string result = null;
             string objectinfo = null;
             string LevelInfoString = null;
-
+            int indexOfPath = 0;
 
             LevelInfo = new JObject(
 
@@ -1219,7 +1535,7 @@ namespace RoteMapView
                     temp.Gravity = true;
                 }
 
-                if (temp.objectstyle == "Wall")
+                if (temp.objectstyle == "AttachWall")
                 {
                     components.Add("TRANSFORM");
                     components.Add("SPRITE");
@@ -1227,7 +1543,14 @@ namespace RoteMapView
                     temp.Texture = "wall.png";
                     temp.Mass = 0;
                 }
-
+                if (temp.objectstyle == "Wall")
+                {
+                    components.Add("TRANSFORM");
+                    components.Add("SPRITE");
+                    components.Add("BODY");
+                    temp.Texture = "unattachwall.png";
+                    temp.Mass = 0;
+                }
                 if (temp.objectstyle == "Button")
                 {
                     components.Add("TRANSFORM");
@@ -1252,7 +1575,14 @@ namespace RoteMapView
                     components.Add("SPRITE");
                     components.Add("BODY");
                     components.Add("TRIGGER");
-                    temp.Texture = "90button.png";
+                    if (temp.m_TriggerliftimeSet == -1)
+                        temp.Texture = "90button.png";
+                    else
+                        temp.Texture = "limited90_3.png";
+
+
+
+
                 }
 
                 if (temp.objectstyle == "Trigger180")
@@ -1261,7 +1591,11 @@ namespace RoteMapView
                     components.Add("SPRITE");
                     components.Add("BODY");
                     components.Add("TRIGGER");
-                    temp.Texture = "180button.png";
+                    if (temp.m_TriggerliftimeSet == -1)
+                        temp.Texture = "180button.png";
+                    else
+                        temp.Texture = "limited180_3.png";
+
                 }
 
                 if (temp.objectstyle == "Clearzone")
@@ -1279,7 +1613,27 @@ namespace RoteMapView
                     temp.Texture = "hazard.png";
                 }
 
+                if (temp.objectstyle == "MovingWall")
+                {
+                    components.Add("TRANSFORM");
+                    components.Add("SPRITE");
+                    components.Add("BODY");
+                    components.Add("AUTOMOVING");
+                    temp.Texture = "wall.png";
+                    foreach (var temp2 in RoteobjectList)
+                    {
 
+                        if (temp2.objectstyle == "Path")
+                        {
+                            Paths.Add(new Point((int)temp2.PositionX, (int)temp2.PositionY));
+                            PropertyList.Add(new JProperty("Path" + indexOfPath,
+                                new JObject(new JProperty("x", temp2.PositionX), new JProperty("y", temp2.PositionY))));
+                            indexOfPath++;
+                        }
+
+
+                    }
+                }
 
 
 
@@ -1304,6 +1658,7 @@ namespace RoteMapView
                     new JProperty("Scale", new JObject(new JProperty("x", temp.ScaleX), new JProperty("y", temp.ScaleY), new JProperty("z", temp.ScaleZ))),
                     new JProperty("TextureDir", temp.Texture),
                     new JProperty("DefaultTrigger180ornot", temp.Trigger180check),
+                    new JProperty("TriggerLifeTime", temp.m_TriggerliftimeSet),
                     new JProperty("Components", Componentlist),
                     new JProperty("HavingComponentsNumbers", Componentlist.Count),
                     new JProperty("ObjectType", temp.objectstyle))

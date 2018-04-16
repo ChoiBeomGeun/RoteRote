@@ -84,7 +84,8 @@ void LevelManager::LoadLevel(std::string  path)
 		CAMERA->cameraPos.y = file.mRoot.get("DefalutCamera", false).get("EYE", false).get("y", false).asFloat();
 		CAMERA->cameraPos.z = file.mRoot.get("DefalutCamera", false).get("EYE", false).get("z", false).asFloat();
 		float mass = file.mRoot.get(object + to_string(i), false).get("Mass", false).asFloat();
-		
+
+	
 
 		
 		
@@ -153,6 +154,7 @@ void LevelManager::LoadLevel(std::string  path)
 					tempObject->GetComponent<Trigger>()->TriggerType = "90";
 					tempObject->objectstyle = Objectstyle::Trigger90;
 				}
+				tempObject->GetComponent<Trigger>()->MaxLife = file.mRoot.get(object + to_string(i), false).get("TriggerLifeTime", false).asInt();
 			}
 
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "PARTICLE") {
@@ -218,6 +220,11 @@ void LevelManager::LoadLevel(std::string  path)
 			//tempObject = FACTORY->CreateWall(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0));
 			tempObject->objectstyle = Objectstyle::Wall;
 		}
+		else if (Objectstyle == "AttachWall")
+		{
+			//tempObject = FACTORY->CreateWall(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0));
+			tempObject->objectstyle = Objectstyle::AttachWall;
+		}
 		else if (Objectstyle == "Button")
 		{
 
@@ -235,6 +242,7 @@ void LevelManager::LoadLevel(std::string  path)
 		{
 			//tempObject = FACTORY->CreateTrigger(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0));
 			tempObject->objectstyle = Objectstyle::Trigger90;
+			
 		}
 		else if (Objectstyle == "Trigger180")
 		{
@@ -329,6 +337,7 @@ void LevelManager::SaveLevel(std::string  path)
 		if (it.second->GetComponent<Trigger>() != nullptr) {
 			root[object + to_string(i)]["Components"][index] = "TRIGGER";
 			root[object + to_string(i)]["TriggerType"] = it.second->GetComponent<Trigger>()->TriggerType;
+			root[object + to_string(i)]["TriggerLifeTime"] = it.second->GetComponent<Trigger>()->LifeTime;
 			index++;
 		}
 		if (it.second->GetComponent<Button>() != nullptr) {

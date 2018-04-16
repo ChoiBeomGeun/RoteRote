@@ -21,6 +21,7 @@ namespace RoteMapView
     {
         private int m_ojbectid;
         private int m_NumberOfPaths;
+        private int m_Triggerliftime = -1;
         private string m_strName;
         private string m_objectstyle;
         private float m_posX;
@@ -146,6 +147,13 @@ namespace RoteMapView
         {
             set { m_Trigger180ornot = value; }
             get { return m_Trigger180ornot; }
+        }
+        [Category("Trigger")]
+        [DisplayName("LifeTime")]
+        public int m_TriggerliftimeSet
+        {
+            set { m_Triggerliftime = value; }
+            get { return m_Triggerliftime; }
         }
         #endregion
         #region MovingPaths
