@@ -92,7 +92,7 @@
             // 
             // splitContainer2
             // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Left;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
             this.splitContainer2.Name = "splitContainer2";
             this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -200,9 +200,10 @@
             this.treeControls.AllowDrop = true;
             this.treeControls.Location = new System.Drawing.Point(0, -5);
             this.treeControls.Name = "treeControls";
-            this.treeControls.Size = new System.Drawing.Size(264, 137);
+            this.treeControls.Size = new System.Drawing.Size(224, 137);
             this.treeControls.TabIndex = 1;
             this.treeControls.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeControls_ItemDrag);
+            this.treeControls.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeControls_AfterSelect);
             // 
             // designModePanel
             // 

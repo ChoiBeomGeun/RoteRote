@@ -51,8 +51,8 @@ namespace ControlDesignMode
         }
         public int NumberChanged(int num)
         {
-
-
+            if (num < 0)
+                return 10;
             int remain = num % 10;
             int result =num;
             if (remain <= 5)

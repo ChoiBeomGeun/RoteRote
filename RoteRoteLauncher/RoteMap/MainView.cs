@@ -110,7 +110,27 @@ namespace RoteMapView
             bmp.RotateFlip(Rotation);
             return bmp;
         }
+        public void DeleteUnvisibleItem()
+        {
+            int index = 0;
 
+            int preCount = RoteobjectList.Count;
+
+            RoteobjectList.RemoveAll(item => ((item.PositionX == 0)&& (item.PositionY==0)));
+
+            if (preCount != RoteobjectList.Count)
+            {
+                foreach (var vItems in RoteobjectList)
+                {
+
+                    vItems.ObjectID = index;
+                    index++;
+
+
+                }
+
+            }
+        }
         public void SynchronizationObjects()
         {
             for(int i=0; i < this.designModePanel.Controls.Count;i++)
@@ -182,13 +202,10 @@ namespace RoteMapView
         }
         void drawPanel1_MouseLeftClick(object sender, MouseDownEventArgs args)
         {
-           
-            
+
+          
             JsonTextUpdate();
-            
-
-     
-
+    
             if (args.Control != null&& args.Control.Tag != null)
             { 
           
@@ -201,7 +218,7 @@ namespace RoteMapView
 
                     return;
                 }
-                if (args.Control.Tag.ToString() == "Path" || RoteobjectList.Count-1 < Int32.Parse(args.Control.Tag.ToString()))
+                if (args.Control.Tag.ToString() == "Path" || RoteobjectList.Count < Int32.Parse(args.Control.Tag.ToString()))
                     return;
                 RoteobjectList[Int32.Parse(args.Control.Tag.ToString())].PositionX = args.Control.Location.X;
                 RoteobjectList[Int32.Parse(args.Control.Tag.ToString())].PositionY = args.Control.Location.Y;
@@ -215,6 +232,7 @@ namespace RoteMapView
 
             }
 
+            DeleteUnvisibleItem();
         }
         /// <summary>
         /// 디자인 모드 변경시 발생한다.
@@ -245,7 +263,9 @@ namespace RoteMapView
         /// <param name="e"></param>
         private void treeControls_ItemDrag(object sender, ItemDragEventArgs e)
         {
-       
+            
+           
+           
             TreeNode selectedNode = (e.Item as TreeNode);
             Control control = null;
             
@@ -261,7 +281,7 @@ namespace RoteMapView
                         if (IsMakingMovingWall)
                         {
                             MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            return;     
                         }
                             if (IsTherePlayer)
                             {
@@ -275,7 +295,9 @@ namespace RoteMapView
                                 SizeMode = PictureBoxSizeMode.StretchImage,
 
                             };
-                              RoteObject temp = new RoteObject();
+                      
+                            
+                            RoteObject temp = new RoteObject();
                             temp.objectstyle = "Player";
                             temp.PositionX = control.Location.X;
                             temp.PositionY = control.Location.Y;
@@ -314,6 +336,9 @@ namespace RoteMapView
                             control.Width = 20;
                             control.Height = 20;
                             control.Tag = temp.ObjectID;
+
+
+                          
                             RoteobjectList.Add(temp);
                             objectList.Add(control);
                  
@@ -1088,8 +1113,8 @@ namespace RoteMapView
             }
             selectedNode.Tag = control;
   
-
-            DoDragDrop(e.Item, DragDropEffects.Move);
+           
+           DoDragDrop(e.Item, DragDropEffects.Move);
 
         }
 
@@ -1296,9 +1321,9 @@ namespace RoteMapView
                     
                 tempObject = new JObject(
 
-                     new JProperty("Object" + (temp.ObjectID + 1).ToString(),
+                     new JProperty("Object" + (temp.ObjectID+1 ).ToString(),
                          new JObject(
-                    new JProperty("ObjectID", temp.ObjectID + 1),
+                    new JProperty("ObjectID", temp.ObjectID+1 ),
                       new JProperty("GravityOn", temp.Gravity),
                     new JProperty("Mass", temp.Mass),
                     new JProperty("Position", new JObject(new JProperty("x", temp.PositionX), new JProperty("y", temp.PositionY), new JProperty("z", temp.PositionZ))),
@@ -1500,7 +1525,7 @@ namespace RoteMapView
             foreach (var temp in RoteobjectList)
             {
 
-                if (temp.ObjectID == 1)
+                if (temp.ObjectID == 0)
                 {
                     string camString = null;
                     camObject = new JObject(
@@ -1805,6 +1830,11 @@ namespace RoteMapView
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void treeControls_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
         }
     }
 
