@@ -50,7 +50,7 @@ void Camera::Initialize()
 	cameraUp = up;
 	_zNear = 1.f;
 	_zFar = 1000.f;
-	angle = 45.f;
+	angle = 30.f;
 	_aspect = (float)APP->_screenWidth / (float)APP->_screenHeight;
 	CAMERA->isCentered = true;
 }

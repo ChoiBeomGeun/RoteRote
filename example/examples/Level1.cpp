@@ -212,6 +212,22 @@ void Level1::Init()
 	_playerPosition.x = player->GetComponent<Transform>()->GetPosition().x;
 	_playerPosition.y = player->GetComponent<Transform>()->GetPosition().y;
 	_playerPosition.z = 500.f;
+
+	//if (STATEMANAGER->Loadtolevelname == "test.json")
+	//{
+	//	glm::vec3 rightblock = glm::vec3(0), leftblock = glm::vec3(0), upblock = glm::vec3(0), downblock = glm::vec3(0);
+	//	// this is current block of map 
+	//	upblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
+	//	downblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
+	//	rightblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
+	//	leftblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
+
+	//	CAMERA->CenterOfCamera.x = leftblock.x + (std::abs(leftblock.x - rightblock.x)*.5f);
+	//	CAMERA->CenterOfCamera.y = upblock.y - (std::abs(upblock.y - downblock.y)*.5f);
+
+	//	CAMERA->cameraPos = glm::vec3(CAMERA->CenterOfCamera, 500.f);
+	//}
+
 }
 
 void Level1::Update(float dt)
@@ -254,8 +270,7 @@ void Level1::Update(float dt)
 		FACTORY->GetPlayer()->GetComponent<Animation>()->setFlipX(Pressed);
 		j++;
 	}
-
-
+	
 	INGAMELOGIC->InGameUpdate(dt);
 	if (STATEMANAGER->b_IsReplay)
 	{

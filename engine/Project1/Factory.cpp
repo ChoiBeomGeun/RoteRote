@@ -366,7 +366,7 @@ Object * TE::ObjectFactory::LeftBoundary(void)
 	std::vector<Object*> WallObject;
 	for (auto walls : FACTORY->ObjectIDMap) {
 		
-		if (walls.second->objectstyle == Objectstyle::Wall)
+		if (walls.second->objectstyle == Objectstyle::Wall || walls.second->objectstyle == Objectstyle::AttachWall)
 		{
 			WallObject.push_back(walls.second);
 		}
@@ -384,7 +384,7 @@ Object * TE::ObjectFactory::RightBoundary(void)
 	std::vector<Object*> WallObject;
 	for (auto walls : FACTORY->ObjectIDMap) {
 
-		if (walls.second->objectstyle == Objectstyle::Wall)
+		if (walls.second->objectstyle == Objectstyle::Wall || walls.second->objectstyle == Objectstyle::AttachWall)
 		{
 			WallObject.push_back(walls.second);
 		}
@@ -402,7 +402,7 @@ Object * TE::ObjectFactory::UpBoundary(void)
 	std::vector<Object*> WallObject;
 	for (auto walls : FACTORY->ObjectIDMap) {
 
-		if (walls.second->objectstyle == Objectstyle::Wall)
+		if (walls.second->objectstyle == Objectstyle::Wall || walls.second->objectstyle == Objectstyle::AttachWall)
 		{
 			WallObject.push_back(walls.second);
 		}
@@ -420,7 +420,7 @@ Object * TE::ObjectFactory::DownBoundary(void)
 	std::vector<Object*> WallObject;
 	for (auto walls : FACTORY->ObjectIDMap) {
 
-		if (walls.second->objectstyle == Objectstyle::Wall)
+		if (walls.second->objectstyle == Objectstyle::Wall || walls.second->objectstyle == Objectstyle::AttachWall)
 		{
 			WallObject.push_back(walls.second);
 		}

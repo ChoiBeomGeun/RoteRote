@@ -267,7 +267,7 @@ void TE::TriggerLogic::_90anglebutton(Object* pTrigger)
 	pTrigger->GetComponent<Trigger>()->i_innertimer += .025f;
 
 	// from 0
-	if (CAMERA->cameraUp.x == 0 && CAMERA->cameraUp.y >= 1)
+	if (CAMERA->cameraUp.x == 0 && CAMERA->cameraUp.y == 1)
 	{
 		SOUNDMANAGER->PlaySounds(RotationSound, false);
 		isDegree[0] = true;
@@ -302,7 +302,7 @@ void TE::TriggerLogic::_90anglebutton(Object* pTrigger)
 		}
 	}
 	// from 90
-	else if (CAMERA->cameraUp.x == 1 && CAMERA->cameraUp.y >= 0)
+	else if (CAMERA->cameraUp.x == 1 && CAMERA->cameraUp.y == 0)
 	{
 		SOUNDMANAGER->PlaySounds(RotationSound, false);
 		isDegree[1] = true;
