@@ -232,7 +232,7 @@ void Level1::Init()
 
 void Level1::Update(float dt)
 {
-	MakingInstructions(dt);
+	//MakingInstructions(dt);
 	
 	camAct.Update(dt);
 
