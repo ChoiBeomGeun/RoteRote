@@ -45,10 +45,10 @@ void Menu::Load()
 	MoveSound = SOUNDMANAGER->LoadSound("menumove.mp3");
 	SelectSound = SOUNDMANAGER->LoadSound("menuselect.mp3");
 
-	Menu_Start = FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Start.png");
-	Menu_HowToPlay = FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_HowToPlay.png");
-	Menu_Quit = FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Quit.png");
-	Menu_Option = FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Option.png");
+	Menu_Start = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Start.png");
+	Menu_HowToPlay = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_HowToPlay.png");
+	Menu_Quit = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Quit.png");
+	Menu_Option = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Option.png");
 }
 
  void Menu::Init()
@@ -217,13 +217,13 @@ void Menu::Selection_Text(void)
 {
 	switch (Selection)
 	{
-	case MenuList::Menu_HowToPlay: FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->m_TextureID = Menu_HowToPlay;
+	case MenuList::Menu_HowToPlay: FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Menu_HowToPlay;
 		break;
-	case MenuList::Menu_Quit: FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->m_TextureID = Menu_Quit;
+	case MenuList::Menu_Quit: FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Menu_Quit;
 		break;
-	case MenuList::Menu_Option: FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->m_TextureID = Menu_Option;
+	case MenuList::Menu_Option: FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Menu_Option;
 		break;
-	case MenuList::Menu_Start: FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->m_TextureID = Menu_Start;
+	case MenuList::Menu_Start: FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Menu_Start;
 		break;
 	default:
 		break;

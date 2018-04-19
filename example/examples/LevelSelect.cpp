@@ -46,8 +46,8 @@ void LevelSelect::Load()
 {
 	LEVELMANAGER->LoadLevel("selectlevel.json");
 
-	for (int i = 0; i <= LevelList::quit; ++i)
-		Levelpng[i] = FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(toString(i));
+	for (int i = 1; i <= LevelList::quit + 1; ++i)
+		Levelpng[i - 1] = FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(NumberToString(i) + ".png");
 
 
 }
@@ -98,9 +98,11 @@ void LevelSelect::Update(float dt)
 		
 
 		if (Input::IsTriggered(SDL_SCANCODE_SPACE)) {
-			STATEMANAGER->Loadtolevelname = "level1.json";
+			STATEMANAGER->i_LevelSelect = LevelList + 1;
+			std::string levelnumber = NumberToString(STATEMANAGER->i_LevelSelect);
+			STATEMANAGER->Loadtolevelname = "level" + levelnumber + ".json";
 			STATEMANAGER->MoveState(StatesList::Level1);
-			STATEMANAGER->i_LevelSelect = LevelList+1;
+
 		}
 
 		if (Input::IsTriggered(SDL_SCANCODE_ESCAPE))

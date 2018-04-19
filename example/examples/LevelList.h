@@ -12,6 +12,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 /******************************************************************************/
 #pragma once
 #include <iostream>
+#include <sstream>
 
 enum LevelList{
 	level1,
@@ -20,24 +21,36 @@ enum LevelList{
 	quit
 };
 
-static std::string toString(int list)
+//static std::string toString(int list)
+//{
+//
+//
+//	switch (list)
+//	{
+//	case level1: return "1.png";
+//		break;
+//	case level2: return "2.png";
+//		break;
+//	case level3: return "3.png";
+//		break;
+//	case quit: return "box.png";
+//		break;
+//	}
+//
+//	return "box.png";
+//}
+
+template <typename T>
+std::string NumberToString(T Number)
 {
+	if (Number == LevelList::quit + 1)
+		return "box";
 
-
-	switch (list)
-	{
-	case level1: return "1.png";
-		break;
-	case level2: return "2.png";
-		break;
-	case level3: return "3.png";
-		break;
-	case quit: return "box.png";
-		break;
-	}
-
-	return "box.png";
+	std::ostringstream ss;
+	ss << Number;
+	return ss.str();
 }
+
 
 //#define LIST_OF_LEVELS \
 //	Level(lvl1)	\
