@@ -155,15 +155,6 @@ void Physics::BroadPhase() {
 
 			if (AABBvsAABB(i->second, j->second, &ij))
 			{
-				if ((!i->second->gravityOn) && (j->second->GetOwner()->objectstyle == Objectstyle::Trigger180))
-					continue;
-				else if (i->second->GetOwner()->objectstyle == Objectstyle::Trigger180 && (!j->second->gravityOn))
-					continue;
-				if ((!i->second->gravityOn) && (j->second->GetOwner()->objectstyle == Objectstyle::Trigger90))
-					continue;
-				else if (i->second->GetOwner()->objectstyle == Objectstyle::Trigger90 && (!j->second->gravityOn))
-					continue;
-
 				PositionalCorrection(&ij);
 				ResolveCollision(&ij);
 			}

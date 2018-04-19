@@ -5,7 +5,7 @@
 		{
 			"x" : 0.0,
 			"y" : 0.0,
-			"z" : 528.88201904296875
+			"z" : 999.0
 		},
 		"TARGET" : 
 		{
@@ -21,7 +21,7 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 12,
+	"NumberOfObjects" : 7,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
@@ -40,65 +40,6 @@
 			"y" : 40.0
 		},
 		"TextureDir" : "start.png"
-	},
-	"Object10" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE" ],
-		"ObjectID" : 10,
-		"ObjectType" : "Button",
-		"Position" : 
-		{
-			"x" : 165.0,
-			"y" : 0.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 50.0,
-			"y" : 50.0
-		},
-		"TextureDir" : "right.png"
-	},
-	"Object11" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE" ],
-		"ObjectID" : 11,
-		"ObjectType" : "Button",
-		"Position" : 
-		{
-			"x" : 0.0,
-			"y" : -162.60200500488281,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 156.09800720214844,
-			"y" : 43.902000427246094
-		},
-		"TextureDir" : "space.png"
-	},
-	"Object12" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
-		"ObjectID" : 12,
-		"ObjectType" : "Button",
-		"ParticleType" : "ET_BACKGROUND",
-		"ParticlePath" : "MenuParticle.json",
-		"Position" : 
-		{
-			"x" : 0.0,
-			"y" : 0.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 0.0,
-			"y" : 0.0
-		},
-		"TextureDir" : "box.png"
 	},
 	"Object2" : 
 	{
@@ -178,29 +119,8 @@
 	},
 	"Object6" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
-		"ObjectID" : 6,
-		"ObjectType" : "Button",
-		"ParticleType" : "ET_BACKGROUND",
-		"ParticlePath" : "StarParticle.json",
-		"Position" : 
-		{
-			"x" : 0.0,
-			"y" : 0.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 10.0,
-			"y" : 10.0
-		},
-		"TextureDir" : "Twinkle.png"
-	},
-	"Object7" : 
-	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
-		"ObjectID" : 7,
+		"ObjectID" : 6,
 		"ObjectType" : "Button",
 		"Position" : 
 		{
@@ -216,10 +136,10 @@
 		},
 		"TextureDir" : "Menu_Option.png"
 	},
-	"Object8" : 
+	"Object7" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
-		"ObjectID" : 8,
+		"ObjectID" : 7,
 		"ObjectType" : "Button",
 		"Position" : 
 		{
@@ -234,25 +154,6 @@
 			"y" : 52.683002471923828
 		},
 		"TextureDir" : "title.png"
-	},
-	"Object9" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE" ],
-		"ObjectID" : 9,
-		"ObjectType" : "Button",
-		"Position" : 
-		{
-			"x" : -178.86201477050781,
-			"y" : 0.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 50.0,
-			"y" : 50.0
-		},
-		"TextureDir" : "left.png"
 	},
 	"WorldSize" : 
 	{

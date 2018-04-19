@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
 \file   Menu.h
-\author Choi Beom Geun
-\par    email: o77151@gmail.com
+\author Kyungook.Park
+\par    email: qkrruddn6680@gmail.com
 \par    Class:GAM200
 \par    ThumbUp Engine
-\date   2017/11/29
+\date   2017/04/19
 
 Menu state header file
 There are ¡°go to level select state¡±, ¡°option state¡±, ¡°How to play state¡±

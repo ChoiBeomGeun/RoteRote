@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file   LevelSelect.cpp
-\author Choi Beom Geun
-\par    email: o77151@gmail.com
+\file   LevelSelect.h
+\author Kyungook.Park
+\par    email: qkrruddn6680@gmail.com
 \par    Class:GAM200
 \par    ThumbUp Engine
-\date   2017/11/29
+\date   2017/04/19
 
 Level selection stage header file
 All content 2017 DigiPen (USA) Corporation, all rights reserved.
