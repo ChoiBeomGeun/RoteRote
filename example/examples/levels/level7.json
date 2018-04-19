@@ -1,6 +1,6 @@
 {
   "Level": "Levelname",
-  "NumberOfObjects": 7,
+  "NumberOfObjects": 8,
 
   "DefalutCamera": {
     "EYE": {
@@ -172,7 +172,28 @@
     "HavingComponentsNumbers": 2,
     "ObjectType": "Clearzone"
   },
-
+"Object8" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
+		"ObjectID" : 8,
+		"ObjectType" : "Button",
+		"ParticlePath" : "PlayerTrail.json",
+		"ParticleType" : "ET_TRAIL",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0
+		},
+		"TextureDir" : "basicParticle.png"
+	},
+  
   "Object7": {
     "ObjectID": 7,
     "GravityOn": false,

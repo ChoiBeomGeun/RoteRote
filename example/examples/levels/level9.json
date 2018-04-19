@@ -1,6 +1,6 @@
 {
   "Level": "Levelname",
-  "NumberOfObjects": 20,
+  "NumberOfObjects": 21,
 
   "DefalutCamera": {
     "EYE": {
@@ -551,5 +551,26 @@
     ],
     "HavingComponentsNumbers": 3,
     "ObjectType": "Box"
-  }
+  },
+  "Object21" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
+		"ObjectID" : 21,
+		"ObjectType" : "Button",
+		"ParticlePath" : "PlayerTrail.json",
+		"ParticleType" : "ET_TRAIL",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0
+		},
+		"TextureDir" : "basicParticle.png"
+	}
 }

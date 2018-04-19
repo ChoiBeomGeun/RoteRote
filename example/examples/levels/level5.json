@@ -21,7 +21,7 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 15,
+	"NumberOfObjects" : 16,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
@@ -340,6 +340,27 @@
 		"TextureDir" : "180button.png",
 		"TriggerLifeTime" : -1,
 		"TriggerType" : "180"
+	},
+	"Object16" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
+		"ObjectID" : 16,
+		"ObjectType" : "Button",
+		"ParticlePath" : "PlayerTrail.json",
+		"ParticleType" : "ET_TRAIL",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0
+		},
+		"TextureDir" : "basicParticle.png"
 	},
 	"WorldSize" : 
 	{
