@@ -69,7 +69,7 @@ namespace TE
 
 		/* For variable Jump */
 
-		float minJumpVelocity = 350;
+		float minJumpVelocity = 200;
 
 	};
 }

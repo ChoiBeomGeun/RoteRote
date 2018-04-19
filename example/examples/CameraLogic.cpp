@@ -8,6 +8,7 @@ void TE::CameraLogic::Initialize()
 
 void TE::CameraLogic::Update(float dt)
 {
+	dt = dt;
 }
 
 void TE::CameraLogic::Free(void)

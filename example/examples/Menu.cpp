@@ -53,7 +53,7 @@ void Menu::Load()
 
  void Menu::Init()
 {
-	 rotation_radius = 100.f;
+	 rotation_radius = 100;
 	 Selection = MenuList::Menu_Start;
 	 delta_angle = 90;
 	 LeftRotate = false;
@@ -171,11 +171,11 @@ void Menu::DeltaAngle(void)
 	{
 		IsRotating = false;
 		delta_angle = FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle;
-		if (delta_angle = FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle > 0)
-		FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle = 90 * select_index;
+		if (delta_angle > 0)
+		FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle = 90 * float(select_index);
 
-		if(FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle < 0)
-		FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle = -90 * abs(select_index);
+		if (delta_angle < 0)
+		FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle = -90 * float(abs(select_index));
 	}
 }
 

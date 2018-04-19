@@ -53,7 +53,7 @@ private:
 
 	MenuList Selection;
 
-	int delta_angle;
+	float delta_angle;
 	int selection_angle;
 
 	int rotation_radius;

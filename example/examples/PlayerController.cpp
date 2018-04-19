@@ -40,7 +40,7 @@ void PlayerController::Initialize()
 
 	pre_pos = 0;
 	delta_pos = 0;
-	JumpSpeed = 600.f;
+	JumpSpeed = 100.f;
 	WallJump = WALLJUMP;
 
 	/* verifies whether player is on attachable wall or not */
