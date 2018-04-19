@@ -17,11 +17,13 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "logging.h"
 #include "Input.h"
 #include "SoundManager.h"
+#include "Camera.h"
 using namespace TE;
 Object * Loseplayer;
 Object *obj;
 SOUNDID LoseSound;
 bool Losesoundonce ;
+
 namespace TE {
 
 
@@ -39,7 +41,7 @@ void TE::LoseconditionLogic::Initialize()
 {
 	Losesoundonce = true;
 	Loseplayer = FACTORY->GetPlayer();
-
+	isBoundaryLose = false;
 }
 
 void TE::LoseconditionLogic::Update(float dt)
@@ -60,18 +62,14 @@ void TE::LoseconditionLogic::Update(float dt)
 				CAMERA->IsCameraShaking = true;
 				STATEMANAGER->Restart();
 			}
-
-
 		}
-
-
 		if (Objects.second->objectstyle != Objectstyle::Player &&
 			Objects.second->objectstyle != Objectstyle::Clearzone&&
 			Objects.second->objectstyle != Objectstyle::Button &&
 			Objects.second->objectstyle != Objectstyle::Trigger180 &&
 			Objects.second->objectstyle != Objectstyle::Trigger90 &&
 			Objects.second->objectstyle != Objectstyle::Camera
-			
+		
 			)
 		{
 				obj = Objects.second;
@@ -85,12 +83,15 @@ void TE::LoseconditionLogic::Update(float dt)
 
 		if (Loseplayer != nullptr && obj != nullptr)
 		{
+			_fourPoints[DyingPlace::EN_LEFT_X] = CAMERA->cameraPos.x - APP->_screenWidth *.45f; // , CAMERA->CenterOfCamera.y + APP->_screenHeight*.5f);
+			_fourPoints[DyingPlace::EN_RIGHT_X] = CAMERA->cameraPos.x + APP->_screenWidth *.45f;// , CAMERA->CenterOfCamera.y + APP->_screenHeight*.5f);
+			_fourPoints[DyingPlace::EN_UP_Y] = CAMERA->cameraPos.y + APP->_screenHeight*.45f;
+			_fourPoints[DyingPlace::EN_DOWN_Y] = CAMERA->cameraPos.y - APP->_screenHeight*.45f;
 
 
 
-
-			if ((Loseplayer->GetComponent<Transform>()->position.x > 2000 || Loseplayer->GetComponent<Transform>()->position.x < -2000||
-				Loseplayer->GetComponent<Transform>()->position.y > 2000 || Loseplayer->GetComponent<Transform>()->position.y < -2000))
+			if ((Loseplayer->GetComponent<Transform>()->position.x > 2000/*_fourPoints[DyingPlace::EN_RIGHT_X]*/ && Loseplayer->GetComponent<Transform>()->position.x < 2000/*_fourPoints[DyingPlace::EN_LEFT_X]*/ &&
+				Loseplayer->GetComponent<Transform>()->position.y > 2000/*_fourPoints[DyingPlace::EN_UP_Y]*/ && Loseplayer->GetComponent<Transform>()->position.y < 2000/*_fourPoints[DyingPlace::EN_DOWN_Y]*/))
 			{
 
 				if (Losesoundonce)
@@ -102,7 +103,8 @@ void TE::LoseconditionLogic::Update(float dt)
 				APP->b_Lose = true;
 				//STATEMANAGER->ReplayPosition.clear();
 				//STATEMANAGER->ReplayPosition.clear();
-				CAMERA->IsCameraShaking = true;
+				isBoundaryLose = true;
+				CAMERA->IsCameraShaking = false;
 				STATEMANAGER->Restart();
 
 			}

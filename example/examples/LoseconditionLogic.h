@@ -17,6 +17,14 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 
 namespace TE
 {
+	enum DyingPlace
+	{
+		EN_LEFT_X,
+		EN_RIGHT_X,
+		EN_UP_Y,
+		EN_DOWN_Y
+	};
+
 	class LoseconditionLogic : public GameLogicSystem
 	{
 	public:
@@ -25,8 +33,9 @@ namespace TE
 		void Update(float dt) override;
 		void Free(void) override;
 		~LoseconditionLogic();
-
-
+		bool isBoundaryLose;
+	private:
+		float _fourPoints[4];
 	};
 
 

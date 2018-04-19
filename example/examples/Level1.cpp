@@ -37,6 +37,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "PlayerController.h"
 #include "cAutoMoving.h"
 #include "Automoving.h"
+#include "LoseconditionLogic.h"
 #define LOGGINGSTART false
 
 using namespace TE;
@@ -138,31 +139,6 @@ void Level1::Init()
 	HUDLevelname->objectstyle = Objectstyle::Button;
 
 	//PARTICLEMANAGER->LoadEmitter("particle1.json");
-
-	///////////// MovingObject TestCode 
-	///////////// If you want to test Moving Object, delete below comment
-	//Movingtest = FACTORY->CreateArchetype(ReadingArchetype("Wall.json"));
-	//Movingtest->GetComponent<Transform>()->SetPosition(glm::vec3(-550, -75, 0));
-	//Movingtest->AddComponent<AutoMoving>();
-	//Paths tempinit;
-	//tempinit.pathway.x = -550;
-	//tempinit.pathway.y = -75;
-	//Paths temp;
-	//temp.pathway.x = -950;
-	//temp.pathway.y = 450;
-	//Paths temp2;
-	//temp2.pathway.x = -550;
-	//temp2.pathway.y = 650;
-	//Paths temp3;
-	//temp3.pathway.x = 250;
-	//temp3.pathway.y = 450;
-	//Movingtest->GetComponent<AutoMoving>()->mPaths.push_back(tempinit);
-	//Movingtest->GetComponent<AutoMoving>()->mPaths.push_back(temp);
-	//Movingtest->GetComponent<AutoMoving>()->mPaths.push_back(temp2);
-	//Movingtest->GetComponent<AutoMoving>()->mPaths.push_back(temp3);
-
-
-
 
 	INGAMELOGIC->InGameInit();
 	SOUNDMANAGER->PlaySounds(Background, true);
@@ -281,11 +257,11 @@ void Level1::Update(float dt)
 		STATEMANAGER->b_IsReplayStart = false;
 		STATEMANAGER->b_IsReplay = true;
 	}
-	camAct.cameraSetting(CameraPosType::EN_BOUNDARY);
+	//camAct.cameraSetting(CameraPosType::EN_BOUNDARY);
 	if (Input::IsAnyTriggered())
 	{
 		
-		camAct.cameraSetting(CameraPosType::EN_BOUNDARY);
+		//camAct.cameraSetting(CameraPosType::EN_BOUNDARY);
 	}
 
 	
@@ -294,7 +270,7 @@ void Level1::Update(float dt)
 		if(LosesoundOnetime)
 		SOUNDMANAGER->PlaySounds(loseSound, false);
 		LosesoundOnetime = false;
-		CAMERA->IsCameraShaking = true;
+		CAMERA->IsCameraShaking = LOSECONDITIONLOGIC->isBoundaryLose ? false : true;
 	}
 
 	if (CAMERA->IsCameraShaking)
