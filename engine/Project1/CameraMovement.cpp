@@ -208,10 +208,10 @@ namespace TE {
 				// To do: seprate sections of map 
 				float UpYLimit, DownYLimit, LeftXLimit, RightXLimit;
 
-				UpYLimit = upblock.y - std::abs(upblock.y - CAMERA->CenterOfCamera.y)*.5f;
-				DownYLimit = downblock.y + std::abs(CAMERA->CenterOfCamera.y - downblock.y)*.5f;
-				LeftXLimit = leftblock.x + std::abs(CAMERA->CenterOfCamera.x - leftblock.x)*.5f;
-				RightXLimit = rightblock.x - std::abs(rightblock.x - CAMERA->CenterOfCamera.x)*.5f;
+				UpYLimit = upblock.y + std::abs(upblock.y - CAMERA->CenterOfCamera.y)*.5f;
+				DownYLimit = downblock.y - std::abs(CAMERA->CenterOfCamera.y - downblock.y)*.5f;
+				LeftXLimit = leftblock.x - std::abs(CAMERA->CenterOfCamera.x - leftblock.x)*.5f;
+				RightXLimit = rightblock.x + std::abs(rightblock.x - CAMERA->CenterOfCamera.x)*.5f;
 
 
 				if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x <= RightXLimit)			// when player is on the left.

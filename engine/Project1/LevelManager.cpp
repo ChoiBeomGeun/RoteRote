@@ -394,6 +394,9 @@ void LevelManager::SaveLevel(std::string  path)
 		case Objectstyle::Particle:
 			root[object + to_string(i)]["ObjectType"] = "Particle";
 			break;
+		case Objectstyle::AttachWall:
+			root[object + to_string(i)]["ObjectType"] = "AttachWall";
+			break;
 			/*case Objectstyle::Camera:
 			root[object + to_string(i)]["ObjectType"] = "Camera";
 			break;*/
