@@ -112,6 +112,8 @@ namespace RoteMapView
         }
         public void DeleteUnvisibleItem()
         {
+
+            SynchronizationObjects();
             int index = 0;
 
             int preCount = RoteobjectList.Count;
