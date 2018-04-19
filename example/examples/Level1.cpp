@@ -145,8 +145,8 @@ void Level1::Init()
 	FACTORY->GetPlayer()->GetComponent<Body>()->GroundType = Grounded::Ground;
 	player = FACTORY->GetPlayer();
 	STATEMANAGER->InitplayerPos = player->GetComponent<Transform>()->GetPosition();
-	player->GetComponent<Animation>()->setFrame(1.0f / 8);
-	player->GetComponent<Animation>()->setTime(1.0f / 8);
+	player->GetComponent<Animation>()->setFrame(.25f);
+	player->GetComponent<Animation>()->setTime(.25f);
 	_camPaceSpeed = 5.0f;
 	_camPacedirction = CAMERA->cameraPos - player->GetComponent<Transform>()->position;
 	_camStartPosition = glm::vec3{ 0.f, 0.f, 0.f };

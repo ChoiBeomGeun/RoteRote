@@ -1797,7 +1797,7 @@ namespace RoteMapView
             , Int32.Parse(Reading["DefalutCamera"]["EYE"]["y"].ToString()));
             tempCamera.Location = tempCameraLocation;
             tempCamera.Size = new Size(50, 50);
-            ((System.Windows.Forms.PictureBox)tempCamera).Image = Image.FromFile("./" + "camera.png");
+            ((System.Windows.Forms.PictureBox)tempCamera).Image = Image.FromFile("texture\\" + "camera.png");
             ((System.Windows.Forms.PictureBox)tempCamera).SizeMode = PictureBoxSizeMode.StretchImage;
             tempCamera.Tag = 0;
             this.designModePanel.Controls.Add(tempCamera);
@@ -1810,9 +1810,9 @@ namespace RoteMapView
                 Size tempScale = new Size((int)RoteobjectList[i].ScaleX, (int)RoteobjectList[i].ScaleY);
                 tempC.Tag = RoteobjectList[i].ObjectID;
                 if (RoteobjectList[i].Texture == "0")
-                    ((System.Windows.Forms.PictureBox)tempC).Image = Image.FromFile("./" + "wall.png");
+                    ((System.Windows.Forms.PictureBox)tempC).Image = Image.FromFile("texture\\" + "wall.png");
                 else
-                    ((System.Windows.Forms.PictureBox)tempC).Image = Image.FromFile("./" + RoteobjectList[i].Texture);
+                    ((System.Windows.Forms.PictureBox)tempC).Image = Image.FromFile("texture\\" + RoteobjectList[i].Texture);
                 ((System.Windows.Forms.PictureBox)tempC).SizeMode = PictureBoxSizeMode.StretchImage;
                 tempC.Location = tempLocation;
                 tempC.Size = tempScale;

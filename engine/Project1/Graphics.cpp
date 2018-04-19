@@ -411,7 +411,7 @@ void TE::Graphics::animationSetting()
 				glUniform1i(uniformLocation[ISANIMATION], 1);
 				glUniform1f(uniformLocation[ANIMATIONX], /*aniX*/(*aniIter)->getFrame());
 				glUniform1f(uniformLocation[TIME], (*aniIter)->getTime()/*1.0f / 6*/);
-				if (time >= .125f)
+				if (time >= (*aniIter)->getTime())
 				{
 					// when key is pressed
 					if ((*aniIter)->isPressed())
