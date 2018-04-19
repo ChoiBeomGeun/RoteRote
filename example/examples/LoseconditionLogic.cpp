@@ -90,8 +90,8 @@ void TE::LoseconditionLogic::Update(float dt)
 
 
 
-			if ((Loseplayer->GetComponent<Transform>()->position.x > 2000/*_fourPoints[DyingPlace::EN_RIGHT_X]*/ && Loseplayer->GetComponent<Transform>()->position.x < 2000/*_fourPoints[DyingPlace::EN_LEFT_X]*/ &&
-				Loseplayer->GetComponent<Transform>()->position.y > 2000/*_fourPoints[DyingPlace::EN_UP_Y]*/ && Loseplayer->GetComponent<Transform>()->position.y < 2000/*_fourPoints[DyingPlace::EN_DOWN_Y]*/))
+			if ((Loseplayer->GetComponent<Transform>()->position.x > 2000/*_fourPoints[DyingPlace::EN_RIGHT_X]*/ || Loseplayer->GetComponent<Transform>()->position.x < -2000/*_fourPoints[DyingPlace::EN_LEFT_X]*/ ||
+				Loseplayer->GetComponent<Transform>()->position.y > 2000/*_fourPoints[DyingPlace::EN_UP_Y]*/ || Loseplayer->GetComponent<Transform>()->position.y < -2000/*_fourPoints[DyingPlace::EN_DOWN_Y]*/))
 			{
 
 				if (Losesoundonce)
