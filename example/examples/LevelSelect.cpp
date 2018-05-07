@@ -67,7 +67,11 @@ void LevelSelect::Update(float dt)
 {
 	//LvlSelectCam.cameraSetting(glm::vec3(0,0,0));
 	if (std::abs(FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle == 360.f))
+	{
+		FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->angle = 0.f;
 		FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle = 0.f;
+	}
+
 
 	LvlSelectCam.Update(dt);
 	if (!IsRotating)	{
@@ -97,7 +101,7 @@ void LevelSelect::Update(float dt)
 		}
 		
 
-		if (Input::IsTriggered(SDL_SCANCODE_SPACE)) {
+		if (Input::IsTriggered(SDL_SCANCODE_SPACE) || Input::IsTriggered(SDL_SCANCODE_RETURN)) {
 			STATEMANAGER->i_LevelSelect = LevelList + 1;
 			std::string levelnumber = NumberToString(STATEMANAGER->i_LevelSelect);
 			STATEMANAGER->Loadtolevelname = "level" + levelnumber + ".json";
@@ -112,9 +116,17 @@ void LevelSelect::Update(float dt)
 	if (IsRotating)
 	{
 		if (IsLeftPressed)
+		{
 			FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle -= 300 * dt;
+			FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->angle -= 300 * dt;
+			FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->scale -= 600 * dt;
+		}
 		else
+		{
 			FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle += 300 * dt;
+			FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->angle += 300 * dt;
+			FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->scale -= 600 * dt;
+		}
 
 		Rotation();
 	}
@@ -137,6 +149,8 @@ void LevelSelect::Rotation(void)
 		if (FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle - selectAngle > 0) {
 			if (std::abs(FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle - selectAngle) > 90) {
 				FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle = LevelList * 90.f;
+				FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->angle = 0.f;
+				FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->scale = glm::vec3(150, 150, 1);
 				IsRotating = false;
 				FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Levelpng[LevelList];
 			}
@@ -145,6 +159,8 @@ void LevelSelect::Rotation(void)
 		else if (FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle - selectAngle < 0) {
 			if (std::abs(FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle - selectAngle) > 90) {
 				FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle = -LevelList * 90.f;
+				FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->angle = 0.f;
+				FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->scale = glm::vec3(150, 150, 1);
 				IsRotating = false;
 				FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Levelpng[LevelList];
 			}

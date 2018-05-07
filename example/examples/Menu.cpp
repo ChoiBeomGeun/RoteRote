@@ -96,7 +96,7 @@ void Menu::Update(float dt)
 	}
 		
 	if (!IsSelected && !IsRotating)
-		if (Input::IsTriggered(SDL_SCANCODE_SPACE))
+		if (Input::IsTriggered(SDL_SCANCODE_SPACE) || Input::IsTriggered(SDL_SCANCODE_RETURN))
 		{
 			SOUNDMANAGER->PlaySounds(SelectSound, false);
 			IsSelected = true;
