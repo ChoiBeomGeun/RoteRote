@@ -29,7 +29,8 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "Application.h"
 #include "InGameLogic.h"
 using namespace TE;
-
+Object * ooHowToPlay;
+Object * ooConfirmation;
 Menu::Menu()
 {
 }
@@ -41,6 +42,8 @@ Menu::~Menu()
 void Menu::Load()
 {
 	LEVELMANAGER->LoadLevel("Menu.json");
+
+
 	MenuSound = SOUNDMANAGER->LoadSound("menu.mp3");
 	MoveSound = SOUNDMANAGER->LoadSound("menumove.mp3");
 	SelectSound = SOUNDMANAGER->LoadSound("menuselect.mp3");
@@ -69,93 +72,127 @@ void Menu::Load()
 
 void Menu::Update(float dt)
 {
-	IsSelected = false;
 
-	if (FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle == 360.f || FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle == -360.f)
-	{
-		FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle = 0.f;
-		delta_angle = 0;
-		select_index = 0;
+	if (ConfirmationIsOn) {
+		if (Input::IsTriggered(SDL_SCANCODE_Y))
+			ENGINE->Quit();
+		if (Input::IsTriggered(SDL_SCANCODE_N))
+		{
+			ConfirmationIsOn = false;
+			FACTORY->Destroy(ooConfirmation);
+			return;
+		}
 	}
-	MenuCam.Update(dt);
+	if (ConfirmationIsOn)
+		return;
 
-	if (IsRotating) {
-		DeltaAngle();
+		IsSelected = false;
+		if (FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle == 360.f || FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle == -360.f)
+		{
+			FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle = 0.f;
+			delta_angle = 0;
+			select_index = 0;
+		}
+		MenuCam.Update(dt);
 
-		for (int i = 1; i < 5; ++i) {
+		if (IsRotating) {
+			DeltaAngle();
 
-			FACTORY->ObjectIDMap[i]->GetComponent<Transform>()->position.x = cos(TUMath::DegreeToRadian(FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle + (i) * 90)) * rotation_radius;
-			FACTORY->ObjectIDMap[i]->GetComponent<Transform>()->position.y = sin(TUMath::DegreeToRadian(FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle + (i) * 90)) * rotation_radius;
-		}	
-	}
-	else
-	{
-		delta_angle = FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle;
-		IsTextChanged = false;
-		Selection_Text();
-	}
+			for (int i = 1; i < 5; ++i) {
+
+				FACTORY->ObjectIDMap[i]->GetComponent<Transform>()->position.x = cos(TUMath::DegreeToRadian(FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle + (i) * 90)) * rotation_radius;
+				FACTORY->ObjectIDMap[i]->GetComponent<Transform>()->position.y = sin(TUMath::DegreeToRadian(FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle + (i) * 90)) * rotation_radius;
+			}
+		}
+		else
+		{
+			delta_angle = FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle;
+			IsTextChanged = false;
+			Selection_Text();
+		}
+
+		if (!IsSelected && !IsRotating)
+			if (Input::IsTriggered(SDL_SCANCODE_SPACE) || Input::IsTriggered(SDL_SCANCODE_RETURN))
+			{
+				SOUNDMANAGER->PlaySounds(SelectSound, false);
+				IsSelected = true;
+			}
+		if (IsSelected)
+		{
+			switch (Selection)
+			{
+			case MenuList::Menu_Start: STATEMANAGER->MoveState(StatesList::LevelSelect);
+				break;
+			case MenuList::Menu_HowToPlay:
+				if (HowToPlayIsOn)
+				{
+					HowToPlayIsOn = false;
+					FACTORY->Destroy(ooHowToPlay);
+					return;
+				}
+				ooHowToPlay = FACTORY->CreateHUD(glm::vec3(0.2, -0.7, 0), glm::vec3(2, 0.5, 0));
+				ooHowToPlay->GetComponent<Sprite>()->texture_load("howtoplay2.png");
+				HowToPlayIsOn = true;
+				return;
+				break;
+			case MenuList::Menu_Quit: 
+				ooConfirmation = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(1.5, 0.7, 0));
+				ooConfirmation->GetComponent<Sprite>()->texture_load("Sure.png");
+				ConfirmationIsOn = true;
+				return;
+				break;
+			case MenuList::Menu_Option: STATEMANAGER->MoveState(StatesList::Option);
+				break;
+			}
+		}
+
+
+		if (!LeftRotate && !IsRotating && !IsTextChanged)
+			if (Input::IsPressed(SDL_SCANCODE_LEFT)) {
+				LeftRotate = true;
+				IsRotating = true;
+				++select_index;
+				Selection_plus();
+				IsTextChanged = true;
 		
-	if (!IsSelected && !IsRotating)
-		if (Input::IsTriggered(SDL_SCANCODE_SPACE) || Input::IsTriggered(SDL_SCANCODE_RETURN))
-		{
-			SOUNDMANAGER->PlaySounds(SelectSound, false);
-			IsSelected = true;
-		}
-	if (IsSelected)
-	{
-		switch (Selection)
-		{
-		case MenuList::Menu_Start: STATEMANAGER->MoveState(StatesList::LevelSelect);
-			break;
-		case MenuList::Menu_HowToPlay:
-			break;
-		case MenuList::Menu_Quit: ENGINE->Quit();
-			break;
-		case MenuList::Menu_Option: STATEMANAGER->MoveState(StatesList::Option);
-			break;
-		}
-	}
-
-
-	if(!LeftRotate && !IsRotating && !IsTextChanged)
-		if (Input::IsPressed(SDL_SCANCODE_LEFT)){
-			LeftRotate = true;
-			IsRotating = true;
-			++select_index;
-			Selection_plus();
-			IsTextChanged = true;
-			std::cout << "plus" << '\n';
-			SOUNDMANAGER->PlaySounds(MoveSound, false);
-		}
-	else if(!RightRotate && !IsRotating && !IsTextChanged)
-		if (Input::IsPressed(SDL_SCANCODE_RIGHT)){
-			RightRotate = true;
-			IsRotating = true;
-			--select_index;
-			Selection_minus();
-			IsTextChanged = true;
-			std::cout << "minus" << '\n';
-			SOUNDMANAGER->PlaySounds(MoveSound, false);
-		}
-
-	if (LeftRotate)
-	{
-		if (IsRotating){
+				SOUNDMANAGER->PlaySounds(MoveSound, false);
+			}
+			else if (!RightRotate && !IsRotating && !IsTextChanged)
+				if (Input::IsPressed(SDL_SCANCODE_RIGHT)) {
+					RightRotate = true;
+					IsRotating = true;
+					--select_index;
+					Selection_minus();
+					IsTextChanged = true;
 			
-			FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle += 250 * dt;
-			
+					SOUNDMANAGER->PlaySounds(MoveSound, false);
+				}
+
+		if (LeftRotate)
+		{
+			if (IsRotating) {
+
+				FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle += 250 * dt;
+
+			}
+			else
+				LeftRotate = false;
 		}
-		else
-			LeftRotate = false;
-	}
-	else if (RightRotate)
-	{
-		if (IsRotating)
-			FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle -= 250 * dt;
-		else
-			RightRotate = false;
-	}
+		else if (RightRotate)
+		{
+			if (IsRotating)
+				FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle -= 250 * dt;
+			else
+				RightRotate = false;
+		}
+
+	
+	
+
 }
+
+	
+
 
 void Menu::Free(void)
 {

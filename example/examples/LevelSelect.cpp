@@ -27,6 +27,8 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "SoundManager.h"
 #include <vector>
 #include "InGameLogic.h"
+
+const int LastLevelNumber = 10;
 using namespace TE;
 
 LevelSelect::LevelSelect()
@@ -102,6 +104,8 @@ void LevelSelect::Update(float dt)
 		
 
 		if (Input::IsTriggered(SDL_SCANCODE_SPACE) || Input::IsTriggered(SDL_SCANCODE_RETURN)) {
+
+
 			STATEMANAGER->i_LevelSelect = LevelList + 1;
 			std::string levelnumber = NumberToString(STATEMANAGER->i_LevelSelect);
 			STATEMANAGER->Loadtolevelname = "level" + levelnumber + ".json";

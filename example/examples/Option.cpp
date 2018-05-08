@@ -1,99 +1,41 @@
 /******************************************************************************/
 /*!
 \file   Option.cpp
-\author Choi Beom Geun
-\par    email: o77151@gmail.com
+\author Kyungook.Park
+\par    email: qkrruddn6680@gmail.com
 \par    Class:GAM200
 \par    ThumbUp Engine
-\date   2017/11/29
+\date   2017/04/19
 
 Option state source file
-There are changing resolution , mute sounds, toggle fullscreen
+There are ¡°go to level select state¡±, ¡°option state¡±, ¡°How to play state¡±
+¡°Quit the game¡±
 All content 2017 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/
 
+#pragma once
 #include "Option.h"
+#include "SoundManager.h"
 #include <stdio.h>
 #include "Object.h"
 #include "Factory.h"
 #include "Input.h"
 #include "StateManager.h"
 #include "Engine.h"
-#include "LevelManager.h"
-#include  "SoundManager.h"
+#include "Graphics.h"
+#include  "LevelManager.h"
+#include  "Timer.h"
 #include "Application.h"
 #include "InGameLogic.h"
+#include "Archetype.h"
 using namespace TE;
-void Back(void);
-void Soundsetting(void);
-void resolution(void);
-void full(void);
-unsigned int menu1;
-unsigned int move1;
-unsigned int selectt1;
-void(*ofunction[4])(void) = { Soundsetting,full,resolution,Back };
-int index1 = 0;
-static unsigned char  i;
+Object * ooHowToPlay2;
+Object * ooConfirmation2;
 
-void Soundsetting(void)
-{
-
- 	if (!SOUNDMANAGER->SoundOnOffCheck())
-	{
-		SOUNDMANAGER->SoundOn();
-		menu1 = TE::SOUNDMANAGER->LoadSound("menu.mp3");
-		move1 = TE::SOUNDMANAGER->LoadSound("menumove.mp3");
-		selectt1 = TE::SOUNDMANAGER->LoadSound("menuselect.mp3");
-		//TE::FACTORY->ObjectIDMap[4]->sprite->texture_load("on.png");
-		
-	}
-	else
-	{
-		//TE::FACTORY->ObjectIDMap[4]->sprite->texture_load("off.png");
-	//	SOUNDMANAGER->DeleteSounds();
-		SOUNDMANAGER->SoundOff();
-		
-	}
-
-}
-void resolution(void)
-{
+Object * ooCredits;
 
 
-	i++;
-
-	if (i == 4)
-	{
-		i = 1;
-	}
-	APP->ChangeScreenSize(APP->getWindow(), (TE::Resolution)i);
-
-
-
-
-}
-void full(void)
-{
-	static bool full = false;
-	if (!APP->_isfull)
-	{
-		//TE::FACTORY->ObjectIDMap[7]->sprite->texture_load("on.png");
-		APP->toggle_fullscreen(APP->getWindow(), true);
-		full = true;
-	}
-	else
-	{
-	//	TE::FACTORY->ObjectIDMap[7]->sprite->texture_load("OFF.png");
-		APP->toggle_fullscreen(APP->getWindow(), false);
-		full = false;
-	}
-}
-void Back(void)
-{
-	STATEMANAGER->MoveState(1);
-
-}
 Option::Option()
 {
 
@@ -105,118 +47,274 @@ Option::~Option()
 
 void Option::Load()
 {
-	menu1 = TE::SOUNDMANAGER->LoadSound("menu.mp3");
-	move1 = TE::SOUNDMANAGER->LoadSound("menumove.mp3");
-	selectt1 = TE::SOUNDMANAGER->LoadSound("menuselect.mp3");
+
+	LEVELMANAGER->LoadLevel("Option.json");
+	OptionSound = SOUNDMANAGER->LoadSound("Menu.mp3");
+	MoveSound = SOUNDMANAGER->LoadSound("Menumove.mp3");
+	SelectSound = SOUNDMANAGER->LoadSound("Menuselect.mp3");
+	if (IsSoundOn)
+	{
+	
+		FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("sound.png");
+
+	}
+	else
+	{
+		FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("soundoff.png");
+
+	}
+
+
+
+	Option_SoundOnOff = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Option_SoundOnOff.png");
+	Option_Credits = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Option_Credits.png");
+	Option_Back = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Option_BackToMenu.png"); 
+	Option_Full = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Option_FullScreen.png");
 }
 
 void Option::Init()
 {
-	i = (unsigned char)APP->ResolutionNumber;
-	LEVELMANAGER->LoadLevel("Option.json");
-	printf("OptionInit\n");
+	rotation_radius = 100;
+	Selection = OptionList::Option_SoundOnOff;
+	delta_angle = 90;
+	LeftRotate = false;
+	RightRotate = false;
+	IsRotating = false;
+	IsTextChanged = false;
+	IsSelected = false;
+	selection_angle = 0;
+	select_index = 0;
+	OptionCam.cameraSetting(CameraPosType::EN_Menu);
+	SOUNDMANAGER->PlaySounds(OptionSound, true);
 }
 
 void Option::Update(float dt)
 {
-	if(APP->_isfull)
-		TE::FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("On.png");
-	else
-		TE::FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("OFF.png");
 
-	
-		if (SOUNDMANAGER->SoundOnOffCheck())
-			TE::FACTORY->ObjectIDMap[4]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("on.png");
-		else
-			TE::FACTORY->ObjectIDMap[4]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("off.png");
-	dt = dt;
-	if (Input::IsTriggered(SDL_SCANCODE_UP))
-		if (index1 >= 0)
-		{
-			SOUNDMANAGER->PlaySounds(move1, false);
-			index1--;
-			if (index1 == -1)
-				index1 = 3;
-		}
-
-	if (Input::IsTriggered(SDL_SCANCODE_DOWN))
-		if (index1 <= 3)
-		{
-			SOUNDMANAGER->PlaySounds(move1, false);
-			index1++;
-			if (index1 == 4)
-				index1 = 0;
-		}
-
-	switch (i)
-	{
-
-	case 1:
-		TE::FACTORY->ObjectIDMap[8]->GetComponent<Transform>()->position.y = 0;
-		APP->ResolutionNumber = 1;
-		break;
-	case 2:
-		TE::FACTORY->ObjectIDMap[8]->GetComponent<Transform>()->position.y = -96;
-		APP->ResolutionNumber = 2;
-		break;
-	case 3:
-		TE::FACTORY->ObjectIDMap[8]->GetComponent<Transform>()->position.y = -203;
-		APP->ResolutionNumber = 3;
-		break;
-
-	}
-
-	switch (index1)
-	{
-	case 0:
-		TE::FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
-		TE::FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		TE::FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		TE::FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		break;
-	case 2:
-		TE::FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
-		TE::FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		TE::FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		TE::FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		break;
-	case 3:
-		TE::FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
-		TE::FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		TE::FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		TE::FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		break;
-	case 1:
-		TE::FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
-		TE::FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		TE::FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		TE::FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		break;
-
-	}
 
 	if (Input::IsTriggered(SDL_SCANCODE_ESCAPE))
-		ofunction[3]();
+		STATEMANAGER->MoveState(StatesList::Menu);
 
-	if (Input::IsTriggered(SDL_SCANCODE_SPACE)||Input::IsTriggered(SDL_SCANCODE_RETURN)) {
-		
-		ofunction[index1]();
-		SOUNDMANAGER->PlaySounds(selectt1, false);
+
+	IsSelected = false;
+	if (FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle == 360.f || FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle == -360.f)
+	{
+		FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle = 0.f;
+		delta_angle = 0;
+		select_index = 0;
 	}
+	OptionCam.Update(dt);
+
+	if (IsRotating) {
+		DeltaAngle();
+
+		for (int i = 1; i < 5; ++i) {
+
+			FACTORY->ObjectIDMap[i]->GetComponent<Transform>()->position.x = cos(TUMath::DegreeToRadian(FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle + (i) * 90)) * rotation_radius;
+			FACTORY->ObjectIDMap[i]->GetComponent<Transform>()->position.y = sin(TUMath::DegreeToRadian(FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle + (i) * 90)) * rotation_radius;
+		}
+	}
+	else
+	{
+		delta_angle = FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle;
+		IsTextChanged = false;
+		Selection_Text();
+	}
+
+	if (!IsSelected && !IsRotating)
+		if (Input::IsTriggered(SDL_SCANCODE_SPACE) || Input::IsTriggered(SDL_SCANCODE_RETURN))
+		{
+			SOUNDMANAGER->PlaySounds(SelectSound, false);
+			IsSelected = true;
+		}
+	if (IsSelected)
+	{
+		switch (Selection)
+		{
+		case OptionList::Option_SoundOnOff: 
+
+			if (!SOUNDMANAGER->SoundOnOffCheck())
+			{
+				IsSoundOn = true;
+				SOUNDMANAGER->SoundOn();
+				OptionSound = SOUNDMANAGER->LoadSound("Menu.mp3");
+				MoveSound = SOUNDMANAGER->LoadSound("Menumove.mp3");
+				SelectSound = SOUNDMANAGER->LoadSound("Menuselect.mp3");
+				//TE::FACTORY->ObjectIDMap[4]->sprite->texture_load("on.png");
+				FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("sound.png");
+
+			}
+			else
+			{
+				IsSoundOn = false;
+				FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("soundoff.png");
+				SOUNDMANAGER->StopSound(OptionSound);
+			
+				SOUNDMANAGER->SoundOff();
+			}
+
+			break;
+		case OptionList::Option_Credits:
+		{
+			static bool full = false;
+		if (!APP->_isfull)
+		{
+			//TE::FACTORY->ObjectIDMap[7]->sprite->texture_load("on.png");
+			APP->toggle_fullscreen(APP->getWindow(), true);
+			full = true;
+		}
+		else
+		{
+			//	TE::FACTORY->ObjectIDMap[7]->sprite->texture_load("OFF.png");
+			APP->toggle_fullscreen(APP->getWindow(), false);
+			full = false;
+		}
+		break;
+		}
+		case OptionList::Option_Back:
+		{
+			STATEMANAGER->MoveState(1);
+		break;
+		}
+		case OptionList::Option_Full:
+		{
+			if (CreditsIsON)
+			{
+				CreditsIsON = false;
+				FACTORY->Destroy(ooCredits);
+				return;
+			}
+			
+			ooCredits = FACTORY->CreateArchetype(ReadingArchetype("Button.json"));
+			ooCredits->GetComponent<Transform>()->SetPosition(glm::vec3(16.260f,-48.871f,-1));
+			ooCredits->GetComponent<Transform>()->SetScale(glm::vec3(1025.041f, 365.854f,0));
+			ooCredits->GetComponent<Sprite>()->texture_load("CreditsText.png");
+			CreditsIsON = true;
+			return;
+		break; 
+		
+		}
+		}
+	}
+
+
+	if (!LeftRotate && !IsRotating && !IsTextChanged)
+		if (Input::IsPressed(SDL_SCANCODE_LEFT)) {
+			LeftRotate = true;
+			IsRotating = true;
+			++select_index;
+			Selection_plus();
+			IsTextChanged = true;
+	
+			SOUNDMANAGER->PlaySounds(MoveSound, false);
+		}
+		else if (!RightRotate && !IsRotating && !IsTextChanged)
+			if (Input::IsPressed(SDL_SCANCODE_RIGHT)) {
+				RightRotate = true;
+				IsRotating = true;
+				--select_index;
+				Selection_minus();
+				IsTextChanged = true;
+		
+				SOUNDMANAGER->PlaySounds(MoveSound, false);
+			}
+
+	if (LeftRotate)
+	{
+		if (IsRotating) {
+
+			FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle += 250 * dt;
+
+		}
+		else
+			LeftRotate = false;
+	}
+	else if (RightRotate)
+	{
+		if (IsRotating)
+			FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle -= 250 * dt;
+		else
+			RightRotate = false;
+	}
+
+
+
+
 }
+
+
+
 
 void Option::Free(void)
 {
-	//INGAMELOGIC->InGameShutdown();
-	SOUNDMANAGER->DeleteSounds();
-	index1 = 0;
-	//LEVELMANAGER->SaveLevel("option.json");
-	printf("OptionFree\n");
+
 }
-
-
 
 void Option::Unload()
 {
-	printf("OptionUnload\n");
+}
+
+void Option::DeltaAngle(void)
+{
+	if (abs(FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle - delta_angle) >= 90)
+	{
+		IsRotating = false;
+		delta_angle = FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle;
+		if (delta_angle > 0)
+			FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle = 90 * float(select_index);
+
+		if (delta_angle < 0)
+			FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle = -90 * float(abs(select_index));
+	}
+}
+
+void Option::Selection_plus(void)
+{
+	switch (Selection)
+	{
+	case OptionList::Option_SoundOnOff:  Selection = OptionList::Option_Full; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Option_Credits.png");
+		break;
+	case OptionList::Option_Full: Selection = OptionList::Option_Back;	//FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Option_Back.png");
+		break;
+	case OptionList::Option_Back: Selection = OptionList::Option_Credits; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Option_Full.png");
+		break;
+	case OptionList::Option_Credits: Selection = OptionList::Option_SoundOnOff; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Option_SoundOnOff.png");
+		break;
+	default:
+		break;
+	}
+}
+
+void Option::Selection_minus(void)
+{
+	switch (Selection)
+	{
+	case OptionList::Option_Full:  Selection = OptionList::Option_SoundOnOff; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Option_SoundOnOff.png");
+		break;
+	case OptionList::Option_Back: Selection = OptionList::Option_Full; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Option_Credits.png");
+		break;
+	case OptionList::Option_Credits: Selection = OptionList::Option_Back; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Option_Back.png");
+		break;
+	case OptionList::Option_SoundOnOff: Selection = OptionList::Option_Credits; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Option_Option.png");
+		break;
+	default:
+		break;
+	}
+}
+
+void Option::Selection_Text(void)
+{
+	switch (Selection)
+	{
+	case OptionList::Option_Full: FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Option_Credits;
+		break;
+	case OptionList::Option_Back: FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Option_Back;
+		break;
+	case OptionList::Option_Credits: FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID =Option_Full;
+		break;
+	case OptionList::Option_SoundOnOff: FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Option_SoundOnOff;
+		break;
+	default:
+		break;
+	}
 }

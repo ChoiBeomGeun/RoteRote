@@ -170,5 +170,8 @@
     <ClInclude Include="CameraLogic.h">
       <Filter>Source Files\GameLogic\CameraLogic</Filter>
     </ClInclude>
+    <ClInclude Include="OptionList.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

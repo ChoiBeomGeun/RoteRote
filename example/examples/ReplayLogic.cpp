@@ -90,6 +90,7 @@ void Backgame3(void)
 
 
 void MakeReplayerUI(void) {
+	pauseindex3 = 0;
 	SOUNDMANAGER->DeleteSounds();
 	FACTORY->DestroyAllObjects();
 	LEVELMANAGER->LoadLevel(STATEMANAGER->Loadtolevelname);
@@ -119,7 +120,7 @@ void MakeReplayerUI(void) {
 }
 
 void SetReplayer(void) {
-
+	
 	replayCam.cameraSetting(CameraPosType::EN_BOUNDARY);
 
 	replayer->GetComponent<Transform>()->SetPosition(itor.front().Pos);

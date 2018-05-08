@@ -35,12 +35,15 @@ public:
 
 	void Selection_plus(void);
 	void Selection_minus(void);
+
 	void Selection_Text(void);
+
 private:
 	TE::CameraAction MenuCam;
 	bool LeftRotate;
 	bool RightRotate;
-
+	bool ConfirmationIsOn = false;
+	bool HowToPlayIsOn = false;
 	bool IsRotating;
 	bool IsSelected;
 	bool IsTextChanged;

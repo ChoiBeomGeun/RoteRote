@@ -132,11 +132,11 @@ void Pause::Init()
 	oLevelbutton = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion.x, Vec3buttonPostion.y - .3f, Vec3buttonPostion.z), Vec3Buttonscale);
 	oLevelbutton->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("levelselect.png");
 	oQuitthegame = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion.x, Vec3buttonPostion.y - .6f, Vec3buttonPostion.z), Vec3Buttonscale);
-	oQuitthegame->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("box.png");
+	oQuitthegame->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("pausebox.png");
 	oHUD = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion.x, Vec3buttonPostion.y-.1f, Vec3buttonPostion.z), glm::vec3(0.8,2,0));
 	oHUD->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("pausehud.png");
 	oHowToPlayIcon = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion.x, Vec3buttonPostion.y-.9f, Vec3buttonPostion.z), Vec3Buttonscale);
-	oHowToPlayIcon->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("question.png");
+	oHowToPlayIcon->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("questionbox.png");
 
 	PauseCam.cameraSetting(CameraPosType::EN_BOUNDARY);
 }

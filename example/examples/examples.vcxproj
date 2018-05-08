@@ -251,6 +251,7 @@ copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(T
     <ClInclude Include="EditorData.h" />
     <ClInclude Include="GameLogicSystem.h" />
     <ClInclude Include="GameSystem.h" />
+    <ClInclude Include="OptionList.h" />
     <ClInclude Include="InGameLogic.h" />
     <ClInclude Include="Level1.h" />
     <ClInclude Include="LevelList.h" />

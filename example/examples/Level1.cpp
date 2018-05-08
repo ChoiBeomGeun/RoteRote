@@ -203,11 +203,23 @@ void Level1::Init()
 
 	//	CAMERA->cameraPos = glm::vec3(CAMERA->CenterOfCamera, 500.f);
 	//}
+	static float loadingtimer = 0.1f;
 
+	while (loadingtimer >0)
+	{
+
+		loadingtimer -= Timer::GetDelta();
+
+
+	}
+	loadingtimer = 0.1f;
 }
 
 void Level1::Update(float dt)
 {
+
+
+	
 	//MakingInstructions(dt);
 	
 	camAct.Update(dt);
