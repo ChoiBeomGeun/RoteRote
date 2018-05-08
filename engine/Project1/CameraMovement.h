@@ -48,7 +48,12 @@ namespace TE
 	public: // camera rotating changing walls;
 		int RotatingCam();
 		void ControlCamMovement(int type);
+		void move_cam(float dt);
+		bool IsCamMovHoz, IsCamMovVer;
+		float interpolate(float  start,float dest, float dt);
 	
+
+
 	private:
 		// how long the object should shake for
 		float shakeDuration;
@@ -56,9 +61,5 @@ namespace TE
 		float shakeAmount;
 		float decreaseFactor;
 		float _camPaceSpeed;
-		
-		bool istest;
-
-
 	};
 }

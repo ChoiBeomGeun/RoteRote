@@ -28,7 +28,8 @@ namespace TE
 		void Update(float dt) override;
 		void Free(void) override;
 		~TriggerLogic();
-		void _90anglebutton(Object* Trigger);
+		void _90angle_toleft_button(Object* Trigger);
+		void _90angle_toright_button(Object* Trigger);
 		void _180anglebutton(Object* Trigger);
 		void InitDegree(void);
 		int NumberOfTriggersActivation = 0;

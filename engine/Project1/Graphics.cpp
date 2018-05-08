@@ -229,7 +229,7 @@ void Graphics::Update(float dt)
 	glUniform1i(particleLoc[PSAMPLER], 0);
 	
 	view = CAMERA->view;
-
+	CAMERA->lookat(CAMERA->cameraPos, CAMERA->cameraTarget, CAMERA->cameraUp);
 	for (std::vector<Sprite*>::iterator it = SpriteList.begin();
 		it != SpriteList.end(); ++it) {
 		glBindTexture(GL_TEXTURE_2D, (*it)->m_TextureID);

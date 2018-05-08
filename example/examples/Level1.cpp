@@ -223,7 +223,7 @@ void Level1::Update(float dt)
 	//MakingInstructions(dt);
 	
 	camAct.Update(dt);
-
+	//std::cout << "cam.x: " << CAMERA->cameraPos.x << ",  cam.y: " << CAMERA->cameraPos.y <<  std::endl;
 #ifdef _DEBUG
 	CheatKeyFunctions();
 #endif

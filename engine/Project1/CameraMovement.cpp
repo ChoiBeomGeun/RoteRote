@@ -16,7 +16,9 @@ namespace TE {
 		shakeAmount = 3.0f;
 		isCamToPlayer = false;
 		_camPaceSpeed = 10.f;
-		istest = true;
+	
+		IsCamMovHoz = false; 
+		IsCamMovVer = false;
 	}
 	CameraAction::~CameraAction()
 	{
@@ -119,13 +121,19 @@ namespace TE {
 					LeftXLimit = downblock.x - APP->_screenWidth*.25f;
 					RightXLimit = downblock.x + APP->_screenWidth *.25f;
 					
-					if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x <= LeftXLimit)
-						CAMERA->cameraPos.x = LeftXLimit;
+					if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x <= LeftXLimit  )
+					{
+						IsCamMovHoz = true;
+						
+					}
 					else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x >= RightXLimit)
+					{
 						CAMERA->cameraPos.x = RightXLimit;
-					else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x > LeftXLimit || FACTORY->GetPlayer()->GetComponent<Transform>()->position.x < RightXLimit)
-						CAMERA->cameraPos.x = FACTORY->GetPlayer()->GetComponent<Transform>()->position.x;
+					}
+					/*else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x > LeftXLimit || FACTORY->GetPlayer()->GetComponent<Transform>()->position.x < RightXLimit)
+					{
 					
+					}*/
 					CAMERA->cameraPos.z = CameraPosz;
 				}
 				else {
@@ -159,7 +167,7 @@ namespace TE {
 
 					CAMERA->cameraPos.z = CameraPosz;
 				}
-
+				
 				
 
 			}
@@ -259,6 +267,44 @@ namespace TE {
 		}
 	}
 
+	void CameraAction::move_cam(float dt)
+	{
+		if (IsCamMovHoz)
+		{
+			CAMERA->cameraPos.x = interpolate((CAMERA->cameraPos.x), FACTORY->GetPlayer()->GetComponent<Transform>()->position.x, .5f);
+			IsCamMovHoz = false;
+		}
+		else if (IsCamMovVer)
+			CAMERA->cameraPos.y = FACTORY->GetPlayer()->GetComponent<Transform>()->position.y;
+		else if(IsCamMovHoz && IsCamMovVer)
+		{
+			CAMERA->cameraPos = FACTORY->GetPlayer()->GetComponent<Transform>()->position;
+			CAMERA->cameraPos.z = 999.f;
+		}
+	}
+
+	float CameraAction::interpolate(float  start, float dest, float dt)
+	{
+		/*start = abs(start);
+		dest = abs(dest);*/
+		/*while (1)
+		{*/
+		
+		//float displacement = FACTORY->GetPlayer()->GetComponent<Transform>()->position.x - CAMERA->cameraPos.x;
+		//cameraOriginPos = glm::vec3();
+		////	auto distanceFromStart = glm::length(displacement);
+		//float _camPacedirction = -glm::normalize(displacement);
+		////_camPacedirction = glm::normalize(_camPacedirction);
+		//CAMERA->cameraPos.x -= _camPacedirction * _camPaceSpeed * dt;
+		//CAMERA->cameraPos.z = 999.f;
+
+
+		return  start + dt*(dest-start);
+			/*if (start >= dest)
+				break;
+		}*/
+	}
+
 	void CameraAction::cameraSetting(CameraPosType camPosType)
 	{
 		switch (camPosType)
@@ -304,11 +350,12 @@ namespace TE {
 		{
 			int degrees = RotatingCam();
 			ControlCamMovement(degrees);
+			move_cam(dt);
 			/*std::cout << "CAMERA->cameraCENTER.x : " << CAMERA->CenterOfCamera.x << std::endl;
 			std::cout << "CAMERA->cameraCENTER.y : " << CAMERA->CenterOfCamera.y << std::endl;
 			std::cout << "CAMERA->cameraPos.x: " << CAMERA->cameraPos.x << std::endl;
 			std::cout << "CAMERA->cameraPos.y: " << CAMERA->cameraPos.y << std::endl;*/
 		}
-		CAMERA->lookat(CAMERA->cameraPos, CAMERA->cameraTarget, CAMERA->cameraUp);
+		
 	}
 }

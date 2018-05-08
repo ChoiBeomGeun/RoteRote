@@ -144,7 +144,7 @@ void TriggerLogic::Update(float dt)
 			TriggerObjects->GetComponent<Sprite>()->m_TextureID = unusable_Trigger;
 
 		if (TriggerObjects->objectstyle != Objectstyle::Trigger90 &&
-			(TriggerObjects->objectstyle != Objectstyle::Trigger180))
+			(TriggerObjects->objectstyle != Objectstyle::Trigger180) && (TriggerObjects->objectstyle != Objectstyle::Trigger90Right))
 			continue;
 		if (TriggerObjects->objectstyle == Objectstyle::Trigger90)
 		{
@@ -159,7 +159,27 @@ void TriggerLogic::Update(float dt)
 				if (TriggerObjects->GetComponent<Trigger>()->Trigger_useable)
 				{
 					if (STATEMANAGER->b_IsRot90 && !STATEMANAGER->b_IsRot180) {
-						_90anglebutton(TriggerObjects);
+						_90angle_toleft_button(TriggerObjects);
+					}
+				}
+
+			}
+
+		}
+		if (TriggerObjects->objectstyle == Objectstyle::Trigger90Right)
+		{
+			if ((PHYSICS->RectvsRectCollisionCheck(FACTORY->GamePlayer->GetComponent<Transform>(),
+				TriggerObjects->GetComponent<Transform>()) &&
+				TriggerObjects->GetComponent<Trigger>()->Trigger_useable))
+			{
+				STATEMANAGER->b_IsGravityChanged = true;
+				STATEMANAGER->b_IsRot90 = true;
+				STATEMANAGER->b_IsRot180 = false;
+				//NumberOfTriggersActivation++;
+				if (TriggerObjects->GetComponent<Trigger>()->Trigger_useable)
+				{
+					if (STATEMANAGER->b_IsRot90 && !STATEMANAGER->b_IsRot180) {
+						_90angle_toright_button(TriggerObjects);
 					}
 				}
 
@@ -195,7 +215,8 @@ void TriggerLogic::Update(float dt)
 			TriggerObjects->GetComponent<Trigger>()->Trigger_useable = true;
 			TriggerObjects->GetComponent<Trigger>()->i_innertimer = 0;
 		}
-
+		// To do: 
+		// 90 degrees right way needs to be implemented
 		if (!TriggerObjects->GetComponent<Trigger>()->Trigger_useable)
 		{
 			if (TriggerObjects->objectstyle == Objectstyle::Trigger180)
@@ -262,7 +283,7 @@ TriggerLogic::~TriggerLogic()
 	
 }
 
-void TE::TriggerLogic::_90anglebutton(Object* pTrigger)
+void TE::TriggerLogic::_90angle_toleft_button(Object* pTrigger)
 {
 	pTrigger->GetComponent<Trigger>()->i_innertimer += .025f;
 
@@ -411,6 +432,163 @@ void TE::TriggerLogic::_90anglebutton(Object* pTrigger)
 			}
 		}
 	}
+}
+
+void TriggerLogic::_90angle_toright_button(Object* pTrigger)
+{
+	pTrigger->GetComponent<Trigger>()->i_innertimer += .025f;
+
+	// from 270
+	if (CAMERA->cameraUp.x == -1 && CAMERA->cameraUp.y == 0)
+	{
+		SOUNDMANAGER->PlaySounds(RotationSound, false);
+		isDegree[0] = true;
+		PHYSICS->Gravity90();
+		// to 0
+	}
+	if (isDegree[0])
+	{
+		// to 180
+		if (CAMERA->cameraUp.x <= 0 && CAMERA->cameraUp.y >= -1)
+		{
+			RotateButtons(2.25);
+			FACTORY->GetPlayer()->GetComponent<Transform>()->angle += 2.25;
+			CAMERA->cameraUp.x += .025f;
+			CAMERA->cameraUp.y -= .025f;
+			STATEMANAGER->b_IsRotating = true;
+
+		}
+		else
+		{
+			RotateButtons(-2.25);
+			FACTORY->GetPlayer()->GetComponent<Transform>()->angle -= 2.25;
+			CAMERA->cameraUp.x = 0.f;
+			CAMERA->cameraUp.y = -1.f;
+			STATEMANAGER->b_IsRot90 = false;
+			STATEMANAGER->b_IsGravityChanged = false;
+			STATEMANAGER->b_IsRotating = false;
+			pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
+			isDegree[0] = false;
+			if (pTrigger->GetComponent<Trigger>()->LifeTime > 0) {
+				--pTrigger->GetComponent<Trigger>()->LifeTime;
+				LimitedTexture(pTrigger);
+			}
+		}
+	}
+	// from 180
+	else if (CAMERA->cameraUp.x == 0 && CAMERA->cameraUp.y == -1)
+	{
+		SOUNDMANAGER->PlaySounds(RotationSound, false);
+		isDegree[1] = true;
+		PHYSICS->Gravity90();
+		// to 270
+	}
+	if (isDegree[1])
+	{
+		// to 90
+		if (CAMERA->cameraUp.x <= 1 && CAMERA->cameraUp.y >= 0)
+		{
+			RotateButtons(2.25);
+			FACTORY->GetPlayer()->GetComponent<Transform>()->angle += 2.25;
+			CAMERA->cameraUp.x += .025f;
+			CAMERA->cameraUp.y += .025f;
+			STATEMANAGER->b_IsRotating = true;
+
+		}
+		else
+		{
+			RotateButtons(-2.25);
+			FACTORY->GetPlayer()->GetComponent<Transform>()->angle -= 2.25;
+
+			CAMERA->cameraUp.x = 1.f;
+			CAMERA->cameraUp.y = 0.f;
+			STATEMANAGER->b_IsRot90 = false;
+			STATEMANAGER->b_IsGravityChanged = false;
+			STATEMANAGER->b_IsRotating = false;
+			pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
+			isDegree[1] = false;
+			if (pTrigger->GetComponent<Trigger>()->LifeTime > 0) {
+				--pTrigger->GetComponent<Trigger>()->LifeTime;
+				LimitedTexture(pTrigger);
+			}
+		}
+	}
+	// from 90
+	else if (CAMERA->cameraUp.x == 1 && CAMERA->cameraUp.y == 0)
+	{
+		SOUNDMANAGER->PlaySounds(RotationSound, false);
+		isDegree[2] = true;
+		PHYSICS->Gravity90();
+		// to 180
+	}
+	if (isDegree[2])
+	{
+		// to 0
+		if (CAMERA->cameraUp.x >= 0 && CAMERA->cameraUp.y <= 1)
+		{
+			FACTORY->GetPlayer()->GetComponent<Transform>()->angle += 2.25;
+			RotateButtons(+2.25);
+			CAMERA->cameraUp.x -= .025f;
+			CAMERA->cameraUp.y += .025f;
+			STATEMANAGER->b_IsRotating = true;
+		}
+		else
+		{
+			RotateButtons(-2.25);
+			FACTORY->GetPlayer()->GetComponent<Transform>()->angle -= 2.25;
+			//FACTORY->GetPlayer()->GetComponent<Transform>()->angle = ;
+			CAMERA->cameraUp.x = 0.f;
+			CAMERA->cameraUp.y = 1.f;
+			STATEMANAGER->b_IsRot90 = false;
+			STATEMANAGER->b_IsGravityChanged = false;
+			STATEMANAGER->b_IsRotating = false;
+			pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
+			isDegree[2] = false;
+			if (pTrigger->GetComponent<Trigger>()->LifeTime > 0) {
+				--pTrigger->GetComponent<Trigger>()->LifeTime;
+				LimitedTexture(pTrigger);
+			}
+
+		}
+	}
+	// from 0
+	else if (CAMERA->cameraUp.x == 0 && CAMERA->cameraUp.y == 1)
+	{
+		SOUNDMANAGER->PlaySounds(RotationSound, false);
+		isDegree[3] = true;
+		PHYSICS->Gravity90();
+	}
+	if (isDegree[3])
+	{
+		// to 270
+		if (CAMERA->cameraUp.x >= -1.f && CAMERA->cameraUp.y >= 0.f)
+		{
+			RotateButtons(2.25);
+			FACTORY->GetPlayer()->GetComponent<Transform>()->angle += 2.25;
+			CAMERA->cameraUp.x -= .025f;
+			CAMERA->cameraUp.y -= .025f;
+			STATEMANAGER->b_IsRotating = true;
+
+		}
+		else
+		{
+			RotateButtons(-2.25);
+			FACTORY->GetPlayer()->GetComponent<Transform>()->angle -= 2.25;
+			CAMERA->cameraUp.x = -1.f;
+			CAMERA->cameraUp.y = 0.f;
+			STATEMANAGER->b_IsRot90 = false;
+			STATEMANAGER->b_IsGravityChanged = false;
+			STATEMANAGER->b_IsRotating = false;
+			pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
+			isDegree[3] = false;
+			if (pTrigger->GetComponent<Trigger>()->LifeTime > 0) {
+				--pTrigger->GetComponent<Trigger>()->LifeTime;
+				LimitedTexture(pTrigger);
+			}
+		}
+	}
+	
+	
 }
 
 void TE::TriggerLogic::_180anglebutton(Object* pTrigger)
