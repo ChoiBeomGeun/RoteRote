@@ -75,11 +75,11 @@ void Engine::Initialize()
 	AddSystem(new ParticleManager());
 
 	AddSystem(new Graphics());
-	AddSystem(new StateManager());
+
 
 
 	AddSystem(new SoundManager());
-
+	AddSystem(new StateManager());
 
 	Filenameloading();
 
@@ -121,7 +121,8 @@ void Engine::GameLoop()
 			frametime = 0.016f;
 		for (unsigned int i = 0; i <SystemList.size(); ++i) {
 		
-			SystemList[i]->Update(frametime);
+		
+ 			SystemList[i]->Update(frametime);
 			if (!GameIsRunning)
 				break;
 		}
