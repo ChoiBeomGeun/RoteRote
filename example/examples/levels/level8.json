@@ -242,7 +242,7 @@
 			"y" : 0.0
 		},
 		"TextureDir" : "basicParticle.png"
-	}
+	},
 	"WorldSize" : 
 	{
 		"x" : 0,
