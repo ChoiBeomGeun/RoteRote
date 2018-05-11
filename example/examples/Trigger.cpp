@@ -292,7 +292,7 @@ void TE::TriggerLogic::_90angle_toleft_button(Object* pTrigger)
 	{
 		SOUNDMANAGER->PlaySounds(RotationSound, false);
 		isDegree[0] = true;
-		PHYSICS->Gravity90();
+		PHYSICS->Gravity90_to_left();
 	}
 	if (isDegree[0])
 	{
@@ -327,7 +327,7 @@ void TE::TriggerLogic::_90angle_toleft_button(Object* pTrigger)
 	{
 		SOUNDMANAGER->PlaySounds(RotationSound, false);
 		isDegree[1] = true;
-		PHYSICS->Gravity90();
+		PHYSICS->Gravity90_to_left();
 		// to 180
 	}
 	if (isDegree[1])
@@ -364,7 +364,7 @@ void TE::TriggerLogic::_90angle_toleft_button(Object* pTrigger)
 	{
 		SOUNDMANAGER->PlaySounds(RotationSound, false);
 		isDegree[2] = true;
-		PHYSICS->Gravity90();
+		PHYSICS->Gravity90_to_left();
 		// to 270
 	}
 	if (isDegree[2])
@@ -401,7 +401,7 @@ void TE::TriggerLogic::_90angle_toleft_button(Object* pTrigger)
 	{
 		SOUNDMANAGER->PlaySounds(RotationSound, false);
 		isDegree[3] = true;
-		PHYSICS->Gravity90();
+		PHYSICS->Gravity90_to_left();
 		// to 0
 	}
 	if (isDegree[3])
@@ -443,7 +443,7 @@ void TriggerLogic::_90angle_toright_button(Object* pTrigger)
 	{
 		SOUNDMANAGER->PlaySounds(RotationSound, false);
 		isDegree[0] = true;
-		PHYSICS->Gravity90();
+		PHYSICS->Gravity90_to_left();
 		// to 0
 	}
 	if (isDegree[0])
@@ -480,7 +480,7 @@ void TriggerLogic::_90angle_toright_button(Object* pTrigger)
 	{
 		SOUNDMANAGER->PlaySounds(RotationSound, false);
 		isDegree[1] = true;
-		PHYSICS->Gravity90();
+		PHYSICS->Gravity90_to_left();
 		// to 270
 	}
 	if (isDegree[1])
@@ -518,7 +518,7 @@ void TriggerLogic::_90angle_toright_button(Object* pTrigger)
 	{
 		SOUNDMANAGER->PlaySounds(RotationSound, false);
 		isDegree[2] = true;
-		PHYSICS->Gravity90();
+		PHYSICS->Gravity90_to_left();
 		// to 180
 	}
 	if (isDegree[2])
@@ -556,7 +556,7 @@ void TriggerLogic::_90angle_toright_button(Object* pTrigger)
 	{
 		SOUNDMANAGER->PlaySounds(RotationSound, false);
 		isDegree[3] = true;
-		PHYSICS->Gravity90();
+		PHYSICS->Gravity90_to_left();
 	}
 	if (isDegree[3])
 	{
