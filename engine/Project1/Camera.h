@@ -33,13 +33,11 @@ namespace TE {
 		~Camera();
 
 		void Initialize();
-		void lookat(const glm::vec3 & eye, const glm::vec3 &target, const glm::vec3& up);
 		void Roate180(void);
 		void scale(glm::vec3 scale);
 		void update();
 		void rotate(float angle);
 		void proj();
-		void onPlayer(bool isOnPlayer);
 
 		void followPlayer();
 

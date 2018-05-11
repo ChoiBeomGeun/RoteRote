@@ -237,8 +237,7 @@ Object * ObjectFactory::CreateArchetype(Archetype path)
 
 		if (path.HavingComponents[i] == ComponentType::CT_EMITTER)
 		{
-			Emitter * emitter = new Emitter();
-	
+			
 			temp->AddComponent<Emitter>();
 
 		}

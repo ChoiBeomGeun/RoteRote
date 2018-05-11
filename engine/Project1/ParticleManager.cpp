@@ -95,7 +95,7 @@ namespace TE {
 		trailNumber = 0;
 	}
 
-	void ParticleManager::Initialize(Emitter* pEmitter)
+	void ParticleManager::Initialize(Emitter* /*pEmitter*/)
 	{
 		std::vector<Emitter*>::iterator emitterIT;
 		for (emitterIT = m_EmitterList.begin(); emitterIT != m_EmitterList.end(); ++emitterIT)
@@ -146,7 +146,7 @@ namespace TE {
 		{
 			std::string Objectstyle = file.mRoot.get(object + to_string(i), false).get("ObjectType", false).asString();
 			std::string emitterType = file.mRoot.get(object + to_string(i), false).get("EmitterType", false).asString();
-			unsigned int emitterTypeID;
+			unsigned int emitterTypeID = 0;
 			if (emitterType == "ET_EXPLOSION")
 			{
 				emitterTypeID = ET_EXPLOSION;
@@ -161,8 +161,7 @@ namespace TE {
 			}
 			else if (emitterType == "ET_ROCKET")
 				emitterTypeID = ET_ROCKET;
-			std::cout << emitterType << std::endl;;
-
+			
 			float Xpos = file.mRoot.get(object + to_string(i), false).get("Position", false).get("x", false).asFloat();
 			float Ypos = file.mRoot.get(object + to_string(i), false).get("Position", false).get("y", false).asFloat();
 			float Xvel = file.mRoot.get(object + to_string(i), false).get("Vel", false).get("x", false).asFloat();
@@ -231,6 +230,7 @@ namespace TE {
 				pobject->Initialize();
 			}
 		}
+		return nullptr;
 	}
 
 	void ParticleManager::Update(float dt)
@@ -459,10 +459,10 @@ namespace TE {
 			pEmitter->pParticles[i].scale
 				= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
 			// set color with g_colors
-			pEmitter->pParticles[i].color[0] = g_colors[TUMath::GetRandomInt(-1, MAX_COLORS - 1)];
-			pEmitter->pParticles[i].color[1] = g_colors[TUMath::GetRandomInt(-1, MAX_COLORS - 1)];
-			pEmitter->pParticles[i].color[2] = g_colors[TUMath::GetRandomInt(-1, MAX_COLORS - 1)];
-			pEmitter->pParticles[i].color[3] = g_colors[TUMath::GetRandomInt(-1, MAX_COLORS - 1)];
+			pEmitter->pParticles[i].color[0] = 0.f/ 255;
+			pEmitter->pParticles[i].color[1] = 0.f / 255;
+			pEmitter->pParticles[i].color[2] = 0.f / 255;
+			pEmitter->pParticles[i].color[3] = 0.f / 255;
 			pEmitter->pParticles[i].lifetime = 0.0f;
 			pEmitter->pParticles[i].angle = rotation;
 		}
@@ -512,7 +512,7 @@ namespace TE {
 		{
 			pEmitter->pParticles[i].pos = glm::vec3(dis(gen) *.9f, dis(gen)*.5f, 0);
 			// set rotation with random
-			float rotation = TUMath::GetRandomFloat(0, TUMath::TWO_PI);
+			//float rotation = TUMath::GetRandomFloat(0, TUMath::TWO_PI);
 			pEmitter->pParticles[i].scale
 				= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
 			//pEmitter->pParticles[i].pos = glm::vec3(0);

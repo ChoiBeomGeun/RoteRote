@@ -28,7 +28,7 @@ static glm::vec3 up{ 0,1,0 };
 Camera::Camera()
 {
 	CenterOfCamera = { 0.f, 0.f };
-	cameraPos = glm::vec3(0, 0, 3);
+	
 	cameraTarget = glm::vec3(0, 0, -1);
 
 	m_camerObject = new CameraObject();
@@ -48,8 +48,8 @@ void Camera::Initialize()
 	cameraPos = eye;
 	cameraTarget = target;
 	cameraUp = up;
-	_zNear = 1.f;
-	_zFar = 1000.f;
+	_zNear = 999.f;
+	_zFar = 1.f;
 	angle = 30.f;
 	_aspect = (float)APP->_screenWidth / (float)APP->_screenHeight;
 	CAMERA->isCentered = true;
@@ -154,15 +154,6 @@ void TE::Camera::proj()
 	}
 }
 
-void TE::Camera::onPlayer(bool isOnPlayer)
-{
-	if (isOnPlayer)
-	{
-		CAMERA->cameraPos = FACTORY->GetPlayer()->GetComponent<Transform>()->position;
-		CAMERA->cameraPos.z = 999.f;
-		view = glm::lookAt(CAMERA->cameraPos, CAMERA->cameraTarget, CAMERA->cameraUp);
-	}
-}
 
 void TE::Camera::followPlayer()
 {
@@ -170,16 +161,6 @@ void TE::Camera::followPlayer()
 	glm::vec3 PaceDirection = FACTORY->GetPlayer()->GetComponent<Transform>()->position - cameraPos;
 	glm::vec3 StartPosition{ 0.f };
 
-}
-
-
-
-void Camera::lookat(const glm::vec3& eye, const glm::vec3& target, const glm::vec3 & up)
-{
-	cameraPos = eye;
-	cameraTarget = target;
-	cameraUp = up;
-	view = glm::lookAt(cameraPos, cameraTarget + cameraPos, cameraUp);
 }
 
 void Camera::Roate180(void)

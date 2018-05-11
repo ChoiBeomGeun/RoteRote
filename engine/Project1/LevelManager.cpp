@@ -37,6 +37,7 @@ namespace TE {
 
 }
 
+float scaleFactor = 1.f;
 
 void LevelManager::LoadLevel(std::string  path)
 {
@@ -98,6 +99,7 @@ void LevelManager::LoadLevel(std::string  path)
 				tempObject->GetComponent<Transform>()->position.y = Ypos;
 				tempObject->GetComponent<Transform>()->scale.x = Xscale;
 				tempObject->GetComponent<Transform>()->scale.y = Yscale;
+				tempObject->GetComponent<Transform>()->scale *= scaleFactor;
 				tempObject->GetComponent<Transform>()->angle = Rotation;
 				tempObject->GetComponent<Transform>()->rotation = glm::vec3(0, 0, 1);
 			

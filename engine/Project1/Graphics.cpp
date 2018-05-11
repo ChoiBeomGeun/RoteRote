@@ -70,8 +70,6 @@ void Graphics::Initialize(void)
 	CAMERA = pCamera;
 	drawStats = 0;
 
-
-
 	//loading OPENGL Funciton
 	DEBUG_ASSERT(glewInit() != GLEW_OK, "Initializing GLEW is failed\n");
 
@@ -83,10 +81,7 @@ void Graphics::Initialize(void)
 		glGenBuffers(1, &buffer);
 	if (basicVAO == 0)
 		glGenVertexArrays(1, &basicVAO);
-	/*if (particleVAO == 0)
-	glGenBuffers(1, &particleVAO);*/
-
-
+	
 	// first triangle
 	vertexData[0].setPosition(-0.5f, 0.5f, 0.0f);
 	vertexData[0].setColor(255, 255, 255, 255);
@@ -114,9 +109,9 @@ void Graphics::Initialize(void)
 	vertexData[5].setUV(0.0f, 1.0f); // 0, 1 // flip 1, 1
 
 
-									 //create opengl buffer object
+	//create opengl buffer object
 
-									 // tell opengl to bind our vertex buffer object
+	// tell opengl to bind our vertex buffer object
 	glBindBuffer(GL_ARRAY_BUFFER, buffer);
 	// upload the data to the GPU
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
@@ -127,11 +122,6 @@ void Graphics::Initialize(void)
 	glBindBuffer(GL_ARRAY_BUFFER, 0); // 0 mean unbind
 
 	drawbasic_attributes();
-	/*CAMERA->cameraPos = eye;
-	CAMERA->cameraTarget = target;
-	CAMERA->cameraUp = up;*/
-
-
 	setbasicUniformLoc();
 	initparticleShader();
 	drawparticle_attributes();
@@ -143,9 +133,7 @@ void Graphics::Initialize(void)
 #endif
 	time = 0.f;
 	splashtime = 0.f;
-	//   ImGuiIO& io = ImGui::GetIO();
-	/*glEnable(GL_ALPHA);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA);*/
+
 	Sprite::LoadAllSprites();
 
 }
@@ -229,7 +217,7 @@ void Graphics::Update(float dt)
 	glUniform1i(particleLoc[PSAMPLER], 0);
 	
 	view = CAMERA->view;
-	CAMERA->lookat(CAMERA->cameraPos, CAMERA->cameraTarget, CAMERA->cameraUp);
+	CAMERA->update();
 	for (std::vector<Sprite*>::iterator it = SpriteList.begin();
 		it != SpriteList.end(); ++it) {
 		glBindTexture(GL_TEXTURE_2D, (*it)->m_TextureID);
@@ -310,9 +298,6 @@ void TE::Graphics::drawOrthogonal(std::vector<Sprite*>::iterator iter)
 {
 	if (!(*iter)->pOwner->HasComponent<Emitter>())
 	{
-		//_basicProgram.use();
-		//glBindTexture(GL_TEXTURE_2D, (*iter)->m_TextureID);
-
 		drawStats = 1;
 		hudmodel = glm::mat4(1.0f);
 		hudmodel = glm::translate(hudmodel, (*iter)->pOwner->GetComponent<Transform>()->position);
@@ -464,29 +449,3 @@ void TE::Graphics::animationSetting()
 	}
 	glUniform1i(uniformLocation[ISANIMATION], 0);
 }
-
-
-
-//void TE::Graphics::MergeList()
-//{
-//	if (GRAPHICS->SpriteList.empty() || PARTICLEMANAGER->m_EmitterList.empty())
-//		return;
-//	else {
-//		for (auto g : GRAPHICS->SpriteList)
-//		{
-//			if (g->isPerspective)
-//				m_BaseGraphicsList.push_back(g);
-//		}
-//		for (auto p : PARTICLEMANAGER->m_EmitterList)
-//			m_BaseGraphicsList.push_back(p);
-//	}
-//
-//}
-//
-//void Graphics::FreeList()
-//{
-//	if (m_BaseGraphicsList.empty())
-//		return;
-//	else
-//		m_BaseGraphicsList.clear();
-//}

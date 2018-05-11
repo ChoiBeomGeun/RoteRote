@@ -43,7 +43,6 @@ namespace TE
 		bool DisplayTheWholeMap();
 		void FollowPlayer(glm::vec3 * cameraPos, glm::vec3 * cameraScale, float dt);
 		bool isCamToPlayer;
-		void defaultCameraSetting();
 
 	public: // camera rotating changing walls;
 		int RotatingCam();

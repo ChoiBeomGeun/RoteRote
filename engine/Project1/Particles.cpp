@@ -60,7 +60,7 @@ namespace TE {
 		}
 	}
 
-	void Emitter::Update(float dt)
+	void Emitter::Update(float /*dt*/)
 	{
 		for (auto p : PARTICLEMANAGER->m_EmitterList)
 		{

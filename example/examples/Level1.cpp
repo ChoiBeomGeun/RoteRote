@@ -91,7 +91,6 @@ void Level1::Init()
 	Loading->GetComponent<Sprite>()->texture_load("loading.png");
 */
 
-	
 	camAct.isCamToPlayer = true;
 	LosesoundOnetime = true;
 	CenterToPlayer = true;
@@ -101,14 +100,8 @@ void Level1::Init()
 	path2 = STATEMANAGER->Loadtolevelname;
 	_camPaceSpeed = 100.0f;
 
-
 	moving = false;
-	//increasing = false;
-	CAMERA->onPlayer(false);
-	//mclicked = false;
-
-
-
+	
 	std::string saveLevel = path2;
 
 	path2 = ".\\autoplays.\\" + path2;
@@ -157,11 +150,9 @@ void Level1::Init()
 
 
 	camAct.cameraOriginPos = CAMERA->cameraPos;
-	CAMERA->cameraPos.z = 1000.f;
 	CAMERA->CenterOfCamera.x = FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x + (FACTORY->RightBoundary()->GetComponent<Transform>()->position.x - FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x) *.5f;
 	CAMERA->CenterOfCamera.y = FACTORY->DownBoundary()->GetComponent<Transform>()->position.y + (FACTORY->UpBoundary()->GetComponent<Transform>()->position.y - FACTORY->DownBoundary()->GetComponent<Transform>()->position.y)*.5f;
-	CAMERA->cameraPos.x = CAMERA->CenterOfCamera.x;
-	CAMERA->cameraPos.y = CAMERA->CenterOfCamera.y;
+	glm::vec2(CAMERA->cameraPos) = CAMERA->CenterOfCamera;
 	STATEMANAGER->IsDrawing = false;
 	//CAMERA->lookatMap(false); 
 

@@ -7,7 +7,7 @@
 #include <random>
 #include <iostream>
 
-float CameraPosz = 999.f;
+float CameraPosz = 500.f;
 namespace TE {
 	CameraAction::CameraAction()
 	{
@@ -46,13 +46,13 @@ namespace TE {
 
 	void CameraAction::FollowPlayer(glm::vec3 * cameraPos, glm::vec3 * cameraScale, float dt)
 	{
-		glm::vec3 displacement = FACTORY->GetPlayer()->GetComponent<Transform>()->position - CAMERA->cameraPos;
+		glm::vec2 displacement = glm::vec2(FACTORY->GetPlayer()->GetComponent<Transform>()->position) - glm::vec2(CAMERA->cameraPos);
 		cameraOriginPos = glm::vec3();
 		//	auto distanceFromStart = glm::length(displacement);
-		glm::vec3 _camPacedirction = -displacement;
+		glm::vec2 _camPacedirction = -displacement;
 		//_camPacedirction = glm::normalize(_camPacedirction);
-		CAMERA->cameraPos -= _camPacedirction  * _camPaceSpeed * dt;
-		CAMERA->cameraPos.z = 999.f;
+		glm::vec2(CAMERA->cameraPos) -= _camPacedirction  * _camPaceSpeed * dt;
+	
 
 		*cameraPos = CAMERA->cameraPos;
 
@@ -61,16 +61,12 @@ namespace TE {
 			&FACTORY->GetPlayer()->GetComponent<Transform>()->scale))
 		{
 			CAMERA->cameraPos = FACTORY->GetPlayer()->GetComponent<Transform>()->position;
-			CAMERA->cameraPos.z = 999.f;
+			CAMERA->cameraPos.z = CameraPosz;
 			CAMERA->isCentered = false;
 			isCamToPlayer = false;
 		}
 	}
 
-	void CameraAction::defaultCameraSetting()
-	{
-		CAMERA->cameraPos = glm::vec3(0, 0, 999.f);
-	}
 
 	int CameraAction::RotatingCam()
 	{
@@ -95,6 +91,7 @@ namespace TE {
 			return EN_270;
 
 		}
+		return false;
 	}
 	
 	void CameraAction::ControlCamMovement(int type)
@@ -116,7 +113,7 @@ namespace TE {
 					CAMERA->CenterOfCamera.x = downblock.x;
 					CAMERA->CenterOfCamera.y = downblock.y + APP->_screenHeight*.25f;
 
-					CAMERA->cameraPos = glm::vec3(CAMERA->CenterOfCamera, CameraPosz);
+					glm::vec2(CAMERA->cameraPos) = CAMERA->CenterOfCamera;
 					float LeftXLimit, RightXLimit;
 					LeftXLimit = downblock.x - APP->_screenWidth*.25f;
 					RightXLimit = downblock.x + APP->_screenWidth *.25f;
@@ -134,13 +131,12 @@ namespace TE {
 					{
 					
 					}*/
-					CAMERA->cameraPos.z = CameraPosz;
+					
 				}
 				else {
 					CAMERA->CenterOfCamera.x = leftblock.x + (std::abs(leftblock.x - rightblock.x)*.5f);
 					CAMERA->CenterOfCamera.y = downblock.y + (std::abs(upblock.y - downblock.y)*.5f);
 
-					CAMERA->cameraPos = glm::vec3(CAMERA->CenterOfCamera, CameraPosz);
 					// To do: seprate sections of map 
 					float UpYLimit, DownYLimit, LeftXLimit, RightXLimit;
 
@@ -164,12 +160,7 @@ namespace TE {
 					else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.y > DownYLimit || FACTORY->GetPlayer()->GetComponent<Transform>()->position.y < UpYLimit)
 						CAMERA->cameraPos.y = FACTORY->GetPlayer()->GetComponent<Transform>()->position.y;
 
-
-					CAMERA->cameraPos.z = CameraPosz;
 				}
-				
-				
-
 			}
 			else if (type == CameraRotation::EN_90)
 			{
@@ -182,8 +173,6 @@ namespace TE {
 
 				CAMERA->CenterOfCamera.x = downblock.x + ((upblock.x - downblock.x)*.5f);
 				CAMERA->CenterOfCamera.y = leftblock.y + ((rightblock.y - leftblock.y)*.5f);
-
-				CAMERA->cameraPos = glm::vec3(CAMERA->CenterOfCamera, CameraPosz);
 
 				float UpYLimit, DownYLimit, LeftXLimit, RightXLimit;
 				// 90 degrees rotated x becomes Y 
@@ -198,7 +187,7 @@ namespace TE {
 					CAMERA->cameraPos.x = DownYLimit;
 				else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x < UpYLimit || FACTORY->GetPlayer()->GetComponent<Transform>()->position.x > DownYLimit)
 					CAMERA->cameraPos.x = FACTORY->GetPlayer()->GetComponent<Transform>()->position.x;
-				CAMERA->cameraPos.z = CameraPosz;
+				
 			}
 			else if (type == CameraRotation::EN_180)
 			{
@@ -211,8 +200,6 @@ namespace TE {
 				CAMERA->CenterOfCamera.x = leftblock.x - (std::abs(leftblock.x - rightblock.x)*.5f);
 				CAMERA->CenterOfCamera.y = downblock.y - (std::abs(upblock.y - downblock.y)*.5f);
 
-				CAMERA->cameraPos = glm::vec3(CAMERA->CenterOfCamera, CameraPosz);
-
 				// To do: seprate sections of map 
 				float UpYLimit, DownYLimit, LeftXLimit, RightXLimit;
 
@@ -220,7 +207,6 @@ namespace TE {
 				DownYLimit = downblock.y - std::abs(CAMERA->CenterOfCamera.y - downblock.y)*.5f;
 				LeftXLimit = leftblock.x - std::abs(CAMERA->CenterOfCamera.x - leftblock.x)*.5f;
 				RightXLimit = rightblock.x + std::abs(rightblock.x - CAMERA->CenterOfCamera.x)*.5f;
-
 
 				if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x <= RightXLimit)			// when player is on the left.
 					CAMERA->cameraPos.x = RightXLimit;
@@ -236,7 +222,6 @@ namespace TE {
 				else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.y < DownYLimit || FACTORY->GetPlayer()->GetComponent<Transform>()->position.y > UpYLimit)
 					CAMERA->cameraPos.y = FACTORY->GetPlayer()->GetComponent<Transform>()->position.y;
 
-				CAMERA->cameraPos.z = CameraPosz;
 
 			}
 			else if (type == CameraRotation::EN_270)
@@ -262,7 +247,7 @@ namespace TE {
 					CAMERA->cameraPos.x = DownYLimit;
 				else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x > UpYLimit || FACTORY->GetPlayer()->GetComponent<Transform>()->position.x < DownYLimit)
 					CAMERA->cameraPos.x = FACTORY->GetPlayer()->GetComponent<Transform>()->position.x;
-				CAMERA->cameraPos.z = CameraPosz;
+				
 			}
 		}
 	}
@@ -278,8 +263,7 @@ namespace TE {
 			CAMERA->cameraPos.y = FACTORY->GetPlayer()->GetComponent<Transform>()->position.y;
 		else if(IsCamMovHoz && IsCamMovVer)
 		{
-			CAMERA->cameraPos = FACTORY->GetPlayer()->GetComponent<Transform>()->position;
-			CAMERA->cameraPos.z = 999.f;
+			glm::vec2(CAMERA->cameraPos) = glm::vec2(FACTORY->GetPlayer()->GetComponent<Transform>()->position);
 		}
 	}
 
@@ -310,22 +294,22 @@ namespace TE {
 		switch (camPosType)
 		{
 		case EN_Default:
-			CAMERA->cameraPos = glm::vec3(0, 0, 999.f);
+			CAMERA->cameraPos = glm::vec3(0, 0, CameraPosz);
 			break;
 		case EN_Splash:
-			CAMERA->cameraPos = glm::vec3(0, 0, 999.f);
+			CAMERA->cameraPos = glm::vec3(0, 0, CameraPosz);
 			break;
 		case EN_Menu:
-			CAMERA->cameraPos = glm::vec3(0, 0, 999.f);
+			CAMERA->cameraPos = glm::vec3(0, 0, CameraPosz);
 			break;
 		case EN_LevelSelect:
-			CAMERA->cameraPos = glm::vec3(0, 0, 999.f);
+			CAMERA->cameraPos = glm::vec3(0, 0, CameraPosz);
 			break;
 		case EN_playerPos:
-			CAMERA->cameraPos = glm::vec3(glm::vec3(FACTORY->GetPlayer()->GetComponent<Transform>()->position.x , FACTORY->GetPlayer()->GetComponent<Transform>()->position.y ,0));
+			glm::vec2(CAMERA->cameraPos) = glm::vec2(FACTORY->GetPlayer()->GetComponent<Transform>()->position);
 			break;
 		case EN_BOUNDARY:
-			CAMERA->cameraPos = glm::vec3(glm::vec3(CAMERA->CenterOfCamera.x, CAMERA->CenterOfCamera.y, CAMERA->cameraPos.z));
+			glm::vec2(CAMERA->cameraPos) = CAMERA->CenterOfCamera;
 		case End:
 			break;
 		}	
@@ -335,7 +319,7 @@ namespace TE {
 			return false;
 		CAMERA->CenterOfCamera.x = FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x + (FACTORY->RightBoundary()->GetComponent<Transform>()->position.x - FACTORY->LeftBoundary()->GetComponent<Transform>()->position.x) *.5f;
 		CAMERA->CenterOfCamera.y = FACTORY->DownBoundary()->GetComponent<Transform>()->position.y + (FACTORY->UpBoundary()->GetComponent<Transform>()->position.y - FACTORY->DownBoundary()->GetComponent<Transform>()->position.y)*.5f;
-		CAMERA->cameraPos = glm::vec3(glm::vec2(CAMERA->CenterOfCamera.x, CAMERA->CenterOfCamera.y), CAMERA->cameraPos.z);
+		glm::vec2(CAMERA->cameraPos) = glm::vec2(CAMERA->CenterOfCamera);
 		return true;
 	}
 
