@@ -154,6 +154,13 @@ void LevelManager::LoadLevel(std::string  path)
 					tempObject->GetComponent<Trigger>()->TriggerType = "90";
 					tempObject->objectstyle = Objectstyle::Trigger90;
 				}
+
+
+				if (Objectstyle == "Trigger90Right") {
+					tempObject->GetComponent<Trigger>()->TriggerType = "90";
+					tempObject->objectstyle = Objectstyle::Trigger90;
+				}
+
 				tempObject->GetComponent<Trigger>()->MaxLife = file.mRoot.get(object + to_string(i), false).get("TriggerLifeTime", false).asInt();
 			}
 
@@ -243,6 +250,11 @@ void LevelManager::LoadLevel(std::string  path)
 			//tempObject = FACTORY->CreateTrigger(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0));
 			tempObject->objectstyle = Objectstyle::Trigger90;
 			
+		}
+		else if (Objectstyle == "Trigger90Right")
+		{
+			//tempObject = FACTORY->CreateTrigger(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0));
+			tempObject->objectstyle = Objectstyle::Trigger90Right;
 		}
 		else if (Objectstyle == "Trigger180")
 		{
@@ -396,6 +408,9 @@ void LevelManager::SaveLevel(std::string  path)
 			break;
 		case Objectstyle::AttachWall:
 			root[object + to_string(i)]["ObjectType"] = "AttachWall";
+			break;
+		case Objectstyle::Trigger90Right:
+			root[object + to_string(i)]["ObjectType"] = "Trigger90Right";
 			break;
 			/*case Objectstyle::Camera:
 			root[object + to_string(i)]["ObjectType"] = "Camera";

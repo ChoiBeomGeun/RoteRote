@@ -74,6 +74,7 @@ void Option::Load()
 
 void Option::Init()
 {
+	CreditsIsON = false;
 	rotation_radius = 100;
 	Selection = OptionList::Option_SoundOnOff;
 	delta_angle = 90;
@@ -186,7 +187,7 @@ void Option::Update(float dt)
 			}
 			
 			ooCredits = FACTORY->CreateArchetype(ReadingArchetype("Button.json"));
-			ooCredits->GetComponent<Transform>()->SetPosition(glm::vec3(16.260f,-48.871f,-1));
+			ooCredits->GetComponent<Transform>()->SetPosition(glm::vec3(16.260f,-16.260f,-1));
 			ooCredits->GetComponent<Transform>()->SetScale(glm::vec3(1025.041f, 365.854f,0));
 			ooCredits->GetComponent<Sprite>()->texture_load("CreditsText.png");
 			CreditsIsON = true;

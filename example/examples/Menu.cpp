@@ -56,6 +56,7 @@ void Menu::Load()
 
  void Menu::Init()
 {
+	 HowToPlayIsOn = false;
 	 rotation_radius = 100;
 	 Selection = MenuList::Menu_Start;
 	 delta_angle = 90;

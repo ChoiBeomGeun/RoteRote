@@ -103,6 +103,14 @@ void TriggerLogic::Initialize(void)
 			TriggerList.push_back(Objects.second);
 
 		}
+		else if (FACTORY->ObjectIDMap[Objects.first]->objectstyle == Objectstyle::Trigger90Right)
+		{
+			//Objects.second->GetComponent<Trigger>()->i_innertimer = 100;
+			Objects.second->GetComponent<Trigger>()->i_innertimer = 0;
+			Objects.second->GetComponent<Trigger>()->Trigger_useable = true;
+			TriggerList.push_back(Objects.second);
+
+		}
 
 	}
 	for (int i = 0; i < 4; ++i)

@@ -307,7 +307,7 @@ Object * ObjectFactory::CreateWall(const glm::vec3 & pos, const glm::vec3& scale
 
 Object *  ObjectFactory::GetPlayer(void)
 {
-	Object *temp = nullptr;
+  	Object *temp = nullptr;
 	for (auto Objects : FACTORY->ObjectIDMap)
 	{
 		if (Objects.second->HasComponent<PlayerController>() )
