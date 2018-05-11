@@ -183,7 +183,6 @@ void Physics::ResolveCollision(Pair *M)
 	float rhs_mass = M->m_rhs->pm_mass;
 	if (M->m_rhs->pm_invmass != 0.f)
 	{
-		if ((!M->m_lhs->gravityOn))
 		{
 			lhs_invmass = 0.f;
 			lhs_mass = 0.f;
@@ -731,7 +730,7 @@ void Physics::Gravity180()
 		GravityType = Gravity::y_Plus;
 }
 
-void Physics::Gravity90()
+void Physics::Gravity90_to_left()
 {
 	if (GravityType == Gravity::x_Plus)
 	{
@@ -752,6 +751,30 @@ void Physics::Gravity90()
 	{
 		gravity = glm::vec3(gravityScale, 0, 0);
 		GravityType = Gravity::x_Minus;
+	}
+}
+
+void Physics::Gravity90_to_right()
+{
+	if (GravityType == Gravity::x_Plus)
+	{
+		gravity = glm::vec3(0, -gravityScale, 0);
+		GravityType = Gravity::y_Plus;
+	}
+	else if (GravityType == Gravity::y_Plus)
+	{
+		gravity = glm::vec3(gravityScale, 0, 0);
+		GravityType = Gravity::x_Minus;
+	}
+	else if (GravityType == Gravity::x_Minus)
+	{
+		gravity = glm::vec3(0, gravityScale, 0);
+		GravityType = Gravity::y_Minus;
+	}
+	else if (GravityType == Gravity::y_Minus)
+	{
+		gravity = glm::vec3(-gravityScale, 0, 0);
+		GravityType = Gravity::x_Plus;
 	}
 }
 

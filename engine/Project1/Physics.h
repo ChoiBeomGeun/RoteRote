@@ -57,7 +57,8 @@ namespace TE {
 
 		float gravityScale;
 		void Gravity180();
-		void Gravity90();
+		void Gravity90_to_left();
+		void Gravity90_to_right();
 		bool GetIsPlayerGround();
 		bool IsMapEditorOn = false;
 
