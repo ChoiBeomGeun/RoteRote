@@ -51,14 +51,14 @@ void LevelSelect::Load()
 	for (int i = 1; i <= LevelList::quit + 1; ++i)
 		Levelpng[i - 1] = FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(NumberToString(i) + ".png");
 
-
+	LevelList = STATEMANAGER->i_LevelSelect - 1;
 }
 
 
 void LevelSelect::Init()
 {
-	FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Levelpng[0];
-	LevelList = LevelList::level1;
+	FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Levelpng[LevelList];
+
 	IsRotating = false;
 	IsLeftPressed = false;
 	IsRightPreesed = false;

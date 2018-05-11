@@ -320,7 +320,7 @@ void TE::TriggerLogic::_90angle_toleft_button(Object* pTrigger)
 			CAMERA->cameraUp.x = 1.f;
 			CAMERA->cameraUp.y = 0.f;
 			STATEMANAGER->b_IsRot90 = false;
-			STATEMANAGER->b_IsGravityChanged = false;
+			STATEMANAGER->b_IsGravityChanged = true;
 			STATEMANAGER->b_IsRotating = false;
 			pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 			isDegree[0] = false;
@@ -356,7 +356,7 @@ void TE::TriggerLogic::_90angle_toleft_button(Object* pTrigger)
 			CAMERA->cameraUp.x = 0.f;
 			CAMERA->cameraUp.y = -1.f;
 			STATEMANAGER->b_IsRot90 = false;
-			STATEMANAGER->b_IsGravityChanged = false;
+			STATEMANAGER->b_IsGravityChanged = true;
 			STATEMANAGER->b_IsRotating = false;
 			pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 			isDegree[1] = false;
@@ -394,7 +394,7 @@ void TE::TriggerLogic::_90angle_toleft_button(Object* pTrigger)
 			CAMERA->cameraUp.x = -1.f;
 			CAMERA->cameraUp.y = 0.f;
 			STATEMANAGER->b_IsRot90 = false;
-			STATEMANAGER->b_IsGravityChanged = false;
+			STATEMANAGER->b_IsGravityChanged = true;
 			STATEMANAGER->b_IsRotating = false;
 			pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 			isDegree[2] = false;
@@ -430,7 +430,7 @@ void TE::TriggerLogic::_90angle_toleft_button(Object* pTrigger)
 			CAMERA->cameraUp.x = 0.f;
 			CAMERA->cameraUp.y = 1.f;
 			STATEMANAGER->b_IsRot90 = false;
-			STATEMANAGER->b_IsGravityChanged = false;
+			STATEMANAGER->b_IsGravityChanged = true;
 			STATEMANAGER->b_IsRotating = false;
 			pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 			isDegree[3] = false;
@@ -451,7 +451,7 @@ void TriggerLogic::_90angle_toright_button(Object* pTrigger)
 	{
 		SOUNDMANAGER->PlaySounds(RotationSound, false);
 		isDegree[0] = true;
-		PHYSICS->Gravity90_to_left();
+		PHYSICS->Gravity90_to_right();
 		// to 0
 	}
 	if (isDegree[0])
@@ -473,7 +473,7 @@ void TriggerLogic::_90angle_toright_button(Object* pTrigger)
 			CAMERA->cameraUp.x = 0.f;
 			CAMERA->cameraUp.y = -1.f;
 			STATEMANAGER->b_IsRot90 = false;
-			STATEMANAGER->b_IsGravityChanged = false;
+			STATEMANAGER->b_IsGravityChanged = true;
 			STATEMANAGER->b_IsRotating = false;
 			pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 			isDegree[0] = false;
@@ -488,7 +488,7 @@ void TriggerLogic::_90angle_toright_button(Object* pTrigger)
 	{
 		SOUNDMANAGER->PlaySounds(RotationSound, false);
 		isDegree[1] = true;
-		PHYSICS->Gravity90_to_left();
+		PHYSICS->Gravity90_to_right();
 		// to 270
 	}
 	if (isDegree[1])
@@ -511,7 +511,7 @@ void TriggerLogic::_90angle_toright_button(Object* pTrigger)
 			CAMERA->cameraUp.x = 1.f;
 			CAMERA->cameraUp.y = 0.f;
 			STATEMANAGER->b_IsRot90 = false;
-			STATEMANAGER->b_IsGravityChanged = false;
+			STATEMANAGER->b_IsGravityChanged = true;
 			STATEMANAGER->b_IsRotating = false;
 			pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 			isDegree[1] = false;
@@ -526,7 +526,7 @@ void TriggerLogic::_90angle_toright_button(Object* pTrigger)
 	{
 		SOUNDMANAGER->PlaySounds(RotationSound, false);
 		isDegree[2] = true;
-		PHYSICS->Gravity90_to_left();
+		PHYSICS->Gravity90_to_right();
 		// to 180
 	}
 	if (isDegree[2])
@@ -548,7 +548,7 @@ void TriggerLogic::_90angle_toright_button(Object* pTrigger)
 			CAMERA->cameraUp.x = 0.f;
 			CAMERA->cameraUp.y = 1.f;
 			STATEMANAGER->b_IsRot90 = false;
-			STATEMANAGER->b_IsGravityChanged = false;
+			STATEMANAGER->b_IsGravityChanged = true;
 			STATEMANAGER->b_IsRotating = false;
 			pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 			isDegree[2] = false;
@@ -564,7 +564,7 @@ void TriggerLogic::_90angle_toright_button(Object* pTrigger)
 	{
 		SOUNDMANAGER->PlaySounds(RotationSound, false);
 		isDegree[3] = true;
-		PHYSICS->Gravity90_to_left();
+		PHYSICS->Gravity90_to_right();
 	}
 	if (isDegree[3])
 	{
@@ -585,7 +585,7 @@ void TriggerLogic::_90angle_toright_button(Object* pTrigger)
 			CAMERA->cameraUp.x = -1.f;
 			CAMERA->cameraUp.y = 0.f;
 			STATEMANAGER->b_IsRot90 = false;
-			STATEMANAGER->b_IsGravityChanged = false;
+			STATEMANAGER->b_IsGravityChanged = true;
 			STATEMANAGER->b_IsRotating = false;
 			pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
 			isDegree[3] = false;
@@ -671,7 +671,7 @@ void TE::TriggerLogic::_180anglebutton(Object* pTrigger)
 				FACTORY->GetPlayer()->GetComponent<Transform>()->angle += 4.5;
 				CAMERA->cameraUp.x = 0.f;
 				CAMERA->cameraUp.y = -1.f;
-				STATEMANAGER->b_IsGravityChanged = false;
+				STATEMANAGER->b_IsGravityChanged = true;
 				STATEMANAGER->b_IsRot180 = false;
 				STATEMANAGER->b_IsRotating = false;
 				pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
@@ -719,7 +719,7 @@ void TE::TriggerLogic::_180anglebutton(Object* pTrigger)
 				FACTORY->GetPlayer()->GetComponent<Transform>()->angle += 4.5;
 				CAMERA->cameraUp.x = -1.f;
 				CAMERA->cameraUp.y = 0.f;
-				STATEMANAGER->b_IsGravityChanged = false;
+				STATEMANAGER->b_IsGravityChanged = true;
 				STATEMANAGER->b_IsRot180 = false;
 				STATEMANAGER->b_IsRotating = false;
 				pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
@@ -766,7 +766,7 @@ void TE::TriggerLogic::_180anglebutton(Object* pTrigger)
 				FACTORY->GetPlayer()->GetComponent<Transform>()->angle += 4.5;
 				CAMERA->cameraUp.x = 0.f;
 				CAMERA->cameraUp.y = 1.f;
-				STATEMANAGER->b_IsGravityChanged = false;
+				STATEMANAGER->b_IsGravityChanged = true;
 				STATEMANAGER->b_IsRot180 = false;
 				STATEMANAGER->b_IsRotating = false;
 				pTrigger->GetComponent<Trigger>()->Trigger_useable = false;
@@ -815,7 +815,7 @@ void TE::TriggerLogic::_180anglebutton(Object* pTrigger)
 				FACTORY->GetPlayer()->GetComponent<Transform>()->angle += 4.5;
 				CAMERA->cameraUp.x = 1.f;
 				CAMERA->cameraUp.y = 0.f;
-				STATEMANAGER->b_IsGravityChanged = false;
+				STATEMANAGER->b_IsGravityChanged = true;
 				STATEMANAGER->b_IsRot180 = false;
 				STATEMANAGER->b_IsRotating = false;
 				pTrigger->GetComponent<Trigger>()->Trigger_useable = false;

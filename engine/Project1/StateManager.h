@@ -71,7 +71,7 @@ namespace TE {
 		std::vector<BaseStage*> v_StatesLists;
 		std::string Loadtolevelname;
 		int i_CurrentStateNumber;
-		int i_LevelSelect = -1;
+		int i_LevelSelect = 1;
 		int i_NumberOfstage;
 		int i_StageToMove;
 		int i_PauseStageNumber;

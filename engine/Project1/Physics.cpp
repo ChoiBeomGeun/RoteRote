@@ -46,7 +46,7 @@ void Physics::Initialize() {
 	GravityType = Gravity::y_Minus;
 	gravity = glm::vec3(0, gravityScale, 0);
 	IsPlayerGround = false;
-	
+
 	//gravity.Set(0, gravityScale, 0);
 }
 
@@ -72,7 +72,7 @@ void Physics::ExplictEulerIntegrator(float dt) {
 
 		if (STATEMANAGER->b_IsReplay || STATEMANAGER->b_IsAutoplaying)
 		{
-			if ((*i).second->GetOwner()->HasComponent<PlayerController>() )
+			if ((*i).second->GetOwner()->HasComponent<PlayerController>())
 				continue;
 
 		}
@@ -92,13 +92,17 @@ void Physics::ExplictEulerIntegrator(float dt) {
 			//(*i).second->pm_velocity.SetZero();
 			(*i).second->pm_velocity += gravity * 100.f * dt;
 		}
-		else if(!(*i).second->pOwner->objectstyle == Player)
+		else if (!(*i).second->pOwner->objectstyle == Player)
 			(*i).second->pm_velocity += (gravity + (*i).second->m_force * (*i).second->pm_invmass)*dt;
 
 		if (gravity.x != 0.f)
 		{
 			if (STATEMANAGER->b_IsGravityChanged)
+			{
 				(*i).second->pm_velocity.x = 0;
+				STATEMANAGER->b_IsGravityChanged = false;
+			}
+		
 			(*i).second->pm_velocity.y *= 0.99f * dt * 50.f;
 			// if Gravity Change, vel.y = 0 
 		}
@@ -106,7 +110,10 @@ void Physics::ExplictEulerIntegrator(float dt) {
 		if (gravity.y != 0.f)
 		{
 			if (STATEMANAGER->b_IsGravityChanged)
+			{
 				(*i).second->pm_velocity.y = 0;
+				STATEMANAGER->b_IsGravityChanged = false;
+			}
 			(*i).second->pm_velocity.x *= 0.99f * dt * 50.f;
 		}
 
@@ -183,6 +190,7 @@ void Physics::ResolveCollision(Pair *M)
 	float rhs_mass = M->m_rhs->pm_mass;
 	if (M->m_rhs->pm_invmass != 0.f)
 	{
+		if ((!M->m_lhs->gravityOn))
 		{
 			lhs_invmass = 0.f;
 			lhs_mass = 0.f;

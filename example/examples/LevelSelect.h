@@ -32,7 +32,7 @@ public:
 private:
 	TE::CameraAction LvlSelectCam;
 
-	int LevelList;
+	int LevelList =  LevelList::level1;
 	bool IsRotating;
 
 	float selectAngle;
