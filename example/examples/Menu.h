@@ -19,6 +19,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "StateLists.h"
 #include "MenuList.h"
 #include "CameraMovement.h"
+#include "Object.h"
 
 class Menu  :public BaseStage
 {
@@ -53,6 +54,9 @@ private:
 	unsigned int Menu_HowToPlay;
 	unsigned int Menu_Quit;
 	unsigned int Menu_Option;
+
+	TE::Object* obj_howToPlay;
+	TE::Object* obj_confirmation;
 
 	MenuList Selection;
 

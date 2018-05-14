@@ -21,7 +21,7 @@ JUMP SHOULDN'T WORK WHILE PLAYER IS ON AIR
 #include "Graphics.h"
 #include <iostream>
 #define SPEED 4000.f
-#define MAXSPEED 200.f
+#define MAXSPEED 150.f
 #define WALLJUMP 500.f
 #define WALLATTACH 10.f
 using namespace TE;
@@ -208,12 +208,12 @@ void PlayerController::Movement(float dt)
 				this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(0, JumpSpeed, 0);
 				JumpTriggered = true;
 			}
-			if (Input::IsReleased(SDL_SCANCODE_SPACE))
-			{
-				FACTORY->GetPlayer()->GetComponent<Animation>()->isJumping = true;
-				if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y > minJumpVelocity)
-					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = minJumpVelocity;
-			}
+			//if (Input::IsReleased(SDL_SCANCODE_SPACE))
+			//{
+			//	FACTORY->GetPlayer()->GetComponent<Animation>()->isJumping = true;
+			//	if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y > minJumpVelocity)
+			//		this->GetOwner()->GetComponent<Body>()->pm_velocity.y = minJumpVelocity;
+			//}
 		}
 		if (this->GetOwner()->GetComponent<Body>()->GroundType != Grounded::Ground)
 		{
@@ -325,11 +325,11 @@ void PlayerController::Movement(float dt)
  				this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(0, JumpSpeed, 0);
 				JumpTriggered = true;
 			}
-			if (Input::IsReleased(SDL_SCANCODE_SPACE))
-			{
-				if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y < -minJumpVelocity)
-					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -minJumpVelocity;
-			}
+			//if (Input::IsReleased(SDL_SCANCODE_SPACE))
+			//{
+			//	if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y < -minJumpVelocity)
+			//		this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -minJumpVelocity;
+			//}
 		}
 		if (this->GetOwner()->GetComponent<Body>()->GroundType != Grounded::Ground)
 		{
@@ -426,11 +426,11 @@ void PlayerController::Movement(float dt)
 				this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(JumpSpeed, 0, 0);
 				JumpTriggered = true;
 			}
-			if (Input::IsReleased(SDL_SCANCODE_SPACE))
-			{
-				if (this->GetOwner()->GetComponent<Body>()->pm_velocity.x > minJumpVelocity)
-					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = minJumpVelocity;
-			}
+			//if (Input::IsReleased(SDL_SCANCODE_SPACE))
+			//{
+			//	if (this->GetOwner()->GetComponent<Body>()->pm_velocity.x > minJumpVelocity)
+			//		this->GetOwner()->GetComponent<Body>()->pm_velocity.x = minJumpVelocity;
+			//}
 		}
 		if (this->GetOwner()->GetComponent<Body>()->GroundType != Grounded::Ground)
 		{
@@ -527,11 +527,11 @@ void PlayerController::Movement(float dt)
 				this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(JumpSpeed, 0, 0);
 				JumpTriggered = true;
 			}
-			if (Input::IsReleased(SDL_SCANCODE_SPACE))
-			{
-				if (this->GetOwner()->GetComponent<Body>()->pm_velocity.x < -minJumpVelocity)
-					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -minJumpVelocity;
-			}
+			//if (Input::IsReleased(SDL_SCANCODE_SPACE))
+			//{
+			//	if (this->GetOwner()->GetComponent<Body>()->pm_velocity.x < -minJumpVelocity)
+			//		this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -minJumpVelocity;
+			//}
 		}
 		if (this->GetOwner()->GetComponent<Body>()->GroundType != Grounded::Ground)
 		{

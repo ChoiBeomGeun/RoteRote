@@ -67,6 +67,19 @@ void LevelSelect::Init()
 
 void LevelSelect::Update(float dt)
 {
+	if (IsConfirmationOn) {
+		if (Input::IsTriggered(SDL_SCANCODE_Y))
+			ENGINE->Quit();
+		if (Input::IsTriggered(SDL_SCANCODE_N))
+		{
+			IsConfirmationOn = false;
+			FACTORY->Destroy(obj_confirmation);
+			return;
+		}
+	}
+	if (IsConfirmationOn)
+		return;
+
 	//LvlSelectCam.cameraSetting(glm::vec3(0,0,0));
 	if (std::abs(FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle == 360.f))
 	{
@@ -105,12 +118,20 @@ void LevelSelect::Update(float dt)
 
 		if (Input::IsTriggered(SDL_SCANCODE_SPACE) || Input::IsTriggered(SDL_SCANCODE_RETURN)) {
 
-
-			STATEMANAGER->i_LevelSelect = LevelList + 1;
-			std::string levelnumber = NumberToString(STATEMANAGER->i_LevelSelect);
-			STATEMANAGER->Loadtolevelname = "level" + levelnumber + ".json";
-			STATEMANAGER->MoveState(StatesList::Level1);
-
+			if (LevelList != LevelList::quit)
+			{
+				STATEMANAGER->i_LevelSelect = LevelList + 1;
+				std::string levelnumber = NumberToString(STATEMANAGER->i_LevelSelect);
+				STATEMANAGER->Loadtolevelname = "level" + levelnumber + ".json";
+				STATEMANAGER->MoveState(StatesList::Level1);
+			}
+			else
+			{
+				STATEMANAGER->MoveState(StatesList::Menu);
+				//obj_confirmation = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(1.5, 0.7, 0));
+				//obj_confirmation->GetComponent<Sprite>()->texture_load("Sure.png");
+				//IsConfirmationOn = true;
+			}
 		}
 
 		if (Input::IsTriggered(SDL_SCANCODE_ESCAPE))

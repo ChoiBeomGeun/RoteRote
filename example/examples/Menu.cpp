@@ -18,7 +18,6 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "Menu.h"
 #include "SoundManager.h"
 #include <stdio.h>
-#include "Object.h"
 #include "Factory.h"
 #include "Input.h"
 #include "StateManager.h"
@@ -29,8 +28,6 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "Application.h"
 #include "InGameLogic.h"
 using namespace TE;
-Object * ooHowToPlay;
-Object * ooConfirmation;
 Menu::Menu()
 {
 }
@@ -80,7 +77,7 @@ void Menu::Update(float dt)
 		if (Input::IsTriggered(SDL_SCANCODE_N))
 		{
 			ConfirmationIsOn = false;
-			FACTORY->Destroy(ooConfirmation);
+			FACTORY->Destroy(obj_confirmation);
 			return;
 		}
 	}
@@ -128,17 +125,17 @@ void Menu::Update(float dt)
 				if (HowToPlayIsOn)
 				{
 					HowToPlayIsOn = false;
-					FACTORY->Destroy(ooHowToPlay);
+					FACTORY->Destroy(obj_howToPlay);
 					return;
 				}
-				ooHowToPlay = FACTORY->CreateHUD(glm::vec3(0.2, -0.7, 0), glm::vec3(2, 0.5, 0));
-				ooHowToPlay->GetComponent<Sprite>()->texture_load("howtoplay2.png");
+				obj_howToPlay = FACTORY->CreateHUD(glm::vec3(0.2, -0.7, 0), glm::vec3(2, 0.5, 0));
+				obj_howToPlay->GetComponent<Sprite>()->texture_load("howtoplay2.png");
 				HowToPlayIsOn = true;
 				return;
 				break;
 			case MenuList::Menu_Quit: 
-				ooConfirmation = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(1.5, 0.7, 0));
-				ooConfirmation->GetComponent<Sprite>()->texture_load("Sure.png");
+				obj_confirmation = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(1.5, 0.7, 0));
+				obj_confirmation->GetComponent<Sprite>()->texture_load("Sure.png");
 				ConfirmationIsOn = true;
 				return;
 				break;

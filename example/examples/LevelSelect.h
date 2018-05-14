@@ -39,6 +39,9 @@ private:
 	bool IsLeftPressed = false;
 	bool IsRightPreesed = false;
 
+	TE::Object* obj_confirmation;
+	bool IsConfirmationOn = false;
+
 
 	void Rotation(void);
 
