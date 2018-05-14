@@ -1,6 +1,7 @@
 #pragma once
 #include "Camera.h"
 #include "Object.h"
+#include "Input.h"
 
 enum CameraPosType {
 	EN_Default,
@@ -49,8 +50,8 @@ namespace TE
 		void ControlCamMovement(int type);
 		void move_cam(float dt);
 		bool IsCamMovHoz, IsCamMovVer;
-		float interpolate(float  start,float dest, float dt);
-	
+		//float interpolate(float  start,float dest, float dt);
+		
 
 
 	private:

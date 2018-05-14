@@ -31,8 +31,8 @@
 		"ObjectType" : "Player",
 		"Position" : 
 		{
-			"x" : -265.0,
-			"y" : 132.94998168945313,
+			"x" : 0.0,
+			"y" : 30.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -52,14 +52,14 @@
 		"ObjectType" : "Wall",
 		"Position" : 
 		{
-			"x" : -265.0,
-			"y" : 113.0,
+			"x" : 0.0,
+			"y" : -150.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 260.0,
+			"x" : 400.0,
 			"y" : 20.0
 		},
 		"TextureDir" : "unattachwall.png"
@@ -71,11 +71,11 @@
 		"ObjectType" : "Clearzone",
 		"Position" : 
 		{
-			"x" : -178.86201477050781,
-			"y" : 268.29299926757813,
+			"x" : 130.0,
+			"y" : 70.0,
 			"z" : 0.0
 		},
-		"Rotation" : 1155.9356689453125,
+		"Rotation" : 0.0,
 		"Scale" : 
 		{
 			"x" : 20.0,
@@ -92,15 +92,15 @@
 		"ObjectType" : "Wall",
 		"Position" : 
 		{
-			"x" : -405.0,
-			"y" : 208.0,
+			"x" : -190.0,
+			"y" : 0.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
 			"x" : 20.0,
-			"y" : 210.0
+			"y" : 300.0
 		},
 		"TextureDir" : "unattachwall.png"
 	},
@@ -113,8 +113,8 @@
 		"ObjectType" : "Trigger90",
 		"Position" : 
 		{
-			"x" : -365.0,
-			"y" : 133.0,
+			"x" : -120.0,
+			"y" : -130.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -136,15 +136,15 @@
 		"ObjectType" : "Wall",
 		"Position" : 
 		{
-			"x" : -125.0,
-			"y" : 208.0,
+			"x" : 190.0,
+			"y" : 0.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
 			"x" : 20.0,
-			"y" : 210.0
+			"y" : 300.0
 		},
 		"TextureDir" : "unattachwall.png"
 	},
@@ -157,14 +157,14 @@
 		"ObjectType" : "Wall",
 		"Position" : 
 		{
-			"x" : -265.0,
-			"y" : 323.0,
+			"x" : 0.0,
+			"y" : 150.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 300.0,
+			"x" : 400.0,
 			"y" : 20.0
 		},
 		"TextureDir" : "unattachwall.png"
