@@ -215,6 +215,7 @@ void Level1::Init()
 
 	}
 	loadingtimer = 0.1f;
+	camAct.cameraSetting(EN_playerPos);
 }
 
 void Level1::Update(float dt)
