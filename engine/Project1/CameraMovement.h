@@ -10,6 +10,7 @@ enum CameraPosType {
 	EN_LevelSelect,
 	EN_playerPos,
 	EN_BOUNDARY,
+	EN_Option,
 	End,
 };
 

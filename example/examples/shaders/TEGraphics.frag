@@ -16,8 +16,8 @@ void main()
 	vec4 texel = texture(texture2D,fragmentUV );
 	if(texel.a < 0.1)
 		discard;
-
-	vec4 tempcolor = fragmentColor * colorOffset;
+	fragmentColor;
+	vec4 tempcolor = colorOffset;
 	//fragmentColor = tempcolor;
 	if(texturing ==1)
 	color = texel * tempcolor; // texel , texture(texture2D,fragmentUV)

@@ -85,7 +85,7 @@ void Option::Init()
 	IsSelected = false;
 	selection_angle = 0;
 	select_index = 0;
-	OptionCam.cameraSetting(CameraPosType::EN_Menu);
+	OptionCam.cameraSetting(CameraPosType::EN_Option);
 	SOUNDMANAGER->PlaySounds(OptionSound, true);
 }
 
