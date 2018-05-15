@@ -65,7 +65,7 @@ namespace TE {
 		static bool compareFrontToBack(Sprite *a, Sprite* b);
 		static bool compareTextureID(Sprite *a, Sprite* b);
 		float depth;
-		float Color[4] = { 255,255,255,255 };
+		float Color[4]; ;
 	private:
 		SortType _sortType;
 

@@ -207,6 +207,10 @@ void Graphics::Update(float dt)
 	Sprite::sortSprites(SortType::FRONT_TO_BACK);
 	//BaseGraphics::sortGraphics(GRA_SORT::FRONT_TO_BACK);
 
+	glEnable(GL_BLEND);
+	glDepthMask(GL_TRUE);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	glClearColor(0.f, 0.f, 0.f, 0.f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -229,12 +233,11 @@ void Graphics::Update(float dt)
 		_basicProgram.use();
 
 		if ((*it)->isPerspective)
-		{
 			drawPerspective(it);
-			drawParticles(it);
-		}
 		else if (!(*it)->isPerspective)
 			drawOrthogonal(it);
+
+		//drawParticles(it);
 
 
 		glUniformMatrix4fv(uniformLocation[VIEW], 1, GL_FALSE, &view[0][0]);
@@ -249,6 +252,8 @@ void Graphics::Update(float dt)
 	ImGuiUpdate();
 #endif
 	APP->SwapWindow();
+	glDisable(GL_BLEND);
+	glDepthMask(GL_FALSE);
 
 }
 
@@ -290,7 +295,7 @@ void TE::Graphics::drawPerspective(std::vector<Sprite*>::iterator iter)
 		model = glm::translate(model, glm::vec3((*iter)->pOwner->GetComponent<Transform>()->position));
 		model = glm::rotate(model, glm::radians((*iter)->pOwner->GetComponent<Transform>()->angle), (*iter)->pOwner->GetComponent<Transform>()->rotation);
 		model = glm::scale(model, glm::vec3((*iter)->pOwner->GetComponent<Transform>()->scale));
-		glUniform1i(particleLoc[PSTATS], drawStats);
+		//glUniform1i(particleLoc[PSTATS], drawStats);
 		//glUniform1i(uniformLocation[PTEXTURE], 0);
 		glUniformMatrix4fv(uniformLocation[MODEL], 1, GL_FALSE, &model[0][0]);
 	}
@@ -304,7 +309,7 @@ void TE::Graphics::drawOrthogonal(std::vector<Sprite*>::iterator iter)
 		hudmodel = glm::mat4(1.0f);
 		hudmodel = glm::translate(hudmodel, (*iter)->pOwner->GetComponent<Transform>()->position);
 		hudmodel = glm::scale(hudmodel, (*iter)->pOwner->GetComponent<Transform>()->scale);
-		glUniform1i(particleLoc[PSTATS], drawStats);
+		//glUniform1i(particleLoc[PSTATS], drawStats);
 		//glUniform1i(uniformLocation[PTEXTURE], 0);
 		glUniformMatrix4fv(uniformLocation[HUDMODEL], 1, GL_FALSE, &hudmodel[0][0]);
 		//_basicProgram.unuse();
@@ -316,7 +321,7 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 	if ((*iter)->pOwner->HasComponent<Emitter>())
 	{
 		_particleProgram.use();
-		glEnable(GL_BLEND);
+		/*glEnable(GL_BLEND);
 		if ((*iter)->pOwner->GetComponent<Emitter>()->isAdditive) {
 			glDepthMask(GL_FALSE);
 			glBlendFunc(GL_ONE, GL_ONE);
@@ -324,9 +329,10 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 		}
 		else if (!(*iter)->pOwner->GetComponent<Emitter>()->isAdditive)
 		{
+			glEnable(GL_BLEND);
 			glDepthMask(GL_TRUE);
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		}
+		}*/
 
 		for (auto p : PARTICLEMANAGER->m_EmitterList)
 		{

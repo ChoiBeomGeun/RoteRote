@@ -175,16 +175,6 @@ void LevelManager::LoadLevel(std::string  path)
 					PaticlePath = ".\\Emitters.\\" + file.mRoot.get(object + to_string(i), false).get("ParticlePath", false).asString();
 
 					tempObject = PARTICLEMANAGER->LoadEmitter(tempObject, PaticlePath);
-					/*tempObject->AddComponent<Emitter>();
-					tempObject->GetComponent<Sprite>()->texture_load("test.png");
-					tempObject->GetComponent<Transform>()->position = tempObject->GetComponent<Transform>()->position;
-					tempObject->GetComponent<Emitter>()->SetEmitter(tempObject->GetComponent<Transform>()->position, glm::vec3(0.0f), 0, 400, 20.f, ET_TRAIL);
-					tempObject->GetComponent<Emitter>()->SetTexture(tempObject->GetComponent<Sprite>()->TextureId);
-					tempObject->GetComponent<Emitter>()->CreateParticle();
-					tempObject->GetComponent<Transform>()->scale = glm::vec3(10.0f);
-
-					PARTICLEMANAGER->AddEmitter(tempObject->GetComponent<Emitter>());*/
-
 					
 				}
 				else if (STATEMANAGER->Loadtolevelname == "Menu.json")

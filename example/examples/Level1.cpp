@@ -219,9 +219,6 @@ void Level1::Init()
 
 void Level1::Update(float dt)
 {
-
-
-	
 	//MakingInstructions(dt);
 	
 	camAct.Update(dt);
@@ -230,6 +227,7 @@ void Level1::Update(float dt)
 	CheatKeyFunctions();
 #endif
 		
+	//Backgroundobj->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 140);
 
         if (Input::IsTriggered(SDL_SCANCODE_R))
             STATEMANAGER->Restart();
