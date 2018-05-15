@@ -29,7 +29,7 @@ namespace TE {
 		//Object will init all components
 		virtual void Initialize() {};
 
-		Object * GetOwner() { return pOwner; }
+		Object * GetOwner() const { return pOwner; }
 		void SetOwner(Object * owner) { pOwner = owner; }
 		ComponentType GetType(){return cType;}
 		virtual ~Component() {  };

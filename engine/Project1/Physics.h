@@ -51,6 +51,7 @@ namespace TE {
 		//member variable ; vector of pointer to rigidbody
 		std::vector<Body*> m_vecprb;
 		std::map<unsigned int, Body*>  m_Body;
+		std::vector<Body*> box_body;
 		glm::vec3 gravity;
 
 		Gravity GravityType;
@@ -76,10 +77,11 @@ namespace TE {
 		bool CircleCircleCollisionCheck(Body *pA, Body *pB, Pair *M);
 		void KinematicBoxCollision(float &rhs_invmass, float &lhs_invmass, Pair *M);
 		void PositionalCorrection(Pair *M);
+		void Box_velocity_toZero();
 
 		void PlayerGroundType(glm::vec3 normal, Body *pA, Body *pB);
 
-	
+		
 
 		bool IsPlayerGround;
 

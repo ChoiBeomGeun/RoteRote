@@ -23,6 +23,7 @@ Body::Body() : Component(CT_BODY)
 {
 	PHYSICS->m_vecprb.push_back(this);
 	PHYSICS->m_Body[FACTORY->BodyID] = this;
+
 	this->BodyID = FACTORY->BodyID;
 	FACTORY->BodyID++;
 }
@@ -33,6 +34,9 @@ Body::Body(glm::vec3 vel, float invmass) : Component(CT_BODY), pm_velocity(vel),
 
 Body::~Body()
 {
+	//PHYSICS->m_vecprb.clear();
+	//PHYSICS->m_Body.clear();
+	//FACTORY->BodyID = 0;
 }
 void Body::Initialize()
 {

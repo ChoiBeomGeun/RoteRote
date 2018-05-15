@@ -68,7 +68,7 @@ namespace TE {
 		float restitution;
 	protected:
 		std::list<Body*>::iterator myBody;
-		//std::vector<GravityBox*> GravityBoxBody;
+		std::list<Body*>::iterator BoxBody;
 	};
 
 

@@ -46,17 +46,29 @@ void Physics::Initialize() {
 	GravityType = Gravity::y_Minus;
 	gravity = glm::vec3(0, gravityScale, 0);
 	IsPlayerGround = false;
-
 	//gravity.Set(0, gravityScale, 0);
 }
 
 void Physics::Update(float dt) {
+
+
+
+
 	if ((!STATEMANAGER->b_IsPauseOn) && (!STATEMANAGER->b_IsRot180) && (!STATEMANAGER->b_IsRot90) && (!PHYSICS->IsMapEditorOn))
 	{
 		//if (!(PHYSICS->IsMapEditorOn))
 		ExplictEulerIntegrator(dt);
 		BroadPhase();
 	}
+	else if (STATEMANAGER->b_IsRot180 || STATEMANAGER->b_IsRot90)
+		Box_velocity_toZero();
+
+	if (STATEMANAGER->b_IsGravityChanged)
+		Box_velocity_toZero();
+
+
+
+
 }
 
 void Physics::ExplictEulerIntegrator(float dt) {
@@ -65,8 +77,11 @@ void Physics::ExplictEulerIntegrator(float dt) {
 	//Current frame Position and next Frame Position
 	glm::vec3 curfp, nexfp;
 
+	box_body.clear();
+
 	for (std::map<unsigned int, Body*>::iterator i = m_Body.begin();
 		i != m_Body.end(); ++i) {
+
 
 
 
@@ -87,6 +102,9 @@ void Physics::ExplictEulerIntegrator(float dt) {
 		if ((*i).second->GetOwner()->objectstyle == Objectstyle::Wall || (*i).second->GetOwner()->objectstyle == Objectstyle::Trigger90 || (*i).second->GetOwner()->objectstyle == Objectstyle::Trigger180)
 			continue;
 
+		if ((*i).second->GetOwner()->objectstyle == Objectstyle::Box)
+			box_body.push_back((*i).second);
+
 		if (!(*i).second->gravityOn)
 		{
 			//(*i).second->pm_velocity.SetZero();
@@ -96,26 +114,10 @@ void Physics::ExplictEulerIntegrator(float dt) {
 			(*i).second->pm_velocity += (gravity + (*i).second->m_force * (*i).second->pm_invmass)*dt;
 
 		if (gravity.x != 0.f)
-		{
-			if (STATEMANAGER->b_IsGravityChanged)
-			{
-				(*i).second->pm_velocity.x = 0;
-				STATEMANAGER->b_IsGravityChanged = false;
-			}
-		
 			(*i).second->pm_velocity.y *= 0.99f * dt * 50.f;
-			// if Gravity Change, vel.y = 0 
-		}
 
 		if (gravity.y != 0.f)
-		{
-			if (STATEMANAGER->b_IsGravityChanged)
-			{
-				(*i).second->pm_velocity.y = 0;
-				STATEMANAGER->b_IsGravityChanged = false;
-			}
 			(*i).second->pm_velocity.x *= 0.99f * dt * 50.f;
-		}
 
 		//(*i).second->m_force = glm::vec3(0);
 	}
@@ -192,12 +194,12 @@ void Physics::ResolveCollision(Pair *M)
 	KinematicBoxCollision(rhs_invmass, lhs_invmass, M);
 
 	if (lhs_invmass == 0)
-		lhs_invmass = 0;
+		lhs_mass = 0;
 	else
 		lhs_mass = 1 / lhs_invmass;
 
 	if (rhs_invmass == 0)
-		rhs_invmass = 0;
+		rhs_mass = 0;
 	else
 		rhs_mass = 1 / rhs_invmass;
 
@@ -499,9 +501,9 @@ void Physics::PositionalCorrection(Pair *M)
 	float rhs_invmass = M->m_rhs->pm_invmass;
 
 
-	glm::vec3 correction = TUMath::Max(M->penetration - slop, 0.0f) / (lhs_invmass + rhs_invmass) * percent * M->normal;
 
-	if(M->m_lhs->GetOwner()->objectstyle == Objectstyle::Box && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Box)
+
+	if (M->m_lhs->GetOwner()->objectstyle == Objectstyle::Box && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Box)
 	{
 		if (gravity.y < 0)
 		{
@@ -532,14 +534,24 @@ void Physics::PositionalCorrection(Pair *M)
 				rhs_invmass = 0;
 		}
 	}
-	else if(M->m_lhs->GetOwner()->objectstyle == Objectstyle::Player && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Box)
+	else if (M->m_lhs->GetOwner()->objectstyle == Objectstyle::Player && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Box)
 		rhs_invmass = 0;
-	else if(M->m_lhs->GetOwner()->objectstyle == Objectstyle::Box && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Player)
+	else if (M->m_lhs->GetOwner()->objectstyle == Objectstyle::Box && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Player)
 		lhs_invmass = 0;
+
+	glm::vec3 correction = TUMath::Max(M->penetration - slop, 0.0f) / (lhs_invmass + rhs_invmass) * percent * M->normal;
 
 	M->m_lhs->m_pTransform->position -= lhs_invmass * correction;
 	M->m_rhs->m_pTransform->position += rhs_invmass * correction;
 
+}
+
+void Physics::Box_velocity_toZero()
+{
+	for (auto box_itr = box_body.begin(); box_itr != box_body.end(); ++box_itr)
+		(*box_itr)->pm_velocity = glm::vec3(0);
+
+	STATEMANAGER->b_IsGravityChanged = false;
 }
 
 void Physics::PlayerGroundType(glm::vec3 normal, Body * pA, Body * pB)
