@@ -106,7 +106,7 @@ void LevelManager::LoadLevel(std::string  path)
 			//	Sprite * sprite = new Sprite();
 				tempObject->AddComponent<Sprite>();
 				tempObject->GetComponent<Sprite>()->depth = file.mRoot[object + to_string(i)]["Depth"].asFloat();
-				tempObject->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+				tempObject->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 140);
 				tempObject->GetComponent<Sprite>()->isPerspective = true;
 				tempObject->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(textureDir);
 			//	tempObject->AddComponent(sprite);
