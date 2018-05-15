@@ -360,7 +360,7 @@ void PlayerController::Movement(float dt)
 				this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(0, -SPEED, 0) * dt;
 		}
 
-		if ((this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Left || this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Right) && this->GetOwner()->GetComponent<Body>()->pm_velocity.y < 0)
+		if ((this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Left || this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Right) && this->GetOwner()->GetComponent<Body>()->pm_velocity.x > 0)
 			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.x > WallSlideMax)
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = WallSlideMax;
 
@@ -461,7 +461,7 @@ void PlayerController::Movement(float dt)
 				this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(0, SPEED, 0) * dt;
 		}
 
-		if ((this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Left || this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Right) && this->GetOwner()->GetComponent<Body>()->pm_velocity.y < 0)
+		if ((this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Left || this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Right) && this->GetOwner()->GetComponent<Body>()->pm_velocity.x < 0)
 			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.x < -WallSlideMax)
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -WallSlideMax;
 
