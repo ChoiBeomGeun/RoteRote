@@ -308,7 +308,15 @@ void LevelManager::SaveLevel(std::string  path)
 	Jsonclass file;
 	Json::Value root;
 	std::string object = "Object";
+        int NumberofUnvaildObject = 0;
+        for (auto it : FACTORY->ObjectIDMap)
+        {
 
+            if (it.second->objectstyle == Objectstyle::Button && !it.second->HasComponent<Emitter>()) {
+                NumberofUnvaildObject++;
+                continue;
+            }
+        }
 
 	root["Level"] = 1;
 	root["WorldSize"]["x"] = STATEMANAGER->v_StatesLists[STATEMANAGER->i_CurrentStateNumber]->WorldSizeX;
@@ -322,15 +330,23 @@ void LevelManager::SaveLevel(std::string  path)
 	root["DefalutCamera"]["UP"]["x"] = CAMERA->cameraUp.x;
 	root["DefalutCamera"]["UP"]["y"] = CAMERA->cameraUp.y;
 	root["DefalutCamera"]["UP"]["z"] = CAMERA->cameraUp.z;
-	root["NumberOfObjects"] = FACTORY->ObjectIDMap.size();
+	root["NumberOfObjects"] = FACTORY->ObjectIDMap.size()- NumberofUnvaildObject;
 	int  i = 1;
+
+    
+
 	for (auto it : FACTORY->ObjectIDMap)
 	{
-		if(it.second->objectstyle == Objectstyle::Button)
-			continue;
+		
 
 		it.second->GetComponent<Transform>()->position.z = 0;
 		static unsigned index = 0;
+
+
+                if (it.second->objectstyle == Objectstyle::Button && !it.second->HasComponent<Emitter>()) {
+
+                    continue;
+                }
 
 		if (it.second->GetComponent<Transform>() != nullptr) {
 			root[object + to_string(i)]["Components"][index] = "TRANSFORM";

@@ -65,7 +65,7 @@ void ObjectFactory::Update(float /*dt*/)
 
 	//Todo : Delete All object in the objectTobedeleted list
 
-	std::vector<Object*>::iterator it = ObjectsToBeDeleted.begin();
+   	std::vector<Object*>::iterator it = ObjectsToBeDeleted.begin();
 
 	for ( it = ObjectsToBeDeleted.begin(); it != ObjectsToBeDeleted.end(); ++it)
 	{

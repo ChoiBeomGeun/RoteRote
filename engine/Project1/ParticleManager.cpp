@@ -480,6 +480,7 @@ namespace TE {
 	/******************************************************************************/
 	void ParticleManager::InitTrailSystem(Emitter* pEmitter)
 	{
+            pEmitter->m_particlePath = "PlayerTrail.json";
 		// fill all particles in emitter with loop
 		for (int i = 0; i < pEmitter->capacity; ++i)
 		{
