@@ -220,6 +220,9 @@ void Level1::Update(float dt)
 	CheatKeyFunctions();
 #endif
 		
+
+        if (Input::IsTriggered(SDL_SCANCODE_R))
+            STATEMANAGER->Restart();
 	if (STATEMANAGER->b_IsReplayStart) {
 
 		ReplayerInfo temp;
