@@ -3,8 +3,8 @@
 	{
 		"EYE" : 
 		{
-			"x" : -372.5,
-			"y" : -192.0,
+			"x" : -120.0,
+			"y" : -47.0,
 			"z" : 999.0
 		},
 		"TARGET" : 
@@ -25,6 +25,7 @@
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "CONTROLLER", "ANIMATION" ],
+		"Depth" : 0.0,
 		"GravityOn" : true,
 		"Mass" : 1.0,
 		"ObjectID" : 1,
@@ -32,7 +33,7 @@
 		"Position" : 
 		{
 			"x" : -523.80975341796875,
-			"y" : -317.05001831054688,
+			"y" : -312.05001831054688,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -46,6 +47,7 @@
 	"Object10" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 10,
@@ -67,6 +69,7 @@
 	"Object11" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 1.0,
 		"ObjectID" : 11,
 		"ObjectType" : "Clearzone",
 		"Position" : 
@@ -75,7 +78,7 @@
 			"y" : -257.0,
 			"z" : 0.0
 		},
-		"Rotation" : 1684.4639892578125,
+		"Rotation" : 1892.263671875,
 		"Scale" : 
 		{
 			"x" : 20.0,
@@ -86,6 +89,7 @@
 	"Object12" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 1.0,
 		"ObjectID" : 12,
@@ -107,6 +111,7 @@
 	"Object13" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 13,
@@ -130,6 +135,7 @@
 	"Object14" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 14,
@@ -153,6 +159,7 @@
 	"Object15" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 15,
@@ -176,6 +183,7 @@
 	"Object16" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 16,
@@ -199,6 +207,7 @@
 	"Object17" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 17,
@@ -222,6 +231,7 @@
 	"Object18" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 18,
@@ -245,6 +255,7 @@
 	"Object19" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 19,
@@ -268,6 +279,7 @@
 	"Object2" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 2,
@@ -286,9 +298,32 @@
 		},
 		"TextureDir" : "unattachwall.png"
 	},
+	"Object20" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
+		"Depth" : -1.0,
+		"ObjectID" : 20,
+		"ObjectType" : "Button",
+		"ParticlePath" : "PlayerTrail.json",
+		"ParticleType" : "ET_TRAIL",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 10.0,
+			"y" : 10.0
+		},
+		"TextureDir" : "basicParticle.png"
+	},
 	"Object3" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 3,
@@ -310,6 +345,7 @@
 	"Object4" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 4,
@@ -331,6 +367,7 @@
 	"Object5" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 5,
@@ -352,6 +389,7 @@
 	"Object6" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 1.0,
 		"ObjectID" : 6,
@@ -373,6 +411,7 @@
 	"Object7" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 7,
@@ -394,6 +433,7 @@
 	"Object8" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 8,
@@ -415,6 +455,7 @@
 	"Object9" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 9,
@@ -432,27 +473,6 @@
 			"y" : 20.0
 		},
 		"TextureDir" : "wall.png"
-	},
-	"Object20" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
-		"ObjectID" : 20,
-		"ObjectType" : "Button",
-		"ParticlePath" : "PlayerTrail.json",
-		"ParticleType" : "ET_TRAIL",
-		"Position" : 
-		{
-			"x" : 0.0,
-			"y" : 0.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 0.0,
-			"y" : 0.0
-		},
-		"TextureDir" : "basicParticle.png"
 	},
 	"WorldSize" : 
 	{

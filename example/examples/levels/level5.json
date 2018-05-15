@@ -3,8 +3,8 @@
 	{
 		"EYE" : 
 		{
-			"x" : -282.5,
-			"y" : -97.100021362304688,
+			"x" : -70.0,
+			"y" : -97.0,
 			"z" : 999.0
 		},
 		"TARGET" : 
@@ -21,10 +21,11 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 16,
+	"NumberOfObjects" : 14,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 1,
@@ -46,6 +47,7 @@
 	"Object10" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 10,
@@ -69,6 +71,7 @@
 	"Object11" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 11,
@@ -92,6 +95,7 @@
 	"Object12" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 12,
@@ -115,6 +119,7 @@
 	"Object13" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 13,
@@ -137,45 +142,30 @@
 	},
 	"Object14" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
+		"Depth" : -1.0,
 		"ObjectID" : 14,
 		"ObjectType" : "Button",
+		"ParticlePath" : "PlayerTrail.json",
+		"ParticleType" : "ET_TRAIL",
 		"Position" : 
 		{
 			"x" : 0.0,
-			"y" : 0.89999997615814209,
+			"y" : 0.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 0.10000000149011612,
-			"y" : 0.20000000298023224
+			"x" : 10.0,
+			"y" : 10.0
 		},
-		"TextureDir" : ""
-	},
-	"Object15" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE" ],
-		"ObjectID" : 15,
-		"ObjectType" : "Button",
-		"Position" : 
-		{
-			"x" : 0.0,
-			"y" : 0.89999997615814209,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 0.10000000149011612,
-			"y" : 0.20000000298023224
-		},
-		"TextureDir" : ""
+		"TextureDir" : "basicParticle.png"
 	},
 	"Object2" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 2,
@@ -197,6 +187,7 @@
 	"Object3" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 3,
@@ -218,6 +209,7 @@
 	"Object4" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 4,
@@ -239,6 +231,7 @@
 	"Object5" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 1.0,
 		"ObjectID" : 5,
 		"ObjectType" : "Clearzone",
 		"Position" : 
@@ -247,7 +240,7 @@
 			"y" : -57.0,
 			"z" : 0.0
 		},
-		"Rotation" : 0,
+		"Rotation" : 362.31396484375,
 		"Scale" : 
 		{
 			"x" : 20.0,
@@ -258,6 +251,7 @@
 	"Object6" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "CONTROLLER", "ANIMATION" ],
+		"Depth" : 0.0,
 		"GravityOn" : true,
 		"Mass" : 1.0,
 		"ObjectID" : 6,
@@ -265,7 +259,7 @@
 		"Position" : 
 		{
 			"x" : -428.20074462890625,
-			"y" : -97.100021362304688,
+			"y" : -92.100021362304688,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -279,6 +273,7 @@
 	"Object7" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 1.0,
 		"ObjectID" : 7,
@@ -300,6 +295,7 @@
 	"Object8" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 1.0,
 		"ObjectID" : 8,
@@ -321,6 +317,7 @@
 	"Object9" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 9,
@@ -340,27 +337,6 @@
 		"TextureDir" : "180button.png",
 		"TriggerLifeTime" : -1,
 		"TriggerType" : "180"
-	},
-	"Object16" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
-		"ObjectID" : 16,
-		"ObjectType" : "Button",
-		"ParticlePath" : "PlayerTrail.json",
-		"ParticleType" : "ET_TRAIL",
-		"Position" : 
-		{
-			"x" : 0.0,
-			"y" : 0.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 0.0,
-			"y" : 0.0
-		},
-		"TextureDir" : "basicParticle.png"
 	},
 	"WorldSize" : 
 	{

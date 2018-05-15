@@ -3,8 +3,8 @@
 	{
 		"EYE" : 
 		{
-			"x" : -285.0,
-			"y" : 112.94999694824219,
+			"x" : -230.0,
+			"y" : 133.0,
 			"z" : 999.0
 		},
 		"TARGET" : 
@@ -25,6 +25,7 @@
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "CONTROLLER", "ANIMATION" ],
+		"Depth" : 0.0,
 		"GravityOn" : true,
 		"Mass" : 1.0,
 		"ObjectID" : 1,
@@ -32,7 +33,7 @@
 		"Position" : 
 		{
 			"x" : -285.0,
-			"y" : 112.94999694824219,
+			"y" : 117.94998931884766,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -46,6 +47,7 @@
 	"Object10" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 1.0,
 		"ObjectID" : 10,
@@ -67,6 +69,7 @@
 	"Object11" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 1.0,
 		"ObjectID" : 11,
@@ -88,6 +91,7 @@
 	"Object12" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 1.0,
 		"ObjectID" : 12,
@@ -109,6 +113,7 @@
 	"Object13" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 13,
@@ -129,9 +134,32 @@
 		"TriggerLifeTime" : -1,
 		"TriggerType" : "90"
 	},
+	"Object14" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
+		"Depth" : -1.0,
+		"ObjectID" : 14,
+		"ObjectType" : "Button",
+		"ParticlePath" : "PlayerTrail.json",
+		"ParticleType" : "ET_TRAIL",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 10.0,
+			"y" : 10.0
+		},
+		"TextureDir" : "basicParticle.png"
+	},
 	"Object2" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 1.0,
 		"ObjectID" : 2,
 		"ObjectType" : "Clearzone",
 		"Position" : 
@@ -140,7 +168,7 @@
 			"y" : 223.0,
 			"z" : 0.0
 		},
-		"Rotation" : 615.8345947265625,
+		"Rotation" : 1626.6734619140625,
 		"Scale" : 
 		{
 			"x" : 20.0,
@@ -151,6 +179,7 @@
 	"Object3" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 3,
@@ -172,6 +201,7 @@
 	"Object4" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 4,
@@ -195,6 +225,7 @@
 	"Object5" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 5,
@@ -216,6 +247,7 @@
 	"Object6" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 6,
@@ -237,6 +269,7 @@
 	"Object7" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 7,
@@ -258,6 +291,7 @@
 	"Object8" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 8,
@@ -279,6 +313,7 @@
 	"Object9" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 9,
@@ -296,27 +331,6 @@
 			"y" : 500.0
 		},
 		"TextureDir" : "unattachwall.png"
-	},
-	"Object14" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
-		"ObjectID" : 14,
-		"ObjectType" : "Button",
-		"ParticlePath" : "PlayerTrail.json",
-		"ParticleType" : "ET_TRAIL",
-		"Position" : 
-		{
-			"x" : 0.0,
-			"y" : 0.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 0.0,
-			"y" : 0.0
-		},
-		"TextureDir" : "basicParticle.png"
 	},
 	"WorldSize" : 
 	{
