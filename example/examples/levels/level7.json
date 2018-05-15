@@ -32,7 +32,7 @@
 		"ObjectType" : "Player",
 		"Position" : 
 		{
-			"x" : -295.0,
+			"x" : -289.71197509765625,
 			"y" : 57.949996948242188,
 			"z" : 0.0
 		},
@@ -61,7 +61,7 @@
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 30.0,
+			"x" : 20.0,
 			"y" : 290.0
 		},
 		"TextureDir" : "unattachwall.png"
@@ -83,7 +83,7 @@
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 30.0,
+			"x" : 20.0,
 			"y" : 290.0
 		},
 		"TextureDir" : "unattachwall.png"
@@ -105,7 +105,7 @@
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 30.0,
+			"x" : 20.0,
 			"y" : 290.0
 		},
 		"TextureDir" : "unattachwall.png"
@@ -144,7 +144,7 @@
 			"y" : 143.0,
 			"z" : 0.0
 		},
-		"Rotation" : 205.09970092773438,
+		"Rotation" : 811.21099853515625,
 		"Scale" : 
 		{
 			"x" : 20.0,
