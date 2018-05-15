@@ -21,7 +21,7 @@ JUMP SHOULDN'T WORK WHILE PLAYER IS ON AIR
 #include "Graphics.h"
 #include <iostream>
 #define SPEED 4000.f
-#define MAXSPEED 150.f
+#define MAXSPEED 250.f
 #define WALLJUMP 500.f
 #define WALLATTACH 10.f
 using namespace TE;
