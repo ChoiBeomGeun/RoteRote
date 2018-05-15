@@ -325,7 +325,7 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 		else if (!(*iter)->pOwner->GetComponent<Emitter>()->isAdditive)
 		{
 			glDepthMask(GL_TRUE);
-			//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		}
 
 		for (auto p : PARTICLEMANAGER->m_EmitterList)
