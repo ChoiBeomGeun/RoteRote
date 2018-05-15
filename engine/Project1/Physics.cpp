@@ -99,7 +99,7 @@ void Physics::ExplictEulerIntegrator(float dt) {
 		//dynamic_cast<Transform*>((*i)->GetOwner()->GetComponent(CT_TRANSFORM));
 		curfp = pTr->GetPosition();
 		pTr->SetPosition(curfp + (*i).second->pm_velocity*dt);
-		if ((*i).second->GetOwner()->objectstyle == Objectstyle::Wall || (*i).second->GetOwner()->objectstyle == Objectstyle::Trigger90 || (*i).second->GetOwner()->objectstyle == Objectstyle::Trigger180)
+		if ((*i).second->GetOwner()->objectstyle == Objectstyle::Wall || (*i).second->GetOwner()->objectstyle == Objectstyle::Trigger90 || (*i).second->GetOwner()->objectstyle == Objectstyle::Trigger180 || (*i).second->GetOwner()->objectstyle == Objectstyle::AttachWall)
 			continue;
 
 		if ((*i).second->GetOwner()->objectstyle == Objectstyle::Box)
