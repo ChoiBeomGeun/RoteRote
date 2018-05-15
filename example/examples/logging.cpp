@@ -20,8 +20,8 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include <ctime>
 #include <chrono>
 #include <iomanip>
-#define LOG_NAME "PreProduction"
-#define LOGGINGSTART false
+#define LOG_NAME "Beta"
+#define LOGGINGSTART true
 
 struct LogList
 {
@@ -32,6 +32,18 @@ struct LogList
 	int NumberOfTriggerActivation = 0;
 
 };
+struct int_compare {
+
+	bool operator()(const LogList& a, const LogList& b)
+
+		const {
+
+		//return std::atoi(&a.at(5)) > std::atoi(&b.at(5));
+		return std::atoi(&a.Levelname.at(5)) > std::atoi(&b.Levelname.at(5));
+		//return true;
+	}
+
+};
 
 
 typedef std::vector<LogList> LogItemLists;
@@ -39,6 +51,7 @@ LogItemLists GameLevelList;
 std::vector<int> Howmanylose;
 bool LoggingInit = true;
 bool DataInit = true;
+bool IsLoseOnce = true;
 using namespace TE;
 namespace TE {
 
@@ -49,7 +62,7 @@ namespace TE {
 }
 TE::LoggingSystem::LoggingSystem()
 {
-
+	IsLoggigOn = LOGGINGSTART;
 	if (LOGGINGSTART) {
 
 
@@ -76,28 +89,36 @@ TE::LoggingSystem::LoggingSystem()
 
 			}
 			LoggingInit = false;
-
-
+		//	std::sort(GameLevelList.begin(), GameLevelList.end(), [](std::string a, std::string b )
+			//{ return b; });
+			//std::atoi()
 		}
 	}
+	std::sort(GameLevelList.begin(), GameLevelList.end(), int_compare());
+	std::reverse(GameLevelList.begin(), GameLevelList.end());
+	GameLevelList.erase(GameLevelList.begin());
 }
 
 
 void TE::LoggingSystem::Initialize()
 {
-	
+	for (auto levels : GameLevelList)
+	{
 
+		levels.HowManyLose = 0;
+	}
+	IsLoseOnce = true;
 }
 
 void TE::LoggingSystem::Update(float dt)
 {	
 
 	if (LOGGINGSTART) {
-		GameLevelList[STATEMANAGER->i_LevelSelect - 1].NumberOfTriggerActivation = TRIGGERLOGIC->NumberOfTriggersActivation;
-		if (APP->b_Lose)
+ 		GameLevelList[STATEMANAGER->i_LevelSelect - 1].NumberOfTriggerActivation = TRIGGERLOGIC->NumberOfTriggersActivation;
+		if (APP->b_Lose&& IsLoseOnce)
 		{
 			GameLevelList[STATEMANAGER->i_LevelSelect - 1].HowManyLose++;
-
+			IsLoseOnce = false;
 
 		}
 		GameLevelList[STATEMANAGER->i_LevelSelect - 1].HowMuchTimepassed += dt;

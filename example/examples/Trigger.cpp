@@ -207,7 +207,7 @@ void TriggerLogic::Update(float dt)
 					if (STATEMANAGER->b_IsRot180 && !STATEMANAGER->b_IsRot90)
 					{
 						_180anglebutton(TriggerObjects);
-						NumberOfTriggersActivation++;
+						//NumberOfTriggersActivation++;
 					}
 				} 
 				//_180anglebutton(TriggerObjects->GetComponent<Trigger>());
@@ -219,11 +219,11 @@ void TriggerLogic::Update(float dt)
 
 		if (TriggerObjects->GetComponent<Trigger>()->i_innertimer > 30)
 		{
-			
+			NumberOfTriggersActivation++;
 			TriggerObjects->GetComponent<Trigger>()->Trigger_useable = true;
 			TriggerObjects->GetComponent<Trigger>()->i_innertimer = 0;
 		}
-		// To do: 
+		// To do: esd
 		// 90 degrees right way needs to be implemented
 		if (!TriggerObjects->GetComponent<Trigger>()->Trigger_useable)
 		{

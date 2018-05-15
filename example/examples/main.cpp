@@ -61,7 +61,7 @@ int main(int,char**)
 	INGAMELOGIC->InGameLogicAdd(new TriggerLogic());
 	INGAMELOGIC->InGameLogicAdd(new ClearzoneLogic());
 	INGAMELOGIC->InGameLogicAdd(new LoseconditionLogic());
-	INGAMELOGIC->InGameLogicAdd(new AutoMovingLogic());
+
 	STATEMANAGER->AddState(new splash);
 	STATEMANAGER->AddState(new Menu);
 	STATEMANAGER->AddState(new Option);
@@ -85,7 +85,7 @@ int main(int,char**)
 	TEengine->DestroyAllsystems();
 
 			
-	//	delete LOGGINGSYSTEM;
+		delete LOGGINGSYSTEM;
 	//Todo : Delete the Engine
 
 

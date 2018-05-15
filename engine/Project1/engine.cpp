@@ -31,7 +31,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "LevelManager.h"
 #include "ParticleManager.h"
 
-//#include "..\..\example\examples\PlayerController.h"
+#include "..\..\example\examples\logging.h"
 #include "Physics.h"
 
 typedef BOOL(WINAPI *LPFN_ISWOW64PROCESS) (HANDLE, PBOOL);
@@ -105,20 +105,22 @@ void Engine::GameLoop()
 	Timer::Initialize();
 	//Testing Object creation 
 
-	STATEMANAGER->Initialize();
+//	STATEMANAGER->Initialize();
 	
 
 	while (GameIsRunning)
 	{
 		float frametime = Timer::GetDelta();
-
-
+	
+	;
 
 		if (frametime >= 0.25f)
 			frametime = 0.25;
 
 		if (frametime <= 0.016f)
 			frametime = 0.016f;
+		if(LOGGINGSYSTEM->IsLoggigOn)
+		LOGGINGSYSTEM->HowMuchTimePassed += frametime;
 		for (unsigned int i = 0; i <SystemList.size(); ++i) {
 		
 		

@@ -41,7 +41,7 @@ namespace TE {
 }
 InGameLogic::InGameLogic()
 {
- // 	LOGGINGSYSTEM = new LoggingSystem;
+  	LOGGINGSYSTEM = new LoggingSystem;
 	INGAMELOGIC = this;
 
 }

@@ -79,7 +79,7 @@ Level1::~Level1()
 
 void Level1::Load()
 {
-	INGAMELOGIC->InGameInit();
+//	INGAMELOGIC->InGameInit();
 
 }
 
@@ -315,7 +315,7 @@ void Level1::Free(void)
 	IsAutoplay = false;
 	j = 0;
 
-	//LOGGINGSYSTEM->SavingLog();
+	LOGGINGSYSTEM->SavingLog();
 	STATEMANAGER->b_IsGameLevel = false;
  	CAMERA->cameraUp.x = 0;
 	CAMERA->cameraUp.y = 1;
