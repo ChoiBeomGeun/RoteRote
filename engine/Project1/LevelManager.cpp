@@ -41,7 +41,7 @@ float scaleFactor = 1.f;
 
 void LevelManager::LoadLevel(std::string  path)
 {
-	string PaticlePath;
+ 	string PaticlePath;
 
 	
 
@@ -86,9 +86,6 @@ void LevelManager::LoadLevel(std::string  path)
 		CAMERA->cameraPos.z = file.mRoot.get("DefalutCamera", false).get("EYE", false).get("z", false).asFloat();
 		float mass = file.mRoot.get(object + to_string(i), false).get("Mass", false).asFloat();
 
-	
-
-		
 		
 		for (unsigned int indexC = 0; ;indexC++) {
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "TRANSFORM") {
@@ -329,6 +326,9 @@ void LevelManager::SaveLevel(std::string  path)
 	int  i = 1;
 	for (auto it : FACTORY->ObjectIDMap)
 	{
+		if(it.second->objectstyle == Objectstyle::Button)
+			continue;
+
 		it.second->GetComponent<Transform>()->position.z = 0;
 		static unsigned index = 0;
 
@@ -369,7 +369,7 @@ void LevelManager::SaveLevel(std::string  path)
 		if (it.second->GetComponent<Emitter>() != nullptr) {
 			root[object + to_string(i)]["Components"][index] = "PARTICLE";
 			if(it.second->GetComponent<Emitter>()->type == EmitterType::ET_TRAIL)
-				root[object + to_string(i)]["ParticleType"] = "TRAIL";
+				root[object + to_string(i)]["ParticleType"] = "ET_TRAIL";
 			if (it.second->GetComponent<Emitter>()->type == EmitterType::ET_EXPLOSION)
 				root[object + to_string(i)]["ParticleType"] = "ET_EXPLOSION";
 

@@ -66,7 +66,7 @@ void Graphics::Initialize(void)
 {
 	isParticle = false;
 
-	pCamera = new Camera;
+	pCamera = new Camera();
 	CAMERA = pCamera;
 	drawStats = 0;
 

@@ -99,6 +99,7 @@ namespace TE {
 		glm::vec3 rightblock = glm::vec3(0), leftblock = glm::vec3(0), upblock = glm::vec3(0), downblock = glm::vec3(0);
 		if (FACTORY->GetPlayer())
 		{
+			glm::vec3 test = CAMERA->viewport_geometry();
 			if (type == CameraRotation::EN_0)
 			{
 				if (IsCamMovVer)
@@ -109,7 +110,7 @@ namespace TE {
 				downblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
 				rightblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
 				leftblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
-				if ((upblock.y - downblock.y) < APP->_screenHeight && (rightblock.x - leftblock.x) < APP->_screenWidth) // when wall boundaries are smaller than camera size
+				if (((upblock.y - downblock.y) < APP->_screenHeight) && ((rightblock.x - leftblock.x) < APP->_screenWidth)) // when wall boundaries are smaller than camera size
 				{
 					if (STATEMANAGER->Loadtolevelname == "level1.json")
 					{
@@ -187,30 +188,38 @@ namespace TE {
 				leftblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
 				rightblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
 
+				CAMERA->CenterOfCamera.x = downblock.x + ((upblock.x - downblock.x)*.5f);
+				CAMERA->CenterOfCamera.y = leftblock.y + ((rightblock.y - leftblock.y)*.5f);
 				if ((upblock.y - downblock.y) < APP->_screenHeight && (rightblock.x - leftblock.x) < APP->_screenWidth) // when wall boundaries are smaller than camera size
 				{
 					float UpYLimit, DownYLimit;
 					UpYLimit = (upblock.x - std::abs((upblock.x - CAMERA->CenterOfCamera.x))*.5f);
 					DownYLimit = (downblock.x + std::abs(CAMERA->CenterOfCamera.x - downblock.x)*.5f);
-					if (!IsCamMovVer)
+					
+					
+					if (abs(upblock.x - downblock.x )> APP->_screenHeight) //when vertical different is bigger than screen _height size.
 					{
-						CAMERA->cameraPos.x -= 5;
-						if (CAMERA->cameraPos.x <= DownYLimit)
-							IsCamMovVer = !IsCamMovVer;
-					}
-					else {
-						if (upblock.x - downblock.x > APP->_screenHeight)
+						/*if (!IsCamMovVer)
 						{
-							
+							CAMERA->cameraPos.x -= 5;
+							if (CAMERA->cameraPos.x <= DownYLimit)
+								IsCamMovVer = !IsCamMovVer;
+						}
+						else {*/
 							if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x >= UpYLimit)
 								CAMERA->cameraPos.x = UpYLimit;
 							else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x <= DownYLimit)
 								CAMERA->cameraPos.x = DownYLimit;
 							else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x < UpYLimit || FACTORY->GetPlayer()->GetComponent<Transform>()->position.x > DownYLimit)
 								CAMERA->cameraPos.x = FACTORY->GetPlayer()->GetComponent<Transform>()->position.x;
-
-						}
+						//}
 					}
+					else // have fix camera pos at the center.
+					{
+						CAMERA->cameraPos.x = CAMERA->CenterOfCamera.x;
+						CAMERA->cameraPos.y = CAMERA->CenterOfCamera.y;
+					}
+					
 				}
 				else
 				{
@@ -297,15 +306,15 @@ namespace TE {
 
 				if ((upblock.y - downblock.y) < APP->_screenHeight && (rightblock.x - leftblock.x) < APP->_screenWidth) // when wall boundaries are smaller than camera size
 				{
-					if (!IsCamMovVer)
+					/*if (!IsCamMovVer)
 					{
 						CAMERA->cameraPos.x += 10;
 						if (CAMERA->cameraPos.x >= DownYLimit)
 							IsCamMovVer = !IsCamMovVer;
 					}
 					else
-					{
-						if (upblock.x - downblock.x > APP->_screenHeight)
+					{*/
+						if (abs(upblock.x - downblock.x) > APP->_screenHeight)
 						{
 							if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x <= UpYLimit)
 								CAMERA->cameraPos.x = UpYLimit;
@@ -314,7 +323,7 @@ namespace TE {
 							else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x > UpYLimit || FACTORY->GetPlayer()->GetComponent<Transform>()->position.x < DownYLimit)
 								CAMERA->cameraPos.x = FACTORY->GetPlayer()->GetComponent<Transform>()->position.x;
 						}
-					}
+					//}
 				}
 				else
 				{

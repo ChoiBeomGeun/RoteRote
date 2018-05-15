@@ -41,8 +41,6 @@ namespace TE {
 
 		void followPlayer();
 
-		float _zNear;
-		float _zFar;
 		glm::mat4 view;
 		glm::vec3 cameraPos;
 		glm::vec3 cameraTarget;
@@ -53,7 +51,17 @@ namespace TE {
 		bool IsCameraAttached{ false };
 		bool isCentered;
 		float angle;
+		float near_distance() const;
+		float far_distance() const;
+		glm::vec3 viewport_geometry() const;
+	private:
+		
+		float _zNear;
+		float _zFar;
 		float _aspect;
+		float _distance;
+		float _width, _height;
+		glm::vec3 right;
 		CameraObject * m_camerObject;
 	};
 	extern Camera * CAMERA;

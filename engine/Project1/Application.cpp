@@ -262,7 +262,7 @@ glm::vec3 TE::Application::ConvertToWorld(glm::vec3 mouseCoords)
 	// invert y direction
 	mouseCoords.x = APP->_screenWidth *.5f - mouseCoords.x;
 	mouseCoords.y = mouseCoords.y - APP->_screenHeight *.5f;
-	float scale = CAMERA->_zFar / CAMERA->cameraPos.z;
+	float scale = CAMERA->far_distance()/ CAMERA->cameraPos.z;
 	mouseCoords /= scale;
 	mouseCoords.z = 0;
 

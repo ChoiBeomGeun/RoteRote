@@ -90,6 +90,7 @@ void Level1::Init()
 	Loading->IsLoadingObject = true;
 	Loading->GetComponent<Sprite>()->texture_load("loading.png");
 */
+	CAMERA->Initialize();
 
 	camAct.isCamToPlayer = true;
 	LosesoundOnetime = true;

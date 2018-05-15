@@ -28,11 +28,24 @@ static glm::vec3 up{ 0,1,0 };
 Camera::Camera()
 {
 	CenterOfCamera = { 0.f, 0.f };
-	
+	right = { 1,0,0 };
 	cameraTarget = glm::vec3(0, 0, -1);
+
+	cameraPos = eye;
+	cameraTarget = target;
+	cameraUp = up;
+	_zNear = 0.f;
+	_zFar = 999.f;
+	angle = 45.f;
+	_aspect = (float)APP->_screenWidth / (float)APP->_screenHeight;
+	//CAMERA->isCentered = true;
+	_distance = (+_zNear + _zFar) *.5f;
+	_width = tan(angle*.5f) * 2 * _distance;
+	_height = _width / _aspect;
 
 	m_camerObject = new CameraObject();
 	m_camerObject->scale = glm::vec3(1, 1, 0);
+	
 	DEBUG_ASSERT(CAMERA != nullptr, "Camera has more than one");
 	CAMERA = this;
 }
@@ -48,11 +61,14 @@ void Camera::Initialize()
 	cameraPos = eye;
 	cameraTarget = target;
 	cameraUp = up;
-	_zNear = 999.f;
-	_zFar = 1.f;
-	angle = 30.f;
+	_zNear = 0.f;
+	_zFar = 999.f;
+	angle = 45.f;
 	_aspect = (float)APP->_screenWidth / (float)APP->_screenHeight;
 	CAMERA->isCentered = true;
+	_distance = (+_zNear +_zFar) *.5f;
+	_width = tan(angle*.5f) * 2 * _distance;
+	_height = _width / _aspect;
 }
 void TE::Camera::update()
 {
@@ -161,6 +177,21 @@ void TE::Camera::followPlayer()
 	glm::vec3 PaceDirection = FACTORY->GetPlayer()->GetComponent<Transform>()->position - cameraPos;
 	glm::vec3 StartPosition{ 0.f };
 
+}
+
+float TE::Camera::near_distance() const
+{
+	return _zNear;
+}
+
+float TE::Camera::far_distance() const
+{
+	return _zFar;
+}
+
+glm::vec3 TE::Camera::viewport_geometry() const
+{
+	return glm::vec3(_width, _height, _distance);
 }
 
 void Camera::Roate180(void)
