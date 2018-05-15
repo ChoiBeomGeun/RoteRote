@@ -105,7 +105,7 @@ void LevelManager::LoadLevel(std::string  path)
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "SPRITE") {
 			//	Sprite * sprite = new Sprite();
 				tempObject->AddComponent<Sprite>();
-				tempObject->GetComponent<Sprite>()->depth = 0.0f;
+				tempObject->GetComponent<Sprite>()->depth = file.mRoot[object + to_string(i)]["Depth"].asFloat();
 				tempObject->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
 				tempObject->GetComponent<Sprite>()->isPerspective = true;
 				tempObject->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(textureDir);
@@ -444,6 +444,7 @@ void LevelManager::SaveLevel(std::string  path)
 		root[object + to_string(i)]["Position"]["z"] = it.second->GetComponent<Transform>()->position.z;
 		root[object + to_string(i)]["Scale"]["x"] = it.second->GetComponent<Transform>()->scale.x;
 		root[object + to_string(i)]["Scale"]["y"] = it.second->GetComponent<Transform>()->scale.y;
+		root[object + to_string(i)]["Depth"] = it.second->GetComponent<Sprite>()->depth;
 		if (FACTORY->ObjectIDMap[it.first]->GetComponent<Body>() != nullptr)
 			root[object + to_string(i)]["Mass"] = it.second->GetComponent<Body>()->pm_mass;
 		root[object + to_string(i)]["Rotation"] = it.second->GetComponent<Transform>()->angle;
