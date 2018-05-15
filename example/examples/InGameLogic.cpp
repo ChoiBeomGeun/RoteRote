@@ -94,6 +94,13 @@ void InGameLogic::InGameUpdate(float dt)
 	for (auto IngameLogics : GameLogicList)
 		IngameLogics->Update(dt);
 	LOGGINGSYSTEM->Update(dt);
+
+	for (auto Objects : FACTORY->ObjectIDMap)
+	{
+		if (STATEMANAGER->b_IsRotating)
+			if (FACTORY->ObjectIDMap[Objects.first]->objectstyle == Objectstyle::Box)
+				FACTORY->ObjectIDMap[Objects.first]->GetComponent<Body>()->pm_velocity = glm::vec3(0);
+	}
 }
 
 void InGameLogic::InGameShutdown(void)
@@ -103,17 +110,9 @@ void InGameLogic::InGameShutdown(void)
 		IngameLogics->Free();
 #endif // !
 
-
-	
-
-
-
-	
 //	PHYSICS->Initialize();
 //	LOGGINGSYSTEM->Free();
 	//CAMERA->view.RotateZ(TUMath::DegreeToRadian(0));
 //	PHYSICS->gravity = glm::vec3(0, -20, 0);
 	//	PHYSICS->gravity.Set(Vector3(0, -20, 0));
-	
-
 }

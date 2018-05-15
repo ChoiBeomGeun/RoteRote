@@ -74,7 +74,7 @@ namespace TE {
 		void BroadPhase();
 		void ResolveCollision(Pair *M);
 		bool CircleCircleCollisionCheck(Body *pA, Body *pB, Pair *M);
-		void KinematicBoxCollision(float &pmL_invmass, float &pmR_invmass, Pair *M);
+		void KinematicBoxCollision(float &rhs_invmass, float &lhs_invmass, Pair *M);
 		void PositionalCorrection(Pair *M);
 
 		void PlayerGroundType(glm::vec3 normal, Body *pA, Body *pB);

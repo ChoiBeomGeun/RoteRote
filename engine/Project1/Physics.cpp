@@ -84,7 +84,7 @@ void Physics::ExplictEulerIntegrator(float dt) {
 		//dynamic_cast<Transform*>((*i)->GetOwner()->GetComponent(CT_TRANSFORM));
 		curfp = pTr->GetPosition();
 		pTr->SetPosition(curfp + (*i).second->pm_velocity*dt);
-		if ((*i).second->pm_invmass == 0)
+		if ((*i).second->GetOwner()->objectstyle == Objectstyle::Wall || (*i).second->GetOwner()->objectstyle == Objectstyle::Trigger90 || (*i).second->GetOwner()->objectstyle == Objectstyle::Trigger180)
 			continue;
 
 		if (!(*i).second->gravityOn)
@@ -188,43 +188,18 @@ void Physics::ResolveCollision(Pair *M)
 	float rhs_invmass = M->m_rhs->pm_invmass;
 	float lhs_mass = M->m_lhs->pm_mass;
 	float rhs_mass = M->m_rhs->pm_mass;
-	if (M->m_rhs->pm_invmass != 0.f)
-	{
-		if ((!M->m_lhs->gravityOn))
-		{
-			lhs_invmass = 0.f;
-			lhs_mass = 0.f;
-		}
-	}
-	if (lhs_invmass != 0.f)
-	{
-		if ((!M->m_rhs->gravityOn))
-		{
-			rhs_invmass = 0.f;
-			rhs_mass = 0.f;
-		}
-	}
 
-	if (!M->m_rhs->gravityOn && !M->m_lhs->gravityOn)
-	{
-		KinematicBoxCollision(lhs_invmass, rhs_invmass, M);
+	KinematicBoxCollision(rhs_invmass, lhs_invmass, M);
 
-		if (rhs_invmass == 0)
-			rhs_mass = 0.f;
-		else
-			rhs_mass = 1 / rhs_invmass;
+	if (lhs_invmass == 0)
+		lhs_invmass = 0;
+	else
+		lhs_mass = 1 / lhs_invmass;
 
-		if (lhs_invmass == 0)
-			lhs_mass = 0.f;
-		else
-			lhs_mass = 1 / lhs_invmass;
-
-		if ((lhs_invmass == 0.f) && (rhs_invmass != 0.f))
-			rv = M->m_rhs->pm_velocity;
-		else
-			rv = -M->m_lhs->pm_velocity;
-	}
-
+	if (rhs_invmass == 0)
+		rhs_invmass = 0;
+	else
+		rhs_mass = 1 / rhs_invmass;
 
 	//M->normal = pB->m_pTransform->Position - pA->m_pTransform->Position;
 	//Vector3 normal = pB->m_pTransform->Position - pA->m_pTransform->Position;
@@ -253,17 +228,10 @@ void Physics::ResolveCollision(Pair *M)
 	float mass_sum = rhs_mass + lhs_mass;
 	float ratio = lhs_mass / mass_sum;
 
-	//if (!M->m_lhs->gravityOn)
-	//            M->m_lhs->pm_velocity.SetZero();
-	//else
 	M->m_lhs->pm_velocity -= ratio * impulse;
-
 
 	ratio = rhs_mass / mass_sum;
 
-	/*      if (!M->m_rhs->gravityOn)
-	M->m_rhs->pm_velocity.SetZero();
-	else*/
 	M->m_rhs->pm_velocity += ratio * impulse;
 }
 
@@ -310,60 +278,43 @@ bool Physics::CircleCircleCollisionCheck(Body * pA, Body * pB, Pair *M)
 	}
 }
 
-void Physics::KinematicBoxCollision(float &pmL_invmass, float &pmR_invmass, Pair *M)
+void Physics::KinematicBoxCollision(float &rhs_invmass, float &lhs_invmass, Pair *M)
 {
-	if (gravity.y < 0)
+	if (M->m_lhs->GetOwner()->objectstyle == Objectstyle::Box && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Box)
 	{
-		if (M->m_rhs->m_pTransform->position.y < M->m_lhs->m_pTransform->position.y)
+		if (gravity.y < 0)
 		{
-			pmR_invmass = 0;
-			pmL_invmass = 1;
+			if (M->m_rhs->m_pTransform->position.y < M->m_lhs->m_pTransform->position.y)
+				rhs_invmass = 0;
+			else if (M->m_rhs->m_pTransform->position.y > M->m_lhs->m_pTransform->position.y)
+				lhs_invmass = 0;
 		}
-		else if (M->m_rhs->m_pTransform->position.y > M->m_lhs->m_pTransform->position.y)
+		else if (gravity.y > 0)
 		{
-			pmR_invmass = 1;
-			pmL_invmass = 0;
+			if (M->m_rhs->m_pTransform->position.y < M->m_lhs->m_pTransform->position.y)
+				lhs_invmass = 0;
+			else if (M->m_rhs->m_pTransform->position.y > M->m_lhs->m_pTransform->position.y)
+				rhs_invmass = 0;
+		}
+		else if (gravity.x < 0)
+		{
+			if (M->m_rhs->m_pTransform->position.x < M->m_lhs->m_pTransform->position.x)
+				rhs_invmass = 0;
+			else if (M->m_rhs->m_pTransform->position.x > M->m_lhs->m_pTransform->position.x)
+				lhs_invmass = 0;
+		}
+		else if (gravity.x > 0)
+		{
+			if (M->m_rhs->m_pTransform->position.x < M->m_lhs->m_pTransform->position.x)
+				lhs_invmass = 0;
+			else if (M->m_rhs->m_pTransform->position.x > M->m_lhs->m_pTransform->position.x)
+				rhs_invmass = 0;
 		}
 	}
-	else if (gravity.y > 0)
-	{
-		if (M->m_rhs->m_pTransform->position.y < M->m_lhs->m_pTransform->position.y)
-		{
-			pmR_invmass = 1;
-			pmL_invmass = 0;
-		}
-		else if (M->m_rhs->m_pTransform->position.y > M->m_lhs->m_pTransform->position.y)
-		{
-			pmR_invmass = 0;
-			pmL_invmass = 1;
-		}
-	}
-	else if (gravity.x < 0)
-	{
-		if (M->m_rhs->m_pTransform->position.x < M->m_lhs->m_pTransform->position.x)
-		{
-			pmR_invmass = 0;
-			pmL_invmass = 1;
-		}
-		else if (M->m_rhs->m_pTransform->position.x > M->m_lhs->m_pTransform->position.x)
-		{
-			pmR_invmass = 1;
-			pmL_invmass = 0;
-		}
-	}
-	else if (gravity.x > 0)
-	{
-		if (M->m_rhs->m_pTransform->position.x < M->m_lhs->m_pTransform->position.x)
-		{
-			pmR_invmass = 1;
-			pmL_invmass = 0;
-		}
-		else if (M->m_rhs->m_pTransform->position.x > M->m_lhs->m_pTransform->position.x)
-		{
-			pmR_invmass = 0;
-			pmL_invmass = 1;
-		}
-	}
+	else if (M->m_lhs->GetOwner()->objectstyle == Objectstyle::Player && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Box)
+		rhs_invmass = 0;
+	else if (M->m_lhs->GetOwner()->objectstyle == Objectstyle::Box && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Player)
+		lhs_invmass = 0;
 }
 
 bool Physics::MouseVsRect(glm::vec3 mouse, Transform * Object)
@@ -546,27 +497,45 @@ void Physics::PositionalCorrection(Pair *M)
 	const float slop = 0.05f; // usually 0.01 to 0.1
 	float lhs_invmass = M->m_lhs->pm_invmass;
 	float rhs_invmass = M->m_rhs->pm_invmass;
-	if (M->m_rhs->pm_invmass != 0)
-	{
-		if ((!M->m_lhs->gravityOn))
-		{
-			lhs_invmass = 0;
-		}
-	}
-	if (lhs_invmass != 0)
-	{
-		if ((!M->m_rhs->gravityOn))
-		{
-			rhs_invmass = 0;
-		}
-	}
 
-	if (!M->m_rhs->gravityOn && !M->m_lhs->gravityOn)
-	{
-		KinematicBoxCollision(lhs_invmass, rhs_invmass, M);
-	}
 
 	glm::vec3 correction = TUMath::Max(M->penetration - slop, 0.0f) / (lhs_invmass + rhs_invmass) * percent * M->normal;
+
+	if(M->m_lhs->GetOwner()->objectstyle == Objectstyle::Box && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Box)
+	{
+		if (gravity.y < 0)
+		{
+			if (M->m_rhs->m_pTransform->position.y < M->m_lhs->m_pTransform->position.y)
+				rhs_invmass = 0;
+			else if (M->m_rhs->m_pTransform->position.y > M->m_lhs->m_pTransform->position.y)
+				lhs_invmass = 0;
+		}
+		else if (gravity.y > 0)
+		{
+			if (M->m_rhs->m_pTransform->position.y < M->m_lhs->m_pTransform->position.y)
+				lhs_invmass = 0;
+			else if (M->m_rhs->m_pTransform->position.y > M->m_lhs->m_pTransform->position.y)
+				rhs_invmass = 0;
+		}
+		else if (gravity.x < 0)
+		{
+			if (M->m_rhs->m_pTransform->position.x < M->m_lhs->m_pTransform->position.x)
+				rhs_invmass = 0;
+			else if (M->m_rhs->m_pTransform->position.x > M->m_lhs->m_pTransform->position.x)
+				lhs_invmass = 0;
+		}
+		else if (gravity.x > 0)
+		{
+			if (M->m_rhs->m_pTransform->position.x < M->m_lhs->m_pTransform->position.x)
+				lhs_invmass = 0;
+			else if (M->m_rhs->m_pTransform->position.x > M->m_lhs->m_pTransform->position.x)
+				rhs_invmass = 0;
+		}
+	}
+	else if(M->m_lhs->GetOwner()->objectstyle == Objectstyle::Player && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Box)
+		rhs_invmass = 0;
+	else if(M->m_lhs->GetOwner()->objectstyle == Objectstyle::Box && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Player)
+		lhs_invmass = 0;
 
 	M->m_lhs->m_pTransform->position -= lhs_invmass * correction;
 	M->m_rhs->m_pTransform->position += rhs_invmass * correction;
