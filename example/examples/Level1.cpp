@@ -55,6 +55,7 @@ bool LosesoundOnetime = true;
 bool IndicatorCheck = true;
 std::string  path2;
 Object * HUDLevelname;
+Object * Backgroundobj;
 Object * Indicator;
 Object * Indicator1;
 Object * Indicator2;
@@ -132,6 +133,7 @@ void Level1::Init()
 	HUDLevelname->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(levelname);
 	HUDLevelname->objectstyle = Objectstyle::Button;
 
+
 	//PARTICLEMANAGER->LoadEmitter("particle1.json");
 
 	INGAMELOGIC->InGameInit();
@@ -195,6 +197,14 @@ void Level1::Init()
 
 	//	CAMERA->cameraPos = glm::vec3(CAMERA->CenterOfCamera, 500.f);
 	//}
+
+
+	Backgroundobj = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(2, 2, 0));
+	Backgroundobj->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("dd.png");
+	Backgroundobj->objectstyle = Objectstyle::Button;
+	Backgroundobj->GetComponent<Sprite>()->depth = -1;
+	Backgroundobj->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 140);
+
 	static float loadingtimer = 0.1f;
 
 	while (loadingtimer >0)

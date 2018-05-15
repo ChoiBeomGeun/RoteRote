@@ -187,7 +187,7 @@ void ImGuiUpdate(void) {
 
 							}
 							ImGui::ColorEdit4("Color", FACTORY->ObjectIDMap[i.second->objID]->GetComponent<Sprite>()->Color, ImGuiColorEditFlags_Uint8);
-							ImGui::SliderFloat("Depth", &FACTORY->ObjectIDMap[i.second->objID]->GetComponent<Sprite>()->depth, 0, 1);
+							ImGui::SliderFloat("Depth", &FACTORY->ObjectIDMap[i.second->objID]->GetComponent<Sprite>()->depth, -10, 10);
 
 							ImGui::TreePop();
 						}

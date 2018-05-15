@@ -312,7 +312,8 @@ void LevelManager::SaveLevel(std::string  path)
         for (auto it : FACTORY->ObjectIDMap)
         {
 
-            if (it.second->objectstyle == Objectstyle::Button && !it.second->HasComponent<Emitter>()) {
+			if (it.second->objectstyle == Objectstyle::Button && it.second->GetComponent<Sprite>()->isPerspective
+				== false && !it.second->HasComponent<Emitter>()) {
                 NumberofUnvaildObject++;
                 continue;
             }
@@ -343,7 +344,8 @@ void LevelManager::SaveLevel(std::string  path)
 		static unsigned index = 0;
 
 
-                if (it.second->objectstyle == Objectstyle::Button && !it.second->HasComponent<Emitter>()) {
+                if (it.second->objectstyle == Objectstyle::Button && it.second->GetComponent<Sprite>()->isPerspective 
+					== false &&!it.second->HasComponent<Emitter>()) {
 
                     continue;
                 }

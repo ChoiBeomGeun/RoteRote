@@ -189,7 +189,7 @@ void Option::Update(float dt)
 			ooCredits = FACTORY->CreateArchetype(ReadingArchetype("Button.json"));
 			ooCredits->GetComponent<Transform>()->SetPosition(glm::vec3(16.260f,-16.260f,-1));
 			ooCredits->GetComponent<Transform>()->SetScale(glm::vec3(1025.041f, 365.854f,0));
-			ooCredits->GetComponent<Sprite>()->texture_load("CreditsText.png");
+			ooCredits->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("CreditsText.png");
 			CreditsIsON = true;
 			return;
 		break; 
