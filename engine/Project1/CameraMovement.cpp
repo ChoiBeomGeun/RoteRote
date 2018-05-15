@@ -102,6 +102,8 @@ namespace TE {
 			glm::vec3 test = CAMERA->viewport_geometry();
 			if (type == CameraRotation::EN_0)
 			{
+				if (IsCamMovVer)
+					IsCamMovVer = !IsCamMovVer;
 				// this is current block of map 
 				upblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
 				downblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
@@ -192,17 +194,21 @@ namespace TE {
 					float UpYLimit, DownYLimit;
 					UpYLimit = (upblock.x - std::abs((upblock.x - CAMERA->CenterOfCamera.x))*.5f);
 					DownYLimit = (downblock.x + std::abs(CAMERA->CenterOfCamera.x - downblock.x)*.5f);
-					
-					
+										
 					if (abs(upblock.x - downblock.x )> APP->_screenHeight) //when vertical different is bigger than screen _height size.
 					{
+						
 						if (!IsCamMovVer)
 						{
-							if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x < UpYLimit || FACTORY->GetPlayer()->GetComponent<Transform>()->position.x > DownYLimit)
-								CAMERA->cameraPos.x = FACTORY->GetPlayer()->GetComponent<Transform>()->position.x;
-							else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x <= DownYLimit)
-								IsCamMovVer = !IsCamMovVer;
+							if (STATEMANAGER->Loadtolevelname == "level6.json")
+							{
+								if (CAMERA->cameraPos.x > DownYLimit)
+									CAMERA->cameraPos.x -= 5.f;
+								else if (CAMERA->cameraPos.x <= DownYLimit)
+									IsCamMovVer = !IsCamMovVer;
+							}
 						}
+
 						else {
 							if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x >= UpYLimit)
 								CAMERA->cameraPos.x = UpYLimit;
@@ -241,6 +247,8 @@ namespace TE {
 			}
 			else if (type == CameraRotation::EN_180)
 			{
+				if (IsCamMovVer)
+					IsCamMovVer = !IsCamMovVer;
 				// this is current block of map 
 				upblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
 				downblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
@@ -391,11 +399,13 @@ namespace TE {
 			glm::vec2(CAMERA->cameraPos) = glm::vec2(FACTORY->GetPlayer()->GetComponent<Transform>()->position);
 			break;
 		case EN_BOUNDARY:
-			glm::vec2(CAMERA->cameraPos) = CAMERA->CenterOfCamera;
+			CameraPosz = 999.f;
+			CAMERA->cameraPos = glm::vec3(0, 0, CameraPosz);
+			break;
 		case EN_Option:
 			CameraPosz = 675.f;
 			CAMERA->cameraPos = glm::vec3(0, 0, CameraPosz);
-
+			break;
 		case End:
 			break;
 		}	

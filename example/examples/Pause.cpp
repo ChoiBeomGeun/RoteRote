@@ -256,9 +256,6 @@ void Pause::Update(float dt)
 
 void Pause::Free(void)
 {
-
-	PauseCam.cameraSetting(CameraPosType::EN_BOUNDARY);
-
 	pauseindex = 0;
 	SOUNDMANAGER->ResumeAllSound();
 	if (oBackbutton)

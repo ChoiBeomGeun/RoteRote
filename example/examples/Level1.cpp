@@ -311,8 +311,8 @@ void Level1::Update(float dt)
 		first = false;
 		SetReplayer();
 	}
-	if (!PARTICLEMANAGER->m_EmitterList.empty() && FACTORY->GetPlayer() != nullptr)
-		PARTICLEMANAGER->m_EmitterList[0]->pos = FACTORY->GetPlayer()->GetComponent<Transform>()->position;
+	/*if (!PARTICLEMANAGER->m_EmitterList.empty() && FACTORY->GetPlayer() != nullptr)
+		PARTICLEMANAGER->m_EmitterList[0]->pos = FACTORY->GetPlayer()->GetComponent<Transform>()->position;*/
 
 
 }

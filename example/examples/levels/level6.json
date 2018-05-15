@@ -21,7 +21,7 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 14,
+	"NumberOfObjects" : 13,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
@@ -140,28 +140,6 @@
 		"TriggerLifeTime" : -1,
 		"TriggerType" : "180"
 	},
-	"Object14" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
-		"Depth" : -1.0,
-		"ObjectID" : 14,
-		"ObjectType" : "Button",
-		"ParticlePath" : "PlayerTrail.json",
-		"ParticleType" : "ET_TRAIL",
-		"Position" : 
-		{
-			"x" : 0.0,
-			"y" : 0.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 10.0,
-			"y" : 10.0
-		},
-		"TextureDir" : "basicParticle.png"
-	},
 	"Object2" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
@@ -240,7 +218,7 @@
 			"y" : -57.0,
 			"z" : 0.0
 		},
-		"Rotation" : 362.31396484375,
+		"Rotation" : 1052.50244140625,
 		"Scale" : 
 		{
 			"x" : 20.0,
