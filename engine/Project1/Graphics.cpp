@@ -47,17 +47,14 @@ void TE::Graphics::initparticleShader()
 {
 	std::string path = "TEParticle";
 
-
 	std::string saveLevel = path;
 
 	path = ".\\shaders.\\" + path;
-
 
 	_particleProgram.compileShaders(path + ".vert", path + ".frag");
 	_particleProgram.addAttribute("verParticlePos");
 	_particleProgram.addAttribute("verParticleCol");
 	_particleProgram.addAttribute("verParticleUV");
-
 	_particleProgram.linkShaders();
 }
 
@@ -199,13 +196,12 @@ void Graphics::drawparticle_attributes()
 	glBindBuffer(GL_ARRAY_BUFFER, 0); // 0 mean unbind
 }
 
-
-
 // ALL systems are updated every frame
 void Graphics::Update(float dt)
 {
 	Sprite::sortSprites(SortType::FRONT_TO_BACK);
 	//BaseGraphics::sortGraphics(GRA_SORT::FRONT_TO_BACK);
+	
 
 	glEnable(GL_BLEND);
 	glDepthMask(GL_TRUE);
@@ -213,7 +209,8 @@ void Graphics::Update(float dt)
 
 	glClearColor(0.f, 0.f, 0.f, 0.f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	time += dt;
 	splashtime += dt;
 
@@ -254,6 +251,8 @@ void Graphics::Update(float dt)
 	APP->SwapWindow();
 	glDisable(GL_BLEND);
 	glDepthMask(GL_FALSE);
+
+	glDisable(GL_BLEND);
 
 }
 
@@ -325,7 +324,6 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 		if ((*iter)->pOwner->GetComponent<Emitter>()->isAdditive) {
 			glDepthMask(GL_FALSE);
 			glBlendFunc(GL_ONE, GL_ONE);
-
 		}
 		else if (!(*iter)->pOwner->GetComponent<Emitter>()->isAdditive)
 		{
@@ -357,7 +355,7 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 				glDrawArrays(GL_TRIANGLES, 0, 6);
 			}
 		}
-		glDisable(GL_BLEND);
+		//glDisable(GL_BLEND);
 	}
 }
 
