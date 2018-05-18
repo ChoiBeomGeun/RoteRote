@@ -54,6 +54,7 @@ namespace TE {
 		std::vector<std::string> mVsSoundnamelist;
 		std::vector<std::string> mVsArchtypenamelist;
 		bool GameIsRunning;
+		bool IsLoggingOn= false;
 	private:
 		//Track all systems the engine uses
 		std::vector<Systems*> SystemList;

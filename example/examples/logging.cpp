@@ -62,8 +62,8 @@ namespace TE {
 }
 TE::LoggingSystem::LoggingSystem()
 {
-	IsLoggigOn = LOGGINGSTART;
-	if (LOGGINGSTART) {
+	IsLoggigOn = ENGINE->IsLoggingOn;
+	if (ENGINE->IsLoggingOn) {
 
 
 		if (LoggingInit) {
@@ -93,10 +93,11 @@ TE::LoggingSystem::LoggingSystem()
 			//{ return b; });
 			//std::atoi()
 		}
-	}
+	
 	std::sort(GameLevelList.begin(), GameLevelList.end(), int_compare());
 	std::reverse(GameLevelList.begin(), GameLevelList.end());
 	GameLevelList.erase(GameLevelList.begin());
+	}
 }
 
 
@@ -113,7 +114,7 @@ void TE::LoggingSystem::Initialize()
 void TE::LoggingSystem::Update(float dt)
 {	
 
-	if (LOGGINGSTART) {
+	if (ENGINE->IsLoggingOn) {
  		GameLevelList[STATEMANAGER->i_LevelSelect - 1].NumberOfTriggerActivation = TRIGGERLOGIC->NumberOfTriggersActivation;
 		if (APP->b_Lose&& IsLoseOnce)
 		{
@@ -138,7 +139,7 @@ void TE::LoggingSystem::Update(float dt)
 
 void TE::LoggingSystem::SavingLog(void)
 {
-	if (LOGGINGSTART) {
+	if (ENGINE->IsLoggingOn) {
 		LOGGINGSYSTEM->rootlog["LOG NAME"] = LOG_NAME;
 
 		char buff[20];

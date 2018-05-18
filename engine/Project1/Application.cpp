@@ -216,16 +216,19 @@ void Application::Initialize()
 
 	}
 */
-//	if (_isfull)
+	if (_isfull)
+		
+#ifdef _DEBUG
 		//SDL_SetWindowFullscreen(pWnd, SDL_WINDOW_FULLSCREEN);
+#endif // DEBUG
 
 
 	SDL_GL_SetSwapInterval(1);
-//#ifndef _DEBUG
+#ifndef _DEBUG
 	int32_t cursorData[2] = { 0, 0 };
 	cursor = SDL_CreateCursor((Uint8 *)cursorData, (Uint8 *)cursorData, 8, 8, 4, 4);
 	SDL_SetCursor(cursor);
-//#endif
+#endif
 }
 
 void Application::Update(float /*dt*/)
@@ -380,18 +383,20 @@ void Application::PollKeyEvent(SDL_Event & currEvent)
 		}
 	}
 
-	switch (currEvent.type)
-	{
-	case SDL_KEYDOWN:
-		Input::SetKeyPressed(currEvent.key.keysym.scancode, SDL_KEYDOWN);
-		break;
-	case SDL_KEYUP:
-		Input::SetKeyPressed(currEvent.key.keysym.scancode, SDL_KEYUP);
-		break;
-	default:
-		break;
-	}
+	if (IsKeyBoardAvailable) {
 
+		switch (currEvent.type)
+		{
+		case SDL_KEYDOWN:
+			Input::SetKeyPressed(currEvent.key.keysym.scancode, SDL_KEYDOWN);
+			break;
+		case SDL_KEYUP:
+			Input::SetKeyPressed(currEvent.key.keysym.scancode, SDL_KEYUP);
+			break;
+		default:
+			break;
+		}
+	}
 }
 /**
 * \brief

@@ -34,6 +34,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "..\..\example\examples\logging.h"
 #include "Physics.h"
 
+#define ISLOGGINGON false;
 typedef BOOL(WINAPI *LPFN_ISWOW64PROCESS) (HANDLE, PBOOL);
 LPFN_ISWOW64PROCESS fnIsWow64Process;
 using namespace TE;
@@ -65,6 +66,7 @@ Engine::~Engine()
 
 void Engine::Initialize()
 {
+	IsLoggingOn = ISLOGGINGON;
 	Input::Initialize();
 	// Add systems to Engine
 	AddSystem(new Application());
@@ -112,14 +114,14 @@ void Engine::GameLoop()
 	{
 		float frametime = Timer::GetDelta();
 	
-	;
+	
 
-		if (frametime >= 0.25f)
-			frametime = 0.25;
+		if (frametime >= 0.025f)
+			frametime = 0.025f;
 
 		if (frametime <= 0.016f)
 			frametime = 0.016f;
-		if(LOGGINGSYSTEM->IsLoggigOn)
+		if(IsLoggingOn)
 		LOGGINGSYSTEM->HowMuchTimePassed += frametime;
 		for (unsigned int i = 0; i <SystemList.size(); ++i) {
 		

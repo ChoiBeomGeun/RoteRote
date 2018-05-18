@@ -65,20 +65,22 @@ void PlayerController::Initialize()
 
 void PlayerController::Update(float dt)
 {
-	if (!(STATEMANAGER->b_IsPauseOn) && !STATEMANAGER->b_IsRot180 && !STATEMANAGER->b_IsRot90 && (!STATEMANAGER->b_IsReplay)
-		&& (!STATEMANAGER->b_IsAutoplaying) && (!CAMERA->IsCameraShaking) && !STATEMANAGER->IsDrawing) {
-
-
-		JumpInit();
-		MaxJump();
-		Movement(dt);
-		PlayerAnimation();
-	}
-	else if (STATEMANAGER->b_IsRot180 || STATEMANAGER->b_IsRot90)
+	if (APP->IsKeyBoardAvailable)
 	{
-		this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(0, 0, 0);
-	}
+		if (!(STATEMANAGER->b_IsPauseOn) && !STATEMANAGER->b_IsRot180 && !STATEMANAGER->b_IsRot90 && (!STATEMANAGER->b_IsReplay)
+			&& (!STATEMANAGER->b_IsAutoplaying) && (!CAMERA->IsCameraShaking) && !STATEMANAGER->IsDrawing) {
 
+
+			JumpInit();
+			MaxJump();
+			Movement(dt);
+			PlayerAnimation();
+		}
+		else if (STATEMANAGER->b_IsRot180 || STATEMANAGER->b_IsRot90)
+		{
+			this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(0, 0, 0);
+		}
+	}
 	//this->GetOwner()->GetComponent<Transform>()->SetPosition(pos);
 }
 

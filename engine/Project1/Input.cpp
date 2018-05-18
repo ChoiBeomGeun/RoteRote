@@ -113,7 +113,7 @@ void Input::MouseReact(glm::vec3   /*position*/, glm::vec3  /*scale*/)
 void Input::Reset(void) {
 	s_released.reset();
 	s_triggered.reset();
-
+	
 	s_mouseReleased.reset();
 	s_mouseTriggered.reset();
 

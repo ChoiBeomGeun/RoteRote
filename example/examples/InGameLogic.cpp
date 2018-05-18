@@ -21,7 +21,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "Application.h"
 #include "LoseconditionLogic.h"
 #include "logging.h"
-
+#include "engine.h"
 using namespace  TE;
 
 
@@ -41,6 +41,7 @@ namespace TE {
 }
 InGameLogic::InGameLogic()
 {
+	if(ENGINE->IsLoggingOn)
   	LOGGINGSYSTEM = new LoggingSystem;
 	INGAMELOGIC = this;
 
@@ -71,6 +72,7 @@ void InGameLogic::InGameInit()
 	//	DEBUG_ASSERT(true, "Opps ! There is no player or clearzone");
 	APP->b_Win = false;
 	APP->b_Lose = false;
+	if(ENGINE->IsLoggingOn)
 	LOGGINGSYSTEM->Initialize();
 }
 void InGameLogic::InGameLogicAdd(GameLogicSystem * game_logic_system)
@@ -93,6 +95,7 @@ void InGameLogic::InGameUpdate(float dt)
 {
 	for (auto IngameLogics : GameLogicList)
 		IngameLogics->Update(dt);
+	if (ENGINE->IsLoggingOn)
 	LOGGINGSYSTEM->Update(dt);
 
 	for (auto Objects : FACTORY->ObjectIDMap)
