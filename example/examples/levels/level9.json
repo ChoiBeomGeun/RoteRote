@@ -138,17 +138,17 @@
 		"ObjectType" : "Button",
 		"Position" : 
 		{
-			"x" : -40.650001525878906,
-			"y" : -235.77201843261719,
+			"x" : 292.650001525878906,
+			"y" : -97.77201843261719,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 245.0,
-			"y" : 50.0
+			"x" : 468.290,
+			"y" : 266.341
 		},
-		"TextureDir" : "spacex2.png"
+		"TextureDir" : "wallJumpIns.png"
 	},
 	"WorldSize" : 
 	{

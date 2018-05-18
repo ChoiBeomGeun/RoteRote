@@ -102,7 +102,7 @@ void Physics::ExplictEulerIntegrator(float dt) {
 		if ((*i).second->GetOwner()->objectstyle == Objectstyle::Wall || (*i).second->GetOwner()->objectstyle == Objectstyle::Trigger90 || (*i).second->GetOwner()->objectstyle == Objectstyle::Trigger180 || (*i).second->GetOwner()->objectstyle == Objectstyle::AttachWall)
 			continue;
 
-		if ((*i).second->GetOwner()->objectstyle == Objectstyle::Box)
+		if ((*i).second->GetOwner()->objectstyle == Objectstyle::Box || (*i).second->GetOwner()->objectstyle == Objectstyle::AttachBox)
 			box_body.push_back((*i).second);
 
 		if (!(*i).second->gravityOn)
@@ -148,6 +148,15 @@ void Physics::BroadPhase() {
 					Attached = true;
 			}
 			else if (i->second->GetOwner()->objectstyle == Objectstyle::Player && j->second->GetOwner()->objectstyle == Objectstyle::AttachWall) {
+				if (AABBvsAABB(i->second, j->second, &ij))
+					Attached = true;
+			}
+
+			if (i->second->GetOwner()->objectstyle == Objectstyle::AttachBox && j->second->GetOwner()->objectstyle == Objectstyle::Player) {
+				if (AABBvsAABB(i->second, j->second, &ij))
+					Attached = true;
+			}
+			else if (i->second->GetOwner()->objectstyle == Objectstyle::Player && j->second->GetOwner()->objectstyle == Objectstyle::AttachBox) {
 				if (AABBvsAABB(i->second, j->second, &ij))
 					Attached = true;
 			}
@@ -282,7 +291,8 @@ bool Physics::CircleCircleCollisionCheck(Body * pA, Body * pB, Pair *M)
 
 void Physics::KinematicBoxCollision(float &rhs_invmass, float &lhs_invmass, Pair *M)
 {
-	if (M->m_lhs->GetOwner()->objectstyle == Objectstyle::Box && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Box)
+	if ((M->m_lhs->GetOwner()->objectstyle == Objectstyle::Box && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Box)
+		|| M->m_lhs->GetOwner()->objectstyle == Objectstyle::AttachBox && M->m_rhs->GetOwner()->objectstyle == Objectstyle::AttachBox)
 	{
 		if (gravity.y < 0)
 		{
@@ -313,9 +323,11 @@ void Physics::KinematicBoxCollision(float &rhs_invmass, float &lhs_invmass, Pair
 				rhs_invmass = 0;
 		}
 	}
-	else if (M->m_lhs->GetOwner()->objectstyle == Objectstyle::Player && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Box)
+	else if ((M->m_lhs->GetOwner()->objectstyle == Objectstyle::Player && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Box)
+		|| (M->m_lhs->GetOwner()->objectstyle == Objectstyle::Player && M->m_rhs->GetOwner()->objectstyle == Objectstyle::AttachBox))
 		rhs_invmass = 0;
-	else if (M->m_lhs->GetOwner()->objectstyle == Objectstyle::Box && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Player)
+	else if ((M->m_lhs->GetOwner()->objectstyle == Objectstyle::Box && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Player)
+		|| (M->m_lhs->GetOwner()->objectstyle == Objectstyle::Player && M->m_rhs->GetOwner()->objectstyle == Objectstyle::AttachBox))
 		lhs_invmass = 0;
 }
 
@@ -503,7 +515,8 @@ void Physics::PositionalCorrection(Pair *M)
 
 
 
-	if (M->m_lhs->GetOwner()->objectstyle == Objectstyle::Box && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Box)
+	if (M->m_lhs->GetOwner()->objectstyle == Objectstyle::Box && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Box
+		|| (M->m_lhs->GetOwner()->objectstyle == Objectstyle::AttachBox && M->m_rhs->GetOwner()->objectstyle == Objectstyle::AttachBox))
 	{
 		if (gravity.y < 0)
 		{
@@ -534,9 +547,11 @@ void Physics::PositionalCorrection(Pair *M)
 				rhs_invmass = 0;
 		}
 	}
-	else if (M->m_lhs->GetOwner()->objectstyle == Objectstyle::Player && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Box)
+	else if (M->m_lhs->GetOwner()->objectstyle == Objectstyle::Player && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Box
+		|| (M->m_lhs->GetOwner()->objectstyle == Objectstyle::Player && M->m_rhs->GetOwner()->objectstyle == Objectstyle::AttachBox))
 		rhs_invmass = 0;
-	else if (M->m_lhs->GetOwner()->objectstyle == Objectstyle::Box && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Player)
+	else if ((M->m_lhs->GetOwner()->objectstyle == Objectstyle::Box && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Player)||
+		(M->m_lhs->GetOwner()->objectstyle == Objectstyle::AttachBox && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Player))
 		lhs_invmass = 0;
 
 	glm::vec3 correction = TUMath::Max(M->penetration - slop, 0.0f) / (lhs_invmass + rhs_invmass) * percent * M->normal;

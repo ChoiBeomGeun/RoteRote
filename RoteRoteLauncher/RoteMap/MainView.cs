@@ -33,7 +33,7 @@ namespace RoteMapView
         public int TotalPaths = 0;
         enum ControlNodeType
         {
-            Player, AttachWall, Button, Box,
+            Player, AttachWall, Button, Box,AttachBox,
             Trigger90_0, Trigger90_90, Trigger90_180,Trigger90_270,
             Trigger90Right_0, Trigger90Right_90, Trigger90Right_180, Trigger90Right_270,
             Trigger180_0, Trigger180_90, Trigger180_180,Trigger180_270,
@@ -435,6 +435,37 @@ namespace RoteMapView
                             RoteobjectList.Add(temp);
                             objectList.Add(control);
                 
+
+                        }
+
+                        break;
+                    case ControlNodeType.AttachBox:
+                        {
+                            if (IsMakingMovingWall)
+                            {
+                                MessageBox.Show("You Should Finish To Make MovingWall", "Spawning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            control = new PictureBox()
+                            {
+
+                                Image = Image.FromFile("texture\\AttachBox.png"),
+                                SizeMode = PictureBoxSizeMode.StretchImage,
+
+                            };
+                            RoteObject temp = new RoteObject();
+                            temp.objectstyle = "AttachBox";
+                            temp.PositionX = control.Location.X;
+                            temp.PositionY = control.Location.Y;
+                            temp.ScaleX = control.Size.Width;
+                            temp.ScaleY = control.Size.Height;
+                            temp.ObjectID = RoteobjectList.Count;
+                            control.Tag = temp.ObjectID;
+                            control.Width = 20;
+                            control.Height = 20;
+                            RoteobjectList.Add(temp);
+                            objectList.Add(control);
+
 
                         }
                         break;
@@ -1369,7 +1400,15 @@ namespace RoteMapView
                     temp.Gravity = false;
                     temp.Mass = 1;
                 }
-
+                if (temp.objectstyle == "AttachBox")
+                {
+                    components.Add("TRANSFORM");
+                    components.Add("SPRITE");
+                    components.Add("BODY");
+                    temp.Texture = "AttachBox.png";
+                    temp.Gravity = false;
+                    temp.Mass = 1;
+                }
                 if (temp.objectstyle == "Trigger90")
                 {
                     components.Add("TRANSFORM");

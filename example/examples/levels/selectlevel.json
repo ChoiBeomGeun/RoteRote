@@ -38,8 +38,8 @@
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 200.0,
-			"y" : 30.0
+			"x" : 280.0,
+			"y" : 52.0
 		},
 		"TextureDir" : "levelSeclect.png"
 	},

@@ -128,14 +128,15 @@ void Menu::Update(float dt)
 					FACTORY->Destroy(obj_howToPlay);
 					return;
 				}
+
 				obj_howToPlay = FACTORY->CreateHUD(glm::vec3(0.2, -0.7, 0), glm::vec3(2, 0.5, 0));
-				obj_howToPlay->GetComponent<Sprite>()->texture_load("howtoplay2.png");
+				obj_howToPlay->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("howTOPlay2.png");
 				HowToPlayIsOn = true;
 				return;
 				break;
 			case MenuList::Menu_Quit: 
 				obj_confirmation = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(1.5, 0.7, 0));
-				obj_confirmation->GetComponent<Sprite>()->texture_load("Sure.png");
+				obj_confirmation->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Sure.png");
 				ConfirmationIsOn = true;
 				return;
 				break;

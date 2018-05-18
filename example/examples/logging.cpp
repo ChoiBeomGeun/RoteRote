@@ -152,17 +152,14 @@ void TE::LoggingSystem::SavingLog(void)
 
 		std::string pathto = "playerlog";
 		pathto = pathto + std::to_string(LogSize) + ".json";
-		char * Userinfo;
-		size_t len = pathto.size();
-		_dupenv_s(&Userinfo, &len, "USERPROFILE");
+	
+
+	
 		std::string saveLevel = pathto;
-#ifdef _DEBUG
+
 		pathto = ".\\logging.\\" + pathto;
-#else
-		pathto = Userinfo;
-		pathto += "/Documents/RoteRote/logging/" + saveLevel;
-#endif
-		free(Userinfo);
+
+
 		LOGGINGSYSTEM->rootlog["HowMuchTimePassedInGame"] = ENGINE->HowMuchTimePassedInGame;
 		for (auto it : GameLevelList)
 		{

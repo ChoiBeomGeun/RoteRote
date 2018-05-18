@@ -207,7 +207,7 @@ void Level1::Init()
 
 	static float loadingtimer = 0.1f;
 
-	while (loadingtimer >0)
+  	while (loadingtimer >0)
 	{
 
 		loadingtimer -= Timer::GetDelta();
@@ -215,6 +215,7 @@ void Level1::Init()
 
 	}
 	loadingtimer = 0.1f;
+
 	camAct.cameraSetting(EN_playerPos);
 }
 

@@ -52,17 +52,7 @@ void Option::Load()
 	OptionSound = SOUNDMANAGER->LoadSound("Menu.mp3");
 	MoveSound = SOUNDMANAGER->LoadSound("Menumove.mp3");
 	SelectSound = SOUNDMANAGER->LoadSound("Menuselect.mp3");
-	if (IsSoundOn)
-	{
-	
-		FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("sound.png");
 
-	}
-	else
-	{
-		FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("soundoff.png");
-
-	}
 
 
 
@@ -74,6 +64,17 @@ void Option::Load()
 
 void Option::Init()
 {
+	if (IsSoundOn)
+	{
+
+		FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("sound.png");
+
+	}
+	else
+	{
+		FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("soundoff.png");
+
+	}
 	CreditsIsON = false;
 	rotation_radius = 100;
 	Selection = OptionList::Option_SoundOnOff;

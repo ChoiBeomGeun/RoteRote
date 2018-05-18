@@ -21,7 +21,7 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 7,
+	"NumberOfObjects" : 8,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "CONTROLLER", "ANIMATION" ],
@@ -75,10 +75,10 @@
 		"Position" : 
 		{
 			"x" : -120.0,
-			"y" : 100.0,
+			"y" : 56.911003112792969,
 			"z" : 0.0
 		},
-		"Rotation" : 350.8616943359375,
+		"Rotation" : 2057.43359375,
 		"Scale" : 
 		{
 			"x" : 20.0,
@@ -175,6 +175,26 @@
 		"TextureDir" : "180button.png",
 		"TriggerLifeTime" : -1,
 		"TriggerType" : "180"
+	},
+	"Object8" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : -1.0,
+		"ObjectID" : 8,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 121.95100402832031,
+			"y" : -73.171005249023438,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 78.049003601074219,
+			"y" : 70.244003295898438
+		},
+		"TextureDir" : "180.png"
 	},
 	"WorldSize" : 
 	{

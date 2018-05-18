@@ -21,7 +21,7 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 7,
+	"NumberOfObjects" : 8,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "CONTROLLER", "ANIMATION" ],
@@ -78,7 +78,7 @@
 			"y" : 70.0,
 			"z" : 0.0
 		},
-		"Rotation" : 222.6380615234375,
+		"Rotation" : 933.43231201171875,
 		"Scale" : 
 		{
 			"x" : 20.0,
@@ -175,6 +175,26 @@
 			"y" : 20.0
 		},
 		"TextureDir" : "unattachwall.png"
+	},
+	"Object8" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"Depth" : 0.0,
+		"ObjectID" : 8,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : -121.95100402832031,
+			"y" : -65.041000366210938,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 79.0,
+			"y" : 79.0
+		},
+		"TextureDir" : "90.png"
 	},
 	"WorldSize" : 
 	{

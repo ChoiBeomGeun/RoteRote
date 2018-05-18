@@ -1,6 +1,6 @@
 {
   "Level": "Levelname",
-  "NumberOfObjects": 5,
+  "NumberOfObjects": 10,
 
   "DefalutCamera": {
     "EYE": {
@@ -12,38 +12,11 @@
 
   "Object1": {
     "ObjectID": 1,
-    "GravityOn": false,
-    "Mass": 0,
-    "Position": {
-      "x": -100.0,
-      "y": 43.0,
-      "z": 0.0
-    },
-    "Rotation": 0.0,
-    "Scale": {
-      "x": 810.0,
-      "y": 20.0,
-      "z": 0.0
-    },
-    "TextureDir": "wall.png",
-    "DefaultTrigger180ornot": false,
-    "TriggerLifeTime": -1,
-    "Components": [
-      "TRANSFORM",
-      "SPRITE",
-      "BODY"
-    ],
-    "HavingComponentsNumbers": 3,
-    "ObjectType": "AttachWall"
-  },
-
-  "Object2": {
-    "ObjectID": 2,
     "GravityOn": true,
     "Mass": 1,
     "Position": {
-      "x": -425.0,
-      "y": 73.0,
+      "x": -635.0,
+      "y": 83.0,
       "z": 0.0
     },
     "Rotation": 0.0,
@@ -66,16 +39,206 @@
     "ObjectType": "Player"
   },
 
+  "Object2": {
+    "ObjectID": 2,
+    "GravityOn": false,
+    "Mass": 0,
+    "Position": {
+      "x": -705.0,
+      "y": 263.0,
+      "z": 0.0
+    },
+    "Rotation": 0.0,
+    "Scale": {
+      "x": 20.0,
+      "y": 460.0,
+      "z": 0.0
+    },
+    "TextureDir": "wall.png",
+    "DefaultTrigger180ornot": false,
+    "TriggerLifeTime": -1,
+    "Components": [
+      "TRANSFORM",
+      "SPRITE",
+      "BODY"
+    ],
+    "HavingComponentsNumbers": 3,
+    "ObjectType": "AttachWall"
+  },
+
   "Object3": {
     "ObjectID": 3,
     "GravityOn": false,
     "Mass": 0,
     "Position": {
-      "x": -245.0,
-      "y": 63.0,
+      "x": -410.0,
+      "y": 43.0,
       "z": 0.0
     },
     "Rotation": 0.0,
+    "Scale": {
+      "x": 570.0,
+      "y": 20.0,
+      "z": 0.0
+    },
+    "TextureDir": "wall.png",
+    "DefaultTrigger180ornot": false,
+    "TriggerLifeTime": -1,
+    "Components": [
+      "TRANSFORM",
+      "SPRITE",
+      "BODY"
+    ],
+    "HavingComponentsNumbers": 3,
+    "ObjectType": "AttachWall"
+  },
+
+  "Object4": {
+    "ObjectID": 4,
+    "GravityOn": false,
+    "Mass": 0,
+    "Position": {
+      "x": -135.0,
+      "y": 273.0,
+      "z": 0.0
+    },
+    "Rotation": 0.0,
+    "Scale": {
+      "x": 20.0,
+      "y": 440.0,
+      "z": 0.0
+    },
+    "TextureDir": "wall.png",
+    "DefaultTrigger180ornot": false,
+    "TriggerLifeTime": -1,
+    "Components": [
+      "TRANSFORM",
+      "SPRITE",
+      "BODY"
+    ],
+    "HavingComponentsNumbers": 3,
+    "ObjectType": "AttachWall"
+  },
+
+  "Object5": {
+    "ObjectID": 5,
+    "GravityOn": false,
+    "Mass": 0,
+    "Position": {
+      "x": -420.0,
+      "y": 483.0,
+      "z": 0.0
+    },
+    "Rotation": 0.0,
+    "Scale": {
+      "x": 550.0,
+      "y": 20.0,
+      "z": 0.0
+    },
+    "TextureDir": "wall.png",
+    "DefaultTrigger180ornot": false,
+    "TriggerLifeTime": -1,
+    "Components": [
+      "TRANSFORM",
+      "SPRITE",
+      "BODY"
+    ],
+    "HavingComponentsNumbers": 3,
+    "ObjectType": "AttachWall"
+  },
+
+  "Object6": {
+    "ObjectID": 6,
+    "GravityOn": false,
+    "Mass": 1,
+    "Position": {
+      "x": -520.0,
+      "y": 238.0,
+      "z": 0.0
+    },
+    "Rotation": 0.0,
+    "Scale": {
+      "x": 110.0,
+      "y": 370.0,
+      "z": 0.0
+    },
+    "TextureDir": "AttachBox.png",
+    "DefaultTrigger180ornot": false,
+    "TriggerLifeTime": -1,
+    "Components": [
+      "TRANSFORM",
+      "SPRITE",
+      "BODY"
+    ],
+    "HavingComponentsNumbers": 3,
+    "ObjectType": "AttachBox"
+  },
+
+  "Object7": {
+    "ObjectID": 7,
+    "GravityOn": false,
+    "Mass":1,
+    "Position": {
+      "x": -280.0,
+      "y": 238.0,
+      "z": 0.0
+    },
+    "Rotation": 0.0,
+    "Scale": {
+      "x": 110.0,
+      "y": 370.0,
+      "z": 0.0
+    },
+    "TextureDir": "AttachBox.png",
+    "DefaultTrigger180ornot": false,
+    "TriggerLifeTime": -1,
+    "Components": [
+      "TRANSFORM",
+      "SPRITE",
+      "BODY"
+    ],
+    "HavingComponentsNumbers": 3,
+    "ObjectType": "AttachBox"
+  },
+
+  "Object8": {
+    "ObjectID": 8,
+    "GravityOn": false,
+    "Mass": 0,
+    "Position": {
+      "x": -525.0,
+      "y": 463.0,
+      "z": 0.0
+    },
+    "Rotation": 180.0,
+    "Scale": {
+      "x": 20.0,
+      "y": 20.0,
+      "z": 0.0
+    },
+    "TextureDir": "180button.png",
+    "DefaultTrigger180ornot": false,
+    "TriggerLifeTime": -1,
+    "Components": [
+      "TRANSFORM",
+      "SPRITE",
+      "BODY",
+      "TRIGGER"
+    ],
+    "HavingComponentsNumbers": 4,
+    "ObjectType": "Trigger180"
+  },
+
+  "Object9": {
+    "ObjectID": 9,
+    "GravityOn": false,
+    "Mass": 0,
+    "Position": {
+      "x": -285.0,
+      "y": 473.0,
+      "z": 0.0
+    },
+    "Rotation": 180.0,
     "Scale": {
       "x": 20.0,
       "y": 20.0,
@@ -94,41 +257,13 @@
     "ObjectType": "Trigger90"
   },
 
-  "Object4": {
-    "ObjectID": 4,
+  "Object10": {
+    "ObjectID": 10,
     "GravityOn": false,
     "Mass": 0,
     "Position": {
-      "x": -5.0,
-      "y": 63.0,
-      "z": 0.0
-    },
-    "Rotation": 0.0,
-    "Scale": {
-      "x": 20.0,
-      "y": 20.0,
-      "z": 0.0
-    },
-    "TextureDir": "90TriggerRight.png",
-    "DefaultTrigger180ornot": false,
-    "TriggerLifeTime": -1,
-    "Components": [
-      "TRANSFORM",
-      "SPRITE",
-      "BODY",
-      "TRIGGER"
-    ],
-    "HavingComponentsNumbers": 4,
-    "ObjectType": "Trigger90Right"
-  },
-
-  "Object5": {
-    "ObjectID": 5,
-    "GravityOn": false,
-    "Mass": 0,
-    "Position": {
-      "x": -125.0,
-      "y": 233.0,
+      "x": -286.0,
+      "y": 153.0,
       "z": 0.0
     },
     "Rotation": 0.0,

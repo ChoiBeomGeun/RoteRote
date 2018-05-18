@@ -3,8 +3,8 @@
 	{
 		"EYE" : 
 		{
-			"x" : -200.0,
-			"y" : 275.0,
+			"x" : -120.0,
+			"y" : -47.0,
 			"z" : 999.0
 		},
 		"TARGET" : 
@@ -21,592 +21,440 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 28,
+	"NumberOfObjects" : 19,
 	"Object1" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "CONTROLLER", "ANIMATION" ],
+		"Depth" : 0.0,
 		"GravityOn" : true,
-		"Mass" : 0.0,
+		"Mass" : 1.0,
 		"ObjectID" : 1,
-		"ObjectType" : "Wall",
+		"ObjectType" : "Player",
 		"Position" : 
 		{
-			"x" : -200.0,
-			"y" : 850.0,
+			"x" : -523.80975341796875,
+			"y" : -312.05001831054688,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 1650.0,
-			"y" : 50.0
+			"x" : 30.0,
+			"y" : 30.0
 		},
-		"TextureDir" : "wall.png"
+		"TextureDir" : "player.png"
 	},
 	"Object10" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
+		"GravityOn" : false,
+		"Mass" : 0.0,
 		"ObjectID" : 10,
-		"ObjectType" : "Button",
+		"ObjectType" : "AttachWall",
 		"Position" : 
 		{
-			"x" : 0.0,
-			"y" : 0.89999997615814209,
+			"x" : 105.0,
+			"y" : 108.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 0.10000000149011612,
-			"y" : 0.20000000298023224
+			"x" : 20.0,
+			"y" : 250.0
 		},
-		"TextureDir" : "1.png"
+		"TextureDir" : "wall.png"
 	},
 	"Object11" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 1.0,
 		"ObjectID" : 11,
-		"ObjectType" : "Button",
+		"ObjectType" : "Clearzone",
 		"Position" : 
 		{
-			"x" : 0.0,
-			"y" : 0.89999997615814209,
+			"x" : -15.0,
+			"y" : -257.0,
 			"z" : 0.0
 		},
-		"Rotation" : 0.0,
+		"Rotation" : 2147.109619140625,
 		"Scale" : 
 		{
-			"x" : 0.10000000149011612,
-			"y" : 0.20000000298023224
+			"x" : 20.0,
+			"y" : 20.0
 		},
-		"TextureDir" : "1.png"
+		"TextureDir" : "clearzone.png"
 	},
 	"Object12" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
-		"Mass" : 0.0,
+		"Mass" : 1.0,
 		"ObjectID" : 12,
-		"ObjectType" : "Wall",
+		"ObjectType" : "Box",
 		"Position" : 
 		{
-			"x" : -900.0,
-			"y" : 650.0,
+			"x" : 250.0,
+			"y" : -202.05001831054688,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 350.0,
-			"y" : 50.0
+			"x" : 250.0,
+			"y" : 250.0
 		},
-		"TextureDir" : "wall.png"
+		"TextureDir" : "box.png"
 	},
 	"Object13" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
-		"Mass" : 1.0,
+		"Mass" : 0.0,
 		"ObjectID" : 13,
-		"ObjectType" : "Box",
+		"ObjectType" : "Trigger90",
 		"Position" : 
 		{
-			"x" : 550.0,
-			"y" : -200.02777099609375,
+			"x" : -605.0,
+			"y" : 53.0,
 			"z" : 0.0
 		},
-		"Rotation" : 0.0,
+		"Rotation" : 270.0,
 		"Scale" : 
 		{
-			"x" : 150.0,
-			"y" : 150.0
+			"x" : 20.0,
+			"y" : 20.0
 		},
-		"TextureDir" : "box.png"
+		"TextureDir" : "90button.png",
+		"TriggerLifeTime" : -1,
+		"TriggerType" : "90"
 	},
 	"Object14" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
-		"Mass" : 1.0,
+		"Mass" : 0.0,
 		"ObjectID" : 14,
-		"ObjectType" : "Box",
+		"ObjectType" : "Trigger180",
 		"Position" : 
 		{
-			"x" : -950.0,
-			"y" : -200.02777099609375,
+			"x" : -475.0,
+			"y" : 213.0,
 			"z" : 0.0
 		},
-		"Rotation" : 0.0,
+		"Rotation" : 180.0,
 		"Scale" : 
 		{
-			"x" : 150.0,
-			"y" : 150.0
+			"x" : 20.0,
+			"y" : 20.0
 		},
-		"TextureDir" : "box.png"
+		"TextureDir" : "180button.png",
+		"TriggerLifeTime" : -1,
+		"TriggerType" : "180"
 	},
 	"Object15" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
-		"Mass" : 1.0,
+		"Mass" : 0.0,
 		"ObjectID" : 15,
-		"ObjectType" : "Box",
+		"ObjectType" : "Trigger90",
 		"Position" : 
 		{
-			"x" : 400.0,
-			"y" : -200.02777099609375,
+			"x" : 125.0,
+			"y" : 103.0,
 			"z" : 0.0
 		},
-		"Rotation" : 0.0,
+		"Rotation" : 270.0,
 		"Scale" : 
 		{
-			"x" : 150.0,
-			"y" : 150.0
+			"x" : 20.0,
+			"y" : 20.0
 		},
-		"TextureDir" : "box.png"
+		"TextureDir" : "90button.png",
+		"TriggerLifeTime" : -1,
+		"TriggerType" : "90"
 	},
 	"Object16" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
-		"Mass" : 1.0,
+		"Mass" : 0.0,
 		"ObjectID" : 16,
-		"ObjectType" : "Box",
+		"ObjectType" : "Trigger180",
 		"Position" : 
 		{
-			"x" : -650.0,
-			"y" : -200.02777099609375,
+			"x" : 295.0,
+			"y" : 223.0,
 			"z" : 0.0
 		},
-		"Rotation" : 0.0,
+		"Rotation" : 180.0,
 		"Scale" : 
 		{
-			"x" : 150.0,
-			"y" : 150.0
+			"x" : 20.0,
+			"y" : 20.0
 		},
-		"TextureDir" : "box.png"
+		"TextureDir" : "180button.png",
+		"TriggerLifeTime" : -1,
+		"TriggerType" : "180"
 	},
 	"Object17" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
-		"GravityOn" : true,
+		"Depth" : 0.0,
+		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 17,
-		"ObjectType" : "Trigger180",
+		"ObjectType" : "Trigger90",
 		"Position" : 
 		{
-			"x" : 550.0,
-			"y" : -50.0,
+			"x" : 45.0,
+			"y" : -317.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 50.0,
-			"y" : 50.0
+			"x" : 20.0,
+			"y" : 20.0
 		},
-		"TextureDir" : "180button.png",
-		"TriggerType" : "180"
+		"TextureDir" : "90button.png",
+		"TriggerLifeTime" : -1,
+		"TriggerType" : "90"
 	},
 	"Object18" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
-		"GravityOn" : true,
+		"Depth" : 0.0,
+		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 18,
 		"ObjectType" : "Trigger90",
 		"Position" : 
 		{
-			"x" : -950.0,
-			"y" : -50.0,
+			"x" : -205.0,
+			"y" : -27.0,
 			"z" : 0.0
 		},
-		"Rotation" : 0.0,
+		"Rotation" : 180.0,
 		"Scale" : 
 		{
-			"x" : 50.0,
-			"y" : 50.0
+			"x" : 20.0,
+			"y" : 20.0
 		},
 		"TextureDir" : "90button.png",
+		"TriggerLifeTime" : -1,
 		"TriggerType" : "90"
 	},
 	"Object19" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
-		"Mass" : 1.0,
+		"Mass" : 0.0,
 		"ObjectID" : 19,
-		"ObjectType" : "Box",
+		"ObjectType" : "Trigger180",
 		"Position" : 
 		{
-			"x" : -800.0,
-			"y" : -0.027777779847383499,
+			"x" : -125.0,
+			"y" : -317.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 150.0,
-			"y" : 150.0
+			"x" : 20.0,
+			"y" : 20.0
 		},
-		"TextureDir" : "box.png"
+		"TextureDir" : "180button.png",
+		"TriggerLifeTime" : -1,
+		"TriggerType" : "180"
 	},
 	"Object2" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
-		"GravityOn" : true,
+		"Depth" : 0.0,
+		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 2,
 		"ObjectType" : "Wall",
 		"Position" : 
 		{
-			"x" : -1050.0,
-			"y" : 300.0,
+			"x" : -120.0,
+			"y" : -337.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 50.0,
-			"y" : 1150.0
+			"x" : 1030.0,
+			"y" : 20.0
 		},
-		"TextureDir" : "wall.png"
-	},
-	"Object20" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
-		"GravityOn" : false,
-		"Mass" : 0.0,
-		"ObjectID" : 20,
-		"ObjectType" : "Wall",
-		"Position" : 
-		{
-			"x" : -550.0,
-			"y" : 800.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 50.0,
-			"y" : 150.0
-		},
-		"TextureDir" : "wall.png"
-	},
-	"Object21" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
-		"GravityOn" : false,
-		"Mass" : 0.0,
-		"ObjectID" : 21,
-		"ObjectType" : "Wall",
-		"Position" : 
-		{
-			"x" : -950.0,
-			"y" : 350.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 200.0,
-			"y" : 50.0
-		},
-		"TextureDir" : "wall.png"
-	},
-	"Object22" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
-		"GravityOn" : false,
-		"Mass" : 0.0,
-		"ObjectID" : 22,
-		"ObjectType" : "Wall",
-		"Position" : 
-		{
-			"x" : 0.0,
-			"y" : 150.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 850.0,
-			"y" : 50.0
-		},
-		"TextureDir" : "wall.png"
-	},
-	"Object23" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
-		"GravityOn" : false,
-		"Mass" : 1.0,
-		"ObjectID" : 23,
-		"ObjectType" : "Box",
-		"Position" : 
-		{
-			"x" : -650.0,
-			"y" : -0.027777779847383499,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 150.0,
-			"y" : 150.0
-		},
-		"TextureDir" : "box.png"
-	},
-	"Object24" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
-		"GravityOn" : false,
-		"Mass" : 0.0,
-		"ObjectID" : 24,
-		"ObjectType" : "Wall",
-		"Position" : 
-		{
-			"x" : -400.0,
-			"y" : 500.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 50.0,
-			"y" : 350.0
-		},
-		"TextureDir" : "wall.png"
-	},
-	"Object25" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
-		"GravityOn" : true,
-		"Mass" : 0.0,
-		"ObjectID" : 25,
-		"ObjectType" : "Trigger90",
-		"Position" : 
-		{
-			"x" : 0.0,
-			"y" : 200.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 50.0,
-			"y" : 50.0
-		},
-		"TextureDir" : "90button.png",
-		"TriggerType" : "90"
-	},
-	"Object26" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
-		"GravityOn" : false,
-		"Mass" : 1.0,
-		"ObjectID" : 26,
-		"ObjectType" : "Box",
-		"Position" : 
-		{
-			"x" : 0.0,
-			"y" : 249.97222900390625,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 100.0,
-			"y" : 150.0
-		},
-		"TextureDir" : "box.png"
-	},
-	"Object27" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE" ],
-		"ObjectID" : 27,
-		"ObjectType" : "Button",
-		"Position" : 
-		{
-			"x" : 0.0,
-			"y" : 0.89999997615814209,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 0.10000000149011612,
-			"y" : 0.20000000298023224
-		},
-		"TextureDir" : "13.png"
-	},
-	"Object28" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
-		"ObjectID" : 28,
-		"ObjectType" : "Button",
-		"ParticleType" : "ET_EXPLOSION",
-		"Position" : 
-		{
-			"x" : 0.0,
-			"y" : 0.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 0.0,
-			"y" : 0.0
-		},
-		"TextureDir" : ""
+		"TextureDir" : "unattachwall.png"
 	},
 	"Object3" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
-		"GravityOn" : true,
+		"Depth" : 0.0,
+		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 3,
-		"ObjectType" : "Wall",
+		"ObjectType" : "AttachWall",
 		"Position" : 
 		{
-			"x" : 650.0,
-			"y" : 300.0,
+			"x" : -625.0,
+			"y" : -52.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 50.0,
-			"y" : 1150.0
+			"x" : 20.0,
+			"y" : 550.0
 		},
 		"TextureDir" : "wall.png"
 	},
 	"Object4" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "CONTROLLER", "ANIMATION" ],
-		"GravityOn" : true,
-		"Mass" : 1.0,
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
+		"GravityOn" : false,
+		"Mass" : 0.0,
 		"ObjectID" : 4,
-		"ObjectType" : "Player",
+		"ObjectType" : "AttachWall",
 		"Position" : 
 		{
-			"x" : -500.0,
-			"y" : -240.05001831054688,
+			"x" : -485.0,
+			"y" : 233.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 70.0,
-			"y" : 70.0
+			"x" : 300.0,
+			"y" : 20.0
 		},
-		"TextureDir" : "player.png"
+		"TextureDir" : "wall.png"
 	},
 	"Object5" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
-		"GravityOn" : true,
+		"Depth" : 0.0,
+		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 5,
-		"ObjectType" : "Wall",
+		"ObjectType" : "AttachWall",
 		"Position" : 
 		{
-			"x" : -200.0,
-			"y" : -300.0,
+			"x" : -345.0,
+			"y" : 103.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 1750.0,
-			"y" : 50.0
+			"x" : 20.0,
+			"y" : 240.0
 		},
 		"TextureDir" : "wall.png"
 	},
 	"Object6" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
+		"GravityOn" : false,
+		"Mass" : 1.0,
 		"ObjectID" : 6,
-		"ObjectType" : "Clearzone",
+		"ObjectType" : "Box",
 		"Position" : 
 		{
-			"x" : -950.0,
-			"y" : 750.0,
+			"x" : -200.0,
+			"y" : -202.05001831054688,
 			"z" : 0.0
 		},
-		"Rotation" : 4816.73583984375,
+		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 50.0,
-			"y" : 50.0
+			"x" : 250.0,
+			"y" : 250.0
 		},
-		"TextureDir" : "clearzone.png"
+		"TextureDir" : "box.png"
 	},
 	"Object7" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
-		"Mass" : 1.0,
+		"Mass" : 0.0,
 		"ObjectID" : 7,
-		"ObjectType" : "Box",
+		"ObjectType" : "AttachWall",
 		"Position" : 
 		{
-			"x" : -800.0,
-			"y" : 749.97222900390625,
+			"x" : -120.0,
+			"y" : -7.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 150.0,
-			"y" : 150.0
+			"x" : 430.0,
+			"y" : 20.0
 		},
-		"TextureDir" : "box.png"
+		"TextureDir" : "wall.png"
 	},
 	"Object8" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
-		"GravityOn" : true,
+		"Depth" : 0.0,
+		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 8,
-		"ObjectType" : "Wall",
+		"ObjectType" : "AttachWall",
 		"Position" : 
 		{
-			"x" : -850.0,
-			"y" : -100.0,
+			"x" : 385.0,
+			"y" : -47.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 450.0,
-			"y" : 50.0
+			"x" : 20.0,
+			"y" : 560.0
 		},
 		"TextureDir" : "wall.png"
 	},
 	"Object9" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
-		"GravityOn" : true,
+		"Depth" : 0.0,
+		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 9,
-		"ObjectType" : "Wall",
+		"ObjectType" : "AttachWall",
 		"Position" : 
 		{
-			"x" : 500.0,
-			"y" : -100.0,
+			"x" : 245.0,
+			"y" : 243.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 350.0,
-			"y" : 50.0
+			"x" : 300.0,
+			"y" : 20.0
 		},
 		"TextureDir" : "wall.png"
 	},
 	"WorldSize" : 
 	{
-		"x" : 1400,
-		"y" : 900
+		"x" : 0,
+		"y" : 0
 	}
 }
