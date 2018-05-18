@@ -49,7 +49,7 @@ namespace TE
 	public: // camera rotating changing walls;
 		int RotatingCam();
 		void ControlCamMovement(int type);
-		void move_cam(float dt);
+	
 		bool IsCamMovHoz, IsCamMovVer;
 		//float interpolate(float  start,float dest, float dt);
 		

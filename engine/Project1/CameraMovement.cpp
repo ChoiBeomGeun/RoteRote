@@ -240,7 +240,7 @@ namespace TE {
 					CAMERA->CenterOfCamera.x = downblock.x + ((upblock.x - downblock.x)*.5f);
 					CAMERA->CenterOfCamera.y = leftblock.y + ((rightblock.y - leftblock.y)*.5f);
 
-					float UpYLimit, DownYLimit, LeftXLimit, RightXLimit;
+					float UpYLimit, DownYLimit;// , LeftXLimit, RightXLimit;
 					// 90 degrees rotated x becomes Y 
 					// only this applies to 90 degrees, 
 					UpYLimit = (upblock.x - std::abs((upblock.x - CAMERA->CenterOfCamera.x))*.5f);
@@ -332,8 +332,6 @@ namespace TE {
 				{
 					CAMERA->CenterOfCamera.x = downblock.x + ((upblock.x - downblock.x)*.5f);
 					CAMERA->CenterOfCamera.y = rightblock.y + ((leftblock.y - rightblock.y)*.5f);
-
-					float UpYLimit, DownYLimit;
 					// 90 degrees rotated x becomes Y 
 					// only this applies to 90 degrees, 
 					UpYLimit = (upblock.x - std::abs((upblock.x - CAMERA->CenterOfCamera.x))*.5f);
@@ -350,20 +348,7 @@ namespace TE {
 		}
 	}
 
-	void CameraAction::move_cam(float dt)
-	{
-		/*if (IsCamMovHoz)
-		{
-		CAMERA->cameraPos.x = interpolate((CAMERA->cameraPos.x), FACTORY->GetPlayer()->GetComponent<Transform>()->position.x, .5f);
-		IsCamMovHoz = false;
-		}
-		else if (IsCamMovVer)
-		CAMERA->cameraPos.y = FACTORY->GetPlayer()->GetComponent<Transform>()->position.y;
-		else if(IsCamMovHoz && IsCamMovVer)
-		{
-		glm::vec2(CAMERA->cameraPos) = glm::vec2(FACTORY->GetPlayer()->GetComponent<Transform>()->position);
-		}*/
-	}
+
 
 	//float CameraAction::interpolate(float  start, float dest, float dt)
 	//{
@@ -435,7 +420,7 @@ namespace TE {
 		CAMERA->cameraPos += glm::vec3(cameraPOS, 0);
 	}
 
-	void CameraAction::Update(float dt)
+	void CameraAction::Update(float /*dt*/)
 	{
 		if (STATEMANAGER->i_LevelSelect >= 1)
 		{

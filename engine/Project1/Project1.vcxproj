@@ -95,7 +95,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\external\glew\include\GL;$(ProjectDir)..\..\external\soil\src;$(ProjectDir)..\..\external\SDL2\include;$(ProjectDir)..\..\external\gl3w\include\GL;$(ProjectDir)..\..\external\fmod\inc;$(ProjectDir)..\..\external\</AdditionalIncludeDirectories>
-      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWarningAsError>true</TreatWarningAsError>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MinimalRebuild>false</MinimalRebuild>
@@ -117,7 +117,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\external\glew\include\GL;$(ProjectDir)..\..\external\soil\src;$(ProjectDir)..\..\external\SDL2\include;$(ProjectDir)..\..\external\gl3w\include\GL;$(ProjectDir)..\..\external\fmod\inc;$(ProjectDir)..\..\external\</AdditionalIncludeDirectories>
-      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWarningAsError>true</TreatWarningAsError>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MinimalRebuild>false</MinimalRebuild>
@@ -141,7 +141,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\external\glew\include\GL;$(ProjectDir)..\..\external\soil\src;$(ProjectDir)..\..\external\SDL2\include;$(ProjectDir)..\..\external\gl3w\include\GL;$(ProjectDir)..\..\external\fmod\inc;$(ProjectDir)..\..\external\</AdditionalIncludeDirectories>
-      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWarningAsError>true</TreatWarningAsError>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <AdditionalOptions>/Ylsymbol %(AdditionalOptions)</AdditionalOptions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -168,7 +168,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\external\glew\include\GL;$(ProjectDir)..\..\external\soil\src;$(ProjectDir)..\..\external\SDL2\include;$(ProjectDir)..\..\external\gl3w\include\GL;$(ProjectDir)..\..\external\fmod\inc;$(ProjectDir)..\..\external\</AdditionalIncludeDirectories>
-      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWarningAsError>true</TreatWarningAsError>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <AdditionalOptions>/Ylsymbol %(AdditionalOptions)</AdditionalOptions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>

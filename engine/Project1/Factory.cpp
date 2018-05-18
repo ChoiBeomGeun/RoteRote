@@ -225,7 +225,7 @@ Object * ObjectFactory::CreateArchetype(Archetype path)
 
 		if (path.HavingComponents[i] == ComponentType::CT_TRIGGER)
 		{
-			Trigger * trigger = new Trigger();
+			//Trigger * trigger = new Trigger();
 			if (path._180triggerornot)
 				temp->objectstyle = Trigger180;
 			else

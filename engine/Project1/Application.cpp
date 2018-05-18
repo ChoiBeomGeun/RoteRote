@@ -416,97 +416,97 @@ void TE::Application::PollMouseEvent(SDL_Event & currentEvent)
 	}
 }
 
-void Application::ChangeScreenSize(SDL_Window * window, Resolution resolution)
-{
-	_resolution = resolution;
-	if (_isfull)
-	{
-		switch (resolution)
-		{
-
-
-			//case Resolution::_1280x720:
-			//	// 16:9
-			//	SDL_SetWindowSize(window, 1280, 720);
-			//	glViewport(0, 0, 1280, 720);
-			//	ResolutionNumber = resolution;
-			//	std::cout << ResolutionNumber << '\n';
-			//	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-			//	SDL_SetWindowBordered(window, SDL_TRUE);
-			//	CAMERA->angle = 45.f;
-			//	break;
-			//case Resolution::_1280x960:
-			//	//4:3
-			//	SDL_SetWindowSize(window, 1280, 960);
-			//	glViewport(0, 0, 1280, 960);
-			//	ResolutionNumber = resolution;
-			//	std::cout << ResolutionNumber << '\n';
-			//	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-			//	SDL_SetWindowBordered(window, SDL_TRUE);
-			//	CAMERA->angle = 45.f;
-			//	break;
-
-			//case Resolution::_1920x1080:
-			//	SDL_SetWindowSize(window, 1920, 1080);
-			//	glViewport(0, 0, 1920, 1080);
-			//	ResolutionNumber = resolution;
-			//	std::cout << ResolutionNumber << '\n';
-			//	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-			//	SDL_SetWindowBordered(window, SDL_TRUE);
-			//	CAMERA->angle = 45.f;
-			//	break;
-			//default:
-			//	break;
-
-		}
-	}
-	else
-	{
-		switch (resolution)
-		{
-			//case Resolution::_960x720:
-			//	// 0 16:9
-			//	SDL_SetWindowSize(window, 960, 720);
-			//	glViewport(0, 0, 960, 720);
-			//	ResolutionNumber = resolution;
-			//	std::cout << ResolutionNumber << '\n';
-			//	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-			//	CAMERA->angle = 45.f;
-			//	break;
-
-			//case Resolution::_1280x720:
-			//	// 16:9
-			//	SDL_SetWindowSize(window, 1280, 720);
-			//	glViewport(0, 0, 1280, 720);
-			//	ResolutionNumber = resolution;
-			//	std::cout << ResolutionNumber << '\n';
-			//	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-			//	CAMERA->angle = 45.f;
-			//	break;
-			//case Resolution::_1280x960:
-			//	//4:3
-			//	SDL_SetWindowSize(window, 1280, 960);
-			//	glViewport(0, 0, 1280, 960);
-			//	ResolutionNumber = resolution;
-			//	std::cout << ResolutionNumber << '\n';
-			//	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-			//	CAMERA->angle = 45.f;
-			//	break;
-
-			//case Resolution::_1920x1080:
-			//	SDL_SetWindowSize(window, 1920, 1080);
-			//	glViewport(0, 0, 1920, 1080);
-			//	ResolutionNumber = resolution;
-			//	std::cout << ResolutionNumber << '\n';
-			//	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-			//	CAMERA->angle = 45.f;
-			//	break;
-			//default:
-			//	break;
-
-		}
-	}
-}
+//void Application::ChangeScreenSize(SDL_Window * window, Resolution resolution)
+//{
+//	_resolution = resolution;
+//	if (_isfull)
+//	{
+//		switch (resolution)
+//		{
+//
+//
+//			//case Resolution::_1280x720:
+//			//	// 16:9
+//			//	SDL_SetWindowSize(window, 1280, 720);
+//			//	glViewport(0, 0, 1280, 720);
+//			//	ResolutionNumber = resolution;
+//			//	std::cout << ResolutionNumber << '\n';
+//			//	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+//			//	SDL_SetWindowBordered(window, SDL_TRUE);
+//			//	CAMERA->angle = 45.f;
+//			//	break;
+//			//case Resolution::_1280x960:
+//			//	//4:3
+//			//	SDL_SetWindowSize(window, 1280, 960);
+//			//	glViewport(0, 0, 1280, 960);
+//			//	ResolutionNumber = resolution;
+//			//	std::cout << ResolutionNumber << '\n';
+//			//	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+//			//	SDL_SetWindowBordered(window, SDL_TRUE);
+//			//	CAMERA->angle = 45.f;
+//			//	break;
+//
+//			//case Resolution::_1920x1080:
+//			//	SDL_SetWindowSize(window, 1920, 1080);
+//			//	glViewport(0, 0, 1920, 1080);
+//			//	ResolutionNumber = resolution;
+//			//	std::cout << ResolutionNumber << '\n';
+//			//	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+//			//	SDL_SetWindowBordered(window, SDL_TRUE);
+//			//	CAMERA->angle = 45.f;
+//			//	break;
+//			//default:
+//			//	break;
+//
+//		}
+//	}
+//	else
+//	{
+//		switch (resolution)
+//		{
+//			//case Resolution::_960x720:
+//			//	// 0 16:9
+//			//	SDL_SetWindowSize(window, 960, 720);
+//			//	glViewport(0, 0, 960, 720);
+//			//	ResolutionNumber = resolution;
+//			//	std::cout << ResolutionNumber << '\n';
+//			//	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+//			//	CAMERA->angle = 45.f;
+//			//	break;
+//
+//			//case Resolution::_1280x720:
+//			//	// 16:9
+//			//	SDL_SetWindowSize(window, 1280, 720);
+//			//	glViewport(0, 0, 1280, 720);
+//			//	ResolutionNumber = resolution;
+//			//	std::cout << ResolutionNumber << '\n';
+//			//	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+//			//	CAMERA->angle = 45.f;
+//			//	break;
+//			//case Resolution::_1280x960:
+//			//	//4:3
+//			//	SDL_SetWindowSize(window, 1280, 960);
+//			//	glViewport(0, 0, 1280, 960);
+//			//	ResolutionNumber = resolution;
+//			//	std::cout << ResolutionNumber << '\n';
+//			//	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+//			//	CAMERA->angle = 45.f;
+//			//	break;
+//
+//			//case Resolution::_1920x1080:
+//			//	SDL_SetWindowSize(window, 1920, 1080);
+//			//	glViewport(0, 0, 1920, 1080);
+//			//	ResolutionNumber = resolution;
+//			//	std::cout << ResolutionNumber << '\n';
+//			//	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+//			//	CAMERA->angle = 45.f;
+//			//	break;
+//			//default:
+//			//	break;
+//
+//		}
+//	}
+//}
 
 void Application::toggle_fullscreen(SDL_Window * window, bool isfull)
 {

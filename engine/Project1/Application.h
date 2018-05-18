@@ -85,7 +85,7 @@ namespace TE {
 		*		_1920x1080
 		*
 		*/
-		void ChangeScreenSize(SDL_Window * window, Resolution resolution);
+		//void ChangeScreenSize(SDL_Window * window, Resolution resolution);
 		void toggle_fullscreen(SDL_Window * window, bool isfull);
 		bool b_Win;
 		bool b_Lose;

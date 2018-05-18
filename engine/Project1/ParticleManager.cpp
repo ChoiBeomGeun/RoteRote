@@ -206,12 +206,12 @@ namespace TE {
 					pobject->GetComponent<Emitter>()->SetTexture(pobject->GetComponent<Sprite>()->m_TextureID);
 					pobject->GetComponent<Emitter>()->CreateParticle();
 
-					for (int i = 0; i < pobject->GetComponent<Emitter>()->capacity; ++i)
+					for (int j = 0; j < pobject->GetComponent<Emitter>()->capacity; ++j)
 					{
-						pobject->GetComponent<Emitter>()->pParticles[i].color[0] = ColorR / 255.f;
-						pobject->GetComponent<Emitter>()->pParticles[i].color[1] = ColorG / 255.f;
-						pobject->GetComponent<Emitter>()->pParticles[i].color[2] = ColorB / 255.f;
-						pobject->GetComponent<Emitter>()->pParticles[i].color[3] = ColorA / 255.f;
+						pobject->GetComponent<Emitter>()->pParticles[j].color[0] = ColorR / 255.f;
+						pobject->GetComponent<Emitter>()->pParticles[j].color[1] = ColorG / 255.f;
+						pobject->GetComponent<Emitter>()->pParticles[j].color[2] = ColorB / 255.f;
+						pobject->GetComponent<Emitter>()->pParticles[j].color[3] = ColorA / 255.f;
 
 					}
 					pobject->GetComponent<Transform>()->scale = glm::vec3(10.0f);
@@ -235,16 +235,16 @@ namespace TE {
 
 	void ParticleManager::Update(float dt)
 	{
-		std::vector<Emitter*>::iterator emitterIT;
-		for (emitterIT = m_EmitterList.begin(); emitterIT != m_EmitterList.end(); ++emitterIT)
+		std::vector<Emitter*>::iterator EIT;
+		for (EIT = m_EmitterList.begin(); EIT != m_EmitterList.end(); ++EIT)
 		{
-			switch ((*emitterIT)->type)
+			switch ((*EIT)->type)
 			{
 			case ET_EXPLOSION:
 			{
-				for (int i = 0; i < (*emitterIT)->capacity; ++i)
+				for (int i = 0; i < (*EIT)->capacity; ++i)
 				{
-					Particle& particle = (*emitterIT)->pParticles[i];
+					Particle& particle = (*EIT)->pParticles[i];
 
 					//Update particle position based on velocity and dt
 					particle.pos += (particle.vel * dt);
@@ -255,44 +255,44 @@ namespace TE {
 						particle.scale = 0;
 				}
 				//Update emitter lifetime based on dt
-				(*emitterIT)->lifeTime += dt;
+				(*EIT)->lifeTime += dt;
 				//If lifetime is greater than expLife delete this emitter
-				if ((*emitterIT)->lifeTime >= m_expLife)
+				if ((*EIT)->lifeTime >= m_expLife)
 				{
-					(*emitterIT)->lifeTime = 0.0f;
+					(*EIT)->lifeTime = 0.0f;
 					float rotation = 0.0f;
-					for (int i = 0; i < (*emitterIT)->capacity; ++i)
+					for (int i = 0; i < (*EIT)->capacity; ++i)
 					{
 						// set position of particle to emitter
-						(*emitterIT)->pParticles[i].pos = (*emitterIT)->pos;
+						(*EIT)->pParticles[i].pos = (*EIT)->pos;
 						// set rotation with random
 						rotation = TUMath::GetRandomFloat(0, TUMath::TWO_PI);
 						// Then Get a random rotation between 0 and 2PI
 						// and set the velocity x and y based on the rotation.
-						(*emitterIT)->pParticles[i].vel = { cosf(rotation), sinf(rotation) , 0.0f };
-						(*emitterIT)->pParticles[i].vel
+						(*EIT)->pParticles[i].vel = { cosf(rotation), sinf(rotation) , 0.0f };
+						(*EIT)->pParticles[i].vel
 							*= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);;
-						(*emitterIT)->pParticles[i].scale
+						(*EIT)->pParticles[i].scale
 							= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
 						// set color with g_colors
-						(*emitterIT)->pParticles[i].color[0] = 255 / 255.f;
-						(*emitterIT)->pParticles[i].color[1] = 255 / 255.f;
-						(*emitterIT)->pParticles[i].color[2] = 255 / 255.f;
-						(*emitterIT)->pParticles[i].color[3] = 255 / 255.f;
+						(*EIT)->pParticles[i].color[0] = 255 / 255.f;
+						(*EIT)->pParticles[i].color[1] = 255 / 255.f;
+						(*EIT)->pParticles[i].color[2] = 255 / 255.f;
+						(*EIT)->pParticles[i].color[3] = 255 / 255.f;
 					}
 				}
 				break;
 			}
 			case ET_TRAIL:
 			{
-				for (int i = 0; i < (*emitterIT)->capacity; ++i)
+				for (int i = 0; i < (*EIT)->capacity; ++i)
 				{
-					Particle& particle = (*emitterIT)->pParticles[i];
+					Particle& particle = (*EIT)->pParticles[i];
 					//If scale of particle is 0
 					if (particle.scale <= 0)
 					{
 						//Get rotation of emitter using atan2
-						float rotation = atan2f((*emitterIT)->vel.y, (*emitterIT)->vel.x);
+						float rotation = atan2f((*EIT)->vel.y, (*EIT)->vel.x);
 						// Rotate that value by PI
 						rotation += TUMath::PI;
 						// Add a random rotation between + or PI/4
@@ -303,33 +303,23 @@ namespace TE {
 						//between minTrailVel and maxTrailVel
 						particle.vel *= TUMath::GetRandomFloat(m_minTrailVel, m_maxTrailVel);
 						//Set particle position to emitter position.
-						particle.pos = (*emitterIT)->pos;
+						particle.pos = (*EIT)->pos;
 						//Set particle scale to random float
 						//between minTrailScale and maxTrailScale
 						particle.scale
 							= TUMath::GetRandomFloat(m_minTrailScale, m_maxTrailScale);
 					}
-					//For every particle
-					//Update particle position based on velocity and dt
-					//	particle.pos += particle.vel * dt;
-					//particle.pos += (*emitterIT)->vel * dt;
 					//Update particle scale based on scaleFactor and dt
 					particle.scale -= m_scaleFactor * dt;
 					//Clamp particle scale to 0 and maxTrailScale
 					TUMath::Clamp(particle.scale, 0, m_maxTrailScale);
-
-					// set colour with RED
-			/*		particle.color[0] = 255 / 255.f;
-					particle.color[1] = 255 / 255.f;
-					particle.color[2] = 255 / 255.f;
-					particle.color[3] = 255 / 255.f;*/
 				}
 				break;
 			}
 			case ET_BACKGROUND:
-				for (int i = 0; i < (*emitterIT)->capacity; ++i)
+				for (int i = 0; i < (*EIT)->capacity; ++i)
 				{
-					Particle& particle = (*emitterIT)->pParticles[i];
+					Particle& particle = (*EIT)->pParticles[i];
 					particle.lifetime += dt;
 					auto sizefactor = rand() % 2;
 					if (sizefactor == 0)
@@ -356,14 +346,14 @@ namespace TE {
 				}
 				break;
 			case ET_ROCKET:
-			{for (int i = 0; i < (*emitterIT)->capacity; ++i)
+			{for (int i = 0; i < (*EIT)->capacity; ++i)
 			{
-				Particle & particle = (*emitterIT)->pParticles[i];
+				Particle & particle = (*EIT)->pParticles[i];
 				//If scale of particle is 0
 				if (particle.scale <= 0)
 				{
 					//Get rotation of emitter using atan2
-					float rotation = atan2f((*emitterIT)->vel.y, (*emitterIT)->vel.x);
+					float rotation = atan2f((*EIT)->vel.y, (*EIT)->vel.x);
 					// Rotate that value by PI
 					rotation += TUMath::PI;
 					// Add a random rotation between + or PI/4
@@ -374,7 +364,7 @@ namespace TE {
 					//between minTrailVel and maxTrailVel
 					particle.vel *= TUMath::GetRandomFloat(m_minTrailVel, m_maxTrailVel);
 					//Set particle position to emitter position.
-					particle.pos = (*emitterIT)->pos;
+					particle.pos = (*EIT)->pos;
 					//Set particle scale to random float
 					//between minTrailScale and maxTrailScale
 					particle.scale
@@ -388,12 +378,6 @@ namespace TE {
 				particle.scale -= m_scaleFactor * dt;
 				//Clamp particle scale to 0 and maxTrailScale
 				TUMath::Clamp(particle.scale, 0, m_maxTrailScale);
-
-				// set colour with RED
-				/*		particle.color[0] = 255 / 255.f;
-				particle.color[1] = 255 / 255.f;
-				particle.color[2] = 255 / 255.f;
-				particle.color[3] = 255 / 255.f;*/
 			}
 			break;
 			}
@@ -524,7 +508,7 @@ namespace TE {
 			pEmitter->pParticles[i].color[3] = 255 / 255.f;
 			pEmitter->pParticles[i].vel = glm::vec3(0);
 			pEmitter->pParticles[i].lifetime = TUMath::GetRandomFloat(0, m_maxBackLifeTime);
-			pEmitter->pParticles[i].angle = rot(gen);
+			pEmitter->pParticles[i].angle = static_cast<float>(rot(gen));
 		}
 	}
 	void ParticleManager::InitPlayerJetSystem(Emitter * pEmitter)
