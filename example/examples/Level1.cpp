@@ -202,25 +202,29 @@ void Level1::Init()
 	
 
 	static float loadingtimer = 0.1f;
-
+	APP->IsKeyBoardAvailable = false;
   	while (loadingtimer >0)
 	{
 
 		loadingtimer -= Timer::GetDelta();
-
+	
 
 	}
+
+	Input::Reset();
+
 	loadingtimer = 0.1f;
 
 	camAct.cameraSetting(EN_playerPos);
+
 	background_trsparent = 140.f;
 	loadbackground();
+
 }
 
 void Level1::Update(float dt)
 {
-	//MakingInstructions(dt);
-	
+	APP->IsKeyBoardAvailable = true;
 	camAct.Update(dt);
 	//std::cout << "cam.x: " << CAMERA->cameraPos.x << ",  cam.y: " << CAMERA->cameraPos.y <<  std::endl;
 #ifdef _DEBUG
@@ -332,6 +336,9 @@ void Level1::Update(float dt)
 
 void Level1::Free(void)
 {
+	Input::Reset();
+
+
 	while (!STATEMANAGER->Replayerinfo.empty())
 		STATEMANAGER->Replayerinfo.pop();
 	CAMERA->isCentered = true;
