@@ -43,6 +43,7 @@ Sprite::~Sprite()
 void Sprite::Initialize()
 {
 	_sortType = SortType::FRONT_TO_BACK;
+	isRotating = false;
 }
 
 

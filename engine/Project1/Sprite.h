@@ -60,6 +60,7 @@ namespace TE {
 
 		void framebuffer_size_callback(int width, int height);
 		bool isPerspective;
+		bool isRotating;
 		static void sortSprites(SortType sortType = SortType::FRONT_TO_BACK);
 		static bool compareBackToFront(Sprite *a, Sprite* b);
 		static bool compareFrontToBack(Sprite *a, Sprite* b);

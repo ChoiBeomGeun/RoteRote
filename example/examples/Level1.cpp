@@ -55,7 +55,7 @@ bool LosesoundOnetime = true;
 bool IndicatorCheck = true;
 std::string  path2;
 Object * HUDLevelname;
-Object * Backgroundobj;
+Object * Backgroundobj[11];
 Object * Indicator;
 Object * Indicator1;
 Object * Indicator2;
@@ -199,11 +199,7 @@ void Level1::Init()
 	//}
 
 
-	Backgroundobj = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(2, 2, 0));
-	Backgroundobj->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("dd.png");
-	Backgroundobj->objectstyle = Objectstyle::Button;
-	Backgroundobj->GetComponent<Sprite>()->depth = -1;
-	Backgroundobj->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 140);
+	
 
 	static float loadingtimer = 0.1f;
 
@@ -217,6 +213,8 @@ void Level1::Init()
 	loadingtimer = 0.1f;
 
 	camAct.cameraSetting(EN_playerPos);
+	background_trsparent = 140.f;
+	loadbackground();
 }
 
 void Level1::Update(float dt)
@@ -263,7 +261,20 @@ void Level1::Update(float dt)
 		FACTORY->GetPlayer()->GetComponent<Animation>()->setFlipX(Pressed);
 		j++;
 	}
-	
+	if (!STATEMANAGER->b_IsReplay)
+	{
+		for (int i = 0; i < 11; ++i)
+		{
+			if (STATEMANAGER->b_IsRot90) {
+				Backgroundobj[i]->GetComponent<Transform>()->angle += 2.25;
+			}
+			else if (STATEMANAGER->b_IsRot180)
+			{
+				Backgroundobj[i]->GetComponent<Transform>()->angle -= 2.25;
+
+			}
+		}
+	}
 	INGAMELOGIC->InGameUpdate(dt);
 	if (STATEMANAGER->b_IsReplay)
 	{
@@ -353,7 +364,88 @@ void Level1::Unload()
 	STATEMANAGER->b_IsReplay = false;
 }
 
+void Level1::loadbackground()
+{
+	// top right
+	//FACTORY->CreateWall()
+	Backgroundobj[0] = FACTORY->CreateHUD(glm::vec3(.9, .9, 0), glm::vec3(.3, .3, 0));
+	Backgroundobj[0]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("sawtooth1_1.png");
+	Backgroundobj[0]->objectstyle = Objectstyle::Button;
+	Backgroundobj[0]->GetComponent<Sprite>()->depth = -1;
+	Backgroundobj[0]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, background_trsparent);
 
+	Backgroundobj[1] = FACTORY->CreateHUD(glm::vec3(.675, .575, 0), glm::vec3(.3, .4, 0));
+	Backgroundobj[1]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("sawtooth1_2.png");
+	Backgroundobj[1]->objectstyle = Objectstyle::Button;
+	Backgroundobj[1]->GetComponent<Sprite>()->depth = -1;
+	Backgroundobj[1]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, background_trsparent);
+
+	Backgroundobj[2] = FACTORY->CreateHUD(glm::vec3(.95, .575, 0), glm::vec3(.35, .4, 0));
+	Backgroundobj[2]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("sawtooth1_3.png");
+	Backgroundobj[2]->objectstyle = Objectstyle::Button;
+	Backgroundobj[2]->GetComponent<Sprite>()->depth = -1;
+	Backgroundobj[2]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, background_trsparent);
+	// top right
+
+	// bot right
+	Backgroundobj[3] = FACTORY->CreateHUD(glm::vec3(.8, -.9, 0), glm::vec3(.55, .65, 0));
+	Backgroundobj[3]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("sawtooth2_1.png");
+	Backgroundobj[3]->objectstyle = Objectstyle::Button;
+	Backgroundobj[3]->GetComponent<Sprite>()->depth = -1;
+	Backgroundobj[3]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, background_trsparent);
+
+	Backgroundobj[4] = FACTORY->CreateHUD(glm::vec3(1.0, -.5, 0), glm::vec3(.25, .25, 0));
+	Backgroundobj[4]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("sawtooth2_2.png");
+	Backgroundobj[4]->objectstyle = Objectstyle::Button;
+	Backgroundobj[4]->GetComponent<Sprite>()->depth = -1;
+	Backgroundobj[4]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, background_trsparent);
+	// bot right
+
+	// top left
+	Backgroundobj[5] = FACTORY->CreateHUD(glm::vec3(-.6, .975, 0), glm::vec3(.3, .4, 0));
+	Backgroundobj[5]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("bigsawtooth.png");
+	Backgroundobj[5]->objectstyle = Objectstyle::Button;
+	Backgroundobj[5]->GetComponent<Sprite>()->depth = -1;
+	Backgroundobj[5]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, background_trsparent);
+
+	Backgroundobj[6] = FACTORY->CreateHUD(glm::vec3(-.8, .6, 0), glm::vec3(.45, .6, 0));
+	Backgroundobj[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("sawtooth2_1.png");
+	Backgroundobj[6]->objectstyle = Objectstyle::Button;
+	Backgroundobj[6]->GetComponent<Sprite>()->depth = -1;
+	Backgroundobj[6]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, background_trsparent);
+
+	Backgroundobj[7] = FACTORY->CreateHUD(glm::vec3(-1.0, 1.0, 0), glm::vec3(.4, .4, 0));
+	Backgroundobj[7]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("boundsawtooth1_1.png");
+	Backgroundobj[7]->objectstyle = Objectstyle::Button;
+	Backgroundobj[7]->GetComponent<Sprite>()->depth = -1;
+	Backgroundobj[7]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, background_trsparent);
+	// top left
+
+	// bot left
+	Backgroundobj[8] = FACTORY->CreateHUD(glm::vec3(-.95, -.6, 0), glm::vec3(.3, .4, 0));
+	Backgroundobj[8]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("bigsawtooth.png");
+	Backgroundobj[8]->objectstyle = Objectstyle::Button;
+	Backgroundobj[8]->GetComponent<Sprite>()->depth = -1;
+	Backgroundobj[8]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, background_trsparent);
+
+	Backgroundobj[9] = FACTORY->CreateHUD(glm::vec3(-.9, -.9, 0), glm::vec3(.25, .25, 0));
+	Backgroundobj[9]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("sawtooth1_1.png");
+	Backgroundobj[9]->objectstyle = Objectstyle::Button;
+	Backgroundobj[9]->GetComponent<Sprite>()->depth = -1;
+	Backgroundobj[9]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, background_trsparent);
+
+	Backgroundobj[10] = FACTORY->CreateHUD(glm::vec3(-.7, -.75, 0), glm::vec3(.24, .24, 0));
+	Backgroundobj[10]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("boundsawtooth1_1.png");
+	Backgroundobj[10]->objectstyle = Objectstyle::Button;
+	Backgroundobj[10]->GetComponent<Sprite>()->depth = -1;
+	Backgroundobj[10]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, background_trsparent);
+	// bot left
+
+	for(int i=0; i<11; ++i)
+	{
+		Backgroundobj[i]->GetComponent<Sprite>()->isRotating = true;
+	}
+}
 
 
 void CheatKeyFunctions(void) {
