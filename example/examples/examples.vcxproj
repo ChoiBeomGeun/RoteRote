@@ -98,7 +98,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)\external\fmod\inc;$(SolutionDir)\external\SDL2\include\;$(SolutionDir)\external\soil\src;$(SolutionDir)\external\glew\include\GL;$(SolutionDir)\engine\Project1;$(SolutionDir)\external\</AdditionalIncludeDirectories>
-      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWarningAsError>true</TreatWarningAsError>
       <WarningVersion>
       </WarningVersion>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -129,7 +129,7 @@ copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(T
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)\external\fmod\inc;$(SolutionDir)\external\SDL2\include\;$(SolutionDir)\external\soil\src;$(SolutionDir)\external\glew\include\GL;$(SolutionDir)\engine\Project1;$(SolutionDir)\external\</AdditionalIncludeDirectories>
-      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWarningAsError>true</TreatWarningAsError>
       <WarningVersion>
       </WarningVersion>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -161,7 +161,7 @@ copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(T
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)\external\fmod\inc;$(SolutionDir)\external\SDL2\include\;$(SolutionDir)\external\soil\src;$(SolutionDir)\external\glew\include\GL;$(SolutionDir)\engine\Project1;$(SolutionDir)\external\</AdditionalIncludeDirectories>
-      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWarningAsError>true</TreatWarningAsError>
       <WarningVersion>
       </WarningVersion>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>

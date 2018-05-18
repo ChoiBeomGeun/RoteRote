@@ -122,7 +122,7 @@ void Engine::GameLoop()
 		if (frametime <= 0.016f)
 			frametime = 0.016f;
 		if(IsLoggingOn)
-		LOGGINGSYSTEM->HowMuchTimePassed += frametime;
+		LOGGINGSYSTEM->HowMuchTimePassed += static_cast<long>(frametime);
 		for (unsigned int i = 0; i <SystemList.size(); ++i) {
 		
 		
