@@ -39,6 +39,8 @@ Physics::Physics() {
 Physics::~Physics()
 {
 	PHYSICS->m_vecprb.clear();
+	PHYSICS->box_body.clear();
+	PHYSICS->m_Body.clear();
 }
 
 void Physics::Initialize() {
