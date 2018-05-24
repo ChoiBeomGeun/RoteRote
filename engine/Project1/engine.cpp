@@ -116,13 +116,13 @@ void Engine::GameLoop()
           
 //                int time;
 
-		if (frametime >= 0.025f)
-			frametime = 0.016f;
+	//	if (frametime >= 0.025f)
+//			frametime = 0.016f;
 
-		if (frametime <= 0.016f)
-			frametime = 0.016f;
+//		if (frametime <= 0.016f)
+//			frametime = 0.016f;
 
-                printf("%f \n,", frametime);
+             
 		if(IsLoggingOn)
 		LOGGINGSYSTEM->HowMuchTimePassed += static_cast<long>(frametime);
 		for (unsigned int i = 0; i <SystemList.size(); ++i) {
