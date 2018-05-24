@@ -63,7 +63,7 @@ void LevelSelect::Load()
 	LEVELMANAGER->LoadLevel("selectlevel.json");
 
 	for (int i = 1; i <= LevelList::quit + 1; ++i)
-		Levelpng[i - 1] = FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(NumberToString(i) + ".png");
+		Levelpng[i - 1] = FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("level" + NumberToString(i) + ".png");
 
 	LevelList = STATEMANAGER->i_LevelSelect - 1;
 }
@@ -189,7 +189,7 @@ void LevelSelect::Rotation(void)
 			if (std::abs(FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle - selectAngle) > 90) {
 				FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle = LevelList * 90.f;
 				FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->angle = 0.f;
-				FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->scale = glm::vec3(150, 150, 1);
+				FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->scale = glm::vec3(100, 100, 1);
 				IsRotating = false;
 				FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Levelpng[LevelList];
 			}
@@ -199,7 +199,7 @@ void LevelSelect::Rotation(void)
 			if (std::abs(FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle - selectAngle) > 90) {
 				FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle = -LevelList * 90.f;
 				FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->angle = 0.f;
-				FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->scale = glm::vec3(150, 150, 1);
+				FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->scale = glm::vec3(100, 100, 1);
 				IsRotating = false;
 				FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Levelpng[LevelList];
 			}

@@ -5,7 +5,7 @@
 		{
 			"x" : 0.0,
 			"y" : 0.0,
-			"z" : 503.697021484375
+			"z" : 500.0
 		},
 		"TARGET" : 
 		{
@@ -25,6 +25,7 @@
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 1,
@@ -46,6 +47,7 @@
 	"Object2" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : -1.0,
 		"ObjectID" : 2,
 		"ObjectType" : "Button",
 		"Position" : 
@@ -57,14 +59,15 @@
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 480.0,
-			"y" : 480.0
+			"x" : 250.0,
+			"y" : 250.0
 		},
 		"TextureDir" : "LevelSelction.png"
 	},
 	"Object3" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : -1.0,
 		"ObjectID" : 3,
 		"ObjectType" : "Button",
 		"Position" : 
@@ -76,8 +79,8 @@
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 150.0,
-			"y" : 150.0
+			"x" : 125.0,
+			"y" : 125.0
 		},
 		"TextureDir" : "1.png"
 	},
