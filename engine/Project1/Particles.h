@@ -42,6 +42,7 @@ namespace TE {
 		void Update(float dt);
 		void SetEmitter(glm::vec3 EmitterPos, glm::vec3 EmitterVel, int pSize, int pCapacity, float plifeTime, EmitterType ptype, std::string particlePath);
 		void SetTexture(int textureID);
+		
 		//float getDepth() { return depth; }
 
 		int FindUnusedParticle();
@@ -57,6 +58,7 @@ namespace TE {
 		int         emitterID; //!< ID of this Emitter
 		float       lifeTime;  //!< lifeTime of this Emitter
 		bool		isAdditive; // !< addtive or bleneded
+		bool		isOn;
 		std::string m_particlePath;
 	};
 

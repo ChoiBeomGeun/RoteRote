@@ -20,6 +20,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "Input.h"
 #include "StateManager.h"
 #include "SoundManager.h"
+#include "ParticleManager.h"
 using namespace TE;
 static Object *player;
 static Object *obj;
@@ -51,10 +52,7 @@ void ClearzoneLogic::Initialize()
 
 void ClearzoneLogic::Update(float dt)
 {
-
-
-
-	for (auto Objects : FACTORY->ObjectIDMap)
+for (auto Objects : FACTORY->ObjectIDMap)
 	{
 
 		if (Objects.second->objectstyle == Objectstyle::Clearzone)
@@ -69,8 +67,13 @@ void ClearzoneLogic::Update(float dt)
 		if (PHYSICS->RectvsRectCollisionCheck(player->GetComponent<Transform>(), obj->GetComponent<Transform>()))
 		{
 
-			APP->b_Win = true;//	LevelInit.b_Win = true;
+			WinSound = SOUNDMANAGER->LoadSound("win3.mp3");
+			SOUNDMANAGER->PlaySounds(WinSound, false);
+
+			APP-> b_Win = true;//	LevelInit.b_Win = true;
 							  //STATEMANAGER->b_Relplay = true;
+			
+			
 			PHYSICS->gravityScale = -20.f;
 			PHYSICS->GravityType = Gravity::y_Minus;
 			PHYSICS->gravity = glm::vec3(0, PHYSICS->gravityScale, 0);

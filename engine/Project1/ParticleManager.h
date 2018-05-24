@@ -37,7 +37,7 @@ namespace TE {
 	- DrawEmitter
 
 	- PRIVATE
-	- InitExplosionSystem
+	- init_win_condition_system_system
 	- InitTrailSystem
 
 	*/
@@ -63,9 +63,9 @@ namespace TE {
 		//void UpdateEmitter(Emitter* pEmitter, float dt);
 		//void     DrawEmitter(const Emitter* pEmitter);
 		std::vector <Emitter*> m_EmitterList;
-
+		void initialize_life_time();
 	private:
-		void InitExplosionSystem(Emitter* pEmitter);
+		void init_win_condition_system_system(Emitter* pEmitter);
 		void InitTrailSystem(Emitter* pEmitter);
 		void InitBackgroundSystem(Emitter* pEmitter);
 		void InitPlayerJetSystem(Emitter * pEmitter);

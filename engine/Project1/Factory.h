@@ -61,6 +61,7 @@ namespace TE {
 		ObjectID LastObjectID;
 		ObjectID BodyID;
 		Object * GetPlayer(void);
+		Object * GetClearZone(void);
 		Object * LeftBoundary(void);
 		Object * RightBoundary(void);
 		Object * UpBoundary(void);

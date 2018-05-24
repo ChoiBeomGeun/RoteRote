@@ -44,7 +44,7 @@ InGameLogic::InGameLogic()
 	if(ENGINE->IsLoggingOn)
   	LOGGINGSYSTEM = new LoggingSystem;
 	INGAMELOGIC = this;
-
+	temp = 0;
 }
 
 InGameLogic::~InGameLogic()
@@ -104,6 +104,21 @@ void InGameLogic::InGameUpdate(float dt)
 			if (FACTORY->ObjectIDMap[Objects.first]->objectstyle == Objectstyle::Box)
 				FACTORY->ObjectIDMap[Objects.first]->GetComponent<Body>()->pm_velocity = glm::vec3(0);
 	}
+}
+
+void InGameLogic::InGameDelay(float  dt, float howlong)
+{
+	temp += dt * 2;
+	
+		if (temp > howlong)
+		{
+			STATEMANAGER->b_IsDelay = false;
+		}
+		else 
+		{			
+			STATEMANAGER->b_IsDelay = true;
+		}
+	
 }
 
 void InGameLogic::InGameShutdown(void)

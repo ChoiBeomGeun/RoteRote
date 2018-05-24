@@ -315,6 +315,19 @@ Object *  ObjectFactory::GetPlayer(void)
 	}
  	return temp;
 }
+
+
+Object* ObjectFactory::GetClearZone(void)
+{
+
+	for (auto Objects : FACTORY->ObjectIDMap)
+	{
+
+		if (Objects.second->objectstyle == Objectstyle::Clearzone)
+			return Objects.second;
+	}
+	return NULL;
+}
 unsigned int TE::ObjectFactory::GetAllObjectNumbers(void)
 {
 	unsigned int ObjectCount = 0;

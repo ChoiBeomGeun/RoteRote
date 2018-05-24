@@ -183,23 +183,6 @@ void Level1::Init()
 	_playerPosition.y = player->GetComponent<Transform>()->GetPosition().y;
 	_playerPosition.z = 500.f;
 
-	//if (STATEMANAGER->Loadtolevelname == "test.json")
-	//{
-	//	glm::vec3 rightblock = glm::vec3(0), leftblock = glm::vec3(0), upblock = glm::vec3(0), downblock = glm::vec3(0);
-	//	// this is current block of map 
-	//	upblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
-	//	downblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
-	//	rightblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
-	//	leftblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
-
-	//	CAMERA->CenterOfCamera.x = leftblock.x + (std::abs(leftblock.x - rightblock.x)*.5f);
-	//	CAMERA->CenterOfCamera.y = upblock.y - (std::abs(upblock.y - downblock.y)*.5f);
-
-	//	CAMERA->cameraPos = glm::vec3(CAMERA->CenterOfCamera, 500.f);
-	//}
-
-
-	
 
 	static float loadingtimer = 0.1f;
 	APP->IsKeyBoardAvailable = false;
@@ -219,7 +202,15 @@ void Level1::Init()
 
 	background_trsparent = 140.f;
 	loadbackground();
-
+	for (auto p : PARTICLEMANAGER->m_EmitterList)
+	{
+		p->isOn = true;
+		if (p->type == ET_EXPLOSION)
+		{
+			p->isOn = false;
+			p->pos = FACTORY->GetClearZone()->GetComponent<Transform>()->position;
+		}
+	}
 }
 
 void Level1::Update(float dt)
@@ -230,11 +221,11 @@ void Level1::Update(float dt)
 #ifdef _DEBUG
 	CheatKeyFunctions();
 #endif
-		
+
 	//Backgroundobj->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 140);
 
-        if (Input::IsTriggered(SDL_SCANCODE_R))
-            STATEMANAGER->Restart();
+	if (Input::IsTriggered(SDL_SCANCODE_R))
+		STATEMANAGER->Restart();
 	if (STATEMANAGER->b_IsReplayStart) {
 
 		ReplayerInfo temp;
@@ -247,7 +238,7 @@ void Level1::Update(float dt)
 
 	if (!ENGINE->GetGameStateIsOn())
 	{
-	
+
 		delete INGAMELOGIC;
 		delete LOGGINGSYSTEM;
 	}
@@ -279,6 +270,11 @@ void Level1::Update(float dt)
 			}
 		}
 	}
+	/*if (FACTORY->GetClearZone())
+	{
+		if(!PARTICLEMANAGER->m_EmitterList.empty() && FACTORY->GetPlayer() != nullptr)
+			PARTICLEMANAGER->m_EmitterList[1]->pos = FACTORY->GetClearZone()->GetComponent<Transform>()->position;
+	}*/
 	INGAMELOGIC->InGameUpdate(dt);
 	if (STATEMANAGER->b_IsReplay)
 	{
@@ -286,17 +282,27 @@ void Level1::Update(float dt)
 	}
 	if (APP->b_Win)
 	{
-		STATEMANAGER->b_IsReplayStart = false;
-		STATEMANAGER->b_IsReplay = true;
-	}
-	//camAct.cameraSetting(CameraPosType::EN_BOUNDARY);
-	if (Input::IsAnyTriggered())
-	{
-		
-		//camAct.cameraSetting(CameraPosType::EN_BOUNDARY);
+		/*STATEMANAGER->b_IsReplayStart = false;
+		STATEMANAGER->b_IsReplay = true;*/
+		for (auto p : PARTICLEMANAGER->m_EmitterList)
+		{
+			
+			if (p->type == ET_EXPLOSION)
+			{
+				if (!p->isOn)
+					PARTICLEMANAGER->initialize_life_time();
+				p->isOn = true;
+			}
+		}
+		if (STATEMANAGER->b_IsDelay)
+			INGAMELOGIC->InGameDelay(dt, 5);
+		else
+		{
+			STATEMANAGER->b_IsReplayStart = false;
+			STATEMANAGER->b_IsReplay = true;
+		}
 	}
 
-	
 	if (APP->b_Lose)
 	{
 		if(LosesoundOnetime)
@@ -329,9 +335,16 @@ void Level1::Update(float dt)
 		SetReplayer();
 	}
 	if (!PARTICLEMANAGER->m_EmitterList.empty() && FACTORY->GetPlayer() != nullptr)
-		PARTICLEMANAGER->m_EmitterList[0]->pos = FACTORY->GetPlayer()->GetComponent<Transform>()->position;
-
-
+	{
+		for (auto p : PARTICLEMANAGER->m_EmitterList)
+		{
+			if (p->type == ET_TRAIL)
+				p->pos = FACTORY->GetPlayer()->GetComponent<Transform>()->position;
+			else if (p->type == ET_EXPLOSION)
+				p->pos = FACTORY->GetClearZone()->GetComponent<Transform>()->position;
+			
+		}
+	}
 }
 
 void Level1::Free(void)

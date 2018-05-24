@@ -53,6 +53,7 @@ namespace TE {
 		void ReplayReturn(void);
 		void DestoryAllStates(void);
 		bool b_Replayrestart = false;;
+		bool b_IsDelay = true;
 		bool b_IsPauseOn;
 		bool b_IsRotating = false;
 		bool b_IsGravityChanged;

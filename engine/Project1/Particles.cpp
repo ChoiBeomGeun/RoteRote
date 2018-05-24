@@ -36,6 +36,7 @@ namespace TE {
 			emitterID = 0;
 			lifeTime = 0;
 			isAdditive = true;
+			isOn = false;
 		}
 		else
 			return;
@@ -74,6 +75,7 @@ namespace TE {
 		m_textureID = textureID;
 	}
 
+	
 
 	void Emitter::SetEmitter(glm::vec3 EmitterPos, glm::vec3 EmitterVel, int pSize, int pCapacity, float plifeTime, EmitterType ptype, std::string particlePath = "PlayerTrail.json")
 	{

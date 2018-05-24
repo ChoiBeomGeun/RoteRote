@@ -328,23 +328,26 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 		{
 			glBindTexture(GL_TEXTURE_2D, p->pOwner->GetComponent<Sprite>()->m_TextureID);
 			//glBindTexture(GL_TEXTURE_2D, p->m_textureID);
-			for (int i = 0; i<p->capacity; ++i)
+			if (p->isOn)
 			{
-				drawStats = 3;
-				particlemodel = glm::mat4(1.0f);
-				CAMERA->proj();
-				particlemodel = glm::translate(particlemodel, p->pParticles[i].pos);
-				particlemodel = glm::rotate(particlemodel, glm::radians(p->pParticles[i].angle), (*iter)->pOwner->GetComponent<Transform>()->rotation);
-				particlemodel = glm::scale(particlemodel, glm::vec3(p->pParticles[i].scale));
-				glUniform4f(particleLoc[PCOLOR], p->pParticles[i].color[0], p->pParticles[i].color[1],
-					p->pParticles[i].color[2], p->pParticles[i].color[3]);
-				glUniformMatrix4fv(particleLoc[PARTICLEMODEL], 1, GL_FALSE, &particlemodel[0][0]);
-				glUniformMatrix4fv(particleLoc[PARTICLEVIEW], 1, GL_FALSE, &view[0][0]);
-				glUniformMatrix4fv(particleLoc[PARTICLEPROJ], 1, GL_FALSE, &CAMERA->projection[0][0]);
-				//glUniform1i(particleLoc[PTEXTURE], 1);
-				glUniform1i(particleLoc[PSTATS], drawStats);
-				glPushAttrib(GL_CURRENT_BIT);
-				glDrawArrays(GL_TRIANGLES, 0, 6);
+				for (int i = 0; i < p->capacity; ++i)
+				{
+					drawStats = 3;
+					particlemodel = glm::mat4(1.0f);
+					CAMERA->proj();
+					particlemodel = glm::translate(particlemodel, p->pParticles[i].pos);
+					particlemodel = glm::rotate(particlemodel, glm::radians(p->pParticles[i].angle), (*iter)->pOwner->GetComponent<Transform>()->rotation);
+					particlemodel = glm::scale(particlemodel, glm::vec3(p->pParticles[i].scale));
+					glUniform4f(particleLoc[PCOLOR], p->pParticles[i].color[0], p->pParticles[i].color[1],
+						p->pParticles[i].color[2], p->pParticles[i].color[3]);
+					glUniformMatrix4fv(particleLoc[PARTICLEMODEL], 1, GL_FALSE, &particlemodel[0][0]);
+					glUniformMatrix4fv(particleLoc[PARTICLEVIEW], 1, GL_FALSE, &view[0][0]);
+					glUniformMatrix4fv(particleLoc[PARTICLEPROJ], 1, GL_FALSE, &CAMERA->projection[0][0]);
+					//glUniform1i(particleLoc[PTEXTURE], 1);
+					glUniform1i(particleLoc[PSTATS], drawStats);
+					glPushAttrib(GL_CURRENT_BIT);
+					glDrawArrays(GL_TRIANGLES, 0, 6);
+				}
 			}
 		}
 		//glDisable(GL_BLEND);

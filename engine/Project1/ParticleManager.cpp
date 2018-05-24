@@ -104,7 +104,7 @@ namespace TE {
 			{
 			case ET_EXPLOSION:
 			{
-				InitExplosionSystem(*emitterIT);
+				init_win_condition_system_system(*emitterIT);
 			}
 			break;
 			case ET_TRAIL:
@@ -201,6 +201,8 @@ namespace TE {
 					pobject->GetComponent<Emitter>()->emitterID = emitterID;
 					pobject->GetComponent<Emitter>()->lifeTime = emitterlifeTime;
 					pobject->GetComponent<Emitter>()->capacity = capacity;
+					// switch for particles
+					pobject->GetComponent<Emitter>()->isOn = false;
 					pobject->GetComponent<Emitter>()->SetEmitter(pobject->GetComponent<Transform>()->position, t_Vel, emittersize, capacity, emitterlifeTime, (EmitterType)emitterTypeID,pobject->GetComponent<Emitter>()->m_particlePath);
 					pobject->GetComponent<Emitter>()->SetTexture(pobject->GetComponent<Sprite>()->m_TextureID);
 					pobject->GetComponent<Emitter>()->CreateParticle();
@@ -237,10 +239,13 @@ namespace TE {
 		std::vector<Emitter*>::iterator EIT = m_EmitterList.begin();
 		while(EIT != m_EmitterList.end())
 		{
+			
 			switch ((*EIT)->type)
 			{
+
 			case ET_EXPLOSION:
 			{
+
 				for (int i = 0; i < (*EIT)->capacity; ++i)
 				{
 					Particle& particle = (*EIT)->pParticles[i];
@@ -273,15 +278,12 @@ namespace TE {
 							*= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);;
 						(*EIT)->pParticles[i].scale
 							= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
-						// set color with g_colors
-						(*EIT)->pParticles[i].color[0] = 255 / 255.f;
-						(*EIT)->pParticles[i].color[1] = 255 / 255.f;
-						(*EIT)->pParticles[i].color[2] = 255 / 255.f;
-						(*EIT)->pParticles[i].color[3] = 255 / 255.f;
+
 					}
 				}
-				break;
 			}
+			break;
+
 			case ET_TRAIL:
 			{
 				for (int i = 0; i < (*EIT)->capacity; ++i)
@@ -370,6 +372,7 @@ namespace TE {
 			break;
 			}
 			}
+			
 			++EIT;
 		}
 	}
@@ -379,7 +382,7 @@ namespace TE {
 		switch (pEmitter->type)
 		{
 		case ET_EXPLOSION:
-			InitExplosionSystem(pEmitter);
+			init_win_condition_system_system(pEmitter);
 			break;
 		case ET_TRAIL:
 			InitTrailSystem(pEmitter);
@@ -401,6 +404,17 @@ namespace TE {
 		m_EmitterList.erase(emitterIt);
 	}
 
+	void ParticleManager::initialize_life_time()
+	{
+		for(auto p : m_EmitterList)
+		{
+			if(p->type== ET_EXPLOSION)
+			{
+				p->lifeTime = m_expLife;
+			}
+		}
+	}
+
 	/*!
 
 	Initialize explosion with many mathematical function.
@@ -413,9 +427,10 @@ namespace TE {
 
 	*/
 	/******************************************************************************/
-	void ParticleManager::InitExplosionSystem(Emitter* pEmitter)
+	void ParticleManager::init_win_condition_system_system(Emitter* pEmitter)
 	{
 		float rotation = 0; // rotation of particle
+		
 		for (int i = 0; i < pEmitter->capacity; ++i)
 		{
 			// set position of particle to emitter
@@ -430,10 +445,10 @@ namespace TE {
 			pEmitter->pParticles[i].scale
 				= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
 			// set color with g_colors
-			pEmitter->pParticles[i].color[0] = 0.f/ 255;
-			pEmitter->pParticles[i].color[1] = 0.f / 255;
-			pEmitter->pParticles[i].color[2] = 0.f / 255;
-			pEmitter->pParticles[i].color[3] = 0.f / 255;
+			pEmitter->pParticles[i].color[0] = i / 255.f;
+			pEmitter->pParticles[i].color[1] = ((i*i)%200 )/ 255.f;
+			pEmitter->pParticles[i].color[2] = (2*i%200) / 255.f;
+			pEmitter->pParticles[i].color[3] = ((i % 255) + i) / 255.f;
 			pEmitter->pParticles[i].lifetime = 0.0f;
 			pEmitter->pParticles[i].angle = rotation;
 		}

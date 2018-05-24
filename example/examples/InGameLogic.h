@@ -27,6 +27,7 @@ namespace  TE {
 	//	}
 		void InGameInit(void);
 		void InGameUpdate(float dt);
+		void InGameDelay(float  dt, float howlong);
 		void InGameShutdown(void);
 
 	/*	template<typename GLST>
@@ -40,6 +41,8 @@ namespace  TE {
 		std::vector<GameLogicSystem*> GameLogicList;
 
 		std::vector<std::string> vsLevelList;
+	private:
+		float temp;
 	};
 
 	extern InGameLogic* INGAMELOGIC;
