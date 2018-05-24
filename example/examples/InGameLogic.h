@@ -39,6 +39,7 @@ namespace  TE {
 		void DestoryAllGameLogics(void);
 		std::vector<GameLogicSystem*> GameLogicList;
 
+		std::vector<std::string> vsLevelList;
 	};
 
 	extern InGameLogic* INGAMELOGIC;

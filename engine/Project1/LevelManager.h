@@ -14,7 +14,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #pragma once
 
 #include <string>
-
+#include <vector>
 namespace TE {
 	class LevelManager
 	{
@@ -23,7 +23,6 @@ namespace TE {
 
 		void LoadLevel(std::string  path);
 		void SaveLevel(std::string  path);
-
 
 	};
 

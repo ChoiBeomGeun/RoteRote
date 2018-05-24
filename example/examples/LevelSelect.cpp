@@ -46,6 +46,20 @@ Load texture & Initialize a value of texture to Levelpng[i]
 */
 void LevelSelect::Load()
 {
+	for (auto it : ENGINE->mVsLevelnamelist)
+	{
+		if (*it.begin() == 'l')
+		{
+			INGAMELOGIC->vsLevelList.push_back(it);
+
+		}
+
+
+
+
+	}
+
+
 	LEVELMANAGER->LoadLevel("selectlevel.json");
 
 	for (int i = 1; i <= LevelList::quit + 1; ++i)
