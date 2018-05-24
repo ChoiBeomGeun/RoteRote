@@ -21,7 +21,7 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 17,
+	"NumberOfObjects" : 18,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
@@ -230,6 +230,28 @@
 		},
 		"TextureDir" : "unattachwall.png"
 	},
+	"Object18" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
+		"Depth" : 0.0,
+		"ObjectID" : 18,
+		"ObjectType" : "Button",
+		"ParticlePath" : "PlayerTrail.json",
+		"ParticleType" : "ET_EXPLOSION",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0
+		},
+		"TextureDir" : "basicParticle.png"
+	},
 	"Object2" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
@@ -308,7 +330,7 @@
 			"y" : -257.0,
 			"z" : 0.0
 		},
-		"Rotation" : 2604.075439453125,
+		"Rotation" : 2940.6318359375,
 		"Scale" : 
 		{
 			"x" : 20.0,
