@@ -60,12 +60,13 @@ namespace TE {
 	/******************************************************************************/
 	ParticleManager::~ParticleManager(void)
 	{
-		/*std::vector<Emitter*>::iterator emitIt = m_EmitterList.begin();
+		std::vector<Emitter*>::iterator emitIt = m_EmitterList.begin();
+		if(!m_EmitterList.empty())
 		for(emitIt; emitIt != m_EmitterList.end(); ++emitIt)
 		{
-		delete (*emitIt)->pParticles;
-		(*emitIt)->pParticles = NULL;
-		}*/
+			delete (*emitIt)->pParticles;
+			(*emitIt)->pParticles = NULL;
+		}
 
 	}
 	void ParticleManager::Initialize(void)
@@ -88,7 +89,6 @@ namespace TE {
 		m_minBackgroundDist = -(APP->_screenWidth * .3f);
 		m_maxBackgroundDist = APP->_screenWidth * .3f;
 		m_maxBackLifeTime = 20;
-
 		m_scaleFactor = 30;
 		m_expLife = 20;
 
@@ -195,14 +195,13 @@ namespace TE {
 					pobject->AddComponent<Emitter>();
 					pobject->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(textureDir);
 					pobject->GetComponent<Sprite>()->depth = -2.0f;
-
 					pobject->GetComponent<Transform>()->position = glm::vec3(Xpos, Ypos, 0);
 					glm::vec3 t_Vel(Xvel, Yvel, Zvel);
 					pobject->GetComponent<Emitter>()->size = emittersize;
 					pobject->GetComponent<Emitter>()->emitterID = emitterID;
 					pobject->GetComponent<Emitter>()->lifeTime = emitterlifeTime;
 					pobject->GetComponent<Emitter>()->capacity = capacity;
-					pobject->GetComponent<Emitter>()->SetEmitter(pobject->GetComponent<Transform>()->position, t_Vel, emittersize, capacity, emitterlifeTime, (EmitterType)emitterTypeID);
+					pobject->GetComponent<Emitter>()->SetEmitter(pobject->GetComponent<Transform>()->position, t_Vel, emittersize, capacity, emitterlifeTime, (EmitterType)emitterTypeID,pobject->GetComponent<Emitter>()->m_particlePath);
 					pobject->GetComponent<Emitter>()->SetTexture(pobject->GetComponent<Sprite>()->m_TextureID);
 					pobject->GetComponent<Emitter>()->CreateParticle();
 
@@ -291,17 +290,6 @@ namespace TE {
 					//If scale of particle is 0
 					if (particle.scale <= 0)
 					{
-						//Get rotation of emitter using atan2
-						float rotation = atan2f((*EIT)->vel.y, (*EIT)->vel.x);
-						// Rotate that value by PI
-						rotation += TUMath::PI;
-						// Add a random rotation between + or PI/4
-						rotation += TUMath::GetRandomFloat(-TUMath::PI / 4, TUMath::PI / 4);
-						// Use rotation to calculate velocity x and y
-						particle.vel = { cosf(rotation), sinf(rotation), 0.0f };
-						//Scale velocity by random float
-						//between minTrailVel and maxTrailVel
-						particle.vel *= TUMath::GetRandomFloat(m_minTrailVel, m_maxTrailVel);
 						//Set particle position to emitter position.
 						particle.pos = (*EIT)->pos;
 						//Set particle scale to random float
@@ -312,7 +300,7 @@ namespace TE {
 					//Update particle scale based on scaleFactor and dt
 					particle.scale -= m_scaleFactor * dt;
 					//Clamp particle scale to 0 and maxTrailScale
-					TUMath::Clamp(particle.scale, 0, m_maxTrailScale);
+					//TUMath::Clamp(particle.scale, 0, m_maxTrailScale);
 				}
 				break;
 			}
@@ -428,7 +416,6 @@ namespace TE {
 	void ParticleManager::InitExplosionSystem(Emitter* pEmitter)
 	{
 		float rotation = 0; // rotation of particle
-
 		for (int i = 0; i < pEmitter->capacity; ++i)
 		{
 			// set position of particle to emitter
@@ -464,7 +451,6 @@ namespace TE {
 	/******************************************************************************/
 	void ParticleManager::InitTrailSystem(Emitter* pEmitter)
 	{
-            pEmitter->m_particlePath = "PlayerTrail.json";
 		// fill all particles in emitter with loop
 		for (int i = 0; i < pEmitter->capacity; ++i)
 		{

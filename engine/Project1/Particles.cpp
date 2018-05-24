@@ -12,13 +12,14 @@
 namespace TE {
 	Emitter::Emitter() : Component(ComponentType::CT_EMITTER)
 	{
-		//PARTICLEMANAGER->m_EmitterList.push_back(this);
-		//m_BaseGraphicsList.push_back(this);
 	}
 	Emitter::~Emitter()
 	{
-		delete pParticles;
-		pParticles = NULL;
+		for(auto p : PARTICLEMANAGER->m_EmitterList)
+		{
+			delete[]p->pParticles;
+			p->pParticles = NULL;
+		}
 		PARTICLEMANAGER->m_EmitterList.erase(std::find(PARTICLEMANAGER->m_EmitterList.begin(), PARTICLEMANAGER->m_EmitterList.end(), this));
 	}
 	void Emitter::Initialize()
@@ -74,7 +75,7 @@ namespace TE {
 	}
 
 
-	void Emitter::SetEmitter(glm::vec3 EmitterPos, glm::vec3 EmitterVel, int pSize, int pCapacity, float plifeTime, EmitterType ptype)
+	void Emitter::SetEmitter(glm::vec3 EmitterPos, glm::vec3 EmitterVel, int pSize, int pCapacity, float plifeTime, EmitterType ptype, std::string particlePath = "PlayerTrail.json")
 	{
 		pos = EmitterPos;
 		vel = EmitterVel;

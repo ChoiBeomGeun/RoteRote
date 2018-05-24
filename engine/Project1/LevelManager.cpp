@@ -182,17 +182,7 @@ void LevelManager::LoadLevel(std::string  path)
 					PaticlePath = ".\\Emitters.\\" + file.mRoot.get(object + to_string(i), false).get("ParticlePath", false).asString();
 
 					tempObject = PARTICLEMANAGER->LoadEmitter(tempObject, PaticlePath);
-					//pfile.ReadFile(PaticlePath);
-
-					/*tempObject->AddComponent<Emitter>();
-					tempObject->GetComponent<Sprite>()->texture_load("test.png");
-					tempObject->GetComponent<Transform>()->position = tempObject->GetComponent<Transform>()->position;
-					tempObject->GetComponent<Emitter>()->SetEmitter(tempObject->GetComponent<Transform>()->position, glm::vec3(0.0f), 0, 400, 20.f, ET_EXPLOSION);
-					tempObject->GetComponent<Emitter>()->SetTexture(tempObject->GetComponent<Sprite>()->TextureId);
-					tempObject->GetComponent<Emitter>()->CreateParticle();
-					tempObject->GetComponent<Transform>()->scale = glm::vec3(10.0f);
-
-					PARTICLEMANAGER->AddEmitter(tempObject->GetComponent<Emitter>());*/
+					
 				}
 				
 			}
@@ -386,7 +376,7 @@ void LevelManager::SaveLevel(std::string  path)
 				root[object + to_string(i)]["ParticleType"] = "ET_EXPLOSION";
 
 
-			root[object + to_string(i)]["ParticlePath"] = it.second->GetComponent<Emitter>()->m_particlePath;
+			root[object + to_string(i)]["ParticlePath"] = "PlayerTrail.json";
 			index++;
 		}
 		index = 0;
@@ -407,6 +397,9 @@ void LevelManager::SaveLevel(std::string  path)
 			break;
 		case Objectstyle::Box:
 			root[object + to_string(i)]["ObjectType"] = "Box";
+			break;
+		case Objectstyle::AttachBox:
+			root[object + to_string(i)]["ObjectType"] = "AttachBox";
 			break;
 		case Objectstyle::Trigger90:
 			root[object + to_string(i)]["ObjectType"] = "Trigger90";

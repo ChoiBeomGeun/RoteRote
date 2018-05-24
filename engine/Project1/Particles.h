@@ -40,7 +40,7 @@ namespace TE {
 		virtual void Initialize() override;
 		void CreateParticle();
 		void Update(float dt);
-		void SetEmitter(glm::vec3 EmitterPos, glm::vec3 EmitterVel, int pSize, int pCapacity, float plifeTime, EmitterType ptype);
+		void SetEmitter(glm::vec3 EmitterPos, glm::vec3 EmitterVel, int pSize, int pCapacity, float plifeTime, EmitterType ptype, std::string particlePath);
 		void SetTexture(int textureID);
 		//float getDepth() { return depth; }
 
