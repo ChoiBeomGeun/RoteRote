@@ -107,6 +107,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <AdditionalOptions>/Ylsymbol %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4099</DisableSpecificWarnings>
+      <StructMemberAlignment>Default</StructMemberAlignment>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)\external\fmod\lib;$(SolutionDir)\external\glfw\lib-vc2010-32;$(SolutionDir)\engine\external\tuEngine\lib\$(PlatformTarget)\;$(SolutionDir)\external\soil\lib\$(PlatformTarget)\;$(SolutionDir)external\gl3w\lib;$(SolutionDir)\external\glew\lib\Release\$(Platform)\;$(SolutionDir)\external\SDL2\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -138,6 +139,7 @@ copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(T
       <MinimalRebuild>false</MinimalRebuild>
       <AdditionalOptions>/Ylsymbol %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4099</DisableSpecificWarnings>
+      <StructMemberAlignment>Default</StructMemberAlignment>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)\external\fmod\lib;$(SolutionDir)\external\glfw\lib-vc2010-32;$(SolutionDir)\engine\external\tuEngine\lib\$(PlatformTarget)\;$(SolutionDir)\external\soil\lib\$(PlatformTarget)\;$(SolutionDir)external\gl3w\lib;$(SolutionDir)\external\glew\lib\Release\$(Platform)\;$(SolutionDir)\external\SDL2\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -169,6 +171,7 @@ copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(T
       <AdditionalOptions>/Ylsymbol %(AdditionalOptions)</AdditionalOptions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <DisableSpecificWarnings>4099</DisableSpecificWarnings>
+      <StructMemberAlignment>Default</StructMemberAlignment>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -202,6 +205,7 @@ copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(T
       <AdditionalOptions>/Ylsymbol %(AdditionalOptions)</AdditionalOptions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <DisableSpecificWarnings>4099</DisableSpecificWarnings>
+      <StructMemberAlignment>Default</StructMemberAlignment>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

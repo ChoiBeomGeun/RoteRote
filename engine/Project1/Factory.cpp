@@ -371,7 +371,7 @@ Object * TE::ObjectFactory::LeftBoundary(void)
 		}
 	}
 	Object * minObject = WallObject[0];
-	for (int i = 1; i < WallObject.size(); i++)
+	for (unsigned i = 1; i < WallObject.size(); i++)
 	{
 		if (minObject->GetComponent<Transform>()->position.x > WallObject[i]->GetComponent<Transform>()->position.x)
 			minObject = WallObject[i];
@@ -389,7 +389,7 @@ Object * TE::ObjectFactory::RightBoundary(void)
 		}
 	}
 	Object * maxObject = WallObject[0];
-	for (int i = 1; i < WallObject.size(); i++)
+	for (unsigned i = 1; i < WallObject.size(); i++)
 	{
 		if (maxObject->GetComponent<Transform>()->position.x < WallObject[i]->GetComponent<Transform>()->position.x)
 			maxObject = WallObject[i];
@@ -407,7 +407,7 @@ Object * TE::ObjectFactory::UpBoundary(void)
 		}
 	}
 	Object * maxObject = WallObject[0];
-	for (int i = 1; i < WallObject.size(); i++)
+	for (unsigned i = 1; i < WallObject.size(); i++)
 	{
 		if (maxObject->GetComponent<Transform>()->position.y < WallObject[i]->GetComponent<Transform>()->position.y)
 			maxObject = WallObject[i];
@@ -425,7 +425,7 @@ Object * TE::ObjectFactory::DownBoundary(void)
 		}
 	}
 	Object * minObject = WallObject[0];
-	for (int i = 1; i < WallObject.size(); i++)
+	for (unsigned i = 1; i < WallObject.size(); i++)
 	{
 		if (minObject->GetComponent<Transform>()->position.y > WallObject[i]->GetComponent<Transform>()->position.y)
 			minObject = WallObject[i];

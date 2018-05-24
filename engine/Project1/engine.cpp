@@ -113,20 +113,24 @@ void Engine::GameLoop()
 	while (GameIsRunning)
 	{
 		float frametime = Timer::GetDelta();
-	
-	
+          
+//                int time;
 
 		if (frametime >= 0.025f)
-			frametime = 0.025f;
+			frametime = 0.016f;
 
 		if (frametime <= 0.016f)
 			frametime = 0.016f;
+
+                printf("%f \n,", frametime);
 		if(IsLoggingOn)
 		LOGGINGSYSTEM->HowMuchTimePassed += static_cast<long>(frametime);
 		for (unsigned int i = 0; i <SystemList.size(); ++i) {
 		
 		
  			SystemList[i]->Update(frametime);
+
+                    
 			if (!GameIsRunning)
 				break;
 		}

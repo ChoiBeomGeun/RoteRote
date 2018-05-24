@@ -13,6 +13,8 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 /******************************************************************************/
 
 #pragma  once
+
+
 #include <algorithm>
 #include "Application.h"
 #include "DebugUtil.h"
@@ -243,6 +245,8 @@ void Application::Update(float /*dt*/)
 void Application::SwapWindow(void)
 {
 
+    SDL_GL_SetSwapInterval(1);
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SwapWindow(pWnd);
 
 }
