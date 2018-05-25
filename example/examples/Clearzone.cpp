@@ -72,7 +72,7 @@ for (auto Objects : FACTORY->ObjectIDMap)
 
 			APP-> b_Win = true;//	LevelInit.b_Win = true;
 							  //STATEMANAGER->b_Relplay = true;
-			
+			STATEMANAGER->b_IsDelay = true;
 			
 			PHYSICS->gravityScale = -20.f;
 			PHYSICS->GravityType = Gravity::y_Minus;

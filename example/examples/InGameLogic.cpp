@@ -72,6 +72,7 @@ void InGameLogic::InGameInit()
 	//	DEBUG_ASSERT(true, "Opps ! There is no player or clearzone");
 	APP->b_Win = false;
 	APP->b_Lose = false;
+	
 	if(ENGINE->IsLoggingOn)
 	LOGGINGSYSTEM->Initialize();
 }
@@ -113,6 +114,7 @@ void InGameLogic::InGameDelay(float  dt, float howlong)
 		if (temp > howlong)
 		{
 			STATEMANAGER->b_IsDelay = false;
+			temp = 0;
 		}
 		else 
 		{			

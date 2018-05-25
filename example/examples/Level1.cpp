@@ -282,8 +282,8 @@ void Level1::Update(float dt)
 	}
 	if (APP->b_Win)
 	{
-		/*STATEMANAGER->b_IsReplayStart = false;
-		STATEMANAGER->b_IsReplay = true;*/
+		/*WinSound = SOUNDMANAGER->LoadSound("win3.mp3");
+		SOUNDMANAGER->PlaySounds(WinSound, false);*/
 		for (auto p : PARTICLEMANAGER->m_EmitterList)
 		{
 			
@@ -295,11 +295,20 @@ void Level1::Update(float dt)
 			}
 		}
 		if (STATEMANAGER->b_IsDelay)
-			INGAMELOGIC->InGameDelay(dt, 5);
+			INGAMELOGIC->InGameDelay(dt, 3);
 		else
 		{
+			for (auto p : PARTICLEMANAGER->m_EmitterList)
+			{
+
+				if (p->type == ET_EXPLOSION)
+				{
+					p->isOn = false;
+				}
+			}
 			STATEMANAGER->b_IsReplayStart = false;
 			STATEMANAGER->b_IsReplay = true;
+			STATEMANAGER->b_IsDelay = false;
 		}
 	}
 
@@ -380,8 +389,16 @@ void Level1::Free(void)
 }
 void Level1::Unload()
 {
+	for (auto p : PARTICLEMANAGER->m_EmitterList)
+	{
+		if (p->type == ET_EXPLOSION)
+		{
+			p->isOn = false;
+		}
+	}
 	STATEMANAGER->b_IsReplayStart = false;
 	STATEMANAGER->b_IsReplay = false;
+	STATEMANAGER->b_IsDelay = false;
 }
 
 void Level1::loadbackground()

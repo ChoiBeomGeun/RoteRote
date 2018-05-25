@@ -207,7 +207,7 @@ void Graphics::Update(float dt)
 	glDepthMask(GL_TRUE);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	glClearColor(0.f, 0.f, 0.f, 0.f);
+	glClearColor(0.f, 0.5f, 0.8f, 0.f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	/*glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);*/
@@ -294,7 +294,7 @@ void TE::Graphics::drawPerspective(std::vector<Sprite*>::iterator iter)
 		model = glm::translate(model, glm::vec3((*iter)->pOwner->GetComponent<Transform>()->position));
 		model = glm::rotate(model, glm::radians((*iter)->pOwner->GetComponent<Transform>()->angle), (*iter)->pOwner->GetComponent<Transform>()->rotation);
 		model = glm::scale(model, glm::vec3((*iter)->pOwner->GetComponent<Transform>()->scale));
-		glUniform1i(particleLoc[PSTATS], drawStats);
+		//glUniform1i(particleLoc[PSTATS], drawStats);
 		//glUniform1i(particleLoc[PTEXTURE], 0);
 		glUniformMatrix4fv(uniformLocation[MODEL], 1, GL_FALSE, &model[0][0]);
 	}
@@ -311,7 +311,7 @@ void TE::Graphics::drawOrthogonal(std::vector<Sprite*>::iterator iter)
 		hudmodel = glm::rotate(hudmodel, glm::radians((*iter)->pOwner->GetComponent<Transform>()->angle), (*iter)->pOwner->GetComponent<Transform>()->rotation);
 
 		hudmodel = glm::scale(hudmodel, (*iter)->pOwner->GetComponent<Transform>()->scale);
-		glUniform1i(particleLoc[PSTATS], drawStats);
+		//glUniform1i(particleLoc[PSTATS], drawStats);
 		//glUniform1i(particleLoc[PTEXTURE], 0);
 		glUniformMatrix4fv(uniformLocation[HUDMODEL], 1, GL_FALSE, &hudmodel[0][0]);
 		//_basicProgram.unuse();
