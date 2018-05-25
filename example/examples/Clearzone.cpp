@@ -24,6 +24,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 using namespace TE;
 static Object *player;
 static Object *obj;
+Object * clearparticle;
 SOUNDID WinSound;
 namespace TE {
 
@@ -45,8 +46,11 @@ ClearzoneLogic::ClearzoneLogic()
 void ClearzoneLogic::Initialize()
 {
 	player = FACTORY->GetPlayer();
-
-}
+	obj = GetClearzone();
+	clearparticle = FACTORY->CreateHUD(obj->GetComponent<Transform>()->position, obj->GetComponent<Transform>()->scale);
+	clearparticle->GetComponent<Sprite>()->isPerspective = true;
+	PARTICLEMANAGER->LoadEmitter(clearparticle, ".\\Emitters.\\finish.json");
+ }
 
 
 
@@ -74,9 +78,9 @@ for (auto Objects : FACTORY->ObjectIDMap)
 							  //STATEMANAGER->b_Relplay = true;
 			STATEMANAGER->b_IsDelay = true;
 			
-			PHYSICS->gravityScale = -20.f;
+			/*PHYSICS->gravityScale = -20.f;
 			PHYSICS->GravityType = Gravity::y_Minus;
-			PHYSICS->gravity = glm::vec3(0, PHYSICS->gravityScale, 0);
+			PHYSICS->gravity = glm::vec3(0, PHYSICS->gravityScale, 0);*/
 			//STATEMANAGER->b_IsReplayFirst = true;
 		}
 	}

@@ -274,8 +274,8 @@ Object * ObjectFactory::CreateWall(const glm::vec3 & pos, const glm::vec3& scale
 	Object* Wall = CreateEmptyObject();
 	Wall->objectstyle = Objectstyle::Wall;
 //	Transform * transform = new Transform();
-	Wall->GetComponent<Transform>()->SetPosition(pos);
 	Wall->AddComponent<Transform>();
+	Wall->GetComponent<Transform>()->SetPosition(pos);
 	Wall->GetComponent<Transform>()->SetScale(scale);
 
 	Wall->GetComponent<Transform>()->rotation = glm::vec3(0, 0, 1);

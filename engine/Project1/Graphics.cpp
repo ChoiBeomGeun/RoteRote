@@ -207,7 +207,7 @@ void Graphics::Update(float dt)
 	glDepthMask(GL_TRUE);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	glClearColor(0.f, 0.5f, 0.8f, 0.f);
+	glClearColor(0.f, 0.75f, 0.8f, 0.2f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	/*glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);*/
@@ -330,6 +330,7 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 			//glBindTexture(GL_TEXTURE_2D, p->m_textureID);
 			if (p->isOn)
 			{
+				if(p->pParticles)
 				for (int i = 0; i < p->capacity; ++i)
 				{
 					drawStats = 3;

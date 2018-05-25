@@ -237,9 +237,10 @@ namespace TE {
 	void ParticleManager::Update(float dt)
 	{
 		std::vector<Emitter*>::iterator EIT = m_EmitterList.begin();
+		if(!m_EmitterList.empty())
 		while(EIT != m_EmitterList.end())
 		{
-			
+			if((*EIT)->pParticles)
 			switch ((*EIT)->type)
 			{
 
