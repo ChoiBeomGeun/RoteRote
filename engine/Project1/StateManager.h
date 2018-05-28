@@ -66,7 +66,7 @@ namespace TE {
 		bool IsDrawing;
 		bool levelreplay = false;
 		bool ReplayInit = true;
-
+		std::vector<std::pair<std::string, bool>> vsLevelListandclear;
 		glm::vec3 InitplayerPos{ 0,0,0 };
 		std::queue<ReplayerInfo> Replayerinfo;
 		std::vector <std::pair<float, float>> AniSave;

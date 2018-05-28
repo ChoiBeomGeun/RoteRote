@@ -181,9 +181,6 @@
     <ClInclude Include="DebugUtil.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="vector3.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Engine.h">
       <Filter>Engine</Filter>
     </ClInclude>
@@ -333,6 +330,9 @@
     </ClInclude>
     <ClInclude Include="Archetype.h">
       <Filter>IMGUIDEBUG</Filter>
+    </ClInclude>
+    <ClInclude Include="vector3.h">
+      <Filter>Statemanager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

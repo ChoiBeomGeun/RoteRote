@@ -23,6 +23,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "camera.h"
 #include "Particles.h"
 #include "..\..\example\examples\PlayerController.h"
+#include "..\..\example\examples\InGameLogic.h"
 #include "ParticleManager.h"
 #define JSON_FILE "jsonFile.json"
 #define JSON_FILE_WRITE "jsonFileWrite.json"
@@ -36,13 +37,32 @@ namespace TE {
 
 
 }
+struct StringCompareLevel {
 
+	bool operator()(const std::string& a, const std::string& b)
+
+		const {
+
+		//return std::atoi(&a.at(5)) > std::atoi(&b.at(5));
+		return std::atoi(&a.at(5)) > std::atoi(&b.at(5));
+		//return true;
+	}
+
+};
 float scaleFactor = 1.f;
+LevelManager::LevelManager()
+{
+
+;
+
+}
+
+
 
 void LevelManager::LoadLevel(std::string  path)
 {
  	string PaticlePath;
-
+	 
 	
 
 
@@ -447,6 +467,47 @@ void LevelManager::SaveLevel(std::string  path)
 	file.WriteFile(path, root);
 
 
+}
+
+void TE::LevelManager::SavingLevelInfo(void)
+{
+	std::string  path = ".\\levels.\\levelClearInfo.json";
+
+
+	Jsonclass file;
+	Json::Value root;
+
+
+	for (auto levelname : STATEMANAGER->vsLevelListandclear)
+	{
+		root[levelname.first] = levelname.second;
+
+
+
+	}
+
+	file.WriteFile(path, root);
+}
+
+void TE::LevelManager::LoadingLevelInfo(void)
+{
+
+	std::string  path = ".\\levels.\\levelClearInfo.json";
+
+
+
+	Jsonclass file;
+	std::string object = "Object";
+
+
+	file.ReadFile(path);
+	for (auto levelname : INGAMELOGIC->vsLevelList)
+	{
+		//vsLevelListandclear.push_back	
+
+		STATEMANAGER->vsLevelListandclear.push_back(std::pair<std::string, bool>(levelname, file.mRoot.get(levelname, false).asBool()));
+
+	}
 }
 
 

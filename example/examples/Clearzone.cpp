@@ -21,6 +21,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "StateManager.h"
 #include "SoundManager.h"
 #include "ParticleManager.h"
+#include "LevelManager.h"
 using namespace TE;
 static Object *player;
 static Object *obj;
@@ -77,7 +78,9 @@ for (auto Objects : FACTORY->ObjectIDMap)
 			APP-> b_Win = true;//	LevelInit.b_Win = true;
 							  //STATEMANAGER->b_Relplay = true;
 			STATEMANAGER->b_IsDelay = true;
-			
+			STATEMANAGER->vsLevelListandclear[STATEMANAGER->i_LevelSelect-1].second = false;
+
+			LEVELMANAGER->SavingLevelInfo();
 			/*PHYSICS->gravityScale = -20.f;
 			PHYSICS->GravityType = Gravity::y_Minus;
 			PHYSICS->gravity = glm::vec3(0, PHYSICS->gravityScale, 0);*/

@@ -16,13 +16,16 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include <string>
 #include <vector>
 namespace TE {
-	class LevelManager
+	class LevelManager 
 	{
 	public:
 		LevelManager();
 
+
 		void LoadLevel(std::string  path);
 		void SaveLevel(std::string  path);
+		void	 SavingLevelInfo(void);
+		void	LoadingLevelInfo(void);
 
 	};
 

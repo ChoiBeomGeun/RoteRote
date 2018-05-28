@@ -31,6 +31,18 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 const int LastLevelNumber = 10;
 using namespace TE;
 
+struct StringCompareLevel {
+
+	bool operator()(const std::string& a, const std::string& b)
+
+		const {
+
+		//return std::atoi(&a.at(5)) > std::atoi(&b.at(5));
+		return std::atoi(&a.at(5)) > std::atoi(&b.at(5));
+		//return true;
+	}
+};
+
 LevelSelect::LevelSelect()
 {
 
@@ -40,6 +52,20 @@ LevelSelect::~LevelSelect()
 {
 
 }
+
+void SavingLevelInfo(void) {
+
+
+	
+}
+void LoadingLevelInfo(void) {
+
+
+
+
+
+}
+
 
 /*
 Load texture & Initialize a value of texture to Levelpng[i]
@@ -60,12 +86,22 @@ void LevelSelect::Load()
 	}
 
 
+
+	std::sort(INGAMELOGIC->vsLevelList.begin(), INGAMELOGIC->vsLevelList.end(), StringCompareLevel());
+	std::reverse(INGAMELOGIC->vsLevelList.begin(), INGAMELOGIC->vsLevelList.end());
+	INGAMELOGIC->vsLevelList.erase(INGAMELOGIC->vsLevelList.begin());
+	INGAMELOGIC->vsLevelList.erase(INGAMELOGIC->vsLevelList.begin());
+
+	std::vector<std::string> temp = INGAMELOGIC->vsLevelList;
+
+	LEVELMANAGER->LoadingLevelInfo();
 	LEVELMANAGER->LoadLevel("selectlevel.json");
 
 	for (int i = 1; i <= LevelList::quit + 1; ++i)
 		Levelpng[i - 1] = FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("level" + NumberToString(i) + ".png");
 
 	LevelList = STATEMANAGER->i_LevelSelect - 1;
+	FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->depth = 1;
 }
 
 
@@ -81,6 +117,12 @@ void LevelSelect::Init()
 
 void LevelSelect::Update(float dt)
 {
+
+	if (STATEMANAGER->vsLevelListandclear[LevelList ].second == true)
+		FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("LevelSelectionLock.png");
+	else
+		FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("LevelSelction.png");
+
 	if (IsConfirmationOn) {
 		if (Input::IsTriggered(SDL_SCANCODE_Y))
 			ENGINE->Quit();
