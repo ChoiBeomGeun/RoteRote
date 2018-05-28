@@ -133,7 +133,7 @@ void MakeReplayerUI(void) {
 void SetReplayer(void) {
 	if (!replayer)
 		return;
-	replayCam.cameraSetting(CameraPosType::EN_BOUNDARY);
+	//replayCam.cameraSetting(CameraPosType::EN_BOUNDARY);
 
 	replayer->GetComponent<Transform>()->SetPosition(itor.front().Pos);
 	replayer->GetComponent<Animation>()->setFrame(itor.front().aniframe);

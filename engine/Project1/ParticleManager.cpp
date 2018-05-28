@@ -117,7 +117,11 @@ namespace TE {
 				InitBackgroundSystem(*emitterIT);
 			}
 			break;
-
+			case ET_SLIDING:
+			{
+				init_sliding_system(*emitterIT);
+			}
+			break;
 			}
 		}
 	}
@@ -159,8 +163,8 @@ namespace TE {
 			{
 				emitterTypeID = ET_BACKGROUND;
 			}
-			else if (emitterType == "ET_ROCKET")
-				emitterTypeID = ET_ROCKET;
+			else if (emitterType == "ET_SLIDING")
+				emitterTypeID = ET_SLIDING;
 			
 			float Xpos = file.mRoot.get(object + to_string(i), false).get("Position", false).get("x", false).asFloat();
 			float Ypos = file.mRoot.get(object + to_string(i), false).get("Position", false).get("y", false).asFloat();
@@ -336,24 +340,15 @@ namespace TE {
 					}
 				}
 				break;
-			case ET_ROCKET:
+			case ET_SLIDING:
 			{for (int i = 0; i < (*EIT)->capacity; ++i)
 			{
 				Particle & particle = (*EIT)->pParticles[i];
+				
 				//If scale of particle is 0
 				if (particle.scale <= 0)
 				{
-					//Get rotation of emitter using atan2
-					float rotation = atan2f((*EIT)->vel.y, (*EIT)->vel.x);
-					// Rotate that value by PI
-					rotation += TUMath::PI;
-					// Add a random rotation between + or PI/4
-					rotation += TUMath::GetRandomFloat(-TUMath::PI / 4, TUMath::PI / 4);
-					// Use rotation to calculate velocity x and y
-					particle.vel = { cosf(rotation), sinf(rotation), 0.0f };
-					//Scale velocity by random float
-					//between minTrailVel and maxTrailVel
-					particle.vel *= TUMath::GetRandomFloat(m_minTrailVel, m_maxTrailVel);
+				
 					//Set particle position to emitter position.
 					particle.pos = (*EIT)->pos;
 					//Set particle scale to random float
@@ -391,7 +386,7 @@ namespace TE {
 		case ET_BACKGROUND:
 			InitBackgroundSystem(pEmitter);
 			break;
-		case ET_ROCKET:
+		case ET_SLIDING:
 			InitBackgroundSystem(pEmitter);
 			break;
 		}
@@ -513,7 +508,7 @@ namespace TE {
 			pEmitter->pParticles[i].angle = static_cast<float>(rot(gen));
 		}
 	}
-	void ParticleManager::InitPlayerJetSystem(Emitter * pEmitter)
+	void ParticleManager::init_particle_system(Emitter * pEmitter)
 	{
 		for (int i = 0; i < pEmitter->capacity; ++i)
 		{
@@ -522,6 +517,23 @@ namespace TE {
 			pEmitter->pParticles[i].lifetime = 0;
 			pEmitter->pParticles[i].scale = 0;
 			pEmitter->pParticles[i].vel = glm::vec3(0);
+		}
+	}
+
+	void ParticleManager::init_sliding_system(Emitter* pEmitter)
+	{
+		for (int i = 0; i < pEmitter->capacity; ++i)
+		{
+			pEmitter->pParticles[i].pos = pEmitter->pos;
+			pEmitter->pParticles[i].angle = 0;
+			pEmitter->pParticles[i].lifetime = 0;
+			pEmitter->pParticles[i].scale = 0;
+			pEmitter->pParticles[i].vel = glm::vec3(0);
+			pEmitter->pParticles[i].color[0] = 0;
+			pEmitter->pParticles[i].color[1] = 0;
+			pEmitter->pParticles[i].color[2] = 0;
+			pEmitter->pParticles[i].color[3] = 0;
+
 		}
 	}
 }

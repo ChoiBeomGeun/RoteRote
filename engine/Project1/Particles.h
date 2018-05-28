@@ -29,7 +29,7 @@ namespace TE {
 		ET_EXPLOSION, //!< type of explosion
 		ET_TRAIL,      //!<  type of trail
 		ET_BACKGROUND, //!< type of Background
-		ET_ROCKET //!< player Exhaust
+		ET_SLIDING //!< player Exhaust
 	};
 
 	class Emitter : public Component //!< struct of Emitter

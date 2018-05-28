@@ -268,7 +268,7 @@ namespace TE {
 
 				if ((upblock.y - downblock.y) < APP->_screenHeight && (rightblock.x - leftblock.x) < APP->_screenWidth) // when wall boundaries are smaller than camera size
 				{
-
+						
 				}
 				else
 				{

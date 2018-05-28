@@ -329,6 +329,7 @@ void Level1::Update(float dt)
 
 	if (STATEMANAGER->b_IsReplay)
 	{
+		camAct.Update(dt);
 		static bool first = true;
 		if (STATEMANAGER->ReplayInit)
 		{

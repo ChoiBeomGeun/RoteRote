@@ -68,7 +68,8 @@ namespace TE {
 		void init_win_condition_system_system(Emitter* pEmitter);
 		void InitTrailSystem(Emitter* pEmitter);
 		void InitBackgroundSystem(Emitter* pEmitter);
-		void InitPlayerJetSystem(Emitter * pEmitter);
+		void init_particle_system(Emitter * pEmitter);
+		void init_sliding_system(Emitter * pEmitter);
 
 		//Emitter* m_pEmitters; //!< pointer of Emitter
 		int m_capacity;       //!< max amount of Emitter
