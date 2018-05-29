@@ -200,7 +200,7 @@ void Menu::Update(float dt)
 		{
 			p->isOn = true;
 			if (p->type == ET_SELECTION)
-				p->pos = FACTORY->ObjectIDMap[7]->GetComponent<Transform>()->position;
+				p->pos = glm::vec3(0,100,0);
 		}
 }
 

@@ -11,7 +11,7 @@
 		"Position" : 
 		{
 			"x" : 0.0,
-			"y" : 150.0,
+			"y" : 100.0,
 			"z" : 0.0
 		},
 		"Vel" : 
@@ -31,7 +31,7 @@
 		"EmitterSize" : 0,
 		"EmitterID" : 0,
 		"EmitterLifeTime" : 5,
-		"Emittercapacity" : 100,
+		"Emittercapacity" : 180,
 		"RenderMode" : 0
 	}
 }
