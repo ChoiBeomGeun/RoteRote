@@ -197,6 +197,7 @@ void Level1::Init()
 			p->pos = FACTORY->GetClearZone()->GetComponent<Transform>()->position;
 		}
 	}
+
 }
 
 void Level1::Update(float dt)

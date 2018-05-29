@@ -267,6 +267,7 @@ copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(T
     <ClInclude Include="MenuList.h" />
     <ClInclude Include="Option.h" />
     <ClInclude Include="Pause.h" />
+    <ClInclude Include="PauseList.h" />
     <ClInclude Include="ReplayLogic.h" />
     <ClInclude Include="splash.h" />
     <ClInclude Include="PlayerController.h" />

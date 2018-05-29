@@ -173,5 +173,8 @@
     <ClInclude Include="OptionList.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="PauseList.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

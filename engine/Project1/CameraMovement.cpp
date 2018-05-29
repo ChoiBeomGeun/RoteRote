@@ -399,7 +399,7 @@ namespace TE {
 			CAMERA->cameraPos = glm::vec3(0, 0, CameraPosz);
 			break;
 		case EN_Option:
-			CameraPosz = 675.f;
+			CameraPosz = 500.f;
 			CAMERA->cameraPos = glm::vec3(0, 0, CameraPosz);
 			break;
 		case End:

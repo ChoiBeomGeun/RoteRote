@@ -1,19 +1,22 @@
 /******************************************************************************/
 /*!
 \file   Pause.cpp
-\author Choi Beom Geun
-\par    email: o77151@gmail.com
+\author Kyungook.Park
+\par    email: qkrruddn6680@gmail.com
 \par    Class:GAM200
 \par    ThumbUp Engine
-\date   2017/11/29
+\date   2017/04/19
 
-Pause State for the game
-This states include ¡°back game¡±, ¡°Restart game¡±, ¡°Go to level Select¡±, ¡°How to play¡±
+Pause state source file
+There are ¡°go to level select state¡±, ¡°Pause state¡±, ¡°How to play state¡±
+¡°Quit the game¡±
 All content 2017 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/
 
+#pragma once
 #include "Pause.h"
+#include "SoundManager.h"
 #include <stdio.h>
 #include "Object.h"
 #include "Factory.h"
@@ -23,86 +26,25 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "Graphics.h"
 #include  "LevelManager.h"
 #include  "Timer.h"
-#include <glm/gtx/transform.hpp>
+#include "Application.h"
+#include "InGameLogic.h"
+#include "Archetype.h"
+#include "CameraMovement.h"
 #include "Trigger.h"
-#include "SoundManager.h"
 using namespace TE;
-Object * oBackbutton;
-Object * oRestartbutton;
-Object * oLevelbutton;
-Object * oQuitthegame;
-Object * oHUD;
-Object * oHowToPlay;
-Object * oconfirmation;
-Object * oHowToPlayIcon;
+//Object * ooHowToPlay2;
+//Object * ooConfirmation2;
+//
+//Object * ooCredits;
 
-unsigned int pmove;
-unsigned int pselect;
-//Object * oPauseHUD;
-glm::vec3 Vec3Buttonscale = glm::vec3(.2f, .2f, 0);
-//glm::vec3 Vec3buttonPostion = glm::vec3(CAMERA->cameraPos.x, CAMERA->cameraPos.y, CAMERA->cameraUp.z);
-glm::vec3 Vec3buttonPostion = glm::vec3(-.85f, .1f, 0);
-int pauseindex = 0;
-void ReStartgame(void);
-void LevelSelect(void);
-void Backgame(void);
-void Quitgame(void);
-void HowToPlay(void);
-bool oExitornot = false;
-bool HowTOplay = false;
- void(*pausefunction[5])(void) = { Backgame,ReStartgame,LevelSelect ,Quitgame,HowToPlay };
-void ReStartgame(void)
-{
-	
-	STATEMANAGER->b_IsReplay = false;
-	STATEMANAGER->b_Relplay = false;
-	STATEMANAGER->b_IsPauseFirst = true;
-	CAMERA->cameraUp.x = 0;
-	CAMERA->cameraUp.y = 1;
-	TRIGGERLOGIC->InitDegree();
-
-	STATEMANAGER->Restart();
-}
-
-void LevelSelect(void)
-{
-
-	STATEMANAGER->b_IsReplay = false;
-	STATEMANAGER->b_Relplay = false;
-	STATEMANAGER->b_IsPauseFirst = true;
-	CAMERA->cameraUp.x = 0;
-	CAMERA->cameraUp.y = 1;
-	TRIGGERLOGIC->InitDegree();
-	STATEMANAGER->PauseReturn();
-	STATEMANAGER->MoveState(3);
-}
-
-void Backgame(void)
-{
-	
-	
-	STATEMANAGER->PauseReturn();
-}
-void Quitgame(void)
-{
-
-
-	oconfirmation = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(1.5, 0.7, 0));
-	oconfirmation->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Sure.png");
-
-	oExitornot = true;
-}
-
-
-void HowToPlay(void)
-{
-
-
-	oHowToPlay = FACTORY->CreateHUD(glm::vec3(0, 0,0), glm::vec3(2, 1.5, 0));
-	oHowToPlay->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("howtoplay.png");
-
-	HowTOplay = true;
-}
+Object * frame =nullptr;
+Object * textIndicator = nullptr;
+Object * iconRestart= nullptr;
+Object * iconHowToPlay= nullptr;
+Object * iconExit=nullptr;
+Object * iconLevelSelect=nullptr;
+Object * oHowToPlay = nullptr;
+bool  HowTOplay = false;
 Pause::Pause()
 {
 
@@ -114,169 +56,317 @@ Pause::~Pause()
 
 void Pause::Load()
 {
-	pmove = TE::SOUNDMANAGER->LoadSound("menumove.mp3");
-	pselect = TE::SOUNDMANAGER->LoadSound("menuselect.mp3");
-	
-}
+	frame = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(0.8, 1, 0));
+	textIndicator = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(0.5, 0.5, 0));
+	iconRestart = FACTORY->CreateHUD(glm::vec3(0.4, 0, 0), glm::vec3(0.1, 0.1, 0));
+	iconHowToPlay = FACTORY->CreateHUD(glm::vec3(0, 0.4, 0), glm::vec3(0.1, 0.1, 0));
+	iconExit = FACTORY->CreateHUD(glm::vec3(0, -0.4, 0), glm::vec3(0.1, 0.1, 0));
+	iconLevelSelect = FACTORY->CreateHUD(glm::vec3(-0.4, 0, 0), glm::vec3(0.1, 0.1, 0));
 
+	 
+	frame->GetComponent<Sprite>()->depth = 1;
+	textIndicator->GetComponent<Sprite>()->depth = 2;
+	//LEVELMANAGER->LoadLevel("Pause.json");
+	PauseSound = SOUNDMANAGER->LoadSound("Menu.mp3");
+	MoveSound = SOUNDMANAGER->LoadSound("Menumove.mp3");
+	SelectSound = SOUNDMANAGER->LoadSound("Menuselect.mp3");
+
+
+	frame->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("LevelSelction.png");
+	textIndicator->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Quit.png");
+
+
+	frame->GetComponent<Sprite>()->isRotating = true; 
+	textIndicator->GetComponent<Sprite>()->isRotating = true;
+	iconRestart->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("question.png");
+	iconExit->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("quit.png");
+	iconHowToPlay->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Pause_restarticon.png");
+	iconLevelSelect->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Pause_levelselecticon.png");
+}
 
 void Pause::Init()
 {
-	
-	SOUNDMANAGER->PauseAllSound();
-
-	oBackbutton = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion.x, Vec3buttonPostion.y + .3f, Vec3buttonPostion.z), Vec3Buttonscale);
-	oBackbutton->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("back.png");
-	oRestartbutton = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion.x, Vec3buttonPostion.y, Vec3buttonPostion.z), Vec3Buttonscale);
-	oRestartbutton->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("retry.png");
-	oLevelbutton = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion.x, Vec3buttonPostion.y - .3f, Vec3buttonPostion.z), Vec3Buttonscale);
-	oLevelbutton->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("levelselect.png");
-	oQuitthegame = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion.x, Vec3buttonPostion.y - .6f, Vec3buttonPostion.z), Vec3Buttonscale);
-	oQuitthegame->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("pausebox.png");
-	oHUD = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion.x, Vec3buttonPostion.y-.1f, Vec3buttonPostion.z), glm::vec3(0.8,2,0));
-	oHUD->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("pausehud.png");
-	oHowToPlayIcon = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion.x, Vec3buttonPostion.y-.9f, Vec3buttonPostion.z), Vec3Buttonscale);
-	oHowToPlayIcon->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("questionbox.png");
-
-	PauseCam.cameraSetting(CameraPosType::EN_BOUNDARY);
+	CreditsIsON = false;
+	rotation_radius = 0.4f;
+	Selection = PauseList::Pause_Restart;
+	delta_angle = 90;
+	LeftRotate = false;
+	RightRotate = false;
+	IsRotating = false;
+	IsTextChanged = false;
+	IsSelected = false;
+	selection_angle = 0;
+	select_index = 0;
+//	PauseCam.cameraSetting(CameraPosType::EN_Option);
+	SOUNDMANAGER->PlaySounds(PauseSound, true);
 }
 
 void Pause::Update(float dt)
 {
-	PauseCam.Update(dt);
-	if (oBackbutton->GetComponent<Transform>()->position.x <= -.7f)
-	{
-		
-		oBackbutton->GetComponent<Transform>()->position.x += 0.02f;
-		oRestartbutton->GetComponent<Transform>()->position.x += 0.02f;
-		oLevelbutton->GetComponent<Transform>()->position.x += 0.02f;
-		oQuitthegame->GetComponent<Transform>()->position.x += 0.02f;
-		oHowToPlayIcon->GetComponent<Transform>()->position.x += 0.02f;
-		oHUD->GetComponent<Transform>()->position.x += 0.02f;
-	}
-	if (!HowTOplay && !oExitornot) {
-		if (Input::IsTriggered(SDL_SCANCODE_DOWN ))
-			if (pauseindex <= 4)
-			{
-				SOUNDMANAGER->PlaySounds(pmove,false);
-				pauseindex++;
-				if (pauseindex == 5)
-					pauseindex = 0;
-			}
-
-		if (Input::IsTriggered(SDL_SCANCODE_UP))
-			if (pauseindex >= 0)
-			{
-				SOUNDMANAGER->PlaySounds(pmove, false);
-				pauseindex--;
-				if (pauseindex == -1)
-					pauseindex = 4;
-			}
-	}
-	switch (pauseindex)
-	{
-	case 1:
-		oRestartbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 0,255);
-		oBackbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		oLevelbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		oQuitthegame->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		oHowToPlayIcon->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		break;
-	case 0:
-		oBackbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
-		oRestartbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		oLevelbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		oQuitthegame->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		oHowToPlayIcon->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		break;
-	case 2:
-		oLevelbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
-		oRestartbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		oBackbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		oQuitthegame->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		oHowToPlayIcon->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		break;
-	case 3:
-		oLevelbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		oRestartbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		oBackbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		oQuitthegame->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
-		oHowToPlayIcon->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		break;
-	case 4:
-		oLevelbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		oRestartbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		oBackbutton->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		oQuitthegame->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
-		oHowToPlayIcon->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
-		break;
-	}
-	if (!HowTOplay && !oExitornot) {
-		if (Input::IsTriggered(SDL_SCANCODE_SPACE) || Input::IsTriggered(SDL_SCANCODE_RETURN)) {
-			SOUNDMANAGER->PlaySounds(pselect, false);
-			pausefunction[pauseindex]();
-		}
-
-	}
-	if (oExitornot) {
-
-		if (Input::IsTriggered(SDL_SCANCODE_Y))
-		{
-			SOUNDMANAGER->PlaySounds(pselect, false);
-			ENGINE->Quit();
-		}
-		if (Input::IsTriggered(SDL_SCANCODE_N)) {
-			SOUNDMANAGER->PlaySounds(pselect, false);
-			oExitornot = false;
-			FACTORY->Destroy(oconfirmation);
-		}
-	}
-	if (oExitornot) {
-
-
-		if (Input::IsTriggered(SDL_SCANCODE_ESCAPE)) {
-
-			SOUNDMANAGER->PlaySounds(pselect, false);
-			oExitornot = false;
-			FACTORY->Destroy(oconfirmation);
-		
-		}
-	}
 	if (HowTOplay) {
 
 
 		if (Input::IsTriggered(SDL_SCANCODE_ESCAPE)) {
-			SOUNDMANAGER->PlaySounds(pselect, false);
+			SOUNDMANAGER->PlaySounds(SelectSound, false);
 			HowTOplay = false;
 			FACTORY->Destroy(oHowToPlay);
 		}
 	}
-	PauseCam.Update(dt);
+
+
+	for(auto obj : FACTORY->ObjectIDMap)
+	{
+
+		if (obj.second == frame ||
+			obj.second == textIndicator ||
+			obj.second == iconHowToPlay ||
+			obj.second == iconExit ||
+			obj.second == iconLevelSelect ||
+			obj.second == iconRestart ||
+			obj.second == obj_confirmationPause ||
+			obj.second == oHowToPlay
+		)
+			continue;
+		obj.second->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 100);
+
+	}
+
+	if (!HowTOplay) {
+
+		if (ConfirmationIsOn) {
+			if (Input::IsTriggered(SDL_SCANCODE_Y))
+				ENGINE->Quit();
+			if (Input::IsTriggered(SDL_SCANCODE_N) || Input::IsTriggered(SDL_SCANCODE_ESCAPE))
+			{
+				ConfirmationIsOn = false;
+				FACTORY->Destroy(obj_confirmationPause);
+				return;
+			}
+		}
+		if (ConfirmationIsOn)
+			return;
+
+
+
+		IsSelected = false;
+		if (frame->GetComponent<Transform>()->angle == 360.f || frame->GetComponent<Transform>()->angle == -360.f)
+		{
+			frame->GetComponent<Transform>()->angle = 0.f;
+			delta_angle = 0;
+			select_index = 0;
+		}
+		PauseCam.Update(dt);
+
+		if (IsRotating) {
+			DeltaAngle();
+
+			//for (int i = 1; i < 5; ++i) {
+
+			//	FACTORY->ObjectIDMap[i]->GetComponent<Transform>()->position.x = cos(TUMath::DegreeToRadian(frame->GetComponent<Transform>()->angle + (i) * 90)) * rotation_radius;
+			//	FACTORY->ObjectIDMap[i]->GetComponent<Transform>()->position.y = sin(TUMath::DegreeToRadian(frame->GetComponent<Transform>()->angle + (i) * 90)) * rotation_radius;
+
+			iconHowToPlay->GetComponent<Transform>()->position.x = cos(TUMath::DegreeToRadian(frame->GetComponent<Transform>()->angle + (1) * 90)) * rotation_radius;
+			iconHowToPlay->GetComponent<Transform>()->position.y = sin(TUMath::DegreeToRadian(frame->GetComponent<Transform>()->angle + (1) * 90)) * rotation_radius;
+			iconLevelSelect->GetComponent<Transform>()->position.x = cos(TUMath::DegreeToRadian(frame->GetComponent<Transform>()->angle + (2) * 90)) * rotation_radius;
+			iconLevelSelect->GetComponent<Transform>()->position.y = sin(TUMath::DegreeToRadian(frame->GetComponent<Transform>()->angle + (2) * 90)) * rotation_radius;
+			iconExit->GetComponent<Transform>()->position.x = cos(TUMath::DegreeToRadian(frame->GetComponent<Transform>()->angle + (3) * 90)) * rotation_radius;
+			iconExit->GetComponent<Transform>()->position.y = sin(TUMath::DegreeToRadian(frame->GetComponent<Transform>()->angle + (3) * 90)) * rotation_radius;
+			iconRestart->GetComponent<Transform>()->position.x = cos(TUMath::DegreeToRadian(frame->GetComponent<Transform>()->angle + (4) * 90)) * rotation_radius;
+			iconRestart->GetComponent<Transform>()->position.y = sin(TUMath::DegreeToRadian(frame->GetComponent<Transform>()->angle + (4) * 90)) * rotation_radius;
+			//}
+		}
+		else
+		{
+			delta_angle = frame->GetComponent<Transform>()->angle;
+			IsTextChanged = false;
+			Selection_Text();
+		}
+
+		if (!IsSelected && !IsRotating)
+			if (Input::IsTriggered(SDL_SCANCODE_SPACE) || Input::IsTriggered(SDL_SCANCODE_RETURN))
+			{
+				SOUNDMANAGER->PlaySounds(SelectSound, false);
+				IsSelected = true;
+			}
+		if (IsSelected)
+		{
+			switch (Selection)
+			{
+			case PauseList::Pause_Restart:
+				STATEMANAGER->Restart();
+
+
+				break;
+			case PauseList::Pause_Exit:
+				STATEMANAGER->b_IsReplay = false;
+				STATEMANAGER->b_Relplay = false;
+				STATEMANAGER->b_IsPauseFirst = true;
+				CAMERA->cameraUp.x = 0;
+				CAMERA->cameraUp.y = 1;
+				TRIGGERLOGIC->InitDegree();
+				STATEMANAGER->PauseReturn();
+				STATEMANAGER->MoveState(3);
+				return;
+				break;
+			case PauseList::Pause_HowToPlay:
+
+				obj_confirmationPause = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(1.5, 0.7, 0));
+				obj_confirmationPause->GetComponent<Sprite>()->depth = 3;
+				obj_confirmationPause->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Sure.png");
+				ConfirmationIsOn = true;
+				return;
+				break;
+
+			case PauseList::Pause_LevelSelect:
+			{
+				oHowToPlay = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(2, 1.5, 0));
+				oHowToPlay->GetComponent<Sprite>()->depth =5;
+				oHowToPlay->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("howtoplay.png");
+
+				HowTOplay = true;
+
+			}
+			}
+		}
+
+
+		if (!LeftRotate && !IsRotating && !IsTextChanged)
+			if (Input::IsPressed(SDL_SCANCODE_LEFT)) {
+				LeftRotate = true;
+				IsRotating = true;
+				++select_index;
+				Selection_plus();
+				IsTextChanged = true;
+
+				SOUNDMANAGER->PlaySounds(MoveSound, false);
+			}
+			else if (!RightRotate && !IsRotating && !IsTextChanged)
+				if (Input::IsPressed(SDL_SCANCODE_RIGHT)) {
+					RightRotate = true;
+					IsRotating = true;
+					--select_index;
+					Selection_minus();
+					IsTextChanged = true;
+
+					SOUNDMANAGER->PlaySounds(MoveSound, false);
+				}
+
+		if (LeftRotate)
+		{
+			if (IsRotating) {
+
+				frame->GetComponent<Transform>()->angle += 250 * dt;
+
+			}
+			else
+				LeftRotate = false;
+		}
+		else if (RightRotate)
+		{
+			if (IsRotating)
+				frame->GetComponent<Transform>()->angle -= 250 * dt;
+			else
+				RightRotate = false;
+		}
+
+	}
+
+
 }
+
+
+
 
 void Pause::Free(void)
 {
-	pauseindex = 0;
-	SOUNDMANAGER->ResumeAllSound();
-	if (oBackbutton)
-		FACTORY->Destroy(oBackbutton);
-	if (oRestartbutton)
-		FACTORY->Destroy(oRestartbutton);
-	if (oLevelbutton)
-		FACTORY->Destroy(oLevelbutton);
-	if (oQuitthegame)
-		FACTORY->Destroy(oQuitthegame);
-	if (oHUD)
-		FACTORY->Destroy(oHUD);
-	if (oconfirmation)
-		FACTORY->Destroy(oconfirmation);
-	if (oHowToPlayIcon)
-		FACTORY->Destroy(oHowToPlayIcon);
-//	SOUNDMANAGER->DeleteSounds();
-}
+	if(frame)
+	FACTORY->Destroy(frame);
+	if (textIndicator)
+	FACTORY->Destroy(textIndicator);
+	if (iconRestart)
+	FACTORY->Destroy(iconRestart);
+	if (iconHowToPlay)
+	FACTORY->Destroy(iconHowToPlay);
+	if (iconExit)
+	FACTORY->Destroy(iconExit);
+	if (iconLevelSelect)
+	FACTORY->Destroy(iconLevelSelect);
+	if (oHowToPlay)
+	FACTORY->Destroy(oHowToPlay);
 
+
+	for (auto obj : FACTORY->ObjectIDMap)
+	{
+		obj.second->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+
+	}
+}
 
 void Pause::Unload()
 {
+}
 
+void Pause::DeltaAngle(void)
+{
+	if (abs(frame->GetComponent<Transform>()->angle - delta_angle) >= 90)
+	{
+		IsRotating = false;
+		delta_angle = frame->GetComponent<Transform>()->angle;
+		if (delta_angle > 0)
+			frame->GetComponent<Transform>()->angle = 90 * float(select_index);
+
+		if (delta_angle < 0)
+			frame->GetComponent<Transform>()->angle = -90 * float(abs(select_index));
+	}
+}
+
+void Pause::Selection_plus(void)
+{
+	switch (Selection)
+	{
+	case PauseList::Pause_Restart:  Selection = PauseList::Pause_LevelSelect; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Pause_Exit.png");
+		break;
+	case PauseList::Pause_LevelSelect: Selection = PauseList::Pause_HowToPlay;	//FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Pause_HowToPlay.png");
+		break;
+	case PauseList::Pause_HowToPlay: Selection = PauseList::Pause_Exit; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Pause_LevelSelect.png");
+		break;
+	case PauseList::Pause_Exit: Selection = PauseList::Pause_Restart; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Pause_Restart.png");
+		break;
+	default:
+		break;
+	}
+}
+
+void Pause::Selection_minus(void)
+{
+	switch (Selection)
+	{
+	case PauseList::Pause_LevelSelect: Selection = PauseList::Pause_Restart;
+		break;
+	case PauseList::Pause_HowToPlay: Selection = PauseList::Pause_LevelSelect;
+		break;
+	case PauseList::Pause_Exit:Selection = PauseList::Pause_HowToPlay;
+		break;
+	case PauseList::Pause_Restart: Selection = PauseList::Pause_Exit;
+		break;
+	default:
+		break;
+	}
+}
+
+void Pause::Selection_Text(void)
+{
+	switch (Selection)
+	{
+	case PauseList::Pause_LevelSelect: textIndicator->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_HowToPlay.png");
+		break;
+	case PauseList::Pause_HowToPlay: textIndicator->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Quit.png");
+		break; 
+	case PauseList::Pause_Exit: textIndicator->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Pause_levelseclect.png");
+		break; 
+	case PauseList::Pause_Restart: textIndicator->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Pause_Restart.png");
+		break;
+	default:
+		break;
+	}
 }

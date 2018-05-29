@@ -364,7 +364,9 @@ Object * TE::ObjectFactory::CreateHUD(const glm::vec3 & pos, const glm::vec3 & s
 	Hud->GetComponent<Sprite>()->isPerspective = false;
 	//sprite->isFlipY = false;
 	Hud->GetComponent<Sprite>()->depth = 1.0f;
-	Hud->GetComponent<Sprite>()->m_TextureID = 5;
+	Hud->GetComponent<Sprite>()->isRotating = false;
+
+	/*Hud->GetComponent<Sprite>()->m_TextureID = 5;*/
 	Hud->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
 
 //	Hud->AddComponent(sprite);

@@ -95,7 +95,7 @@ void MakeReplayerUI(void) {
 	SOUNDMANAGER->DeleteSounds();
 	FACTORY->DestroyAllObjects();
 
-
+	
 
 	LEVELMANAGER->LoadLevel(STATEMANAGER->Loadtolevelname);
 
@@ -129,6 +129,15 @@ void MakeReplayerUI(void) {
 	SOUNDMANAGER->PlaySounds(rlwin, false);
 	STATEMANAGER->vsLevelListandclear[STATEMANAGER->i_LevelSelect - 1 +1].second = false;
 	LEVELMANAGER->SavingLevelInfo();
+	for (auto p : PARTICLEMANAGER->m_EmitterList)
+	{
+		p->isOn = true;
+		if (p->type == ET_EXPLOSION)
+		{
+			p->isOn = false;
+			p->pos = FACTORY->GetClearZone()->GetComponent<Transform>()->position;
+		}
+	}
 }
 
 void SetReplayer(void) {
@@ -158,6 +167,25 @@ void SetReplayer(void) {
 		ReeplayImage = FACTORY->CreateHUD(glm::vec3(0, 0, Vec3buttonPostion3.z), glm::vec3(2, 2, 0));
 		ReeplayImage->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("replay.png");
 		replayer = FACTORY->GetPlayer();
+
+
+		for (auto p : PARTICLEMANAGER->m_EmitterList)
+		{
+			if (p->type == ET_EXPLOSION)
+			{
+				p->isOn = false;
+			}
+		}
+
+		for (auto p : PARTICLEMANAGER->m_EmitterList)
+		{
+			p->isOn = true;
+			if (p->type == ET_EXPLOSION)
+			{
+				p->isOn = false;
+				p->pos = FACTORY->GetClearZone()->GetComponent<Transform>()->position;
+			}
+		}
 		CAMERA->cameraUp.x = 0;
 		CAMERA->cameraUp.y = 1;
 		PHYSICS->gravityScale = -20.f;
@@ -255,5 +283,6 @@ void FreeReplayer(void) {
 	STATEMANAGER->b_Relplay = false;
 	STATEMANAGER->ReplayInit = true;
 	STATEMANAGER->b_IsGameLevel = true;
+
 	//	STATEMANAGER->Replayerinfo.clear();
 }
