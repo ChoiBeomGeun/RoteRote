@@ -130,7 +130,9 @@ namespace TE {
 	{
 
 		
-		std::string loadParticle = path;
+		std::string loadParticle = ".\\Emitters.\\";
+		loadParticle+= path;
+		
 	/*	#ifdef _DEBUG
 		
 		#else
@@ -209,6 +211,7 @@ namespace TE {
 					pobject->GetComponent<Emitter>()->isOn = false;
 					pobject->GetComponent<Emitter>()->SetEmitter(pobject->GetComponent<Transform>()->position, t_Vel, emittersize, capacity, emitterlifeTime, (EmitterType)emitterTypeID,pobject->GetComponent<Emitter>()->m_particlePath);
 					pobject->GetComponent<Emitter>()->SetTexture(pobject->GetComponent<Sprite>()->m_TextureID);
+					pobject->GetComponent<Emitter>()->m_particlePath = path;
 					pobject->GetComponent<Emitter>()->CreateParticle();
 
 					for (int j = 0; j < pobject->GetComponent<Emitter>()->capacity; ++j)
@@ -242,135 +245,138 @@ namespace TE {
 	{
 		std::vector<Emitter*>::iterator EIT = m_EmitterList.begin();
 		if(!m_EmitterList.empty())
-		while(EIT != m_EmitterList.end())
-		{
-			if((*EIT)->pParticles)
-			switch ((*EIT)->type)
+			while (EIT != m_EmitterList.end())
 			{
-
-			case ET_EXPLOSION:
-			{
-
-				for (int i = 0; i < (*EIT)->capacity; ++i)
+				if ((*EIT)->pParticles)
 				{
-					Particle& particle = (*EIT)->pParticles[i];
-
-					//Update particle position based on velocity and dt
-					particle.pos += (particle.vel * dt);
-					//Update particle position based on velocity and dt
-					particle.scale -= m_scaleFactor * dt;
-					//Clamp particle scale to 0 and maxExpScale
-					if (particle.scale <= 0)
-						particle.scale = 0;
-				}
-				//Update emitter lifetime based on dt
-				(*EIT)->lifeTime += dt;
-				//If lifetime is greater than expLife delete this emitter
-				if ((*EIT)->lifeTime >= m_expLife)
-				{
-					(*EIT)->lifeTime = 0.0f;
-					float rotation = 0.0f;
-					for (int i = 0; i < (*EIT)->capacity; ++i)
+					switch ((*EIT)->type)
 					{
-						// set position of particle to emitter
-						(*EIT)->pParticles[i].pos = (*EIT)->pos;
-						// set rotation with random
-						rotation = TUMath::GetRandomFloat(0, TUMath::TWO_PI);
-						// Then Get a random rotation between 0 and 2PI
-						// and set the velocity x and y based on the rotation.
-						(*EIT)->pParticles[i].vel = { cosf(rotation), sinf(rotation) , 0.0f };
-						(*EIT)->pParticles[i].vel
-							*= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);;
-						(*EIT)->pParticles[i].scale
-							= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
 
-					}
-				}
-			}
-			break;
-
-			case ET_TRAIL:
-			{
-				for (int i = 0; i < (*EIT)->capacity; ++i)
-				{
-					Particle& particle = (*EIT)->pParticles[i];
-					//If scale of particle is 0
-					if (particle.scale <= 0)
+					case ET_EXPLOSION:
 					{
-						//Set particle position to emitter position.
-						particle.pos = (*EIT)->pos;
-						//Set particle scale to random float
-						//between minTrailScale and maxTrailScale
-						particle.scale
-							= TUMath::GetRandomFloat(m_minTrailScale, m_maxTrailScale);
-					}
-					//Update particle scale based on scaleFactor and dt
-					particle.scale -= m_scaleFactor * dt;
-					//Clamp particle scale to 0 and maxTrailScale
-					//TUMath::Clamp(particle.scale, 0, m_maxTrailScale);
-				}
-				break;
-			}
-			case ET_BACKGROUND:
-				for (int i = 0; i < (*EIT)->capacity; ++i)
-				{
-					Particle& particle = (*EIT)->pParticles[i];
-					particle.lifetime += dt;
-					auto sizefactor = rand() % 2;
-					if (sizefactor == 0)
-						sizefactor = -1;
 
-					if (particle.lifetime >= m_maxBackLifeTime)
-					{
-						if (particle.scale >= m_maxExpScale)
+						for (int i = 0; i < (*EIT)->capacity; ++i)
 						{
-							particle.scale = 0.0f;
-							particle.lifetime = 0.0f;
-							particle.scale = TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
-							break;
-						}
-						else if (particle.scale < m_minExpScale)
-						{
-							particle.scale = 0.0f;
-							particle.lifetime = 0.0f;
-							particle.scale = TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
-							break;
-						}
+							Particle& particle = (*EIT)->pParticles[i];
 
+							//Update particle position based on velocity and dt
+							particle.pos += (particle.vel * dt);
+							//Update particle position based on velocity and dt
+							particle.scale -= m_scaleFactor * dt;
+							//Clamp particle scale to 0 and maxExpScale
+							if (particle.scale <= 0)
+								particle.scale = 0;
+						}
+						//Update emitter lifetime based on dt
+						(*EIT)->lifeTime += dt;
+						//If lifetime is greater than expLife delete this emitter
+						if ((*EIT)->lifeTime >= m_expLife)
+						{
+							(*EIT)->lifeTime = 0.0f;
+							float rotation = 0.0f;
+							for (int i = 0; i < (*EIT)->capacity; ++i)
+							{
+								// set position of particle to emitter
+								(*EIT)->pParticles[i].pos = (*EIT)->pos;
+								// set rotation with random
+								rotation = TUMath::GetRandomFloat(0, TUMath::TWO_PI);
+								// Then Get a random rotation between 0 and 2PI
+								// and set the velocity x and y based on the rotation.
+								(*EIT)->pParticles[i].vel = { cosf(rotation), sinf(rotation) , 0.0f };
+								(*EIT)->pParticles[i].vel
+									*= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);;
+								(*EIT)->pParticles[i].scale
+									= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
+
+							}
+						}
 					}
+					break;
+
+					case ET_TRAIL:
+					{
+						for (int i = 0; i < (*EIT)->capacity; ++i)
+						{
+							Particle& particle = (*EIT)->pParticles[i];
+							//If scale of particle is 0
+							if (particle.scale <= 0)
+							{
+								//Set particle position to emitter position.
+								particle.pos = (*EIT)->pos;
+								//Set particle scale to random float
+								//between minTrailScale and maxTrailScale
+								particle.scale
+									= TUMath::GetRandomFloat(m_minTrailScale, m_maxTrailScale);
+							}
+							//Update particle scale based on scaleFactor and dt
+							particle.scale -= m_scaleFactor * dt;
+							//Clamp particle scale to 0 and maxTrailScale
+							//TUMath::Clamp(particle.scale, 0, m_maxTrailScale);
+						}
+						break;
+					}
+					case ET_BACKGROUND:
+						for (int i = 0; i < (*EIT)->capacity; ++i)
+						{
+							Particle& particle = (*EIT)->pParticles[i];
+							particle.lifetime += dt;
+							auto sizefactor = rand() % 2;
+							if (sizefactor == 0)
+								sizefactor = -1;
+
+							if (particle.lifetime >= m_maxBackLifeTime)
+							{
+								if (particle.scale >= m_maxExpScale)
+								{
+									particle.scale = 0.0f;
+									particle.lifetime = 0.0f;
+									particle.scale = TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
+									break;
+								}
+								else if (particle.scale < m_minExpScale)
+								{
+									particle.scale = 0.0f;
+									particle.lifetime = 0.0f;
+									particle.scale = TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
+									break;
+								}
+
+							}
+						}
+						break;
+					case ET_SLIDING:
+					{
+						for (int i = 0; i < (*EIT)->capacity; ++i)
+						{
+							Particle & particle = (*EIT)->pParticles[i];
+
+							//If scale of particle is 0
+							if (particle.scale <= 0)
+							{
+
+								//Set particle position to emitter position.
+								particle.pos = (*EIT)->pos;
+								//Set particle scale to random float
+								//between minTrailScale and maxTrailScale
+								particle.scale
+									= TUMath::GetRandomFloat(m_minTrailScale, m_maxTrailScale);
+							}
+							//For every particle
+							//Update particle position based on velocity and dt
+							//	particle.pos += particle.vel * dt;
+							//particle.pos += (*emitterIT)->vel * dt;
+							//Update particle scale based on scaleFactor and dt
+							particle.scale -= m_scaleFactor * dt;
+							//Clamp particle scale to 0 and maxTrailScale
+							TUMath::Clamp(particle.scale, 0, m_maxTrailScale);
+						}
+						break;
+					}
+					}
+
+					++EIT;
 				}
-				break;
-			case ET_SLIDING:
-			{for (int i = 0; i < (*EIT)->capacity; ++i)
-			{
-				Particle & particle = (*EIT)->pParticles[i];
-				
-				//If scale of particle is 0
-				if (particle.scale <= 0)
-				{
-				
-					//Set particle position to emitter position.
-					particle.pos = (*EIT)->pos;
-					//Set particle scale to random float
-					//between minTrailScale and maxTrailScale
-					particle.scale
-						= TUMath::GetRandomFloat(m_minTrailScale, m_maxTrailScale);
-				}
-				//For every particle
-				//Update particle position based on velocity and dt
-				//	particle.pos += particle.vel * dt;
-				//particle.pos += (*emitterIT)->vel * dt;
-				//Update particle scale based on scaleFactor and dt
-				particle.scale -= m_scaleFactor * dt;
-				//Clamp particle scale to 0 and maxTrailScale
-				TUMath::Clamp(particle.scale, 0, m_maxTrailScale);
 			}
-			break;
-			}
-			}
-			
-			++EIT;
-		}
 	}
 
 	void ParticleManager::AddEmitter(Emitter* pEmitter)
@@ -466,10 +472,11 @@ namespace TE {
 		for (int i = 0; i < pEmitter->capacity; ++i)
 		{
 			pEmitter->pParticles[i].scale = 0;
-			/*pEmitter->pParticles[i].color[0] = 255 / 255.f;
-			pEmitter->pParticles[i].color[1] = 0 / 255.f;
-			pEmitter->pParticles[i].color[2] = 128 / 255.f;
-			pEmitter->pParticles[i].color[3] = 255 / 255.f;*/
+			pEmitter->pParticles[i].pos = glm::vec3(0);
+			pEmitter->pParticles[i].color[0] = 255 / 255.f;
+			pEmitter->pParticles[i].color[1] = 255 / 255.f;
+			pEmitter->pParticles[i].color[2] = 255 / 255.f;
+			pEmitter->pParticles[i].color[3] = 255 / 255.f;
 			pEmitter->pParticles[i].lifetime = 0.0f;
 			pEmitter->pParticles[i].angle = 0.f;
 		}

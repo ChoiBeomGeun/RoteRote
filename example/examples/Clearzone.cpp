@@ -50,7 +50,7 @@ void ClearzoneLogic::Initialize()
 	obj = GetClearzone();
 	clearparticle = FACTORY->CreateHUD(obj->GetComponent<Transform>()->position, obj->GetComponent<Transform>()->scale);
 	clearparticle->GetComponent<Sprite>()->isPerspective = true;
-	PARTICLEMANAGER->LoadEmitter(clearparticle, ".\\Emitters.\\finish.json");
+	PARTICLEMANAGER->LoadEmitter(clearparticle, "finish.json");
  }
 
 

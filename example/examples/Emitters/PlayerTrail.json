@@ -22,10 +22,10 @@
 		},
 		"Color" : 
 		{
-			"r" : 255.0,
-			"g" : 255.0,
-			"b" : 255.0,
-			"a" : 255.0
+			"r" : 0.0,
+			"g" : 0.0,
+			"b" : 0.0,
+			"a" : 0.0
 		},
 		"TextureDir" : "basicParticle.png",
 		"EmitterSize" : 0,

@@ -69,6 +69,7 @@ Object * player;
 Object * Movingtest;
 
 Object * dust_particle;
+Object * trail_particle;
 Level1::Level1()
 {
 	//   _centerOfScreen = { 0.f ,0.f };
@@ -158,28 +159,7 @@ void Level1::Init()
 	CAMERA->CenterOfCamera.y = FACTORY->DownBoundary()->GetComponent<Transform>()->position.y + (FACTORY->UpBoundary()->GetComponent<Transform>()->position.y - FACTORY->DownBoundary()->GetComponent<Transform>()->position.y)*.5f;
 	glm::vec2(CAMERA->cameraPos) = CAMERA->CenterOfCamera;
 	STATEMANAGER->IsDrawing = false;
-	//CAMERA->lookatMap(false); 
-
-
-//	camerObj = FACTORY->CreateArchetype(ReadingArchetype("Button.json"));
-//	camerObj->objectstyle = Objectstyle::Camera;
-
-	/////////////////////////////////////////////////// Loading Delay Function
-	//movingToCenter = false;
-	//static float loadingtimer = 3;
-
-	//while(loadingtimer >0)
-	//{6
-	//	
-	//	loadingtimer -= Timer::GetDelta();
-	//	
-
-	//}
-	//loadingtimer = 3;
-	//Delete Loading Image
-	//Loading->IsLoadingObject = false;
-	//FACTORY->Destroy(Loading);
-	/////////////////////////////////////////////////////
+	
 	
 
 	static float loadingtimer = 0.1f;
@@ -200,6 +180,14 @@ void Level1::Init()
 
 	background_trsparent = 140.f;
 	loadbackground();
+
+	/*dust_particle = FACTORY->CreateHUD(player->GetComponent<Transform>()->position, player->GetComponent<Transform>()->scale);
+	dust_particle->GetComponent<Sprite>()->isPerspective = true;
+	PARTICLEMANAGER->LoadEmitter(dust_particle, ".\\Emitters.\\sliding.json");*/
+
+	trail_particle = FACTORY->CreateHUD(player->GetComponent<Transform>()->position, player->GetComponent<Transform>()->scale);
+	trail_particle->GetComponent<Sprite>()->isPerspective = true;
+	PARTICLEMANAGER->LoadEmitter(trail_particle, "PlayerTrail.json");
 	for (auto p : PARTICLEMANAGER->m_EmitterList)
 	{
 		p->isOn = true;
@@ -209,9 +197,6 @@ void Level1::Init()
 			p->pos = FACTORY->GetClearZone()->GetComponent<Transform>()->position;
 		}
 	}
-	dust_particle = FACTORY->CreateHUD(player->GetComponent<Transform>()->position, player->GetComponent<Transform>()->scale);
-	dust_particle->GetComponent<Sprite>()->isPerspective = true;
-	PARTICLEMANAGER->LoadEmitter(dust_particle, ".\\Emitters.\\sliding.json");
 }
 
 void Level1::Update(float dt)
@@ -283,8 +268,7 @@ void Level1::Update(float dt)
 	}
 	if (APP->b_Win)
 	{
-		/*WinSound = SOUNDMANAGER->LoadSound("win3.mp3");
-		SOUNDMANAGER->PlaySounds(WinSound, false);*/
+		
 		for (auto p : PARTICLEMANAGER->m_EmitterList)
 		{
 			
