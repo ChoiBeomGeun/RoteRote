@@ -112,14 +112,14 @@ namespace TE {
 				InitTrailSystem(*emitterIT);
 			}
 			break;
-			case ET_BACKGROUND:
+			case ET_SELECTION:
 			{
-				InitBackgroundSystem(*emitterIT);
+				init_menu_system(*emitterIT);
 			}
 			break;
 			case ET_SLIDING:
 			{
-				init_sliding_system(*emitterIT);
+				init_particle_system(*emitterIT);
 			}
 			break;
 			}
@@ -161,9 +161,9 @@ namespace TE {
 			{
 				emitterTypeID = ET_TRAIL;
 			}
-			else if (emitterType == "ET_BACKGROUND")
+			else if (emitterType == "ET_SELECTION")
 			{
-				emitterTypeID = ET_BACKGROUND;
+				emitterTypeID = ET_SELECTION;
 			}
 			else if (emitterType == "ET_SLIDING")
 				emitterTypeID = ET_SLIDING;
@@ -315,35 +315,44 @@ namespace TE {
 						}
 						break;
 					}
-					case ET_BACKGROUND:
+					case ET_SELECTION:
+					{
 						for (int i = 0; i < (*EIT)->capacity; ++i)
 						{
 							Particle& particle = (*EIT)->pParticles[i];
-							particle.lifetime += dt;
-							auto sizefactor = rand() % 2;
-							if (sizefactor == 0)
-								sizefactor = -1;
 
-							if (particle.lifetime >= m_maxBackLifeTime)
+							//Update particle position based on velocity and dt
+							particle.pos += glm::vec3(cosf(particle.vel.x), sinf(particle.vel.y),0 )* dt;
+							//Update particle position based on velocity and dt
+							particle.scale -= m_scaleFactor * dt;
+							//Clamp particle scale to 0 and maxExpScale
+							if (particle.scale <= 0)
+								particle.scale = 0;
+						}
+						//Update emitter lifetime based on dt
+						(*EIT)->lifeTime += dt;
+						//If lifetime is greater than expLife delete this emitter
+						if ((*EIT)->lifeTime >= m_expLife)
+						{
+							(*EIT)->lifeTime = 0.0f;
+							float rotation = 0.0f;
+							for (int i = 0; i < (*EIT)->capacity; ++i)
 							{
-								if (particle.scale >= m_maxExpScale)
-								{
-									particle.scale = 0.0f;
-									particle.lifetime = 0.0f;
-									particle.scale = TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
-									break;
-								}
-								else if (particle.scale < m_minExpScale)
-								{
-									particle.scale = 0.0f;
-									particle.lifetime = 0.0f;
-									particle.scale = TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
-									break;
-								}
+								// set position of particle to emitter
+								(*EIT)->pParticles[i].pos = (*EIT)->pos;
+								// set rotation with random
+								rotation = TUMath::GetRandomFloat(0, TUMath::TWO_PI);
+								// Then Get a random rotation between 0 and 2PI
+								// and set the velocity x and y based on the rotation.
+								(*EIT)->pParticles[i].vel
+									*= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);;
+								(*EIT)->pParticles[i].scale
+									= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
 
 							}
 						}
 						break;
+					}
 					case ET_SLIDING:
 					{
 						for (int i = 0; i < (*EIT)->capacity; ++i)
@@ -389,8 +398,8 @@ namespace TE {
 		case ET_TRAIL:
 			InitTrailSystem(pEmitter);
 			break;
-		case ET_BACKGROUND:
-			InitBackgroundSystem(pEmitter);
+		case ET_SELECTION:
+			init_menu_system(pEmitter);
 			break;
 		case ET_SLIDING:
 			init_particle_system(pEmitter);
@@ -527,7 +536,7 @@ namespace TE {
 		}
 	}
 
-	void ParticleManager::init_sliding_system(Emitter* pEmitter)
+	void ParticleManager::init_menu_system(Emitter* pEmitter)
 	{
 		for (int i = 0; i < pEmitter->capacity; ++i)
 		{
@@ -536,11 +545,13 @@ namespace TE {
 			pEmitter->pParticles[i].lifetime = 0;
 			pEmitter->pParticles[i].scale = 0;
 			pEmitter->pParticles[i].vel = glm::vec3(0);
-			pEmitter->pParticles[i].color[0] = 0;
-			pEmitter->pParticles[i].color[1] = 0;
-			pEmitter->pParticles[i].color[2] = 0;
-			pEmitter->pParticles[i].color[3] = 0;
+			pEmitter->pParticles[i].color[0] = ((i*i) % 50 + i) / 255.f;
+			pEmitter->pParticles[i].color[1] = 200 / 255.f;
+			pEmitter->pParticles[i].color[2] = (2 * i % 200) / 255.f;
+			pEmitter->pParticles[i].color[3] = (255 - i) / 255.f;
 
 		}
 	}
+
+	
 }

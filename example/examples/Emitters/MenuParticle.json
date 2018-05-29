@@ -6,12 +6,12 @@
 	{		
 		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
 		"EmitterID" : 1,
-		"EmitterType" : "ET_BACKGROUND",
+		"EmitterType" : "ET_SELECTION",
 		"ObjectType" : "Particle",
 		"Position" : 
 		{
 			"x" : 0.0,
-			"y" : 0.0,
+			"y" : 150.0,
 			"z" : 0.0
 		},
 		"Vel" : 
@@ -27,11 +27,11 @@
 			"b" : 0.0,
 			"a" : 0.0
 		},
-		"TextureDir" : "box.png",
+		"TextureDir" : "basicParticle.png",
 		"EmitterSize" : 0,
 		"EmitterID" : 0,
-		"EmitterLifeTime" : 10,
-		"Emittercapacity" : 25,
+		"EmitterLifeTime" : 5,
+		"Emittercapacity" : 100,
 		"RenderMode" : 0
 	}
 }

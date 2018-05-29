@@ -57,7 +57,7 @@ private:
 
 	TE::Object* obj_howToPlay;
 	TE::Object* obj_confirmation;
-
+	TE::Object * select_particle;
 	MenuList Selection;
 
 	float delta_angle;

@@ -28,7 +28,7 @@ namespace TE {
 	{
 		ET_EXPLOSION, //!< type of explosion
 		ET_TRAIL,      //!<  type of trail
-		ET_BACKGROUND, //!< type of Background
+		ET_SELECTION, //!< type of Background
 		ET_SLIDING //!< player Exhaust
 	};
 

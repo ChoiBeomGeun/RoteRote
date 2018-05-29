@@ -27,7 +27,10 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include  "Timer.h"
 #include "Application.h"
 #include "InGameLogic.h"
+#include "ParticleManager.h"
 using namespace TE;
+
+
 Menu::Menu()
 {
 }
@@ -49,6 +52,11 @@ void Menu::Load()
 	Menu_HowToPlay = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_HowToPlay.png");
 	Menu_Quit = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Quit.png");
 	Menu_Option = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Option.png");
+
+
+	select_particle = FACTORY->CreateHUD(glm::vec3(0, 100,0),glm::vec3(10));
+	select_particle->GetComponent<Sprite>()->isPerspective = true;
+	PARTICLEMANAGER->LoadEmitter(select_particle, "MenuParticle.json");
 }
 
  void Menu::Init()
@@ -66,11 +74,14 @@ void Menu::Load()
 	 select_index = 0;
 	 MenuCam.cameraSetting(CameraPosType::EN_Menu);
 	 SOUNDMANAGER->PlaySounds(MenuSound, true);
+	
 }
 
 void Menu::Update(float dt)
 {
-
+	
+	//select_particle;
+	
 	if (ConfirmationIsOn) {
 		if (Input::IsTriggered(SDL_SCANCODE_Y))
 			ENGINE->Quit();
@@ -185,9 +196,12 @@ void Menu::Update(float dt)
 				RightRotate = false;
 		}
 
-	
-	
-
+		for (auto p : PARTICLEMANAGER->m_EmitterList)
+		{
+			p->isOn = true;
+			if (p->type == ET_SELECTION)
+				p->pos = FACTORY->ObjectIDMap[7]->GetComponent<Transform>()->position;
+		}
 }
 
 	
