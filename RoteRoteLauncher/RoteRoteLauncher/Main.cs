@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using Newtonsoft.Json.Linq;
 using RoteMapView;
 
 namespace RoteRoteLauncherView
@@ -86,6 +87,28 @@ namespace RoteRoteLauncherView
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            JObject Reading = null;
+ 
+                Reading = JObject.Parse(File.ReadAllText("levels.\\" +"levelClearInfo.json"));
+
+            int LevelNumber = System.Int16.Parse(Reading["NumberOfTheLevels"].ToString());
+            for (int i = 1; i <= LevelNumber; i++)
+            {
+                string Level = "level" + i.ToString() + ".json";
+
+                Reading[Level] = true;
+
+
+
+            }
+            Reading["level" + 1.ToString() + ".json"] = false;
+            File.WriteAllText("levels.\\" +"levelClearInfo.json", Reading.ToString());
+
 
         }
     }
