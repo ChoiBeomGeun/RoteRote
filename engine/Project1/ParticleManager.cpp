@@ -387,7 +387,7 @@ namespace TE {
 			InitBackgroundSystem(pEmitter);
 			break;
 		case ET_SLIDING:
-			InitBackgroundSystem(pEmitter);
+			init_particle_system(pEmitter);
 			break;
 		}
 		// todo add emitter

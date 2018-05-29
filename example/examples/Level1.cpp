@@ -68,7 +68,7 @@ Object * player;
 
 Object * Movingtest;
 
-Object * particle;
+Object * dust_particle;
 Level1::Level1()
 {
 	//   _centerOfScreen = { 0.f ,0.f };
@@ -141,8 +141,9 @@ void Level1::Init()
 	FACTORY->GetPlayer()->GetComponent<Body>()->GroundType = Grounded::Ground;
 	player = FACTORY->GetPlayer();
 	STATEMANAGER->InitplayerPos = player->GetComponent<Transform>()->GetPosition();
-	player->GetComponent<Animation>()->setFrame(.25f);
-	player->GetComponent<Animation>()->setTime(.25f);
+	player->GetComponent<Animation>()->setFrame(.2f);
+	player->GetComponent<Animation>()->setTime(.2f);
+	player->GetComponent<Animation>()->_limit_frame = 0.8f;
 	_camPaceSpeed = 5.0f;
 	_camPacedirction = CAMERA->cameraPos - player->GetComponent<Transform>()->position;
 	_camStartPosition = glm::vec3{ 0.f, 0.f, 0.f };
@@ -179,10 +180,7 @@ void Level1::Init()
 	//Loading->IsLoadingObject = false;
 	//FACTORY->Destroy(Loading);
 	/////////////////////////////////////////////////////
-	_playerPosition.x = player->GetComponent<Transform>()->GetPosition().x;
-	_playerPosition.y = player->GetComponent<Transform>()->GetPosition().y;
-	_playerPosition.z = 500.f;
-
+	
 
 	static float loadingtimer = 0.1f;
 	APP->IsKeyBoardAvailable = false;
@@ -211,6 +209,9 @@ void Level1::Init()
 			p->pos = FACTORY->GetClearZone()->GetComponent<Transform>()->position;
 		}
 	}
+	dust_particle = FACTORY->CreateHUD(player->GetComponent<Transform>()->position, player->GetComponent<Transform>()->scale);
+	dust_particle->GetComponent<Sprite>()->isPerspective = true;
+	PARTICLEMANAGER->LoadEmitter(dust_particle, ".\\Emitters.\\sliding.json");
 }
 
 void Level1::Update(float dt)

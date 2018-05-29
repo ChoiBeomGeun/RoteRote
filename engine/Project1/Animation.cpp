@@ -36,12 +36,13 @@ namespace TE {
 		GRAPHICS->AnimationList.erase(std::find(GRAPHICS->AnimationList.begin(), GRAPHICS->AnimationList.end(), this));
 	}
 
-	void Animation::IterateFrame(float frame)
+	void Animation::IterateFrame(float frame, float limit)
 	{
-		if (_frame < .625f)
 			_frame += frame;
-		else
+		if (_frame >= limit)
+		{
 			_frame = 0.f;
+		}
 	}
 	void Animation::IterateSplash(float frame)
 	{

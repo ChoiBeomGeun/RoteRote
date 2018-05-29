@@ -403,7 +403,7 @@ void TE::Graphics::animationSetting()
 					// when key is pressed
 					if ((*aniIter)->isPressed())
 					{
-						(*aniIter)->IterateFrame((*aniIter)->getTime());
+						(*aniIter)->IterateFrame((*aniIter)->getTime(), (*aniIter)->_limit_frame);
 					}
 					if ((*aniIter)->isJumping)
 					{
@@ -417,7 +417,7 @@ void TE::Graphics::animationSetting()
 
 					if ((*aniIter)->_isOnWall)
 					{
-						(*aniIter)->setFrame(.75f);
+						(*aniIter)->setFrame(.8f);
 					}
 					else {}
 					time = 0.0f;

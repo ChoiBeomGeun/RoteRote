@@ -31,7 +31,7 @@ namespace TE {
 		virtual void Initialize() override;
 		~Animation();
 
-		void IterateFrame(float frame);
+		void IterateFrame(float frame, float limit);
 		void IterateSplash(float frame);
 		//setter
 		void setFlipX(bool isFlippedX);
@@ -49,8 +49,8 @@ namespace TE {
 		// public variables
 		bool isJumping;
 		bool _isOnWall;
+		float _limit_frame;
 	private:
-
 		float _time; // Timer
 		float _frame; // animationX
 		bool isFlipX;
