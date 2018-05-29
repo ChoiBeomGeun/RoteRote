@@ -68,7 +68,8 @@ void TE::LoseconditionLogic::Update(float dt)
 			Objects.second->objectstyle != Objectstyle::Button &&
 			Objects.second->objectstyle != Objectstyle::Trigger180 &&
 			Objects.second->objectstyle != Objectstyle::Trigger90 &&
-			Objects.second->objectstyle != Objectstyle::Camera
+			Objects.second->objectstyle != Objectstyle::Camera &&
+			Objects.second->objectstyle != Objectstyle::Particle
 		
 			)
 		{

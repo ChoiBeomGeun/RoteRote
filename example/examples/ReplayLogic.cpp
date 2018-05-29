@@ -127,7 +127,8 @@ void MakeReplayerUI(void) {
 	rlselect = SOUNDMANAGER->LoadSound("menuselect.mp3");
 	rlwin = SOUNDMANAGER->LoadSound("win3.mp3");
 	SOUNDMANAGER->PlaySounds(rlwin, false);
-
+	STATEMANAGER->vsLevelListandclear[STATEMANAGER->i_LevelSelect - 1 +1].second = false;
+	LEVELMANAGER->SavingLevelInfo();
 }
 
 void SetReplayer(void) {

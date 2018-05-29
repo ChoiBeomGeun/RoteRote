@@ -78,9 +78,9 @@ for (auto Objects : FACTORY->ObjectIDMap)
 			APP-> b_Win = true;//	LevelInit.b_Win = true;
 							  //STATEMANAGER->b_Relplay = true;
 			STATEMANAGER->b_IsDelay = true;
-			STATEMANAGER->vsLevelListandclear[STATEMANAGER->i_LevelSelect-1].second = false;
+			
 
-			LEVELMANAGER->SavingLevelInfo();
+		
 			/*PHYSICS->gravityScale = -20.f;
 			PHYSICS->GravityType = Gravity::y_Minus;
 			PHYSICS->gravity = glm::vec3(0, PHYSICS->gravityScale, 0);*/

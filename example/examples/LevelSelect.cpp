@@ -30,7 +30,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 
 const int LastLevelNumber = 10;
 using namespace TE;
-
+Object * LockObject = nullptr;
 struct StringCompareLevel {
 
 	bool operator()(const std::string& a, const std::string& b)
@@ -102,6 +102,14 @@ void LevelSelect::Load()
 
 	LevelList = STATEMANAGER->i_LevelSelect - 1;
 	FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->depth = 1;
+
+
+
+
+	LockObject = FACTORY->CreateArchetype(ReadingArchetype("Button.json"));
+	LockObject->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("LevelSelectionLock.png");
+	LockObject->GetComponent<Transform>()->SetPosition(glm::vec3(0, -30, 0));
+	LockObject->GetComponent<Transform>()->SetScale(glm::vec3(300, 300, 0));
 }
 
 
@@ -113,15 +121,20 @@ void LevelSelect::Init()
 	IsLeftPressed = false;
 	IsRightPreesed = false;
 	LvlSelectCam.cameraSetting(CameraPosType::EN_LevelSelect);
+
 }
 
 void LevelSelect::Update(float dt)
 {
 
-	if (STATEMANAGER->vsLevelListandclear[LevelList ].second == true)
-		FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("LevelSelectionLock.png");
+	if (STATEMANAGER->vsLevelListandclear[LevelList].second == true)
+		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(300, 300, 0));
 	else
-		FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("LevelSelction.png");
+		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(0, 0, 0));
+	
+	
+	//= Sprite::find_texture_id("LevelSelction.png");
+		//FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("LevelSelction.png");
 
 	if (IsConfirmationOn) {
 		if (Input::IsTriggered(SDL_SCANCODE_Y))
@@ -140,6 +153,7 @@ void LevelSelect::Update(float dt)
 	if (std::abs(FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle == 360.f))
 	{
 		FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->angle = 0.f;
+
 		FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle = 0.f;
 	}
 
@@ -173,20 +187,21 @@ void LevelSelect::Update(float dt)
 		
 
 		if (Input::IsTriggered(SDL_SCANCODE_SPACE) || Input::IsTriggered(SDL_SCANCODE_RETURN)) {
-
-			if (LevelList != LevelList::quit)
-			{
-				STATEMANAGER->i_LevelSelect = LevelList + 1;
-				std::string levelnumber = NumberToString(STATEMANAGER->i_LevelSelect);
-				STATEMANAGER->Loadtolevelname = "level" + levelnumber + ".json";
-				STATEMANAGER->MoveState(StatesList::Level1);
-			}
-			else
-			{
-				STATEMANAGER->MoveState(StatesList::Menu);
-				//obj_confirmation = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(1.5, 0.7, 0));
-				//obj_confirmation->GetComponent<Sprite>()->texture_load("Sure.png");
-				//IsConfirmationOn = true;
+			if (STATEMANAGER->vsLevelListandclear[LevelList].second != true) {
+				if (LevelList != LevelList::quit)
+				{
+					STATEMANAGER->i_LevelSelect = LevelList + 1;
+					std::string levelnumber = NumberToString(STATEMANAGER->i_LevelSelect);
+					STATEMANAGER->Loadtolevelname = "level" + levelnumber + ".json";
+					STATEMANAGER->MoveState(StatesList::Level1);
+				}
+				else
+				{
+					STATEMANAGER->MoveState(StatesList::Menu);
+					//obj_confirmation = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(1.5, 0.7, 0));
+					//obj_confirmation->GetComponent<Sprite>()->texture_load("Sure.png");
+					//IsConfirmationOn = true;
+				}
 			}
 		}
 
