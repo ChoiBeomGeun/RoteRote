@@ -181,10 +181,6 @@ void Level1::Init()
 	background_trsparent = 140.f;
 	loadbackground();
 
-	/*dust_particle = FACTORY->CreateHUD(player->GetComponent<Transform>()->position, player->GetComponent<Transform>()->scale);
-	dust_particle->GetComponent<Sprite>()->isPerspective = true;
-	PARTICLEMANAGER->LoadEmitter(dust_particle, ".\\Emitters.\\sliding.json");*/
-
 	trail_particle = FACTORY->CreateHUD(player->GetComponent<Transform>()->position, player->GetComponent<Transform>()->scale);
 	trail_particle->GetComponent<Sprite>()->isPerspective = true;
 	PARTICLEMANAGER->LoadEmitter(trail_particle, "PlayerTrail.json");
@@ -195,6 +191,10 @@ void Level1::Init()
 		{
 			p->isOn = false;
 			p->pos = FACTORY->GetClearZone()->GetComponent<Transform>()->position;
+		}
+		if(p->type == ET_TRAIL)
+		{
+			p->pos = player->GetComponent<Transform>()->position;
 		}
 	}
 

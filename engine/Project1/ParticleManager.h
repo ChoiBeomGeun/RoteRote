@@ -64,6 +64,7 @@ namespace TE {
 		//void     DrawEmitter(const Emitter* pEmitter);
 		std::vector <Emitter*> m_EmitterList;
 		void initialize_life_time();
+		void turn_on_particles(bool ison);
 	private:
 		void init_win_condition_system_system(Emitter* pEmitter);
 		void InitTrailSystem(Emitter* pEmitter);

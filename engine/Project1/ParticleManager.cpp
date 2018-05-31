@@ -170,6 +170,9 @@ namespace TE {
 			
 			float Xpos = file.mRoot.get(object + to_string(i), false).get("Position", false).get("x", false).asFloat();
 			float Ypos = file.mRoot.get(object + to_string(i), false).get("Position", false).get("y", false).asFloat();
+			float Xscale = file.mRoot.get(object + to_string(i), false).get("Scale", false).get("x", false).asFloat();
+			float Yscale = file.mRoot.get(object + to_string(i), false).get("Scale", false).get("y", false).asFloat();
+
 			float Xvel = file.mRoot.get(object + to_string(i), false).get("Vel", false).get("x", false).asFloat();
 			float Yvel = file.mRoot.get(object + to_string(i), false).get("Vel", false).get("y", false).asFloat();
 			float Zvel = file.mRoot.get(object + to_string(i), false).get("Vel", false).get("z", false).asFloat();
@@ -202,6 +205,7 @@ namespace TE {
 					pobject->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(textureDir);
 					pobject->GetComponent<Sprite>()->depth = -2.0f;
 					pobject->GetComponent<Transform>()->position = glm::vec3(Xpos, Ypos, 0);
+					pobject->GetComponent<Transform>()->scale = glm::vec3(Xscale, Yscale, 0);
 					glm::vec3 t_Vel(Xvel, Yvel, Zvel);
 					pobject->GetComponent<Emitter>()->size = emittersize;
 					pobject->GetComponent<Emitter>()->emitterID = emitterID;
@@ -222,7 +226,6 @@ namespace TE {
 						pobject->GetComponent<Emitter>()->pParticles[j].color[3] = ColorA / 255.f;
 
 					}
-					pobject->GetComponent<Transform>()->scale = glm::vec3(10.0f);
 					pobject->GetComponent<Emitter>()->isAdditive = isBlened;
 
 					PARTICLEMANAGER->AddEmitter(pobject->GetComponent<Emitter>());
@@ -412,6 +415,22 @@ namespace TE {
 				p->lifeTime = m_expLife;
 			}
 		}
+	}
+
+	void ParticleManager::turn_on_particles(bool ison)
+	{
+		if(ison)
+		{
+			for (auto p : m_EmitterList)
+				p->isOn = true;
+		}
+		else
+		{
+			for (auto p : m_EmitterList)
+				p->isOn = false;
+			
+		}
+
 	}
 
 	/*!

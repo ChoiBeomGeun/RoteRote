@@ -19,6 +19,7 @@ State Manager source file in the engine system class
 #include  "DebugUtil.h"
 #include "Input.h"
 #include "Timer.h"
+#include "ParticleManager.h"
 using namespace TE;
 
 bool IsFadingOut = true;
@@ -32,10 +33,10 @@ void FadeIn(void)
 	for(auto allobj:FACTORY->ObjectIDMap)
 	{
 		allobj.second->GetComponent<Sprite>()->ChangeColor(255, 255, 255, itransvalue);
-
+		//PARTICLEMANAGER->turn_on_particles(false);
 		if (itransvalue > 255) {
 			IsFadingIn = false;
-
+			
 		
 		}
 

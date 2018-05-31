@@ -54,7 +54,7 @@ void Menu::Load()
 	Menu_Option = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Option.png");
 
 
-	select_particle = FACTORY->CreateHUD(glm::vec3(0, 100,0),glm::vec3(10));
+	select_particle = FACTORY->CreateHUD(glm::vec3(0, 0,0),glm::vec3(0.1f));
 	select_particle->GetComponent<Sprite>()->isPerspective = true;
 	PARTICLEMANAGER->LoadEmitter(select_particle, "MenuParticle.json");
 }
@@ -79,7 +79,9 @@ void Menu::Load()
 
 void Menu::Update(float dt)
 {
+	std::cout << select_particle->GetComponent<Transform>()->scale.x << "\n";
 	
+	std::cout << select_particle->GetComponent<Transform>()->scale.y << "\n";
 	//select_particle;
 	
 	if (ConfirmationIsOn) {
