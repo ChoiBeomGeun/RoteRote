@@ -99,7 +99,7 @@ void MakeReplayerUI(void) {
 
 	LEVELMANAGER->LoadLevel(STATEMANAGER->Loadtolevelname);
 
-	rBackgroundobj = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(APP->_screenWidth - 150, APP->_screenHeight, 0));
+	rBackgroundobj = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(APP->_screenWidth, APP->_screenHeight, 0));
 	rBackgroundobj->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("dd.png");
 	rBackgroundobj->objectstyle = Objectstyle::Button;
 	rBackgroundobj->GetComponent<Sprite>()->depth = -1;

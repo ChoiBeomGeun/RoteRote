@@ -392,19 +392,19 @@ void Level1::loadbackground()
 {
 	// top left
 	//FACTORY->CreateWall()
-	Backgroundobj[0] = FACTORY->CreateHUD(glm::vec3(-350, 300, 0), glm::vec3(150, 150, 0));
+	Backgroundobj[0] = FACTORY->CreateHUD(glm::vec3(-650, 300, 0), glm::vec3(150, 150, 0));
 	Backgroundobj[0]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("sawtooth1_1.png");
 	Backgroundobj[0]->objectstyle = Objectstyle::Button;
 	Backgroundobj[0]->GetComponent<Sprite>()->depth = -1;
 	Backgroundobj[0]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, background_trsparent);
 
-	Backgroundobj[1] = FACTORY->CreateHUD(glm::vec3(-210, 350, 0), glm::vec3(130, 130, 0));
+	Backgroundobj[1] = FACTORY->CreateHUD(glm::vec3(-510, 350, 0), glm::vec3(130, 130, 0));
 	Backgroundobj[1]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("sawtooth1_2.png");
 	Backgroundobj[1]->objectstyle = Objectstyle::Button;
 	Backgroundobj[1]->GetComponent<Sprite>()->depth = -1;
 	Backgroundobj[1]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, background_trsparent);
 
-	Backgroundobj[2] = FACTORY->CreateHUD(glm::vec3(-250, 210, 0), glm::vec3(125, 125, 0));
+	Backgroundobj[2] = FACTORY->CreateHUD(glm::vec3(-550, 210, 0), glm::vec3(125, 125, 0));
 	Backgroundobj[2]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("sawtooth1_3.png");
 	Backgroundobj[2]->objectstyle = Objectstyle::Button;
 	Backgroundobj[2]->GetComponent<Sprite>()->depth = -1;
@@ -412,40 +412,40 @@ void Level1::loadbackground()
 	// top left
 
 	// top right
-	Backgroundobj[3] = FACTORY->CreateHUD(glm::vec3(275, 225,0 ), glm::vec3(125, 125, 0));
+	Backgroundobj[3] = FACTORY->CreateHUD(glm::vec3(575, 225, 0), glm::vec3(125, 125, 0));
 	Backgroundobj[3]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("sawtooth2_1.png");
 	Backgroundobj[3]->objectstyle = Objectstyle::Button;
 	Backgroundobj[3]->GetComponent<Sprite>()->depth = -1;
 	Backgroundobj[3]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, background_trsparent);
 
-	Backgroundobj[4] = FACTORY->CreateHUD(glm::vec3(350, 325, 0), glm::vec3(110, 110, 0));
+	Backgroundobj[4] = FACTORY->CreateHUD(glm::vec3(650, 325, 0), glm::vec3(110, 110, 0));
 	Backgroundobj[4]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("sawtooth2_2.png");
 	Backgroundobj[4]->objectstyle = Objectstyle::Button;
 	Backgroundobj[4]->GetComponent<Sprite>()->depth = -1;
 	Backgroundobj[4]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, background_trsparent);
-	
-	Backgroundobj[5] = FACTORY->CreateHUD(glm::vec3(230, 330, 0), glm::vec3(100, 100, 0));
+
+	Backgroundobj[5] = FACTORY->CreateHUD(glm::vec3(530, 330, 0), glm::vec3(100, 100, 0));
 	Backgroundobj[5]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("bigsawtooth.png");
 	Backgroundobj[5]->objectstyle = Objectstyle::Button;
 	Backgroundobj[5]->GetComponent<Sprite>()->depth = -1;
 	Backgroundobj[5]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, background_trsparent);
 
 	// bot left
-	Backgroundobj[6] = FACTORY->CreateHUD(glm::vec3(-350, -300, 0), glm::vec3(90, 90, 0));
+	Backgroundobj[6] = FACTORY->CreateHUD(glm::vec3(-650, -300, 0), glm::vec3(90, 90, 0));
 	Backgroundobj[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("sawtooth2_1.png");
 	Backgroundobj[6]->objectstyle = Objectstyle::Button;
 	Backgroundobj[6]->GetComponent<Sprite>()->depth = -1;
 	Backgroundobj[6]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, background_trsparent);
 
-	Backgroundobj[7] = FACTORY->CreateHUD(glm::vec3(-240, -320, 0), glm::vec3(125, 125, 0));
+	Backgroundobj[7] = FACTORY->CreateHUD(glm::vec3(-540, -320, 0), glm::vec3(125, 125, 0));
 	Backgroundobj[7]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("boundsawtooth1_1.png");
 	Backgroundobj[7]->objectstyle = Objectstyle::Button;
 	Backgroundobj[7]->GetComponent<Sprite>()->depth = -1;
 	Backgroundobj[7]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, background_trsparent);
-	
 
-	
-	Backgroundobj[8] = FACTORY->CreateHUD(glm::vec3(-300, -220, 0), glm::vec3(90, 90, 0));
+
+
+	Backgroundobj[8] = FACTORY->CreateHUD(glm::vec3(-600, -220, 0), glm::vec3(90, 90, 0));
 	Backgroundobj[8]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("bigsawtooth.png");
 	Backgroundobj[8]->objectstyle = Objectstyle::Button;
 	Backgroundobj[8]->GetComponent<Sprite>()->depth = -1;
@@ -453,20 +453,20 @@ void Level1::loadbackground()
 	// bot left
 
 	// bot right
-	Backgroundobj[9] = FACTORY->CreateHUD(glm::vec3(350,-350, 0), glm::vec3(100, 100, 0));
+	Backgroundobj[9] = FACTORY->CreateHUD(glm::vec3(650, -350, 0), glm::vec3(100, 100, 0));
 	Backgroundobj[9]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("sawtooth1_1.png");
 	Backgroundobj[9]->objectstyle = Objectstyle::Button;
 	Backgroundobj[9]->GetComponent<Sprite>()->depth = -1;
 	Backgroundobj[9]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, background_trsparent);
 
-	Backgroundobj[10] = FACTORY->CreateHUD(glm::vec3(330, -235, 0), glm::vec3(105, 105, 0));
+	Backgroundobj[10] = FACTORY->CreateHUD(glm::vec3(630, -235, 0), glm::vec3(105, 105, 0));
 	Backgroundobj[10]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("boundsawtooth1_1.png");
 	Backgroundobj[10]->objectstyle = Objectstyle::Button;
 	Backgroundobj[10]->GetComponent<Sprite>()->depth = -1;
 	Backgroundobj[10]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, background_trsparent);
 	// bot right
 
-	for(int i=0; i<11; ++i)
+	for (int i = 0; i<11; ++i)
 	{
 		Backgroundobj[i]->GetComponent<Sprite>()->isRotating = true;
 	}
