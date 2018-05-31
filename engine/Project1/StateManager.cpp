@@ -18,9 +18,51 @@ State Manager source file in the engine system class
 #include "SoundManager.h"
 #include  "DebugUtil.h"
 #include "Input.h"
+#include "Timer.h"
 using namespace TE;
 
+bool IsFadingOut = true;
+bool IsFadingIn = true;
+static float itransvalue = 0;
+static float transvalue = 255;
+void FadeIn(void)
+{
 
+	
+	for(auto allobj:FACTORY->ObjectIDMap)
+	{
+		allobj.second->GetComponent<Sprite>()->ChangeColor(255, 255, 255, itransvalue);
+
+		if (itransvalue > 255) {
+			IsFadingIn = false;
+
+		
+		}
+
+	}
+	itransvalue += Timer::GetDelta() *300;
+
+}
+
+
+void FadeOut(void)
+{
+
+
+	for (auto allobj : FACTORY->ObjectIDMap)
+	{
+		allobj.second->GetComponent<Sprite>()->ChangeColor(255, 255, 255, transvalue);
+
+		if (transvalue < 0) {
+			IsFadingOut = false;
+
+			
+		}
+
+	}
+	transvalue -= Timer::GetDelta() * 300;
+
+}
 namespace TE {
 
 
@@ -120,6 +162,15 @@ void StateManager::Update(float dt)
 
 	if (b_IsNext)
 	{
+	
+		if (IsFadingOut) {
+			FadeOut();
+			return;
+		}
+		IsFadingOut = true;
+		IsFadingIn = true;
+		transvalue = 255;
+		FACTORY;
 		SOUNDMANAGER->DeleteSounds();
 		FACTORY->DestroyAllObjects();
 		this->v_StatesLists[i_CurrentStateNumber]->Free();
@@ -134,9 +185,17 @@ void StateManager::Update(float dt)
 
 	if (b_IsMoveState)
 	{
-		
+		if (IsFadingOut) {
+			FadeOut();
+			return;
+		}
+
+		IsFadingOut = true;
+		IsFadingIn = true;
+		transvalue = 255;
 		SOUNDMANAGER->DeleteSounds();
 		FACTORY->DestroyAllObjects();
+
 		this->v_StatesLists[i_CurrentStateNumber]->Free();
 		this->v_StatesLists[i_CurrentStateNumber]->Unload();
 
@@ -173,12 +232,27 @@ void StateManager::Update(float dt)
 
 
 	}
-	if (b_Relplay)
+	if (b_Relplay) {
+		FACTORY;
 		this->v_StatesLists[i_ReplayStageNumber]->Update(dt);
-	if (!b_IsPauseOn && !b_Relplay)
+	}
+	if (!b_IsPauseOn && !b_Relplay) {
+
+		if (IsFadingIn) {
+			FadeIn();
+			return;
+		}
+
+		itransvalue = 0;
+		
+		FACTORY;
 		this->v_StatesLists[i_CurrentStateNumber]->Update(dt);
-	if (b_IsPauseOn)
+	}
+	if (b_IsPauseOn) {
+		FACTORY;
 		this->v_StatesLists[i_PauseStageNumber]->Update(dt);
+
+	}
 
 
 
