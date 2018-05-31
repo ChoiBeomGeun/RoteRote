@@ -28,8 +28,8 @@ static glm::vec3 up{ 0,1,0 };
 Camera::Camera()
 {
 	CenterOfCamera = { 0.f, 0.f };
-	right = { 1,0,0 };
-	cameraTarget = glm::vec3(0, 0, -1);
+	//right = { 1,0,0 };
+	//cameraTarget = glm::vec3(0, 0, -1);
 
 	cameraPos = eye;
 	cameraTarget = target;
@@ -166,6 +166,42 @@ void TE::Camera::proj()
 		{
 			_aspect = (float)APP->_screenWidth / (float)APP->_screenHeight;
 			projection = glm::perspective(glm::radians(angle), _aspect, _zNear, _zFar);
+		}
+	}
+}
+
+void TE::Camera::unproj()
+{
+	if (APP->_isfull)
+	{
+		if (APP->_resolution == Resolution::_1280X960)
+		{
+			_aspect = 1;
+			projection = glm::ortho(-APP->_screenHeight *.5f, APP->_screenHeight *.5f, -APP->_screenHeight*.5f, APP->_screenHeight*.5f, _zNear, _zFar);
+
+		}
+		else
+		{
+			_aspect = 1;
+			projection = glm::ortho(-APP->_screenHeight *.5f, APP->_screenHeight *.5f, -APP->_screenHeight*.5f, APP->_screenHeight*.5f, _zNear, _zFar);
+		}
+	}
+	else
+	{
+		if (APP->_resolution == Resolution::_1280X960 || APP->_resolution == Resolution::_800X600)
+		{
+			_aspect = 1;
+			projection = glm::ortho(-APP->_screenHeight *.5f, APP->_screenHeight *.5f, -APP->_screenHeight*.5f, APP->_screenHeight*.5f, _zNear, _zFar);
+		}
+		else if (APP->_resolution == Resolution::_1280X720)
+		{
+			_aspect = 1;
+			projection = glm::ortho(-APP->_screenHeight *.5f, APP->_screenHeight *.5f, -APP->_screenHeight*.5f, APP->_screenHeight*.5f, _zNear, _zFar);
+		}
+		else
+		{
+			_aspect = 1;
+			projection = glm::ortho(-APP->_screenHeight *.5f, APP->_screenHeight *.5f, -APP->_screenHeight*.5f, APP->_screenHeight*.5f, _zNear, _zFar);
 		}
 	}
 }

@@ -304,6 +304,8 @@ void TE::Graphics::drawOrthogonal(std::vector<Sprite*>::iterator iter)
 {
 	if (!(*iter)->pOwner->HasComponent<Emitter>())
 	{
+		CAMERA->unproj();
+
 		drawStats = 1;
 		hudmodel = glm::mat4(1.0f);
 		hudmodel = glm::translate(hudmodel, (*iter)->pOwner->GetComponent<Transform>()->position);

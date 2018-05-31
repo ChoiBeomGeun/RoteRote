@@ -324,11 +324,6 @@ namespace TE {
 							particle.pos.x += cosf(TUMath::PI * .1f * i + dt);
 							particle.pos.y += sinf(TUMath::PI * .1f * i + dt);
 
-							//Update particle position based on velocity and dt
-							//particle.pos += particle.vel * dt * 10.f;
-//								glm::vec3(cosf(particle.vel.x), sinf(particle.vel.y),0 )* dt;
-							//Update particle position based on velocity and dt
-							//Clamp particle scale to 0 and maxExpScale
 							if (particle.scale <= 0)
 							{
 								//Set particle position to emitter position.

@@ -56,14 +56,21 @@ Pause::~Pause()
 
 void Pause::Load()
 {
-	frame = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(0.8, 1, 0));
-	textIndicator = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(0.5, 0.5, 0));
-	iconRestart = FACTORY->CreateHUD(glm::vec3(0.4, 0, 0), glm::vec3(0.1, 0.1, 0));
-	iconHowToPlay = FACTORY->CreateHUD(glm::vec3(0, 0.4, 0), glm::vec3(0.1, 0.1, 0));
-	iconExit = FACTORY->CreateHUD(glm::vec3(0, -0.4, 0), glm::vec3(0.1, 0.1, 0));
-	iconLevelSelect = FACTORY->CreateHUD(glm::vec3(-0.4, 0, 0), glm::vec3(0.1, 0.1, 0));
+	frame = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(400, 400, 0));
+	textIndicator = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(50, 50, 0));
+	iconRestart = FACTORY->CreateHUD(glm::vec3(280, 0, 0), glm::vec3(40, 40, 0));
+	iconHowToPlay = FACTORY->CreateHUD(glm::vec3(0, 280, 0), glm::vec3(40, 40, 0));
+	iconExit = FACTORY->CreateHUD(glm::vec3(0, -280, 0), glm::vec3(40, 40, 0));
+	iconLevelSelect = FACTORY->CreateHUD(glm::vec3(-280, 0, 0), glm::vec3(40, 40, 0));
 
-	 
+	frame->GetComponent<Sprite>()->isRotating = true;
+	textIndicator->GetComponent<Sprite>()->isRotating = true;
+	iconRestart->GetComponent<Sprite>()->isRotating = true;
+	iconHowToPlay->GetComponent<Sprite>()->isRotating = true;
+	iconExit->GetComponent<Sprite>()->isRotating = true;
+	iconLevelSelect->GetComponent<Sprite>()->isRotating = true;
+
+
 	frame->GetComponent<Sprite>()->depth = 1;
 	textIndicator->GetComponent<Sprite>()->depth = 2;
 	//LEVELMANAGER->LoadLevel("Pause.json");
@@ -87,7 +94,7 @@ void Pause::Load()
 void Pause::Init()
 {
 	CreditsIsON = false;
-	rotation_radius = 0.4f;
+	rotation_radius = 280.f;
 	Selection = PauseList::Pause_Restart;
 	delta_angle = 90;
 	LeftRotate = false;

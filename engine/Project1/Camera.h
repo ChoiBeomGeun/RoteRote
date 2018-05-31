@@ -38,7 +38,7 @@ namespace TE {
 		void update();
 		void rotate(float angle);
 		void proj();
-
+		void unproj();
 		void followPlayer();
 
 		glm::mat4 view;

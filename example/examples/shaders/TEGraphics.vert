@@ -70,7 +70,7 @@ void main()
 	}
 	else if (drawingStatus == 1)
 	{
-		gl_Position =  hudmodel * vec4(vertexPosition.xyz, 1.0);
+		gl_Position = projection * hudmodel * position;
 	}
 	
 	
