@@ -57,6 +57,7 @@ namespace TE {
 		int         capacity; //!< max amount for this Emitter
 		int         emitterID; //!< ID of this Emitter
 		float       lifeTime;  //!< lifeTime of this Emitter
+		float		explifeTime;
 		bool		isAdditive; // !< addtive or bleneded
 		bool		isOn;
 		std::string m_particlePath;

@@ -354,10 +354,10 @@ Object * TE::ObjectFactory::CreateHUD(const glm::vec3 & pos, const glm::vec3 & s
 	Hud->objectstyle = Objectstyle::Button;
 //	Transform * transform = new Transform();
 	Hud->AddComponent<Transform>();
-	Hud->GetComponent<Transform>()->SetPosition(pos);
+	Hud->GetComponent<Transform>()->SetPosition(glm::vec3(APP->_screenWidth *pos.x, APP->_screenHeight * pos.y,0));
 	
 	
-	Hud->GetComponent<Transform>()->SetScale(scale);
+	Hud->GetComponent<Transform>()->SetScale(glm::vec3(APP->_screenWidth *scale.x, APP->_screenHeight * scale.y, 0));
 	Hud->GetComponent<Transform>()->rotation = glm::vec3(0, 0, 1);
 
 	Hud->AddComponent<Sprite>();

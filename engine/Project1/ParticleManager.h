@@ -65,13 +65,6 @@ namespace TE {
 		std::vector <Emitter*> m_EmitterList;
 		void initialize_life_time();
 		void turn_on_particles(bool ison);
-	private:
-		void init_win_condition_system_system(Emitter* pEmitter);
-		void InitTrailSystem(Emitter* pEmitter);
-		void InitBackgroundSystem(Emitter* pEmitter);
-		void init_particle_system(Emitter * pEmitter);
-		void init_menu_system(Emitter * pEmitter);
-		
 		//Emitter* m_pEmitters; //!< pointer of Emitter
 		int m_capacity;       //!< max amount of Emitter
 		int m_size;           //!< number of Emitter
@@ -92,10 +85,18 @@ namespace TE {
 		float m_minBackgroundDist; //!< minimum Distance of Background
 		float m_maxBackgroundDist; //!< maximum Distance of Background
 		float m_maxBackLifeTime; //!< maximum lifetime of Background
-		//float m_maxBackLimitsize; //!< maximum size of Background
+								 //float m_maxBackLimitsize; //!< maximum size of Background
 
 		float m_scaleFactor;  //!< scale factor
 		float m_expLife;      //!< explosion life
+	private:
+		void init_win_condition_system_system(Emitter* pEmitter);
+		void InitTrailSystem(Emitter* pEmitter);
+		void InitBackgroundSystem(Emitter* pEmitter);
+		void init_particle_system(Emitter * pEmitter);
+		void init_menu_system(Emitter * pEmitter);
+		
+		
 	};
 
 	extern ParticleManager * PARTICLEMANAGER;

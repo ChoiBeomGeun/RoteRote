@@ -195,9 +195,13 @@ void ImGuiUpdate(void) {
 					if (FACTORY->ObjectIDMap[i.first]->HasComponent<Emitter>())
 					{
 						std::string EmitterOn = "EmitterOn";
+						std::string lifeTime = "lifeTime";
+						
 						if (ImGui::TreeNode(("Particle " + std::to_string(i.second->objID)).c_str()))
 						{
+							ImGui::Text("Particle Type is %s", &FACTORY->ObjectIDMap[i.first]->GetComponent<Emitter>()->type);
 							ImGui::Checkbox(EmitterOn.c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Emitter>()->isOn);
+							ImGui::SliderFloat(lifeTime.c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Emitter>()->explifeTime, 0.f, 50.f);
 							ImGui::SliderFloat((ObjectPosition + "x").c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Emitter>()->pos.x, -1000.f, 1000.f);
 							ImGui::SliderFloat((ObjectPosition + "y").c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Emitter>()->pos.y, -1000.f, 1000.f);
 							ImGui::SliderFloat((ObjectPosition + "z").c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Emitter>()->pos.z, -1000.f, 1000.f);

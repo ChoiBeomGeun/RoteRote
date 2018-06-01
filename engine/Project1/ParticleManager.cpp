@@ -302,6 +302,7 @@ namespace TE {
 						{
 							Particle& particle = (*EIT)->pParticles[i];
 							//If scale of particle is 0
+
 							if (particle.scale <= 0)
 							{
 								//Set particle position to emitter position.
@@ -448,7 +449,7 @@ namespace TE {
 	void ParticleManager::init_win_condition_system_system(Emitter* pEmitter)
 	{
 		float rotation = 0; // rotation of particle
-		
+		pEmitter->explifeTime = m_expLife;
 		for (int i = 0; i < pEmitter->capacity; ++i)
 		{
 			// set position of particle to emitter
@@ -484,6 +485,8 @@ namespace TE {
 	/******************************************************************************/
 	void ParticleManager::InitTrailSystem(Emitter* pEmitter)
 	{
+		pEmitter->explifeTime = m_expLife;
+
 		// fill all particles in emitter with loop
 		for (int i = 0; i < pEmitter->capacity; ++i)
 		{
@@ -513,6 +516,8 @@ namespace TE {
 		std::mt19937 gen(rd());
 		std::uniform_real_distribution<> dis(m_minBackgroundDist, m_maxBackgroundDist);
 		std::uniform_real_distribution<> rot(0, TUMath::TWO_PI);
+		pEmitter->explifeTime = m_expLife;
+
 		for (int i = 0; i< pEmitter->capacity; ++i)
 		{
 			pEmitter->pParticles[i].pos = glm::vec3(dis(gen) *.9f, dis(gen)*.5f, 0);
@@ -533,6 +538,8 @@ namespace TE {
 	}
 	void ParticleManager::init_particle_system(Emitter * pEmitter)
 	{
+		pEmitter->explifeTime = m_expLife;
+
 		for (int i = 0; i < pEmitter->capacity; ++i)
 		{
 			pEmitter->pParticles[i].pos = pEmitter->pos;
@@ -545,6 +552,8 @@ namespace TE {
 
 	void ParticleManager::init_menu_system(Emitter* pEmitter)
 	{
+		pEmitter->explifeTime = m_expLife;
+
 		for (int i = 0; i < pEmitter->capacity; ++i)
 		{
 			pEmitter->pParticles[i].pos = pEmitter->pos;
@@ -552,7 +561,7 @@ namespace TE {
 			pEmitter->pParticles[i].angle = 0;
 			pEmitter->pParticles[i].lifetime = 0;
 			pEmitter->pParticles[i].scale = 0;
-			pEmitter->pParticles[i].vel = glm::vec3(cosf(TUMath::DegreeToRadian(i)), sinf(TUMath::DegreeToRadian(i)),0);
+			pEmitter->pParticles[i].vel = glm::vec3(cosf(TUMath::DegreeToRadian(i)), sinf(TUMath::DegreeToRadian(i)),0.f);
 			pEmitter->pParticles[i].color[0] = ((i*i) % 50 + i) / 255.f;
 			pEmitter->pParticles[i].color[1] = 200 / 255.f;
 			pEmitter->pParticles[i].color[2] = (2 * i % 200) / 255.f;
