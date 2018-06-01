@@ -41,7 +41,7 @@ void FadeIn(void)
 		}
 
 	}
-	itransvalue += Timer::GetDelta() *300;
+	itransvalue += Timer::GetDelta() *600;
 
 }
 
@@ -61,7 +61,7 @@ void FadeOut(void)
 		}
 
 	}
-	transvalue -= Timer::GetDelta() * 300;
+	transvalue -= Timer::GetDelta() * 600;
 
 }
 namespace TE {
@@ -138,6 +138,14 @@ void StateManager::Update(float dt)
 	}
 	if (b_IsRestart && !CAMERA->IsCameraShaking)
 	{
+
+		if (IsFadingOut) {
+			FadeOut();
+			return;
+		}
+		IsFadingOut = true;
+		IsFadingIn = true;
+		transvalue = 255;
 		FACTORY->DestroyAllObjects();
 		CAMERA->cameraUp.x = 0;
 		CAMERA->cameraUp.y = 1;
@@ -152,7 +160,13 @@ void StateManager::Update(float dt)
 
 	if (b_Replayrestart)
 	{
-
+		if (IsFadingOut) {
+			FadeOut();
+			return;
+		}
+		IsFadingOut = true;
+		IsFadingIn = true;
+		transvalue = 255;
 		FACTORY->DestroyAllObjects();
 		this->v_StatesLists[i_ReplayStageNumber]->Free();
 		this->v_StatesLists[i_ReplayStageNumber]->Init();
@@ -236,8 +250,6 @@ void StateManager::Update(float dt)
 	if (b_Relplay) {
 		FACTORY;
 		this->v_StatesLists[i_ReplayStageNumber]->Update(dt);
-	}
-	if (!b_IsPauseOn && !b_Relplay) {
 
 		if (IsFadingIn) {
 			FadeIn();
@@ -245,13 +257,31 @@ void StateManager::Update(float dt)
 		}
 
 		itransvalue = 0;
+	}
+	if (!b_IsPauseOn && !b_Relplay) {
+
+	
 		
 		FACTORY;
 		this->v_StatesLists[i_CurrentStateNumber]->Update(dt);
+
+		if (IsFadingIn) {
+			FadeIn();
+			return;
+		}
+
+		itransvalue = 0;
 	}
 	if (b_IsPauseOn) {
 		FACTORY;
 		this->v_StatesLists[i_PauseStageNumber]->Update(dt);
+
+		if (IsFadingIn) {
+			FadeIn();
+			return;
+		}
+
+		itransvalue = 0;
 
 	}
 

@@ -485,7 +485,8 @@ void TE::LevelManager::SavingLevelInfo(void)
 
 
 	}
-
+	root["NumberOfTheLevels"] = STATEMANAGER->vsLevelListandclear.size();
+	
 	file.WriteFile(path, root);
 }
 
