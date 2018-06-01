@@ -79,11 +79,6 @@ void Menu::Load()
 
 void Menu::Update(float dt)
 {
-	std::cout << select_particle->GetComponent<Transform>()->scale.x << "\n";
-	
-	std::cout << select_particle->GetComponent<Transform>()->scale.y << "\n";
-	//select_particle;
-	
 	if (ConfirmationIsOn) {
 		if (Input::IsTriggered(SDL_SCANCODE_Y))
 			ENGINE->Quit();

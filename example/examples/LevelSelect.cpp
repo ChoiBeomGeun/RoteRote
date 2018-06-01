@@ -77,12 +77,7 @@ void LevelSelect::Load()
 		if (*it.begin() == 'l')
 		{
 			INGAMELOGIC->vsLevelList.push_back(it);
-
 		}
-
-
-
-
 	}
 
 
@@ -109,7 +104,7 @@ void LevelSelect::Load()
 	LockObject = FACTORY->CreateArchetype(ReadingArchetype("Button.json"));
 	LockObject->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("LevelSelectionLock.png");
 	LockObject->GetComponent<Transform>()->SetPosition(glm::vec3(0, -30, 0));
-	LockObject->GetComponent<Transform>()->SetScale(glm::vec3(300, 300, 0));
+	LockObject->GetComponent<Transform>()->SetScale(glm::vec3(150, 150, 0));
 }
 
 
@@ -128,7 +123,7 @@ void LevelSelect::Update(float dt)
 {
 
 	if (STATEMANAGER->vsLevelListandclear[LevelList].second == true)
-		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(300, 300, 0));
+		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(150, 150, 0));
 	else
 		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(0, 0, 0));
 	
