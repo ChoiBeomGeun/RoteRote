@@ -37,6 +37,7 @@ namespace TE {
 
 	class Application : public Systems
 	{
+		friend class Object;
 	public:
 		Application();
 		~Application();
@@ -44,7 +45,7 @@ namespace TE {
 		void Initialize(void) override;
 		void Update(float dt) override;
 		void SwapWindow(void);
-		void ResizeObjects();
+		void ResizeAllObjects();
 		//Todo : add other features
 		//Resolution size
 		//Window Size

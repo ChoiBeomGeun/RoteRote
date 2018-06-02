@@ -37,7 +37,7 @@ public:
 	void Selection_minus(void);
 
 	void Selection_Text(void);
-
+	void resize();
 private:
 	TE::CameraAction PauseCam;
 	bool LeftRotate;

@@ -197,7 +197,7 @@ void Level1::Init()
 			p->pos = player->GetComponent<Transform>()->position;
 		}
 	}
-
+	//APP->ResizeObjects();
 }
 
 void Level1::Update(float dt)

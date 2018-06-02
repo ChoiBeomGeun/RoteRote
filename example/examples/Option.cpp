@@ -90,7 +90,7 @@ void Option::Init()
 	select_index = 0;
 	OptionCam.cameraSetting(CameraPosType::EN_Option);
 	SOUNDMANAGER->PlaySounds(OptionSound, true);
-	APP->ResizeObjects();
+	APP->ResizeAllObjects();
 	FACTORY->ObjectIDMap[7]->GetComponent<Transform>()->scale.y = 52;
 	/*FACTORY->ObjectIDMap[6]->GetComponent<Transform>()->scale = glm::vec3(FACTORY->ObjectIDMap[6]->GetComponent<Transform>()->scale.x, FACTORY->ObjectIDMap[6]->GetComponent<Transform>()->scale.x, 0);
 	FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->scale = glm::vec3(FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->scale.x, FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->scale.x, 0);*/

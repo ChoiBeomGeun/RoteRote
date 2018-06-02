@@ -116,7 +116,7 @@ void LevelSelect::Init()
 	IsLeftPressed = false;
 	IsRightPreesed = false;
 	LvlSelectCam.cameraSetting(CameraPosType::EN_LevelSelect);
-	APP->ResizeObjects();
+	APP->ResizeAllObjects();
 }
 
 void LevelSelect::Update(float dt)

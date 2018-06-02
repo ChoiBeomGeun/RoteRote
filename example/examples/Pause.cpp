@@ -56,12 +56,28 @@ Pause::~Pause()
 
 void Pause::Load()
 {
-	frame = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(400, 400, 0));
-	textIndicator = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(50, 50, 0));
-	iconRestart = FACTORY->CreateHUD(glm::vec3(200, 0, 0), glm::vec3(40, 40, 0));
-	iconHowToPlay = FACTORY->CreateHUD(glm::vec3(0, 200, 0), glm::vec3(40, 40, 0));
-	iconExit = FACTORY->CreateHUD(glm::vec3(0, -200, 0), glm::vec3(40, 40, 0));
-	iconLevelSelect = FACTORY->CreateHUD(glm::vec3(-200, 0, 0), glm::vec3(40, 40, 0));
+	frame = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(.5, .5, 0));
+	frame->GetComponent<Transform>()->scale.y = frame->GetComponent<Transform>()->scale.x;
+	textIndicator = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(.25, .25, 0));
+
+	iconRestart = FACTORY->CreateHUD(glm::vec3(APP->_screenWidth*.1f, 0, 0), glm::vec3(.10, .10, 0));
+	iconRestart->GetComponent<Transform>()->position = glm::vec3(APP->_screenWidth*.2f,  0, 0);
+	iconRestart->GetComponent<Transform>()->scale = glm::vec3(40, 40, 0);
+
+	iconHowToPlay = FACTORY->CreateHUD(glm::vec3(0, APP->_screenWidth*.1f, 0), glm::vec3(.10, .10, 0));
+	iconHowToPlay->GetComponent<Transform>()->position = glm::vec3(0, APP->_screenWidth*.2f, 0);
+	iconHowToPlay->GetComponent<Transform>()->scale = glm::vec3(40, 40, 0);
+
+
+	iconExit = FACTORY->CreateHUD(glm::vec3(0, -APP->_screenWidth*.1f, 0), glm::vec3(.10, .10, 0));
+	iconExit->GetComponent<Transform>()->position = glm::vec3(0, -APP->_screenWidth*.2f, 0);
+	iconExit->GetComponent<Transform>()->scale = glm::vec3(40, 40, 0);
+
+
+	iconLevelSelect = FACTORY->CreateHUD(glm::vec3(-APP->_screenWidth*.1f, 0, 0), glm::vec3(.10, .10, 0));
+	iconLevelSelect->GetComponent<Transform>()->position = glm::vec3(-APP->_screenWidth*.2f, 0, 0);
+	iconLevelSelect->GetComponent<Transform>()->scale = glm::vec3(40, 40, 0);
+
 
 	frame->GetComponent<Sprite>()->isRotating = true;
 	textIndicator->GetComponent<Sprite>()->isRotating = true;
@@ -89,12 +105,15 @@ void Pause::Load()
 	iconExit->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("quit.png");
 	iconHowToPlay->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Pause_restarticon.png");
 	iconLevelSelect->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Pause_levelselecticon.png");
+
+
+	resize();
 }
 
 void Pause::Init()
 {
 	CreditsIsON = false;
-	rotation_radius = 200.f;
+	rotation_radius = APP->_screenWidth*.2f;
 	Selection = PauseList::Pause_Restart;
 	delta_angle = 90;
 	LeftRotate = false;
@@ -106,6 +125,8 @@ void Pause::Init()
 	select_index = 0;
 //	PauseCam.cameraSetting(CameraPosType::EN_Option);
 	SOUNDMANAGER->PlaySounds(PauseSound, true);
+
+	
 }
 
 void Pause::Update(float dt)
@@ -217,7 +238,7 @@ void Pause::Update(float dt)
 				break;
 			case PauseList::Pause_HowToPlay:
 
-				obj_confirmationPause = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(1.5, 0.7, 0));
+				obj_confirmationPause = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(.5, 0.5, 0));
 				obj_confirmationPause->GetComponent<Sprite>()->depth = 3;
 				obj_confirmationPause->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Sure.png");
 				ConfirmationIsOn = true;
@@ -375,5 +396,36 @@ void Pause::Selection_Text(void)
 		break;
 	default:
 		break;
+	}
+}
+
+void Pause::resize()
+{
+	if (APP->_screenWidth != 1280 && APP->_screenHeight != 720)
+	{
+		frame->GetComponent<Transform>()->scale.x = APP->_screenWidth * frame->GetComponent<Transform>()->scale.x / 1280;
+		frame->GetComponent<Transform>()->scale.y = frame->GetComponent<Transform>()->scale.x;
+
+		textIndicator->GetComponent<Transform>()->scale.x = APP->_screenWidth * textIndicator->GetComponent<Transform>()->scale.x / 1280;
+		textIndicator->GetComponent<Transform>()->scale.y = textIndicator->GetComponent<Transform>()->scale.x;
+
+
+		iconRestart->GetComponent<Transform>()->scale.x = APP->_screenWidth * iconRestart->GetComponent<Transform>()->scale.x / 1280;
+		iconRestart->GetComponent<Transform>()->scale.y = APP->_screenHeight * iconRestart->GetComponent<Transform>()->scale.y / 720;
+
+
+		iconHowToPlay->GetComponent<Transform>()->scale.x = APP->_screenWidth * iconHowToPlay->GetComponent<Transform>()->scale.x / 1280;
+		iconHowToPlay->GetComponent<Transform>()->scale.y = APP->_screenHeight * iconHowToPlay->GetComponent<Transform>()->scale.y / 720;
+
+		iconExit->GetComponent<Transform>()->scale.x = APP->_screenWidth * iconExit->GetComponent<Transform>()->scale.x / 1280;
+		iconExit->GetComponent<Transform>()->scale.y = APP->_screenHeight * iconExit->GetComponent<Transform>()->scale.y / 720;
+
+		iconLevelSelect->GetComponent<Transform>()->scale.x = APP->_screenWidth * iconLevelSelect->GetComponent<Transform>()->scale.x / 1280;
+		iconLevelSelect->GetComponent<Transform>()->scale.y = APP->_screenHeight * iconLevelSelect->GetComponent<Transform>()->scale.y / 720;
+
+		/*oHowToPlay->GetComponent<Transform>()->scale.x = APP->_screenWidth * oHowToPlay->GetComponent<Transform>()->scale.x / 1280;
+		oHowToPlay->GetComponent<Transform>()->scale.y = APP->_screenHeight * oHowToPlay->GetComponent<Transform>()->scale.y / 720;*/
+
+
 	}
 }

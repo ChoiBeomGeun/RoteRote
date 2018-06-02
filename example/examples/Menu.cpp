@@ -74,7 +74,7 @@ void Menu::Load()
 	 select_index = 0;
 	 MenuCam.cameraSetting(CameraPosType::EN_Menu);
 	 SOUNDMANAGER->PlaySounds(MenuSound, true);
-	 APP->ResizeObjects();	
+	 APP->ResizeAllObjects();	
 }
 
 void Menu::Update(float dt)

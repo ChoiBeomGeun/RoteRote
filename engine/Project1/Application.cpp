@@ -251,7 +251,7 @@ void Application::SwapWindow(void)
 
 }
 
-void TE::Application::ResizeObjects()
+void TE::Application::ResizeAllObjects()
 {
 	if(_screenWidth != 1280 && _screenHeight !=720)
 	for (auto p : FACTORY->ObjectIDMap)
@@ -259,12 +259,16 @@ void TE::Application::ResizeObjects()
 		float xscale = APP->_screenWidth * p.second->GetComponent<Transform>()->scale.x / 1280;
 		float yscale = APP->_screenHeight * p.second->GetComponent<Transform>()->scale.y / 720;
 
-		if(p.second->GetComponent<Sprite>()->isPerspective)
+		if(p.second->objectstyle == Objectstyle::Button)
 			p.second->GetComponent<Transform>()->scale = glm::vec3(xscale, xscale, 0);
 		else
 		p.second->GetComponent<Transform>()->scale = glm::vec3(xscale, yscale, 0);
 	}
 }
+
+
+
+
 
 glm::vec3  Application::ConvertToNDC(const glm::vec3 & position)
 {

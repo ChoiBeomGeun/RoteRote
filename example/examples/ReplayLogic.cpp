@@ -19,7 +19,7 @@ void Backgame3(void);
 void(*pausefunction3[3])(void) = { Backgame3,ReStartgame3,LevelSelect3 };
 glm::vec3 Vec3Buttonscale3 = glm::vec3(.10f, .15f, 0);
 int pauseindex3 = 0;
-glm::vec3 Vec3buttonPostion3 = glm::vec3(.13f, 0, 0);
+glm::vec3 Vec3buttonPostion3 = glm::vec3(.35f, 0, 0);
 unsigned int rlmove;
 unsigned int rlselect;
 unsigned int rlback;
