@@ -44,6 +44,7 @@ namespace TE {
 		void Initialize(void) override;
 		void Update(float dt) override;
 		void SwapWindow(void);
+		void ResizeObjects();
 		//Todo : add other features
 		//Resolution size
 		//Window Size

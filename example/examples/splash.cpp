@@ -61,6 +61,13 @@ void splash::Init()
 	camActSplash.cameraSetting(CameraPosType::EN_Splash);
 
 	printf("splashInit\n");
+	APP->ResizeObjects();
+
+	FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->scale.y = 163;
+	FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->scale.y = 470;
+	FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->scale.y = 600;
+
+
 }
 
 void splash::Update(float dt)

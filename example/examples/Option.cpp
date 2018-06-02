@@ -60,6 +60,8 @@ void Option::Load()
 	Option_Credits = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Option_Credits.png");
 	Option_Back = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Option_BackToMenu.png"); 
 	Option_Full = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Option_FullScreen.png");
+	
+	
 }
 
 void Option::Init()
@@ -88,6 +90,11 @@ void Option::Init()
 	select_index = 0;
 	OptionCam.cameraSetting(CameraPosType::EN_Option);
 	SOUNDMANAGER->PlaySounds(OptionSound, true);
+	APP->ResizeObjects();
+	FACTORY->ObjectIDMap[7]->GetComponent<Transform>()->scale.y = 52;
+	/*FACTORY->ObjectIDMap[6]->GetComponent<Transform>()->scale = glm::vec3(FACTORY->ObjectIDMap[6]->GetComponent<Transform>()->scale.x, FACTORY->ObjectIDMap[6]->GetComponent<Transform>()->scale.x, 0);
+	FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->scale = glm::vec3(FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->scale.x, FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->scale.x, 0);*/
+
 }
 
 void Option::Update(float dt)
@@ -188,8 +195,8 @@ void Option::Update(float dt)
 			}
 			
 			ooCredits = FACTORY->CreateArchetype(ReadingArchetype("Button.json"));
-			ooCredits->GetComponent<Transform>()->SetPosition(glm::vec3(16.260f,-16.260f,-1));
-			ooCredits->GetComponent<Transform>()->SetScale(glm::vec3(1025.041f, 365.854f,0));
+			ooCredits->GetComponent<Transform>()->SetPosition(glm::vec3(0,0,0));
+			ooCredits->GetComponent<Transform>()->SetScale(glm::vec3(APP->_screenWidth*.575f, APP->_screenHeight*.5f,0));
 			ooCredits->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("CreditsText.png");
 			CreditsIsON = true;
 			return;
