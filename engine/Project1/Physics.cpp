@@ -101,7 +101,8 @@ void Physics::ExplictEulerIntegrator(float dt) {
 		//dynamic_cast<Transform*>((*i)->GetOwner()->GetComponent(CT_TRANSFORM));
 		curfp = pTr->GetPosition();
 		pTr->SetPosition(curfp + (*i).second->pm_velocity*dt);
-		if ((*i).second->GetOwner()->objectstyle == Objectstyle::Wall || (*i).second->GetOwner()->objectstyle == Objectstyle::Trigger90 || (*i).second->GetOwner()->objectstyle == Objectstyle::Trigger180 || (*i).second->GetOwner()->objectstyle == Objectstyle::AttachWall)
+		if ((*i).second->GetOwner()->objectstyle == Objectstyle::Trigger90Right||
+			(*i).second->GetOwner()->objectstyle == Objectstyle::Wall || (*i).second->GetOwner()->objectstyle == Objectstyle::Trigger90 || (*i).second->GetOwner()->objectstyle == Objectstyle::Trigger180 || (*i).second->GetOwner()->objectstyle == Objectstyle::AttachWall)
 			continue;
 
 		if ((*i).second->GetOwner()->objectstyle == Objectstyle::Box || (*i).second->GetOwner()->objectstyle == Objectstyle::AttachBox)
@@ -165,9 +166,9 @@ void Physics::BroadPhase() {
 
 			if (i->second->pm_invmass == 0 && j->second->pm_invmass == 0)
 				continue;
-			if (i->second->GetOwner()->objectstyle == Objectstyle::Trigger180 || i->second->GetOwner()->objectstyle == Objectstyle::Trigger90)
+			if (i->second->GetOwner()->objectstyle == Objectstyle::Trigger180 || i->second->GetOwner()->objectstyle == Objectstyle::Trigger90 || (*i).second->GetOwner()->objectstyle == Objectstyle::Trigger90Right)
 				continue;
-			if (j->second->GetOwner()->objectstyle == Objectstyle::Trigger180 || j->second->GetOwner()->objectstyle == Objectstyle::Trigger90)
+			if (j->second->GetOwner()->objectstyle == Objectstyle::Trigger180 || j->second->GetOwner()->objectstyle == Objectstyle::Trigger90|| (*i).second->GetOwner()->objectstyle == Objectstyle::Trigger90Right)
 				continue;
 
 
