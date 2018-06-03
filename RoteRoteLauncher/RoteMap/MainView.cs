@@ -235,7 +235,7 @@ namespace RoteMapView
 
             }
 
-            DeleteUnvisibleItem();
+           // DeleteUnvisibleItem();
         }
         /// <summary>
         /// 디자인 모드 변경시 발생한다.
