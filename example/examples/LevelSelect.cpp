@@ -72,9 +72,7 @@ Load texture & Initialize a value of texture to Levelpng[i]
 */
 void LevelSelect::Load()
 {
-	sizefactor.x = APP->_screenWidth * .2f;
-
-	sizefactor.y = APP->_screenHeight * .2f;
+	
 	for (auto it : ENGINE->mVsLevelnamelist)
 	{
 		if (*it.begin() == 'l')
@@ -106,7 +104,7 @@ void LevelSelect::Load()
 
 	LockObject = FACTORY->CreateArchetype(ReadingArchetype("Button.json"));
 	LockObject->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("LevelSelectionLock.png");
-	LockObject->GetComponent<Transform>()->SetPosition(glm::vec3(0, -30, 0));
+	LockObject->GetComponent<Transform>()->SetPosition(glm::vec3(0, 0, 0));
 	LockObject->GetComponent<Transform>()->SetScale(glm::vec3(APP->_screenWidth*.45f, APP->_screenWidth*.45f, 0));
 }
 
@@ -116,8 +114,12 @@ void LevelSelect::Init()
 
 	
 	FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth* .2f, APP->_screenWidth*.05f, 0);
-	FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->scale = glm::vec3(sizefactor.x * 2, sizefactor.x * 2, 0);
-	FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position = glm::vec3(0, FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position.y + sizefactor.x *.5f, 0);
+	FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.45f, APP->_screenWidth *.45f, 0);
+	FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.25f, APP->_screenWidth *.25f, 0);
+
+	FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position = glm::vec3(0, APP->_screenHeight*.4f, 0);
+
+	//FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position = glm::vec3(0, FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position.y + sizefactor.x *.5f, 0);
 	FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Levelpng[LevelList];
 
 	IsRotating = false;
@@ -125,13 +127,18 @@ void LevelSelect::Init()
 	IsRightPreesed = false;
 	LvlSelectCam.cameraSetting(CameraPosType::EN_LevelSelect);
 	APP->ResizeAllObjects();
+	if (APP->_screenWidth != 1280 && APP->_screenHeight != 720)
+	{
+		sizefactor.x = APP->_screenWidth * APP->_screenWidth *.25f / 1280;
+		sizefactor.y = APP->_screenHeight * APP->_screenWidth *.25f / 720;
+	}
 }
 
 void LevelSelect::Update(float dt)
 {
 
 	if (STATEMANAGER->vsLevelListandclear[LevelList].second == true)
-		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(APP->_screenWidth*.45f, APP->_screenWidth*.45f, 0));
+		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(sizefactor.x, sizefactor.x, 0));
 	else
 		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(0, 0, 0));
 	

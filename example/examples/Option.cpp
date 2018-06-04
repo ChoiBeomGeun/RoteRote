@@ -47,7 +47,7 @@ Option::~Option()
 
 void Option::Load()
 {
-	rotation_radius = static_cast<int>(APP->_screenWidth*.1f);
+	rotation_radius = static_cast<int>(APP->_screenWidth*.2f);
 
 	LEVELMANAGER->LoadLevel("Option.json");
 	OptionSound = SOUNDMANAGER->LoadSound("Menu.mp3");
@@ -63,9 +63,20 @@ void Option::Load()
 	Option_Full = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Option_FullScreen.png");
 
 	FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position = glm::vec3(0, rotation_radius,0);
+	FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.05f, APP->_screenWidth *.05f, 0);
+
 	FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->position = glm::vec3(-rotation_radius,0,0);
+	FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.05f, APP->_screenWidth *.05f, 0);
+
 	FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->position = glm::vec3(0,-rotation_radius,0);
+	FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.05f, APP->_screenWidth *.05f, 0);
+
 	FACTORY->ObjectIDMap[4]->GetComponent<Transform>()->position = glm::vec3(rotation_radius,0,0);
+	FACTORY->ObjectIDMap[4]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.05f, APP->_screenWidth *.05f, 0);
+
+	FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.45f, APP->_screenWidth *.45f, 0);
+	FACTORY->ObjectIDMap[6]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.25f, APP->_screenWidth *.25f, 0);
+
 	FACTORY->ObjectIDMap[7]->GetComponent<Transform>()->position = glm::vec3(0, APP->_screenHeight*.4f, 0);
 
 	
@@ -98,7 +109,7 @@ void Option::Init()
 	OptionCam.cameraSetting(CameraPosType::EN_Option);
 	SOUNDMANAGER->PlaySounds(OptionSound, true);
 	APP->ResizeAllObjects();
-	FACTORY->ObjectIDMap[7]->GetComponent<Transform>()->scale.y = 52;
+	FACTORY->ObjectIDMap[7]->GetComponent<Transform>()->scale.y = APP->_screenHeight*.1f;
 	/*FACTORY->ObjectIDMap[6]->GetComponent<Transform>()->scale = glm::vec3(FACTORY->ObjectIDMap[6]->GetComponent<Transform>()->scale.x, FACTORY->ObjectIDMap[6]->GetComponent<Transform>()->scale.x, 0);
 	FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->scale = glm::vec3(FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->scale.x, FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->scale.x, 0);*/
 

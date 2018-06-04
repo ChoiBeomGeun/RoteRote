@@ -259,7 +259,8 @@ void Application::SwapWindow(void)
 
 void TE::Application::ResizeAllObjects()
 {
-	if(_screenWidth != 1280 && _screenHeight !=720)
+	if (_screenWidth != 1280 && _screenHeight != 720)
+	{
 		for (auto p : FACTORY->ObjectIDMap)
 		{
 			if (!p.second->HasComponent<Emitter>())
@@ -273,6 +274,7 @@ void TE::Application::ResizeAllObjects()
 					p.second->GetComponent<Transform>()->scale = glm::vec3(xscale, yscale, 0);
 			}
 		}
+	}
 }
 
 
