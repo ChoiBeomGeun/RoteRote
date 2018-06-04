@@ -32,7 +32,10 @@ void copyFile(std::string  src, std::string dest);
 using namespace TE;
 bool RealExit = false;
 Object * confirmationa;
+/* GIMP RGBA C-Source image dump (player4_kIe_icon.c) */
 
+/* GIMP RGBA C-Source image dump (player4_kIe_icon.c) */
+void WindowIconSetting(SDL_Window * sWnd);
 namespace TE {
 
 
@@ -128,7 +131,7 @@ void Application::Initialize()
 		DEBUG_PRINT("SDL couldn't init! SD_Error : %s\n", SDL_GetError());
 	}
 	// Set up the screen
-	pWnd = SDL_CreateWindow("game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+	pWnd = SDL_CreateWindow("RoteRote", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		_screenWidth, _screenHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
 
 	if (pWnd == NULL)
@@ -139,10 +142,11 @@ void Application::Initialize()
 
 
 	//ImGui_ImplSdlGL3_Init(pWnd);
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	//we are not going to use deprecated functions
 	//SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	//
@@ -218,19 +222,21 @@ void Application::Initialize()
 
 	}
 */
-	if (_isfull)
-		
-#ifdef _DEBUG
-		//SDL_SetWindowFullscreen(pWnd, SDL_WINDOW_FULLSCREEN);
+	WindowIconSetting(this->pWnd);
+	
+
+#ifndef _DEBUG
+		SDL_SetWindowFullscreen(pWnd, SDL_WINDOW_FULLSCREEN);
 #endif // DEBUG
 
-
 	SDL_GL_SetSwapInterval(1);
+	
 #ifndef _DEBUG
 	int32_t cursorData[2] = { 0, 0 };
 	cursor = SDL_CreateCursor((Uint8 *)cursorData, (Uint8 *)cursorData, 8, 8, 4, 4);
 	SDL_SetCursor(cursor);
 #endif
+	
 }
 
 void Application::Update(float /*dt*/)
@@ -564,4 +570,81 @@ void copyFile(std::string src, std::string dest)
 	}
 	fclose(f_src);
 	fclose(f_dest);
+}
+
+void WindowIconSetting(SDL_Window * sWnd)
+{
+	static const struct {
+		unsigned int 	 width;
+		unsigned int 	 height;
+		unsigned int 	 bytes_per_pixel; /* 2:RGB16, 3:RGB, 4:RGBA */
+		unsigned char	 pixel_data[16 * 16 * 4 + 1];
+	} my_icon = {
+		16, 16, 4,
+		"\234\234\234\377kkk\377ooo\377ooo\377ooo\377ooo\377ooo\377ooo\377ooo\377"
+		"ooo\377ooo\377ooo\377ooo\377ooo\377ooo\377\266\266\266\377RRR\377\000\000\000\377"
+		"\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\000"
+		"\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\201\201\201\377"
+		"RRR\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000"
+		"\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377"
+		"\201\201\201\377RRR\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377"
+		"\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\000"
+		"\000\000\377\000\000\000\377\201\201\201\377RRR\377\000\000\000\377\000\000\000\377\000\000\000\377\000"
+		"\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000"
+		"\000\377\000\000\000\377\000\000\000\377\000\000\000\377\201\201\201\377RRR\377\000\000\000\377\000\000"
+		"\000\377\010\010\010\377\060\060\060\377EEE\377\040\040\040\377\002\002\002\377\000\000\000\377"
+		"\000\000\000\377\000\000\000\377\023\023\023\377\063\063\063\377$$$\377\005\005\005\377\201\201\201"
+		"\377RRR\377\000\000\000\377\003\003\003\377PPP\377\311\311\311\377\351\351\351\377\253"
+		"\253\253\377)))\377\012\012\012\377\014\014\014\377\033\033\033\377\214\214\215\377"
+		"\331\331\331\377\304\304\304\377LLL\377\204\204\204\377RRR\377\000\000\000\377"
+		"\024\024\024\377\250\250\250\377\377\377\377\377\275\275\275\377\272\272\272"
+		"\377lll\377\067\067\067\377???\377UUU\377\356\356\356\377\374\374\374\377\271"
+		"\271\271\377\225\225\225\377\234\234\234\377RRR\377\000\000\000\377\027\027\027\377"
+		"\260\260\260\377\377\377\377\377\243\243\243\377\234\234\234\377ttt\377<"
+		"<<\377FFF\377ccc\377\367\367\367\377\367\367\367\377vvv\377\207\207\207\377"
+		"\245\245\245\377RRR\377\000\000\000\377\006\006\006\377eee\377\341\341\341\377\367\367"
+		"\367\377\301\301\301\377\065\065\065\377\027\027\027\377\035\035\035\377\063\064\064"
+		"\377\303\303\303\377\375\375\375\377\350\350\350\377uuu\377\213\213\213\377"
+		"RRR\377\000\000\000\377\000\000\000\377\020\020\020\377KKK\377fff\377\064\065\065\377\004\004\004"
+		"\377\012\012\012\377*''\377,%%\377\070\070\070\377ttt\377\\]]\377\026\026\026\377"
+		"\201\201\201\377RRR\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\001\001\001\377"
+		"\000\000\000\377\002\002\002\377!##\377c,,\377d\061\061\377\000\000\000\377\004\004\004\377\002\002\002\377"
+		"\000\000\000\377\201\201\201\377RRR\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377"
+		"\000\000\000\377\000\000\000\377\010\010\010\377\034\034\034\377\232\066\066\377v\067\067\377\000"
+		"\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\201\201\201\377RRR\377\000\000\000\377\000"
+		"\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\004\004\004\377\040\"\"\377t,,"
+		"\377n\064\064\377\000\000\000\377\000\000\000\377\000\000\000\377\000\000\000\377\201\201\201\377S"
+		"SS\377\000\000\000\377\001\001\001\377\001\001\001\377\001\001\001\377\001\001\001\377\001\001\001\377\001\001\001"
+		"\377\022\023\023\377\065,,\377\066''\377\000\001\001\377\001\001\001\377\001\001\001\377\002\002\002\377"
+		"\202\202\202\377\255\255\255\377\207\207\207\377\210\210\210\377\210\210"
+		"\210\377\210\210\210\377\210\210\210\377\210\210\210\377\210\210\210\377"
+		"\207\207\207\377\216\217\217\377\215\216\216\377\210\210\210\377\210\210"
+		"\210\377\210\210\210\377\210\210\210\377\302\302\302\377",
+	};
+
+
+	Uint32 rmask, gmask, bmask, amask;
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+	int shift = (my_icon.bytes_per_pixel == 3) ? 8 : 0;
+	rmask = 0xff000000 >> shift;
+	gmask = 0x00ff0000 >> shift;
+	bmask = 0x0000ff00 >> shift;
+	amask = 0x000000ff >> shift;
+#else // little endian, like x86
+	rmask = 0x000000ff;
+	gmask = 0x0000ff00;
+	bmask = 0x00ff0000;
+	amask = (my_icon.bytes_per_pixel == 3) ? 0 : 0xff000000;
+#endif
+	SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)my_icon.pixel_data, my_icon.width,
+		my_icon.height, my_icon.bytes_per_pixel * 8, my_icon.bytes_per_pixel*my_icon.width,
+		rmask, gmask, bmask, amask);
+
+	//SDL_Surface *surface = SDL_CreateRGBSurfaceFrom(pixels, 16, 16, 16, 16 * 2, 0x0f00, 0x00f0, 0x000f, 0xf000);
+
+	// The icon is attached to the window pointer
+	SDL_SetWindowIcon(sWnd, icon);
+
+	// ...and the surface containing the icon pixel data is no longer required.
+	SDL_FreeSurface(icon);
 }
