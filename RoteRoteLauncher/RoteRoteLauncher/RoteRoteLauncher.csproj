@@ -98,6 +98,10 @@
       <Project>{d34ecae4-3092-43ce-9c27-88dfe82c4810}</Project>
       <Name>DesignModePanel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MonitorInfoCSharp\MonitorInfoCSharp.csproj">
+      <Project>{8679e454-12c9-4511-8cfd-d96e8cb3abab}</Project>
+      <Name>MonitorInfoCSharp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RoteMap\RoteMapEditorView.csproj">
       <Project>{039c2c31-3b06-4741-ba49-714cc4ae2f41}</Project>
       <Name>RoteMapEditorView</Name>

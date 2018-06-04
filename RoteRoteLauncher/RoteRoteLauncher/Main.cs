@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Management;
 using System.Diagnostics;
 using System.IO;
 using Newtonsoft.Json.Linq;
@@ -18,26 +19,58 @@ namespace RoteRoteLauncherView
     {
         int i_hiddencount = 0;
         bool b_IsHiddenFormAppeared = true;
+        private Size MaxSize;
+        private Size []CurrentSize = new Size[6];
+        private Size ClickedSize;
         public Main()
         {
             InitializeComponent();
+            MaxSize = MonitorInfoCSharp.Form1.returnMaxSize();
+
+            //  ManagementObjectSearcher
         }
         
         private void Form1_Load(object sender, EventArgs e)
         {
          
             listBox1.Items.Add("1920 X 1080");
+            listBox1.Items.Add("1680 X 1050");
             listBox1.Items.Add("1600 X 900");
             listBox1.Items.Add("1280 X 960");
+            listBox1.Items.Add("1280 X 720");
             listBox1.Items.Add("1024 X 768");
-            listBox1.Items.Add("800 X 600");
             
+            CurrentSize[0] = new Size (1920, 1080);
+            CurrentSize[1] = new Size(1680, 1050);
+            CurrentSize[2] = new Size(1600, 900);
+            CurrentSize[3] = new Size(1280, 960);
+            CurrentSize[4] = new Size(1280, 720);
+            CurrentSize[5] = new Size(1024, 768);
+            listBox1.SelectedIndex = 0;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             if (listBox1.SelectedIndex != -1)
             {
+                if (ClickedSize.Width > MaxSize.Width ||
+                    ClickedSize.Height > MaxSize.Height)
+                {
+                    DialogResult result = MessageBox.Show("Your Monitor doesn't support this Resolution\n " +
+                                                          "Will you play the game with recommended Resolution("
+                                                          + listBox1.Items[++listBox1.SelectedIndex].ToString() + ")",
+                        "Rresolution ERROR",
+                        MessageBoxButtons.YesNo);
+
+                    if (result == DialogResult.No)
+                    {
+                        return;
+                    }
+
+             
+                }
+
+
                 using (StreamWriter rdr = new StreamWriter(Environment.CurrentDirectory + "\\temp.ini"))
                 {
                     rdr.WriteLine(listBox1.SelectedItem.ToString());
@@ -109,6 +142,12 @@ namespace RoteRoteLauncherView
             Reading["level" + 1.ToString() + ".json"] = false;
             File.WriteAllText("levels.\\" +"levelClearInfo.json", Reading.ToString());
 
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ClickedSize = CurrentSize[listBox1.SelectedIndex];
 
         }
     }

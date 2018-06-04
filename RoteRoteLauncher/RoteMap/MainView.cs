@@ -68,7 +68,7 @@ namespace RoteMapView
             this.designModePanel.MouseRightClick += drawPanel1_MouseRightClick;
             this.designModePanel.MouseLeftClick += drawPanel1_MouseLeftClick;
             this.designModePanel.Painted += designModePanel_Painted;
-
+          
             //this.designModePanel.Controls.Clear();
         }
 
