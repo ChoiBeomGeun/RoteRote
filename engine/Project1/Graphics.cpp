@@ -366,6 +366,7 @@ void TE::Graphics::setbasicUniformLoc()
 	uniformLocation[MODEL] = _basicProgram.getUniformLocation("model");
 	uniformLocation[VIEW] = _basicProgram.getUniformLocation("view");
 	uniformLocation[PROJ] = _basicProgram.getUniformLocation("projection");
+
 	uniformLocation[DRAWINGSTATUS] = _basicProgram.getUniformLocation("drawingStatus");
 	uniformLocation[HUDMODEL] = _basicProgram.getUniformLocation("hudmodel");
 	uniformLocation[ISANIMATION] = _basicProgram.getUniformLocation("isAnimation");

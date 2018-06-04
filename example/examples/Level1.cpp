@@ -181,7 +181,7 @@ void Level1::Init()
 
 	loadbackground();
 
-	trail_particle = FACTORY->CreateHUD(player->GetComponent<Transform>()->position, player->GetComponent<Transform>()->scale);
+	trail_particle = FACTORY->CreateHUD(glm::vec3(0), glm::vec3(0));
 	trail_particle->GetComponent<Sprite>()->isPerspective = true;
 	PARTICLEMANAGER->LoadEmitter(trail_particle, "PlayerTrail.json");
 	for (auto p : PARTICLEMANAGER->m_EmitterList)

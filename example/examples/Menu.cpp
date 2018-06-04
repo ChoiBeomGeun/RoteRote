@@ -42,6 +42,7 @@ Menu::~Menu()
 void Menu::Load()
 {
 	LEVELMANAGER->LoadLevel("Menu.json");
+	rotation_radius = static_cast<int>(APP->_screenWidth*.2f);
 
 
 	MenuSound = SOUNDMANAGER->LoadSound("menu.mp3");
@@ -54,15 +55,38 @@ void Menu::Load()
 	Menu_Option = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Option.png");
 
 
+
+
+
 	select_particle = FACTORY->CreateHUD(glm::vec3(0, 0,0),glm::vec3(0.1f));
 	select_particle->GetComponent<Sprite>()->isPerspective = true;
 	PARTICLEMANAGER->LoadEmitter(select_particle, "MenuParticle.json");
+	FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position = glm::vec3(0, rotation_radius, 0);
+	FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.05f, APP->_screenWidth *.05f, 0);
+
+	FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->position = glm::vec3(-rotation_radius, 0, 0);
+	FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.05f, APP->_screenWidth *.05f, 0);
+
+	FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->position = glm::vec3(0, -rotation_radius, 0);
+	FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.05f, APP->_screenWidth *.05f, 0);
+
+	FACTORY->ObjectIDMap[4]->GetComponent<Transform>()->position = glm::vec3(rotation_radius, 0, 0);
+	FACTORY->ObjectIDMap[4]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.05f, APP->_screenWidth *.05f, 0);
+
+	FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.45f, APP->_screenWidth *.45f, 0);
+	FACTORY->ObjectIDMap[6]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.25f, APP->_screenWidth *.25f, 0);
+
+
+	FACTORY->ObjectIDMap[7]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth*.5f, APP->_screenHeight*.2f, 0);
+	FACTORY->ObjectIDMap[7]->GetComponent<Transform>()->position = glm::vec3(0, APP->_screenHeight*.5f , 0);
+	
+	select_particle->GetComponent<Transform>()->position.y = static_cast<float>(rotation_radius);
+	//select_particle->GetComponent<Emitter>()->pos.y = static_cast<float>(rotation_radius);
 }
 
  void Menu::Init()
 {
 	 HowToPlayIsOn = false;
-	 rotation_radius = 100;
 	 Selection = MenuList::Menu_Start;
 	 delta_angle = 90;
 	 LeftRotate = false;
@@ -137,13 +161,13 @@ void Menu::Update(float dt)
 					return;
 				}
 
-				obj_howToPlay = FACTORY->CreateHUD(glm::vec3(0.2, -0.7, 0), glm::vec3(2, 0.5, 0));
+				obj_howToPlay = FACTORY->CreateHUD(glm::vec3(0.2, -0.7, 0), glm::vec3(.7, 0.5, 0));
 				obj_howToPlay->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("howTOPlay2.png");
 				HowToPlayIsOn = true;
 				return;
 				break;
 			case MenuList::Menu_Quit: 
-				obj_confirmation = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(1.5, 0.7, 0));
+				obj_confirmation = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(.5, 0.5, 0));
 				obj_confirmation->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Sure.png");
 				ConfirmationIsOn = true;
 				return;
@@ -197,7 +221,7 @@ void Menu::Update(float dt)
 		{
 			p->isOn = true;
 			if (p->type == ET_SELECTION)
-				p->pos = glm::vec3(0,100,0);
+				p->pos = glm::vec3(0,rotation_radius,0);
 		}
 }
 

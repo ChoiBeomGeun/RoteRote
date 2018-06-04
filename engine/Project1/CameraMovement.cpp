@@ -114,7 +114,7 @@ namespace TE {
 				{
 					width = FACTORY->DownBoundary()->GetComponent<Transform>()->scale.x;
 					CAMERA->cameraPos.x = downblock.x;
-					CAMERA->cameraPos.y = downblock.y + APP->_screenHeight*.5f;
+					CAMERA->cameraPos.y =0;
 
 					float leftboundary, rightboundary;
 					leftboundary = downblock.x - APP->_screenWidth*.25f;
@@ -181,7 +181,7 @@ namespace TE {
 				// 1. if map is smaller than screen
 				if (width < APP->_screenWidth && height < APP->_screenHeight)
 				{
-					CAMERA->cameraPos = glm::vec3(center, 999);
+					// do nothing
 				}
 				// 2. if width is bigger than screen
 				else if (width > APP->_screenWidth)
@@ -522,11 +522,11 @@ namespace TE {
 			CAMERA->cameraPos = glm::vec3(0, 0, CameraPosz);
 			break;
 		case EN_Menu:
-			CameraPosz = 500.f;
+			CameraPosz = 999.f;
 			CAMERA->cameraPos = glm::vec3(0, 0, CameraPosz);
 			break;
 		case EN_LevelSelect:
-			CameraPosz = 500.f;
+			CameraPosz = 999.f;
 			CAMERA->cameraPos = glm::vec3(0, 0, CameraPosz);
 			break;
 		case EN_playerPos:
@@ -538,7 +538,7 @@ namespace TE {
 			CAMERA->cameraPos = glm::vec3(0, 0, CameraPosz);
 			break;
 		case EN_Option:
-			CameraPosz = 500.f;
+			CameraPosz = 999.f;
 			CAMERA->cameraPos = glm::vec3(0, 0, CameraPosz);
 			break;
 		case End:

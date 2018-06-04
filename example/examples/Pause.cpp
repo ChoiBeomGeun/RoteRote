@@ -247,7 +247,7 @@ void Pause::Update(float dt)
 
 			case PauseList::Pause_LevelSelect:
 			{
-				oHowToPlay = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(2, 1.5, 0));
+				oHowToPlay = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(.75, .5, 0));
 				oHowToPlay->GetComponent<Sprite>()->depth =5;
 				oHowToPlay->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("howtoplay.png");
 

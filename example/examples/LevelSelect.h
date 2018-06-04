@@ -41,6 +41,7 @@ private:
 
 	TE::Object* obj_confirmation;
 	bool IsConfirmationOn = false;
+	glm::vec2 sizefactor;
 
 
 	void Rotation(void);

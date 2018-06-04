@@ -140,7 +140,7 @@ void Application::Initialize()
 		return;
 	}
 
-
+	getCurrentMonitorSize();
 	//ImGui_ImplSdlGL3_Init(pWnd);
 
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
@@ -260,16 +260,19 @@ void Application::SwapWindow(void)
 void TE::Application::ResizeAllObjects()
 {
 	if(_screenWidth != 1280 && _screenHeight !=720)
-	for (auto p : FACTORY->ObjectIDMap)
-	{
-		float xscale = APP->_screenWidth * p.second->GetComponent<Transform>()->scale.x / 1280;
-		float yscale = APP->_screenHeight * p.second->GetComponent<Transform>()->scale.y / 720;
+		for (auto p : FACTORY->ObjectIDMap)
+		{
+			if (!p.second->HasComponent<Emitter>())
+			{
+				float xscale = APP->_screenWidth * p.second->GetComponent<Transform>()->scale.x / 1280;
+				float yscale = APP->_screenHeight * p.second->GetComponent<Transform>()->scale.y / 720;
 
-		if(p.second->objectstyle == Objectstyle::Button)
-			p.second->GetComponent<Transform>()->scale = glm::vec3(xscale, xscale, 0);
-		else
-		p.second->GetComponent<Transform>()->scale = glm::vec3(xscale, yscale, 0);
-	}
+				if (p.second->objectstyle == Objectstyle::Button)
+					p.second->GetComponent<Transform>()->scale = glm::vec3(xscale, xscale, 0);
+				else
+					p.second->GetComponent<Transform>()->scale = glm::vec3(xscale, yscale, 0);
+			}
+		}
 }
 
 
@@ -443,6 +446,21 @@ void TE::Application::PollMouseEvent(SDL_Event & currentEvent)
 	default:
 		break;
 	}
+}
+
+void TE::Application::getCurrentMonitorSize()
+{
+	glm::vec2 screensize;
+	SDL_DisplayMode dm;
+	if (SDL_GetDesktopDisplayMode(0, &dm) != 0)
+	{
+		SDL_Log("SDL_GETDESKTOPDISPLAYMODE failed: %s", SDL_GetError());
+		
+	}
+	screensize.x = dm.w;
+	screensize.y = dm.h;
+	std::cout << dm.w << "    " << dm.h << std::endl;
+	//SDL_GetRendererOutputSize(r)
 }
 
 //void Application::ChangeScreenSize(SDL_Window * window, Resolution resolution)
@@ -644,7 +662,6 @@ void WindowIconSetting(SDL_Window * sWnd)
 
 	// The icon is attached to the window pointer
 	SDL_SetWindowIcon(sWnd, icon);
-
 	// ...and the surface containing the icon pixel data is no longer required.
 	SDL_FreeSurface(icon);
 }

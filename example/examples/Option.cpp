@@ -47,6 +47,7 @@ Option::~Option()
 
 void Option::Load()
 {
+	rotation_radius = static_cast<int>(APP->_screenWidth*.1f);
 
 	LEVELMANAGER->LoadLevel("Option.json");
 	OptionSound = SOUNDMANAGER->LoadSound("Menu.mp3");
@@ -60,6 +61,13 @@ void Option::Load()
 	Option_Credits = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Option_Credits.png");
 	Option_Back = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Option_BackToMenu.png"); 
 	Option_Full = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Option_FullScreen.png");
+
+	FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position = glm::vec3(0, rotation_radius,0);
+	FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->position = glm::vec3(-rotation_radius,0,0);
+	FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->position = glm::vec3(0,-rotation_radius,0);
+	FACTORY->ObjectIDMap[4]->GetComponent<Transform>()->position = glm::vec3(rotation_radius,0,0);
+	FACTORY->ObjectIDMap[7]->GetComponent<Transform>()->position = glm::vec3(0, APP->_screenHeight*.4f, 0);
+
 	
 	
 }
@@ -78,7 +86,6 @@ void Option::Init()
 
 	}
 	CreditsIsON = false;
-	rotation_radius = 100;
 	Selection = OptionList::Option_SoundOnOff;
 	delta_angle = 90;
 	LeftRotate = false;

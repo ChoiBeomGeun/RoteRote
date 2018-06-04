@@ -152,17 +152,19 @@ void TE::Camera::proj()
 	}
 	else
 	{
-		if (APP->_resolution == Resolution::_1280X960 || APP->_resolution == Resolution::_800X600)
-		{
-			_aspect = (float)16 / 9;
-			projection = glm::perspective(glm::radians(angle), _aspect, _zNear, _zFar);
-		}
-		else if(APP->_resolution == Resolution::_1280X720)
+		//4:3
+		if (APP->_resolution == Resolution::_1280X960 || APP->_resolution == Resolution::_800X600 || APP->_resolution == Resolution::_1024X768)
 		{
 			_aspect = (float)APP->_screenWidth / (float)APP->_screenHeight;
 			projection = glm::perspective(glm::radians(angle), _aspect, _zNear, _zFar);
 		}
-		else
+		//16:9
+		else if(APP->_resolution == Resolution::_1280X720 || APP->_resolution == Resolution::_1920X1080 || APP->_resolution == Resolution::_1600X900)
+		{
+			_aspect = (float)APP->_screenWidth / (float)APP->_screenHeight;
+			projection = glm::perspective(glm::radians(angle), _aspect, _zNear, _zFar);
+		}
+		else if(APP->_resolution == Resolution::_1680X1050)
 		{
 			_aspect = (float)APP->_screenWidth / (float)APP->_screenHeight;
 			projection = glm::perspective(glm::radians(angle), _aspect, _zNear, _zFar);
@@ -193,12 +195,12 @@ void TE::Camera::unproj()
 			_aspect = 1;
 			projection = glm::ortho(-APP->_screenWidth *.5f, APP->_screenWidth *.5f, -APP->_screenHeight*.5f, APP->_screenHeight*.5f, _zNear, _zFar);
 		}
-		else if (APP->_resolution == Resolution::_1280X720)
+		else if (APP->_resolution == Resolution::_1280X720 || APP->_resolution == Resolution::_1920X1080 || APP->_resolution == Resolution::_1600X900)
 		{
 			_aspect = 1;
 			projection = glm::ortho(-APP->_screenWidth *.5f, APP->_screenWidth *.5f, -APP->_screenHeight*.5f, APP->_screenHeight*.5f, _zNear, _zFar);
 		}
-		else
+		else if (APP->_resolution == Resolution::_1680X1050)
 		{
 			_aspect = 1;
 			projection = glm::ortho(-APP->_screenWidth *.5f, APP->_screenWidth *.5f, -APP->_screenHeight*.5f, APP->_screenHeight*.5f, _zNear, _zFar);

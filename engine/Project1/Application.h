@@ -31,6 +31,7 @@ namespace TE {
 		_1024X768,
 		_1280X720,
 		_1280X960,
+		_1680X1050,
 		_1600X900,
 		_1920X1080
 	};
@@ -67,6 +68,7 @@ namespace TE {
 		void PollWindowEvent(SDL_Event & currEvent);
 		void PollKeyEvent(SDL_Event & currEvent);
 		void PollMouseEvent(SDL_Event & currentEvent);
+		void getCurrentMonitorSize();
 		/*
 		*	return windowID: pWnd;
 		*
