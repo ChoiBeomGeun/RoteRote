@@ -32,6 +32,8 @@ void FadeIn(void)
 	
 	for(auto allobj:FACTORY->ObjectIDMap)
 	{
+		if(allobj.second->objectstyle == Objectstyle::BackGround)
+			continue;
 		allobj.second->GetComponent<Sprite>()->ChangeColor(255, 255, 255, itransvalue);
 		//PARTICLEMANAGER->turn_on_particles(false);
 		if (itransvalue > 255) {

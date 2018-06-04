@@ -31,7 +31,7 @@ Object * oReRestartbutton;
 Object * oReLevelbutton;
 Object * ReeplayImage;
 Object * ReeplayUI;
-Object * rBackgroundobj;
+
 TE::CameraAction replayCam;
 std::queue<ReplayerInfo> itor;
 static bool IsButtonAvailable = true;
@@ -73,7 +73,7 @@ void Backgame3(void)
 		return;
 	}
 
-
+	
 	CAMERA->cameraUp.x = 0;
 	CAMERA->cameraUp.y = 1;
 
@@ -98,12 +98,8 @@ void MakeReplayerUI(void) {
 	
 
 	LEVELMANAGER->LoadLevel(STATEMANAGER->Loadtolevelname);
+	Level1::loadbackground();
 
-	rBackgroundobj = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(1, 1, 0));
-	rBackgroundobj->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("dd.png");
-	rBackgroundobj->objectstyle = Objectstyle::Button;
-	rBackgroundobj->GetComponent<Sprite>()->depth = -1;
-	rBackgroundobj->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 140);
 
 	oReBackbutton = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion3.x, Vec3buttonPostion3.y + .200f, 0), Vec3Buttonscale3);
 	oReBackbutton->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("nextlevel.png");
@@ -157,6 +153,7 @@ void SetReplayer(void) {
 		//itor = STATEMANAGER->Replayerinfo.begin();
 		FACTORY->DestroyAllObjects();
 		LEVELMANAGER->LoadLevel(STATEMANAGER->Loadtolevelname);
+		Level1::loadbackground();
 		TRIGGERLOGIC->Initialize();
 		oReBackbutton = FACTORY->CreateHUD(glm::vec3(Vec3buttonPostion3.x, Vec3buttonPostion3.y + .200f, Vec3buttonPostion3.z), Vec3Buttonscale3);
 		oReBackbutton->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("nextlevel.png");

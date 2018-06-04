@@ -29,7 +29,7 @@ public:
 	void Free(void);
 	void Unload(void);
 
-	void loadbackground();
+	static void loadbackground();
 	
 	
 	//void CamMoveToCenter();
@@ -48,7 +48,7 @@ public:
 private:
 	glm::vec3 _playerPosition;
 	float _camPaceSpeed;
-	float background_trsparent;
+
 	glm::vec3 _camPacedirction;
 	glm::vec3 _camStartPosition;
 	TE::CameraAction camAct;
