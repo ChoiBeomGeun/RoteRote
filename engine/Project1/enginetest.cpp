@@ -14,6 +14,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 
 
 #pragma  once
+#pragma comment(lib, "winmm.lib") 
 #include "Engine.h"
 #include "DebugUtil.h"
 #include "Application.h"
@@ -33,10 +34,12 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 
 #include "..\..\example\examples\logging.h"
 #include "Physics.h"
-
+#include <windows.h>
 #define ISLOGGINGON false;
 typedef BOOL(WINAPI *LPFN_ISWOW64PROCESS) (HANDLE, PBOOL);
 LPFN_ISWOW64PROCESS fnIsWow64Process;
+
+
 using namespace TE;
 namespace TE {
 
@@ -103,6 +106,9 @@ void Engine::Quit()
 void Engine::GameLoop()
 {
 
+	static DWORD ﻿frameDelta = 0;
+
+	static DWORD lastTime = timeGetTime();
 	//Initialize Timer
 	Timer::Initialize();
 	//Testing Object creation 
@@ -117,42 +123,38 @@ void Engine::GameLoop()
 	uint32_t tick_time = SDL_GetTicks();
 	double previous = GetCurrentTime();
 	double lag = 0.0;
+	DWORD FPS = 100;
+
+	DWORD dwInterval = 1000 / FPS;
+	DWORD dwNextTick = 0; //다음 번 루프 순회가 시작 되어야 하는 시간 
 	while (GameIsRunning)
 	{
+
+		if (dwNextTick > GetTickCount())
+			Sleep(dwNextTick - GetTickCount());//dwNextTick - GetTickCount() : 현재의 FPS가 너무 높게 나와 이번 루프에서 지연 되어야 하는 시간
+
 		float frametime = Timer::GetDelta();
-		pm_accumulator += frametime;
 
 
 
-		//if (frametime >= 0.025f)
-		//	frametime = 0.016f;
 
-		//if (frametime <= 0.016f)
-		//	frametime = 0.016f;
+			for (unsigned int i = 0; i < SystemList.size(); ++i) {
 
+			
 
-		if (IsLoggingOn)
-			LOGGINGSYSTEM->HowMuchTimePassed += static_cast<long>(frametime);
-
-		for (unsigned int i = 0; i < SystemList.size(); ++i) {
+				SystemList[i]->Update(0.016f);
 
 
-			SystemList[i]->Update(frametime);
+				if (!GameIsRunning)
 
-
-			if (!GameIsRunning)
-
-				break;
-		}
-		if (pm_accumulator > pm_accumlock)
-			pm_accumulator = pm_accumlock;
-
-		while (pm_accumulator >= pm_fixeddt)
-		{
-			pm_accumulator -= pm_fixeddt;
-
-		}
+					break;
+			}
+			dwNextTick = GetTickCount() + dwInterval;
 	}
+		
+	
+
+	
 	//Todo : Delete all game objects
 	FACTORY->DestroyAllObjects();
 }
