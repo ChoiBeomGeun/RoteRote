@@ -56,26 +56,28 @@ Pause::~Pause()
 
 void Pause::Load()
 {
-	frame = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(.5, .5, 0));
-	frame->GetComponent<Transform>()->scale.y = frame->GetComponent<Transform>()->scale.x;
-	textIndicator = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(.25, .25, 0));
+	rotation_radius = 200;
+	frame = FACTORY->CreateHUD(glm::vec3(0,0,0), glm::vec3(0,0,0));
+	frame->GetComponent<Transform>()->scale = glm::vec3(300, 300, 0);
+	textIndicator = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0));
+	textIndicator->GetComponent<Transform>()->scale = glm::vec3(200, 200,0);
 
-	iconRestart = FACTORY->CreateHUD(glm::vec3(APP->_screenWidth*.1f, 0, 0), glm::vec3(.10, .10, 0));
-	iconRestart->GetComponent<Transform>()->position = glm::vec3(APP->_screenWidth*.2f,  0, 0);
+	iconRestart = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0));
+	iconRestart->GetComponent<Transform>()->position = glm::vec3(rotation_radius,  0, 0);
 	iconRestart->GetComponent<Transform>()->scale = glm::vec3(40, 40, 0);
 
-	iconHowToPlay = FACTORY->CreateHUD(glm::vec3(0, APP->_screenWidth*.1f, 0), glm::vec3(.10, .10, 0));
-	iconHowToPlay->GetComponent<Transform>()->position = glm::vec3(0, APP->_screenWidth*.2f, 0);
+	iconHowToPlay = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0));
+	iconHowToPlay->GetComponent<Transform>()->position = glm::vec3(0, rotation_radius, 0);
 	iconHowToPlay->GetComponent<Transform>()->scale = glm::vec3(40, 40, 0);
 
 
-	iconExit = FACTORY->CreateHUD(glm::vec3(0, -APP->_screenWidth*.1f, 0), glm::vec3(.10, .10, 0));
-	iconExit->GetComponent<Transform>()->position = glm::vec3(0, -APP->_screenWidth*.2f, 0);
+	iconExit = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0));
+	iconExit->GetComponent<Transform>()->position = glm::vec3(0, -rotation_radius, 0);
 	iconExit->GetComponent<Transform>()->scale = glm::vec3(40, 40, 0);
 
 
-	iconLevelSelect = FACTORY->CreateHUD(glm::vec3(-APP->_screenWidth*.1f, 0, 0), glm::vec3(.10, .10, 0));
-	iconLevelSelect->GetComponent<Transform>()->position = glm::vec3(-APP->_screenWidth*.2f, 0, 0);
+	iconLevelSelect = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0));
+	iconLevelSelect->GetComponent<Transform>()->position = glm::vec3(-rotation_radius, 0, 0);
 	iconLevelSelect->GetComponent<Transform>()->scale = glm::vec3(40, 40, 0);
 
 
@@ -107,13 +109,13 @@ void Pause::Load()
 	iconLevelSelect->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Pause_levelselecticon.png");
 
 
-	resize();
+	//resize();
 }
 
 void Pause::Init()
 {
 	CreditsIsON = false;
-	rotation_radius = APP->_screenWidth*.2f;
+	
 	Selection = PauseList::Pause_Restart;
 	delta_angle = 90;
 	LeftRotate = false;
@@ -238,7 +240,9 @@ void Pause::Update(float dt)
 				break;
 			case PauseList::Pause_HowToPlay:
 
-				obj_confirmationPause = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(.5, 0.5, 0));
+				obj_confirmationPause = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0));
+				obj_confirmationPause->GetComponent<Transform>()->position = glm::vec3(0, 0, 0);
+				obj_confirmationPause->GetComponent<Transform>()->scale = glm::vec3(500, 300, 0);
 				obj_confirmationPause->GetComponent<Sprite>()->depth = 3;
 				obj_confirmationPause->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Sure.png");
 				ConfirmationIsOn = true;
@@ -247,7 +251,9 @@ void Pause::Update(float dt)
 
 			case PauseList::Pause_LevelSelect:
 			{
-				oHowToPlay = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(.75, .5, 0));
+				oHowToPlay = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0));
+				oHowToPlay->GetComponent<Transform>()->position = glm::vec3(0, 0, 0);
+				oHowToPlay->GetComponent<Transform>()->scale = glm::vec3(500, 300, 0);
 				oHowToPlay->GetComponent<Sprite>()->depth =5;
 				oHowToPlay->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("howtoplay.png");
 

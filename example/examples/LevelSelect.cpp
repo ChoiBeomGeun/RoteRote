@@ -104,8 +104,7 @@ void LevelSelect::Load()
 
 	LockObject = FACTORY->CreateArchetype(ReadingArchetype("Button.json"));
 	LockObject->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("LevelSelectionLock.png");
-	LockObject->GetComponent<Transform>()->SetPosition(glm::vec3(0, 0, 0));
-	LockObject->GetComponent<Transform>()->SetScale(glm::vec3(APP->_screenWidth*.45f, APP->_screenWidth*.45f, 0));
+
 }
 
 
@@ -113,11 +112,11 @@ void LevelSelect::Init()
 {
 
 	
-	FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth* .2f, APP->_screenWidth*.05f, 0);
+	/*FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth* .2f, APP->_screenWidth*.05f, 0);
 	FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.45f, APP->_screenWidth *.45f, 0);
 	FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.25f, APP->_screenWidth *.25f, 0);
 
-	FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position = glm::vec3(0, APP->_screenHeight*.4f, 0);
+	FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position = glm::vec3(0, APP->_screenHeight*.4f, 0);*/
 
 	//FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position = glm::vec3(0, FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position.y + sizefactor.x *.5f, 0);
 	FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Levelpng[LevelList];
@@ -126,21 +125,21 @@ void LevelSelect::Init()
 	IsLeftPressed = false;
 	IsRightPreesed = false;
 	LvlSelectCam.cameraSetting(CameraPosType::EN_LevelSelect);
-	APP->ResizeAllObjects();
+	/*APP->ResizeAllObjects();
 	if (APP->_screenWidth != 1280 && APP->_screenHeight != 720)
 	{
 		sizefactor.x = APP->_screenWidth * APP->_screenWidth *.25f / 1280;
 		sizefactor.y = APP->_screenHeight * APP->_screenWidth *.25f / 720;
-	}
+	}*/
 }
 
 void LevelSelect::Update(float dt)
 {
 
 	if (STATEMANAGER->vsLevelListandclear[LevelList].second == true)
-		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(sizefactor.x, sizefactor.x, 0));
-	else
 		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(0, 0, 0));
+	else
+		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(300, 300, 0));
 	
 	
 	//= Sprite::find_texture_id("LevelSelction.png");
@@ -256,7 +255,7 @@ void LevelSelect::Rotation(void)
 			if (std::abs(FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle - selectAngle) > 90) {
 				FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle = LevelList * 90.f;
 				FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->angle = 0.f;
-				FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->scale = glm::vec3(sizefactor.x, sizefactor.x, 1);
+				FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->scale = glm::vec3(150, 150, 1);
 				IsRotating = false;
 				FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Levelpng[LevelList];
 			}
@@ -266,7 +265,7 @@ void LevelSelect::Rotation(void)
 			if (std::abs(FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle - selectAngle) > 90) {
 				FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle = -LevelList * 90.f;
 				FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->angle = 0.f;
-				FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->scale = glm::vec3(sizefactor.x, sizefactor.x, 1);
+				FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->scale = glm::vec3(150, 150, 1);
 				IsRotating = false;
 				FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Levelpng[LevelList];
 			}

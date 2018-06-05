@@ -42,7 +42,6 @@ Menu::~Menu()
 void Menu::Load()
 {
 	LEVELMANAGER->LoadLevel("Menu.json");
-	rotation_radius = static_cast<int>(APP->_screenWidth*.2f);
 
 
 	MenuSound = SOUNDMANAGER->LoadSound("menu.mp3");
@@ -61,7 +60,11 @@ void Menu::Load()
 	select_particle = FACTORY->CreateHUD(glm::vec3(0, 0,0),glm::vec3(0.1f));
 	select_particle->GetComponent<Sprite>()->isPerspective = true;
 	PARTICLEMANAGER->LoadEmitter(select_particle, "MenuParticle.json");
-	FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position = glm::vec3(0, rotation_radius, 0);
+	for (auto p : FACTORY->ObjectIDMap)
+	{
+		p.second->GetComponent<Sprite>()->isPerspective = true;
+	}
+	/*FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position = glm::vec3(0, rotation_radius, 0);
 	FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.05f, APP->_screenWidth *.05f, 0);
 
 	FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->position = glm::vec3(-rotation_radius, 0, 0);
@@ -75,7 +78,7 @@ void Menu::Load()
 
 	FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.45f, APP->_screenWidth *.45f, 0);
 	FACTORY->ObjectIDMap[6]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.25f, APP->_screenWidth *.25f, 0);
-
+*/
 
 	
 	select_particle->GetComponent<Transform>()->position.y = static_cast<float>(rotation_radius);
@@ -86,6 +89,8 @@ void Menu::Load()
 {
 	 HowToPlayIsOn = false;
 	 Selection = MenuList::Menu_Start;
+	 rotation_radius = 200;
+
 	 delta_angle = 90;
 	 LeftRotate = false;
 	 RightRotate = false;
@@ -96,10 +101,10 @@ void Menu::Load()
 	 select_index = 0;
 	 MenuCam.cameraSetting(CameraPosType::EN_Menu);
 	 SOUNDMANAGER->PlaySounds(MenuSound, true);
-	 APP->ResizeAllObjects();	
+	 /*APP->ResizeAllObjects();	
 	 FACTORY->ObjectIDMap[7]->GetComponent<Transform>()->position = glm::vec3(0, APP->_screenHeight*.45f, 0);
 
-	 FACTORY->ObjectIDMap[7]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth*.5f, APP->_screenHeight*.2f, 0);
+	 FACTORY->ObjectIDMap[7]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth*.5f, APP->_screenHeight*.2f, 0);*/
 
 }
 
