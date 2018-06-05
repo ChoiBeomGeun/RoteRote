@@ -31,6 +31,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "Archetype.h"
 #include "CameraMovement.h"
 #include "Trigger.h"
+#include "ObjectStyle.h"
 using namespace TE;
 //Object * ooHowToPlay2;
 //Object * ooConfirmation2;
@@ -126,8 +127,8 @@ void Pause::Init()
 	selection_angle = 0;
 	select_index = 0;
 //	PauseCam.cameraSetting(CameraPosType::EN_Option);
-	SOUNDMANAGER->PlaySounds(PauseSound, true);
-
+	SOUNDMANAGER->PauseAllSound();
+	PauseCam.cameraSetting(CameraPosType::EN_BOUNDARY);
 	
 }
 
@@ -313,6 +314,8 @@ void Pause::Update(float dt)
 
 void Pause::Free(void)
 {
+
+	SOUNDMANAGER->ResumeAllSound();
 	if(frame)
 	FACTORY->Destroy(frame);
 	if (textIndicator)
@@ -331,6 +334,7 @@ void Pause::Free(void)
 
 	for (auto obj : FACTORY->ObjectIDMap)
 	{
+		if(obj.second->objectstyle != Objectstyle::BackGround)
 		obj.second->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
 
 	}
