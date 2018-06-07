@@ -234,6 +234,7 @@ copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(T
     <ClCompile Include="Clearzone.cpp" />
     <ClCompile Include="EditorData.cpp" />
     <ClCompile Include="InGameLogic.cpp" />
+    <ClCompile Include="Intro.cpp" />
     <ClCompile Include="Level1.cpp" />
     <ClCompile Include="LevelSelect.cpp" />
     <ClCompile Include="logging.cpp" />
@@ -255,6 +256,7 @@ copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(T
     <ClInclude Include="EditorData.h" />
     <ClInclude Include="GameLogicSystem.h" />
     <ClInclude Include="GameSystem.h" />
+    <ClInclude Include="Intro.h" />
     <ClInclude Include="OptionList.h" />
     <ClInclude Include="InGameLogic.h" />
     <ClInclude Include="Level1.h" />
