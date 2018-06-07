@@ -43,12 +43,32 @@ namespace TE {
 }
 Application::Application() : pWnd(nullptr), ResolutionNumber(2)
 {
+	std::string  path;
 	std::ifstream ifile;
 
 	char line[200]; // 한 줄씩 읽어서 임시로 저장할 공간
 
-	ifile.open(".\\temp.ini");  // 파일 열기
+	
+#ifdef _DEBUG
+	ifile.open(".\\temp.ini");
+#else
 
+
+	char * Userinfo;
+	size_t len = path.size();
+	_dupenv_s(&Userinfo, &len, "USERPROFILE");
+
+	path = Userinfo;
+	path += "/Documents/RoteRote/temp.ini";
+
+
+	ifile.open(path);  // 파일 열기
+
+	free(Userinfo);
+
+#endif
+	
+	
 	if (ifile.is_open())
 	{
 		while (ifile.getline(line, sizeof(line))) // 한 줄씩 읽어 처리를 시작한다.
@@ -103,6 +123,24 @@ Application::Application() : pWnd(nullptr), ResolutionNumber(2)
 	}
 
 	ifile.close(); // 파일 닫기
+
+
+
+
+
+	
+
+#ifdef _DEBUG
+#else
+
+	if (remove(path.c_str()) != 0)
+		perror("Error deleting file");
+	else
+		puts("File successfully deleted");
+	
+#endif
+;
+
 
 
 
