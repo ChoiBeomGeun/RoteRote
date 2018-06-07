@@ -473,7 +473,23 @@ void LevelManager::SaveLevel(std::string  path)
 
 void TE::LevelManager::SavingLevelInfo(void)
 {
-	std::string  path = ".\\levels.\\levelClearInfo.json";
+	std::string  path = "levelClearInfo.json";
+	char * Userinfo;
+	size_t len = path.size();
+	_dupenv_s(&Userinfo, &len, "USERPROFILE");
+
+
+
+
+	std::string saveLevel = path;
+#ifdef _DEBUG
+	path = ".\\levels.\\" + path;
+#else
+	path = Userinfo;
+	path += "/Documents/RoteRote/levels/" + levelClearInfo.json;
+#endif
+	free(Userinfo);
+	
 
 
 	Jsonclass file;
@@ -495,9 +511,22 @@ void TE::LevelManager::SavingLevelInfo(void)
 void TE::LevelManager::LoadingLevelInfo(void)
 {
 
-	std::string  path = ".\\levels.\\levelClearInfo.json";
+	std::string  path = "levelClearInfo.json";
+	char * Userinfo;
+	size_t len = path.size();
+	_dupenv_s(&Userinfo, &len, "USERPROFILE");
 
 
+
+
+	std::string saveLevel = path;
+#ifdef _DEBUG
+	path = ".\\levels.\\" + path;
+#else
+	path = Userinfo;
+	path += "/Documents/RoteRote/levels/" + levelClearInfo.json;
+#endif
+	free(Userinfo);
 
 	Jsonclass file;
 	std::string object = "Object";

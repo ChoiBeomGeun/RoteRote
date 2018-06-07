@@ -47,7 +47,7 @@ Application::Application() : pWnd(nullptr), ResolutionNumber(2)
 
 	char line[200]; // 한 줄씩 읽어서 임시로 저장할 공간
 
-	ifile.open(".\\temp.txt");  // 파일 열기
+	ifile.open(".\\temp.ini");  // 파일 열기
 
 	if (ifile.is_open())
 	{
