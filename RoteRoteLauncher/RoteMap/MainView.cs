@@ -1764,7 +1764,15 @@ namespace RoteMapView
                     temp.Gravity = false;
                     temp.Mass = 1;
                 }
-
+                if (temp.objectstyle == "AttachBox")
+                {
+                    components.Add("TRANSFORM");
+                    components.Add("SPRITE");
+                    components.Add("BODY");
+                    temp.Texture = "AttachBox.png";
+                    temp.Gravity = false;
+                    temp.Mass = 1;
+                }
                 if (temp.objectstyle == "Trigger90")
                 {
                     components.Add("TRANSFORM");
