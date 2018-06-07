@@ -316,7 +316,7 @@ void LevelManager::SaveLevel(std::string  path)
         for (auto it : FACTORY->ObjectIDMap)
         {
 
-			if (it.second->objectstyle == Objectstyle::Button && it.second->GetComponent<Sprite>()->isPerspective
+			if (it.second->objectstyle == Objectstyle::BackGround ||it.second->objectstyle == Objectstyle::Button && it.second->GetComponent<Sprite>()->isPerspective
 				== false && !it.second->HasComponent<Emitter>()) {
                 NumberofUnvaildObject++;
                 continue;
@@ -348,7 +348,7 @@ void LevelManager::SaveLevel(std::string  path)
 		static unsigned index = 0;
 
 
-                if (it.second->objectstyle == Objectstyle::Button && it.second->GetComponent<Sprite>()->isPerspective 
+                if (it.second->objectstyle == Objectstyle::BackGround ||it.second->objectstyle == Objectstyle::Button && it.second->GetComponent<Sprite>()->isPerspective
 					== false &&!it.second->HasComponent<Emitter>()) {
 
                     continue;
@@ -438,6 +438,9 @@ void LevelManager::SaveLevel(std::string  path)
 			break;
 		case Objectstyle::Trigger90Right:
 			root[object + to_string(i)]["ObjectType"] = "Trigger90Right";
+			break;
+		case Objectstyle::Hazard:
+			root[object + to_string(i)]["ObjectType"] = "Hazard";
 			break;
 			/*case Objectstyle::Camera:
 			root[object + to_string(i)]["ObjectType"] = "Camera";

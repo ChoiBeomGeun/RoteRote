@@ -117,6 +117,12 @@ void ImGuiUpdate(void) {
 				case Objectstyle::Particle:
 					ObjectStyle = "Particle";
 					break;
+				case Objectstyle::BackGround:
+					ObjectStyle = "BackGround";
+					break;
+				case Objectstyle::Hazard:
+					ObjectStyle = "Hazard";
+					break;
 				}
 				std::string Object = "Object" + std::to_string(i.second->objID) + " - ";
 				std::string ObjectScale = "Scale";

@@ -102,7 +102,7 @@ void InGameLogic::InGameUpdate(float dt)
 	for (auto Objects : FACTORY->ObjectIDMap)
 	{
 		if (STATEMANAGER->b_IsRotating)
-			if (FACTORY->ObjectIDMap[Objects.first]->objectstyle == Objectstyle::Box)
+			if (FACTORY->ObjectIDMap[Objects.first]->objectstyle == Objectstyle::Box || FACTORY->ObjectIDMap[Objects.first]->objectstyle == Objectstyle::AttachBox)
 				FACTORY->ObjectIDMap[Objects.first]->GetComponent<Body>()->pm_velocity = glm::vec3(0);
 	}
 }

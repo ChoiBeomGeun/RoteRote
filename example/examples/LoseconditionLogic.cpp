@@ -63,14 +63,8 @@ void TE::LoseconditionLogic::Update(float dt)
 				STATEMANAGER->Restart();
 			}
 		}
-		if (Objects.second->objectstyle ==Objectstyle::Box/*!= Objectstyle::Player &&
-			Objects.second->objectstyle != Objectstyle::Clearzone&&
-			Objects.second->objectstyle != Objectstyle::Button &&
-			Objects.second->objectstyle != Objectstyle::Trigger180 &&
-			Objects.second->objectstyle != Objectstyle::Trigger90 &&
-			Objects.second->objectstyle != Objectstyle::Camera &&
-			Objects.second->objectstyle != Objectstyle::Particle &&
-			Objects.second->objectstyle != Objectstyle::BackGround*/
+		if (Objects.second->objectstyle ==Objectstyle::Box || Objects.second->objectstyle == Objectstyle::AttachBox
+			|| Objects.second->objectstyle == Objectstyle::AttachWall || Objects.second->objectstyle == Objectstyle::Wall
 			)
 		{
 				obj = Objects.second;

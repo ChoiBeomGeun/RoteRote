@@ -101,7 +101,7 @@ void Physics::ExplictEulerIntegrator(float dt) {
 		//dynamic_cast<Transform*>((*i)->GetOwner()->GetComponent(CT_TRANSFORM));
 		curfp = pTr->GetPosition();
 		pTr->SetPosition(curfp + (*i).second->pm_velocity*dt);
-		if ((*i).second->GetOwner()->objectstyle == Objectstyle::Trigger90Right||
+		if ((*i).second->GetOwner()->objectstyle == Objectstyle::Hazard || (*i).second->GetOwner()->objectstyle == Objectstyle::Trigger90Right||
 			(*i).second->GetOwner()->objectstyle == Objectstyle::Wall || (*i).second->GetOwner()->objectstyle == Objectstyle::Trigger90 || (*i).second->GetOwner()->objectstyle == Objectstyle::Trigger180 || (*i).second->GetOwner()->objectstyle == Objectstyle::AttachWall)
 			continue;
 
@@ -140,9 +140,15 @@ void Physics::BroadPhase() {
 	for (std::map<unsigned int, Body*>::iterator i = m_Body.begin();
 		i != m_Body.end(); ++i) {
 
+		if (i->second->GetOwner()->objectstyle == Objectstyle::Hazard)
+			continue;
+
 		for (std::map <unsigned int, Body*>::iterator j = std::next(i); j != m_Body.end(); j++) {
 			//Check collsision between tow AABB objects,
 			//put the pair into the container
+
+			if (j->second->GetOwner()->objectstyle == Objectstyle::Hazard)
+				continue;
 
 			Pair ij(i->second, j->second);
 
@@ -155,7 +161,7 @@ void Physics::BroadPhase() {
 					Attached = true;
 			}
 
-			if (i->second->GetOwner()->objectstyle == Objectstyle::AttachBox && j->second->GetOwner()->objectstyle == Objectstyle::Player) {
+			else if(i->second->GetOwner()->objectstyle == Objectstyle::AttachBox && j->second->GetOwner()->objectstyle == Objectstyle::Player) {
 				if (AABBvsAABB(i->second, j->second, &ij))
 					Attached = true;
 			}
@@ -294,8 +300,7 @@ bool Physics::CircleCircleCollisionCheck(Body * pA, Body * pB, Pair *M)
 
 void Physics::KinematicBoxCollision(float &rhs_invmass, float &lhs_invmass, Pair *M)
 {
-	if ((M->m_lhs->GetOwner()->objectstyle == Objectstyle::Box && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Box)
-		|| M->m_lhs->GetOwner()->objectstyle == Objectstyle::AttachBox && M->m_rhs->GetOwner()->objectstyle == Objectstyle::AttachBox)
+	if ((M->m_lhs->GetOwner()->objectstyle == Objectstyle::Box || M->m_lhs->GetOwner()->objectstyle == Objectstyle::AttachBox) && (M->m_rhs->GetOwner()->objectstyle == Objectstyle::Box || M->m_rhs->GetOwner()->objectstyle == Objectstyle::AttachBox))
 	{
 		if (gravity.y < 0)
 		{
@@ -326,11 +331,9 @@ void Physics::KinematicBoxCollision(float &rhs_invmass, float &lhs_invmass, Pair
 				rhs_invmass = 0;
 		}
 	}
-	else if ((M->m_lhs->GetOwner()->objectstyle == Objectstyle::Player && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Box)
-		|| (M->m_lhs->GetOwner()->objectstyle == Objectstyle::Player && M->m_rhs->GetOwner()->objectstyle == Objectstyle::AttachBox))
+	else if (M->m_lhs->GetOwner()->objectstyle == Objectstyle::Player && (M->m_rhs->GetOwner()->objectstyle == Objectstyle::Box || M->m_rhs->GetOwner()->objectstyle == Objectstyle::AttachBox))
 		rhs_invmass = 0;
-	else if ((M->m_lhs->GetOwner()->objectstyle == Objectstyle::Box && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Player)
-		|| (M->m_lhs->GetOwner()->objectstyle == Objectstyle::Player && M->m_rhs->GetOwner()->objectstyle == Objectstyle::AttachBox))
+	else if ((M->m_lhs->GetOwner()->objectstyle == Objectstyle::Box || M->m_lhs->GetOwner()->objectstyle == Objectstyle::AttachBox) && M->m_rhs->GetOwner()->objectstyle == Objectstyle::Player)
 		lhs_invmass = 0;
 }
 
