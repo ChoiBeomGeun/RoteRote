@@ -110,6 +110,10 @@ void Menu::Load()
 
 void Menu::Update(float dt)
 {
+
+	if (Input::IsTriggered(SDL_SCANCODE_F1))
+		STATEMANAGER->MoveState(StatesList::Intro-1);
+
 	if (ConfirmationIsOn) {
 		if (Input::IsTriggered(SDL_SCANCODE_Y))
 			ENGINE->Quit();

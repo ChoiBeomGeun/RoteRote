@@ -125,7 +125,7 @@ void LevelManager::LoadLevel(std::string  path)
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "SPRITE") {
 			//	Sprite * sprite = new Sprite();
 				tempObject->AddComponent<Sprite>();
-				tempObject->GetComponent<Sprite>()->depth = file.mRoot[object + to_string(i)]["Depth"].asFloat();
+ 				tempObject->GetComponent<Sprite>()->depth = file.mRoot[object + to_string(i)]["Depth"].asFloat();
 				tempObject->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
 				tempObject->GetComponent<Sprite>()->isPerspective = true;
 				tempObject->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(textureDir);
@@ -234,8 +234,7 @@ void LevelManager::LoadLevel(std::string  path)
 		else if (Objectstyle == "Button")
 		{
 
-			if(tempObject->GetComponent<Sprite>() !=NULL)
-			tempObject->GetComponent<Sprite>()->depth = -1;
+		
 			//tempObject = FACTORY->CreateButton(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0));
 			tempObject->objectstyle = Objectstyle::Button;
 		}

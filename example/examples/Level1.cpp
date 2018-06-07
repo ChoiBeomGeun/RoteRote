@@ -100,7 +100,7 @@ void Level1::Init()
 	ZoomInToPlayer = false;
 	XmovedCompleted = false;
 	YmovedCompleted = false;
-	path2 = STATEMANAGER->Loadtolevelname;
+	path2 = "SAVE";
 	_camPaceSpeed = 100.0f;
 
 	moving = false;
@@ -221,6 +221,8 @@ void Level1::Update(float dt)
 		temp.anitime = player->GetComponent<Animation>()->getTime();
 		temp.mouseinfo = player->GetComponent<Animation>()->isFlippedX();
 		STATEMANAGER->Replayerinfo.push(temp);
+
+
 	}
 
 	if (!ENGINE->GetGameStateIsOn())
@@ -341,6 +343,24 @@ void Level1::Update(float dt)
 			
 		}
 	}
+
+	static bool Isauto = false;
+	if (Input::IsTriggered(SDL_SCANCODE_W)) {
+		Isauto = true;
+	
+	}
+	if(Isauto)
+	{
+		root["PositionX"][j] = FACTORY->GetPlayer()->GetComponent<Transform>()->GetPosition().x;
+		root["PositionY"][j] = FACTORY->GetPlayer()->GetComponent<Transform>()->GetPosition().y;
+		root["Frame"][j] = FACTORY->GetPlayer()->GetComponent<Animation>()->getFrame();
+		root["FrameTime"][j] = FACTORY->GetPlayer()->GetComponent<Animation>()->getTime();
+		root["isFlippedX"][j] = FACTORY->GetPlayer()->GetComponent<Animation>()->isFlippedX();
+
+		j++;
+	}
+	if (Input::IsTriggered(SDL_SCANCODE_Q))
+	file.WriteFile(path2, root);
 }
 
 void Level1::Free(void)

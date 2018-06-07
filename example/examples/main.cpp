@@ -38,6 +38,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "Trigger.h"
 #include "cAutoMoving.h"
 #include "Automoving.h"
+#include "Intro.h"
 
 using namespace TE;
 int main(int,char**)
@@ -70,6 +71,7 @@ int main(int,char**)
 	STATEMANAGER->AddState(new Pause);
 
 	STATEMANAGER->AddState(new MapEditor);
+	STATEMANAGER->AddState(new Intro);
 	STATEMANAGER->SetPauseState(StatesList::Pause);
 	STATEMANAGER->SetStartState(StatesList::Splash);
 //	STATEMANAGER->SetReplayState(6);

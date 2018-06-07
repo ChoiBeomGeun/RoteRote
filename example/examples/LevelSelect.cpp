@@ -90,7 +90,7 @@ void LevelSelect::Load()
 
 	std::vector<std::string> temp = INGAMELOGIC->vsLevelList;
 
-	LEVELMANAGER->LoadingLevelInfo();
+ 	LEVELMANAGER->LoadingLevelInfo();
 	LEVELMANAGER->LoadLevel("selectlevel.json");
 
 	for (int i = 1; i <= LevelList::quit + 1; ++i)
@@ -136,7 +136,7 @@ void LevelSelect::Init()
 void LevelSelect::Update(float dt)
 {
 
-	if (STATEMANAGER->vsLevelListandclear[LevelList].second == true)
+	if (!STATEMANAGER->vsLevelListandclear[LevelList].second == true)
 		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(0, 0, 0));
 	else
 		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(300, 300, 0));
