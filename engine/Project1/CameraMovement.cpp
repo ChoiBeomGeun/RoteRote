@@ -100,161 +100,164 @@ namespace TE {
 		glm::vec3 rightblock = glm::vec3(0), leftblock = glm::vec3(0), upblock = glm::vec3(0), downblock = glm::vec3(0);
 		if (FACTORY->GetPlayer())
 		{
-			glm::vec3 playerpos = FACTORY->GetPlayer()->GetComponent<Transform>()->position;
-			if (type == CameraRotation::EN_0)
-			{
-				upblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
-				downblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
-				rightblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
-				leftblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
-			
+			glm::vec2 playerpos = glm::vec2(FACTORY->GetPlayer()->GetComponent<Transform>()->position);
+			CAMERA->cameraPos = glm::vec3(playerpos, 999);
 
-				float width = rightblock.x - leftblock.x, height = upblock.x - downblock.x;
-				if (STATEMANAGER->Loadtolevelname == "level1.json")
-				{
-					width = FACTORY->DownBoundary()->GetComponent<Transform>()->scale.x;
-					CAMERA->cameraPos.x = downblock.x;
-					CAMERA->cameraPos.y =0;
+			//if (type == CameraRotation::EN_0)
+			//{
+			//	upblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
+			//	downblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
+			//	rightblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
+			//	leftblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
+			//
 
-					float leftboundary, rightboundary;
-					leftboundary = downblock.x - APP->_screenWidth*.25f;
-					rightboundary = downblock.x + APP->_screenWidth *.25f;
+			//	float width = rightblock.x - leftblock.x, height = upblock.x - downblock.x;
+			//	if (STATEMANAGER->Loadtolevelname == "level1.json")
+			//	{
+			//		width = FACTORY->DownBoundary()->GetComponent<Transform>()->scale.x;
+			//		CAMERA->cameraPos.x = downblock.x;
+			//		CAMERA->cameraPos.y =0;
 
-					if (playerpos.x < leftboundary)
-						CAMERA->cameraPos.x = leftboundary;
-					else if (playerpos.x > rightboundary)
-						CAMERA->cameraPos.x = rightboundary;
-					else
-						CAMERA->cameraPos.x = playerpos.x;
-				}
-				else if (STATEMANAGER->Loadtolevelname == "level8.json" || STATEMANAGER->Loadtolevelname == "level10.json")
-				{
-					CAMERA->cameraPos = glm::vec3(0, 0, 999);
-				}
-				// 1. if map is smaller than screen
-				else if (width < APP->_screenWidth && height < APP->_screenHeight)
-				{
-					CAMERA->cameraPos.x = downblock.x;
-					CAMERA->cameraPos.y = leftblock.y;
-				}
-				// 2. if width is bigger than screen
-				else if (width > APP->_screenWidth)
-				{
-					float leftboundary, rightboundary;
-					leftboundary = downblock.x - APP->_screenWidth*.25f;
-					rightboundary = downblock.x + APP->_screenWidth *.25f;
+			//		float leftboundary, rightboundary;
+			//		leftboundary = downblock.x - width * .1f;
+			//		rightboundary = downblock.x + width * .1f;
 
-					if (playerpos.x < leftboundary)
-						CAMERA->cameraPos.x = leftboundary;
-					else if (playerpos.x > rightboundary)
-						CAMERA->cameraPos.x = rightboundary;
-					else
-						CAMERA->cameraPos.x = playerpos.x;
-				}
-				// 3. if height is bigger than screen
-				else if (height > APP->_screenHeight)
-				{
-					float upboundary, downboundary;
-					upboundary = upblock.x - APP->_screenHeight*.25f;
-					downboundary = downblock.x + APP->_screenHeight *.25f;
+			//		if (playerpos.x < leftboundary)
+			//			CAMERA->cameraPos.x = leftboundary;
+			//		else if (playerpos.x > rightboundary)
+			//			CAMERA->cameraPos.x = rightboundary;
+			//		else
+			//			CAMERA->cameraPos.x = playerpos.x;
+			//	}
+			//	else if (STATEMANAGER->Loadtolevelname == "level8.json" || STATEMANAGER->Loadtolevelname == "level10.json")
+			//	{
+			//		CAMERA->cameraPos = glm::vec3(0, 0, 999);
+			//	}
+			//	// 1. if map is smaller than screen
+			//	// this applies to level 2,3,4
+			//	else if (width < APP->_screenWidth && height < APP->_screenHeight)
+			//	{
+			//		CAMERA->cameraPos.x = downblock.x;
+			//		CAMERA->cameraPos.y = leftblock.y;
+			//	}
+			//	// 2. if width is bigger than screen
+			//	else if (width > APP->_screenWidth)
+			//	{
+			//		float leftboundary, rightboundary;
+			//		leftboundary = downblock.x - APP->_screenWidth*.25f;
+			//		rightboundary = downblock.x + APP->_screenWidth *.25f;
 
-					if (playerpos.y < upboundary)
-						CAMERA->cameraPos.y = upboundary;
-					else if (playerpos.y > downboundary)
-						CAMERA->cameraPos.y = downboundary;
-					else
-						CAMERA->cameraPos.y = playerpos.y;
-				}
-				// 4 when map is both bigger than screen.
-				else {
+			//		if (playerpos.x < leftboundary)
+			//			CAMERA->cameraPos.x = leftboundary;
+			//		else if (playerpos.x > rightboundary)
+			//			CAMERA->cameraPos.x = rightboundary;
+			//		else
+			//			CAMERA->cameraPos.x = playerpos.x;
+			//	}
+			//	// 3. if height is bigger than screen
+			//	else if (height > APP->_screenHeight)
+			//	{
+			//		float upboundary, downboundary;
+			//		upboundary = upblock.x - APP->_screenHeight*.25f;
+			//		downboundary = downblock.x + APP->_screenHeight *.25f;
 
-				}
-			}
-			else if (type == CameraRotation::EN_90)
-			{
-				upblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
-				downblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
-				leftblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
-				rightblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
-				float width = std::abs(rightblock.y - leftblock.y), height = std::abs(upblock.x - downblock.x);
-				glm::vec2 center = glm::vec2(width *.5f,height *.5f );
-				// 1. if map is smaller than screen
-				if (width < APP->_screenWidth && height < APP->_screenHeight)
-				{
-					// do nothing
-				}
-				// 2. if width is bigger than screen
-				else if (width > APP->_screenWidth)
-				{
-					
-				}
-				// 3. if height is bigger than screen
-				else if (height > APP->_screenHeight)
-				{
-					float downlimit = downblock.x + APP->_screenHeight*.25f, uplimit = upblock.x - APP->_screenHeight *.25f;
-					if (CAMERA->cameraPos.x < center.y)
-					{
-						if (CAMERA->cameraPos.x > downlimit)
-							CAMERA->cameraPos.x -= 500 * dt;
-						if (CAMERA->cameraPos.x <= downlimit)
-							CAMERA->cameraPos.x = downlimit;
-					}
-					else if (CAMERA->cameraPos.x > center.y)
-					{
-						if (CAMERA->cameraPos.x < uplimit)
-							CAMERA->cameraPos.x += 5 * dt;
-						if (CAMERA->cameraPos.x >= uplimit)
-							CAMERA->cameraPos.x = downlimit;
-					}
+			//		if (playerpos.y < upboundary)
+			//			CAMERA->cameraPos.y = upboundary;
+			//		else if (playerpos.y > downboundary)
+			//			CAMERA->cameraPos.y = downboundary;
+			//		else
+			//			CAMERA->cameraPos.y = playerpos.y;
+			//	}
+			//	// 4 when map is both bigger than screen.
+			//	else {
 
-				}
-				// 4 when map is both bigger than screen.
-			}
-			else if (type == CameraRotation::EN_180)
-			{
+			//	}
+			//}
+			//else if (type == CameraRotation::EN_90)
+			//{
+			//	upblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
+			//	downblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
+			//	leftblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
+			//	rightblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
+			//	float width = std::abs(rightblock.y - leftblock.y), height = std::abs(upblock.x - downblock.x);
+			//	glm::vec2 center = glm::vec2(width *.5f,height *.5f );
+			//	// 1. if map is smaller than screen
+			//	if (width < APP->_screenWidth && height < APP->_screenHeight)
+			//	{
+			//		// do nothing
+			//	}
+			//	// 2. if width is bigger than screen
+			//	else if (width > APP->_screenWidth)
+			//	{
+			//		
+			//	}
+			//	// 3. if height is bigger than screen
+			//	else if (height > APP->_screenHeight)
+			//	{
+			//		float downlimit = downblock.x + APP->_screenHeight*.25f, uplimit = upblock.x - APP->_screenHeight *.25f;
+			//		if (CAMERA->cameraPos.x < center.y)
+			//		{
+			//			if (CAMERA->cameraPos.x > downlimit)
+			//				CAMERA->cameraPos.x -= 500 * dt;
+			//			if (CAMERA->cameraPos.x <= downlimit)
+			//				CAMERA->cameraPos.x = downlimit;
+			//		}
+			//		else if (CAMERA->cameraPos.x > center.y)
+			//		{
+			//			if (CAMERA->cameraPos.x < uplimit)
+			//				CAMERA->cameraPos.x += 5 * dt;
+			//			if (CAMERA->cameraPos.x >= uplimit)
+			//				CAMERA->cameraPos.x = downlimit;
+			//		}
 
-			}
-			else if (type == CameraRotation::EN_270)
-			{
-				upblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
-				downblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
-				leftblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
-				rightblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
-				float width = std::abs(rightblock.y - leftblock.y), height = std::abs(upblock.x - downblock.x);
-				glm::vec2 center = glm::vec2(width *.5f, height *.5f);
-				// 1. if map is smaller than screen
-				if (width < APP->_screenWidth && height < APP->_screenHeight)
-				{
-					CAMERA->cameraPos = glm::vec3(center, 999);
-				}
-				// 2. if width is bigger than screen
-				else if (width > APP->_screenWidth)
-				{
+			//	}
+			//	// 4 when map is both bigger than screen.
+			//}
+			//else if (type == CameraRotation::EN_180)
+			//{
 
-				}
-				// 3. if height is bigger than screen
-				else if (height > APP->_screenHeight)
-				{
-					float downlimit = downblock.x - APP->_screenHeight*.25f, uplimit = upblock.x + APP->_screenHeight *.25f;
-					if (playerpos.x<= center.x)
-					{
-						if (playerpos.x < uplimit)
-							CAMERA->cameraPos.x = uplimit;
-						else if (playerpos.x >= uplimit)
-							CAMERA->cameraPos.x = playerpos.x;
-						
-					}
-					else if (playerpos.x > center.x)
-					{
-						if (CAMERA->cameraPos.x >= downlimit)
-							CAMERA->cameraPos.x = downlimit;
-						else if (CAMERA->cameraPos.x < downlimit)
-							CAMERA->cameraPos.x = playerpos.x;
-						
-					}
-				}
-				// 4 when map is both bigger than screen.
-			}
+			//}
+			//else if (type == CameraRotation::EN_270)
+			//{
+			//	upblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
+			//	downblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
+			//	leftblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
+			//	rightblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
+			//	float width = std::abs(rightblock.y - leftblock.y), height = std::abs(upblock.x - downblock.x);
+			//	glm::vec2 center = glm::vec2(width *.5f, height *.5f);
+			//	// 1. if map is smaller than screen
+			//	if (width < APP->_screenWidth && height < APP->_screenHeight)
+			//	{
+			//		CAMERA->cameraPos = glm::vec3(center, 999);
+			//	}
+			//	// 2. if width is bigger than screen
+			//	else if (width > APP->_screenWidth)
+			//	{
+
+			//	}
+			//	// 3. if height is bigger than screen
+			//	else if (height > APP->_screenHeight)
+			//	{
+			//		float downlimit = downblock.x - APP->_screenHeight*.25f, uplimit = upblock.x + APP->_screenHeight *.25f;
+			//		if (playerpos.x<= center.x)
+			//		{
+			//			if (playerpos.x < uplimit)
+			//				CAMERA->cameraPos.x = uplimit;
+			//			else if (playerpos.x >= uplimit)
+			//				CAMERA->cameraPos.x = playerpos.x;
+			//			
+			//		}
+			//		else if (playerpos.x > center.x)
+			//		{
+			//			if (CAMERA->cameraPos.x >= downlimit)
+			//				CAMERA->cameraPos.x = downlimit;
+			//			else if (CAMERA->cameraPos.x < downlimit)
+			//				CAMERA->cameraPos.x = playerpos.x;
+			//			
+			//		}
+			//	}
+			//	// 4 when map is both bigger than screen.
+			//}
 
 
 			//	glm::vec3 test = CAMERA->viewport_geometry();
