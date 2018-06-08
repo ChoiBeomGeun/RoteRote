@@ -24,12 +24,17 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "Application.h"
 #include "SoundManager.h"
 #include "InGameLogic.h"
+#include "LevelList.h"
+#include "StateLists.h"
 #include "Archetype.h"
 using namespace TE;
 Jsonclass fileIntro;
 Json::Value rootIntro;
 int autoindex = 0;
 bool Enter = false;
+bool once = true;
+SOUNDID backsound;
+SOUNDID blackhole;
 Intro::Intro()
 {
 
@@ -47,20 +52,24 @@ void Intro::Load()
 
 void Intro::Init()
 {
-
+	once = true;
 	std::string saveLevel = "SAVE";
 
+	backsound = SOUNDMANAGER->LoadSound("introback.mp3");
+	blackhole = SOUNDMANAGER->LoadSound("portalintro.wav");
 
 
-
+	 
 	fileIntro.ReadFile(".\\autoplays.\\" + saveLevel);
 
 
-
+	 SOUNDMANAGER->PlaySounds(backsound,false);
 }
 
 void Intro::Update(float dt)
 {
+
+	FACTORY->ObjectIDMap[14]->GetComponent<Transform>()->angle += 300 * dt;
 	static bool stop = true;
 
 	if (Input::IsTriggered(SDL_SCANCODE_R))
@@ -85,6 +94,7 @@ void Intro::Update(float dt)
 	bool Pressed = fileIntro.mRoot["isFlippedX"][autoindex].asBool();*/
 
 	if (stop) {
+
 		if (!(int(FACTORY->ObjectIDMap[13]->GetComponent<Transform>()->position.x) > 200)) {
 			FACTORY->ObjectIDMap[13]->GetComponent<Transform>()->SetPosition(glm::vec3(Xpos, Ypos, 0));
 		
@@ -97,17 +107,31 @@ void Intro::Update(float dt)
 
 	if(Enter)
 	{
+		if (once) {
+			SOUNDMANAGER->PlaySounds(blackhole, false);
+	
+			once = false;
+		}
 		camActIntro.ShakeCamera(dt);
 		if (FACTORY->ObjectIDMap[14]->GetComponent<Transform>()->position.x >
 			FACTORY->ObjectIDMap[13]->GetComponent<Transform>()->position.x) {
+			FACTORY->ObjectIDMap[17]->GetComponent<Transform>()->position.x += dt * 100;
+			FACTORY->ObjectIDMap[17]->GetComponent<Transform>()->angle += 300 * dt;
+			FACTORY->ObjectIDMap[17]->GetComponent<Transform>()->scale -= 100 * dt;
+			FACTORY->ObjectIDMap[17]->GetComponent<Transform>()->rotation += dt ;
+
 			FACTORY->ObjectIDMap[13]->GetComponent<Transform>()->position.x += dt * 100;
-			
-			FACTORY->ObjectIDMap[13]->GetComponent<Transform>()->rotation += dt ;
+			FACTORY->ObjectIDMap[13]->GetComponent<Transform>()->angle += 300 * dt;
+			FACTORY->ObjectIDMap[13]->GetComponent<Transform>()->scale -= 100 * dt;
+			FACTORY->ObjectIDMap[13]->GetComponent<Transform>()->rotation += dt;
 		}
 		if (FACTORY->ObjectIDMap[14]->GetComponent<Transform>()->position.y >
 			FACTORY->ObjectIDMap[13]->GetComponent<Transform>()->position.y) {
 			FACTORY->ObjectIDMap[13]->GetComponent<Transform>()->position.y += dt * 100;
 			FACTORY->ObjectIDMap[13]->GetComponent<Transform>()->rotation += dt ;
+
+
+
 		}
 
 
@@ -120,12 +144,21 @@ void Intro::Update(float dt)
 	//FACTORY->ObjectIDMap[13]->GetComponent<Animation>()->setFlipX(Pressed);
 	autoindex++;
 
+	if (CAMERA->cameraPos.z == 0) {
+
+		std::string levelnumber = NumberToString(STATEMANAGER->i_LevelSelect);
+		STATEMANAGER->Loadtolevelname = "level" + levelnumber + ".json";
+		STATEMANAGER->MoveState(StatesList::Level1);
+
+	}
+
 }
 
 void Intro::Free(void)
 {
 	//	delete INGAMELOGIC;
 	printf("IntroFree\n");
+	Enter = false;
 	//	INGAMELOGIC->InGameShutdown();
 }
 
