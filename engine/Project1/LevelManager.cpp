@@ -183,29 +183,6 @@ void LevelManager::LoadLevel(std::string  path)
 				tempObject->GetComponent<Trigger>()->MaxLife = file.mRoot.get(object + to_string(i), false).get("TriggerLifeTime", false).asInt();
 			}
 
-			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "PARTICLE") {
-
-				if (STATEMANAGER->Loadtolevelname == "level1.json" || STATEMANAGER->Loadtolevelname == "level2.json" || STATEMANAGER->Loadtolevelname == "level3.json"
-					|| STATEMANAGER->Loadtolevelname == "level4.json" || STATEMANAGER->Loadtolevelname == "level5.json" || STATEMANAGER->Loadtolevelname == "leve6.json"
-					|| STATEMANAGER->Loadtolevelname == "level7.json" || STATEMANAGER->Loadtolevelname == "level8.json" || STATEMANAGER->Loadtolevelname == "level9.json"
-					|| STATEMANAGER->Loadtolevelname == "level10.json" || STATEMANAGER->Loadtolevelname == "level11.json" || STATEMANAGER->Loadtolevelname == "level12.json")
-				{
-					//tempObject = PARTICLEMANAGER->LoadEmitter(tempObject,".\\Emitters.\\particle1.json");
-
-					PaticlePath = ".\\Emitters.\\" + file.mRoot.get(object + to_string(i), false).get("ParticlePath", false).asString();
-
-					tempObject = PARTICLEMANAGER->LoadEmitter(tempObject, PaticlePath);
-					
-				}
-				else if (STATEMANAGER->Loadtolevelname == "Menu.json")
-				{
-					PaticlePath = ".\\Emitters.\\" + file.mRoot.get(object + to_string(i), false).get("ParticlePath", false).asString();
-
-					tempObject = PARTICLEMANAGER->LoadEmitter(tempObject, PaticlePath);
-					
-				}
-				
-			}
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "")
 				break;
 		}
@@ -264,10 +241,7 @@ void LevelManager::LoadLevel(std::string  path)
 			//tempObject = FACTORY->CreateButton(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0));
 			tempObject->objectstyle = Objectstyle::Clearzone;
 		}
-		else if (Objectstyle == "Particle")
-		{
-			tempObject->objectstyle = Objectstyle::Particle;
-		}
+
 		else if (Objectstyle == "Hazard")
 		{
 			tempObject->objectstyle = Objectstyle::Hazard;
@@ -296,6 +270,7 @@ void LevelManager::LoadLevel(std::string  path)
 
 void LevelManager::SaveLevel(std::string  path)
 {
+	FACTORY->ObjectIDMap;
 	char * Userinfo;
 	size_t len = path.size();
 	_dupenv_s(&Userinfo, &len, "USERPROFILE");
@@ -315,7 +290,7 @@ void LevelManager::SaveLevel(std::string  path)
         for (auto it : FACTORY->ObjectIDMap)
         {
 
-			if (it.second->objectstyle == Objectstyle::BackGround ||it.second->objectstyle == Objectstyle::Button && it.second->GetComponent<Sprite>()->isPerspective
+			if (it.second->objectstyle == Objectstyle::BackGround|| it.second->objectstyle == Objectstyle::Particle ||it.second->objectstyle == Objectstyle::Button && it.second->GetComponent<Sprite>()->isPerspective
 				== false && !it.second->HasComponent<Emitter>()) {
                 NumberofUnvaildObject++;
                 continue;
@@ -347,7 +322,7 @@ void LevelManager::SaveLevel(std::string  path)
 		static unsigned index = 0;
 
 
-                if (it.second->objectstyle == Objectstyle::BackGround ||it.second->objectstyle == Objectstyle::Button && it.second->GetComponent<Sprite>()->isPerspective
+                if (it.second->objectstyle == Objectstyle::BackGround || it.second->objectstyle == Objectstyle::Particle ||it.second->objectstyle == Objectstyle::Button && it.second->GetComponent<Sprite>()->isPerspective
 					== false &&!it.second->HasComponent<Emitter>()) {
 
                     continue;
@@ -387,17 +362,7 @@ void LevelManager::SaveLevel(std::string  path)
 			root[object + to_string(i)]["Components"][index] = "ANIMATION";
 			index++;
 		}
-		if (it.second->GetComponent<Emitter>() != nullptr) {
-			root[object + to_string(i)]["Components"][index] = "PARTICLE";
-			if(it.second->GetComponent<Emitter>()->type == EmitterType::ET_TRAIL)
-				root[object + to_string(i)]["ParticleType"] = "ET_TRAIL";
-			if (it.second->GetComponent<Emitter>()->type == EmitterType::ET_EXPLOSION)
-				root[object + to_string(i)]["ParticleType"] = "ET_EXPLOSION";
 
-
-			root[object + to_string(i)]["ParticlePath"] = "PlayerTrail.json";
-			index++;
-		}
 		index = 0;
 
 		switch (it.second->objectstyle)
@@ -429,9 +394,7 @@ void LevelManager::SaveLevel(std::string  path)
 		case Objectstyle::Clearzone:
 			root[object + to_string(i)]["ObjectType"] = "Clearzone";
 			break;
-		case Objectstyle::Particle:
-			root[object + to_string(i)]["ObjectType"] = "Particle";
-			break;
+
 		case Objectstyle::AttachWall:
 			root[object + to_string(i)]["ObjectType"] = "AttachWall";
 			break;
