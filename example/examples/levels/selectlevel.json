@@ -5,7 +5,7 @@
 		{
 			"x" : 0.0,
 			"y" : 0.0,
-			"z" : 500.0
+			"z" : 999.0
 		},
 		"TARGET" : 
 		{
@@ -21,7 +21,7 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 3,
+	"NumberOfObjects" : 23,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
@@ -33,7 +33,7 @@
 		"Position" : 
 		{
 			"x" : 0.0,
-			"y" : 150.0,
+			"y" : 260.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -44,16 +44,216 @@
 		},
 		"TextureDir" : "levelSeclect.png"
 	},
-	"Object2" : 
+	"Object10" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE" ],
-		"Depth" : -1.0,
-		"ObjectID" : 2,
+		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"Depth" : 0.0,
+		"ObjectID" : 10,
 		"ObjectType" : "Button",
 		"Position" : 
 		{
 			"x" : 0.0,
 			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 50.0,
+			"y" : 50.0
+		},
+		"TextureDir" : ""
+	},
+	"Object11" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"Depth" : 0.0,
+		"ObjectID" : 11,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 50.0,
+			"y" : 50.0
+		},
+		"TextureDir" : ""
+	},
+	"Object12" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"Depth" : 0.0,
+		"ObjectID" : 12,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 50.0,
+			"y" : 50.0
+		},
+		"TextureDir" : ""
+	},
+	"Object13" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"Depth" : 0.0,
+		"ObjectID" : 13,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 50.0,
+			"y" : 50.0
+		},
+		"TextureDir" : ""
+	},
+	"Object14" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"Depth" : 0.0,
+		"ObjectID" : 14,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 50.0,
+			"y" : 50.0
+		},
+		"TextureDir" : ""
+	},
+	"Object15" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"Depth" : 0.0,
+		"ObjectID" : 15,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 50.0,
+			"y" : 50.0
+		},
+		"TextureDir" : ""
+	},
+	"Object16" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"Depth" : 0.0,
+		"ObjectID" : 16,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 50.0,
+			"y" : 50.0
+		},
+		"TextureDir" : ""
+	},
+	"Object17" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"Depth" : 0.0,
+		"ObjectID" : 17,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 50.0,
+			"y" : 50.0
+		},
+		"TextureDir" : ""
+	},
+	"Object18" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"Depth" : 0.0,
+		"ObjectID" : 18,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 50.0,
+			"y" : 50.0
+		},
+		"TextureDir" : ""
+	},
+	"Object19" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"Depth" : 0.0,
+		"ObjectID" : 19,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 50.0,
+			"y" : 50.0
+		},
+		"TextureDir" : ""
+	},
+	"Object2" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 1.0,
+		"ObjectID" : 2,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : -80.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -64,11 +264,11 @@
 		},
 		"TextureDir" : "LevelSelction.png"
 	},
-	"Object3" : 
+	"Object20" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE" ],
-		"Depth" : -1.0,
-		"ObjectID" : 3,
+		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"Depth" : 0.0,
+		"ObjectID" : 20,
 		"ObjectType" : "Button",
 		"Position" : 
 		{
@@ -79,10 +279,210 @@
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
+			"x" : 50.0,
+			"y" : 50.0
+		},
+		"TextureDir" : ""
+	},
+	"Object21" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"Depth" : 0.0,
+		"ObjectID" : 21,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 50.0,
+			"y" : 50.0
+		},
+		"TextureDir" : ""
+	},
+	"Object22" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"Depth" : 0.0,
+		"ObjectID" : 22,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 50.0,
+			"y" : 50.0
+		},
+		"TextureDir" : ""
+	},
+	"Object23" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BUTTON" ],
+		"Depth" : 0.0,
+		"ObjectID" : 23,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 0.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 50.0,
+			"y" : 50.0
+		},
+		"TextureDir" : ""
+	},
+	"Object3" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : -1.0,
+		"ObjectID" : 3,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : -80.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
 			"x" : 125.0,
 			"y" : 125.0
 		},
 		"TextureDir" : "1.png"
+	},
+	"Object4" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 0.0,
+		"ObjectID" : 4,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : -100.0,
+			"y" : 180.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 30.0,
+			"y" : 30.0
+		},
+		"TextureDir" : ""
+	},
+	"Object5" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 0.0,
+		"ObjectID" : 5,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : -50.0,
+			"y" : 180.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 30.0,
+			"y" : 30.0
+		},
+		"TextureDir" : ""
+	},
+	"Object6" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 0.0,
+		"ObjectID" : 6,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 0.0,
+			"y" : 180.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 30.0,
+			"y" : 30.0
+		},
+		"TextureDir" : ""
+	},
+	"Object7" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 0.0,
+		"ObjectID" : 7,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 50.0,
+			"y" : 180.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 30.0,
+			"y" : 30.0
+		},
+		"TextureDir" : ""
+	},
+	"Object8" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 0.0,
+		"ObjectID" : 8,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : 100.0,
+			"y" : 180.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 30.0,
+			"y" : 30.0
+		},
+		"TextureDir" : ""
+	},
+	"Object9" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 0.0,
+		"ObjectID" : 9,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : -100.0,
+			"y" : 130.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 30.0,
+			"y" : 30.0
+		},
+		"TextureDir" : ""
 	},
 	"WorldSize" : 
 	{

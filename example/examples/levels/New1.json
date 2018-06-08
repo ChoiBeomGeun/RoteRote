@@ -21,7 +21,7 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 29,
+	"NumberOfObjects" : 27,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "CONTROLLER", "ANIMATION" ],
@@ -139,7 +139,7 @@
 		"GravityOn" : false,
 		"Mass" : 1.0,
 		"ObjectID" : 14,
-		"ObjectType" : "Box",
+		"ObjectType" : "AttachBox",
 		"Position" : 
 		{
 			"x" : 42.0,
@@ -280,7 +280,7 @@
 			"y" : -68.0,
 			"z" : 0.0
 		},
-		"Rotation" : 6916.0380859375,
+		"Rotation" : 4836.0771484375,
 		"Scale" : 
 		{
 			"x" : 20.0,
@@ -319,7 +319,7 @@
 		"Position" : 
 		{
 			"x" : 0.0,
-			"y" : -7.0,
+			"y" : -27.0,
 			"z" : 0.0
 		},
 		"Rotation" : 90.0,
@@ -363,14 +363,14 @@
 		"Position" : 
 		{
 			"x" : 0.0,
-			"y" : 73.0,
+			"y" : 62.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
 			"x" : 5.0,
-			"y" : 140.0
+			"y" : 160.0
 		},
 		"TextureDir" : "glowline90.png"
 	},
@@ -416,49 +416,9 @@
 	},
 	"Object26" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE" ],
-		"Depth" : -2.0,
-		"ObjectID" : 26,
-		"ObjectType" : "Particle",
-		"Position" : 
-		{
-			"x" : 0.0,
-			"y" : 0.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 0.10000000149011612,
-			"y" : 0.10000000149011612
-		},
-		"TextureDir" : ""
-	},
-	"Object27" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE" ],
-		"Depth" : -2.0,
-		"ObjectID" : 27,
-		"ObjectType" : "Particle",
-		"Position" : 
-		{
-			"x" : 0.0,
-			"y" : 0.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 0.10000000149011612,
-			"y" : 0.10000000149011612
-		},
-		"TextureDir" : ""
-	},
-	"Object28" : 
-	{
 		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
 		"Depth" : -2.0,
-		"ObjectID" : 28,
+		"ObjectID" : 26,
 		"ObjectType" : "Particle",
 		"ParticlePath" : "PlayerTrail.json",
 		"ParticleType" : "ET_EXPLOSION",
@@ -476,11 +436,11 @@
 		},
 		"TextureDir" : ""
 	},
-	"Object29" : 
+	"Object27" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
 		"Depth" : -2.0,
-		"ObjectID" : 29,
+		"ObjectID" : 27,
 		"ObjectType" : "Particle",
 		"ParticlePath" : "PlayerTrail.json",
 		"ParticleType" : "ET_TRAIL",
