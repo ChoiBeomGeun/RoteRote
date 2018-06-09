@@ -21,7 +21,7 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 17,
+	"NumberOfObjects" : 18,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
@@ -205,6 +205,26 @@
 			"y" : 70.0
 		},
 		"TextureDir" : "player0.png"
+	},
+			"Object18" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : -1.0,
+		"ObjectID" : 13,
+		"ObjectType" : "Button",
+		"Position" : 
+		{
+			"x" : -569.76400756835938,
+			"y" : -195.03300476074219,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" : 
+		{
+			"x" : 234.0,
+			"y" : 184.0
+		},
+		"TextureDir" : "house.png"
 	},
 	"Object2" : 
 	{
