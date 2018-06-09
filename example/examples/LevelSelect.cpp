@@ -101,6 +101,7 @@ void LevelSelect::Load()
 
 	LockObject = FACTORY->CreateArchetype(ReadingArchetype("Button.json"));
 	LockObject->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("LevelSelectionLock.png");
+        LockObject->GetComponent<Transform>()->SetPosition(glm::vec3(0, -80, 0));
 
 
 	glm::vec3 num_pos(-100.f, 180.f, 0);
@@ -121,8 +122,11 @@ void LevelSelect::Load()
             FACTORY->ObjectIDMap[i + 4]->GetComponent<Sprite>()->m_TextureID = FACTORY->ObjectIDMap[i + 4]->GetComponent<Sprite>()->texture_load(NumberToString(i + 1) + ".png");
             FACTORY->ObjectIDMap[i + 4]->GetComponent<Transform>()->SetPosition(num_pos);
 
-            if(i == quit)
+            if (i == quit)
+            {
                 FACTORY->ObjectIDMap[i + 4]->GetComponent<Sprite>()->m_TextureID = FACTORY->ObjectIDMap[i + 4]->GetComponent<Sprite>()->texture_load("attachbox.png");
+                FACTORY->ObjectIDMap[i + 4]->GetComponent<Transform>()->SetPosition(glm::vec3(0, -300, 0));
+            }
 	}
 
 }
@@ -142,8 +146,6 @@ void LevelSelect::Init()
 
 void LevelSelect::Update(float dt)
 {
-
-   std::vector<std::pair<std::string,bool>> test =  STATEMANAGER->vsLevelListandclear;
 	if (STATEMANAGER->vsLevelListandclear[LevelList].second == true)
 		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(0, 0, 0));
 	else
