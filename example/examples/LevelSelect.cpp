@@ -101,7 +101,7 @@ void LevelSelect::Load()
 
 	LockObject = FACTORY->CreateArchetype(ReadingArchetype("Button.json"));
 	LockObject->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("LevelSelectionLock.png");
-        LockObject->GetComponent<Transform>()->SetPosition(glm::vec3(0, -80, 0));
+        LockObject->GetComponent<Transform>()->SetPosition(glm::vec3(0, -120, 0));
 
 
 	glm::vec3 num_pos(-100.f, 180.f, 0);
@@ -136,10 +136,10 @@ void LevelSelect::Init()
 {
     	FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Levelpng[LevelList];
 
-	IsRotating = false;
-	IsLeftPressed = false;
-	IsRightPreesed = false;
-	LvlSelectCam.cameraSetting(CameraPosType::EN_LevelSelect);
+		IsRotating = false;
+		IsLeftPressed = false;
+		IsRightPreesed = false;
+		LvlSelectCam.cameraSetting(CameraPosType::EN_LevelSelect);
 
         FACTORY->ObjectIDMap[LevelList + 4]->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
 }
@@ -147,7 +147,7 @@ void LevelSelect::Init()
 void LevelSelect::Update(float dt)
 {
 	if (STATEMANAGER->vsLevelListandclear[LevelList].second == true)
-		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(0, 0, 0));
+		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(0, -120, 0));
 	else
 		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(300, 300, 0));
 
