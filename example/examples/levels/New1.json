@@ -21,7 +21,7 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 27,
+	"NumberOfObjects" : 21,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "CONTROLLER", "ANIMATION" ],
@@ -248,26 +248,6 @@
 		"TriggerLifeTime" : -1,
 		"TriggerType" : "180"
 	},
-	"Object19" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE" ],
-		"Depth" : -2.0,
-		"ObjectID" : 19,
-		"ObjectType" : "Particle",
-		"Position" : 
-		{
-			"x" : 0.0,
-			"y" : 0.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 0.10000000149011612,
-			"y" : 0.10000000149011612
-		},
-		"TextureDir" : ""
-	},
 	"Object2" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
@@ -288,27 +268,7 @@
 		},
 		"TextureDir" : "clearzone.png"
 	},
-	"Object20" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE" ],
-		"Depth" : -2.0,
-		"ObjectID" : 20,
-		"ObjectType" : "Particle",
-		"Position" : 
-		{
-			"x" : 0.0,
-			"y" : 0.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 0.10000000149011612,
-			"y" : 0.10000000149011612
-		},
-		"TextureDir" : ""
-	},
-	"Object21" : 
+	"Object19" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -330,7 +290,7 @@
 		},
 		"TextureDir" : "elec.png"
 	},
-	"Object22" : 
+	"Object20" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -352,7 +312,7 @@
 		},
 		"TextureDir" : "elec.png"
 	},
-	"Object23" : 
+	"Object21" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -373,90 +333,6 @@
 			"y" : 160.0
 		},
 		"TextureDir" : "glowline90.png"
-	},
-	"Object24" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE" ],
-		"Depth" : -2.0,
-		"ObjectID" : 24,
-		"ObjectType" : "Particle",
-		"Position" : 
-		{
-			"x" : 0.0,
-			"y" : 0.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 0.10000000149011612,
-			"y" : 0.10000000149011612
-		},
-		"TextureDir" : ""
-	},
-	"Object25" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE" ],
-		"Depth" : -2.0,
-		"ObjectID" : 25,
-		"ObjectType" : "Particle",
-		"Position" : 
-		{
-			"x" : 0.0,
-			"y" : 0.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 0.10000000149011612,
-			"y" : 0.10000000149011612
-		},
-		"TextureDir" : ""
-	},
-	"Object26" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
-		"Depth" : -2.0,
-		"ObjectID" : 26,
-		"ObjectType" : "Particle",
-		"ParticlePath" : "PlayerTrail.json",
-		"ParticleType" : "ET_EXPLOSION",
-		"Position" : 
-		{
-			"x" : 0.0,
-			"y" : 0.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 0.10000000149011612,
-			"y" : 0.10000000149011612
-		},
-		"TextureDir" : ""
-	},
-	"Object27" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
-		"Depth" : -2.0,
-		"ObjectID" : 27,
-		"ObjectType" : "Particle",
-		"ParticlePath" : "PlayerTrail.json",
-		"ParticleType" : "ET_TRAIL",
-		"Position" : 
-		{
-			"x" : 0.0,
-			"y" : 0.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 0.10000000149011612,
-			"y" : 0.10000000149011612
-		},
-		"TextureDir" : ""
 	},
 	"Object3" : 
 	{
