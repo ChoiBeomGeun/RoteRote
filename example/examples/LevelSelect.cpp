@@ -28,7 +28,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include <vector>
 #include "InGameLogic.h"
 
-const int LastLevelNumber = LevelList::level12;
+const int LastLevelNumber = LevelList::quit;
 using namespace TE;
 Object * LockObject = nullptr;
 struct StringCompareLevel {
@@ -142,7 +142,9 @@ void LevelSelect::Init()
 
 void LevelSelect::Update(float dt)
 {
-	if (!STATEMANAGER->vsLevelListandclear[LevelList].second == true)
+
+   std::vector<std::pair<std::string,bool>> test =  STATEMANAGER->vsLevelListandclear;
+	if (STATEMANAGER->vsLevelListandclear[LevelList].second == true)
 		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(0, 0, 0));
 	else
 		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(300, 300, 0));
