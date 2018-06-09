@@ -3,8 +3,8 @@
 	{
 		"EYE" : 
 		{
-			"x" : -190.0,
-			"y" : 48.0,
+			"x" : -420.0,
+			"y" : 263.0,
 			"z" : 999.0
 		},
 		"TARGET" : 
@@ -21,7 +21,7 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 20,
+	"NumberOfObjects" : 10,
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "CONTROLLER", "ANIMATION" ],
@@ -32,8 +32,8 @@
 		"ObjectType" : "Player",
 		"Position" : 
 		{
-			"x" : -655.0,
-			"y" : -132.05001831054688,
+			"x" : -635.0,
+			"y" : 67.949996948242188,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -46,225 +46,23 @@
 	},
 	"Object10" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
-		"Depth" : 0.0,
-		"GravityOn" : false,
-		"Mass" : 0.0,
-		"ObjectID" : 10,
-		"ObjectType" : "AttachWall",
-		"Position" : 
-		{
-			"x" : -415.0,
-			"y" : -97.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 80.0,
-			"y" : 20.0
-		},
-		"TextureDir" : "wall.png"
-	},
-	"Object11" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
-		"Depth" : 0.0,
-		"GravityOn" : false,
-		"Mass" : 1.0,
-		"ObjectID" : 11,
-		"ObjectType" : "Box",
-		"Position" : 
-		{
-			"x" : -265.0,
-			"y" : -87.100006103515625,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 40.0,
-			"y" : 40.0
-		},
-		"TextureDir" : "box.png"
-	},
-	"Object12" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
-		"Depth" : 0.0,
-		"GravityOn" : false,
-		"Mass" : 1.0,
-		"ObjectID" : 12,
-		"ObjectType" : "Box",
-		"Position" : 
-		{
-			"x" : -145.0,
-			"y" : -127.05000305175781,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 40.0,
-			"y" : 40.0
-		},
-		"TextureDir" : "box.png"
-	},
-	"Object13" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
-		"Depth" : 0.0,
-		"GravityOn" : false,
-		"Mass" : 0.0,
-		"ObjectID" : 13,
-		"ObjectType" : "Trigger90",
-		"Position" : 
-		{
-			"x" : -385.0,
-			"y" : -77.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 20.0,
-			"y" : 20.0
-		},
-		"TextureDir" : "90button.png",
-		"TriggerLifeTime" : -1,
-		"TriggerType" : "90"
-	},
-	"Object14" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
-		"Depth" : 0.0,
-		"GravityOn" : false,
-		"Mass" : 1.0,
-		"ObjectID" : 14,
-		"ObjectType" : "Box",
-		"Position" : 
-		{
-			"x" : -225.0,
-			"y" : -87.100006103515625,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 40.0,
-			"y" : 40.0
-		},
-		"TextureDir" : "box.png"
-	},
-	"Object15" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
-		"Depth" : 0.0,
-		"GravityOn" : false,
-		"Mass" : 1.0,
-		"ObjectID" : 15,
-		"ObjectType" : "Box",
-		"Position" : 
-		{
-			"x" : -185.0,
-			"y" : -87.100006103515625,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 40.0,
-			"y" : 40.0
-		},
-		"TextureDir" : "box.png"
-	},
-	"Object16" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
-		"Depth" : 0.0,
-		"GravityOn" : false,
-		"Mass" : 1.0,
-		"ObjectID" : 16,
-		"ObjectType" : "Box",
-		"Position" : 
-		{
-			"x" : -145.0,
-			"y" : -87.100006103515625,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 40.0,
-			"y" : 40.0
-		},
-		"TextureDir" : "box.png"
-	},
-	"Object17" : 
-	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
-		"Depth" : 1.0,
-		"ObjectID" : 17,
+		"Depth" : 0.0,
+		"ObjectID" : 10,
 		"ObjectType" : "Clearzone",
 		"Position" : 
 		{
-			"x" : -195.0,
-			"y" : 93.0,
+			"x" : -286.0,
+			"y" : 153.0,
 			"z" : 0.0
 		},
-		"Rotation" : 623.3914794921875,
+		"Rotation" : 302.88180541992188,
 		"Scale" : 
 		{
 			"x" : 20.0,
 			"y" : 20.0
 		},
 		"TextureDir" : "clearzone.png"
-	},
-	"Object18" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
-		"Depth" : 0.0,
-		"GravityOn" : false,
-		"Mass" : 0.0,
-		"ObjectID" : 18,
-		"ObjectType" : "Trigger180",
-		"Position" : 
-		{
-			"x" : 155.0,
-			"y" : -137.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 20.0,
-			"y" : 20.0
-		},
-		"TextureDir" : "180button.png",
-		"TriggerLifeTime" : -1,
-		"TriggerType" : "180"
-	},
-	"Object19" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
-		"Depth" : 0.0,
-		"GravityOn" : false,
-		"Mass" : 0.0,
-		"ObjectID" : 19,
-		"ObjectType" : "AttachWall",
-		"Position" : 
-		{
-			"x" : 30.0,
-			"y" : -97.0,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 110.0,
-			"y" : 20.0
-		},
-		"TextureDir" : "wall.png"
 	},
 	"Object2" : 
 	{
@@ -273,42 +71,20 @@
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 2,
-		"ObjectType" : "Wall",
+		"ObjectType" : "AttachWall",
 		"Position" : 
 		{
-			"x" : -200.0,
-			"y" : -157.0,
+			"x" : -705.0,
+			"y" : 263.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 930.0,
-			"y" : 20.0
+			"x" : 20.0,
+			"y" : 460.0
 		},
-		"TextureDir" : "unattachwall.png"
-	},
-	"Object20" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
-		"Depth" : 0.0,
-		"GravityOn" : false,
-		"Mass" : 1.0,
-		"ObjectID" : 20,
-		"ObjectType" : "Box",
-		"Position" : 
-		{
-			"x" : -105.0,
-			"y" : -127.05000305175781,
-			"z" : 0.0
-		},
-		"Rotation" : 0.0,
-		"Scale" : 
-		{
-			"x" : 40.0,
-			"y" : 40.0
-		},
-		"TextureDir" : "box.png"
+		"TextureDir" : "wall.png"
 	},
 	"Object3" : 
 	{
@@ -320,15 +96,15 @@
 		"ObjectType" : "AttachWall",
 		"Position" : 
 		{
-			"x" : -465.0,
-			"y" : -7.0,
+			"x" : -410.0,
+			"y" : 43.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 20.0,
-			"y" : 280.0
+			"x" : 570.0,
+			"y" : 20.0
 		},
 		"TextureDir" : "wall.png"
 	},
@@ -342,15 +118,15 @@
 		"ObjectType" : "AttachWall",
 		"Position" : 
 		{
-			"x" : 85.0,
-			"y" : -2.0,
+			"x" : -135.0,
+			"y" : 273.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
 			"x" : 20.0,
-			"y" : 290.0
+			"y" : 440.0
 		},
 		"TextureDir" : "wall.png"
 	},
@@ -364,14 +140,14 @@
 		"ObjectType" : "AttachWall",
 		"Position" : 
 		{
-			"x" : -200.0,
-			"y" : 253.0,
+			"x" : -420.0,
+			"y" : 483.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 930.0,
+			"x" : 550.0,
 			"y" : 20.0
 		},
 		"TextureDir" : "wall.png"
@@ -383,20 +159,20 @@
 		"GravityOn" : false,
 		"Mass" : 1.0,
 		"ObjectID" : 6,
-		"ObjectType" : "Box",
+		"ObjectType" : "AttachBox",
 		"Position" : 
 		{
-			"x" : -305.0,
-			"y" : -127.05000305175781,
+			"x" : -520.0,
+			"y" : 217.94998168945313,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 40.0,
-			"y" : 40.0
+			"x" : 110.0,
+			"y" : 330.0
 		},
-		"TextureDir" : "box.png"
+		"TextureDir" : "AttachBox.png"
 	},
 	"Object7" : 
 	{
@@ -405,64 +181,68 @@
 		"GravityOn" : false,
 		"Mass" : 1.0,
 		"ObjectID" : 7,
-		"ObjectType" : "Box",
+		"ObjectType" : "AttachBox",
 		"Position" : 
 		{
-			"x" : -265.0,
-			"y" : -127.05000305175781,
+			"x" : -280.0,
+			"y" : 217.94998168945313,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 40.0,
-			"y" : 40.0
+			"x" : 110.0,
+			"y" : 330.0
 		},
-		"TextureDir" : "box.png"
+		"TextureDir" : "AttachBox.png"
 	},
 	"Object8" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
 		"Depth" : 0.0,
 		"GravityOn" : false,
-		"Mass" : 1.0,
+		"Mass" : 0.0,
 		"ObjectID" : 8,
-		"ObjectType" : "Box",
+		"ObjectType" : "Trigger180",
 		"Position" : 
 		{
-			"x" : -225.0,
-			"y" : -127.05000305175781,
+			"x" : -525.0,
+			"y" : 463.0,
 			"z" : 0.0
 		},
-		"Rotation" : 0.0,
+		"Rotation" : 180.0,
 		"Scale" : 
 		{
-			"x" : 40.0,
-			"y" : 40.0
+			"x" : 20.0,
+			"y" : 20.0
 		},
-		"TextureDir" : "box.png"
+		"TextureDir" : "180button.png",
+		"TriggerLifeTime" : -1,
+		"TriggerType" : "180"
 	},
 	"Object9" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
 		"Depth" : 0.0,
 		"GravityOn" : false,
-		"Mass" : 1.0,
+		"Mass" : 0.0,
 		"ObjectID" : 9,
-		"ObjectType" : "Box",
+		"ObjectType" : "Trigger90",
 		"Position" : 
 		{
-			"x" : -185.0,
-			"y" : -127.05000305175781,
+			"x" : -285.0,
+			"y" : 463.0,
 			"z" : 0.0
 		},
-		"Rotation" : 0.0,
+		"Rotation" : 180.0,
 		"Scale" : 
 		{
-			"x" : 40.0,
-			"y" : 40.0
+			"x" : 20.0,
+			"y" : 20.0
 		},
-		"TextureDir" : "box.png"
+		"TextureDir" : "90button.png",
+		"TriggerLifeTime" : -1,
+		"TriggerType" : "90"
 	},
 	"WorldSize" : 
 	{
