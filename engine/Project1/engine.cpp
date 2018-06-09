@@ -1,4 +1,4 @@
-/******************************************************************************/
+﻿/******************************************************************************/
 /*!
 \file   engine.cpp
 \author Choi Beom Geun
@@ -14,6 +14,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 
 
 #pragma  once
+#pragma comment(lib, "winmm.lib") 
 #include "Engine.h"
 #include "DebugUtil.h"
 #include "Application.h"
@@ -33,10 +34,12 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 
 #include "..\..\example\examples\logging.h"
 #include "Physics.h"
-
+#include <windows.h>
 #define ISLOGGINGON false;
 typedef BOOL(WINAPI *LPFN_ISWOW64PROCESS) (HANDLE, PBOOL);
 LPFN_ISWOW64PROCESS fnIsWow64Process;
+
+
 using namespace TE;
 namespace TE {
 
@@ -103,41 +106,55 @@ void Engine::Quit()
 void Engine::GameLoop()
 {
 
+	static DWORD ﻿frameDelta = 0;
+
+	static DWORD lastTime = timeGetTime();
 	//Initialize Timer
 	Timer::Initialize();
 	//Testing Object creation 
 
-//	STATEMANAGER->Initialize();
-	
+	//	STATEMANAGER->Initialize();
+	Uint64 NOW = SDL_GetPerformanceCounter(), LAST = 0;
+	double deltaTime = 0;
+	float pm_accumlock = 0.2f;
+	uint32_t last_tick_time = 0;
+	uint32_t delta = 0;
 
+	uint32_t tick_time = SDL_GetTicks();
+	double previous = GetCurrentTime();
+	double lag = 0.0;
+	DWORD FPS = 100;
+
+	DWORD dwInterval = 1000 / FPS;
+	DWORD dwNextTick = 0; //다음 번 루프 순회가 시작 되어야 하는 시간 
 	while (GameIsRunning)
 	{
+
+		if (dwNextTick > GetTickCount())
+			Sleep(dwNextTick - GetTickCount());//dwNextTick - GetTickCount() : 현재의 FPS가 너무 높게 나와 이번 루프에서 지연 되어야 하는 시간
+
 		float frametime = Timer::GetDelta();
-          
-//                int time;
 
-		if (frametime >= 0.025f)
-			frametime = 0.016f;
 
-		if (frametime <= 0.016f)
-			frametime = 0.016f;
 
-             
-		if(IsLoggingOn)
-		LOGGINGSYSTEM->HowMuchTimePassed += static_cast<long>(frametime);
-		for (unsigned int i = 0; i <SystemList.size(); ++i) {
-		
-		
- 			SystemList[i]->Update(frametime);
 
-                    
+		for (unsigned int i = 0; i < SystemList.size(); ++i) {
+
+
+
+			SystemList[i]->Update(0.016f);
+
+
 			if (!GameIsRunning)
+
 				break;
 		}
-
-
+		dwNextTick = GetTickCount() + dwInterval;
 	}
-	
+
+
+
+
 	//Todo : Delete all game objects
 	FACTORY->DestroyAllObjects();
 }
@@ -192,22 +209,22 @@ void Engine::Filenameloading(void)
 	mVsTexturenamelist.clear();
 	std::string path;
 	char * Userinfo;
-	size_t len =100;
+	size_t len = 100;
 	_dupenv_s(&Userinfo, &len, "USERPROFILE");
 	path = Userinfo;
 	free(Userinfo);
 
-		_finddata_t level32;
-		_finddata_t texture32;
-		_finddata_t log32;
-		_finddata_t sound32;
-		_finddata_t archtype32;
-		long levelhandle;
-		long texturehandle;
-		long loghandle;
-		long soundhandle;
-		long archtypehandle;
-	
+	_finddata_t level32;
+	_finddata_t texture32;
+	_finddata_t log32;
+	_finddata_t sound32;
+	_finddata_t archtype32;
+	long levelhandle;
+	long texturehandle;
+	long loghandle;
+	long soundhandle;
+	long archtypehandle;
+
 	intptr_t archtypehandle64;
 	intptr_t soundhandle64;
 	intptr_t loghandle64;
@@ -392,6 +409,6 @@ void Engine::Filenameloading(void)
 		_findclose(soundhandle64);
 		_findclose(archtypehandle64);
 	}
-		
+
 
 }

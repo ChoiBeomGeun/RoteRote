@@ -53,7 +53,7 @@ namespace TE {
 		static void UnLoadAllSprites();
 		static GLuint find_texture_id(std::string filepath);
 		static void SetTextureID(std::string filepath);
-
+		void ChangeAvalue(float a);
 		void ChangeColor(float r, float g, float b, float a); // You can actually put numbers from 0~255.f 
 		void ChangeBackgroundColor(float r, float g, float b, float a);
 

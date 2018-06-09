@@ -94,6 +94,11 @@ void TE::Sprite::SetTextureID(std::string filepath)
 	
 }
 
+void TE::Sprite::ChangeAvalue(float a)
+{
+	Color[3] = a / 255.f;
+}
+
 void Sprite::LoadAllSprites()
 {
 	if (GRAPHICS->m_textureMap.empty())
