@@ -392,7 +392,7 @@ void Application::PollWindowEvent(SDL_Event & currEvent)
 		if (confirmationa == NULL) {
 			confirmationa = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0));
 			confirmationa->GetComponent<Transform>()->scale = glm::vec3(500, 300, 0);
-			confirmationa->GetComponent<Sprite>()->m_TextureID = confirmationa->GetComponent<Sprite>()->find_texture_id("Sure.png");
+			confirmationa->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Sure.png");
 		}
 		RealExit = true;
 
