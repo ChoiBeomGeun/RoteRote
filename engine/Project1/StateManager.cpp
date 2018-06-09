@@ -32,18 +32,18 @@ void FadeIn(void)
 	
 	for(auto allobj:FACTORY->ObjectIDMap)
 	{
-		if(allobj.second->objectstyle == Objectstyle::BackGround)
+		if (allobj.second->objectstyle == Objectstyle::BackGround)
 			continue;
-		allobj.second->GetComponent<Sprite>()->ChangeColor(255, 255, 255, itransvalue);
+		allobj.second->GetComponent<Sprite>()->ChangeAvalue(itransvalue);
 		//PARTICLEMANAGER->turn_on_particles(false);
-		if (itransvalue > 255) {
+		if (itransvalue == 255) {
 			IsFadingIn = false;
-			
+		//	itransvalue = 255;
 		
 		}
-
+	
 	}
-	itransvalue += Timer::GetDelta() *600;
+	itransvalue += 5;
 
 }
 
@@ -54,16 +54,16 @@ void FadeOut(void)
 
 	for (auto allobj : FACTORY->ObjectIDMap)
 	{
-		allobj.second->GetComponent<Sprite>()->ChangeColor(255, 255, 255, transvalue);
+		allobj.second->GetComponent<Sprite>()->ChangeAvalue(transvalue);
 
-		if (transvalue < 0) {
+		if (transvalue == 0) {
 			IsFadingOut = false;
 
 			
 		}
 
 	}
-	transvalue -= Timer::GetDelta() * 600;
+	transvalue -= 5;
 
 }
 namespace TE {
