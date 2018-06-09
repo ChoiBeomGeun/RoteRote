@@ -120,6 +120,11 @@ void Intro::Update(float dt)
 			FACTORY->ObjectIDMap[17]->GetComponent<Transform>()->scale -= 100 * dt;
 			FACTORY->ObjectIDMap[17]->GetComponent<Transform>()->rotation += dt ;
 
+			FACTORY->ObjectIDMap[18]->GetComponent<Transform>()->position.x += dt * 300;
+			FACTORY->ObjectIDMap[18]->GetComponent<Transform>()->angle += 300 * dt;
+			FACTORY->ObjectIDMap[18]->GetComponent<Transform>()->scale -= 100 * dt;
+			FACTORY->ObjectIDMap[18]->GetComponent<Transform>()->rotation += dt;
+
 			FACTORY->ObjectIDMap[13]->GetComponent<Transform>()->position.x += dt * 100;
 			FACTORY->ObjectIDMap[13]->GetComponent<Transform>()->angle += 300 * dt;
 			FACTORY->ObjectIDMap[13]->GetComponent<Transform>()->scale -= 100 * dt;
@@ -144,11 +149,10 @@ void Intro::Update(float dt)
 	//FACTORY->ObjectIDMap[13]->GetComponent<Animation>()->setFlipX(Pressed);
 	autoindex++;
 
-	if (CAMERA->cameraPos.z == 0) {
+	if (CAMERA->cameraPos.z == 0 || Input::IsAnyTriggered()) {
 
-		std::string levelnumber = NumberToString(STATEMANAGER->i_LevelSelect);
-		STATEMANAGER->Loadtolevelname = "level" + levelnumber + ".json";
-		STATEMANAGER->MoveState(StatesList::Level1);
+
+		STATEMANAGER->MoveState(StatesList::Splash);
 
 	}
 
