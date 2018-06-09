@@ -27,7 +27,14 @@ enum LevelList{
 	level10,
 	level11,
 	level12,
-	//level13,
+	level13,
+        level14,
+        level15,
+        level16,
+        level17,
+        level18,
+        level19,
+        level20,
 	quit
 };
 

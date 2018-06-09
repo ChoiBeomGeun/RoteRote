@@ -99,19 +99,30 @@ void LevelSelect::Load()
 	LevelList = STATEMANAGER->i_LevelSelect - 1;
 	FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->depth = 1;
 
-
-
-
 	LockObject = FACTORY->CreateArchetype(ReadingArchetype("Button.json"));
 	LockObject->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("LevelSelectionLock.png");
 
 
-	glm::vec3 num_pos(0);
+	glm::vec3 num_pos(-100.f, 180.f, 0);
 
-	for (int i = 0; i < 20; ++i)
+	for (int i = 0; i <= quit; ++i)
 	{
-		FACTORY->ObjectIDMap[i + 4]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(NumberToString(i + 1) + "png");
-		FACTORY->ObjectIDMap[i + 4]->GetComponent<Transform>()->SetPosition()
+            if ((i != 0) && !(i % 5))
+            {
+                num_pos.x = -100.f;
+                num_pos.y -= 50.f;
+            }
+            else if(i != 0)
+            {
+                num_pos.x += 50.f;
+            }
+            
+            FACTORY->ObjectIDMap[i + 4]->GetComponent<Transform>()->scale = glm::vec3(30, 30, 1);
+            FACTORY->ObjectIDMap[i + 4]->GetComponent<Sprite>()->m_TextureID = FACTORY->ObjectIDMap[i + 4]->GetComponent<Sprite>()->texture_load(NumberToString(i + 1) + ".png");
+            FACTORY->ObjectIDMap[i + 4]->GetComponent<Transform>()->SetPosition(num_pos);
+
+            if(i == quit)
+                FACTORY->ObjectIDMap[i + 4]->GetComponent<Sprite>()->m_TextureID = FACTORY->ObjectIDMap[i + 4]->GetComponent<Sprite>()->texture_load("attachbox.png");
 	}
 
 }
@@ -119,13 +130,14 @@ void LevelSelect::Load()
 
 void LevelSelect::Init()
 {
-	FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Levelpng[LevelList];
+    	FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Levelpng[LevelList];
 
 	IsRotating = false;
 	IsLeftPressed = false;
 	IsRightPreesed = false;
 	LvlSelectCam.cameraSetting(CameraPosType::EN_LevelSelect);
 
+        FACTORY->ObjectIDMap[LevelList + 4]->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
 }
 
 void LevelSelect::Update(float dt)
@@ -159,6 +171,9 @@ void LevelSelect::Update(float dt)
 	LvlSelectCam.Update(dt);
 	if (!IsRotating)	{
 		if (Input::IsPressed(SDL_SCANCODE_RIGHT)) {
+                        
+                        FACTORY->ObjectIDMap[LevelList + 4]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+
 			if (LevelList == LevelList::quit)
 				LevelList = LevelList::level1;
 			else
@@ -166,17 +181,24 @@ void LevelSelect::Update(float dt)
 
 			selectAngle = FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle;
 
+                        FACTORY->ObjectIDMap[LevelList + 4]->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
+
 			IsRotating = true;
 			IsLeftPressed = true;
 			IsRightPreesed = false;
 		}
 		if (Input::IsPressed(SDL_SCANCODE_LEFT)) {
+
+                        FACTORY->ObjectIDMap[LevelList + 4]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+
 			if (LevelList == LevelList::level1)
 				LevelList = LevelList::quit;
 			else
 				--LevelList;
 
 			selectAngle = FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle;
+
+                        FACTORY->ObjectIDMap[LevelList + 4]->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
 
 			IsRotating = true;
 			IsRightPreesed = true;
