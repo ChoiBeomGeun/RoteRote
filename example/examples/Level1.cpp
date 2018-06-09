@@ -68,7 +68,7 @@ Object * player;
 
 Object * Movingtest;
 
-Object * dust_particle;
+Object * laser_particle;
 Object * trail_particle;
 Level1::Level1()
 {
@@ -130,7 +130,9 @@ void Level1::Init()
 	LEVELMANAGER->LoadLevel(STATEMANAGER->Loadtolevelname);
 
  	std::string levelname = std::to_string(STATEMANAGER->i_LevelSelect) + ".png";
-	HUDLevelname = FACTORY->CreateHUD(glm::vec3(0, 0.9, 0), glm::vec3(0.1, 0.2, 0));
+	HUDLevelname = FACTORY->CreateHUD(glm::vec3(0, 0.5, 0), glm::vec3(0.1, 0.2, 0));
+	HUDLevelname->GetComponent<Transform>()->scale = glm::vec3(50, 50, 0);
+	HUDLevelname->GetComponent<Transform>()->position.y = HUDLevelname->GetComponent<Transform>()->position.y - HUDLevelname->GetComponent<Transform>()->scale.y;
 	HUDLevelname->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(levelname);
 	HUDLevelname->objectstyle = Objectstyle::Button;
 
@@ -183,7 +185,11 @@ void Level1::Init()
 
 	trail_particle = FACTORY->CreateHUD(glm::vec3(0), glm::vec3(0));
 	trail_particle->GetComponent<Sprite>()->isPerspective = true;
+	laser_particle = FACTORY->CreateHUD(glm::vec3(0), glm::vec3(0));
+	laser_particle->GetComponent<Sprite>()->isPerspective = true;
 	PARTICLEMANAGER->LoadEmitter(trail_particle, "PlayerTrail.json");
+	PARTICLEMANAGER->LoadEmitter(laser_particle, "glowLine.json");
+
 	for (auto p : PARTICLEMANAGER->m_EmitterList)
 	{
 		p->isOn = true;
@@ -192,9 +198,13 @@ void Level1::Init()
 			p->isOn = false;
 			p->pos = FACTORY->GetClearZone()->GetComponent<Transform>()->position;
 		}
-		if(p->type == ET_TRAIL)
+		else if(p->type == ET_TRAIL)
 		{
 			p->pos = player->GetComponent<Transform>()->position;
+		}
+		else if(p->type == ET_LASER)
+		{
+			p->pos = FACTORY->GetClearZone()->GetComponent<Transform>()->position;
 		}
 	}
 	
@@ -224,6 +234,7 @@ void Level1::Update(float dt)
 
 
 	}
+	MakingInstructions(dt);
 
 	if (!ENGINE->GetGameStateIsOn())
 	{

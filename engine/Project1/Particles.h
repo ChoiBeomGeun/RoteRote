@@ -19,7 +19,7 @@ namespace TE {
 		glm::vec3 pos; //!< position of particle
 		glm::vec3 vel; //!< velocity of Particle
 		float lifetime; //!< lifetime of Particle
-		float scale;  //!< scale of Particle
+		glm::vec3 scale;  //!< scale of Particle
 		float color[4]; //!< color of Particle
 		float angle; //!< rotation of particle
 	};
@@ -29,7 +29,7 @@ namespace TE {
 		ET_EXPLOSION, //!< type of explosion
 		ET_TRAIL,      //!<  type of trail
 		ET_SELECTION, //!< type of Background
-		ET_LASER //!< player Exhaust
+		ET_LASER //!< Hazard
 	};
 
 	class Emitter : public Component //!< struct of Emitter

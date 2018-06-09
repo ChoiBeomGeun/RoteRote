@@ -6,7 +6,7 @@
 	{		
 		"Components" : [ "TRANSFORM", "SPRITE", "PARTICLE" ],
 		"EmitterID" : 1,
-		"EmitterType" : "ET_TRAIL",
+		"EmitterType" : "ET_LASER",
 		"ObjectType" : "Particle",
 		"Position" : 
 		{
@@ -16,8 +16,8 @@
 		},
 		"Scale" :
 		{
-			"x" : 0.1,
-			"y" : 0.1
+			"x" : 10.1,
+			"y" : 10.1
 		},
 		"Vel" : 
 		{
@@ -29,14 +29,14 @@
 		{
 			"r" : 0.0,
 			"g" : 0.0,
-			"b" : 0.0,
-			"a" : 0.0
+			"b" : 240.0,
+			"a" : 255.0
 		},
 		"TextureDir" : "glowparticle.png",
 		"EmitterSize" : 0,
 		"EmitterID" : 0,
 		"EmitterLifeTime" : 5,
-		"Emittercapacity" : 10,
+		"Emittercapacity" : 100,
 		"RenderMode" : 0
 	}
 }

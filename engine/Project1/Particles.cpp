@@ -56,8 +56,7 @@ namespace TE {
 			pParticles[i].color[1] = 255;
 			pParticles[i].color[2] = 255;
 			pParticles[i].color[3] = 255;
-			pParticles[i].scale = 0.0f;
-			pParticles[i].scale = 20;
+			pParticles[i].scale = glm::vec3(0.0);
 			pParticles[i].vel = glm::vec3(0);
 		}
 	}

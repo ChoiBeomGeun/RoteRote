@@ -340,7 +340,7 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 					CAMERA->proj();
 					particlemodel = glm::translate(particlemodel, p->pParticles[i].pos);
 					particlemodel = glm::rotate(particlemodel, glm::radians(p->pParticles[i].angle), (*iter)->pOwner->GetComponent<Transform>()->rotation);
-					particlemodel = glm::scale(particlemodel, glm::vec3(p->pParticles[i].scale));
+					particlemodel = glm::scale(particlemodel, p->pParticles[i].scale);
 					glUniform4f(particleLoc[PCOLOR], p->pParticles[i].color[0], p->pParticles[i].color[1],
 						p->pParticles[i].color[2], p->pParticles[i].color[3]);
 					glUniformMatrix4fv(particleLoc[PARTICLEMODEL], 1, GL_FALSE, &particlemodel[0][0]);

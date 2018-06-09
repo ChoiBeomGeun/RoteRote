@@ -205,7 +205,7 @@ namespace TE {
 					pobject->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(textureDir);
 					pobject->GetComponent<Sprite>()->depth = -2.0f;
 					pobject->GetComponent<Transform>()->position = glm::vec3(Xpos, Ypos, 0);
-					pobject->GetComponent<Transform>()->scale = glm::vec3(Xscale, Yscale, 0);
+					pobject->GetComponent<Transform>()->scale = glm::vec3(0, 0, 0);
 					glm::vec3 t_Vel(Xvel, Yvel, Zvel);
 					pobject->GetComponent<Emitter>()->size = emittersize;
 					pobject->GetComponent<Emitter>()->emitterID = emitterID;
@@ -217,6 +217,7 @@ namespace TE {
 					pobject->GetComponent<Emitter>()->SetTexture(pobject->GetComponent<Sprite>()->m_TextureID);
 					pobject->GetComponent<Emitter>()->m_particlePath = path;
 					pobject->GetComponent<Emitter>()->CreateParticle();
+					pobject->GetComponent<Emitter>()->pParticles->scale = glm::vec3(Xscale, Yscale, 0);
 
 					for (int j = 0; j < pobject->GetComponent<Emitter>()->capacity; ++j)
 					{
@@ -267,8 +268,8 @@ namespace TE {
 							//Update particle position based on velocity and dt
 							particle.scale -= m_scaleFactor * dt;
 							//Clamp particle scale to 0 and maxExpScale
-							if (particle.scale <= 0)
-								particle.scale = 0;
+							if (particle.scale.x <= 0 || particle.scale.y <= 0)
+								particle.scale = glm::vec3(0);
 						}
 						//Update emitter lifetime based on dt
 						(*EIT)->lifeTime += dt;
@@ -288,7 +289,9 @@ namespace TE {
 								(*EIT)->pParticles[i].vel = { cosf(rotation), sinf(rotation) , 0.0f };
 								(*EIT)->pParticles[i].vel
 									*= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);;
-								(*EIT)->pParticles[i].scale
+								(*EIT)->pParticles[i].scale.x
+									= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
+								(*EIT)->pParticles[i].scale.y
 									= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
 
 							}
@@ -303,14 +306,13 @@ namespace TE {
 							Particle& particle = (*EIT)->pParticles[i];
 							//If scale of particle is 0
 
-							if (particle.scale <= 0)
+							if (particle.scale.x <= 0 || particle.scale.y <= 0)
 							{
 								//Set particle position to emitter position.
 								particle.pos = (*EIT)->pos;
 								//Set particle scale to random float
 								//between minTrailScale and maxTrailScale
-								particle.scale
-									= TUMath::GetRandomFloat(m_minTrailScale, m_maxTrailScale);
+								particle.scale = glm::vec3(TUMath::GetRandomFloat(m_minTrailScale, m_maxTrailScale));
 							}
 							//Update particle scale based on scaleFactor and dt
 							particle.scale -= m_scaleFactor * dt;
@@ -328,13 +330,13 @@ namespace TE {
 							particle.pos.x += cosf(TUMath::PI * .1f * i + dt);
 							particle.pos.y += sinf(TUMath::PI * .1f * i + dt);
 
-							if (particle.scale <= 0)
+							if (particle.scale.x  <= 0 || particle.scale.y <= 0)
 							{
 								//Set particle position to emitter position.
 								particle.pos = (*EIT)->pos;
 								//Set particle scale to random float
 								//between minTrailScale and maxTrailScale
-								particle.scale = 20.f;
+								particle.scale = glm::vec3(20.f);
 									
 							}
 							//Update particle scale based on scaleFactor and dt
@@ -347,10 +349,12 @@ namespace TE {
 					}
 					case ET_LASER:
 					{
+						(*EIT)->vel = m_laserVel;
+						//float xscale = 20.f;
 						for (int i = 0; i < (*EIT)->capacity; ++i)
 						{
 							Particle & particle = (*EIT)->pParticles[i];
-
+							particle.vel = (*EIT)->vel *dt;
 							particle.pos += particle.vel;
 
 							particle.lifetime += dt;
@@ -359,6 +363,8 @@ namespace TE {
 								particle.pos = (*EIT)->pos;
 
 								particle.lifetime = 0;
+								particle.scale.x = TUMath::GetRandomFloat(m_minTrailScale, m_maxTrailScale);
+								particle.scale.y = TUMath::GetRandomFloat(m_minTrailScale, m_maxTrailScale);
 
 							}							
 						}
@@ -452,7 +458,9 @@ namespace TE {
 			pEmitter->pParticles[i].vel = { cosf(rotation), sinf(rotation) , 0.0f };
 			pEmitter->pParticles[i].vel
 				*= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);;
-			pEmitter->pParticles[i].scale
+			pEmitter->pParticles[i].scale.x
+				= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
+			pEmitter->pParticles[i].scale.y
 				= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
 			// set color with g_colors
 			pEmitter->pParticles[i].color[0] = i / 255.f;
@@ -481,7 +489,7 @@ namespace TE {
 		// fill all particles in emitter with loop
 		for (int i = 0; i < pEmitter->capacity; ++i)
 		{
-			pEmitter->pParticles[i].scale = 0;
+			pEmitter->pParticles[i].scale = glm::vec3(0);
 			pEmitter->pParticles[i].pos = glm::vec3(0);
 			pEmitter->pParticles[i].color[0] = 255 / 255.f;
 			pEmitter->pParticles[i].color[1] = 255 / 255.f;
@@ -514,10 +522,10 @@ namespace TE {
 			pEmitter->pParticles[i].pos = glm::vec3(dis(gen) *.9f, dis(gen)*.5f, 0);
 			// set rotation with random
 			//float rotation = TUMath::GetRandomFloat(0, TUMath::TWO_PI);
-			pEmitter->pParticles[i].scale
+			pEmitter->pParticles[i].scale.x
 				= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
 			//pEmitter->pParticles[i].pos = glm::vec3(0);
-			pEmitter->pParticles[i].scale = TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
+			pEmitter->pParticles[i].scale.y = TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
 			pEmitter->pParticles[i].color[0] = 255 / 255.f;
 			pEmitter->pParticles[i].color[1] = 255 / 255.f;
 			pEmitter->pParticles[i].color[2] = 255 / 255.f;
@@ -535,8 +543,8 @@ namespace TE {
 		{
 			pEmitter->pParticles[i].pos = pEmitter->pos;
 			pEmitter->pParticles[i].angle = 0;
-			pEmitter->pParticles[i].lifetime = 0;
-			pEmitter->pParticles[i].scale = 0;
+			pEmitter->pParticles[i].lifetime = i;
+			pEmitter->pParticles[i].scale = glm::vec3(0);
 			pEmitter->pParticles[i].vel = pEmitter->vel;
 		}
 	}
@@ -551,7 +559,7 @@ namespace TE {
 			
 			pEmitter->pParticles[i].angle = 0;
 			pEmitter->pParticles[i].lifetime = 0;
-			pEmitter->pParticles[i].scale = 0;
+			pEmitter->pParticles[i].scale = glm::vec3(0);
 			pEmitter->pParticles[i].vel = glm::vec3(cosf(TUMath::DegreeToRadian(i)), sinf(TUMath::DegreeToRadian(i)),0.f);
 			pEmitter->pParticles[i].color[0] = ((i*i) % 50 + i) / 255.f;
 			pEmitter->pParticles[i].color[1] = 200 / 255.f;
