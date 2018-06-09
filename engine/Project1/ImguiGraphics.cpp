@@ -190,7 +190,7 @@ void ImGuiUpdate(void) {
 							if (ImGui::Button("Load"))
 							{
 								i.second->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(cppTextureitems[j]);
-
+								i.second->GetComponent<Sprite>()->mTexutureDir = cppTextureitems[j];
 							}
 							ImGui::ColorEdit4("Color", FACTORY->ObjectIDMap[i.second->objID]->GetComponent<Sprite>()->Color, ImGuiColorEditFlags_Uint8);
 							ImGui::SliderFloat("Depth", &FACTORY->ObjectIDMap[i.second->objID]->GetComponent<Sprite>()->depth, -10, 10);
@@ -202,15 +202,23 @@ void ImGuiUpdate(void) {
 					{
 						std::string EmitterOn = "EmitterOn";
 						std::string lifeTime = "lifeTime";
-						
+						std::string particleVel = "vel";
+
 						if (ImGui::TreeNode(("Particle " + std::to_string(i.second->objID)).c_str()))
 						{
-							ImGui::Text("Particle Type is %s", &FACTORY->ObjectIDMap[i.first]->GetComponent<Emitter>()->type);
-							ImGui::Checkbox(EmitterOn.c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Emitter>()->isOn);
-							ImGui::SliderFloat(lifeTime.c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Emitter>()->explifeTime, 0.f, 50.f);
+							
 							ImGui::SliderFloat((ObjectPosition + "x").c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Emitter>()->pos.x, -1000.f, 1000.f);
 							ImGui::SliderFloat((ObjectPosition + "y").c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Emitter>()->pos.y, -1000.f, 1000.f);
 							ImGui::SliderFloat((ObjectPosition + "z").c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Emitter>()->pos.z, -1000.f, 1000.f);
+							
+							ImGui::SliderFloat((particleVel + "x").c_str(), &PARTICLEMANAGER->m_laserVel.x, 0, 500.f);
+							ImGui::SliderFloat((particleVel + "y").c_str(), &PARTICLEMANAGER->m_laserVel.y, 0, 500.f);
+							
+							
+							ImGui::Text("Particle Type is %s", &FACTORY->ObjectIDMap[i.first]->GetComponent<Emitter>()->type);
+							ImGui::Checkbox(EmitterOn.c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Emitter>()->isOn);
+							
+							ImGui::SliderFloat(lifeTime.c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Emitter>()->explifeTime, 0.f, 50.f);
 							
 							ImGui::TreePop();
 						}

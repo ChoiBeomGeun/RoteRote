@@ -101,7 +101,9 @@ namespace TE {
 		if (FACTORY->GetPlayer())
 		{
 			glm::vec2 playerpos = glm::vec2(FACTORY->GetPlayer()->GetComponent<Transform>()->position);
-			CAMERA->cameraPos = glm::vec3(playerpos, 999);
+			CAMERA->cameraPos.x = playerpos.x;
+			CAMERA->cameraPos.y = playerpos.y;
+
 
 			//if (type == CameraRotation::EN_0)
 			//{

@@ -179,6 +179,7 @@ void Menu::Update(float dt)
 				break;
 			case MenuList::Menu_Quit: 
 				obj_confirmation = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(.5, 0.5, 0));
+				obj_confirmation->GetComponent<Transform>()->scale = glm::vec3(500, 300, 0);
 				obj_confirmation->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Sure.png");
 				ConfirmationIsOn = true;
 				return;

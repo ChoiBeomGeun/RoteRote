@@ -390,8 +390,9 @@ void Application::PollWindowEvent(SDL_Event & currEvent)
 	{
 	case SDL_QUIT:
 		if (confirmationa == NULL) {
-			confirmationa = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(1.5, 0.7, 0));
-			confirmationa->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Sure.png");
+			confirmationa = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0));
+			confirmationa->GetComponent<Transform>()->scale = glm::vec3(500, 300, 0);
+			confirmationa->GetComponent<Sprite>()->m_TextureID = confirmationa->GetComponent<Sprite>()->find_texture_id("Sure.png");
 		}
 		RealExit = true;
 
@@ -497,8 +498,8 @@ void TE::Application::getCurrentMonitorSize()
 		SDL_Log("SDL_GETDESKTOPDISPLAYMODE failed: %s", SDL_GetError());
 		
 	}
-	screensize.x = dm.w;
-	screensize.y = dm.h;
+	//screensize.x = dm.w;
+	//screensize.y = dm.h;
 	std::cout << dm.w << "    " << dm.h << std::endl;
 	//SDL_GetRendererOutputSize(r)
 }

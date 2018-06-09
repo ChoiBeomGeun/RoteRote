@@ -86,6 +86,7 @@ namespace TE {
 		float m_maxBackgroundDist; //!< maximum Distance of Background
 		float m_maxBackLifeTime; //!< maximum lifetime of Background
 								 //float m_maxBackLimitsize; //!< maximum size of Background
+		glm::vec3 m_laserVel;
 
 		float m_scaleFactor;  //!< scale factor
 		float m_expLife;      //!< explosion life
@@ -95,6 +96,7 @@ namespace TE {
 		void InitBackgroundSystem(Emitter* pEmitter);
 		void init_particle_system(Emitter * pEmitter);
 		void init_menu_system(Emitter * pEmitter);
+	
 		
 		
 	};

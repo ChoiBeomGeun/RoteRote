@@ -91,7 +91,7 @@ namespace TE {
 		m_maxBackLifeTime = 20;
 		m_scaleFactor = 30;
 		m_expLife = 20;
-
+		m_laserVel = glm::vec3(0);
 		trailNumber = 0;
 	}
 
@@ -117,7 +117,7 @@ namespace TE {
 				init_menu_system(*emitterIT);
 			}
 			break;
-			case ET_SLIDING:
+			case ET_LASER:
 			{
 				init_particle_system(*emitterIT);
 			}
@@ -165,8 +165,8 @@ namespace TE {
 			{
 				emitterTypeID = ET_SELECTION;
 			}
-			else if (emitterType == "ET_SLIDING")
-				emitterTypeID = ET_SLIDING;
+			else if (emitterType == "ET_LASER")
+				emitterTypeID = ET_LASER;
 			
 			float Xpos = file.mRoot.get(object + to_string(i), false).get("Position", false).get("x", false).asFloat();
 			float Ypos = file.mRoot.get(object + to_string(i), false).get("Position", false).get("y", false).asFloat();
@@ -345,31 +345,22 @@ namespace TE {
 						
 						break;
 					}
-					case ET_SLIDING:
+					case ET_LASER:
 					{
 						for (int i = 0; i < (*EIT)->capacity; ++i)
 						{
 							Particle & particle = (*EIT)->pParticles[i];
 
-							//If scale of particle is 0
-							if (particle.scale <= 0)
-							{
+							particle.pos += particle.vel;
 
-								//Set particle position to emitter position.
+							particle.lifetime += dt;
+							if (particle.lifetime > (*EIT)->explifeTime)
+							{
 								particle.pos = (*EIT)->pos;
-								//Set particle scale to random float
-								//between minTrailScale and maxTrailScale
-								particle.scale
-									= TUMath::GetRandomFloat(m_minTrailScale, m_maxTrailScale);
-							}
-							//For every particle
-							//Update particle position based on velocity and dt
-							//	particle.pos += particle.vel * dt;
-							//particle.pos += (*emitterIT)->vel * dt;
-							//Update particle scale based on scaleFactor and dt
-							particle.scale -= m_scaleFactor * dt;
-							//Clamp particle scale to 0 and maxTrailScale
-							TUMath::Clamp(particle.scale, 0, m_maxTrailScale);
+
+								particle.lifetime = 0;
+
+							}							
 						}
 						break;
 					}
@@ -393,7 +384,7 @@ namespace TE {
 		case ET_SELECTION:
 			init_menu_system(pEmitter);
 			break;
-		case ET_SLIDING:
+		case ET_LASER:
 			init_particle_system(pEmitter);
 			break;
 		}
@@ -539,14 +530,14 @@ namespace TE {
 	void ParticleManager::init_particle_system(Emitter * pEmitter)
 	{
 		pEmitter->explifeTime = m_expLife;
-
+		pEmitter->vel = m_laserVel;
 		for (int i = 0; i < pEmitter->capacity; ++i)
 		{
 			pEmitter->pParticles[i].pos = pEmitter->pos;
 			pEmitter->pParticles[i].angle = 0;
 			pEmitter->pParticles[i].lifetime = 0;
 			pEmitter->pParticles[i].scale = 0;
-			pEmitter->pParticles[i].vel = glm::vec3(0);
+			pEmitter->pParticles[i].vel = pEmitter->vel;
 		}
 	}
 
