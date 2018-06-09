@@ -90,7 +90,7 @@ void LevelSelect::Load()
 
 	std::vector<std::string> temp = INGAMELOGIC->vsLevelList;
 
- 	LEVELMANAGER->LoadingLevelInfo();
+	LEVELMANAGER->LoadingLevelInfo();
 	LEVELMANAGER->LoadLevel("selectlevel.json");
 
 	for (int i = 1; i <= LevelList::quit + 1; ++i)

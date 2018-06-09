@@ -145,7 +145,15 @@ void SetReplayer(void) {
 	replayer->GetComponent<Animation>()->setFrame(itor.front().aniframe);
 	replayer->GetComponent<Animation>()->setTime(itor.front().anitime);
 	replayer->GetComponent<Animation>()->setFlipX(itor.front().mouseinfo);
-
+	for (auto p : PARTICLEMANAGER->m_EmitterList)
+	{
+		p->isOn = true;
+		if (p->type == ET_EXPLOSION)
+		{
+			p->isOn = false;
+			p->pos = FACTORY->GetClearZone()->GetComponent<Transform>()->position;
+		}
+	}
 	//PARTICLEMANAGER->GetEmitters()[0].Initialize();
 	itor.pop();
 	if (itor.size() <= 0) {
@@ -166,23 +174,15 @@ void SetReplayer(void) {
 		replayer = FACTORY->GetPlayer();
 
 
-		for (auto p : PARTICLEMANAGER->m_EmitterList)
-		{
-			if (p->type == ET_EXPLOSION)
-			{
-				p->isOn = false;
-			}
-		}
+		//for (auto p : PARTICLEMANAGER->m_EmitterList)
+		//{
+		//	if (p->type == ET_EXPLOSION)
+		//	{
+		//		p->isOn = false;
+		//	}
+		//}
 
-		for (auto p : PARTICLEMANAGER->m_EmitterList)
-		{
-			p->isOn = true;
-			if (p->type == ET_EXPLOSION)
-			{
-				p->isOn = false;
-				p->pos = FACTORY->GetClearZone()->GetComponent<Transform>()->position;
-			}
-		}
+		
 		CAMERA->cameraUp.x = 0;
 		CAMERA->cameraUp.y = 1;
 		PHYSICS->gravityScale = -20.f;
@@ -281,5 +281,12 @@ void FreeReplayer(void) {
 	STATEMANAGER->ReplayInit = true;
 	STATEMANAGER->b_IsGameLevel = true;
 
+	for (auto p : PARTICLEMANAGER->m_EmitterList)
+	{
+		if (p->type == ET_EXPLOSION)
+		{
+			p->isOn = false;
+		}
+	}
 	//	STATEMANAGER->Replayerinfo.clear();
 }

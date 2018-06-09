@@ -270,8 +270,7 @@ void Level1::Update(float dt)
 		APP->b_Win = false;
 	}
 	if (APP->b_Win)
-	{
-		
+	{		
 		for (auto p : PARTICLEMANAGER->m_EmitterList)
 		{
 			
