@@ -3,8 +3,8 @@
 	{
 		"EYE" : 
 		{
-			"x" : -122.5,
-			"y" : -92.0,
+			"x" : 0.0,
+			"y" : 0.0,
 			"z" : 999.0
 		},
 		"TARGET" : 
@@ -61,7 +61,7 @@
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 20.0,
+			"x" : 30.0,
 			"y" : 290.0
 		},
 		"TextureDir" : "unattachwall.png"
@@ -83,7 +83,7 @@
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 20.0,
+			"x" : 30.0,
 			"y" : 290.0
 		},
 		"TextureDir" : "unattachwall.png"
@@ -105,7 +105,7 @@
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 20.0,
+			"x" : 30.0,
 			"y" : 290.0
 		},
 		"TextureDir" : "unattachwall.png"
@@ -127,7 +127,7 @@
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 20.0,
+			"x" : 30.0,
 			"y" : 330.0
 		},
 		"TextureDir" : "unattachwall.png"
@@ -144,7 +144,7 @@
 			"y" : 143.0,
 			"z" : 0.0
 		},
-		"Rotation" : 1316.536865234375,
+		"Rotation" : 2062.977294921875,
 		"Scale" : 
 		{
 			"x" : 20.0,
