@@ -29,7 +29,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 using namespace TE;
 float Timer2 = 0;
 float angle = 0;
-
+SOUNDID blackholesplash;
 splash::splash()
 {
 
@@ -41,7 +41,7 @@ splash::~splash()
 
 void splash::Load()
 {
-	
+	blackholesplash = SOUNDMANAGER->LoadSound("splash.wav");
 	printf("splashLoad\n");
 }
 
@@ -55,7 +55,7 @@ void splash::Init()
 	//CAMERA->view.RotateZ(TUMath::DegreeToRadian(0.f));
 	CAMERA->Initialize();
 	std::string path2 = "splash.json";
-
+	SOUNDMANAGER->PlaySounds(blackholesplash, false);
 
 	LEVELMANAGER->LoadLevel(path2);
 	camActSplash.cameraSetting(CameraPosType::EN_Splash);
