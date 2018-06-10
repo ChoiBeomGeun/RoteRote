@@ -100,6 +100,9 @@ void LevelManager::LoadLevel(std::string  path)
 		float Rotation = file.mRoot.get(object + to_string(i), false).get("Rotation", false).asFloat();
 		float Xscale = file.mRoot.get(object + to_string(i), false).get("Scale", false).get("x", false).asFloat();
 		float Yscale = file.mRoot.get(object + to_string(i), false).get("Scale", false).get("y", false).asFloat();
+		
+
+
 		std::string textureDir = file.mRoot.get(object + to_string(i), false).get("TextureDir", false).asString();
 		CAMERA->cameraPos.x = file.mRoot.get("DefalutCamera", false).get("EYE", false).get("x", false).asFloat();
 		CAMERA->cameraPos.y = file.mRoot.get("DefalutCamera", false).get("EYE", false).get("y", false).asFloat();
@@ -419,6 +422,7 @@ void LevelManager::SaveLevel(std::string  path)
 		root[object + to_string(i)]["Scale"]["x"] = it.second->GetComponent<Transform>()->scale.x;
 		root[object + to_string(i)]["Scale"]["y"] = it.second->GetComponent<Transform>()->scale.y;
 		root[object + to_string(i)]["Depth"] = it.second->GetComponent<Sprite>()->depth;
+
 		if (FACTORY->ObjectIDMap[it.first]->GetComponent<Body>() != nullptr)
 			root[object + to_string(i)]["Mass"] = it.second->GetComponent<Body>()->pm_mass;
 		root[object + to_string(i)]["Rotation"] = it.second->GetComponent<Transform>()->angle;
@@ -449,7 +453,7 @@ void TE::LevelManager::SavingLevelInfo(void)
 	path = ".\\levels.\\" + path;
 #else
 	path = Userinfo;
-	path += "/Documents/RoteRote/levels/" + levelClearInfo.json;
+	path += "/Documents/RoteRote/levels/levelClearInfo.json";
 #endif
 	free(Userinfo);
 	
@@ -487,7 +491,7 @@ void TE::LevelManager::LoadingLevelInfo(void)
 	path = ".\\levels.\\" + path;
 #else
 	path = Userinfo;
-	path += "/Documents/RoteRote/levels/" + levelClearInfo.json;
+	path += "/Documents/RoteRote/levels/levelClearInfo.json";
 #endif
 	free(Userinfo);
 

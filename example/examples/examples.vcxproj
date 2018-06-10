@@ -271,12 +271,18 @@ copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(T
     <ClInclude Include="Pause.h" />
     <ClInclude Include="PauseList.h" />
     <ClInclude Include="ReplayLogic.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="splash.h" />
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="StateLists.h" />
     <ClInclude Include="Trigger.h" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ResourceCompile Include="examples.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\thumbup\INSTALLERFILES\SetupIcon.ico" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
 </Project>

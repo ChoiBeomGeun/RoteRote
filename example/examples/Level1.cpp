@@ -129,6 +129,7 @@ void Level1::Init()
 
 	LEVELMANAGER->LoadLevel(STATEMANAGER->Loadtolevelname);
 
+	
  	std::string levelname = std::to_string(STATEMANAGER->i_LevelSelect) + ".png";
 	HUDLevelname = FACTORY->CreateHUD(glm::vec3(0, 0.5, 0), glm::vec3(0.1, 0.2, 0));
 	HUDLevelname->GetComponent<Transform>()->scale = glm::vec3(50, 50, 0);
@@ -218,6 +219,14 @@ void Level1::Update(float dt)
 #ifdef _DEBUG
 	CheatKeyFunctions();
 #endif
+
+	if (STATEMANAGER->Loadtolevelname == "stairlevel.json")
+	{
+		FACTORY->ObjectIDMap[4]->GetComponent<Sprite>()->Color[4] = 0;
+		FACTORY->ObjectIDMap[9]->GetComponent<Sprite>()->Color[4] = 0;
+		FACTORY->ObjectIDMap[10]->GetComponent<Sprite>()->Color[4] = 0;
+		FACTORY->ObjectIDMap[17]->GetComponent<Sprite>()->Color[4] = 0;
+	}
 
 	//Backgroundobj->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 140);
 

@@ -142,7 +142,7 @@ void Engine::GameLoop()
 
 
 
-			SystemList[i]->Update(0.016f);
+			SystemList[i]->Update(0.015f);
 
 
 			if (!GameIsRunning)

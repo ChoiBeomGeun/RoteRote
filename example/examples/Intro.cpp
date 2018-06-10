@@ -55,7 +55,7 @@ void Intro::Init()
 	once = true;
 	std::string saveLevel = "SAVE";
 
-	backsound = SOUNDMANAGER->LoadSound("introback.mp3");
+	backsound = SOUNDMANAGER->LoadSound("introback.wav");
 	blackhole = SOUNDMANAGER->LoadSound("portalintro.wav");
 
 
