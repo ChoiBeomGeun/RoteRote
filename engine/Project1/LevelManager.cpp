@@ -448,12 +448,10 @@ void TE::LevelManager::SavingLevelInfo(void)
 
 
 
-	std::string saveLevel = path;
 #ifdef _DEBUG
-	path = ".\\levels.\\" + path;
 #else
 	path = Userinfo;
-	path += "/Documents/RoteRote/levels/levelClearInfo.json";
+	path += "/Documents/RoteRote/levelClearInfo.json";
 #endif
 	free(Userinfo);
 	
@@ -486,12 +484,11 @@ void TE::LevelManager::LoadingLevelInfo(void)
 
 
 
-	std::string saveLevel = path;
+
 #ifdef _DEBUG
-	path = ".\\levels.\\" + path;
 #else
 	path = Userinfo;
-	path += "/Documents/RoteRote/levels/levelClearInfo.json";
+	path += "/Documents/RoteRote/levelClearInfo.json";
 #endif
 	free(Userinfo);
 

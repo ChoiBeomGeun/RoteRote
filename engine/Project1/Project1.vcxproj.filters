@@ -42,9 +42,6 @@
     <Filter Include="Imgui">
       <UniqueIdentifier>{e6aeaa2d-eaa6-43f9-bdee-49f2a93217c6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SoundManager">
-      <UniqueIdentifier>{a517cae8-e44d-4a37-8777-0a6836bac61b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="JSON">
       <UniqueIdentifier>{94b0fbfb-d526-488e-9585-4ad25deac4c2}</UniqueIdentifier>
     </Filter>
@@ -65,6 +62,9 @@
     </Filter>
     <Filter Include="Graphics\Particle">
       <UniqueIdentifier>{b5557283-f369-4571-aaa4-5774231e805d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SoundManager">
+      <UniqueIdentifier>{a517cae8-e44d-4a37-8777-0a6836bac61b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -117,7 +117,7 @@
       <Filter>Imgui</Filter>
     </ClCompile>
     <ClCompile Include="Soundmanager.cpp">
-      <Filter>SoundManager</Filter>
+      <Filter>Source Files\SoundManager</Filter>
     </ClCompile>
     <ClCompile Include="Button.cpp">
       <Filter>Object\Button</Filter>
@@ -260,7 +260,7 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="SoundManager.h">
-      <Filter>SoundManager</Filter>
+      <Filter>Source Files\SoundManager</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Object\Button</Filter>

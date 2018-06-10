@@ -85,10 +85,10 @@ void LevelSelect::Load()
 
 	std::sort(INGAMELOGIC->vsLevelList.begin(), INGAMELOGIC->vsLevelList.end(), StringCompareLevel());
 	std::reverse(INGAMELOGIC->vsLevelList.begin(), INGAMELOGIC->vsLevelList.end());
-	INGAMELOGIC->vsLevelList.erase(INGAMELOGIC->vsLevelList.begin());
+
 	INGAMELOGIC->vsLevelList.erase(INGAMELOGIC->vsLevelList.begin());
 
-	std::vector<std::string> temp = INGAMELOGIC->vsLevelList;
+
 
 	LEVELMANAGER->LoadingLevelInfo();
 	LEVELMANAGER->LoadLevel("selectlevel.json");
@@ -106,26 +106,26 @@ void LevelSelect::Load()
 
 	glm::vec3 num_pos(-100.f, 180.f, 0);
 
-	for (int i = 0; i <= quit; ++i)
+	for (auto indexOfnumber = 0; indexOfnumber <= quit; ++indexOfnumber)
 	{
-            if ((i != 0) && !(i % 5))
+            if ((indexOfnumber != 0) && !(indexOfnumber % 5))
             {
                 num_pos.x = -100.f;
                 num_pos.y -= 50.f;
             }
-            else if(i != 0)
+            else if(indexOfnumber != 0)
             {
                 num_pos.x += 50.f;
             }
             
-            FACTORY->ObjectIDMap[i + 4]->GetComponent<Transform>()->scale = glm::vec3(30, 30, 1);
-            FACTORY->ObjectIDMap[i + 4]->GetComponent<Sprite>()->m_TextureID = FACTORY->ObjectIDMap[i + 4]->GetComponent<Sprite>()->texture_load(NumberToString(i + 1) + ".png");
-            FACTORY->ObjectIDMap[i + 4]->GetComponent<Transform>()->SetPosition(num_pos);
+            FACTORY->ObjectIDMap[indexOfnumber + 4]->GetComponent<Transform>()->scale = glm::vec3(30, 30, 1);
+            FACTORY->ObjectIDMap[indexOfnumber + 4]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(NumberToString(indexOfnumber + 1) + ".png");
+            FACTORY->ObjectIDMap[indexOfnumber + 4]->GetComponent<Transform>()->SetPosition(num_pos);
 
-            if (i == quit)
+            if (indexOfnumber == quit)
             {
-                FACTORY->ObjectIDMap[i + 4]->GetComponent<Sprite>()->m_TextureID = FACTORY->ObjectIDMap[i + 4]->GetComponent<Sprite>()->texture_load("attachbox.png");
-                FACTORY->ObjectIDMap[i + 4]->GetComponent<Transform>()->SetPosition(glm::vec3(0, -300, 0));
+                FACTORY->ObjectIDMap[indexOfnumber + 4]->GetComponent<Sprite>()->m_TextureID = FACTORY->ObjectIDMap[indexOfnumber + 4]->GetComponent<Sprite>()->texture_load("attachbox.png");
+                FACTORY->ObjectIDMap[indexOfnumber + 4]->GetComponent<Transform>()->SetPosition(glm::vec3(0, -300, 0));
             }
 	}
 
@@ -146,7 +146,9 @@ void LevelSelect::Init()
 
 void LevelSelect::Update(float dt)
 {
-	if (STATEMANAGER->vsLevelListandclear[LevelList].second == true)
+
+	std::vector<std::pair<std::string, bool>> test = STATEMANAGER->vsLevelListandclear;
+	if (STATEMANAGER->vsLevelListandclear[LevelList].second != true)
 		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(0, -120, 0));
 	else
 		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(300, 300, 0));

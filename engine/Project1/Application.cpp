@@ -133,10 +133,10 @@ Application::Application() : pWnd(nullptr), ResolutionNumber(2)
 #ifdef _DEBUG
 #else
 
-	if (remove(path.c_str()) != 0)
-		perror("Error deleting file");
-	else
-		puts("File successfully deleted");
+	//if (remove(path.c_str()) != 0)
+	//	perror("Error deleting file");
+	//else
+	//	puts("File successfully deleted");
 	
 #endif
 ;
@@ -264,7 +264,7 @@ void Application::Initialize()
 	
 
 #ifndef _DEBUG
-		SDL_SetWindowFullscreen(pWnd, SDL_WINDOW_FULLSCREEN);
+	//	SDL_SetWindowFullscreen(pWnd, SDL_WINDOW_FULLSCREEN);
 #endif // DEBUG
 
 	SDL_GL_SetSwapInterval(1);
