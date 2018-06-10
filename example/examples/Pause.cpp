@@ -243,7 +243,7 @@ void Pause::Update(float dt)
 
 				obj_confirmationPause = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0));
 				obj_confirmationPause->GetComponent<Transform>()->position = glm::vec3(0, 0, 0);
-				obj_confirmationPause->GetComponent<Transform>()->scale = glm::vec3(500, 300, 0);
+				obj_confirmationPause->GetComponent<Transform>()->scale = glm::vec3(650, 250, 0);
 				obj_confirmationPause->GetComponent<Sprite>()->depth = 3;
 				obj_confirmationPause->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Sure.png");
 				ConfirmationIsOn = true;

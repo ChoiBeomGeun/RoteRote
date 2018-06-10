@@ -172,14 +172,16 @@ void Menu::Update(float dt)
 					return;
 				}
 
-				obj_howToPlay = FACTORY->CreateHUD(glm::vec3(0.2, -0.7, 0), glm::vec3(.7, 0.5, 0));
+				obj_howToPlay = FACTORY->CreateHUD(glm::vec3(0, -.2f, 0), glm::vec3(.7, 0.5, 0));
+				obj_howToPlay->GetComponent<Transform>()->position = glm::vec3(100, -150, 0);
+				obj_howToPlay->GetComponent<Transform>()->scale = glm::vec3(900, 250, 0);
 				obj_howToPlay->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("howTOPlay2.png");
 				HowToPlayIsOn = true;
 				return;
 				break;
 			case MenuList::Menu_Quit: 
 				obj_confirmation = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(.5, 0.5, 0));
-				obj_confirmation->GetComponent<Transform>()->scale = glm::vec3(500, 300, 0);
+				obj_confirmation->GetComponent<Transform>()->scale = glm::vec3(650, 250, 0);
 				obj_confirmation->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Sure.png");
 				ConfirmationIsOn = true;
 				return;

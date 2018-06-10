@@ -15,7 +15,7 @@
 	"level4.json" : false,
 	"level5.json" : false,
 	"level6.json" : true,
-	"level7.json" : true,
+	"level7.json" : false,
 	"level8.json" : true,
 	"level9.json" : true
 }
