@@ -186,10 +186,10 @@ void Level1::Init()
 
 	trail_particle = FACTORY->CreateHUD(glm::vec3(0), glm::vec3(0));
 	trail_particle->GetComponent<Sprite>()->isPerspective = true;
-	laser_particle = FACTORY->CreateHUD(glm::vec3(0), glm::vec3(0));
+	/*laser_particle = FACTORY->CreateHUD(glm::vec3(0), glm::vec3(0));
 	laser_particle->GetComponent<Sprite>()->isPerspective = true;
-	PARTICLEMANAGER->LoadEmitter(trail_particle, "PlayerTrail.json");
-	PARTICLEMANAGER->LoadEmitter(laser_particle, "glowLine.json");
+	*/PARTICLEMANAGER->LoadEmitter(trail_particle, "PlayerTrail.json");
+	//PARTICLEMANAGER->LoadEmitter(laser_particle, "glowLine.json");
 
 	for (auto p : PARTICLEMANAGER->m_EmitterList)
 	{
@@ -203,10 +203,10 @@ void Level1::Init()
 		{
 			p->pos = player->GetComponent<Transform>()->position;
 		}
-		else if(p->type == ET_LASER)
+		/*else if(p->type == ET_LASER)
 		{
 			p->pos = FACTORY->GetClearZone()->GetComponent<Transform>()->position;
-		}
+		}*/
 	}
 	
 }
@@ -540,7 +540,7 @@ void CheatKeyFunctions(void) {
 
 
 
-	if (Input::IsTriggered(SDL_SCANCODE_F8) && STATEMANAGER->i_LevelSelect != 13 && !STATEMANAGER->b_IsRot180 && !STATEMANAGER->b_IsRot90)
+	if (Input::IsTriggered(SDL_SCANCODE_F8) && STATEMANAGER->i_LevelSelect != 20 && !STATEMANAGER->b_IsRot180 && !STATEMANAGER->b_IsRot90)
 	{
 
 		CAMERA->cameraUp.x = 0;

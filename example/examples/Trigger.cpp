@@ -170,7 +170,6 @@ void TriggerLogic::Update(float dt)
 						_90angle_toleft_button(TriggerObjects);
 					}
 				}
-
 			}
 
 		}

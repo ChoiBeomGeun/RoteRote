@@ -127,8 +127,7 @@ void Sprite::UnLoadAllSprites()
 
 void Sprite::ChangeColor(float r, float g, float b, float a)
 {
-	if ((r < 0 || r> 255.0f) || (g < 0 || g> 255.0f) || (b < 0 || b> 255.0f) || (a < 0 || a> 255.0f))
-		;
+    if ((r < 0 || r> 255.0f) || (g < 0 || g> 255.0f) || (b < 0 || b> 255.0f) || (a < 0 || a> 255.0f));
 
 
 	Color[0] = r / 255.f;

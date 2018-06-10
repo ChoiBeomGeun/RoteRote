@@ -216,6 +216,10 @@ namespace TE {
 					else CAMERA->cameraPos.x = playerpos.x;
 				}
 			}
+                        else if(STATEMANAGER->Loadtolevelname == "level16.json")
+                        {
+                            ;
+                        }
 			else 
 			{
 				leftboundary = downblock.x - width * .1f;
