@@ -289,18 +289,14 @@ namespace TE {
 								(*EIT)->pParticles[i].vel = { cosf(rotation), sinf(rotation) , 0.0f };
 								(*EIT)->pParticles[i].vel
 									*= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);;
-								(*EIT)->pParticles[i].scale.x
-									= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
-								(*EIT)->pParticles[i].scale.y
-									= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
-
+								(*EIT)->pParticles[i].scale	= glm::vec3(TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale));
 							}
 						}
 					}
 					break;
 
 					case ET_TRAIL:
-					{
+					{ 
 						for (int i = 0; i < (*EIT)->capacity; ++i)
 						{
 							Particle& particle = (*EIT)->pParticles[i];

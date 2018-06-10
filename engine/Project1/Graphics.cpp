@@ -277,8 +277,8 @@ Graphics::~Graphics()
 	ImguiFree();
 	ImGui_ImplSdlGL3_Shutdown();
 #endif
-	
-	Sprite::UnLoadAllSprites();
+	if(!m_textureMap.empty())
+		Sprite::UnLoadAllSprites();
 }
 
 void TE::Graphics::drawPerspective(std::vector<Sprite*>::iterator iter)

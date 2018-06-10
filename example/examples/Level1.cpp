@@ -186,10 +186,10 @@ void Level1::Init()
 
 	trail_particle = FACTORY->CreateHUD(glm::vec3(0), glm::vec3(0));
 	trail_particle->GetComponent<Sprite>()->isPerspective = true;
-	/*laser_particle = FACTORY->CreateHUD(glm::vec3(0), glm::vec3(0));
-	laser_particle->GetComponent<Sprite>()->isPerspective = true;
-	*/PARTICLEMANAGER->LoadEmitter(trail_particle, "PlayerTrail.json");
-	//PARTICLEMANAGER->LoadEmitter(laser_particle, "glowLine.json");
+	PARTICLEMANAGER->LoadEmitter(trail_particle, "PlayerTrail.json");
+
+	//laser_particle = FACTORY->CreateHUD(glm::vec3(0), glm::vec3(0));
+	//laser_particle->GetComponent<Sprite>()->isPerspective = true;
 
 	for (auto p : PARTICLEMANAGER->m_EmitterList)
 	{
@@ -581,7 +581,7 @@ void CheatKeyFunctions(void) {
 void MakingInstructions(float dt) 
 {
 
-	static float timeringame = 9;
+	static float timeringame = 5;
 
 
 	timeringame -= dt;

@@ -186,14 +186,4 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="examples.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\..\..\thumbup\INSTALLERFILES\SetupIcon.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
 </Project>
