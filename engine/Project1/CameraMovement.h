@@ -43,7 +43,7 @@ namespace TE
 
 	public: // camera movement
 		bool DisplayTheWholeMap();
-		void cam_move_interpolate(int type,glm::vec2 destination, float dt);
+		bool cam_move_interpolate(int type,glm::vec2 destination, float dt);
 		//bool isCamToPlayer;
 
 	public: // camera rotating changing walls;
@@ -57,6 +57,7 @@ namespace TE
 
 
 	private:
+		bool iscam_interpol;
 		// how long the object should shake for
 		float shakeDuration;
 		// amplitude of the shake. A larger value shakes the camera harder.

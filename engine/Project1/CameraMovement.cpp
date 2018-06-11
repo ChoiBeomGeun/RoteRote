@@ -16,7 +16,7 @@ namespace TE {
 		shakeAmount = 3.0f;
 		//isCamToPlayer = false;
 		_camPaceSpeed = 10.f;
-
+		iscam_interpol = false;
 		IsCamMovHoz = false;
 		IsCamMovVer = false;
 	}
@@ -44,7 +44,7 @@ namespace TE {
 		}
 	}
 
-	void CameraAction::cam_move_interpolate(int type,glm::vec2 destination, float dt)
+	bool CameraAction::cam_move_interpolate(int type,glm::vec2 destination, float dt)
 	{
 		glm::vec2 displacement = destination- glm::vec2(CAMERA->cameraPos);
 		displacement  = glm::normalize(displacement);
@@ -54,7 +54,7 @@ namespace TE {
 		//_camPacedirction = glm::normalize(_camPacedirction);
 		
 		if (CAMERA->cameraPos.x == destination.x || CAMERA->cameraPos.y == destination.y)
-			return;
+			return true;
 		if(STATEMANAGER->Loadtolevelname == "level6.json")
 			CAMERA->cameraPos.x -= _camPacedirction.x * 300.f * dt;
 		else {
@@ -62,68 +62,18 @@ namespace TE {
 			CAMERA->cameraPos.y -= _camPacedirction.y * 300.f * dt;
 		}
 
-		glm::vec3 rightblock = glm::vec3(0), leftblock = glm::vec3(0), upblock = glm::vec3(0), downblock = glm::vec3(0);
-		float leftboundary = 0, rightboundary = 0, upboundary = 0, downboundary = 0;
-		glm::vec2 center(0);
-		float width = 0, height = 0;
-		if (CameraRotation::EN_0)
-		{
-			upblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
-			downblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
-			rightblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
-			leftblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
-
-			width = abs(rightblock.x - leftblock.x), height = abs(upblock.y - downblock.y);
-
-			center.x = leftblock.x + width * .5f;
-			center.y = downblock.x + height * .5f;
-		}
-		else if (type == CameraRotation::EN_90)
-		{
-			upblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
-			downblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
-			leftblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
-			rightblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
-			width = abs(rightblock.y - leftblock.y), height = abs(upblock.x - downblock.x);
-
-			center.x = leftblock.x + width * .5f;
-			center.y = downblock.x + height * .5f;
-		}
-		else if (type == CameraRotation::EN_180)
-		{
-			upblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
-			downblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
-			leftblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
-			rightblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
-
-			width = std::abs(rightblock.x - leftblock.x), height = std::abs(upblock.y - downblock.y);
-			center.x = leftblock.x + width * .5f;
-			center.y = downblock.x + height * .5f;
-
-		}
-		else if (type == CameraRotation::EN_270)
-		{
-			upblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
-			downblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
-			leftblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
-			rightblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
-
-			width = std::abs(rightblock.y - leftblock.y), height = std::abs(upblock.x - downblock.x);
-			center.x = leftblock.x + width * .5f;
-			center.y = downblock.x + height * .5f;
-		}
 		glm::vec3 scale(10, 10, 0);
-
-
 		if (PHYSICS->SimpleRectvsRectCollisionCheck(&CAMERA->cameraPos, &scale,
 			&FACTORY->GetPlayer()->GetComponent<Transform>()->position,
 			&FACTORY->GetPlayer()->GetComponent<Transform>()->scale))
 		{
 			CAMERA->cameraPos = FACTORY->GetPlayer()->GetComponent<Transform>()->position;
 			CAMERA->cameraPos.z = CameraPosz;
-			return; 
+			return true; 
 			//isCamToPlayer = false;
 		}
+
+		return false;
 	}
 
 
@@ -259,15 +209,18 @@ namespace TE {
 				{
 					upboundary = upblock.x - height * .2f;
 					downboundary = downblock.x + height * .2f;
-
-					cam_move_interpolate(type, glm::vec2(playerpos), dt);
-					
-						/*if (playerpos.x < downboundary)
+					center.x = leftblock.y + width * .5f;
+					center.y = downblock.x + height * .5f;
+					if(!iscam_interpol)
+					iscam_interpol = cam_move_interpolate(type, glm::vec2(downboundary, center.y ), dt);
+					else {
+						if (playerpos.x < downboundary)
 							CAMERA->cameraPos.x = downboundary;
 						else if (playerpos.x > upboundary)
 							CAMERA->cameraPos.x = upboundary;
 						else CAMERA->cameraPos.x = playerpos.x;
-					*/
+					}
+
 					/*if (!STATEMANAGER->b_IsDelay_Cam)
 						STATEMANAGER->b_IsDelay_Cam = true;*/
 				}
