@@ -69,6 +69,7 @@ void ObjectFactory::Update(float /*dt*/)
 
 	for ( it = ObjectsToBeDeleted.begin(); it != ObjectsToBeDeleted.end(); ++it)
 	{
+
 		Object * gameObject = *it;
 
 		//std::map<ObjectID, Object*>::iterator IDit = ObjectIDMap.find(gameObject->objID);
@@ -107,17 +108,31 @@ void ObjectFactory::Destroy(Object* gameObject)
 
 void ObjectFactory::DestroyAllObjects()
 {
-	//std::map<ObjectID, Object* >::iterator it = ObjectIDMap.begin();
- 	for ( auto it : ObjectIDMap)
+	
+	for (auto it : ObjectIDMap)
 	{
-		if (it.second->IsLoadingObject)
+		if (it.second->objectstyle == Objectstyle::NoneReremovable) {
+			APP->IsSureOn = false;
+			APP->RealExit = false;
+
+		}
+
+		if (it.second->IsLoadingObject ) {
+		
 			continue;
+		}
 		delete it.second;
 	}
-	BodyID = 0;
-	LastObjectID = 0;
-	ObjectIDMap.clear();
-	PHYSICS->m_Body.clear();
+
+
+
+		BodyID = 0;
+		LastObjectID = 0;
+		ObjectIDMap.clear();
+		PHYSICS->m_Body.clear();
+
+	
+
 }
 
 

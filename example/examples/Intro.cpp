@@ -27,6 +27,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "LevelList.h"
 #include "StateLists.h"
 #include "Archetype.h"
+#include "ParticleManager.h"
 using namespace TE;
 Jsonclass fileIntro;
 Json::Value rootIntro;
@@ -35,6 +36,7 @@ bool Enter = false;
 bool once = true;
 SOUNDID backsound;
 SOUNDID blackhole;
+Object * particleintro;
 Intro::Intro()
 {
 
@@ -64,6 +66,7 @@ void Intro::Init()
 
 
 	 SOUNDMANAGER->PlaySounds(backsound,false);
+
 }
 
 void Intro::Update(float dt)

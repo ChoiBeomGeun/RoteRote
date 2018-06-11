@@ -97,6 +97,8 @@ namespace TE {
 		bool windowminimized = false;
 		bool windowIsActive = false;
 		bool IsKeyBoardAvailable = true;
+		bool IsSureOn = false;
+		bool RealExit = false;
 		unsigned ResolutionNumber = 0;
 	};
 	extern Application * APP;

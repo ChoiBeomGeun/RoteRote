@@ -35,6 +35,8 @@ namespace TE {
 		void ERRORCheck(FMOD_RESULT result);
 		SOUNDID LoadSound(std::string  SoundDir);
 		void PlaySounds(unsigned int soundtoplay,bool IsRepeat);
+
+		void PlayOnceSounds(unsigned int soundtoplay, bool IsRepeat, bool & IsPlayed);
 		void StopSound(SOUNDID soundtostop);
 		void SetVolume(SOUNDID soundtoadjust, float volume);
 		void Initialize(void) override;

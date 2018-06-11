@@ -67,7 +67,7 @@ void PlayerController::Update(float dt)
 {
 	if (APP->IsKeyBoardAvailable)
 	{
-		if (!(STATEMANAGER->b_IsPauseOn) && !STATEMANAGER->b_IsRot180 && !STATEMANAGER->b_IsRot90 && (!STATEMANAGER->b_IsReplay)
+		if (!APP->b_Win &&!(STATEMANAGER->b_IsPauseOn) && !STATEMANAGER->b_IsRot180 && !STATEMANAGER->b_IsRot90 && (!STATEMANAGER->b_IsReplay)
 			&& (!STATEMANAGER->b_IsAutoplaying) && (!CAMERA->IsCameraShaking) && !STATEMANAGER->IsDrawing) {
 
 

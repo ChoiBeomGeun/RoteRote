@@ -34,6 +34,7 @@ namespace TE
 		void Free(void) override;
 		~LoseconditionLogic();
 		bool isBoundaryLose;
+		bool IsLoseSoundPlayed = true;
 	private:
 		float _fourPoints[4];
 	};

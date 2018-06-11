@@ -72,7 +72,10 @@ Load texture & Initialize a value of texture to Levelpng[i]
 */
 void LevelSelect::Load()
 {
-	
+	 lsPauseSound = SOUNDMANAGER->LoadSound("Menu.mp3");
+	 lsMoveSound = SOUNDMANAGER->LoadSound("Menumove.mp3");
+	 lsSelectSound = SOUNDMANAGER->LoadSound("Menuselect.mp3");
+
 	for (auto it : ENGINE->mVsLevelnamelist)
 	{
 		if (*it.begin() == 'l')
@@ -192,6 +195,9 @@ void LevelSelect::Update(float dt)
 			IsRotating = true;
 			IsLeftPressed = true;
 			IsRightPreesed = false;
+
+
+			SOUNDMANAGER->PlaySounds(lsMoveSound, false);
 		}
 		if (Input::IsPressed(SDL_SCANCODE_LEFT)) {
 
@@ -209,6 +215,7 @@ void LevelSelect::Update(float dt)
 			IsRotating = true;
 			IsRightPreesed = true;
 			IsLeftPressed = false;
+			SOUNDMANAGER->PlaySounds(lsMoveSound, false);
 		}
 		
 
@@ -220,14 +227,21 @@ void LevelSelect::Update(float dt)
 					std::string levelnumber = NumberToString(STATEMANAGER->i_LevelSelect);
 					STATEMANAGER->Loadtolevelname = "level" + levelnumber + ".json";
 					STATEMANAGER->MoveState(StatesList::Level1);
+					SOUNDMANAGER->PlaySounds(lsSelectSound, false);
 				}
-				else
+				else {
 					STATEMANAGER->MoveState(StatesList::Menu);
+					SOUNDMANAGER->PlaySounds(lsSelectSound, false);
+				}
 			}
+
+			
 		}
 
-		if (Input::IsTriggered(SDL_SCANCODE_ESCAPE))
+		if (Input::IsTriggered(SDL_SCANCODE_ESCAPE)) {
 			STATEMANAGER->MoveState(StatesList::Menu);
+			SOUNDMANAGER->PlaySounds(lsSelectSound, false);
+		}
 	}
 
 	if (IsRotating)

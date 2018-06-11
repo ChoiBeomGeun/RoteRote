@@ -289,41 +289,11 @@ void Level1::Update(float dt)
 	{
 		APP->b_Win = false;
 	}
-	if (APP->b_Win)
-	{		
-		for (auto p : PARTICLEMANAGER->m_EmitterList)
-		{
-			
-			if (p->type == ET_EXPLOSION)
-			{
-				if (!p->isOn)
-					PARTICLEMANAGER->initialize_life_time();
-				p->isOn = true;
-			}
-		}
-		if (STATEMANAGER->b_IsDelay)
-			INGAMELOGIC->InGameDelay(dt, 3);
-		else
-		{
-			for (auto p : PARTICLEMANAGER->m_EmitterList)
-			{
 
-				if (p->type == ET_EXPLOSION)
-				{
-					p->isOn = false;
-				}
-			}
-			STATEMANAGER->b_IsReplayStart = false;
-			STATEMANAGER->b_IsReplay = true;
-			STATEMANAGER->b_IsDelay = false;
-		}
-	}
 
 	if (APP->b_Lose)
 	{
-		if(LosesoundOnetime)
-		SOUNDMANAGER->PlaySounds(loseSound, false);
-		LosesoundOnetime = false;
+	
 		CAMERA->IsCameraShaking = LOSECONDITIONLOGIC->isBoundaryLose ? false : true;
 	}
 
@@ -351,6 +321,38 @@ void Level1::Update(float dt)
 		first = false;
 		SetReplayer();
 	}
+
+	if (APP->b_Win)
+	{
+		STATEMANAGER->b_IsReplayStart = false;
+		for (auto p : PARTICLEMANAGER->m_EmitterList)
+		{
+
+			if (p->type == ET_EXPLOSION)
+			{
+				if (!p->isOn)
+					PARTICLEMANAGER->initialize_life_time();
+				p->isOn = true;
+			}
+		}
+		if (STATEMANAGER->b_IsDelay)
+			INGAMELOGIC->InGameDelay(dt, 3);
+		else
+		{
+			for (auto p : PARTICLEMANAGER->m_EmitterList)
+			{
+
+				if (p->type == ET_EXPLOSION)
+				{
+					p->isOn = false;
+				}
+			}
+
+			STATEMANAGER->b_IsReplayStart = false;
+			STATEMANAGER->b_IsReplay = true;
+			STATEMANAGER->b_IsDelay = false;
+		}
+	}
 	if (!PARTICLEMANAGER->m_EmitterList.empty() && FACTORY->GetPlayer() != nullptr)
 	{
 		for (auto p : PARTICLEMANAGER->m_EmitterList)
@@ -363,23 +365,7 @@ void Level1::Update(float dt)
 		}
 	}
 
-	static bool Isauto = false;
-	if (Input::IsTriggered(SDL_SCANCODE_W)) {
-		Isauto = true;
-	
-	}
-	if(Isauto)
-	{
-		root["PositionX"][j] = FACTORY->GetPlayer()->GetComponent<Transform>()->GetPosition().x;
-		root["PositionY"][j] = FACTORY->GetPlayer()->GetComponent<Transform>()->GetPosition().y;
-		root["Frame"][j] = FACTORY->GetPlayer()->GetComponent<Animation>()->getFrame();
-		root["FrameTime"][j] = FACTORY->GetPlayer()->GetComponent<Animation>()->getTime();
-		root["isFlippedX"][j] = FACTORY->GetPlayer()->GetComponent<Animation>()->isFlippedX();
 
-		j++;
-	}
-	if (Input::IsTriggered(SDL_SCANCODE_Q))
-	file.WriteFile(path2, root);
 }
 
 void Level1::Free(void)

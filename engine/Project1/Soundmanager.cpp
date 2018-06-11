@@ -156,6 +156,29 @@ void SoundManager::PlaySounds(unsigned int soundtoplay, bool IsRepeat )
 	}
 }
 
+void TE::SoundManager::PlayOnceSounds(unsigned int soundtoplay, bool IsRepeat, bool & IsPlayed)
+{
+	if (IsPlayed) {
+		if (b_SoundOnOff) {
+			if (!IsRepeat)
+				Sounds[soundtoplay]->setMode(FMOD_LOOP_OFF);
+			else
+				Sounds[soundtoplay]->setMode(FMOD_LOOP_NORMAL);
+			result = system->playSound(FMOD_CHANNEL_FREE, Sounds[soundtoplay], false, &Channels[soundtoplay]);
+
+			bool bplay;
+
+			Channels[soundtoplay]->isPlaying(&bplay);
+
+
+
+
+			ERRORCheck(result);
+		}
+	}
+	IsPlayed = false;
+}
+
 void SoundManager::StopSound(SOUNDID soundtostop)
 {
 	

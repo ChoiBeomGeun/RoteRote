@@ -55,7 +55,8 @@ void TE::LoseconditionLogic::Update(float dt)
 		{
 			if (Physics::RectvsRectCollisionCheck(Loseplayer->GetComponent<Transform>(), Objects.second->GetComponent<Transform>()))
 			{
-				LoseSound = false;
+				SOUNDMANAGER->PlayOnceSounds(LoseSound, false, IsLoseSoundPlayed);
+			
 				APP->b_Lose = true;
 				//STATEMANAGER->ReplayPosition.clear();
 				//STATEMANAGER->ReplayPosition.clear();
@@ -89,10 +90,10 @@ void TE::LoseconditionLogic::Update(float dt)
 				Loseplayer->GetComponent<Transform>()->position.y > 2000/*_fourPoints[DyingPlace::EN_UP_Y]*/ || Loseplayer->GetComponent<Transform>()->position.y < -2000/*_fourPoints[DyingPlace::EN_DOWN_Y]*/))
 			{
 
-				if (Losesoundonce)
-					//	SOUNDMANAGER->PlaySounds(LoseSound, false);
+		
+						SOUNDMANAGER->PlayOnceSounds(LoseSound, false,IsLoseSoundPlayed);
 
-					LoseSound = false;
+				
 				FACTORY->GetPlayer()->GetComponent<Sprite>()->ChangeColor(255, 0, 0, 255);
 				FACTORY->GetPlayer()->GetComponent<Body>()->pm_velocity = glm::vec3(0);
 				APP->b_Lose = true;
@@ -115,11 +116,10 @@ void TE::LoseconditionLogic::Update(float dt)
 			{
 				if (std::abs(int_xnormal) + 10.f < std::abs(xdis) && std::abs(int_ynormal) + 10.f < std::abs(ydis))
 				{
-					
-					if(Losesoundonce)
-				//	SOUNDMANAGER->PlaySounds(LoseSound, false);
+					SOUNDMANAGER->PlayOnceSounds(LoseSound, false, IsLoseSoundPlayed);
 
- 					LoseSound = false;
+
+ 					
 					FACTORY->GetPlayer()->GetComponent<Sprite>()->ChangeColor(255, 0, 0, 255);
 					FACTORY->GetPlayer()->GetComponent<Body>()->pm_velocity = glm::vec3(0);
 					APP->b_Lose = true;
@@ -140,6 +140,8 @@ void TE::LoseconditionLogic::Free(void)
 {
 //	delete LOSECONDITIONLOGIC;
 	CAMERA->IsCameraShaking = false;
+
+	  
 }
 
 TE::LoseconditionLogic::~LoseconditionLogic()

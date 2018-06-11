@@ -27,6 +27,8 @@ static Object *player;
 static Object *obj;
 Object * clearparticle;
 SOUNDID WinSound;
+
+
 namespace TE {
 
 
@@ -42,15 +44,21 @@ ClearzoneLogic::ClearzoneLogic()
 {
 	CLEARZONELOGIC = this;
 
-
+	
 }
 void ClearzoneLogic::Initialize()
 {
+	OnceWin = true;
+	WinSound = SOUNDMANAGER->LoadSound("win3.mp3");
 	player = FACTORY->GetPlayer();
 	obj = GetClearzone();
 	clearparticle = FACTORY->CreateHUD(obj->GetComponent<Transform>()->position, obj->GetComponent<Transform>()->scale);
 	clearparticle->GetComponent<Sprite>()->isPerspective = true;
 	PARTICLEMANAGER->LoadEmitter(clearparticle, "finish.json");
+
+
+	SoundIsPlay = true;
+
  }
 
 
@@ -64,6 +72,13 @@ for (auto Objects : FACTORY->ObjectIDMap)
 			obj = Objects.second;
 
 	}
+if (APP->b_Win) {
+	
+	player->GetComponent<Transform>()->angle += TUMath::GetRandomInt(300, 800) * dt;
+
+	player->GetComponent<Transform>()->scale -= TUMath::GetRandomInt(50, 150) * dt;
+	player->GetComponent<Transform>()->rotation += dt;
+}
 	if (obj != NULL)
 		obj->GetComponent<Transform>()->angle += 20 * dt;
 	if (obj != NULL)
@@ -71,13 +86,24 @@ for (auto Objects : FACTORY->ObjectIDMap)
 		player = FACTORY->GetPlayer();
 		if (PHYSICS->RectvsRectCollisionCheck(player->GetComponent<Transform>(), obj->GetComponent<Transform>()))
 		{
+//			player->GetComponent<Transform>()->scale -= 1;
+		
 
+			SOUNDMANAGER->PlayOnceSounds(WinSound, false, SoundIsPlay);
 		//	WinSound = SOUNDMANAGER->LoadSound("win3.mp3");
 		//	SOUNDMANAGER->PlaySounds(WinSound, false);
+			if (OnceWin) {
+				APP->b_Win = true;
 
-			APP-> b_Win = true;//	LevelInit.b_Win = true;
+				OnceWin = false;
+
+				STATEMANAGER->b_IsDelay = true;
+			}
+			
+			
+			//	LevelInit.b_Win = true;
 							  //STATEMANAGER->b_Relplay = true;
-			STATEMANAGER->b_IsDelay = true;
+			
 			
 
 		

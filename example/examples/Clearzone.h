@@ -31,8 +31,8 @@ namespace  TE
 		Object * GetClearzone(void);
 		ClearzoneLogic();
 		~ClearzoneLogic();
-
-
+		bool   SoundIsPlay = true;
+		bool OnceWin = true;
 
 	};
 

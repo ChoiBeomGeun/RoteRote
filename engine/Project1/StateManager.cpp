@@ -32,7 +32,7 @@ void FadeIn(void)
 	
 	for(auto allobj:FACTORY->ObjectIDMap)
 	{
-		if (allobj.second->objectstyle == Objectstyle::BackGround)
+		if (allobj.second->objectstyle == Objectstyle::BackGround || allobj.second->objectstyle == Objectstyle::NoneReremovable)
 			continue;
 		allobj.second->GetComponent<Sprite>()->ChangeAvalue(itransvalue);
 		//PARTICLEMANAGER->turn_on_particles(false);

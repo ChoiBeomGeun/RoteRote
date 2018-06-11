@@ -38,7 +38,9 @@ private:
 	float selectAngle;
 	bool IsLeftPressed = false;
 	bool IsRightPreesed = false;
-
+	unsigned int lsPauseSound; 
+	unsigned int lsMoveSound ;
+	unsigned int lsSelectSound;
 	TE::Object* obj_confirmation;
 	bool IsConfirmationOn = false;
 	glm::vec2 sizefactor;

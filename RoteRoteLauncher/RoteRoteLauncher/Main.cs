@@ -125,9 +125,11 @@ namespace RoteRoteLauncherView
 
         private void button4_Click(object sender, EventArgs e)
         {
+            string temp = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            temp += ".\\RoteRote.\\ClearInfo.json";
             JObject Reading = null;
  
-                Reading = JObject.Parse(File.ReadAllText("levels.\\" +"levelClearInfo.json"));
+                Reading = JObject.Parse(File.ReadAllText(temp));
 
             int LevelNumber = System.Int16.Parse(Reading["NumberOfTheLevels"].ToString());
             for (int i = 1; i <= LevelNumber; i++)
@@ -137,10 +139,10 @@ namespace RoteRoteLauncherView
                 Reading[Level] = true;
 
 
-
+           
             }
             Reading["level" + 1.ToString() + ".json"] = false;
-            File.WriteAllText("levels.\\" +"levelClearInfo.json", Reading.ToString());
+            File.WriteAllText(temp, Reading.ToString());
 
 
         }

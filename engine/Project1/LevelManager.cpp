@@ -440,7 +440,7 @@ void LevelManager::SaveLevel(std::string  path)
 
 void TE::LevelManager::SavingLevelInfo(void)
 {
-	std::string  path = "levelClearInfo.json";
+	std::string  path = "ClearInfo.json";
 	char * Userinfo;
 	size_t len = path.size();
 	_dupenv_s(&Userinfo, &len, "USERPROFILE");
@@ -451,7 +451,7 @@ void TE::LevelManager::SavingLevelInfo(void)
 #ifdef _DEBUG
 #else
 	path = Userinfo;
-	path += "/Documents/RoteRote/levelClearInfo.json";
+	path += "/Documents/RoteRote/ClearInfo.json";
 #endif
 	free(Userinfo);
 	
@@ -476,7 +476,7 @@ void TE::LevelManager::SavingLevelInfo(void)
 void TE::LevelManager::LoadingLevelInfo(void)
 {
 
-	std::string  path = "levelClearInfo.json";
+	std::string  path = "ClearInfo.json";
 	char * Userinfo;
 	size_t len = path.size();
 	_dupenv_s(&Userinfo, &len, "USERPROFILE");
@@ -488,7 +488,7 @@ void TE::LevelManager::LoadingLevelInfo(void)
 #ifdef _DEBUG
 #else
 	path = Userinfo;
-	path += "/Documents/RoteRote/levelClearInfo.json";
+	path += "/Documents/RoteRote/ClearInfo.json";
 #endif
 	free(Userinfo);
 

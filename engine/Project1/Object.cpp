@@ -25,7 +25,7 @@ Object::~Object()
 
 	for (auto inComponentList : mVcomponetList)
 	{
-		delete inComponentList;
+ 		delete inComponentList;
 	
 	}
 	mVcomponetList.clear();

@@ -9,7 +9,7 @@
 #include "Trigger.h"
 #include "ParticleManager.h"
 #include "CameraMovement.h"
-
+#include "Clearzone.h"
 using namespace TE;
 unsigned int index = 0;
 void ButtonLogic(void);
@@ -91,6 +91,8 @@ void Backgame3(void)
 
 
 void MakeReplayerUI(void) {
+	
+
 	pauseindex3 = 0;
 	SOUNDMANAGER->DeleteSounds();
 	FACTORY->DestroyAllObjects();
@@ -122,7 +124,7 @@ void MakeReplayerUI(void) {
 	rlback = SOUNDMANAGER->LoadSound("menuselect.mp3");
 	rlselect = SOUNDMANAGER->LoadSound("menuselect.mp3");
 	rlwin = SOUNDMANAGER->LoadSound("win3.mp3");
-	SOUNDMANAGER->PlaySounds(rlwin, false);
+
 	STATEMANAGER->vsLevelListandclear[STATEMANAGER->i_LevelSelect - 1 +1].second = false;
 	LEVELMANAGER->SavingLevelInfo();
 	for (auto p : PARTICLEMANAGER->m_EmitterList)

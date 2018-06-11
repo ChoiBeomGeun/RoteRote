@@ -30,7 +30,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 void copyFile(std::string  src, std::string dest);
 
 using namespace TE;
-bool RealExit = false;
+
 Object * confirmationa;
 /* GIMP RGBA C-Source image dump (player4_kIe_icon.c) */
 
@@ -389,10 +389,11 @@ void Application::PollWindowEvent(SDL_Event & currEvent)
 	switch (currEvent.type)
 	{
 	case SDL_QUIT:
-		if (confirmationa == NULL) {
+		if (confirmationa == NULL || RealExit == false) {
 			confirmationa = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0));
 			confirmationa->GetComponent<Transform>()->scale = glm::vec3(650, 250, 0);
 			confirmationa->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Sure.png");
+			confirmationa->objectstyle = Objectstyle::NoneReremovable;
 		}
 		RealExit = true;
 
@@ -441,7 +442,7 @@ void Application::PollWindowEvent(SDL_Event & currEvent)
 
 void Application::PollKeyEvent(SDL_Event & currEvent)
 {
-	if (RealExit) {
+	if (RealExit|| IsSureOn) {
 
 		if (Input::IsTriggered(SDL_SCANCODE_Y)) {
 			FACTORY->Destroy(confirmationa);

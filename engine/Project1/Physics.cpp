@@ -56,7 +56,7 @@ void Physics::Update(float dt) {
 
 
 
-	if ((!STATEMANAGER->b_IsPauseOn) && (!STATEMANAGER->b_IsRot180) && (!STATEMANAGER->b_IsRot90) && (!PHYSICS->IsMapEditorOn))
+	if ((!STATEMANAGER->b_IsPauseOn) && (!STATEMANAGER->b_IsRot180) && (!STATEMANAGER->b_IsRot90) && (!PHYSICS->IsMapEditorOn) && !APP->b_Win)
 	{
 		//if (!(PHYSICS->IsMapEditorOn))
 		ExplictEulerIntegrator(dt);
