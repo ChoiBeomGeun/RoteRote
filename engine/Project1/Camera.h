@@ -49,7 +49,6 @@ namespace TE {
 		glm::mat4 projection;
 		bool IsCameraShaking{ false };
 		bool IsCameraAttached{ false };
-		bool isCentered;
 		float angle;
 		float near_distance() const;
 		float far_distance() const;

@@ -1,3 +1,17 @@
+/******************************************************************************/
+/*!
+\file		Particles.cpp
+\author	HyunJun Yoo
+\par		email: hyunjun306@gmail.com
+\par		Class:GAM250
+\par		ThumbUp Engine
+\date		06/11/2015
+
+Particles are created here.
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
+
 #include "Particles.h"
 #include "TUMath.h"
 
@@ -10,8 +24,19 @@
 
 
 namespace TE {
-	Emitter::Emitter() : Component(ComponentType::CT_EMITTER)
+	Emitter::Emitter() : Component(ComponentType::CT_EMITTER), pParticles(nullptr)
 	{
+		pos = glm::vec3(0);
+		vel = glm::vec3(0);
+		m_textureID = 0;
+		size = 0;
+		capacity = 0;
+		emitterID = 0;
+		lifeTime = 0;
+		explifeTime = 0;
+		isAdditive = true;
+		isOn = false;
+		m_particlePath = "";
 	}
 	Emitter::~Emitter()
 	{
@@ -24,10 +49,10 @@ namespace TE {
 	}
 	void Emitter::Initialize()
 	{
-		if (PARTICLEMANAGER->m_EmitterList.empty())
-		{
-			pParticles = NULL;
-			type = ET_EXPLOSION;
+		/*if (PARTICLEMANAGER->m_EmitterList.empty())
+		{*/
+			//pParticles = NULL;
+			/*type = ET_EXPLOSION;
 			pos = glm::vec3(0);
 			vel = glm::vec3(0);
 			m_textureID = 0;
@@ -35,19 +60,25 @@ namespace TE {
 			capacity = 0;
 			emitterID = 0;
 			lifeTime = 0;
+			explifeTime = 0;
 			isAdditive = true;
-			isOn = false;
-		}
+			isOn = false;*/
+	/*	}
 		else
 			return;
-
+*/
 	}
 
 	void Emitter::CreateParticle()
 	{
 		vel = glm::vec3(0.0f);
+		
 		if (pParticles == NULL)
+		{
 			pParticles = new Particle[capacity];
+			pParticles->angle = 0;
+			pParticles->lifetime = 0;
+		}
 		else
 			return;
 		for (int i = 0; i < capacity; ++i)
@@ -61,13 +92,6 @@ namespace TE {
 		}
 	}
 
-	void Emitter::Update(float /*dt*/)
-	{
-		for (auto p : PARTICLEMANAGER->m_EmitterList)
-		{
-			p->pos = this->GetOwner()->GetComponent<Transform>()->position;
-		}
-	}
 
 	void Emitter::SetTexture(int textureID)
 	{

@@ -2,7 +2,7 @@
 \file        Sprite.cpp
 \author      HyunJun Yoo
 \par         email: hyunjun306@gmail.com
-\par         course: CS225
+\par         course: GAM250
 \date        12/16/2017
 \brief
 

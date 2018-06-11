@@ -65,7 +65,6 @@ void Camera::Initialize()
 	_zFar = 999.f;
 	angle = 45.f;
 	_aspect = (float)APP->_screenWidth / (float)APP->_screenHeight;
-	CAMERA->isCentered = true;
 	_distance = (+_zNear +_zFar) *.5f;
 	_width = tan(angle*.5f) * 2 * _distance;
 	_height = _width / _aspect;

@@ -1,11 +1,14 @@
 /******************************************************************************/
 /*!
-\file   ParticleManager.cpp
-\author HyunJun Yoo
-\par    email: hyunjun306\@gmail.com
-\brief
-This file has the implementation of the functions for Assignment3
+\file		ParticleManager.cpp
+\author	HyunJun Yoo
+\par		email: hyunjun306@gmail.com
+\par		Class:GAM250
+\par		ThumbUp Engine
+\date		06/11/2015
 
+This is where particles are controlled
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/
 #include "ParticleManager.h"
@@ -92,7 +95,7 @@ namespace TE {
 		m_scaleFactor = 30;
 		m_expLife = 20;
 		m_laserVel = glm::vec3(0);
-		trailNumber = 0;
+		m_EmitterList.clear();
 	}
 
 	void ParticleManager::Initialize(Emitter* /*pEmitter*/)

@@ -27,7 +27,7 @@ namespace  TE {
 	//	}
 		void InGameInit(void);
 		void InGameUpdate(float dt);
-		void InGameDelay(float  dt, float howlong);
+		bool InGameDelay(float  dt, float howlong);
 		void InGameShutdown(void);
 
 	/*	template<typename GLST>

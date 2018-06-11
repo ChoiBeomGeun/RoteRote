@@ -107,18 +107,20 @@ void InGameLogic::InGameUpdate(float dt)
 	}
 }
 
-void InGameLogic::InGameDelay(float  dt, float howlong)
+bool InGameLogic::InGameDelay(float  dt, float howlong)
 {
 	temp += dt * 2;
 	
 		if (temp > howlong)
 		{
-			STATEMANAGER->b_IsDelay = false;
+			//STATEMANAGER->b_IsDelay = false;
 			temp = 0;
+			return false;
 		}
 		else 
 		{			
-			STATEMANAGER->b_IsDelay = true;
+			//STATEMANAGER->b_IsDelay = true;
+			return true;;
 		}
 	
 }

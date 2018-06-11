@@ -94,7 +94,7 @@ void Level1::Init()
 */
 	CAMERA->Initialize();
 
-	camAct.isCamToPlayer = true;
+	//camAct.isCamToPlayer = true;
 	LosesoundOnetime = true;
 	CenterToPlayer = true;
 	ZoomInToPlayer = false;
@@ -113,7 +113,7 @@ void Level1::Init()
 	file.ReadFile(path2);
 
 	camAct.Setshakeduration(2);
-	camAct.isCamToPlayer = false;
+	//camAct.isCamToPlayer = false;
 	loseSound = SOUNDMANAGER->LoadSound("lose.mp3");
 	Background = SOUNDMANAGER->LoadSound("menu.mp3");
 	winSound2 = SOUNDMANAGER->LoadSound("win.mp3");
@@ -227,21 +227,20 @@ void Level1::Update(float dt)
 		FACTORY->ObjectIDMap[10]->GetComponent<Sprite>()->Color[4] = 0;
 		FACTORY->ObjectIDMap[17]->GetComponent<Sprite>()->Color[4] = 0;
 	}
+	/*std::cout << "CAMERA pos .x " << CAMERA->cameraPos.x << "\n";
+	std::cout << "CAMERA pos .y " << CAMERA->cameraPos.y << "\n";*/
 
 	//Backgroundobj->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 140);
 
 	if (Input::IsTriggered(SDL_SCANCODE_R) && !STATEMANAGER->b_IsReplay)
 		STATEMANAGER->Restart();
 	if (STATEMANAGER->b_IsReplayStart) {
-
 		ReplayerInfo temp;
 		temp.Pos = player->GetComponent<Transform>()->GetPosition();
 		temp.aniframe = player->GetComponent<Animation>()->getFrame();
 		temp.anitime = player->GetComponent<Animation>()->getTime();
 		temp.mouseinfo = player->GetComponent<Animation>()->isFlippedX();
 		STATEMANAGER->Replayerinfo.push(temp);
-
-
 	}
 	MakingInstructions(dt);
 
@@ -279,6 +278,17 @@ void Level1::Update(float dt)
 			}
 		}
 	}
+
+	/*if (STATEMANAGER->b_IsDelay_Cam)
+	{
+		STATEMANAGER->b_IsDelay = STATEMANAGER->b_IsDelay_Cam;
+		STATEMANAGER->b_IsDelay_Cam = INGAMELOGIC->InGameDelay(dt, 2);
+		if (STATEMANAGER->b_IsDelay_Cam)
+			camAct.cam_move_interpolate(glm::vec2(player->GetComponent<Transform>()->position), dt);
+		if (!STATEMANAGER->b_IsDelay_Cam)
+			STATEMANAGER->b_IsDelay = !STATEMANAGER->b_IsDelay_Cam;
+	}*/
+
 	/*if (FACTORY->GetClearZone())
 	{
 		if(!PARTICLEMANAGER->m_EmitterList.empty() && FACTORY->GetPlayer() != nullptr)
@@ -335,9 +345,9 @@ void Level1::Update(float dt)
 				p->isOn = true;
 			}
 		}
-		if (STATEMANAGER->b_IsDelay)
-			INGAMELOGIC->InGameDelay(dt, 3);
-		else
+		
+		STATEMANAGER->b_IsDelay =	INGAMELOGIC->InGameDelay(dt, 3);
+		if(!STATEMANAGER->b_IsDelay)
 		{
 			for (auto p : PARTICLEMANAGER->m_EmitterList)
 			{
@@ -375,7 +385,7 @@ void Level1::Free(void)
 
 	while (!STATEMANAGER->Replayerinfo.empty())
 		STATEMANAGER->Replayerinfo.pop();
-	CAMERA->isCentered = true;
+	
 	CAMERA->IsCameraShaking = false;
 	STATEMANAGER->b_IsAutoplaying = false;
 	IsAutoplay = false;
@@ -567,7 +577,7 @@ void CheatKeyFunctions(void) {
 void MakingInstructions(float dt) 
 {
 
-	static float timeringame = 5;
+	static float timeringame = 2;
 
 
 	timeringame -= dt;

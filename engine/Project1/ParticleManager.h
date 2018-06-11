@@ -1,12 +1,14 @@
 /******************************************************************************/
 /*!
-\file   ParticleManager.h
-\author HyunJun Yoo
-\par    email: hyunjun306\@gmail.com
+\file		ParticleManager.h
+\author	HyunJun Yoo
+\par		email: hyunjun306@gmail.com
+\par		Class:GAM250
+\par		ThumbUp Engine
+\date		06/11/2015
 
-\brief
-This file has the implementation of the functions for Assignment3
-
+ParticleManager header
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/
 #ifndef PARTICLETEST_H
@@ -70,8 +72,7 @@ namespace TE {
 		int m_size;           //!< number of Emitter
 		int m_currentID;      //!< current ID of Emitter
 
-		int trailNumber;      //!< number of trail Emitter
-
+		
 		float m_minExpVel;    //!< minimum velocity of explosion
 		float m_maxExpVel;    //!< maximum velocity of explosion
 		float m_minExpScale;  //!< minimum scale of explosion
