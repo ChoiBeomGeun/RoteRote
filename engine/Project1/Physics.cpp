@@ -174,7 +174,7 @@ void Physics::BroadPhase() {
 				continue;
 			if (i->second->GetOwner()->objectstyle == Objectstyle::Trigger180 || i->second->GetOwner()->objectstyle == Objectstyle::Trigger90 || (*i).second->GetOwner()->objectstyle == Objectstyle::Trigger90Right)
 				continue;
-			if (j->second->GetOwner()->objectstyle == Objectstyle::Trigger180 || j->second->GetOwner()->objectstyle == Objectstyle::Trigger90|| (*i).second->GetOwner()->objectstyle == Objectstyle::Trigger90Right)
+			if (j->second->GetOwner()->objectstyle == Objectstyle::Trigger180 || j->second->GetOwner()->objectstyle == Objectstyle::Trigger90|| (*j).second->GetOwner()->objectstyle == Objectstyle::Trigger90Right)
 				continue;
 
 

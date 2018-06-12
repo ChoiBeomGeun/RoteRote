@@ -230,6 +230,8 @@ void TriggerLogic::Update(float dt)
 			TriggerObjects->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("180buttonPushed.png");
 			if (TriggerObjects->objectstyle == Objectstyle::Trigger90)
 			TriggerObjects->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("90buttonPushed.png");
+			if (TriggerObjects->objectstyle == Objectstyle::Trigger90Right)
+				TriggerObjects->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("90buttonPushed.png");
 		}
 
 		if (TriggerObjects->GetComponent<Trigger>()->Trigger_useable)
@@ -238,6 +240,8 @@ void TriggerLogic::Update(float dt)
 			TriggerObjects->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("180button.png");
 			if (TriggerObjects->objectstyle == Objectstyle::Trigger90)
 				TriggerObjects->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("90button.png");
+			if (TriggerObjects->objectstyle == Objectstyle::Trigger90Right)
+				TriggerObjects->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("90TriggerRight.png");
 		}
 
 		LimitedTexture(TriggerObjects);
@@ -844,6 +848,21 @@ void TriggerLogic::LimitedTexture(Object* trigger)
 {
 	if (trigger->GetComponent<Trigger>()->MaxLife == 3)
 	{
+		if (trigger->objectstyle == Objectstyle::Trigger90Right)
+		{
+			switch (trigger->GetComponent<Trigger>()->LifeTime)
+			{
+			case 3:
+				trigger->GetComponent<Sprite>()->m_TextureID = Limited90_3[trigger->GetComponent<Trigger>()->MaxLife - 1];
+				break;
+			case 2:
+				trigger->GetComponent<Sprite>()->m_TextureID = Limited90_3[trigger->GetComponent<Trigger>()->MaxLife - 2];
+				break;
+			case 1:
+				trigger->GetComponent<Sprite>()->m_TextureID = Limited90_3[trigger->GetComponent<Trigger>()->MaxLife - 3];
+				break;
+			}
+		}
 		if (trigger->objectstyle == Objectstyle::Trigger90)
 		{
 			switch (trigger->GetComponent<Trigger>()->LifeTime)
