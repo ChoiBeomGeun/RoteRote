@@ -496,8 +496,8 @@ void TriggerLogic::_90angle_toright_button(Object* pTrigger)
 	}
 	if (isDegree[1])
 	{
-		// to 90
-		if (CAMERA->cameraUp.x <= 1 && CAMERA->cameraUp.y >= 0)
+		// to 270
+		if (CAMERA->cameraUp.x <= 1 && CAMERA->cameraUp.y <= 0)
 		{
 			RotateButtons(2.25);
 			FACTORY->GetPlayer()->GetComponent<Transform>()->angle += 2.25;
@@ -534,7 +534,7 @@ void TriggerLogic::_90angle_toright_button(Object* pTrigger)
 	}
 	if (isDegree[2])
 	{
-		// to 0
+		// to 180
 		if (CAMERA->cameraUp.x >= 0 && CAMERA->cameraUp.y <= 1)
 		{
 			FACTORY->GetPlayer()->GetComponent<Transform>()->angle += 2.25;
@@ -568,10 +568,11 @@ void TriggerLogic::_90angle_toright_button(Object* pTrigger)
 		SOUNDMANAGER->PlaySounds(RotationSound, false);
 		isDegree[3] = true;
 		PHYSICS->Gravity90_to_right();
+		//90
 	}
 	if (isDegree[3])
 	{
-		// to 270
+		// to 90
 		if (CAMERA->cameraUp.x >= -1.f && CAMERA->cameraUp.y >= 0.f)
 		{
 			RotateButtons(2.25);
