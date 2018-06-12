@@ -53,6 +53,11 @@ void Ending::Load()
 	std::string saveLevele = "SAVE";
 	LEVELMANAGER->LoadLevel("Ending.json");
 	FACTORY->ObjectIDMap[21]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 0);
+	FACTORY->ObjectIDMap[21]->GetComponent<Transform>()->SetScale(glm::vec3(
+		FACTORY->ObjectIDMap[21]->GetComponent<Transform>()->GetScale().x-500, 
+		FACTORY->ObjectIDMap[21]->GetComponent<Transform>()->GetScale().y,
+		FACTORY->ObjectIDMap[21]->GetComponent<Transform>()->GetScale().z
+	));
 	FACTORY->ObjectIDMap[22]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 0);
 	FACTORY->ObjectIDMap[23]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 0);
 	FACTORY->ObjectIDMap[24]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 0);
