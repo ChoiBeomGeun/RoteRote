@@ -385,7 +385,7 @@
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 24,
-		"ObjectType" : "Hazard",
+		"ObjectType" : "Wall",
 		"Position" : 
 		{
 			"x" : -85.0,
@@ -429,7 +429,7 @@
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 26,
-		"ObjectType" : "Hazard",
+		"ObjectType" : "Wall",
 		"Position" : 
 		{
 			"x" : 45.0,
@@ -607,7 +607,7 @@
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 8,
-		"ObjectType" : "Hazard",
+		"ObjectType" : "Wall",
 		"Position" : 
 		{
 			"x" : -395.0,
@@ -629,7 +629,7 @@
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 9,
-		"ObjectType" : "Hazard",
+		"ObjectType" : "Wall",
 		"Position" : 
 		{
 			"x" : -125.0,

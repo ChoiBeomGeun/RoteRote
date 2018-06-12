@@ -275,7 +275,7 @@
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 21,
-		"ObjectType" : "Hazard",
+		"ObjectType" : "Wall",
 		"Position" : 
 		{
 			"x" : 0.0,
@@ -297,7 +297,7 @@
 		"GravityOn" : false,
 		"Mass" : 0.0,
 		"ObjectID" : 22,
-		"ObjectType" : "Hazard",
+		"ObjectType" : "Wall",
 		"Position" : 
 		{
 			"x" : 0.0,
