@@ -380,7 +380,7 @@
 	},
 	"Object24" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE" ],
 		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
@@ -424,7 +424,7 @@
 	},
 	"Object26" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE" ],
 		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
@@ -602,7 +602,7 @@
 	},
 	"Object8" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE" ],
 		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
@@ -624,7 +624,7 @@
 	},
 	"Object9" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE" ],
 		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,

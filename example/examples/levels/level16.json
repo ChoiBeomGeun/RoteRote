@@ -374,7 +374,7 @@
 	},
 	"Object24" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE" ],
 		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
@@ -396,7 +396,7 @@
 	},
 	"Object25" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE" ],
 		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
@@ -440,7 +440,7 @@
 	},
 	"Object27" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE" ],
 		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
@@ -462,7 +462,7 @@
 	},
 	"Object28" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE" ],
 		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
@@ -484,7 +484,7 @@
 	},
 	"Object29" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE" ],
 		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
@@ -528,7 +528,7 @@
 	},
 	"Object30" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE" ],
 		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
@@ -550,7 +550,7 @@
 	},
 	"Object31" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE" ],
 		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
@@ -594,7 +594,7 @@
 	},
 	"Object33" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE" ],
 		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
@@ -616,7 +616,7 @@
 	},
 	"Object34" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE" ],
 		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
@@ -638,7 +638,7 @@
 	},
 	"Object35" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE" ],
 		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,

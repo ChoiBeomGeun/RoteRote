@@ -270,7 +270,7 @@
 	},
 	"Object19" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE" ],
 		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
@@ -292,7 +292,7 @@
 	},
 	"Object20" : 
 	{
-		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Components" : [ "TRANSFORM", "SPRITE" ],
 		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
@@ -330,7 +330,7 @@
 		"Scale" : 
 		{
 			"x" : 5.0,
-			"y" : 160.0
+			"y" : 157.0
 		},
 		"TextureDir" : "glowline90.png"
 	},
