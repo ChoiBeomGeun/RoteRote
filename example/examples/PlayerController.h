@@ -29,8 +29,10 @@ namespace TE
 		void JumpInit();
 		void MaxJump();
 		void PlayerAnimation();
-
+		void JumpEnoughChange();
 		bool IsAttachable;
+
+		bool IsJumpable;
 
 	private:
 		glm::vec3 pos;
@@ -71,5 +73,6 @@ namespace TE
 
 		float minJumpVelocity = 200;
 
+		unsigned int JumpSound;
 	};
 }

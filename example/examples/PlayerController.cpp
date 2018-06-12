@@ -17,6 +17,7 @@ JUMP SHOULDN'T WORK WHILE PLAYER IS ON AIR
 #include "Input.h"
 #include "Object.h"
 #include "StateManager.h"
+#include "SoundManager.h"
 #include "Factory.h"
 #include "Graphics.h"
 #include <iostream>
@@ -61,6 +62,9 @@ void PlayerController::Initialize()
 	//pos = this->GetOwner()->GetComponent<Transform>()->GetPosition();
 	myController = GAMELOGIC->ControllerList.insert(GAMELOGIC->ControllerList.end(), this);
 	STATEMANAGER->IsDrawing = true;
+
+	JumpSound = SOUNDMANAGER->LoadSound("jump.mp3");
+	SOUNDMANAGER->PlaySounds(JumpSound, true);
 }
 
 void PlayerController::Update(float dt)
@@ -209,6 +213,7 @@ void PlayerController::Movement(float dt)
 				FACTORY->GetPlayer()->GetComponent<Animation>()->isJumping = true;
 				this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(0, JumpSpeed, 0);
 				JumpTriggered = true;
+				SOUNDMANAGER->PlaySounds(JumpSound, false);
 			}
 			//if (Input::IsReleased(SDL_SCANCODE_SPACE))
 			//{
@@ -326,6 +331,7 @@ void PlayerController::Movement(float dt)
 				FACTORY->GetPlayer()->GetComponent<Animation>()->isJumping = true;
  				this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(0, JumpSpeed, 0);
 				JumpTriggered = true;
+				SOUNDMANAGER->PlaySounds(JumpSound, false);
 			}
 			//if (Input::IsReleased(SDL_SCANCODE_SPACE))
 			//{
@@ -427,6 +433,7 @@ void PlayerController::Movement(float dt)
 			{
 				this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(JumpSpeed, 0, 0);
 				JumpTriggered = true;
+				SOUNDMANAGER->PlaySounds(JumpSound, false);
 			}
 			//if (Input::IsReleased(SDL_SCANCODE_SPACE))
 			//{
@@ -528,6 +535,7 @@ void PlayerController::Movement(float dt)
 			{
 				this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(JumpSpeed, 0, 0);
 				JumpTriggered = true;
+				SOUNDMANAGER->PlaySounds(JumpSound, false);
 			}
 			//if (Input::IsReleased(SDL_SCANCODE_SPACE))
 			//{
