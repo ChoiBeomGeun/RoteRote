@@ -232,7 +232,7 @@ void Level1::Update(float dt)
 
 	//Backgroundobj->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 140);
 
-	if (Input::IsTriggered(SDL_SCANCODE_R) && !STATEMANAGER->b_IsReplay)
+	if (Input::IsTriggered(SDL_SCANCODE_R) && !STATEMANAGER->b_IsReplay && !APP->b_Win && !APP->b_Lose)
 		STATEMANAGER->Restart();
 	if (STATEMANAGER->b_IsReplayStart) {
 		ReplayerInfo temp;

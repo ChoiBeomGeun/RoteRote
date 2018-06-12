@@ -1,11 +1,11 @@
 {
-	"NumberOfTheLevels" : 20,
+	"NumberOfTheLevels" : 60,
 	"level1.json" : false,
 	"level10.json" : false,
 	"level11.json" : false,
 	"level12.json" : false,
 	"level13.json" : false,
-	"level14.json" : true,
+	"level14.json" : false,
 	"level15.json" : true,
 	"level16.json" : true,
 	"level17.json" : true,

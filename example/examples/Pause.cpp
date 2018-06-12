@@ -128,7 +128,7 @@ void Pause::Init()
 	select_index = 0;
 //	PauseCam.cameraSetting(CameraPosType::EN_Option);
 	SOUNDMANAGER->PauseAllSound();
-	PauseCam.cameraSetting(CameraPosType::EN_BOUNDARY);
+	//PauseCam.cameraSetting(CameraPosType::EN_BOUNDARY);
 	
 }
 
