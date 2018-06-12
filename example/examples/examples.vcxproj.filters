@@ -99,6 +99,9 @@
     <ClCompile Include="Intro.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Ending.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerController.h">
@@ -174,6 +177,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ending.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

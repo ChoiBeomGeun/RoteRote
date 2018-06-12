@@ -39,7 +39,7 @@ All content 2017 DigiPen (USA) Corporation, all rights reserved.
 #include "cAutoMoving.h"
 #include "Automoving.h"
 #include "Intro.h"
-
+#include "Ending.h"
 using namespace TE;
 int main(int,char**)
 {
@@ -72,6 +72,7 @@ int main(int,char**)
 
 	STATEMANAGER->AddState(new MapEditor);
 	STATEMANAGER->AddState(new Intro);
+	STATEMANAGER->AddState(new Ending);
 	STATEMANAGER->SetPauseState(StatesList::Pause);
 	STATEMANAGER->SetStartState(StatesList::Intro);
 //	STATEMANAGER->SetReplayState(6);

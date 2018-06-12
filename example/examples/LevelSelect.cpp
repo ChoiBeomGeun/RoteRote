@@ -151,7 +151,8 @@ void LevelSelect::Update(float dt)
 {
 
 	std::vector<std::pair<std::string, bool>> test = STATEMANAGER->vsLevelListandclear;
-	if (STATEMANAGER->vsLevelListandclear[LevelList].second != true)
+	if (STATEMANAGER->vsLevelListandclear[LevelList].second != true &&
+		LevelList != LevelList::quit)
 		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(0, -120, 0));
 	else
 		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(300, 300, 0));
@@ -266,7 +267,7 @@ void LevelSelect::Update(float dt)
 
 void LevelSelect::Free(void)
 {
-
+	
 }
 
 

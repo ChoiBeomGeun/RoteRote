@@ -66,6 +66,8 @@ namespace TE {
 		bool IsDrawing;
 		bool levelreplay = false;
 		bool ReplayInit = true;
+		bool IsEnding = false;
+		bool IsEndingISOVER = false;
 		std::vector<std::pair<std::string, bool>> vsLevelListandclear;
 		glm::vec3 InitplayerPos{ 0,0,0 };
 		std::queue<ReplayerInfo> Replayerinfo;

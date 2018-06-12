@@ -28,7 +28,8 @@ static float itransvalue = 0;
 static float transvalue = 255;
 void FadeIn(void)
 {
-
+	if (STATEMANAGER->IsEnding)
+		return;
 	
 	for(auto allobj:FACTORY->ObjectIDMap)
 	{
@@ -50,7 +51,8 @@ void FadeIn(void)
 
 void FadeOut(void)
 {
-
+	if (STATEMANAGER->IsEnding)
+		return;
 
 	for (auto allobj : FACTORY->ObjectIDMap)
 	{

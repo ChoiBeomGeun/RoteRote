@@ -41,9 +41,13 @@ Menu::~Menu()
 
 void Menu::Load()
 {
-	LEVELMANAGER->LoadLevel("Menu.json");
-
-
+	if(STATEMANAGER->IsEndingISOVER)
+	LEVELMANAGER->LoadLevel("menuafterclear.json");
+	else
+		LEVELMANAGER->LoadLevel("Menu.json");
+	if (STATEMANAGER->IsEndingISOVER)
+		MenuSound = SOUNDMANAGER->LoadSound("Endingsound.mp3");
+	else
 	MenuSound = SOUNDMANAGER->LoadSound("menu.mp3");
 	MoveSound = SOUNDMANAGER->LoadSound("menumove.mp3");
 	SelectSound = SOUNDMANAGER->LoadSound("menuselect.mp3");
@@ -111,7 +115,7 @@ void Menu::Load()
 void Menu::Update(float dt)
 {
 	if (Input::IsTriggered(SDL_SCANCODE_F1))
-		STATEMANAGER->MoveState(StatesList::Intro-1);
+		STATEMANAGER->MoveState(StatesList::Ending);
 
 	if (ConfirmationIsOn) {
 		if (Input::IsTriggered(SDL_SCANCODE_Y))

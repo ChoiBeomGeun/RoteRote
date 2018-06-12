@@ -25,7 +25,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8486F910-0077-4BDF-B654-1496D8A5F604}</ProjectGuid>
     <RootNamespace>examples</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -232,6 +232,7 @@ copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(T
     <ClCompile Include="AutoMoving.cpp" />
     <ClCompile Include="Clearzone.cpp" />
     <ClCompile Include="EditorData.cpp" />
+    <ClCompile Include="Ending.cpp" />
     <ClCompile Include="InGameLogic.cpp" />
     <ClCompile Include="Intro.cpp" />
     <ClCompile Include="Level1.cpp" />
@@ -252,6 +253,7 @@ copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(T
     <ClInclude Include="Automoving.h" />
     <ClInclude Include="Clearzone.h" />
     <ClInclude Include="EditorData.h" />
+    <ClInclude Include="Ending.h" />
     <ClInclude Include="GameLogicSystem.h" />
     <ClInclude Include="GameSystem.h" />
     <ClInclude Include="Intro.h" />

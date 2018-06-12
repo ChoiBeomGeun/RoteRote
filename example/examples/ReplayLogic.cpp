@@ -10,6 +10,7 @@
 #include "ParticleManager.h"
 #include "CameraMovement.h"
 #include "Clearzone.h"
+#include "StateLists.h"
 using namespace TE;
 unsigned int index = 0;
 void ButtonLogic(void);
@@ -68,8 +69,8 @@ void LevelSelect3(void)
 void Backgame3(void)
 {
 	FreeReplayer();
-	if (STATEMANAGER->i_LevelSelect == 13) {
-		LevelSelect3();
+	if (STATEMANAGER->i_LevelSelect == 20) {
+		STATEMANAGER->MoveState(StatesList::Ending);
 		return;
 	}
 
@@ -124,7 +125,7 @@ void MakeReplayerUI(void) {
 	rlback = SOUNDMANAGER->LoadSound("menuselect.mp3");
 	rlselect = SOUNDMANAGER->LoadSound("menuselect.mp3");
 	rlwin = SOUNDMANAGER->LoadSound("win3.mp3");
-
+	if(STATEMANAGER->i_LevelSelect != 20)
 	STATEMANAGER->vsLevelListandclear[STATEMANAGER->i_LevelSelect - 1 +1].second = false;
 	LEVELMANAGER->SavingLevelInfo();
 	for (auto p : PARTICLEMANAGER->m_EmitterList)

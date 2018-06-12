@@ -99,6 +99,7 @@ namespace TE {
 		bool IsKeyBoardAvailable = true;
 		bool IsSureOn = false;
 		bool RealExit = false;
+		
 		unsigned ResolutionNumber = 0;
 	};
 	extern Application * APP;
