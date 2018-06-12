@@ -43,7 +43,7 @@ namespace TE
 
 	public: // camera movement
 		bool DisplayTheWholeMap();
-		bool cam_move_interpolate(int type,glm::vec2 destination, float dt);
+		bool cam_move_interpolate(glm::vec2 destination, float dt);
 		//bool isCamToPlayer;
 
 	public: // camera rotating changing walls;

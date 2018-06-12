@@ -2,9 +2,6 @@
 #include "Factory.h"
 #include "Physics.h"
 #include "StateManager.h"
-
-
-
 #include <random>
 
 float CameraPosz = 999.f;
@@ -14,7 +11,6 @@ namespace TE {
 		shakeDuration = 3.0f;
 		decreaseFactor = 1.0f;
 		shakeAmount = 3.0f;
-		//isCamToPlayer = false;
 		_camPaceSpeed = 10.f;
 		iscam_interpol = false;
 		IsCamMovHoz = false;
@@ -22,7 +18,6 @@ namespace TE {
 	}
 	CameraAction::~CameraAction()
 	{
-
 	}
 	void CameraAction::ShakeCamera(float dt)
 	{
@@ -44,15 +39,23 @@ namespace TE {
 		}
 	}
 
-	bool CameraAction::cam_move_interpolate(int type,glm::vec2 destination, float dt)
+	bool CameraAction::cam_move_interpolate(glm::vec2 destination, float dt)
 	{
 		glm::vec2 displacement = destination- glm::vec2(CAMERA->cameraPos);
 		displacement  = glm::normalize(displacement);
-		
-		//   auto distanceFromStart = glm::length(displacement);
+		glm::vec3 scale(3, 3, 0);
 		glm::vec2 _camPacedirction = -displacement;
-		//_camPacedirction = glm::normalize(_camPacedirction);
-		
+		glm::vec3 collpos(destination, 0);
+		if (PHYSICS->SimpleRectvsRectCollisionCheck(&CAMERA->cameraPos, &scale,
+			&collpos,
+			&scale))
+		{
+			CAMERA->cameraPos.x = destination.x;
+			CAMERA->cameraPos.y = destination.y;
+			CAMERA->cameraPos.z = CameraPosz;
+			return true;
+			//isCamToPlayer = false;
+		}
 		if (CAMERA->cameraPos.x == destination.x || CAMERA->cameraPos.y == destination.y)
 			return true;
 		if(STATEMANAGER->Loadtolevelname == "level6.json")
@@ -61,51 +64,28 @@ namespace TE {
 			CAMERA->cameraPos.x -= _camPacedirction.x * 300.f * dt;
 			CAMERA->cameraPos.y -= _camPacedirction.y * 300.f * dt;
 		}
-
-		glm::vec3 scale(10, 10, 0);
-		if (PHYSICS->SimpleRectvsRectCollisionCheck(&CAMERA->cameraPos, &scale,
-			&FACTORY->GetPlayer()->GetComponent<Transform>()->position,
-			&FACTORY->GetPlayer()->GetComponent<Transform>()->scale))
-		{
-			CAMERA->cameraPos = FACTORY->GetPlayer()->GetComponent<Transform>()->position;
-			CAMERA->cameraPos.z = CameraPosz;
-			return true; 
-			//isCamToPlayer = false;
-		}
-
 		return false;
 	}
-
 
 	int CameraAction::RotatingCam()
 	{
 		// when degree is 0 
 		if (CAMERA->cameraUp.x == 0 && CAMERA->cameraUp.y == 1)
-		{
 			return EN_0;
-		}
 		// when degree is 90
 		else if (CAMERA->cameraUp.x == 1 && CAMERA->cameraUp.y == 0)
-		{
 			return EN_90;
-		}
 		// when degree is 180
 		else if (CAMERA->cameraUp.x == 0 && CAMERA->cameraUp.y == -1)
-		{
 			return EN_180;
-		}
 		// when degree is 270
 		else if (CAMERA->cameraUp.x == -1 && CAMERA->cameraUp.y == 0)
-		{
 			return EN_270;
-
-		}
 		return false;
 	}
 
 	void CameraAction::ControlCamMovement(int type, float dt)
 	{
-
 		glm::vec3 rightblock = glm::vec3(0), leftblock = glm::vec3(0), upblock = glm::vec3(0), downblock = glm::vec3(0);
 		if (FACTORY->GetPlayer())
 		{
@@ -122,9 +102,7 @@ namespace TE {
 				downblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
 				rightblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
 				leftblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
-
 				width = abs(rightblock.x - leftblock.x), height = abs(upblock.y - downblock.y);
-
 				center.x = leftblock.x + width * .5f;
 				center.y = downblock.x + height * .5f;
 			}
@@ -135,8 +113,7 @@ namespace TE {
 				leftblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
 				rightblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
 				width = abs(rightblock.y - leftblock.y), height = abs(upblock.x - downblock.x);
-
-				center.x = leftblock.x + width * .5f;
+				center.x = leftblock.y + width * .5f;
 				center.y = downblock.x + height * .5f;
 			}
 			else if(type == CameraRotation::EN_180)
@@ -159,11 +136,10 @@ namespace TE {
 				rightblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
 
 				width = std::abs(rightblock.y - leftblock.y), height = std::abs(upblock.x - downblock.x);
-				center.x = leftblock.x + width * .5f;
-				center.y = downblock.x + height * .5f;
+				center.y = leftblock.y + width * .5f;
+				center.x = downblock.x + height * .5f;
 			}
 
-			
 				
 			if (STATEMANAGER->Loadtolevelname == "level1.json")
 			{
@@ -190,7 +166,6 @@ namespace TE {
 			{
 				if (type == CameraRotation::EN_0)
 				{
-					
 					CAMERA->cameraPos.x = center.x;
 					CAMERA->cameraPos.y = center.y;
 				}
@@ -203,7 +178,6 @@ namespace TE {
 					center.y = downblock.y + height * .5f;
 					CAMERA->cameraPos.x = center.x;
 					CAMERA->cameraPos.y = center.y;
-					
 				}
 				else if (type == CameraRotation::EN_90)
 				{
@@ -211,28 +185,39 @@ namespace TE {
 					downboundary = downblock.x + height * .2f;
 					center.x = leftblock.y + width * .5f;
 					center.y = downblock.x + height * .5f;
+
+					if (CAMERA->cameraPos.x != downboundary)
+						iscam_interpol = false;
+						 
 					if(!iscam_interpol)
-					iscam_interpol = cam_move_interpolate(type, glm::vec2(downboundary, center.y ), dt);
+					iscam_interpol = cam_move_interpolate( glm::vec2(downboundary, center.y ), dt);
 					else {
 						if (playerpos.x < downboundary)
 							CAMERA->cameraPos.x = downboundary;
 						else if (playerpos.x > upboundary)
 							CAMERA->cameraPos.x = upboundary;
 						else CAMERA->cameraPos.x = playerpos.x;
-					}
+						iscam_interpol = false;
 
-					/*if (!STATEMANAGER->b_IsDelay_Cam)
-						STATEMANAGER->b_IsDelay_Cam = true;*/
+					}
 				}
-				else if(type == CameraRotation::EN_270)
+				else if (type == CameraRotation::EN_270)
 				{
+					center.x = leftblock.y + width * .5f;
+					center.y = downblock.x + height * .5f;
 					upboundary = upblock.x + height * .2f;
 					downboundary = downblock.x - height * .2f;
-					if (playerpos.x > downboundary)
-						CAMERA->cameraPos.x = downboundary;
-					else if (playerpos.x < upboundary)
-						CAMERA->cameraPos.x = upboundary;
-					else CAMERA->cameraPos.x = playerpos.x;
+					if (!iscam_interpol)
+						iscam_interpol = cam_move_interpolate(glm::vec2(downboundary, center.y), dt);
+					else
+					{
+						if (playerpos.x > downboundary)
+							CAMERA->cameraPos.x = downboundary;
+					
+						else CAMERA->cameraPos.x = playerpos.x;
+						iscam_interpol = false;
+
+					}
 				}
 			}
 
@@ -246,7 +231,7 @@ namespace TE {
 				leftboundary = downblock.x - width * .1f;
 				rightboundary = downblock.x + width * .1f;
 				
-				if (type == CameraRotation::EN_0 || type == CameraRotation::EN_180)
+				if (type == CameraRotation::EN_0 )
 				{
 					if (playerpos.x < leftboundary)
 						CAMERA->cameraPos.x = leftboundary;
@@ -255,275 +240,57 @@ namespace TE {
 					else
 						CAMERA->cameraPos.x = playerpos.x;
 				}
-				else if(type == CameraRotation::EN_90)
+				else if (type == CameraRotation::EN_90)
+				{
+					upboundary = upblock.x - height * .3f;
+					downboundary = downblock.x + height * .2f;
+					if (STATEMANAGER->Loadtolevelname == "level12.json")
+					{
+						if (playerpos.x < downboundary)
+							CAMERA->cameraPos.x = downboundary;
+						else if (playerpos.x < upboundary)
+							CAMERA->cameraPos.x = playerpos.x;
+					}
+					else if (!iscam_interpol)
+						iscam_interpol = cam_move_interpolate(glm::vec2(upboundary,center.y), dt);
+					else
+					{
+						if (playerpos.x < downboundary)
+							CAMERA->cameraPos.x = downboundary;
+						else if (playerpos.x < upboundary)
+							CAMERA->cameraPos.x = playerpos.x;
+						iscam_interpol = true;
+					}
+				}
+				else if (type == CameraRotation::EN_180)
 				{
 					upboundary = upblock.x - height * .2f;
 					downboundary = downblock.x + height * .2f;
-					if (playerpos.x < downboundary)
-						CAMERA->cameraPos.x = downboundary;
-					else if (playerpos.x > upboundary)
-						CAMERA->cameraPos.x = upboundary;
-					else CAMERA->cameraPos.x = playerpos.x;
+					
+						if (playerpos.x < leftboundary)
+							CAMERA->cameraPos.x = leftboundary;
+						else if (playerpos.x > rightboundary)
+							CAMERA->cameraPos.x = rightboundary;
+						else
+							CAMERA->cameraPos.x = playerpos.x;
+					
 				}
-				else if(type == CameraRotation::EN_270)
+				else if (type == CameraRotation::EN_270)
 				{
-					upboundary = upblock.x + height * .2f;
-					downboundary = downblock.x - height * .2f;
-					if (playerpos.x > downboundary)
-						CAMERA->cameraPos.x = downboundary;
-					else if (playerpos.x < upboundary)
-						CAMERA->cameraPos.x = upboundary;
-					else CAMERA->cameraPos.x = playerpos.x;
+					upboundary = upblock.x - height * .2f;
+					downboundary = downblock.x + height * 0.4f;
+					if (!iscam_interpol)
+						iscam_interpol = cam_move_interpolate(glm::vec2(downboundary, center.y), dt);
+					else
+					{
+						if (playerpos.x < upboundary)
+							CAMERA->cameraPos.x = upboundary;
+						else if (playerpos.x < downboundary)
+							CAMERA->cameraPos.x = playerpos.x;
+						iscam_interpol = true;
+					}
 				}
 			}
-		
-			
-			//	if (type == CameraRotation::EN_0)
-			//	{
-			//		if (IsCamMovVer)
-			//			IsCamMovVer = !IsCamMovVer;
-
-			//		// this is current block of map 
-			//		upblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
-			//		downblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
-			//		rightblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
-			//		leftblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
-			//		if (((upblock.y - downblock.y) < APP->_screenHeight) && ((rightblock.x - leftblock.x) < APP->_screenWidth)) // when wall boundaries are smaller than camera size
-			//		{
-			//			if (STATEMANAGER->Loadtolevelname == "level1.json")
-			//			{
-			//				CAMERA->CenterOfCamera.x = downblock.x;
-			//				CAMERA->CenterOfCamera.y = downblock.y + APP->_screenHeight*.5f - FACTORY->GetPlayer()->GetComponent<Transform>()->scale.y * 4;
-
-
-			//				CAMERA->cameraPos.x = CAMERA->CenterOfCamera.x;
-			//				CAMERA->cameraPos.y = CAMERA->CenterOfCamera.y;
-
-			//				float LeftXLimit, RightXLimit;
-			//				LeftXLimit = downblock.x - APP->_screenWidth *.25f;
-			//				RightXLimit = downblock.x + APP->_screenWidth *.25f;
-
-			//				if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x <= LeftXLimit)
-			//				{
-			//					CAMERA->cameraPos.x = LeftXLimit;
-			//				}
-			//				else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x >= RightXLimit)
-			//				{
-			//					CAMERA->cameraPos.x = RightXLimit;
-			//				}
-			//				else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x > LeftXLimit || FACTORY->GetPlayer()->GetComponent<Transform>()->position.x < RightXLimit)
-			//				{
-			//					CAMERA->cameraPos.x = FACTORY->GetPlayer()->GetComponent<Transform>()->position.x;
-			//				}
-			//			}
-			//			else {
-
-			//				CAMERA->CenterOfCamera.x = leftblock.x + (std::abs(leftblock.x - rightblock.x)*.5f);
-			//				CAMERA->CenterOfCamera.y = downblock.y + (std::abs(upblock.y - downblock.y)*.5f);
-
-			//				CAMERA->cameraPos.x = CAMERA->CenterOfCamera.x;
-			//				CAMERA->cameraPos.y = CAMERA->CenterOfCamera.y;
-			//			}
-			//		}
-			//		else
-			//		{
-			//			CAMERA->CenterOfCamera.x = leftblock.x + (std::abs(leftblock.x - rightblock.x)*.5f);
-			//			CAMERA->CenterOfCamera.y = downblock.y + (std::abs(upblock.y - downblock.y)*.5f);
-
-			//			// To do: seprate sections of map 
-			//			float UpYLimit, DownYLimit, LeftXLimit, RightXLimit;
-
-			//			UpYLimit = upblock.y - std::abs(upblock.y - CAMERA->CenterOfCamera.y)*.5f;
-			//			DownYLimit = downblock.y + std::abs(CAMERA->CenterOfCamera.y - downblock.y)*.5f;
-			//			LeftXLimit = leftblock.x + std::abs(CAMERA->CenterOfCamera.x - leftblock.x)*.5f;
-			//			RightXLimit = rightblock.x - std::abs(rightblock.x - CAMERA->CenterOfCamera.x)*.5f;
-
-
-			//			if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x <= LeftXLimit)         // when player is on the left.
-			//				CAMERA->cameraPos.x = LeftXLimit;
-			//			else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x >= RightXLimit)   // when player is on the right
-			//				CAMERA->cameraPos.x = RightXLimit;
-			//			else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x > LeftXLimit || FACTORY->GetPlayer()->GetComponent<Transform>()->position.x < RightXLimit)
-			//				CAMERA->cameraPos.x = FACTORY->GetPlayer()->GetComponent<Transform>()->position.x;
-
-			//			if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.y <= DownYLimit)         // when player is on the left.
-			//				CAMERA->cameraPos.y = DownYLimit;
-			//			else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.y >= UpYLimit)   // when player is on the right
-			//				CAMERA->cameraPos.y = UpYLimit;
-			//			else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.y > DownYLimit || FACTORY->GetPlayer()->GetComponent<Transform>()->position.y < UpYLimit)
-			//				CAMERA->cameraPos.y = FACTORY->GetPlayer()->GetComponent<Transform>()->position.y;
-
-			//		}
-
-
-			//	}
-			//	else if (type == CameraRotation::EN_90)
-			//	{
-
-			//		// this is current block of map 
-			//		upblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
-			//		downblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
-			//		leftblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
-			//		rightblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
-
-			//		CAMERA->CenterOfCamera.x = downblock.x + ((upblock.x - downblock.x)*.5f);
-			//		CAMERA->CenterOfCamera.y = leftblock.y + ((rightblock.y - leftblock.y)*.5f);
-			//		if ((upblock.y - downblock.y) < APP->_screenHeight && (rightblock.x - leftblock.x) < APP->_screenWidth) // when wall boundaries are smaller than camera size
-			//		{
-			//			float UpYLimit, DownYLimit;
-			//			UpYLimit = (upblock.x - std::abs((upblock.x - CAMERA->CenterOfCamera.x))*.5f);
-			//			DownYLimit = (downblock.x + std::abs(CAMERA->CenterOfCamera.x - downblock.x)*.5f);
-
-			//			if (abs(upblock.x - downblock.x)> APP->_screenHeight) //when vertical different is bigger than screen _height size.
-			//			{
-
-			//				if (!IsCamMovVer)
-			//				{
-			//					if (STATEMANAGER->Loadtolevelname == "level6.json")
-			//					{
-			//						if (CAMERA->cameraPos.x > DownYLimit)
-			//							CAMERA->cameraPos.x -= 5.f;
-			//						else if (CAMERA->cameraPos.x <= DownYLimit)
-			//							IsCamMovVer = !IsCamMovVer;
-			//					}
-			//					else
-			//					{
-			//						if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x >= UpYLimit)
-			//							CAMERA->cameraPos.x = UpYLimit;
-			//						else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x <= DownYLimit)
-			//							CAMERA->cameraPos.x = DownYLimit;
-			//						else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x < UpYLimit || FACTORY->GetPlayer()->GetComponent<Transform>()->position.x > DownYLimit)
-			//							CAMERA->cameraPos.x = FACTORY->GetPlayer()->GetComponent<Transform>()->position.x;
-			//					}
-			//				}
-
-			//				else {
-			//					if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x >= UpYLimit)
-			//						CAMERA->cameraPos.x = UpYLimit;
-			//					else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x <= DownYLimit)
-			//						CAMERA->cameraPos.x = DownYLimit;
-			//					else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x < UpYLimit || FACTORY->GetPlayer()->GetComponent<Transform>()->position.x > DownYLimit)
-			//						CAMERA->cameraPos.x = FACTORY->GetPlayer()->GetComponent<Transform>()->position.x;
-			//				}
-			//			}
-			//			else // have fix camera pos at the center.
-			//			{
-			//				CAMERA->cameraPos.x = CAMERA->CenterOfCamera.x;
-			//				CAMERA->cameraPos.y = CAMERA->CenterOfCamera.y;
-			//			}
-
-			//		}
-			//		else
-			//		{
-			//			CAMERA->CenterOfCamera.x = downblock.x + ((upblock.x - downblock.x)*.5f);
-			//			CAMERA->CenterOfCamera.y = leftblock.y + ((rightblock.y - leftblock.y)*.5f);
-
-			//			float UpYLimit, DownYLimit;// , LeftXLimit, RightXLimit;
-			//			// 90 degrees rotated x becomes Y 
-			//			// only this applies to 90 degrees, 
-			//			UpYLimit = (upblock.x - std::abs((upblock.x - CAMERA->CenterOfCamera.x))*.5f);
-			//			DownYLimit = (downblock.x + std::abs(CAMERA->CenterOfCamera.x - downblock.x)*.5f);
-
-
-			//			if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x >= UpYLimit)
-			//				CAMERA->cameraPos.x = UpYLimit;
-			//			else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x <= DownYLimit)
-			//				CAMERA->cameraPos.x = DownYLimit;
-			//			else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x < UpYLimit || FACTORY->GetPlayer()->GetComponent<Transform>()->position.x > DownYLimit)
-			//				CAMERA->cameraPos.x = FACTORY->GetPlayer()->GetComponent<Transform>()->position.x;
-			//		}
-			//	}
-			//	else if (type == CameraRotation::EN_180)
-			//	{
-			//		if (IsCamMovVer)
-			//			IsCamMovVer = !IsCamMovVer;
-
-			//		// this is current block of map 
-			//		upblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
-			//		downblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
-			//		rightblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
-			//		leftblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
-
-			//		if ((upblock.y - downblock.y) < APP->_screenHeight && (rightblock.x - leftblock.x) < APP->_screenWidth) // when wall boundaries are smaller than camera size
-			//		{
-			//				
-			//		}
-			//		else
-			//		{
-			//			CAMERA->CenterOfCamera.x = leftblock.x - (std::abs(leftblock.x - rightblock.x)*.5f);
-			//			CAMERA->CenterOfCamera.y = downblock.y - (std::abs(upblock.y - downblock.y)*.5f);
-
-			//			// To do: seprate sections of map 
-			//			float UpYLimit, DownYLimit, LeftXLimit, RightXLimit;
-
-			//			UpYLimit = upblock.y + std::abs(upblock.y - CAMERA->CenterOfCamera.y)*.5f;
-			//			DownYLimit = downblock.y - std::abs(CAMERA->CenterOfCamera.y - downblock.y)*.5f;
-			//			LeftXLimit = leftblock.x - std::abs(CAMERA->CenterOfCamera.x - leftblock.x)*.5f;
-			//			RightXLimit = rightblock.x + std::abs(rightblock.x - CAMERA->CenterOfCamera.x)*.5f;
-
-			//			if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x <= RightXLimit)         // when player is on the left.
-			//				CAMERA->cameraPos.x = RightXLimit;
-			//			else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x >= LeftXLimit)   // when player is on the right
-			//				CAMERA->cameraPos.x = LeftXLimit;
-			//			else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x < LeftXLimit || FACTORY->GetPlayer()->GetComponent<Transform>()->position.x > RightXLimit)
-			//				CAMERA->cameraPos.x = FACTORY->GetPlayer()->GetComponent<Transform>()->position.x;
-
-			//			if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.y <= UpYLimit)         // when player is on the left.
-			//				CAMERA->cameraPos.y = UpYLimit;
-			//			else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.y >= DownYLimit)   // when player is on the right
-			//				CAMERA->cameraPos.y = DownYLimit;
-			//			else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.y < DownYLimit || FACTORY->GetPlayer()->GetComponent<Transform>()->position.y > UpYLimit)
-			//				CAMERA->cameraPos.y = FACTORY->GetPlayer()->GetComponent<Transform>()->position.y;
-			//		}
-
-			//	}
-			//	else if (type == CameraRotation::EN_270)
-			//	{
-			//		// this is current block of map 
-			//		upblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
-			//		downblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
-			//		leftblock = FACTORY->DownBoundary()->GetComponent<Transform>()->position;
-			//		rightblock = FACTORY->RightBoundary()->GetComponent<Transform>()->position;
-			//		float UpYLimit, DownYLimit;
-			//		// 270 degrees rotated x becomes Y 
-			//		// only this applies to 270 degrees, 
-			//		CAMERA->CenterOfCamera.x = downblock.x + ((upblock.x - downblock.x)*.5f);
-			//		CAMERA->CenterOfCamera.y = rightblock.x + ((leftblock.x - rightblock.x)*.5f);
-			//		UpYLimit = upblock.x + std::abs(upblock.x - CAMERA->CenterOfCamera.x)*.5f;
-			//		DownYLimit = downblock.x - std::abs(CAMERA->CenterOfCamera.x - downblock.x)*.5f;
-
-
-			//		if ((upblock.y - downblock.y) < APP->_screenHeight && (rightblock.x - leftblock.x) < APP->_screenWidth) // when wall boundaries are smaller than camera size
-			//		{
-			//			if (abs(upblock.x - downblock.x) > APP->_screenHeight)
-			//			{
-			//				if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x <= UpYLimit)
-			//					CAMERA->cameraPos.x = UpYLimit;
-			//				else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x >= DownYLimit)
-			//					CAMERA->cameraPos.x = DownYLimit;
-			//				else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x > UpYLimit || FACTORY->GetPlayer()->GetComponent<Transform>()->position.x < DownYLimit)
-			//					CAMERA->cameraPos.x = FACTORY->GetPlayer()->GetComponent<Transform>()->position.x;
-			//			}
-
-			//		}
-			//		else
-			//		{
-			//			CAMERA->CenterOfCamera.x = downblock.x + ((upblock.x - downblock.x)*.5f);
-			//			CAMERA->CenterOfCamera.y = rightblock.y + ((leftblock.y - rightblock.y)*.5f);
-			//			// 90 degrees rotated x becomes Y 
-			//			// only this applies to 90 degrees, 
-			//			UpYLimit = (upblock.x - std::abs((upblock.x - CAMERA->CenterOfCamera.x))*.5f);
-			//			DownYLimit = (downblock.x + std::abs(CAMERA->CenterOfCamera.x - downblock.x)*.5f);
-
-			//			if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x <= UpYLimit)
-			//				CAMERA->cameraPos.x = UpYLimit;
-			//			else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x >= DownYLimit)
-			//				CAMERA->cameraPos.x = DownYLimit;
-			//			else if (FACTORY->GetPlayer()->GetComponent<Transform>()->position.x > UpYLimit || FACTORY->GetPlayer()->GetComponent<Transform>()->position.x < DownYLimit)
-			//				CAMERA->cameraPos.x = FACTORY->GetPlayer()->GetComponent<Transform>()->position.x;
-			//		}
-			//	}
-			//}
 		}
 	}
 
