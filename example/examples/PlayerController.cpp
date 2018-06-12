@@ -202,9 +202,9 @@ void PlayerController::Movement(float dt)
 			}
 		}
 
-		if (!JumpEnough)
+		if (!JumpEnough && IsJumpable)
 		{
-			if (Input::IsTriggered(SDL_SCANCODE_SPACE) && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
+			if (Input::IsPressed(SDL_SCANCODE_SPACE) && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
 			{
 				FACTORY->GetPlayer()->GetComponent<Animation>()->isJumping = true;
 				this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(0, JumpSpeed, 0);
@@ -319,9 +319,9 @@ void PlayerController::Movement(float dt)
 			}
 		}
 
-		if (!JumpEnough)
+		if (!JumpEnough && IsJumpable)
 		{
-			if (Input::IsTriggered(SDL_SCANCODE_SPACE) && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
+			if (Input::IsPressed(SDL_SCANCODE_SPACE) && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
 			{
 				FACTORY->GetPlayer()->GetComponent<Animation>()->isJumping = true;
  				this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(0, JumpSpeed, 0);
@@ -421,9 +421,9 @@ void PlayerController::Movement(float dt)
 			}
 		}
 
-		if (!JumpEnough)
+		if (!JumpEnough && IsJumpable)
 		{
-			if (Input::IsTriggered(SDL_SCANCODE_SPACE) && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
+			if (Input::IsPressed(SDL_SCANCODE_SPACE) && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
 			{
 				this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(JumpSpeed, 0, 0);
 				JumpTriggered = true;
@@ -522,9 +522,9 @@ void PlayerController::Movement(float dt)
 			}
 		}
 
-		if (!JumpEnough)
+		if (!JumpEnough && IsJumpable)
 		{
-			if (Input::IsTriggered(SDL_SCANCODE_SPACE) && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
+			if (Input::IsPressed(SDL_SCANCODE_SPACE) && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
 			{
 				this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(JumpSpeed, 0, 0);
 				JumpTriggered = true;
@@ -646,7 +646,7 @@ void PlayerController::PlayerAnimation()
 
 	if (!JumpEnough)
 	{
-		if (Input::IsTriggered(SDL_SCANCODE_SPACE) && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
+		if (Input::IsPressed(SDL_SCANCODE_SPACE) && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
 			FACTORY->GetPlayer()->GetComponent<Animation>()->isJumping = true;
 		if (Input::IsReleased(SDL_SCANCODE_SPACE))
 			FACTORY->GetPlayer()->GetComponent<Animation>()->isJumping = true;
@@ -670,6 +670,14 @@ void PlayerController::PlayerAnimation()
 	{
 		FACTORY->GetPlayer()->GetComponent<Animation>()->_isOnWall = false;
 	}
+}
+
+void PlayerController::JumpEnoughChange()
+{
+	if (JumpEnough)
+		JumpEnough = false;
+	else
+		JumpEnough = true;
 }
 
 PlayerController::~PlayerController()
