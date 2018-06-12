@@ -14,10 +14,10 @@ JUMP SHOULDN'T WORK WHILE PLAYER IS ON AIR
 
 */
 #include "PlayerController.h"
+#include "SoundManager.h"
 #include "Input.h"
 #include "Object.h"
 #include "StateManager.h"
-#include "SoundManager.h"
 #include "Factory.h"
 #include "Graphics.h"
 #include <iostream>
@@ -37,7 +37,7 @@ void PlayerController::Initialize()
 	//   pos = this->GetOwner()->GetComponent<Transform>()->GetPosition();
 	//	this->GetOwner()->GetComponent<Transform>() = GetOwner()->GetComponent<Transform>();
 	//this->GetOwner()->GetComponent<Body>() =GetOwner()->GetComponent<Body>();
-	
+
 
 	pre_pos = 0;
 	delta_pos = 0;
@@ -64,14 +64,13 @@ void PlayerController::Initialize()
 	STATEMANAGER->IsDrawing = true;
 
 	JumpSound = SOUNDMANAGER->LoadSound("jump.mp3");
-	SOUNDMANAGER->PlaySounds(JumpSound, true);
 }
 
 void PlayerController::Update(float dt)
 {
 	if (APP->IsKeyBoardAvailable)
 	{
-		if (!APP->b_Win &&!(STATEMANAGER->b_IsPauseOn) && !STATEMANAGER->b_IsRot180 && !STATEMANAGER->b_IsRot90 && (!STATEMANAGER->b_IsReplay)
+		if (!APP->b_Win && !(STATEMANAGER->b_IsPauseOn) && !STATEMANAGER->b_IsRot180 && !STATEMANAGER->b_IsRot90 && (!STATEMANAGER->b_IsReplay)
 			&& (!STATEMANAGER->b_IsAutoplaying) && (!CAMERA->IsCameraShaking) && !STATEMANAGER->IsDrawing) {
 
 
@@ -95,7 +94,7 @@ void PlayerController::Movement(float dt)
 	WallAttached = false;
 
 	if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground || WallAttached)
-		WallJumpTriggered = false;	
+		WallJumpTriggered = false;
 
 
 	if ((this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Left || this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Right) && IsAttachable)
@@ -107,7 +106,7 @@ void PlayerController::Movement(float dt)
 	{
 		OffFromWall = false;
 	}
-	
+
 	/* Make sure player is able to jump on ground while attached on wall */
 	if (PHYSICS->GetIsPlayerGround() && WallAttached)
 		this->GetOwner()->GetComponent<Body>()->GroundType = Grounded::Ground;
@@ -123,11 +122,11 @@ void PlayerController::Movement(float dt)
 		{
 			FACTORY->GetPlayer()->GetComponent<Animation>()->setFlipX(false);
 			FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(true);
-			
+
 			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.x < MAXSPEED)
 				this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(SPEED, 0, 0) * dt;
 			else
- 				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = MAXSPEED;
+				this->GetOwner()->GetComponent<Body>()->pm_velocity.x = MAXSPEED;
 		}
 		else if (!FACTORY->GetPlayer()->GetComponent<Animation>()->isFlippedX())
 			FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(false);
@@ -137,7 +136,7 @@ void PlayerController::Movement(float dt)
 			FACTORY->GetPlayer()->GetComponent<Animation>()->setFlipX(true);
 			FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(true);
 			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.x > -MAXSPEED)
-			this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(-SPEED, 0, 0) * dt;
+				this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(-SPEED, 0, 0) * dt;
 		}
 		else if (FACTORY->GetPlayer()->GetComponent<Animation>()->isFlippedX())
 			FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(false);
@@ -206,7 +205,7 @@ void PlayerController::Movement(float dt)
 			}
 		}
 
-		if (!JumpEnough && IsJumpable)
+		if (!JumpEnough)
 		{
 			if (Input::IsPressed(SDL_SCANCODE_SPACE) && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
 			{
@@ -224,7 +223,7 @@ void PlayerController::Movement(float dt)
 		}
 		if (this->GetOwner()->GetComponent<Body>()->GroundType != Grounded::Ground)
 		{
-			
+
 			////std::cout << "-50" << '\n';
 			this->GetOwner()->GetComponent<Body>()->pm_velocity.y -= 2500.f * dt;
 			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y < -FallSpeedMax)
@@ -272,10 +271,10 @@ void PlayerController::Movement(float dt)
 			if (Input::IsPressed(SDL_SCANCODE_RIGHT))
 			{
 				if (Input::IsTriggered(SDL_SCANCODE_SPACE) && IsAttachable)
- 				{
+				{
 					WallJumpTriggered = true;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -WallJump;
-  					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -600;
+					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -600;
 				}
 			}
 			if (Input::IsPressed(SDL_SCANCODE_SPACE) && IsAttachable)
@@ -324,12 +323,12 @@ void PlayerController::Movement(float dt)
 			}
 		}
 
-		if (!JumpEnough && IsJumpable)
+		if (!JumpEnough)
 		{
 			if (Input::IsPressed(SDL_SCANCODE_SPACE) && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
 			{
 				FACTORY->GetPlayer()->GetComponent<Animation>()->isJumping = true;
- 				this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(0, JumpSpeed, 0);
+				this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(0, JumpSpeed, 0);
 				JumpTriggered = true;
 				SOUNDMANAGER->PlaySounds(JumpSound, false);
 			}
@@ -362,7 +361,7 @@ void PlayerController::Movement(float dt)
 				this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(0, SPEED, 0) * dt;
 		}
 
- 		if (Input::IsPressed(SDL_SCANCODE_LEFT) && !WallAttached)
+		if (Input::IsPressed(SDL_SCANCODE_LEFT) && !WallAttached)
 		{
 			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y > -MAXSPEED)
 				this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(0, -SPEED, 0) * dt;
@@ -427,7 +426,7 @@ void PlayerController::Movement(float dt)
 			}
 		}
 
-		if (!JumpEnough && IsJumpable)
+		if (!JumpEnough)
 		{
 			if (Input::IsPressed(SDL_SCANCODE_SPACE) && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
 			{
@@ -461,7 +460,7 @@ void PlayerController::Movement(float dt)
 		if (Input::IsPressed(SDL_SCANCODE_RIGHT) && !WallAttached)
 		{
 			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y > -MAXSPEED)
-			this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(0, -SPEED, 0) * dt;
+				this->GetOwner()->GetComponent<Body>()->pm_velocity += glm::vec3(0, -SPEED, 0) * dt;
 		}
 
 		if (Input::IsPressed(SDL_SCANCODE_LEFT) && !WallAttached)
@@ -529,7 +528,7 @@ void PlayerController::Movement(float dt)
 			}
 		}
 
-		if (!JumpEnough && IsJumpable)
+		if (!JumpEnough)
 		{
 			if (Input::IsPressed(SDL_SCANCODE_SPACE) && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
 			{
@@ -678,14 +677,6 @@ void PlayerController::PlayerAnimation()
 	{
 		FACTORY->GetPlayer()->GetComponent<Animation>()->_isOnWall = false;
 	}
-}
-
-void PlayerController::JumpEnoughChange()
-{
-	if (JumpEnough)
-		JumpEnough = false;
-	else
-		JumpEnough = true;
 }
 
 PlayerController::~PlayerController()

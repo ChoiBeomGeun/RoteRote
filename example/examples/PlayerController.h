@@ -32,8 +32,6 @@ namespace TE
 		void JumpEnoughChange();
 		bool IsAttachable;
 
-		bool IsJumpable;
-
 	private:
 		glm::vec3 pos;
 		Transform * transform;
