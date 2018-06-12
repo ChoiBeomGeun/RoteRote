@@ -1,4 +1,18 @@
-﻿using System;
+﻿/******************************************************************************/
+/*!
+\file   SelectedControlViewport.cs
+\author Choi Beom Geun
+\par    email: o77151@gmail.com
+\par    Class:GAM250
+\par    RoteRoteMapEditor
+\date   2018/6/6
+
+Actions of Selected Objects
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -8,9 +22,7 @@ using System.Windows.Forms;
 
 namespace ControlDesignMode
 {
-    /// <summary>
-    /// 커서 상태
-    /// </summary>
+
     internal enum CusorStatus
     {
         None,
@@ -25,26 +37,16 @@ namespace ControlDesignMode
         SizeAll,
     }
 
-    /// <summary>
-    /// 컨트롤을 선택했을시의 영역에 관한 클래스
-    /// </summary>
+   
     internal class SelectedControlViewport
     {
-        /// <summary>
-        /// 최소 컨트롤 크기
-        /// </summary>
+      
         const int MinControlSize = 20;
-        /// <summary>
-        /// 크기 조절하는 Rectangle 크기
-        /// </summary>
+
         public const int DRAG_HANDLE_SIZE = 7;
-        /// <summary>
-        /// 커서 상태
-        /// </summary>
+ 
         CusorStatus cursorStatus = CusorStatus.None;
-        /// <summary>
-        /// 현재 커서 상태를 가져온다.
-        /// </summary>
+
         public CusorStatus CurrentCusorStatus
         {
             get { return cursorStatus; }
@@ -67,9 +69,7 @@ namespace ControlDesignMode
         }
         public void Draw(Graphics g, Control selectedObject)
         {
-            //define the border to be drawn, it will be offset by DRAG_HANDLE_SIZE / 2
-            //around the control, so when the drag handles are drawn they will be seem
-            //connected in the middle.
+        
             Rectangle border = new Rectangle(
                 new Point(selectedObject.Location.X - DRAG_HANDLE_SIZE / 2,
                     selectedObject.Location.Y - DRAG_HANDLE_SIZE / 2),
@@ -77,7 +77,7 @@ namespace ControlDesignMode
                     selectedObject.Size.Height + DRAG_HANDLE_SIZE));
 
 
-            //define the 8 drag handles, that has the size of DRAG_HANDLE_SIZE
+      
             Rectangle NW = new Rectangle(
                 new Point(selectedObject.Location.X - DRAG_HANDLE_SIZE,
                     selectedObject.Location.Y - DRAG_HANDLE_SIZE),
@@ -118,7 +118,7 @@ namespace ControlDesignMode
                     selectedObject.Location.Y + selectedObject.Height),
                 new Size(DRAG_HANDLE_SIZE, DRAG_HANDLE_SIZE));
 
-            //draw the border and drag handles
+
             ControlPaint.DrawBorder(g, border, Color.Gray, ButtonBorderStyle.Dotted);
             ControlPaint.DrawGrabHandle(g, NW, true, true);
             ControlPaint.DrawGrabHandle(g, N, true, true);
@@ -130,16 +130,11 @@ namespace ControlDesignMode
             ControlPaint.DrawGrabHandle(g, SE, true, true);
         }
 
-        /// <summary>
-        /// 현재 커서를 반환한다.
-        /// </summary>
-        /// <param name="enteredControl"></param>
-        /// <param name="pos"></param>
-        /// <returns></returns>
+
         internal Cursor GetCursor(Control enteredControl, Point pos)
         {
             Cursor cursor = null;
-            //마우스 위치에 있는 컨트롤과 선택한 컨트롤이 일치하면
+ 
             if ((pos.X >= enteredControl.Location.X - DRAG_HANDLE_SIZE &&
                 pos.X <= enteredControl.Location.X) &&
                 (pos.Y >= enteredControl.Location.Y - DRAG_HANDLE_SIZE &&
@@ -216,15 +211,10 @@ namespace ControlDesignMode
             return cursor;
         }
 
-        /// <summary>
-        /// 해당 선택한 개체의 크기 및 위치를 변경한다.
-        /// </summary>
-        /// <param name="selectedObject"></param>
-        /// <param name="pos"></param>
+
         internal void ChangeSelectedControlBounds(Control selectedObject, Point pos)
         {
-            //get the current mouse position relative the the app
-            //Point pos = this.PointToClient(point);
+      
             Point newLocation;
             Size newSize;
             bool isHeightSmall, isWidthSmall;
@@ -379,10 +369,7 @@ namespace ControlDesignMode
             }
         }
 
-        /// <summary>
-        /// 컨트롤의 최소 크기를 검사하고, 그 이하이면 수정한다.
-        /// </summary>
-        /// <param name="newSize"></param>
+
         private void CheckControlMinimumSize(ref Size newSize, out bool isHeightSmall, out bool isWidthSmall)
         {
             isHeightSmall = false;
@@ -398,10 +385,7 @@ namespace ControlDesignMode
                 isWidthSmall = true;
             }
         }
-        /// <summary>
-        /// 컨트롤의 최소 크기를 검사하고, 그 이하이면 수정한다.
-        /// </summary>
-        /// <param name="newSize"></param>
+
         private void CheckControlMinimumSize(ref Size newSize)
         {
             if (newSize.Height < MinControlSize)

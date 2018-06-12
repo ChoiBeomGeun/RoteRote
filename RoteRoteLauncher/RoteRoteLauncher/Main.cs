@@ -1,4 +1,19 @@
-﻿using System;
+﻿/******************************************************************************/
+/*!
+\file   Main.cs
+\author Choi Beom Geun
+\par    email: o77151@gmail.com
+\par    Class:GAM250
+\par    RoteRoteMapEditor
+\date   2018/6/6
+
+Main view of Launcher
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,7 +42,7 @@ namespace RoteRoteLauncherView
             InitializeComponent();
             MaxSize = MonitorInfoCSharp.Form1.returnMaxSize();
 
-            //  ManagementObjectSearcher
+            
         }
         
         private void Form1_Load(object sender, EventArgs e)
@@ -51,6 +66,9 @@ namespace RoteRoteLauncherView
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+            string temp = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            temp += ".\\RoteRote.\\temp.ini";
             if (listBox1.SelectedIndex != -1)
             {
                 if (ClickedSize.Width > MaxSize.Width ||
@@ -71,14 +89,14 @@ namespace RoteRoteLauncherView
                 }
 
 
-                using (StreamWriter rdr = new StreamWriter(Environment.CurrentDirectory + "\\temp.ini"))
+                using (StreamWriter rdr = new StreamWriter(temp))
                 {
                     rdr.WriteLine(listBox1.SelectedItem.ToString());
                     rdr.WriteLine(checkBox1.Checked.ToString());
                 }
 
                 System.Diagnostics.Process ps = new System.Diagnostics.Process();
-                ps.StartInfo.FileName = "examples.exe";
+                ps.StartInfo.FileName = "RoteRote.exe";
                 ps.Start();
                 Application.Exit();
             }

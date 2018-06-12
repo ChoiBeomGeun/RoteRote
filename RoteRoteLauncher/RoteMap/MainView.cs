@@ -1,4 +1,18 @@
-﻿using System;
+﻿/******************************************************************************/
+/*!
+\file   MainView.cs
+\author Choi Beom Geun
+\par    email: o77151@gmail.com
+\par    Class:GAM250
+\par    RoteRoteMapEditor
+\date   2018/6/6
+
+MainView of RoteRoteMapEditor
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -57,26 +71,19 @@ namespace RoteMapView
 
         }
 
-        /// <summary>
-        /// 데모 컨트롤 추가
-        /// </summary>
         private void InitDesignModePanel()
         {
 
-         //   this.designModePanel.Controls.Add(new Button() { Text = "Test", Location = new Point(10, 10) });
+
        
             this.designModePanel.MouseRightClick += drawPanel1_MouseRightClick;
             this.designModePanel.MouseLeftClick += drawPanel1_MouseLeftClick;
             this.designModePanel.Painted += designModePanel_Painted;
           
-            //this.designModePanel.Controls.Clear();
+           
         }
 
-        /// <summary>
-        /// 디자인모드 패널이 컨트롤들을 다 그리고나서 발생한다.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         void designModePanel_Painted(object sender, PaintEventArgs e)
         {
          
@@ -161,12 +168,7 @@ namespace RoteMapView
 
 
         }
-        /// <summary>
-        /// 컨트롤이 마우스 클릭되면 발생한다.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
-        /// 
+
 
 
         void drawPanel1_MouseRightClick(object sender, MouseDownEventArgs args)
@@ -235,21 +237,14 @@ namespace RoteMapView
 
             }
 
-           // DeleteUnvisibleItem();
         }
-        /// <summary>
-        /// 디자인 모드 변경시 발생한다.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         void chkDesignMode_CheckedChanged(object sender, EventArgs e)
         {
             this.designModePanel.IsDesignMode = this.chkDesignMode.Checked;
         }
 
-        /// <summary>
-        /// 컨트롤 노드들을 생성한다.
-        /// </summary>
+ 
         private void CreateTreeControlNodes()
         {
             string[] controlNames = Enum.GetNames(typeof(ControlNodeType));
@@ -259,11 +254,6 @@ namespace RoteMapView
             }
         }
 
-        /// <summary>
-        /// TreeView에서 Drag가 시작되면 발생한다.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void treeControls_ItemDrag(object sender, ItemDragEventArgs e)
         {
             

@@ -1,4 +1,18 @@
-﻿using System;
+﻿/******************************************************************************/
+/*!
+\file   MonitorInfoGettor.cs
+\author Choi Beom Geun
+\par    email: o77151@gmail.com
+\par    Class:GAM250
+\par    RoteRoteMapEditor
+\date   2018/6/6
+
+Getting max size of monitor
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
+
+using System; 
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;

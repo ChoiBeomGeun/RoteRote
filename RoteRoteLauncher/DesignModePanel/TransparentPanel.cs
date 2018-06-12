@@ -1,4 +1,18 @@
-﻿using System;
+﻿/******************************************************************************/
+/*!
+\file   TransparentPanel.cs
+\author Choi Beom Geun
+\par    email: o77151@gmail.com
+\par    Class:GAM250
+\par    RoteRoteMapEditor
+\date   2018/6/6
+
+Transparent Panel Interface
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -7,14 +21,12 @@ using System.Windows.Forms;
 
 namespace ControlDesignMode
 {
-    /// <summary>
-    /// 배경이 투명한 보더 패널
-    /// </summary>
+
     internal class TransparentPanel : Panel
     {
         internal TransparentPanel()
         {
-            // don't paint the background
+      
             SetStyle(ControlStyles.Opaque, true);
         }
 
@@ -22,9 +34,9 @@ namespace ControlDesignMode
         {
             get
             {
-                // use transparency
+             
                 CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x00000020; //WS_EX_TRANSPARENT
+                cp.ExStyle |= 0x00000020;
                 return cp;
             }
         }

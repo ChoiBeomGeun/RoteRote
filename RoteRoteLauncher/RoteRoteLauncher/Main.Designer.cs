@@ -1,4 +1,18 @@
-﻿namespace RoteRoteLauncherView
+﻿/******************************************************************************/
+/*!
+\file   Main.Designer.cs
+\author Choi Beom Geun
+\par    email: o77151@gmail.com
+\par    Class:GAM250
+\par    RoteRoteMapEditor
+\date   2018/6/6
+
+Rote launcher Designer cs file
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
+
+namespace RoteRoteLauncherView
 {
     partial class Main
     {

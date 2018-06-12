@@ -1,4 +1,18 @@
-﻿using System;
+﻿/******************************************************************************/
+/*!
+\file   Program.cs
+\author Choi Beom Geun
+\par    email: o77151@gmail.com
+\par    Class:GAM250
+\par    RoteRoteMapEditor
+\date   2018/6/6
+
+Main Entry of MonitorInfoGettor
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
