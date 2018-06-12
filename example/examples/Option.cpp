@@ -128,7 +128,7 @@ void Option::Update(float dt)
 	if (FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle == 360.f || FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle == -360.f)
 	{
 		FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle = 0.f;
-		delta_angle = 0;
+		delta_angle = 90;
 		select_index = 0;
 	}
 	OptionCam.Update(dt);

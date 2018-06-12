@@ -210,7 +210,7 @@ void LevelSelect::Update(float dt)
 
 			selectAngle = FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle;
 
-                        FACTORY->ObjectIDMap[LevelList + 4]->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
+            FACTORY->ObjectIDMap[LevelList + 4]->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
 
 			IsRotating = true;
 			IsRightPreesed = true;

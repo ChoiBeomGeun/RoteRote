@@ -25,6 +25,7 @@
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 0.0,
 		"ObjectID" : 1,
 		"ObjectType" : "Button",
 		"Position" : 
@@ -44,6 +45,7 @@
 	"Object2" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 0.0,
 		"ObjectID" : 2,
 		"ObjectType" : "Button",
 		"Position" : 
@@ -63,6 +65,7 @@
 	"Object3" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 0.0,
 		"ObjectID" : 3,
 		"ObjectType" : "Button",
 		"Position" : 
@@ -82,6 +85,7 @@
 	"Object4" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 0.0,
 		"ObjectID" : 4,
 		"ObjectType" : "Button",
 		"Position" : 
@@ -101,6 +105,7 @@
 	"Object5" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 0.0,
 		"ObjectID" : 5,
 		"ObjectType" : "Button",
 		"Position" : 
@@ -120,6 +125,7 @@
 	"Object6" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 0.0,
 		"ObjectID" : 6,
 		"ObjectType" : "Button",
 		"Position" : 
@@ -139,6 +145,7 @@
 	"Object7" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 0.0,
 		"ObjectID" : 7,
 		"ObjectType" : "Button",
 		"Position" : 
@@ -150,8 +157,8 @@
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 230.0,
-			"y" : 50.0
+			"x" : 300.0,
+			"y" : 150.0
 		},
 		"TextureDir" : "OptionTitile.png"
 	},

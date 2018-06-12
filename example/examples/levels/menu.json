@@ -5,7 +5,7 @@
 		{
 			"x" : 0.0,
 			"y" : 0.0,
-			"z" : 500.0
+			"z" : 999.0
 		},
 		"TARGET" : 
 		{
@@ -25,11 +25,12 @@
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 0.0,
 		"ObjectID" : 1,
 		"ObjectType" : "Button",
 		"Position" : 
 		{
-			"x" : 0.0,
+			"x" : -8.7422777141910046e-06,
 			"y" : 200.0,
 			"z" : 0.0
 		},
@@ -44,12 +45,13 @@
 	"Object2" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 0.0,
 		"ObjectID" : 2,
 		"ObjectType" : "Button",
 		"Position" : 
 		{
 			"x" : -200.0,
-			"y" : 0.0,
+			"y" : -1.7484555428382009e-05,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -63,11 +65,12 @@
 	"Object3" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 0.0,
 		"ObjectID" : 3,
 		"ObjectType" : "Button",
 		"Position" : 
 		{
-			"x" : 0.0,
+			"x" : 2.3849761419114657e-06,
 			"y" : -200.0,
 			"z" : 0.0
 		},
@@ -82,12 +85,13 @@
 	"Object4" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 0.0,
 		"ObjectID" : 4,
 		"ObjectType" : "Button",
 		"Position" : 
 		{
 			"x" : 200.0,
-			"y" : 0.0,
+			"y" : 3.4969110856764019e-05,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
@@ -101,6 +105,7 @@
 	"Object5" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 0.0,
 		"ObjectID" : 5,
 		"ObjectType" : "Button",
 		"Position" : 
@@ -120,6 +125,7 @@
 	"Object6" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 0.0,
 		"ObjectID" : 6,
 		"ObjectType" : "Button",
 		"Position" : 
@@ -139,19 +145,20 @@
 	"Object7" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 0.0,
 		"ObjectID" : 7,
 		"ObjectType" : "Button",
 		"Position" : 
 		{
-			"x" : 0.0,
+			"x" : 10.0,
 			"y" : 300.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 150.0,
-			"y" : 50.0
+			"x" : 700.0,
+			"y" : 100.0
 		},
 		"TextureDir" : "title.png"
 	},

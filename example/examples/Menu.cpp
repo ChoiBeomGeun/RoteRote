@@ -110,7 +110,6 @@ void Menu::Load()
 
 void Menu::Update(float dt)
 {
-
 	if (Input::IsTriggered(SDL_SCANCODE_F1))
 		STATEMANAGER->MoveState(StatesList::Intro-1);
 
@@ -131,12 +130,15 @@ void Menu::Update(float dt)
 		if (FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle == 360.f || FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle == -360.f)
 		{
 			FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle = 0.f;
-			delta_angle = 0;
+			delta_angle = 90;
 			select_index = 0;
 		}
 		MenuCam.Update(dt);
 
 		if (IsRotating) {
+
+			std::cout << FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle << '\n';
+
 			DeltaAngle();
 
 			for (int i = 1; i < 5; ++i) {

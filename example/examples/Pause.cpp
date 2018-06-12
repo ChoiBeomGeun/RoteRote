@@ -61,7 +61,7 @@ void Pause::Load()
 	frame = FACTORY->CreateHUD(glm::vec3(0,0,0), glm::vec3(0,0,0));
 	frame->GetComponent<Transform>()->scale = glm::vec3(300, 300, 0);
 	textIndicator = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0));
-	textIndicator->GetComponent<Transform>()->scale = glm::vec3(200, 200,0);
+	textIndicator->GetComponent<Transform>()->scale = glm::vec3(150, 150,0);
 
 	iconRestart = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0));
 	iconRestart->GetComponent<Transform>()->position = glm::vec3(rotation_radius,  0, 0);
@@ -183,7 +183,7 @@ void Pause::Update(float dt)
 		if (frame->GetComponent<Transform>()->angle == 360.f || frame->GetComponent<Transform>()->angle == -360.f)
 		{
 			frame->GetComponent<Transform>()->angle = 0.f;
-			delta_angle = 0;
+			delta_angle = 90;
 			select_index = 0;
 		}
 		PauseCam.Update(dt);
