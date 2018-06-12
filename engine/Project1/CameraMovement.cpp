@@ -160,7 +160,8 @@ namespace TE {
 				STATEMANAGER->Loadtolevelname == "level5.json" ||
 				STATEMANAGER->Loadtolevelname == "level8.json" || STATEMANAGER->Loadtolevelname == "level10.json")
 			{
-				CAMERA->cameraPos = glm::vec3(0, 0, 999);
+				CAMERA->cameraPos.x = 0;
+				CAMERA->cameraPos.x = 0;
 			}
 			else if (STATEMANAGER->Loadtolevelname == "level4.json")
 			{

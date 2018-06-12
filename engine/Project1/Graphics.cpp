@@ -132,8 +132,7 @@ void Graphics::Initialize(void)
 	splashtime = 0.f;
 
 	Sprite::LoadAllSprites();
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	
 
 }
 
@@ -204,7 +203,7 @@ void Graphics::Update(float dt)
 	
 
 	glEnable(GL_BLEND);
-	glDepthMask(GL_TRUE);
+	//glDepthMask(GL_TRUE);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	glClearColor(0.f, 0.f, 0.f, 0.f);

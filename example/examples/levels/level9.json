@@ -76,14 +76,14 @@
 		"ObjectType" : "AttachWall",
 		"Position" : 
 		{
-			"x" : -65.0,
+			"x" : -70.0,
 			"y" : -140.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 180.0,
+			"x" : 200.0,
 			"y" : 30.0
 		},
 		"TextureDir" : "wall.png"
