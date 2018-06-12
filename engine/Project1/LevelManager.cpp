@@ -207,10 +207,18 @@ void LevelManager::LoadLevel(std::string  path)
 			//tempObject = FACTORY->CreateWall(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0));
 			tempObject->objectstyle = Objectstyle::Wall;
 			int x, y;
-			x = tempObject->GetComponent<Transform>()->scale.x / 20;
-			y = tempObject->GetComponent<Transform>()->scale.x / 20;
-			tempObject->GetComponent<Transform>()->u_v.x = 1.0f/x;
-			tempObject->GetComponent<Transform>()->u_v.y = 1.0f/y;
+
+			if(tempObject->GetComponent<Transform>()->scale.x == 20)
+				x = 1;
+			else 
+				x= tempObject->GetComponent<Transform>()->scale.x / 40;
+			if (tempObject->GetComponent<Transform>()->scale.y == 20)
+				y = 1;
+			else
+				y = tempObject->GetComponent<Transform>()->scale.x / 40;
+
+			tempObject->GetComponent<Transform>()->u_v.x =x;
+			tempObject->GetComponent<Transform>()->u_v.y =y;
 
 
 		}

@@ -2,7 +2,7 @@
 \file        Graphics.cpp
 \author      HyunJun Yoo
 \par         email: hyunjun306@gmail.com
-\par         course: CS225
+\par         course: CS250
 \date        12/16/2017
 \brief
 
@@ -203,7 +203,7 @@ void Graphics::Update(float dt)
 	
 
 	glEnable(GL_BLEND);
-	//glDepthMask(GL_TRUE);
+	glDepthMask(GL_TRUE);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	glClearColor(0.f, 0.f, 0.f, 0.f);
@@ -251,7 +251,6 @@ void Graphics::Update(float dt)
 	glDisable(GL_BLEND);
 	glDepthMask(GL_FALSE);
 
-	glDisable(GL_BLEND);
 
 }
 
@@ -276,6 +275,9 @@ Graphics::~Graphics()
 	ImguiFree();
 	ImGui_ImplSdlGL3_Shutdown();
 #endif
+	glDeleteVertexArrays(1, &buffer);
+	glDeleteBuffers(1, &basicVAO);
+
 	if(!m_textureMap.empty())
 		Sprite::UnLoadAllSprites();
 }
@@ -293,16 +295,14 @@ void TE::Graphics::drawPerspective(std::vector<Sprite*>::iterator iter)
 		model = glm::translate(model, glm::vec3((*iter)->pOwner->GetComponent<Transform>()->position));
 		model = glm::rotate(model, glm::radians((*iter)->pOwner->GetComponent<Transform>()->angle), (*iter)->pOwner->GetComponent<Transform>()->rotation);
 		model = glm::scale(model, glm::vec3((*iter)->pOwner->GetComponent<Transform>()->scale));
-		/*if ((*iter)->pOwner->GetComponent<Sprite>()->mTexutureDir == "unattachwall.png")
-			glUniform2f(uniformLocation[UV], (*iter)->pOwner->GetComponent<Transform>()->u_v.x, (*iter)->pOwner->GetComponent<Transform>()->u_v.y);
 
-		for (int i = 0; i < 6; ++i)
-		{
-			(*iter)->pOwner->GetComponent<Transform>()->u_v.x = vertexData[i].uv.u;
-			(*iter)->pOwner->GetComponent<Transform>()->u_v.y = vertexData[i].uv.v;
-		}
+	
 		if ((*iter)->pOwner->GetComponent<Sprite>()->mTexutureDir == "unattachwall.png")
-			glUniform2f(uniformLocation[UV], (*iter)->pOwner->GetComponent<Transform>()->u_v.x, (*iter)->pOwner->GetComponent<Transform>()->u_v.y);*/
+			glUniform2f(uniformLocation[UV], (*iter)->pOwner->GetComponent<Transform>()->u_v.x, (*iter)->pOwner->GetComponent<Transform>()->u_v.y);
+		else
+		glUniform2f(uniformLocation[UV], (*iter)->pOwner->GetComponent<Transform>()->u_v.x, (*iter)->pOwner->GetComponent<Transform>()->u_v.y);
+
+		
 		glUniformMatrix4fv(uniformLocation[MODEL], 1, GL_FALSE, &model[0][0]);
 	}
 }
@@ -381,8 +381,8 @@ void TE::Graphics::setbasicUniformLoc()
 	uniformLocation[ISJUMPING] = _basicProgram.getUniformLocation("isJumping");
 	uniformLocation[ANIMATIONX] = _basicProgram.getUniformLocation("animationx");
 	uniformLocation[TIME] = _basicProgram.getUniformLocation("timer");
-	//uniformLocation[UV] = _basicProgram.getUniformLocation("uv");
-
+	uniformLocation[UV] = _basicProgram.getUniformLocation("uv");
+	
 
 }
 

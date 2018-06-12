@@ -17,7 +17,7 @@ uniform int flipx;
 uniform int isJumping;
 uniform float animationx;
 uniform float timer;
-//uniform vec2 uv;
+uniform vec2 uv;
 
 out vec4 fragmentPosition;
 out vec4 fragmentColor;
@@ -27,6 +27,8 @@ void main()
 {
 	
 	vec2 UV = vec2(1.0f, 1.0f);
+	float xscale = float(uv.x);
+	float yscale = float(uv.y);
 	if(isAnimation)
 	{
 		float abc = float(vertexUV.x * timer);
@@ -60,7 +62,8 @@ void main()
 	}
 	else
 	{
-		UV = vertexUV;
+		UV.x = vertexUV.x *xscale;
+		UV.y = vertexUV.y *yscale;
 	}
 	
 	vec4 position = vec4(vertexPosition.xyz, 1.0);

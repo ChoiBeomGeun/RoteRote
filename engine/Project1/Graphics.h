@@ -69,7 +69,7 @@ namespace TE {
 		ISJUMPING,
 		ANIMATIONX,
 		TIME,
-		//UV,
+		UV,
 		END
 	};
 	enum PARTICLELOC
