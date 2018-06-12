@@ -205,7 +205,8 @@ Object * ObjectFactory::CreateArchetype(Archetype path)
 			temp->GetComponent<Transform>()->rotation = glm::vec3(0, 0, 1);
 			temp->GetComponent<Transform>()->SetPosition(path.DefaultPosition);
 			temp->GetComponent<Transform>()->SetScale(path.DefaultScale);
-			temp->GetComponent<Transform>()->SetRotationZ(path.rotation)  ;
+			temp->GetComponent<Transform>()->SetRotationZ(path.rotation);
+			temp->GetComponent<Transform>()->u_v = glm::vec2(1, 1);
 	
 
 

@@ -27,7 +27,7 @@ namespace TE {
 	   	GLubyte a;
 	   };
 
-	struct UV {
+	struct Uv {
 		float u;
 		float v;
 	};
@@ -46,7 +46,7 @@ namespace TE {
 		Color color;
 
 		// UV texture coordinates.
-		UV uv;
+		Uv uv;
 
 		void setPosition(float x, float y, float z) {
 			position.x = x;

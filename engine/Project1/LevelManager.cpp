@@ -194,6 +194,7 @@ void LevelManager::LoadLevel(std::string  path)
 		{
 			//tempObject = FACTORY->CreatePlayer(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0), glm::vec3(0, 0, 0), mass);
 			tempObject->objectstyle = Objectstyle::Player;
+			tempObject->GetComponent<Sprite>()->depth = 10.f;
   			//tempObject = FACTORY->CreateArchetype(ReadingArchetype("Player.json"));
 		}
 		else if (Objectstyle == "Asteriod")
@@ -205,6 +206,13 @@ void LevelManager::LoadLevel(std::string  path)
 		{
 			//tempObject = FACTORY->CreateWall(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0));
 			tempObject->objectstyle = Objectstyle::Wall;
+			int x, y;
+			x = tempObject->GetComponent<Transform>()->scale.x / 20;
+			y = tempObject->GetComponent<Transform>()->scale.x / 20;
+			tempObject->GetComponent<Transform>()->u_v.x = 1.0f/x;
+			tempObject->GetComponent<Transform>()->u_v.y = 1.0f/y;
+
+
 		}
 		else if (Objectstyle == "AttachWall")
 		{

@@ -26,6 +26,7 @@ namespace TE {
 			rotation = glm::vec3(0, 0, 0);
 			scale = glm::vec3(1, 1, 1);
 			angle = 0.0f;
+			u_v = glm::vec2(1.f,1.f);
 		}
 		///~Transform();
 	
@@ -43,6 +44,7 @@ namespace TE {
 		glm::vec3 position;
 		glm::vec3 rotation;
 		glm::vec3 scale;
+		glm::vec2 u_v;
 
 		// helper function
 		/*glm::vec3 changeVec3PosToglm(const Vector3& pos);

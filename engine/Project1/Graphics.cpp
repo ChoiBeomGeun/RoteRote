@@ -293,8 +293,16 @@ void TE::Graphics::drawPerspective(std::vector<Sprite*>::iterator iter)
 		model = glm::translate(model, glm::vec3((*iter)->pOwner->GetComponent<Transform>()->position));
 		model = glm::rotate(model, glm::radians((*iter)->pOwner->GetComponent<Transform>()->angle), (*iter)->pOwner->GetComponent<Transform>()->rotation);
 		model = glm::scale(model, glm::vec3((*iter)->pOwner->GetComponent<Transform>()->scale));
-		//glUniform1i(particleLoc[PSTATS], drawStats);
-		//glUniform1i(particleLoc[PTEXTURE], 0);
+		/*if ((*iter)->pOwner->GetComponent<Sprite>()->mTexutureDir == "unattachwall.png")
+			glUniform2f(uniformLocation[UV], (*iter)->pOwner->GetComponent<Transform>()->u_v.x, (*iter)->pOwner->GetComponent<Transform>()->u_v.y);
+
+		for (int i = 0; i < 6; ++i)
+		{
+			(*iter)->pOwner->GetComponent<Transform>()->u_v.x = vertexData[i].uv.u;
+			(*iter)->pOwner->GetComponent<Transform>()->u_v.y = vertexData[i].uv.v;
+		}
+		if ((*iter)->pOwner->GetComponent<Sprite>()->mTexutureDir == "unattachwall.png")
+			glUniform2f(uniformLocation[UV], (*iter)->pOwner->GetComponent<Transform>()->u_v.x, (*iter)->pOwner->GetComponent<Transform>()->u_v.y);*/
 		glUniformMatrix4fv(uniformLocation[MODEL], 1, GL_FALSE, &model[0][0]);
 	}
 }
@@ -373,6 +381,7 @@ void TE::Graphics::setbasicUniformLoc()
 	uniformLocation[ISJUMPING] = _basicProgram.getUniformLocation("isJumping");
 	uniformLocation[ANIMATIONX] = _basicProgram.getUniformLocation("animationx");
 	uniformLocation[TIME] = _basicProgram.getUniformLocation("timer");
+	//uniformLocation[UV] = _basicProgram.getUniformLocation("uv");
 
 
 }

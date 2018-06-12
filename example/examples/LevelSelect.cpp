@@ -127,7 +127,7 @@ void LevelSelect::Load()
 
             if (indexOfnumber == quit)
             {
-                FACTORY->ObjectIDMap[indexOfnumber + 4]->GetComponent<Sprite>()->m_TextureID = FACTORY->ObjectIDMap[indexOfnumber + 4]->GetComponent<Sprite>()->texture_load("attachbox.png");
+                FACTORY->ObjectIDMap[indexOfnumber + 4]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("attachbox.png");
                 FACTORY->ObjectIDMap[indexOfnumber + 4]->GetComponent<Transform>()->SetPosition(glm::vec3(0, -300, 0));
             }
 	}

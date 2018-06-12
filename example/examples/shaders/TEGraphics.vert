@@ -17,6 +17,7 @@ uniform int flipx;
 uniform int isJumping;
 uniform float animationx;
 uniform float timer;
+//uniform vec2 uv;
 
 out vec4 fragmentPosition;
 out vec4 fragmentColor;
