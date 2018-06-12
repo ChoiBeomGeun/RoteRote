@@ -71,14 +71,16 @@ Application::Application() : pWnd(nullptr), ResolutionNumber(2)
 	
 	if (ifile.is_open())
 	{
-		while (ifile.getline(line, sizeof(line))) // 한 줄씩 읽어 처리를 시작한다.
+		while (ifile.getline(line, sizeof(line))) 
 		{
-			std::cout << line << std::endl; // 내용 출력
+			std::cout << line << std::endl; 
 
 			if (!strcmp(line, "1680 X 1050"))
 			{
 				_screenWidth = 1680;
 				_screenHeight = 1050;
+
+				_resolution = Resolution::_1680X1050;
 			}
 			if (!strcmp(line, "1920 X 1080"))
 			{
@@ -117,12 +119,14 @@ Application::Application() : pWnd(nullptr), ResolutionNumber(2)
 				_screenHeight = 720;
 				_resolution = Resolution::_1280X720;
 			}
-			if (!strcmp(line, "True"))
+			if (!strcmp(line, "True")) {
 				_isfull = true;
+		//		SDL_SetWindowFullscreen(pWnd, SDL_WINDOW_FULLSCREEN);
+			}
 		}
 	}
 
-	ifile.close(); // 파일 닫기
+	ifile.close(); 
 
 
 
@@ -214,55 +218,11 @@ void Application::Initialize()
 
 	SDL_SetWindowPosition(this->pWnd, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 	SDL_SetWindowBordered(this->pWnd, SDL_TRUE);
-	/*if (_resolution == Resolution::_1280X960)
-	{
 
-
-		SDL_SetWindowSize(this->pWnd, 1280, 960);
-		glViewport(0, 0, 1280, 960);
-
-		std::cout << ResolutionNumber << '\n';
-		SDL_SetWindowPosition(this->pWnd, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-		SDL_SetWindowBordered(this->pWnd, SDL_TRUE);
-
-	}
-	if (_resolution == Resolution::_1920X1080)
-	{
-
-
-		SDL_SetWindowSize(this->pWnd, 1920, 1080);
-		glViewport(0, 0, 1920, 1080);
-
-		std::cout << ResolutionNumber << '\n';
-		SDL_SetWindowPosition(this->pWnd, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-		SDL_SetWindowBordered(this->pWnd, SDL_TRUE);
-
-	}
-	if (_resolution == Resolution::_800X600)
-	{
-
-
-		SDL_SetWindowSize(this->pWnd, 800, 600);
-		glViewport(0, 0, 800, 600);
-
-		std::cout << ResolutionNumber << '\n';
-		SDL_SetWindowPosition(this->pWnd, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-		SDL_SetWindowBordered(this->pWnd, SDL_TRUE);
-
-	}
-	if (_resolution == Resolution::_1280X720)
-	{
-		SDL_SetWindowSize(this->pWnd, 1280, 720);
-		glViewport(0, 0, 1280, 720);
-		std::cout << ResolutionNumber << '\n';
-		SDL_SetWindowPosition(this->pWnd, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-		SDL_SetWindowBordered(this->pWnd, SDL_TRUE);
-
-	}
-*/
 	WindowIconSetting(this->pWnd);
 	
-
+	if(_isfull)
+		SDL_SetWindowFullscreen(pWnd, SDL_WINDOW_FULLSCREEN);
 #ifndef _DEBUG
 	//	SDL_SetWindowFullscreen(pWnd, SDL_WINDOW_FULLSCREEN);
 #endif // DEBUG

@@ -60,7 +60,7 @@ void TE::LoseconditionLogic::Update(float dt)
 				APP->b_Lose = true;
 				//STATEMANAGER->ReplayPosition.clear();
 				//STATEMANAGER->ReplayPosition.clear();
-				CAMERA->IsCameraShaking = true;
+ 				CAMERA->IsCameraShaking = true;
 				STATEMANAGER->Restart();
 			}
 		}

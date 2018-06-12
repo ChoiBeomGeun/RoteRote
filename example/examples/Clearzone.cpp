@@ -84,7 +84,7 @@ if (APP->b_Win) {
 	if (obj != NULL)
 	{
 		player = FACTORY->GetPlayer();
-		if (PHYSICS->RectvsRectCollisionCheck(player->GetComponent<Transform>(), obj->GetComponent<Transform>()))
+		if (!APP->b_Lose &&PHYSICS->RectvsRectCollisionCheck(player->GetComponent<Transform>(), obj->GetComponent<Transform>()))
 		{
 //			player->GetComponent<Transform>()->scale -= 1;
 		
