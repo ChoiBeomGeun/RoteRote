@@ -158,7 +158,8 @@ namespace TE {
 			}
 			else if (STATEMANAGER->Loadtolevelname == "level2.json" || STATEMANAGER->Loadtolevelname == "level3.json" ||
 				STATEMANAGER->Loadtolevelname == "level5.json" ||
-				STATEMANAGER->Loadtolevelname == "level8.json" || STATEMANAGER->Loadtolevelname == "level10.json")
+				STATEMANAGER->Loadtolevelname == "level8.json" || STATEMANAGER->Loadtolevelname == "level10.json" || 
+				STATEMANAGER->Loadtolevelname == "level18.json" || STATEMANAGER->Loadtolevelname == "level19.json")
 			{
 				CAMERA->cameraPos.x = 0;
 				CAMERA->cameraPos.x = 0;
