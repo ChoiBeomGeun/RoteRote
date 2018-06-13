@@ -106,24 +106,11 @@ void Engine::Quit()
 void Engine::GameLoop()
 {
 
-	static DWORD ﻿frameDelta = 0;
-
-	static DWORD lastTime = timeGetTime();
+	
 	//Initialize Timer
 	Timer::Initialize();
-	//Testing Object creation 
 
-	//	STATEMANAGER->Initialize();
-	Uint64 NOW = SDL_GetPerformanceCounter(), LAST = 0;
-	double deltaTime = 0;
-	float pm_accumlock = 0.2f;
-	uint32_t last_tick_time = 0;
-	uint32_t delta = 0;
-
-	uint32_t tick_time = SDL_GetTicks();
-	double previous = GetCurrentTime();
-	double lag = 0.0;
-	DWORD FPS = 100;
+	DWORD FPS = 60;
 
 	DWORD dwInterval = 1000 / FPS;
 	DWORD dwNextTick = 0; //다음 번 루프 순회가 시작 되어야 하는 시간 

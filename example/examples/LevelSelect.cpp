@@ -97,7 +97,7 @@ void LevelSelect::Load()
 	LEVELMANAGER->LoadLevel("selectlevel.json");
 
 
-	if (!APP->IsKRMODE) {
+	if (APP->IsKRMODE) {
 		FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("kr_levelSeclect.png");
 	}
 
@@ -110,9 +110,9 @@ void LevelSelect::Load()
 
 		if (i == LevelList::quit + 1) {
 			if (!APP->IsKRMODE) 
-			Levelpng[i - 1] = Sprite::find_texture_id("Menu_Quit.png");
+			Levelpng[i - 1] = Sprite::find_texture_id("Option_BackToMenu.png");
 			else
-				Levelpng[i - 1] = Sprite::find_texture_id("kr_Menu_Quit.png");
+				Levelpng[i - 1] = Sprite::find_texture_id("kr_Option_BackToMenu.png");
 		}
 	}
 
