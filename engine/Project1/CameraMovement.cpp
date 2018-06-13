@@ -95,7 +95,7 @@ namespace TE {
 		// when degree is 270
 		else if (CAMERA->cameraUp.x == -1 && CAMERA->cameraUp.y == 0)
 			return EN_270;
-		return false;
+		return EN_END;
 	}
 
 	void CameraAction::ControlCamMovement(int type, float dt)
@@ -104,8 +104,6 @@ namespace TE {
 		if (FACTORY->GetPlayer())
 		{
 			glm::vec2 playerpos = glm::vec2(FACTORY->GetPlayer()->GetComponent<Transform>()->position);
-			/*CAMERA->cameraPos.x = playerpos.x;
-			CAMERA->cameraPos.y = playerpos.y;*/
 			float leftboundary = 0, rightboundary = 0, upboundary = 0, downboundary = 0;
 			glm::vec2 center(0);
 			float width = 0, height = 0;
@@ -235,7 +233,6 @@ namespace TE {
 					}
 				}
 			}
-
 			else if(STATEMANAGER->Loadtolevelname == "level20.json" || STATEMANAGER->Loadtolevelname == "level16.json")
 			{
 				CAMERA->cameraPos.x = playerpos.x;
@@ -270,8 +267,6 @@ namespace TE {
 						CAMERA->cameraPos.x = downboundary;
 					else if (playerpos.x < upboundary)
 						CAMERA->cameraPos.x = playerpos.x;// +difference;
-					iscam_interpol = true;
-					
 				}
 				else if (type == CameraRotation::EN_180)
 				{
@@ -288,7 +283,7 @@ namespace TE {
 				}
 				else if (type == CameraRotation::EN_270)
 				{
-					upboundary = upblock.x - height * .2f;
+					upboundary = upblock.x + height * .2f;
 
 					downboundary = downblock.x - height * 0.3f;
 					/*if (!iscam_interpol)
@@ -299,7 +294,7 @@ namespace TE {
 							CAMERA->cameraPos.x = upboundary;
 						else if (playerpos.x < downboundary)
 							CAMERA->cameraPos.x = playerpos.x;
-						iscam_interpol = true;
+						//iscam_interpol = true;
 					//}
 				}
 			}
