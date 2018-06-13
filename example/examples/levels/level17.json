@@ -3,7 +3,7 @@
 	{
 		"EYE" : 
 		{
-			"x" : -118.0,
+			"x" : -150.0,
 			"y" : 32.0,
 			"z" : 999.0
 		},
@@ -25,7 +25,7 @@
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "CONTROLLER", "ANIMATION" ],
-		"Depth" : 0.0,
+		"Depth" : 10.0,
 		"GravityOn" : true,
 		"Mass" : 1.0,
 		"ObjectID" : 1,
@@ -190,7 +190,7 @@
 			"y" : 52.0,
 			"z" : 0.0
 		},
-		"Rotation" : 0.0,
+		"Rotation" : 270.0,
 		"Scale" : 
 		{
 			"x" : 20.0,
@@ -248,33 +248,11 @@
 		"TriggerLifeTime" : -1,
 		"TriggerType" : "180"
 	},
-	"Object2" : 
-	{
-		"Components" : [ "TRANSFORM", "SPRITE" ],
-		"Depth" : 0.0,
-		"ObjectID" : 2,
-		"ObjectType" : "Clearzone",
-		"Position" : 
-		{
-			"x" : 42.0,
-			"y" : -68.0,
-			"z" : 0.0
-		},
-		"Rotation" : 4836.0771484375,
-		"Scale" : 
-		{
-			"x" : 20.0,
-			"y" : 20.0
-		},
-		"TextureDir" : "clearzone.png"
-	},
 	"Object19" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
 		"Depth" : 0.0,
-		"GravityOn" : false,
-		"Mass" : 0.0,
-		"ObjectID" : 21,
+		"ObjectID" : 19,
 		"ObjectType" : "Wall",
 		"Position" : 
 		{
@@ -290,13 +268,31 @@
 		},
 		"TextureDir" : "elec.png"
 	},
+	"Object2" : 
+	{
+		"Components" : [ "TRANSFORM", "SPRITE" ],
+		"Depth" : 0.0,
+		"ObjectID" : 2,
+		"ObjectType" : "Clearzone",
+		"Position" : 
+		{
+			"x" : 42.0,
+			"y" : -68.0,
+			"z" : 0.0
+		},
+		"Rotation" : 4977.884765625,
+		"Scale" : 
+		{
+			"x" : 20.0,
+			"y" : 20.0
+		},
+		"TextureDir" : "clearzone.png"
+	},
 	"Object20" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
 		"Depth" : 0.0,
-		"GravityOn" : false,
-		"Mass" : 0.0,
-		"ObjectID" : 22,
+		"ObjectID" : 20,
 		"ObjectType" : "Wall",
 		"Position" : 
 		{
@@ -318,7 +314,7 @@
 		"Depth" : 0.0,
 		"GravityOn" : false,
 		"Mass" : 0.0,
-		"ObjectID" : 23,
+		"ObjectID" : 21,
 		"ObjectType" : "Hazard",
 		"Position" : 
 		{

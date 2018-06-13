@@ -1,19 +1,19 @@
 {
-	"DefalutCamera" : 
+	"DefalutCamera" :
 	{
-		"EYE" : 
+		"EYE" :
 		{
-			"x" : 0.0,
+			"x" : 122.07863616943359,
 			"y" : 0.0,
 			"z" : 999.00006103515625
 		},
-		"TARGET" : 
+		"TARGET" :
 		{
 			"x" : 0.0,
 			"y" : 0.0,
 			"z" : -1.0
 		},
-		"UP" : 
+		"UP" :
 		{
 			"x" : 0.0,
 			"y" : 1.0,
@@ -21,8 +21,8 @@
 		}
 	},
 	"Level" : 1,
-	"NumberOfObjects" : 28,
-	"Object1" : 
+	"NumberOfObjects" : 30,
+	"Object1" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "CONTROLLER", "ANIMATION" ],
 		"Depth" : 10.0,
@@ -30,21 +30,21 @@
 		"Mass" : 1.0,
 		"ObjectID" : 1,
 		"ObjectType" : "Player",
-		"Position" : 
+		"Position" :
 		{
-			"x" : -409.18359375,
-			"y" : 47.949996948242188,
+			"x" : 122.07863616943359,
+			"y" : -145.78202819824219,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 30.0,
 			"y" : 30.0
 		},
 		"TextureDir" : "player.png"
 	},
-	"Object10" : 
+	"Object10" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -52,21 +52,21 @@
 		"Mass" : 1.0,
 		"ObjectID" : 10,
 		"ObjectType" : "Box",
-		"Position" : 
+		"Position" :
 		{
 			"x" : -490.05001831054688,
 			"y" : 247.94998168945313,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 50.0,
 			"y" : 50.0
 		},
 		"TextureDir" : "box.png"
 	},
-	"Object11" : 
+	"Object11" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -74,21 +74,21 @@
 		"Mass" : 1.0,
 		"ObjectID" : 11,
 		"ObjectType" : "Box",
-		"Position" : 
+		"Position" :
 		{
 			"x" : -440.10006713867188,
 			"y" : 247.94998168945313,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 50.0,
 			"y" : 50.0
 		},
 		"TextureDir" : "box.png"
 	},
-	"Object12" : 
+	"Object12" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -96,21 +96,21 @@
 		"Mass" : 1.0,
 		"ObjectID" : 12,
 		"ObjectType" : "Box",
-		"Position" : 
+		"Position" :
 		{
 			"x" : -390.15008544921875,
 			"y" : 247.94998168945313,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 50.0,
 			"y" : 50.0
 		},
 		"TextureDir" : "box.png"
 	},
-	"Object13" : 
+	"Object13" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -118,21 +118,21 @@
 		"Mass" : 1.0,
 		"ObjectID" : 13,
 		"ObjectType" : "Box",
-		"Position" : 
+		"Position" :
 		{
 			"x" : -340.20013427734375,
 			"y" : 247.94998168945313,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 50.0,
 			"y" : 50.0
 		},
 		"TextureDir" : "box.png"
 	},
-	"Object14" : 
+	"Object14" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -140,21 +140,21 @@
 		"Mass" : 1.0,
 		"ObjectID" : 14,
 		"ObjectType" : "Box",
-		"Position" : 
+		"Position" :
 		{
 			"x" : -240.0,
 			"y" : 247.94998168945313,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 50.0,
 			"y" : 50.0
 		},
 		"TextureDir" : "box.png"
 	},
-	"Object15" : 
+	"Object15" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -162,21 +162,21 @@
 		"Mass" : 1.0,
 		"ObjectID" : 15,
 		"ObjectType" : "Box",
-		"Position" : 
+		"Position" :
 		{
 			"x" : -290.0501708984375,
 			"y" : 247.94998168945313,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 50.0,
 			"y" : 50.0
 		},
 		"TextureDir" : "box.png"
 	},
-	"Object16" : 
+	"Object16" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -184,21 +184,21 @@
 		"Mass" : 0.0,
 		"ObjectID" : 16,
 		"ObjectType" : "Wall",
-		"Position" : 
+		"Position" :
 		{
 			"x" : -415.0,
 			"y" : 23.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 200.0,
 			"y" : 20.0
 		},
 		"TextureDir" : "unattachwall.png"
 	},
-	"Object17" : 
+	"Object17" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -206,21 +206,21 @@
 		"Mass" : 0.0,
 		"ObjectID" : 17,
 		"ObjectType" : "Hazard",
-		"Position" : 
+		"Position" :
 		{
 			"x" : -300.0,
 			"y" : -90.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 330.0,
 			"y" : 10.0
 		},
 		"TextureDir" : "glowline.png"
 	},
-	"Object18" : 
+	"Object18" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -228,21 +228,21 @@
 		"Mass" : 0.0,
 		"ObjectID" : 18,
 		"ObjectType" : "Wall",
-		"Position" : 
+		"Position" :
 		{
 			"x" : -490.0,
 			"y" : -92.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 50.0,
 			"y" : 50.0
 		},
 		"TextureDir" : "unattachwall.png"
 	},
-	"Object19" : 
+	"Object19" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -250,41 +250,41 @@
 		"Mass" : 0.0,
 		"ObjectID" : 19,
 		"ObjectType" : "Wall",
-		"Position" : 
+		"Position" :
 		{
 			"x" : -110.0,
 			"y" : -92.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 50.0,
 			"y" : 50.0
 		},
 		"TextureDir" : "unattachwall.png"
 	},
-	"Object2" : 
+	"Object2" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE" ],
-		"Depth" : 0.0,
+		"Depth" : 10.0,
 		"ObjectID" : 2,
 		"ObjectType" : "Clearzone",
-		"Position" : 
+		"Position" :
 		{
-			"x" : -55.0,
-			"y" : -117.0,
+			"x" : -243.90200805664063,
+			"y" : 252.03201293945313,
 			"z" : 0.0
 		},
-		"Rotation" : 11074.32421875,
-		"Scale" : 
+		"Rotation" : 1842.703857421875,
+		"Scale" :
 		{
 			"x" : 20.0,
 			"y" : 20.0
 		},
 		"TextureDir" : "clearzone.png"
 	},
-	"Object20" : 
+	"Object20" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -292,21 +292,21 @@
 		"Mass" : 0.0,
 		"ObjectID" : 20,
 		"ObjectType" : "Wall",
-		"Position" : 
+		"Position" :
 		{
 			"x" : -15.0,
 			"y" : -77.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 140.0,
 			"y" : 20.0
 		},
 		"TextureDir" : "unattachwall.png"
 	},
-	"Object21" : 
+	"Object21" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -314,21 +314,21 @@
 		"Mass" : 0.0,
 		"ObjectID" : 21,
 		"ObjectType" : "Hazard",
-		"Position" : 
+		"Position" :
 		{
 			"x" : 45.0,
 			"y" : -277.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 250.0,
 			"y" : 10.0
 		},
 		"TextureDir" : "glowline.png"
 	},
-	"Object22" : 
+	"Object22" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -336,21 +336,21 @@
 		"Mass" : 0.0,
 		"ObjectID" : 22,
 		"ObjectType" : "Wall",
-		"Position" : 
+		"Position" :
 		{
 			"x" : -75.0,
 			"y" : -277.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 20.0,
 			"y" : 20.0
 		},
 		"TextureDir" : "unattachwall.png"
 	},
-	"Object23" : 
+	"Object23" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -358,21 +358,21 @@
 		"Mass" : 0.0,
 		"ObjectID" : 23,
 		"ObjectType" : "Wall",
-		"Position" : 
+		"Position" :
 		{
 			"x" : 165.0,
 			"y" : -277.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 20.0,
 			"y" : 20.0
 		},
 		"TextureDir" : "unattachwall.png"
 	},
-	"Object24" : 
+	"Object24" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
 		"Depth" : 0.0,
@@ -380,14 +380,14 @@
 		"Mass" : 0.0,
 		"ObjectID" : 24,
 		"ObjectType" : "Trigger90",
-		"Position" : 
+		"Position" :
 		{
 			"x" : -355.0,
 			"y" : 43.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 20.0,
 			"y" : 20.0
@@ -396,7 +396,7 @@
 		"TriggerLifeTime" : -1,
 		"TriggerType" : "90"
 	},
-	"Object25" : 
+	"Object25" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
 		"Depth" : 0.0,
@@ -404,14 +404,14 @@
 		"Mass" : 0.0,
 		"ObjectID" : 25,
 		"ObjectType" : "Trigger180",
-		"Position" : 
+		"Position" :
 		{
 			"x" : 255.0,
 			"y" : 3.0,
 			"z" : 0.0
 		},
 		"Rotation" : 90.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 0.0,
 			"y" : 0.0
@@ -420,7 +420,7 @@
 		"TriggerLifeTime" : -1,
 		"TriggerType" : "180"
 	},
-	"Object26" : 
+	"Object26" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
 		"Depth" : 0.0,
@@ -428,14 +428,14 @@
 		"Mass" : 0.0,
 		"ObjectID" : 26,
 		"ObjectType" : "Trigger180",
-		"Position" : 
+		"Position" :
 		{
 			"x" : -675.0,
 			"y" : 488.0,
 			"z" : 0.0
 		},
 		"Rotation" : 180.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 0.0,
 			"y" : 0.0
@@ -444,7 +444,7 @@
 		"TriggerLifeTime" : -1,
 		"TriggerType" : "180"
 	},
-	"Object27" : 
+	"Object27" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
 		"Depth" : 0.0,
@@ -452,14 +452,14 @@
 		"Mass" : 0.0,
 		"ObjectID" : 27,
 		"ObjectType" : "Trigger180",
-		"Position" : 
+		"Position" :
 		{
 			"x" : -505.0,
 			"y" : 113.0,
 			"z" : 0.0
 		},
 		"Rotation" : 270.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 20.0,
 			"y" : 20.0
@@ -468,7 +468,7 @@
 		"TriggerLifeTime" : -1,
 		"TriggerType" : "180"
 	},
-	"Object28" : 
+	"Object28" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
 		"Depth" : 0.0,
@@ -476,14 +476,14 @@
 		"Mass" : 0.0,
 		"ObjectID" : 28,
 		"ObjectType" : "Trigger90",
-		"Position" : 
+		"Position" :
 		{
 			"x" : 8.130000114440918,
 			"y" : -55.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 20.0,
 			"y" : 20.0
@@ -492,7 +492,29 @@
 		"TriggerLifeTime" : -1,
 		"TriggerType" : "90"
 	},
-	"Object3" : 
+	"Object29" :
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
+		"Depth" : 0.0,
+		"GravityOn" : false,
+		"Mass" : 0.0,
+		"ObjectID" : 29,
+		"ObjectType" : "Wall",
+		"Position" :
+		{
+			"x" : 113.82100677490234,
+			"y" : -170.73200988769531,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" :
+		{
+			"x" : 140.0,
+			"y" : 20.0
+		},
+		"TextureDir" : "unattachwall.png"
+	},
+	"Object3" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -500,21 +522,45 @@
 		"Mass" : 0.0,
 		"ObjectID" : 3,
 		"ObjectType" : "Wall",
-		"Position" : 
+		"Position" :
 		{
 			"x" : -310.0,
 			"y" : -127.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 410.0,
 			"y" : 20.0
 		},
 		"TextureDir" : "unattachwall.png"
 	},
-	"Object4" : 
+	"Object30" :
+	{
+		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "TRIGGER" ],
+		"Depth" : 0.0,
+		"GravityOn" : true,
+		"Mass" : 0.0,
+		"ObjectID" : 30,
+		"ObjectType" : "Trigger90",
+		"Position" :
+		{
+			"x" : 56.911003112792969,
+			"y" : -151.0,
+			"z" : 0.0
+		},
+		"Rotation" : 0.0,
+		"Scale" :
+		{
+			"x" : 20.0,
+			"y" : 20.0
+		},
+		"TextureDir" : "",
+		"TriggerLifeTime" : -1,
+		"TriggerType" : "180"
+	},
+	"Object4" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -522,21 +568,21 @@
 		"Mass" : 0.0,
 		"ObjectID" : 4,
 		"ObjectType" : "Wall",
-		"Position" : 
+		"Position" :
 		{
 			"x" : -525.0,
 			"y" : 68.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 20.0,
 			"y" : 410.0
 		},
 		"TextureDir" : "unattachwall.png"
 	},
-	"Object5" : 
+	"Object5" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -544,21 +590,21 @@
 		"Mass" : 0.0,
 		"ObjectID" : 5,
 		"ObjectType" : "AttachWall",
-		"Position" : 
+		"Position" :
 		{
 			"x" : 185.0,
 			"y" : -7.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 20.0,
 			"y" : 560.0
 		},
 		"TextureDir" : "wall.png"
 	},
-	"Object6" : 
+	"Object6" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -566,21 +612,21 @@
 		"Mass" : 0.0,
 		"ObjectID" : 6,
 		"ObjectType" : "Wall",
-		"Position" : 
+		"Position" :
 		{
 			"x" : -95.0,
 			"y" : -212.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 20.0,
 			"y" : 190.0
 		},
 		"TextureDir" : "unattachwall.png"
 	},
-	"Object7" : 
+	"Object7" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -588,21 +634,21 @@
 		"Mass" : 0.0,
 		"ObjectID" : 7,
 		"ObjectType" : "Wall",
-		"Position" : 
+		"Position" :
 		{
 			"x" : 55.0,
 			"y" : -297.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 280.0,
 			"y" : 20.0
 		},
 		"TextureDir" : "unattachwall.png"
 	},
-	"Object8" : 
+	"Object8" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -610,21 +656,21 @@
 		"Mass" : 0.0,
 		"ObjectID" : 8,
 		"ObjectType" : "Wall",
-		"Position" : 
+		"Position" :
 		{
 			"x" : -170.0,
 			"y" : 283.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 730.0,
 			"y" : 20.0
 		},
 		"TextureDir" : "unattachwall.png"
 	},
-	"Object9" : 
+	"Object9" :
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY" ],
 		"Depth" : 0.0,
@@ -632,21 +678,21 @@
 		"Mass" : 0.0,
 		"ObjectID" : 9,
 		"ObjectType" : "Wall",
-		"Position" : 
+		"Position" :
 		{
 			"x" : -365.0,
 			"y" : 213.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
-		"Scale" : 
+		"Scale" :
 		{
 			"x" : 300.0,
 			"y" : 20.0
 		},
 		"TextureDir" : "unattachwall.png"
 	},
-	"WorldSize" : 
+	"WorldSize" :
 	{
 		"x" : 0,
 		"y" : 0
