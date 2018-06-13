@@ -37,6 +37,8 @@ namespace TE
 		bool IsLoseSoundPlayed = true;
 	private:
 		float _fourPoints[4];
+
+		unsigned FallSound;
 	};
 
 

@@ -34,6 +34,7 @@ namespace TE {
 TE::LoseconditionLogic::LoseconditionLogic()
 {
 	LoseSound = SOUNDMANAGER->LoadSound("win.mp3");
+	FallSound = SOUNDMANAGER->LoadSound("fall.mp3");
 	LOSECONDITIONLOGIC = this;
 }
 
@@ -91,7 +92,7 @@ void TE::LoseconditionLogic::Update(float dt)
 			{
 
 		
-						SOUNDMANAGER->PlayOnceSounds(LoseSound, false,IsLoseSoundPlayed);
+				SOUNDMANAGER->PlayOnceSounds(LoseSound, false,IsLoseSoundPlayed);
 
 				
 				FACTORY->GetPlayer()->GetComponent<Sprite>()->ChangeColor(255, 0, 0, 255);

@@ -54,7 +54,6 @@ void PlayerController::Initialize()
 	WallStickTime = .25f;
 	timeToWallUnStick = 0.4f;
 
-	//pos = this->GetOwner()->GetComponent<Transform>()->GetPosition();
 	myController = GAMELOGIC->ControllerList.insert(GAMELOGIC->ControllerList.end(), this);
 	STATEMANAGER->IsDrawing = true;
 
@@ -82,13 +81,10 @@ void PlayerController::Update(float dt)
 			this->GetOwner()->GetComponent<Body>()->pm_velocity = glm::vec3(0, 0, 0);
 		}
 	}
-	//this->GetOwner()->GetComponent<Transform>()->SetPosition(pos);
 }
 
 void PlayerController::Movement(float dt)
 {
-	////std::cout << "GroundType: " << this->GetOwner()->GetComponent<Body>()->GroundType << '\n';
-
 	WallAttached = false;
 
 	if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground || WallAttached)
@@ -230,17 +226,9 @@ void PlayerController::Movement(float dt)
 				JumpTriggered = true;
 				SOUNDMANAGER->PlaySounds(JumpSound, false);
 			}
-			//if (Input::IsReleased(SDL_SCANCODE_SPACE))
-			//{
-			//	FACTORY->GetPlayer()->GetComponent<Animation>()->isJumping = true;
-			//	if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y > minJumpVelocity)
-			//		this->GetOwner()->GetComponent<Body>()->pm_velocity.y = minJumpVelocity;
-			//}
 		}
 		if (this->GetOwner()->GetComponent<Body>()->GroundType != Grounded::Ground)
 		{
-
-			////std::cout << "-50" << '\n';
 			this->GetOwner()->GetComponent<Body>()->pm_velocity.y -= 2500.f * dt;
 			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y < -FallSpeedMax)
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -FallSpeedMax;
@@ -249,7 +237,6 @@ void PlayerController::Movement(float dt)
 
 		if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Air && !JumpTriggered && !WallJumpTriggered)
 		{
-			////std::cout << "-100" << '\n';
 			this->GetOwner()->GetComponent<Body>()->pm_velocity.y -= 2500.f * dt;
 			if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y < -FallSpeedMax)
 				this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -FallSpeedMax;
@@ -348,11 +335,6 @@ void PlayerController::Movement(float dt)
 				JumpTriggered = true;
 				SOUNDMANAGER->PlaySounds(JumpSound, false);
 			}
-			//if (Input::IsReleased(SDL_SCANCODE_SPACE))
-			//{
-			//	if (this->GetOwner()->GetComponent<Body>()->pm_velocity.y < -minJumpVelocity)
-			//		this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -minJumpVelocity;
-			//}
 		}
 		if (this->GetOwner()->GetComponent<Body>()->GroundType != Grounded::Ground)
 		{
@@ -450,11 +432,6 @@ void PlayerController::Movement(float dt)
 				JumpTriggered = true;
 				SOUNDMANAGER->PlaySounds(JumpSound, false);
 			}
-			//if (Input::IsReleased(SDL_SCANCODE_SPACE))
-			//{
-			//	if (this->GetOwner()->GetComponent<Body>()->pm_velocity.x > minJumpVelocity)
-			//		this->GetOwner()->GetComponent<Body>()->pm_velocity.x = minJumpVelocity;
-			//}
 		}
 		if (this->GetOwner()->GetComponent<Body>()->GroundType != Grounded::Ground)
 		{
@@ -552,11 +529,6 @@ void PlayerController::Movement(float dt)
 				JumpTriggered = true;
 				SOUNDMANAGER->PlaySounds(JumpSound, false);
 			}
-			//if (Input::IsReleased(SDL_SCANCODE_SPACE))
-			//{
-			//	if (this->GetOwner()->GetComponent<Body>()->pm_velocity.x < -minJumpVelocity)
-			//		this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -minJumpVelocity;
-			//}
 		}
 		if (this->GetOwner()->GetComponent<Body>()->GroundType != Grounded::Ground)
 		{
@@ -624,19 +596,13 @@ void PlayerController::MaxJump()
 {
 	if (delta_pos >= maxAltitude)
 	{
-		////std::cout << "JumpEnough True" << '\n';
 		JumpEnough = true;
 	}
 	else if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Ground)
 	{
-		////std::cout << "JumpEnough False" << '\n';
-		////std::cout << "JumpTriggered False" << '\n';
 		JumpEnough = false;
 		JumpTriggered = false;
 	}
-
-
-	//if(JumpEnough && this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Air && 
 }
 
 void PlayerController::PlayerAnimation()

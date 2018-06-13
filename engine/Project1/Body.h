@@ -14,7 +14,6 @@ All content 2018 DigiPen (USA) Corporation, all rights reserved.
 #pragma once
 #include "Component.h"
 
-//#include "vector3.h"
 #include "Physics.h"
 #include "Transform.h"
 #include "Type.h"
@@ -23,21 +22,7 @@ All content 2018 DigiPen (USA) Corporation, all rights reserved.
 #include <glm/gtx/transform.hpp>
 #include  <list>
 namespace TE {
-	/*class GravityBox : public Body
-	{
-	public:
-		GravityBox();
-		~GravityBox();
 
-		void PlayerIsColliding();
-		bool IsBoxTriggered();
-		virtual void Initialize() override;
-	private:
-		bool IsColliding = false;
-		bool IsTriggered = false;
-
-		Gravity GravityType;
-	};*/
 	class Body : public Component
 	{
 	public:

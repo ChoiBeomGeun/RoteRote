@@ -48,7 +48,6 @@ void Physics::Initialize() {
 	GravityType = Gravity::y_Minus;
 	gravity = glm::vec3(0, gravityScale, 0);
 	IsPlayerGround = false;
-	//gravity.Set(0, gravityScale, 0);
 }
 
 void Physics::Update(float dt) {
@@ -58,7 +57,6 @@ void Physics::Update(float dt) {
 
 	if ((!STATEMANAGER->b_IsPauseOn) && (!STATEMANAGER->b_IsRot180) && (!STATEMANAGER->b_IsRot90) && (!PHYSICS->IsMapEditorOn) && !APP->b_Win)
 	{
-		//if (!(PHYSICS->IsMapEditorOn))
 		ExplictEulerIntegrator(dt);
 		BroadPhase();
 	}
@@ -98,7 +96,6 @@ void Physics::ExplictEulerIntegrator(float dt) {
 		//Next Frame's Position = Current Frame's position + (vector *dt);
 
 		pTr = (*i).second->m_pTransform;
-		//dynamic_cast<Transform*>((*i)->GetOwner()->GetComponent(CT_TRANSFORM));
 		curfp = pTr->GetPosition();
 		pTr->SetPosition(curfp + (*i).second->pm_velocity*dt);
 		if ((*i).second->GetOwner()->objectstyle == Objectstyle::Hazard || (*i).second->GetOwner()->objectstyle == Objectstyle::Trigger90Right||
@@ -110,7 +107,6 @@ void Physics::ExplictEulerIntegrator(float dt) {
 
 		if (!(*i).second->gravityOn)
 		{
-			//(*i).second->pm_velocity.SetZero();
 			(*i).second->pm_velocity += gravity * 100.f * dt;
 		}
 		else if (!(*i).second->pOwner->objectstyle == Player)
@@ -121,8 +117,6 @@ void Physics::ExplictEulerIntegrator(float dt) {
 
 		if (gravity.y != 0.f)
 			(*i).second->pm_velocity.x *= 0.99f * dt * 50.f;
-
-		//(*i).second->m_force = glm::vec3(0);
 	}
 
 }
@@ -221,8 +215,6 @@ void Physics::ResolveCollision(Pair *M)
 	else
 		rhs_mass = 1 / rhs_invmass;
 
-	//M->normal = pB->m_pTransform->Position - pA->m_pTransform->Position;
-	//Vector3 normal = pB->m_pTransform->Position - pA->m_pTransform->Position;
 
 	// Calculate relative velocity in terms of the normal direction
 	float velAlongNormal = glm::dot(rv, M->normal);
@@ -235,15 +227,11 @@ void Physics::ResolveCollision(Pair *M)
 
 	// Calculate impulse scalar
 	float j = -(1 + e) * velAlongNormal;
-	//if (M->m_lhs->pm_invmass == 0 && M->m_rhs->pm_invmass == 0)
-	//            j /= 2;
-	//else
+
 	j /= rhs_invmass + lhs_invmass;
 
 	// Apply impulse
 	glm::vec3 impulse = M->normal * j;
-	//M->m_rhs->pm_velocity -= M->m_rhs->pm_invmass * impulse;
-	//M->m_lhs->pm_velocity += M->m_lhs->pm_invmass * impulse;
 
 	float mass_sum = rhs_mass + lhs_mass;
 	float ratio = lhs_mass / mass_sum;
@@ -276,7 +264,7 @@ bool Physics::CircleCircleCollisionCheck(Body * pA, Body * pB, Pair *M)
 	// Circles have collided, now compute manifold
 	float d = glm::length(normal); // perform actual sqrt
 
-								   // If distance between circles is not zero
+	// If distance between circles is not zero
 	if (d != 0)
 	{
 		// Distance is difference between radius and distance
@@ -363,7 +351,7 @@ bool Physics::RectvsRectCollisionCheck(Transform * pA, Transform * pB)
 
 		// Vector from A to B
 		glm::vec3 normal = pB->GetPosition() - pA->GetPosition();
-		//      pB->m_pTransform->Position - pA->m_pTransform->Position;
+		// pB->m_pTransform->Position - pA->m_pTransform->Position;
 
 		// Calculate half extents along x axis for each object
 		float a_extent = (abr.x - atl.x) / 2;
@@ -407,7 +395,7 @@ bool TE::Physics::SimpleRectvsRectCollisionCheck(glm::vec3 * pApos, glm::vec3 * 
 
 		// Vector from A to B
 		glm::vec3 normal = *pBpos - *pApos;
-		//      pB->m_pTransform->Position - pA->m_pTransform->Position;
+		// pB->m_pTransform->Position - pA->m_pTransform->Position;
 
 		// Calculate half extents along x axis for each object
 		float a_extent = (abr.x - atl.x) / 2;
@@ -438,11 +426,6 @@ bool Physics::AABBvsAABB(Body * pA, Body * pB, Pair * M)
 {
 	M->m_lhs = pA;
 	M->m_rhs = pB;
-
-	//if (pA->GetOwner()->objectstyle == Player && !(pA->Jump))
-	//   pA->GroundType = Grounded::Air;
-	//if (pB->GetOwner()->objectstyle == Player && !(pB->Jump))
-	//   pB->GroundType = Grounded::Air;
 
 	glm::vec3 asize = glm::vec3(pA->m_pTransform->GetScale());
 	glm::vec3   apos = glm::vec3(pA->m_pTransform->GetPosition());
@@ -506,8 +489,7 @@ bool Physics::AABBvsAABB(Body * pA, Body * pB, Pair * M)
 			}
 		}
 	}
-	//M->m_lhs->Jump = false;
-	//M->m_rhs->Jump = false;
+
 	return false;
 }
 
