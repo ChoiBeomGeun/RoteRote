@@ -154,8 +154,6 @@ void LevelSelect::Init()
 
 void LevelSelect::Update(float dt)
 {
-
-	std::vector<std::pair<std::string, bool>> test = STATEMANAGER->vsLevelListandclear;
 	if (LevelList != LevelList::quit)
 	{
 		if (STATEMANAGER->vsLevelListandclear[LevelList].second != true)
@@ -225,10 +223,52 @@ void LevelSelect::Update(float dt)
 			IsLeftPressed = false;
 			SOUNDMANAGER->PlaySounds(lsMoveSound, false);
 		}
-		
+		if (Input::IsPressed(SDL_SCANCODE_DOWN)) {
+
+			FACTORY->ObjectIDMap[LevelList + 4]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+
+			if (LevelList == LevelList::level20 || LevelList == LevelList::level19 || LevelList == LevelList::level18 || LevelList == LevelList::level17 || LevelList == LevelList::level16)
+				LevelList = LevelList::quit;
+			else if (LevelList == LevelList::quit)
+				LevelList = LevelList::level1;
+			else
+				LevelList += 5;
+
+			selectAngle = FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle;
+
+			FACTORY->ObjectIDMap[LevelList + 4]->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
+
+			IsRotating = true;
+			IsRightPreesed = true;
+			IsLeftPressed = false;
+
+			SOUNDMANAGER->PlaySounds(lsMoveSound, false);
+		}
+		if (Input::IsPressed(SDL_SCANCODE_UP)) {
+
+			FACTORY->ObjectIDMap[LevelList + 4]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
+
+			if (LevelList == LevelList::level1 || LevelList == LevelList::level2 || LevelList == LevelList::level3 || LevelList == LevelList::level4 || LevelList == LevelList::level5)
+				LevelList = LevelList::quit;
+			else if (LevelList == LevelList::quit)
+				LevelList = LevelList::level20;
+			else
+				LevelList -= 5;
+
+			selectAngle = FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->angle;
+
+			FACTORY->ObjectIDMap[LevelList + 4]->GetComponent<Sprite>()->ChangeColor(255, 255, 0, 255);
+
+			IsRotating = true;
+			IsLeftPressed = true;
+			IsRightPreesed = false;
+
+
+			SOUNDMANAGER->PlaySounds(lsMoveSound, false);
+		}
 
 		if (Input::IsTriggered(SDL_SCANCODE_SPACE) || Input::IsTriggered(SDL_SCANCODE_RETURN)) {
-			if (STATEMANAGER->vsLevelListandclear[LevelList].second != true) {
+			if (STATEMANAGER->i_LevelSelect != 20 || STATEMANAGER->vsLevelListandclear[LevelList].second != true) {
 				if (LevelList != LevelList::quit)
 				{
 					STATEMANAGER->i_LevelSelect = LevelList + 1;
