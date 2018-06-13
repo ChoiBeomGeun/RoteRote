@@ -182,57 +182,7 @@ namespace TE {
 					CAMERA->cameraPos.x = center.x;
 					CAMERA->cameraPos.y = center.y;
 				}
-			}
-			else if (STATEMANAGER->Loadtolevelname == "level6.json")
-			{
-				if (type == CameraRotation::EN_0)
-				{
-					center.x = leftblock.x + width * .5f;
-					center.y = downblock.y + height * .5f;
-					CAMERA->cameraPos.x = center.x;
-					CAMERA->cameraPos.y = center.y;
-				}
-				else if (type == CameraRotation::EN_90)
-				{
-					upboundary = upblock.x - height * .2f;
-					downboundary = downblock.x + height * .2f;
-					center.x = leftblock.y + width * .5f;
-					center.y = downblock.x + height * .5f;
-
-					if (CAMERA->cameraPos.x != downboundary)
-						iscam_interpol = false;
-						 
-					if(!iscam_interpol)
-					iscam_interpol = cam_move_interpolate( glm::vec2(downboundary, center.y ), dt);
-					else {
-						if (playerpos.x < downboundary)
-							CAMERA->cameraPos.x = downboundary;
-						else if (playerpos.x > upboundary)
-							CAMERA->cameraPos.x = upboundary;
-						else CAMERA->cameraPos.x = playerpos.x;
-						iscam_interpol = false;
-
-					}
-				}
-				else if (type == CameraRotation::EN_270)
-				{
-					center.x = leftblock.y + width * .5f;
-					center.y = downblock.x + height * .5f;
-					upboundary = upblock.x + height * .2f;
-					downboundary = downblock.x - height * .2f;
-					if (!iscam_interpol)
-						iscam_interpol = cam_move_interpolate(glm::vec2(downboundary, center.y), dt);
-					else
-					{
-						if (playerpos.x > downboundary)
-							CAMERA->cameraPos.x = downboundary;
-					
-						else CAMERA->cameraPos.x = playerpos.x;
-						iscam_interpol = false;
-
-					}
-				}
-			}
+			}			
 			else if(STATEMANAGER->Loadtolevelname == "level20.json" || STATEMANAGER->Loadtolevelname == "level16.json")
 			{
 				CAMERA->cameraPos.x = playerpos.x;
@@ -260,13 +210,10 @@ namespace TE {
 				{
 					upboundary = upblock.x - height * .35f;
 					downboundary = downblock.x + height * .35f;
-					/*else if (!iscam_interpol)
-						iscam_interpol = cam_move_interpolate(glm::vec2(upboundary,center.y), dt);*/
-					//float difference = abs(upboundary - upblock.x *.5f);
 					if (playerpos.x < downboundary)
 						CAMERA->cameraPos.x = downboundary;
 					else if (playerpos.x < upboundary)
-						CAMERA->cameraPos.x = playerpos.x;// +difference;
+						CAMERA->cameraPos.x = playerpos.x;
 				}
 				else if (type == CameraRotation::EN_180)
 				{
@@ -286,25 +233,14 @@ namespace TE {
 					upboundary = upblock.x + height * .2f;
 
 					downboundary = downblock.x - height * 0.3f;
-					/*if (!iscam_interpol)
-						iscam_interpol = cam_move_interpolate(glm::vec2(downboundary, center.y), dt);
-					else
-					{*/
 						if (playerpos.x < upboundary)
 							CAMERA->cameraPos.x = upboundary;
 						else if (playerpos.x < downboundary)
 							CAMERA->cameraPos.x = playerpos.x;
-						//iscam_interpol = true;
-					//}
 				}
 			}
 		}
 	}
-
-
-
-
-
 	void CameraAction::cameraSetting(CameraPosType camPosType)
 	{
 		switch (camPosType)
@@ -359,9 +295,6 @@ namespace TE {
 		{
 			int degrees = RotatingCam();
 			ControlCamMovement(degrees, dt);
-			//move_cam(dt);
-
 		}
-
 	}
 }

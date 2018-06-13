@@ -58,18 +58,12 @@ namespace TE
 	public: // camera movement
 		bool DisplayTheWholeMap();
 		bool cam_move_interpolate(glm::vec2 destination, float dt);
-		//bool isCamToPlayer;
+		
 
 	public: // camera rotating changing walls;
 		int RotatingCam();
 		void ControlCamMovement(int type, float dt);
-
-	
 		bool IsCamMovHoz, IsCamMovVer;
-		//float interpolate(float  start,float dest, float dt);
-		
-
-
 	private:
 		bool iscam_interpol;
 		// how long the object should shake for

@@ -111,6 +111,7 @@ void Sprite::UnLoadAllSprites()
 	{
 		glDeleteTextures(1, &texID.second);
 	}
+	GRAPHICS->m_textureMap.clear();
 }
 
 void Sprite::ChangeColor(float r, float g, float b, float a)

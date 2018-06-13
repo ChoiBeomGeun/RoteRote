@@ -130,18 +130,12 @@ namespace TE {
 	}
 
 	Object * ParticleManager::LoadEmitter(Object* pobject, std::string path)
-	{
-
-		
+	{		
 		std::string loadParticle = ".\\Emitters.\\";
 		loadParticle+= path;
-		
 		Jsonclass file;
 		std::string object = "Emitter";
-
 		file.ReadFile(loadParticle);
-
-
 		for (int i = 1; i < file.mRoot.get("NumberOfEmitter", false).asInt() + 1; i++)
 		{
 			std::string Objectstyle = file.mRoot.get(object + to_string(i), false).get("ObjectType", false).asString();
@@ -508,10 +502,8 @@ namespace TE {
 		{
 			pEmitter->pParticles[i].pos = glm::vec3(dis(gen) *.9f, dis(gen)*.5f, 0);
 			// set rotation with random
-			//float rotation = TUMath::GetRandomFloat(0, TUMath::TWO_PI);
 			pEmitter->pParticles[i].scale.x
-				= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
-			//pEmitter->pParticles[i].pos = glm::vec3(0);
+				= TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);			
 			pEmitter->pParticles[i].scale.y = TUMath::GetRandomFloat(m_minExpScale, m_maxExpScale);
 			pEmitter->pParticles[i].color[0] = 255 / 255.f;
 			pEmitter->pParticles[i].color[1] = 255 / 255.f;
@@ -552,9 +544,6 @@ namespace TE {
 			pEmitter->pParticles[i].color[1] = 200 / 255.f;
 			pEmitter->pParticles[i].color[2] = (2 * i % 200) / 255.f;
 			pEmitter->pParticles[i].color[3] = (255 - i) / 255.f;
-
 		}
-	}
-
-	
+	}	
 }

@@ -17,9 +17,6 @@ All content 2018 DigiPen (USA) Corporation, all rights reserved.
 #include "Graphics.h"
 #include <algorithm>
 
-
-//bool moving;
-
 namespace TE {
 	Graphics * GRAPHICS = nullptr;
 }
@@ -108,7 +105,6 @@ void Graphics::Initialize(void)
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
 
 	glBindVertexArray(basicVAO);
-	//glBindVertexArray(particleVAO);
 	// unbind the buffer
 	glBindBuffer(GL_ARRAY_BUFFER, 0); // 0 mean unbind
 
@@ -253,6 +249,8 @@ Graphics::~Graphics()
 	{
 		glDeleteTextures(1, &texID->m_TextureID);
 	}
+	SpriteList.clear();
+	AnimationList.clear();
 	_basicProgram.unuse();
 	_particleProgram.unuse();
 	delete pCamera;
@@ -264,8 +262,7 @@ Graphics::~Graphics()
 	glDeleteVertexArrays(1, &buffer);
 	glDeleteBuffers(1, &basicVAO);
 
-	if(!m_textureMap.empty())
-		Sprite::UnLoadAllSprites();
+	Sprite::UnLoadAllSprites();
 }
 
 void TE::Graphics::drawPerspective(std::vector<Sprite*>::iterator iter)
@@ -383,8 +380,8 @@ void TE::Graphics::animationSetting()
 			if ((*aniIter)->pOwner->objectstyle == Player)
 			{
 				glUniform1i(uniformLocation[ISANIMATION], 1);
-				glUniform1f(uniformLocation[ANIMATIONX], /*aniX*/(*aniIter)->getFrame());
-				glUniform1f(uniformLocation[TIME], (*aniIter)->getTime()/*1.0f / 6*/);
+				glUniform1f(uniformLocation[ANIMATIONX], (*aniIter)->getFrame());
+				glUniform1f(uniformLocation[TIME], (*aniIter)->getTime());
 				if (time >= (*aniIter)->getTime())
 				{
 					// when key is pressed
@@ -420,8 +417,8 @@ void TE::Graphics::animationSetting()
 				if (splashtime >= .1f)
 				{
 					glUniform1i(uniformLocation[ISANIMATION], 1);
-					glUniform1f(uniformLocation[ANIMATIONX], /*aniX*/(*aniIter)->getFrame());
-					glUniform1f(uniformLocation[TIME], (*aniIter)->getTime()/*1.0f / 6*/);
+					glUniform1f(uniformLocation[ANIMATIONX], (*aniIter)->getFrame());
+					glUniform1f(uniformLocation[TIME], (*aniIter)->getTime());
 					(*aniIter)->IterateSplash((*aniIter)->getTime());
 					splashtime = 0.0f;
 					if ((*aniIter)->getFrame() >= .95f)

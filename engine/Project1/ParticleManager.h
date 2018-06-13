@@ -54,11 +54,8 @@ namespace TE {
 
 		void Initialize(void) override;
 		Object * LoadEmitter(Object* pobject, std::string  path);
-		//void SaveEmitter(std::string  path);
-
 		void Update(float dt) override;
 		void Initialize(Emitter * pEmitter);
-		
 
 		void AddEmitter(Emitter* pEmitter);
 		void Delete_all_particles();
@@ -66,7 +63,6 @@ namespace TE {
 		std::vector <Emitter*> m_EmitterList;
 		void initialize_life_time();
 		void turn_on_particles(bool ison);
-		//Emitter* m_pEmitters; //!< pointer of Emitter
 		int m_capacity;       //!< max amount of Emitter
 		int m_size;           //!< number of Emitter
 		int m_currentID;      //!< current ID of Emitter
@@ -96,9 +92,6 @@ namespace TE {
 		void InitBackgroundSystem(Emitter* pEmitter);
 		void init_particle_system(Emitter * pEmitter);
 		void init_menu_system(Emitter * pEmitter);
-	
-		
-		
 	};
 
 	extern ParticleManager * PARTICLEMANAGER;
