@@ -109,8 +109,9 @@ void Sprite::UnLoadAllSprites()
 {
 	for (auto texID : GRAPHICS->m_textureMap)
 	{
-		glDeleteTextures(1, &texID.second);
+		glDeleteTextures(1, &texID.second);	
 	}
+	GRAPHICS->m_textureMap.erase(GRAPHICS->m_textureMap.begin(),GRAPHICS->m_textureMap.end());
 	GRAPHICS->m_textureMap.clear();
 }
 
