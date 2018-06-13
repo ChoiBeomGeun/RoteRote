@@ -43,6 +43,8 @@ void RotateButtons(float angles) {
 
 		for (auto it : buttonsobj) {
 
+			if (it.first->GetComponent<Sprite>()->mTexutureDir == "elec.png")
+				return;
 			it.first->GetComponent<Transform>()->angle += angles;
 
 
