@@ -3,7 +3,7 @@
 	{
 		"EYE" : 
 		{
-			"x" : -16.0,
+			"x" : 0.0,
 			"y" : 0.0,
 			"z" : 999.00006103515625
 		},
@@ -25,7 +25,7 @@
 	"Object1" : 
 	{
 		"Components" : [ "TRANSFORM", "SPRITE", "BODY", "CONTROLLER", "ANIMATION" ],
-		"Depth" : 0.0,
+		"Depth" : 10.0,
 		"GravityOn" : true,
 		"Mass" : 1.0,
 		"ObjectID" : 1,
@@ -209,16 +209,16 @@
 		"Position" : 
 		{
 			"x" : -300.0,
-			"y" : -97.0,
+			"y" : -90.0,
 			"z" : 0.0
 		},
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
 			"x" : 330.0,
-			"y" : 20.0
+			"y" : 10.0
 		},
-		"TextureDir" : "hazard.png"
+		"TextureDir" : "glowline.png"
 	},
 	"Object18" : 
 	{
@@ -276,7 +276,7 @@
 			"y" : -117.0,
 			"z" : 0.0
 		},
-		"Rotation" : 8093.3662109375,
+		"Rotation" : 11074.32421875,
 		"Scale" : 
 		{
 			"x" : 20.0,
@@ -323,10 +323,10 @@
 		"Rotation" : 0.0,
 		"Scale" : 
 		{
-			"x" : 20.0,
-			"y" : 20.0
+			"x" : 250.0,
+			"y" : 10.0
 		},
-		"TextureDir" : "hazard.png"
+		"TextureDir" : "glowline.png"
 	},
 	"Object22" : 
 	{
@@ -413,8 +413,8 @@
 		"Rotation" : 90.0,
 		"Scale" : 
 		{
-			"x" : 20.0,
-			"y" : 20.0
+			"x" : 0.0,
+			"y" : 0.0
 		},
 		"TextureDir" : "180button.png",
 		"TriggerLifeTime" : -1,
@@ -437,8 +437,8 @@
 		"Rotation" : 180.0,
 		"Scale" : 
 		{
-			"x" : 100.0,
-			"y" : 50.0
+			"x" : 0.0,
+			"y" : 0.0
 		},
 		"TextureDir" : "180button.png",
 		"TriggerLifeTime" : -1,
@@ -488,9 +488,9 @@
 			"x" : 20.0,
 			"y" : 20.0
 		},
-		"TextureDir" : "",
-		"TriggerLifeTime" : 0,
-		"TriggerType" : "180"
+		"TextureDir" : "90button.png",
+		"TriggerLifeTime" : -1,
+		"TriggerType" : "90"
 	},
 	"Object3" : 
 	{
