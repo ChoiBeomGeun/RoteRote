@@ -148,9 +148,16 @@ void Application::Initialize()
 		DEBUG_PRINT("SDL couldn't init! SD_Error : %s\n", SDL_GetError());
 	}
 	// Set up the screen
-	pWnd = SDL_CreateWindow("RoteRote", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-		_screenWidth, _screenHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
-
+	if (_isfull)
+	{
+		pWnd = SDL_CreateWindow("RoteRote", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+			_screenWidth, _screenHeight, SDL_WINDOW_FULLSCREEN |SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+	}
+	else
+	{
+		pWnd = SDL_CreateWindow("RoteRote", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+			_screenWidth, _screenHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+	}
 	if (pWnd == NULL)
 	{
 		DEBUG_PRINT("SDL Window could not be created!");
@@ -190,14 +197,13 @@ void Application::Initialize()
 
 	SDL_SetWindowSize(this->pWnd, _screenWidth, _screenHeight);
 	glViewport(0, 0, _screenWidth, _screenHeight);
-
+	
 	SDL_SetWindowPosition(this->pWnd, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 	SDL_SetWindowBordered(this->pWnd, SDL_TRUE);
 
 	WindowIconSetting(this->pWnd);
 	
-	if(_isfull)
-		SDL_SetWindowFullscreen(pWnd, SDL_WINDOW_FULLSCREEN);
+	
 
 	SDL_GL_SetSwapInterval(1);
 	
