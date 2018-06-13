@@ -97,7 +97,12 @@ void LevelSelect::Load()
 	LEVELMANAGER->LoadLevel("selectlevel.json");
 
 	for (int i = 1; i <= LevelList::quit + 1; ++i)
+	{
 		Levelpng[i - 1] = FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("level" + NumberToString(i) + ".png");
+
+		if(i == LevelList::quit + 1)
+			Levelpng[i - 1] = Sprite::find_texture_id("Menu_Quit.png");
+	}
 
 	LevelList = STATEMANAGER->i_LevelSelect - 1;
 	FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->depth = 1;
@@ -127,7 +132,7 @@ void LevelSelect::Load()
 
             if (indexOfnumber == quit)
             {
-                FACTORY->ObjectIDMap[indexOfnumber + 4]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("attachbox.png");
+                FACTORY->ObjectIDMap[indexOfnumber + 4]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("AttachBox.png");
                 FACTORY->ObjectIDMap[indexOfnumber + 4]->GetComponent<Transform>()->SetPosition(glm::vec3(0, -300, 0));
             }
 	}
@@ -151,11 +156,13 @@ void LevelSelect::Update(float dt)
 {
 
 	std::vector<std::pair<std::string, bool>> test = STATEMANAGER->vsLevelListandclear;
-	if (STATEMANAGER->vsLevelListandclear[LevelList].second != true &&
-		LevelList != LevelList::quit)
-		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(0, -120, 0));
-	else
-		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(300, 300, 0));
+	if (LevelList != LevelList::quit)
+	{
+		if (STATEMANAGER->vsLevelListandclear[LevelList].second != true)
+			LockObject->GetComponent<Transform>()->SetScale(glm::vec3(0, -120, 0));
+		else
+			LockObject->GetComponent<Transform>()->SetScale(glm::vec3(300, 300, 0));
+	}
 
 	if (IsConfirmationOn) {
 		if (Input::IsTriggered(SDL_SCANCODE_Y))
