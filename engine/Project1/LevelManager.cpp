@@ -249,8 +249,8 @@ void LevelManager::LoadLevel(std::string  path)
 			else
 				y = static_cast<int>(tempObject->GetComponent<Transform>()->scale.x) / 40;
 
-			tempObject->GetComponent<Transform>()->u_v.x = x;
-			tempObject->GetComponent<Transform>()->u_v.y = y;
+			tempObject->GetComponent<Transform>()->u_v.x = static_cast<float>(x);
+			tempObject->GetComponent<Transform>()->u_v.y = static_cast<float>(y);
 		}
 		else if (Objectstyle == "Trigger90")
 		{

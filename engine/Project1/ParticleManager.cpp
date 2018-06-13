@@ -542,7 +542,7 @@ namespace TE {
 		{
 			pEmitter->pParticles[i].pos = pEmitter->pos;
 			pEmitter->pParticles[i].angle = 0;
-			pEmitter->pParticles[i].lifetime = i;
+			pEmitter->pParticles[i].lifetime = static_cast<float>(i);
 			pEmitter->pParticles[i].scale = glm::vec3(0);
 			pEmitter->pParticles[i].vel = pEmitter->vel;
 		}
@@ -559,7 +559,7 @@ namespace TE {
 			pEmitter->pParticles[i].angle = 0;
 			pEmitter->pParticles[i].lifetime = 0;
 			pEmitter->pParticles[i].scale = glm::vec3(0);
-			pEmitter->pParticles[i].vel = glm::vec3(cosf(TUMath::DegreeToRadian(i)), sinf(TUMath::DegreeToRadian(i)),0.f);
+			pEmitter->pParticles[i].vel = glm::vec3(cosf(TUMath::DegreeToRadian(static_cast<float>(i))), sinf(TUMath::DegreeToRadian(static_cast<float>(i))), 0.f);
 			pEmitter->pParticles[i].color[0] = ((i*i) % 50 + i) / 255.f;
 			pEmitter->pParticles[i].color[1] = 200 / 255.f;
 			pEmitter->pParticles[i].color[2] = (2 * i % 200) / 255.f;
