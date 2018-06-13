@@ -3,12 +3,12 @@
 \file   Application.cpp
 \author Choi Beom Geun
 \par    email: o77151@gmail.com
-\par    Class:GAM200
+\par    Class:GAM250
 \par    ThumbUp Engine
 \date   2017/11/29
 
 Application Source file for handling Resolution and window
-All content 2017 DigiPen (USA) Corporation, all rights reserved.
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/
 

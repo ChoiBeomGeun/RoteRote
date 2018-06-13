@@ -1,15 +1,17 @@
-/**
+/******************************************************************************/
+/*!
 \file        Camera.cpp
 \author      HyunJun Yoo
 \par         email: hyunjun306@gmail.com
-\par         course: CS225
-\date        12/11/2017
-\brief
+\par         course: GAM250
+\par		 ThumbUp Engine
+\date        06/13/2018
 
 Camera class implementation.
 It can set location of camera, where to look and zoom in and out.
-All content 2017 DigiPen (USA) Corporation, all rights reserved.
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
+/******************************************************************************/
 
 #include "Camera.h"
 #include "Object.h"
@@ -28,9 +30,6 @@ static glm::vec3 up{ 0,1,0 };
 Camera::Camera()
 {
 	CenterOfCamera = { 0.f, 0.f };
-	//right = { 1,0,0 };
-	//cameraTarget = glm::vec3(0, 0, -1);
-
 	cameraPos = eye;
 	cameraTarget = target;
 	cameraUp = up;
@@ -38,7 +37,6 @@ Camera::Camera()
 	_zFar = 999.f;
 	angle = 45.f;
 	_aspect = (float)APP->_screenWidth / (float)APP->_screenHeight;
-	//CAMERA->isCentered = true;
 	_distance = (+_zNear + _zFar) *.5f;
 	_width = tan(angle*.5f) * 2 * _distance;
 	_height = _width / _aspect;
@@ -77,9 +75,6 @@ void TE::Camera::update()
 
 void TE::Camera::rotate(float rotAngle)
 {
-	//view = glm::rotate(view, angle, glm::vec3(0, 0, -1));
-	//view = glm::rotate(glm::radians(angle), glm::vec3(1.f, 1.f, 0.f));
-
 	if (rotAngle == 90)
 	{
 		// from 0
@@ -185,7 +180,6 @@ void TE::Camera::unproj()
 		{
 			_aspect = 1;
 			projection = glm::ortho(-APP->_screenWidth *.5f, APP->_screenWidth *.5f, -APP->_screenHeight*.5f, APP->_screenHeight*.5f, _zNear, _zFar);
-
 		}
 		else
 		{
@@ -216,10 +210,8 @@ void TE::Camera::unproj()
 
 void TE::Camera::followPlayer()
 {
-//	float PaceSpeed = 5.0f;
 	glm::vec3 PaceDirection = FACTORY->GetPlayer()->GetComponent<Transform>()->position - cameraPos;
 	glm::vec3 StartPosition{ 0.f };
-
 }
 
 float TE::Camera::near_distance() const

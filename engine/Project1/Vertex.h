@@ -1,15 +1,16 @@
-
-/**
+/******************************************************************************/
+/*!
 \file        Vertex.h
 \author      HyunJun Yoo
 \par         email: hyunjun306@gmail.com
-\par         course: CS225
+\par         course: GAM250
 \date        12/11/2017
-\brief
 
 Vertex.h contains position, color, UV.
-All content 2017 DigiPen (USA) Corporation, all rights reserved.
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
+/******************************************************************************/
+
 #pragma once
 
 #include <glew.h>

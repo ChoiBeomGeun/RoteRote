@@ -1,7 +1,7 @@
 /******************************************************************************/
 /*!
 \file		ParticleManager.cpp
-\author	HyunJun Yoo
+\author		HyunJun Yoo
 \par		email: hyunjun306@gmail.com
 \par		Class:GAM250
 \par		ThumbUp Engine
@@ -136,18 +136,9 @@ namespace TE {
 		std::string loadParticle = ".\\Emitters.\\";
 		loadParticle+= path;
 		
-	/*	#ifdef _DEBUG
-		
-		#else
-		path = Userinfo;
-		path += "/Documents/RoteRote/Emitters/" + loadParticle;
-		#endif
-		free(Userinfo);*/
-	
 		Jsonclass file;
 		std::string object = "Emitter";
 
-		//	char *path = (char*)JSON_FILE;
 		file.ReadFile(loadParticle);
 
 
@@ -315,8 +306,6 @@ namespace TE {
 							}
 							//Update particle scale based on scaleFactor and dt
 							particle.scale -= m_scaleFactor * dt;
-							//Clamp particle scale to 0 and maxTrailScale
-							//TUMath::Clamp(particle.scale, 0, m_maxTrailScale);
 						}
 						break;
 					}
@@ -342,14 +331,11 @@ namespace TE {
 							particle.scale -= m_scaleFactor * dt;
 						}
 						//Update emitter lifetime based on dt
-						
-						
 						break;
 					}
 					case ET_LASER:
 					{
 						(*EIT)->vel = m_laserVel;
-						//float xscale = 20.f;
 						for (int i = 0; i < (*EIT)->capacity; ++i)
 						{
 							Particle & particle = (*EIT)->pParticles[i];
@@ -360,17 +346,14 @@ namespace TE {
 							if (particle.lifetime > (*EIT)->explifeTime)
 							{
 								particle.pos = (*EIT)->pos;
-
 								particle.lifetime = 0;
 								particle.scale.x = TUMath::GetRandomFloat(m_minTrailScale, m_maxTrailScale);
 								particle.scale.y = TUMath::GetRandomFloat(m_minTrailScale, m_maxTrailScale);
-
 							}							
 						}
 						break;
 					}
 					}
-
 					++EIT;
 				}
 			}

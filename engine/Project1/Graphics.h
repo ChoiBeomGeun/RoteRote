@@ -1,16 +1,21 @@
-#pragma once
-
-/**
-\file        Graphics.h
-\author      HyunJun Yoo
-\par         email: hyunjun306@gmail.com
-\par         course: CS225
-\date        12/11/2017
-\brief
+/******************************************************************************/
+/*!
+\file		Graphics.h
+\author		HyunJun Yoo
+\par		email: hyunjun306@gmail.com
+\par		Class:GAM250
+\par		ThumbUp Engine
+\date		06/13/2018
 
 GLSLProgram header file.
-All content 2017 DigiPen (USA) Corporation, all rights reserved.
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
+/******************************************************************************/
+
+
+
+#pragma once
+
 #include <SDL.h>
 
 #include "System.h"
@@ -107,7 +112,6 @@ namespace TE {
 		std::vector<Sprite*> SpriteList;
 		std::vector<Animation *> AnimationList;
 		std::map<std::string, GLuint> m_textureMap;
-		//std::vector<Emitter *> EmitterList;
 
 		void initbasicShader();
 		void initparticleShader();
@@ -120,16 +124,12 @@ namespace TE {
 		void setbasicUniformLoc();
 		void setparticleUniformLoc();
 		void animationSetting();
-		/*static void LoadAllSprites(std::string path);
-		static void UnLoadAllSprites();
-		static GLuint find_texture_id(std::string filepath);*/
-		//void drawLine(bool isdraw);
+	
 	private:
 		int drawStats;
 		int particleDraw;
 		bool isParticle;
-		GLuint buffer, basicVAO/*, particleVAO*/;
-		//GLuint particlebuffer;
+		GLuint buffer, basicVAO;
 		glm::mat4 model = glm::mat4(1.0f);
 		glm::mat4 hudmodel = glm::mat4(1.f);
 		glm::mat4 particlemodel = glm::mat4(1.0f);

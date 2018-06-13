@@ -1,16 +1,19 @@
-#pragma once
-
-/**
+/******************************************************************************/
+/*!
 \file        Camera.h
 \author      HyunJun Yoo
 \par         email: hyunjun306@gmail.com
-\par         course: CS225
-\date        12/11/2017
-\brief
+\par         course: GAM250
+\par		 ThumbUp Engine
+\date        06/13/2018
 
 this is camera class
-All content 2017 DigiPen (USA) Corporation, all rights reserved.
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
+/******************************************************************************/
+
+#pragma once
+
 
 
 #ifndef CAMERA_H

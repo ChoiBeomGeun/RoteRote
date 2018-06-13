@@ -1,16 +1,19 @@
-/**
-\file        MapEditor.cpp
-\author      KyungOok Park
-\par         email: qkrruddn6680@gmail.com
-\par         course: GAM200
-\par       ThumbUp Engine
-\date        12/12/2017
+/******************************************************************************/
+/*!
+\file       MapEditor.cpp
+\author     KyungOok Park
+\par        email: qkrruddn6680@gmail.com
+\par        course: GAM250
+\par		ThumbUp Engine
+\date       12/12/2017
 \brief
 MapEditor state
 
 Load Level and Edit it.
-All content 2017 DigiPen (USA) Corporation, all rights reserved.
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
+/******************************************************************************/
+
 #include <iostream>
 
 #include "MapEditor.h"

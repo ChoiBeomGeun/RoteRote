@@ -1,7 +1,7 @@
 /******************************************************************************/
 /*!
 \file		ParticleManager.h
-\author	HyunJun Yoo
+\author		HyunJun Yoo
 \par		email: hyunjun306@gmail.com
 \par		Class:GAM250
 \par		ThumbUp Engine
@@ -62,8 +62,7 @@ namespace TE {
 
 		void AddEmitter(Emitter* pEmitter);
 		void DeleteEmitter(std::vector <Emitter*>::iterator emitterIt);
-		//void UpdateEmitter(Emitter* pEmitter, float dt);
-		//void     DrawEmitter(const Emitter* pEmitter);
+		
 		std::vector <Emitter*> m_EmitterList;
 		void initialize_life_time();
 		void turn_on_particles(bool ison);

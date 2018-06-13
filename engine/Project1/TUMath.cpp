@@ -2,7 +2,7 @@
 \file        TUMath.cpp
 \author      KyungOok Park
 \par         email: qkrruddn6680@gmail.com
-\par         course: GAM200
+\par         course: GAM250
 \par	ThumbUp Engine
 \date        12/12/2017
 \brief

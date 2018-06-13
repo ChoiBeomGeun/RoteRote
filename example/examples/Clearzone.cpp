@@ -1,21 +1,20 @@
 /******************************************************************************/
 /*!
-\file   Clearzone.cpp
-\author Choi Beom Geun
-\par    email: o77151@gmail.com
-\par    Class:GAM200
-\par    ThumbUp Engine
-\date   2017/11/29
+\file		Clearzone.cpp
+\author		Choi Beom Geun
+\par		email: o77151@gmail.com
+\par		Class:GAM250
+\par		ThumbUp Engine
+\date		2017/11/29
 
 Clear zone game logic source file
-All content 2017 DigiPen (USA) Corporation, all rights reserved.
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/
 
 #include "Clearzone.h"
 #include  "Factory.h"
 #include  "InGameLogic.h"
-//extern InGameLogic LevelInit;
 #include "Application.h"
 #include "Input.h"
 #include "StateManager.h"
@@ -30,11 +29,7 @@ SOUNDID WinSound;
 
 
 namespace TE {
-
-
 	ClearzoneLogic * CLEARZONELOGIC = nullptr;
-
-
 }
 
 
@@ -55,10 +50,7 @@ void ClearzoneLogic::Initialize()
 	clearparticle = FACTORY->CreateHUD(obj->GetComponent<Transform>()->position, obj->GetComponent<Transform>()->scale);
 	clearparticle->GetComponent<Sprite>()->isPerspective = true;
 	PARTICLEMANAGER->LoadEmitter(clearparticle, "finish.json");
-
-
 	SoundIsPlay = true;
-
  }
 
 

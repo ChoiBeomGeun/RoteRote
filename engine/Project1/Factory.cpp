@@ -3,13 +3,13 @@
 \file   Factory.cpp
 \author Choi Beom Geun
 \par    email: o77151@gmail.com
-\par    Class:GAM200
+\par    Class:GAM250
 \par    ThumbUp Engine
 \date   2017/11/29
 
 OvjectFactory handles the creation , managment , and
 destruction of all Objects
-All content 2017 DigiPen (USA) Corporation, all rights reserved.
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/
 

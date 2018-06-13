@@ -1,7 +1,7 @@
 /******************************************************************************/
 /*!
 \file		Particles.cpp
-\author	HyunJun Yoo
+\author		HyunJun Yoo
 \par		email: hyunjun306@gmail.com
 \par		Class:GAM250
 \par		ThumbUp Engine
@@ -14,7 +14,6 @@ All content 2018 DigiPen (USA) Corporation, all rights reserved.
 
 #include "Particles.h"
 #include "TUMath.h"
-
 #include "glm\glm.hpp"
 #include "SOIL.h"
 #include <cmath> /*atan2*/
@@ -49,24 +48,7 @@ namespace TE {
 	}
 	void Emitter::Initialize()
 	{
-		/*if (PARTICLEMANAGER->m_EmitterList.empty())
-		{*/
-			//pParticles = NULL;
-			/*type = ET_EXPLOSION;
-			pos = glm::vec3(0);
-			vel = glm::vec3(0);
-			m_textureID = 0;
-			size = 0;
-			capacity = 0;
-			emitterID = 0;
-			lifeTime = 0;
-			explifeTime = 0;
-			isAdditive = true;
-			isOn = false;*/
-	/*	}
-		else
-			return;
-*/
+
 	}
 
 	void Emitter::CreateParticle()

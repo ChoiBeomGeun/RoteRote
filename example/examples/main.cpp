@@ -1,15 +1,15 @@
 /******************************************************************************/
 /*!
-\file   main.cpp
-\author Choi Beom Geun
-\par    email: o77151@gmail.com
-\par    Class:GAM200
-\par    ThumbUp Engine
-\date   2017/11/29
+\file		main.cpp
+\author		Choi Beom Geun
+\par		email: o77151@gmail.com
+\par		Class:GAM250
+\par		ThumbUp Engine
+\date		2017/11/29
 
 Whole main game loop for the game
 In this cpp, there should be add states and set states
-All content 2017 DigiPen (USA) Corporation, all rights reserved.
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/
 

@@ -2,7 +2,7 @@
 \file        Physics.h
 \author      KyungOok Park
 \par         email: qkrruddn6680@gmail.com
-\par         course: GAM200
+\par         course: GAM250
 \par   ThumbUp Engine
 \date        12/12/2017
 \brief
@@ -10,7 +10,7 @@ Pair class
 Pair class has two object's as a class member and their collision information.
 Physics class
 
-All content 2017 DigiPen (USA) Corporation, all rights reserved.
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
 #pragma once
 #include "System.h"

@@ -1,16 +1,16 @@
 /******************************************************************************/
 /*!
-\file   Menu.h
-\author Kyungook.Park
-\par    email: qkrruddn6680@gmail.com
-\par    Class:GAM200
-\par    ThumbUp Engine
-\date   2017/04/19
+\file		Menu.h
+\author		Kyungook.Park
+\par		email: qkrruddn6680@gmail.com
+\par		Class:GAM250
+\par		ThumbUp Engine
+\date		2017/04/19
 
 Menu state header file
 There are ¡°go to level select state¡±, ¡°option state¡±, ¡°How to play state¡±
 ¡°Quit the game¡±
-All content 2017 DigiPen (USA) Corporation, all rights reserved.
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/
 

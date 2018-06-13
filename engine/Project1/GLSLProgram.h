@@ -1,15 +1,15 @@
-
-/**
+/******************************************************************************/
+/*!
 \file        GLSLProgram.h
 \author      HyunJun Yoo
 \par         email: hyunjun306@gmail.com
-\par         course: CS225
+\par         course: GAM250
 \date        12/11/2017
-\brief
 
-GLSLProgram header file.
-All content 2017 DigiPen (USA) Corporation, all rights reserved.
+header file for GLSLProgram.
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
+/******************************************************************************/
 #pragma once
 
 #include <string>

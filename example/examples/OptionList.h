@@ -1,15 +1,17 @@
+/******************************************************************************/
 /*!
-\file  OptionList.h
-\author Kyungook.Park
-\par    email: qkrruddn6680@gmail.com
-\par    Class:GAM200
-\par    ThumbUp Engine
-\date   2017/04/19
+\file		OptionList.h
+\author		Kyungook.Park
+\par		email: qkrruddn6680@gmail.com
+\par		Class:GAM250
+\par		ThumbUp Engine
+\date		2017/04/19
 
-MenuList header
-All content 2017 DigiPen (USA) Corporation, all rights reserved.
+OptionList header
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/
+
 #pragma once
 enum class OptionList {
 	Option_SoundOnOff,

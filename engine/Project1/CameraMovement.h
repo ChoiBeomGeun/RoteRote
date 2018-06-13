@@ -1,3 +1,17 @@
+/******************************************************************************/
+/*!
+\file        CameraMovement.h
+\author      HyunJun Yoo
+\par         email: hyunjun306@gmail.com
+\par         course: GAM250
+\par		 ThumbUp Engine
+\date        06/13/2018
+
+This is interface for CameraMovement
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
+
 #pragma once
 #include "Camera.h"
 #include "Object.h"

@@ -1,16 +1,16 @@
-
-/**
+/******************************************************************************/
+/*!
 \file        GLSLProgram.cpp
 \author      HyunJun Yoo
 \par         email: hyunjun306@gmail.com
-\par         course: CS225
+\par         course: GAM250
 \date        12/11/2017
-\brief
 
 This is the program that communicate between user and shader program.
 This is where shaders are compiled and linked.
-All content 2017 DigiPen (USA) Corporation, all rights reserved.
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
+/******************************************************************************/
 
 #include "GLSLProgram.h"
 #include "DebugUtil.h"

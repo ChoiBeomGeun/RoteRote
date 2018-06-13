@@ -9,7 +9,7 @@
 This is where textures are loaded, sort sprite by depth.
 and store sprite info to sprite vector
 
-All content 2017 DigiPen (USA) Corporation, all rights reserved.
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
 
 

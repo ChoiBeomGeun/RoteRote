@@ -1,3 +1,17 @@
+/******************************************************************************/
+/*!
+\file		Particles.h
+\author		HyunJun Yoo
+\par		email: hyunjun306@gmail.com
+\par		Class:GAM250
+\par		ThumbUp Engine
+\date		06/11/2015
+
+Particle interface
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
+
 #ifndef  Particle_H
 #define  Particle_H
 
@@ -39,15 +53,8 @@ namespace TE {
 		~Emitter();
 		virtual void Initialize() override;
 		void CreateParticle();
-		//void Update(float dt);
 		void SetEmitter(glm::vec3 EmitterPos, glm::vec3 EmitterVel, int pSize, int pCapacity, float plifeTime, EmitterType ptype, std::string particlePath);
 		void SetTexture(int textureID);
-		
-		//float getDepth() { return depth; }
-
-		//int FindUnusedParticle();
-
-
 		Particle*   pParticles; //!< pointer of Paritcles in this Emitter
 		EmitterType type; //!< type of Emitter
 		glm::vec3      pos;  //!< position of Emitter
@@ -62,13 +69,8 @@ namespace TE {
 		bool		isOn;
 		std::string m_particlePath;
 	};
-
-
 	void defaultParticleUpdate(Particle& particle, float deltaTime);
-
 	void trailParticleUpdate(Particle& particle, float deltaTime);
-
-
 }
 
 #endif // ! Particle_H

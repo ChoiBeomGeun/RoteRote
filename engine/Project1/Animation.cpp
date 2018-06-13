@@ -1,16 +1,17 @@
-/**
-\file        Animation.cpp
-\author      HyunJun Yoo
-\par         email: hyunjun306@gmail.com
-\par         course: CS225
-\date        12/11/2017
-\brief
+/******************************************************************************/
+/*!
+\file		Animation.cpp
+\author		HyunJun Yoo
+\par		email: hyunjun306@gmail.com
+\par		Class:GAM250
+\par		ThumbUp Engine
+\date		06/13/2018
 
 Animation class implementation file.
 it is a component type.
-All content 2017 DigiPen (USA) Corporation, all rights reserved.
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
-
+/******************************************************************************/
 
 #include "Animation.h"
 #include "Graphics.h"

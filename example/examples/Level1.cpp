@@ -1,14 +1,14 @@
 /******************************************************************************/
 /*!
-\file   level1.cpp
-\author Choi Beom Geun
-\par    email: o77151@gmail.com
-\par    Class:GAM200
-\par    ThumbUp Engine
-\date   2017/11/29
+\file		level1.cpp
+\author		Choi Beom Geun
+\par		email: o77151@gmail.com
+\par		Class:GAM250
+\par		ThumbUp Engine
+\date		2017/11/29
 
 All levels is running in this state
-All content 2017 DigiPen (USA) Corporation, all rights reserved.
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/
 #include "Level1.h"
@@ -65,7 +65,7 @@ unsigned int winSound2;
 Jsonclass file;
 Json::Value root;
 Object * player;
-
+bool LoseSOUNDONCE = true;
 Object * Movingtest;
 
 Object * laser_particle;
@@ -208,7 +208,7 @@ void Level1::Init()
 			p->pos = FACTORY->GetClearZone()->GetComponent<Transform>()->position;
 		}*/
 	}
-	
+	LoseSOUNDONCE = true;
 }
 
 void Level1::Update(float dt)
@@ -219,6 +219,12 @@ void Level1::Update(float dt)
 #ifdef _DEBUG
 	CheatKeyFunctions();
 #endif
+
+	if (APP->b_Lose)
+	{
+		SOUNDMANAGER->PlayOnceSounds(loseSound, false, LoseSOUNDONCE);
+		LoseSOUNDONCE = false;
+	}
 
 	if (STATEMANAGER->Loadtolevelname == "stairlevel.json")
 	{

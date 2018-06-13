@@ -1,17 +1,17 @@
-/**
-\file        Sprite.cpp
-\author      HyunJun Yoo
-\par         email: hyunjun306@gmail.com
-\par         course: CS225
-\date        12/16/2017
-\brief
+/******************************************************************************/
+/*!
+\file		Sprite.cpp
+\author		HyunJun Yoo
+\par		email: hyunjun306@gmail.com
+\par		Class:GAM250
+\par		ThumbUp Engine
+\date		06/13/2018
 
 This is where textures are loaded, sort sprite by depth.
 and store sprite info to sprite vector
-
-All content 2017 DigiPen (USA) Corporation, all rights reserved.
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
-
+/******************************************************************************/
 
 #include "Sprite.h"
 #include "Graphics.h"
@@ -28,16 +28,12 @@ using namespace TE;
 
 Sprite::Sprite() : Component(ComponentType::CT_SPRITE)
 {
-
 	GRAPHICS->SpriteList.push_back(this);
-	//m_BaseGraphicsList.push_back(this);
 }
 
 Sprite::~Sprite()
 {
 	GRAPHICS->SpriteList.erase(std::find(GRAPHICS->SpriteList.begin(), GRAPHICS->SpriteList.end(), this));
-	
-
 }
 
 void Sprite::Initialize()
@@ -113,7 +109,6 @@ void Sprite::UnLoadAllSprites()
 {
 	for (auto texID : GRAPHICS->m_textureMap)
 	{
-		//std::cout << "texID->pTextureID : " << texID->pTexureID << '\n';
 		glDeleteTextures(1, &texID.second);
 	}
 }
@@ -153,10 +148,7 @@ void TE::Sprite::sortSprites(SortType sortType /*= SortType::FRONT_TO_BACK*/)
 	case SortType::TEXTURE:
 		std::stable_sort(GRAPHICS->SpriteList.begin(), GRAPHICS->SpriteList.end(), compareTextureID);
 		break;
-
-
 	}
-
 }
 
 bool TE::Sprite::compareBackToFront(Sprite *a, Sprite* b)

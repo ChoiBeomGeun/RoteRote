@@ -1,28 +1,25 @@
-/**
-\file        Sprite.h
-\author      HyunJun Yoo
-\par         email: hyunjun306@gmail.com
-\par         course: CS225
-\date        12/16/2017
-\brief
+/******************************************************************************/
+/*!
+\file		Sprite.h
+\author		HyunJun Yoo
+\par		email: hyunjun306@gmail.com
+\par		Class:GAM250
+\par		ThumbUp Engine
+\date		06/13/2018
 
 Sprite component,
 where sprite is defined.
-
-
-All content 2017 DigiPen (USA) Corporation, all rights reserved.
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
+/******************************************************************************/
 
 #pragma once
 
 #include "Component.h"
-
 #include "Transform.h"
 #include  <string>
-
 #include "glew.h"
 #include "SDL.h"
-
 
 
 enum class SortType
@@ -39,14 +36,9 @@ namespace TE {
 	{
 	public:
 		Sprite();
-
 		~Sprite();
-
 		virtual void Initialize() override;
-
 		GLuint  texture_load(std::string filepath);
-
-		//Transform * pTransform;
 		GLuint m_TextureID;
 		std::string mTexutureDir;
 		static void LoadAllSprites();

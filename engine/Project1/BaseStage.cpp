@@ -3,7 +3,7 @@
 \file   BaseStage.cpp
 \author Choi Beom Geun
 \par    email: o77151@gmail.com
-\par    Class:GAM200
+\par    Class:GAM250
 \par    Thumbup Engine
 \date   2017/11/29
 

@@ -1,18 +1,22 @@
-/**
-\file        EditorData.cpp
-\author      KyungOok Park
-\par         email: qkrruddn6680@gmail.com
-\par         course: GAM200
-\par       ThumbUp Engine
-\date        12/12/2017
+/******************************************************************************/
+/*!
+\file       EditorData.cpp
+\author     KyungOok Park
+\par        email: qkrruddn6680@gmail.com
+\par        course: GAM250
+\par		ThumbUp Engine
+\date       12/12/2017
 \brief
 
 struct GameData, store Object.
 class EditorData, function for edit object.
 Add Object, Scale, Translate
 Load Level and move to GameData to use it as a MapEditor.
-All content 2017 DigiPen (USA) Corporation, all rights reserved.
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
+/******************************************************************************/
+
+
 #include "EditorData.h"
 #include "Physics.h"
 #include "Input.h"

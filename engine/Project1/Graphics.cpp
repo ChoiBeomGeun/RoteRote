@@ -1,15 +1,18 @@
-/**
-\file        Graphics.cpp
-\author      HyunJun Yoo
-\par         email: hyunjun306@gmail.com
-\par         course: CS250
-\date        12/16/2017
-\brief
+/******************************************************************************/
+/*!
+\file		Graphics.cpp
+\author		HyunJun Yoo
+\par		email: hyunjun306@gmail.com
+\par		Class:GAM250
+\par		ThumbUp Engine
+\date		06/13/2018
 
 Graphics.cpp,
 This is where it get all sprite and animation data to redner objects
-All content 2017 DigiPen (USA) Corporation, all rights reserved.
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
+/******************************************************************************/
+
 
 #include "Graphics.h"
 #include <algorithm>
@@ -30,27 +33,19 @@ Graphics::Graphics()
 void TE::Graphics::initbasicShader()
 {
 	std::string path = "TEGraphics";
-
-
-
 	path = ".\\shaders.\\" + path;
-	
 	_basicProgram.compileShaders(path + ".vert", path + ".frag");
 	_basicProgram.addAttribute("vertexPosition");
 	_basicProgram.addAttribute("vertexColor");
 	_basicProgram.addAttribute("vertexUV");
-
 	_basicProgram.linkShaders();
 }
 
 void TE::Graphics::initparticleShader()
 {
 	std::string path = "TEParticle";
-
 	std::string saveLevel = path;
-
 	path = ".\\shaders.\\" + path;
-
 	_particleProgram.compileShaders(path + ".vert", path + ".frag");
 	_particleProgram.addAttribute("verParticlePos");
 	_particleProgram.addAttribute("verParticleCol");
@@ -72,8 +67,7 @@ void Graphics::Initialize(void)
 
 	// initialize Shader
 	initbasicShader();
-
-
+	
 	if (buffer == 0)
 		glGenBuffers(1, &buffer);
 	if (basicVAO == 0)
@@ -199,8 +193,6 @@ void Graphics::drawparticle_attributes()
 void Graphics::Update(float dt)
 {
 	Sprite::sortSprites(SortType::FRONT_TO_BACK);
-	//BaseGraphics::sortGraphics(GRA_SORT::FRONT_TO_BACK);
-	
 
 	glEnable(GL_BLEND);
 	glDepthMask(GL_TRUE);
@@ -208,8 +200,6 @@ void Graphics::Update(float dt)
 
 	glClearColor(0.f, 0.f, 0.f, 0.f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	/*glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);*/
 	time += dt;
 	splashtime += dt;
 
@@ -224,8 +214,6 @@ void Graphics::Update(float dt)
 		it != SpriteList.end(); ++it) {
 		glBindTexture(GL_TEXTURE_2D, (*it)->m_TextureID);
 		animationSetting();
-		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		//m_textureMap;
 		_basicProgram.use();
 
 		if ((*it)->isPerspective)
@@ -234,7 +222,6 @@ void Graphics::Update(float dt)
 			drawOrthogonal(it);
 
 		drawParticles(it);
-
 
 		glUniformMatrix4fv(uniformLocation[VIEW], 1, GL_FALSE, &view[0][0]);
 		glUniformMatrix4fv(uniformLocation[PROJ], 1, GL_FALSE, &CAMERA->projection[0][0]);
@@ -264,7 +251,6 @@ Graphics::~Graphics()
 {
 	for (auto texID : GRAPHICS->SpriteList)
 	{
-		//std::cout << "texID->pTextureID : " << texID->pTexureID << '\n';
 		glDeleteTextures(1, &texID->m_TextureID);
 	}
 	_basicProgram.unuse();
@@ -301,7 +287,6 @@ void TE::Graphics::drawPerspective(std::vector<Sprite*>::iterator iter)
 		else
 			glUniform2f(uniformLocation[UV], (*iter)->pOwner->GetComponent<Transform>()->u_v.x, (*iter)->pOwner->GetComponent<Transform>()->u_v.y);
 
-		
 		glUniformMatrix4fv(uniformLocation[MODEL], 1, GL_FALSE, &model[0][0]);
 	}
 }
@@ -319,10 +304,7 @@ void TE::Graphics::drawOrthogonal(std::vector<Sprite*>::iterator iter)
 		hudmodel = glm::rotate(hudmodel, glm::radians((*iter)->pOwner->GetComponent<Transform>()->angle), (*iter)->pOwner->GetComponent<Transform>()->rotation);
 
 		hudmodel = glm::scale(hudmodel, (*iter)->pOwner->GetComponent<Transform>()->scale);
-		//glUniform1i(particleLoc[PSTATS], drawStats);
-		//glUniform1i(particleLoc[PTEXTURE], 0);
 		glUniformMatrix4fv(uniformLocation[HUDMODEL], 1, GL_FALSE, &hudmodel[0][0]);
-		//_basicProgram.unuse();
 	}
 }
 
@@ -335,7 +317,6 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 		for (auto p : PARTICLEMANAGER->m_EmitterList)
 		{
 			glBindTexture(GL_TEXTURE_2D, p->pOwner->GetComponent<Sprite>()->m_TextureID);
-			//glBindTexture(GL_TEXTURE_2D, p->m_textureID);
 			if (p->isOn)
 			{
 				if(p->pParticles)
@@ -352,27 +333,23 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 					glUniformMatrix4fv(particleLoc[PARTICLEMODEL], 1, GL_FALSE, &particlemodel[0][0]);
 					glUniformMatrix4fv(particleLoc[PARTICLEVIEW], 1, GL_FALSE, &view[0][0]);
 					glUniformMatrix4fv(particleLoc[PARTICLEPROJ], 1, GL_FALSE, &CAMERA->projection[0][0]);
-					//glUniform1i(particleLoc[PTEXTURE], 1);
 					glUniform1i(particleLoc[PSTATS], drawStats);
 					glPushAttrib(GL_CURRENT_BIT);
 					glDrawArrays(GL_TRIANGLES, 0, 6);
 				}
 			}
 		}
-		//glDisable(GL_BLEND);
 	}
 }
 
 void TE::Graphics::setbasicUniformLoc()
 {
-
 	uniformLocation[TEXTURE] = _basicProgram.getUniformLocation("texturing");
 	uniformLocation[SAMPLER] = _basicProgram.getUniformLocation("texture2D");
 	uniformLocation[COLOR] = _basicProgram.getUniformLocation("colorOffset");
 	uniformLocation[MODEL] = _basicProgram.getUniformLocation("model");
 	uniformLocation[VIEW] = _basicProgram.getUniformLocation("view");
 	uniformLocation[PROJ] = _basicProgram.getUniformLocation("projection");
-
 	uniformLocation[DRAWINGSTATUS] = _basicProgram.getUniformLocation("drawingStatus");
 	uniformLocation[HUDMODEL] = _basicProgram.getUniformLocation("hudmodel");
 	uniformLocation[ISANIMATION] = _basicProgram.getUniformLocation("isAnimation");
@@ -431,16 +408,12 @@ void TE::Graphics::animationSetting()
 					}
 					else {}
 					time = 0.0f;
-					//std::cout << (*aniIter)->getFrame() << '\n';
 				}
-
 				// if player is flipped it should face other direction
 				if ((*aniIter)->isFlippedX())
 					glUniform1i(uniformLocation[FLIPX], 1);
-
 				if (!(*aniIter)->isFlippedX())
 					glUniform1i(uniformLocation[FLIPX], 0);
-
 			}
 			else
 			{

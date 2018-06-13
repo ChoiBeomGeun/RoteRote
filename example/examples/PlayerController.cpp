@@ -1,18 +1,19 @@
-/**
+/******************************************************************************/
+/*!
 \file        PlayerController.cpp
 \author      KyungOok Park
 \par         email: qkrruddn6680@gmail.com
-\par         course: GAM200
-\par		ThumbUp Engine
+\par         course: GAM250
+\par		 ThumbUp Engine
 \date        12/12/2017
+
 \brief
 PlayerController, allow player to Jump and Move around
 for every gravity change.
-All content 2017 DigiPen (USA) Corporation, all rights reserved.
-
-JUMP SHOULDN'T WORK WHILE PLAYER IS ON AIR
-
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
+/******************************************************************************/
+
 #include "PlayerController.h"
 #include "SoundManager.h"
 #include "Input.h"
@@ -33,12 +34,6 @@ PlayerController::PlayerController()
 
 void PlayerController::Initialize()
 {
-
-	//   pos = this->GetOwner()->GetComponent<Transform>()->GetPosition();
-	//	this->GetOwner()->GetComponent<Transform>() = GetOwner()->GetComponent<Transform>();
-	//this->GetOwner()->GetComponent<Body>() =GetOwner()->GetComponent<Body>();
-
-
 	pre_pos = 0;
 	delta_pos = 0;
 	JumpSpeed = 100.f;

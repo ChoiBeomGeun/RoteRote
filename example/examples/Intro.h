@@ -1,15 +1,15 @@
 #pragma once
 /******************************************************************************/
 /*!
-\file   Intro.cpp
-\author Choi Beom Geun
-\par    email: o77151@gmail.com
-\par    Class:GAM200
-\par    ThumbUp Engine
-\date   2017/11/29
+\file		Intro.h
+\author		Choi Beom Geun
+\par		email: o77151@gmail.com
+\par		Class:GAM250
+\par		ThumbUp Engine
+\date		2017/11/29
 
-Intro
-All content 2017 DigiPen (USA) Corporation, all rights reserved.
+Intro header
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/
 
