@@ -33,8 +33,6 @@ Object::~Object()
 
 	//Todo : delete ALL componenets
 
-	/*if (particle)
-		delete particle;*/
 }	
 
 
@@ -49,8 +47,7 @@ void Object::Initialize()
 	}
 	//Todo : Init all components
 
-	/*if (particle)
-		particle->Initialize();*/
+
 }
 
 

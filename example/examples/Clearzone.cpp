@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file		Clearzone.cpp
-\author		Choi Beom Geun
-\par		email: o77151@gmail.com
-\par		Class:GAM250
-\par		ThumbUp Engine
-\date		2017/11/29
+\file	Clearzone.cpp
+\author	Choi Beom Geun
+\par	email: o77151@gmail.com
+\par	Class:GAM250
+\par	ThumbUp Engine
+\date	2017/11/29
 
 Clear zone game logic source file
 All content 2018 DigiPen (USA) Corporation, all rights reserved.
@@ -78,12 +78,8 @@ if (APP->b_Win) {
 		player = FACTORY->GetPlayer();
 		if (!APP->b_Lose &&PHYSICS->RectvsRectCollisionCheck(player->GetComponent<Transform>(), obj->GetComponent<Transform>()))
 		{
-//			player->GetComponent<Transform>()->scale -= 1;
-		
-
 			SOUNDMANAGER->PlayOnceSounds(WinSound, false, SoundIsPlay);
-		//	WinSound = SOUNDMANAGER->LoadSound("win3.mp3");
-		//	SOUNDMANAGER->PlaySounds(WinSound, false);
+	
 			if (OnceWin) {
 				APP->b_Win = true;
 
@@ -92,17 +88,6 @@ if (APP->b_Win) {
 				STATEMANAGER->b_IsDelay = true;
 			}
 			
-			
-			//	LevelInit.b_Win = true;
-							  //STATEMANAGER->b_Relplay = true;
-			
-			
-
-		
-			/*PHYSICS->gravityScale = -20.f;
-			PHYSICS->GravityType = Gravity::y_Minus;
-			PHYSICS->gravity = glm::vec3(0, PHYSICS->gravityScale, 0);*/
-			//STATEMANAGER->b_IsReplayFirst = true;
 		}
 	}
 }

@@ -43,7 +43,6 @@ void GameLogic::Initialize()
 
 void GameLogic::Update(float dt)
 {
-//	std::list<Controller>::iterator itr = ControllerList.begin();
 	for (auto element : ControllerList)
 		element->Update(dt);
 		

@@ -65,8 +65,6 @@ void SoundManager::Update(float dt)
 {
 	dt = dt;
 	if (b_SoundOnOff) {
-		/*for (unsigned int i = 0; i < Channels.size(); i++)
-			Channels[i]->setVolume(Volume[i]);*/
 		system->update();
 	}
 }
@@ -226,7 +224,6 @@ void SoundManager::SetVolume(SOUNDID soundtoadjust, float volume)
 {
 	Channels[soundtoadjust]->setVolume(volume);
 
-	//Volume[soundtoadjust] = volume;
 
 }
 

@@ -21,7 +21,6 @@ All content 2018 DigiPen (USA) Corporation, all rights reserved.
 #include "PlayerController.h"
 
 using namespace TE;
-//Object * FACTORY->GamePlayer;
 std::vector<Object*> TriggerList;
 
 typedef std::vector<std::pair<Object*, int>> ButtonObjectList;
@@ -90,7 +89,6 @@ void TriggerLogic::Initialize(void)
 
 		if (FACTORY->ObjectIDMap[Objects.first]->objectstyle == Objectstyle::Trigger90)
 		{
-			//Objects.second->GetComponent<Trigger>()->i_innertimer = 100;
 			Objects.second->GetComponent<Trigger>()->i_innertimer = 0;
 			Objects.second->GetComponent<Trigger>()->Trigger_useable = true;
 			TriggerList.push_back(Objects.second);
@@ -98,7 +96,6 @@ void TriggerLogic::Initialize(void)
 		}
 		else if (FACTORY->ObjectIDMap[Objects.first]->objectstyle == Objectstyle::Trigger180)
 		{
-			//Objects.second->GetComponent<Trigger>()->i_innertimer = 100;
 			Objects.second->GetComponent<Trigger>()->i_innertimer = 0;
 			Objects.second->GetComponent<Trigger>()->Trigger_useable = true;
 			TriggerList.push_back(Objects.second);
@@ -106,7 +103,6 @@ void TriggerLogic::Initialize(void)
 		}
 		else if (FACTORY->ObjectIDMap[Objects.first]->objectstyle == Objectstyle::Trigger90Right)
 		{
-			//Objects.second->GetComponent<Trigger>()->i_innertimer = 100;
 			Objects.second->GetComponent<Trigger>()->i_innertimer = 0;
 			Objects.second->GetComponent<Trigger>()->Trigger_useable = true;
 			TriggerList.push_back(Objects.second);
@@ -138,7 +134,6 @@ void TriggerLogic::Initialize(void)
 
 void TriggerLogic::Update(float dt)
 {
-	//FACTORY->GamePlayer = FACTORY->GamePlayer;
 
 	dt = dt;
 	for (auto TriggerObjects : TriggerList)
@@ -164,7 +159,6 @@ void TriggerLogic::Update(float dt)
 				STATEMANAGER->b_IsGravityChanged = true;
 				STATEMANAGER->b_IsRot90 = true;
 				STATEMANAGER->b_IsRot180 = false;
-				//NumberOfTriggersActivation++;
 				if (TriggerObjects->GetComponent<Trigger>()->Trigger_useable)
 				{
 					if (STATEMANAGER->b_IsRot90 && !STATEMANAGER->b_IsRot180) {
@@ -183,7 +177,6 @@ void TriggerLogic::Update(float dt)
 				STATEMANAGER->b_IsGravityChanged = true;
 				STATEMANAGER->b_IsRot90 = true;
 				STATEMANAGER->b_IsRot180 = false;
-				//NumberOfTriggersActivation++;
 				if (TriggerObjects->GetComponent<Trigger>()->Trigger_useable)
 				{
 					if (STATEMANAGER->b_IsRot90 && !STATEMANAGER->b_IsRot180) {
@@ -207,10 +200,8 @@ void TriggerLogic::Update(float dt)
 					if (STATEMANAGER->b_IsRot180 && !STATEMANAGER->b_IsRot90)
 					{
 						_180anglebutton(TriggerObjects);
-						//NumberOfTriggersActivation++;
 					}
 				} 
-				//_180anglebutton(TriggerObjects->GetComponent<Trigger>());
 			}
 		}
 		if (!TriggerObjects->GetComponent<Trigger>()->Trigger_useable)
@@ -356,7 +347,6 @@ void TE::TriggerLogic::_90angle_toleft_button(Object* pTrigger)
 		{
 			RotateButtons(2.25);
 			FACTORY->GetPlayer()->GetComponent<Transform>()->angle += 2.25;
-			//FACTORY->GetPlayer()->GetComponent<Transform>()->angle = ;
 			CAMERA->cameraUp.x = 0.f;
 			CAMERA->cameraUp.y = -1.f;
 			STATEMANAGER->b_IsRot90 = false;
@@ -548,7 +538,6 @@ void TriggerLogic::_90angle_toright_button(Object* pTrigger)
 		{
 			RotateButtons(-2.25);
 			FACTORY->GetPlayer()->GetComponent<Transform>()->angle -= 2.25;
-			//FACTORY->GetPlayer()->GetComponent<Transform>()->angle = ;
 			CAMERA->cameraUp.x = 0.f;
 			CAMERA->cameraUp.y = 1.f;
 			STATEMANAGER->b_IsRot90 = false;
@@ -709,7 +698,6 @@ void TE::TriggerLogic::_180anglebutton(Object* pTrigger)
 			
 		
 			isDegree180double[1] = true;
-			//isDegree180[1] = false;
 		}
 		if (isDegree180double[1])
 		{
@@ -752,11 +740,8 @@ void TE::TriggerLogic::_180anglebutton(Object* pTrigger)
 			STATEMANAGER->b_IsRotating = true;
 		}
 		else
-		{
-			
-		
+		{		
 			isDegree180double[2] = true;
-			//isDegree180[2] = false;
 		}
 		if (isDegree180double[2])
 		{
@@ -804,7 +789,6 @@ void TE::TriggerLogic::_180anglebutton(Object* pTrigger)
 			
 	
 			isDegree180double[3] = true;
-			//isDegree180[3] = false;
 		}
 		// to 90
 		if (isDegree180double[3])

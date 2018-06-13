@@ -1,31 +1,24 @@
-#pragma once
-/**
-\file        Sprite.h
-\author      HyunJun Yoo
-\par         email: hyunjun306@gmail.com
-\par         course: CS225
-\date        12/16/2017
+/******************************************************************************/
+/*!
+\file	cAutoMoving.h
+\author HyunJun Yoo
+\par    email: hyunjun306@gmail.com
+\par    course: CS225
+\date   12/16/2017
 \brief
 
-Sprite component,
-where sprite is defined.
-
-
+AutoMoving header
 All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
+/******************************************************************************/
 
 #pragma once
 
 #include "Component.h"
-
-//#include "vector3.h"
 #include "Transform.h"
 #include  <string>
-
 #include "glew.h"
 #include "SDL.h"
-
-
 
 namespace TE {
 	struct Paths
@@ -38,14 +31,10 @@ namespace TE {
 	{
 	public:
 		AutoMoving();
-
 		~AutoMoving();
-
 		virtual void Initialize() override;
 		glm::vec3 mOriginPosition;
 		unsigned int NumberOfTowardPath = 0;
 		std::vector <Paths> mPaths;
-
-
 	};
 }

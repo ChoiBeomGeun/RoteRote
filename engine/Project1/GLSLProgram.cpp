@@ -1,10 +1,10 @@
 /******************************************************************************/
 /*!
-\file        GLSLProgram.cpp
-\author      HyunJun Yoo
-\par         email: hyunjun306@gmail.com
-\par         course: GAM250
-\date        12/11/2017
+\file   GLSLProgram.cpp
+\author HyunJun Yoo
+\par    email: hyunjun306@gmail.com
+\par    course: GAM250
+\date   12/11/2017
 
 This is the program that communicate between user and shader program.
 This is where shaders are compiled and linked.

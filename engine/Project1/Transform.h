@@ -1,15 +1,19 @@
-/*
-Transform.h
-BeomGeun Choi
+/******************************************************************************/
+/*!
+\file   Transform.h
+\author Choi Beom Geun
+\par    email: o77151@gmail.com
+\par    Class:GAM250
+\par    ThumbUp Engine
+\date   2017/11/29
 
-
+Transform
 */
+/******************************************************************************/
 
 #pragma once
 #include "Component.h"
-//#include "vector3.h"
 #include "ComponentType.h"
-//#include "Mat44.h"
 #include "TUMath.h"
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
@@ -28,8 +32,6 @@ namespace TE {
 			angle = 0.0f;
 			u_v = glm::vec2(1.f,1.f);
 		}
-		///~Transform();
-	
 		glm::vec3 GetPosition() { return position; }
 		glm::vec3 GetRotation() { return rotation; }
 		glm::vec3 GetScale() { return scale; }
@@ -45,11 +47,6 @@ namespace TE {
 		glm::vec3 rotation;
 		glm::vec3 scale;
 		glm::vec2 u_v;
-
-		// helper function
-		/*glm::vec3 changeVec3PosToglm(const Vector3& pos);
-		glm::vec3 changeVec3ScaleToglm(const Vector3& scale);
-		glm::vec3 changeVec3RotateToglm(const Vector3& rotate);*/
 	private:
 
 	};

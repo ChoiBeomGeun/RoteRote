@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file		Pause.cpp
-\author		Choi Beom Geun
-\par		email: o77151@gmail.com
-\par		Class:GAM250
-\par		ThumbUp Engine
-\date		2017/04/19
+\file	Pause.cpp
+\author	Choi Beom Geun
+\par	email: o77151@gmail.com
+\par	Class:GAM250
+\par	ThumbUp Engine
+\date	2017/04/19
 
 Pause state source file
 There are ¡°go to level select state¡±, ¡°Pause state¡±, ¡°How to play state¡±
@@ -89,7 +89,6 @@ void Pause::Load()
 
 	frame->GetComponent<Sprite>()->depth = 1;
 	textIndicator->GetComponent<Sprite>()->depth = 2;
-	//LEVELMANAGER->LoadLevel("Pause.json");
 	PauseSound = SOUNDMANAGER->LoadSound("Menu.mp3");
 	MoveSound = SOUNDMANAGER->LoadSound("Menumove.mp3");
 	SelectSound = SOUNDMANAGER->LoadSound("Menuselect.mp3");
@@ -106,7 +105,6 @@ void Pause::Load()
 	iconLevelSelect->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Pause_levelselecticon.png");
 
 
-	//resize();
 }
 
 void Pause::Init()
@@ -122,9 +120,7 @@ void Pause::Init()
 	IsSelected = false;
 	selection_angle = 0;
 	select_index = 0;
-//	PauseCam.cameraSetting(CameraPosType::EN_Option);
 	SOUNDMANAGER->PauseAllSound();
-	//PauseCam.cameraSetting(CameraPosType::EN_BOUNDARY);
 	
 }
 
@@ -187,10 +183,7 @@ void Pause::Update(float dt)
 		if (IsRotating) {
 			DeltaAngle();
 
-			//for (int i = 1; i < 5; ++i) {
-
-			//	FACTORY->ObjectIDMap[i]->GetComponent<Transform>()->position.x = cos(TUMath::DegreeToRadian(frame->GetComponent<Transform>()->angle + (i) * 90)) * rotation_radius;
-			//	FACTORY->ObjectIDMap[i]->GetComponent<Transform>()->position.y = sin(TUMath::DegreeToRadian(frame->GetComponent<Transform>()->angle + (i) * 90)) * rotation_radius;
+		
 
 			iconHowToPlay->GetComponent<Transform>()->position.x = cos(TUMath::DegreeToRadian(frame->GetComponent<Transform>()->angle + (1) * 90)) * rotation_radius;
 			iconHowToPlay->GetComponent<Transform>()->position.y = sin(TUMath::DegreeToRadian(frame->GetComponent<Transform>()->angle + (1) * 90)) * rotation_radius;
@@ -200,7 +193,6 @@ void Pause::Update(float dt)
 			iconExit->GetComponent<Transform>()->position.y = sin(TUMath::DegreeToRadian(frame->GetComponent<Transform>()->angle + (3) * 90)) * rotation_radius;
 			iconRestart->GetComponent<Transform>()->position.x = cos(TUMath::DegreeToRadian(frame->GetComponent<Transform>()->angle + (4) * 90)) * rotation_radius;
 			iconRestart->GetComponent<Transform>()->position.y = sin(TUMath::DegreeToRadian(frame->GetComponent<Transform>()->angle + (4) * 90)) * rotation_radius;
-			//}
 		}
 		else
 		{
@@ -359,13 +351,13 @@ void Pause::Selection_plus(void)
 {
 	switch (Selection)
 	{
-	case PauseList::Pause_Restart:  Selection = PauseList::Pause_LevelSelect; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Pause_Exit.png");
+	case PauseList::Pause_Restart:  Selection = PauseList::Pause_LevelSelect; 
 		break;
-	case PauseList::Pause_LevelSelect: Selection = PauseList::Pause_HowToPlay;	//FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Pause_HowToPlay.png");
+	case PauseList::Pause_LevelSelect: Selection = PauseList::Pause_HowToPlay;
 		break;
-	case PauseList::Pause_HowToPlay: Selection = PauseList::Pause_Exit; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Pause_LevelSelect.png");
+	case PauseList::Pause_HowToPlay: Selection = PauseList::Pause_Exit; 
 		break;
-	case PauseList::Pause_Exit: Selection = PauseList::Pause_Restart; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Pause_Restart.png");
+	case PauseList::Pause_Exit: Selection = PauseList::Pause_Restart; 
 		break;
 	default:
 		break;
@@ -447,10 +439,6 @@ void Pause::resize()
 
 		iconLevelSelect->GetComponent<Transform>()->scale.x = APP->_screenWidth * iconLevelSelect->GetComponent<Transform>()->scale.x / 1280;
 		iconLevelSelect->GetComponent<Transform>()->scale.y = APP->_screenHeight * iconLevelSelect->GetComponent<Transform>()->scale.y / 720;
-
-		/*oHowToPlay->GetComponent<Transform>()->scale.x = APP->_screenWidth * oHowToPlay->GetComponent<Transform>()->scale.x / 1280;
-		oHowToPlay->GetComponent<Transform>()->scale.y = APP->_screenHeight * oHowToPlay->GetComponent<Transform>()->scale.y / 720;*/
-
-
+		
 	}
 }

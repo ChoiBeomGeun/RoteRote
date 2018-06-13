@@ -36,10 +36,8 @@ void FadeIn(void)
 		if (allobj.second->objectstyle == Objectstyle::BackGround || allobj.second->objectstyle == Objectstyle::NoneReremovable)
 			continue;
 		allobj.second->GetComponent<Sprite>()->ChangeAvalue(itransvalue);
-		//PARTICLEMANAGER->turn_on_particles(false);
 		if (itransvalue == 255) {
 			IsFadingIn = false;
-		//	itransvalue = 255;
 		
 		}
 	
@@ -119,7 +117,6 @@ void StateManager::Initialize(void)
 	b_IsFirst = true;
 	b_IsGravityChanged = false;
 	b_IsReplayFirst = true;
-	//activestage = Statevec[0];
 }
 
 void StateManager::Update(float dt)

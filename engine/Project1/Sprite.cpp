@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file		Sprite.cpp
-\author		HyunJun Yoo
-\par		email: hyunjun306@gmail.com
-\par		Class:GAM250
-\par		ThumbUp Engine
-\date		06/13/2018
+\file	Sprite.cpp
+\author	HyunJun Yoo
+\par	email: hyunjun306@gmail.com
+\par	Class:GAM250
+\par	ThumbUp Engine
+\date	06/13/2018
 
 This is where textures are loaded, sort sprite by depth.
 and store sprite info to sprite vector

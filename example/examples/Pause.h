@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file		Pause.h
-\author		Choi Beom Geun
-\par		email: 	email: o77151@gmail.com
-\par		Class:GAM250
-\par		ThumbUp Engine
-\date		2017/12/19
+\file	Pause.h
+\author	Choi Beom Geun
+\par	email: 	email: o77151@gmail.com
+\par	Class:GAM250
+\par	ThumbUp Engine
+\date	2017/12/19
 
 Pause state header file
 There are ¡°go to level select state¡±, ¡°Pause state¡±, ¡°How to play state¡±

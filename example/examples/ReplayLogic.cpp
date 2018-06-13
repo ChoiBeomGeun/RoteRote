@@ -1,3 +1,16 @@
+/******************************************************************************/
+/*!
+\file	ReplayLogic.cpp
+\author	Choi Beom Geun
+\par	email: o77151@gmail.com
+\par	Class:GAM250
+\par	ThumbUp Engine
+\date	2017/11/29
+
+ReplayLogic implementation
+All content 2018 DigiPen (USA) Corporation, all rights reserved.
+*/
+/******************************************************************************/
 #include "ReplayLogic.h" 
 #include "StateManager.h"
 #include "Factory.h"
@@ -39,18 +52,12 @@ static bool IsButtonAvailable = true;
 
 void ReStartgame3(void)
 {
-	//->LoadLevel(STATEMANAGER->Loadtolevelname);
-	//STATEMANAGER->ReplayPosition.clear();
-	//STATEMANAGER->b_IsReplay = false;
-	//STATEMANAGER->b_Relplay = false;
-	//STATEMANAGER->b_IsPauseFirst = true;
-	//STATEMANAGER->Restart();
+	
 	while (!STATEMANAGER->Replayerinfo.empty())
 		STATEMANAGER->Replayerinfo.pop();
 	FreeReplayer();
 	STATEMANAGER->Restart();
 	PARTICLEMANAGER->Initialize();
-	//PARTICLEMANAGER->GetEmitters()[0].Initialize();
 }
 
 void LevelSelect3(void)
@@ -63,7 +70,6 @@ void LevelSelect3(void)
 	while (!STATEMANAGER->Replayerinfo.empty())
 		STATEMANAGER->Replayerinfo.pop();
 	PARTICLEMANAGER->Initialize();
-	//PARTICLEMANAGER->GetEmitters()[0].Initialize();
 }
 //Move next
 void Backgame3(void)
@@ -87,7 +93,6 @@ void Backgame3(void)
 	STATEMANAGER->b_IsPauseFirst = true;
 	STATEMANAGER->MoveState(4);
 	PARTICLEMANAGER->Initialize();
-	//PARTICLEMANAGER->GetEmitters()[0].Initialize();
 }
 
 
@@ -112,10 +117,7 @@ void MakeReplayerUI(void) {
 	oReLevelbutton->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("levelselect.png");
 	ReeplayImage = FACTORY->CreateHUD(glm::vec3(0, 0, Vec3buttonPostion3.z), glm::vec3(1, 1, 0));
 	ReeplayImage->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("replay.png");
-	//IsButtonAvailable = true;
 	replayer = FACTORY->GetPlayer();
-	//	STATEMANAGER->Replayerinfo.reverse();
-	//	itor = STATEMANAGER->Replayerinfo.;
 	STATEMANAGER->ReplayInit = false;
 	TRIGGERLOGIC->Free();
 	TRIGGERLOGIC->Initialize();
@@ -142,7 +144,6 @@ void MakeReplayerUI(void) {
 void SetReplayer(void) {
 	if (!replayer)
 		return;
-	//replayCam.cameraSetting(CameraPosType::EN_BOUNDARY);
 
 	replayer->GetComponent<Transform>()->SetPosition(itor.front().Pos);
 	replayer->GetComponent<Animation>()->setFrame(itor.front().aniframe);
@@ -157,11 +158,9 @@ void SetReplayer(void) {
 			p->pos = FACTORY->GetClearZone()->GetComponent<Transform>()->position;
 		}
 	}
-	//PARTICLEMANAGER->GetEmitters()[0].Initialize();
 	itor.pop();
 	if (itor.size() <= 0) {
 		SOUNDMANAGER->PlaySounds(rlwin, false);
-		//itor = STATEMANAGER->Replayerinfo.begin();
 		FACTORY->DestroyAllObjects();
 		LEVELMANAGER->LoadLevel(STATEMANAGER->Loadtolevelname);
 		Level1::loadbackground();
@@ -177,14 +176,6 @@ void SetReplayer(void) {
 		replayer = FACTORY->GetPlayer();
 
 
-		//for (auto p : PARTICLEMANAGER->m_EmitterList)
-		//{
-		//	if (p->type == ET_EXPLOSION)
-		//	{
-		//		p->isOn = false;
-		//	}
-		//}
-
 		
 		CAMERA->cameraUp.x = 0;
 		CAMERA->cameraUp.y = 1;
@@ -192,7 +183,6 @@ void SetReplayer(void) {
 		PHYSICS->GravityType = Gravity::y_Minus;
 		PHYSICS->gravity = glm::vec3(0, PHYSICS->gravityScale, 0);
 		itor = STATEMANAGER->Replayerinfo;
-		//PARTICLEMANAGER->Initialize();
 	}
 
 
@@ -278,8 +268,7 @@ void FreeReplayer(void) {
 	STATEMANAGER->b_IsReplay = false;
 	IsButtonAvailable = false;
 	STATEMANAGER->b_IsReplayStart = true;
-	//FACTORY->GetPlayer()->transform->SetPosition(STATEMANAGER->InitplayerPos) ;
-	//STATEMANAGER->Replayerinfo.clea
+
 	STATEMANAGER->b_Relplay = false;
 	STATEMANAGER->ReplayInit = true;
 	STATEMANAGER->b_IsGameLevel = true;
@@ -291,5 +280,4 @@ void FreeReplayer(void) {
 			p->isOn = false;
 		}
 	}
-	//	STATEMANAGER->Replayerinfo.clear();
 }

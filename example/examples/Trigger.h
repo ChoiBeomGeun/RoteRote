@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file		Trigger.h
-\author		HyunJun Yoo
-\par		email: hyunjun306@gmail.com
-\par		Class:GAM250
-\par		ThumbUp Engine
-\date		2017/12/16
+\file	Trigger.h
+\author	HyunJun Yoo
+\par	email: hyunjun306@gmail.com
+\par	Class:GAM250
+\par	ThumbUp Engine
+\date	2017/12/16
 
 Trigger game logic header file
 There are interacting between player and triggers.

@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file        Camera.cpp
-\author      HyunJun Yoo
-\par         email: hyunjun306@gmail.com
-\par         course: GAM250
-\par		 ThumbUp Engine
-\date        06/13/2018
+\file   Camera.cpp
+\author HyunJun Yoo
+\par    email: hyunjun306@gmail.com
+\par    course: GAM250
+\par	ThumbUp Engine
+\date   06/13/2018
 
 Camera class implementation.
 It can set location of camera, where to look and zoom in and out.

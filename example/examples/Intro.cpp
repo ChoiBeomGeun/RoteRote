@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file		Intro.cpp
-\author		Choi Beom Geun
-\par		email: o77151@gmail.com
-\par		Class:GAM250
-\par		ThumbUp Engine
-\date		2017/11/29
+\file	Intro.cpp
+\author	Choi Beom Geun
+\par	email: o77151@gmail.com
+\par	Class:GAM250
+\par	ThumbUp Engine
+\date	2017/11/29
 
 Intro
 All content 2018 DigiPen (USA) Corporation, all rights reserved.
@@ -92,9 +92,6 @@ void Intro::Update(float dt)
 	dt = dt;
 	float Xpos = fileIntro.mRoot["PositionX"][autoindex].asFloat();
 	float Ypos = fileIntro.mRoot["PositionY"][autoindex].asFloat();
-	/*float Frame = fileIntro.mRoot["Frame"][autoindex].asFloat();
-	float FrameTime = fileIntro.mRoot["FrameTime"][autoindex].asFloat();
-	bool Pressed = fileIntro.mRoot["isFlippedX"][autoindex].asBool();*/
 
 	if (stop) {
 
@@ -146,10 +143,6 @@ void Intro::Update(float dt)
 
 	}
 
-
-	//FACTORY->ObjectIDMap[13]->GetComponent<Animation>()->setFrame(Frame);
-	//FACTORY->ObjectIDMap[13]->GetComponent<Animation>()->setTime(FrameTime);
-	//FACTORY->ObjectIDMap[13]->GetComponent<Animation>()->setFlipX(Pressed);
 	autoindex++;
 
 	if (CAMERA->cameraPos.z == 0 || Input::IsAnyTriggered()) {
@@ -163,10 +156,8 @@ void Intro::Update(float dt)
 
 void Intro::Free(void)
 {
-	//	delete INGAMELOGIC;
 	printf("IntroFree\n");
 	Enter = false;
-	//	INGAMELOGIC->InGameShutdown();
 }
 
 

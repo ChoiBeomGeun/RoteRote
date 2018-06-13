@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file		GameSystem.h
-\author		Choi Beom Geun
-\par		email: o77151@gmail.com
-\par		Class:GAM250
-\par		ThumbUp Engine
-\date		06/13/2018
+\file	GameSystem.h
+\author	Choi Beom Geun
+\par	email: o77151@gmail.com
+\par	Class:GAM250
+\par	ThumbUp Engine
+\date	06/13/2018
 
 A pure virtual base class(an interface) that is the base class
 for all systems used  by the Engine

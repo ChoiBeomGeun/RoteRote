@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file		level1.h
-\author		Choi Beom Geun
-\par		email: o77151@gmail.com
-\par		Class:GAM250
-\par		ThumbUp Engine
-\date		2017/11/29
+\file	level1.h
+\author	Choi Beom Geun
+\par	email: o77151@gmail.com
+\par	Class:GAM250
+\par	ThumbUp Engine
+\date	2017/11/29
 
 All levels is running in this state
 All content 2018 DigiPen (USA) Corporation, all rights reserved.
@@ -31,18 +31,6 @@ public:
 
 	static void loadbackground();
 	
-	
-	//void CamMoveToCenter();
-	
-	
-	//bool increasing;
-	bool CenterToPlayer;
-	bool ZoomInToPlayer;
-	bool XmovedCompleted;
-	bool YmovedCompleted;
-
-
-
 	bool moving;
 	glm::vec3 playerInitPos;
 private:

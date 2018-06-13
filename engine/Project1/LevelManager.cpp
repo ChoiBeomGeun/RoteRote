@@ -40,12 +40,9 @@ namespace TE {
 struct StringCompareLevel {
 
 	bool operator()(const std::string& a, const std::string& b)
-
 		const {
-
-		//return std::atoi(&a.at(5)) > std::atoi(&b.at(5));
-		return std::atoi(&a.at(5)) > std::atoi(&b.at(5));
-		//return true;
+			return std::atoi(&a.at(5)) > std::atoi(&b.at(5));
+	
 	}
 
 };
@@ -62,24 +59,15 @@ LevelManager::LevelManager()
 void LevelManager::LoadLevel(std::string  path)
 {
  	string PaticlePath;
-	 
-	
-
-
 	
 	std::string saveLevel = path;
 
 	path = ".\\levels.\\" + path;
 
-
-
-	//FACTORY->DestroyAllObjects();
-
 	STATEMANAGER->Loadtolevelname = saveLevel;
 	Jsonclass file;
 	std::string object = "Object";
 	
-	//	char *path = (char*)JSON_FILE;
 	file.ReadFile(path);
 
 
@@ -89,20 +77,14 @@ void LevelManager::LoadLevel(std::string  path)
 		std::string Objectstyle = file.mRoot.get(object + to_string(i), false).get("ObjectType", false).asString();
 
 
-		Object *tempObject = FACTORY->CreateEmptyObject();
-	//	int objectID = file.mRoot.get(object + to_string(i), false).get("ObjectID", false).asInt();
- 		
+		Object *tempObject = FACTORY->CreateEmptyObject(); 		
 
 		bool GravityOn = file.mRoot.get(object + to_string(i), false).get("GravityOn", false).asBool();
 		float Xpos = file.mRoot.get(object + to_string(i), false).get("Position", false).get("x", false).asFloat();
 		float Ypos = file.mRoot.get(object + to_string(i), false).get("Position", false).get("y", false).asFloat();
-//		float Zpos = file.mRoot.get(object + to_string(i), false).get("Position", false).get("z", false).asFloat();
 		float Rotation = file.mRoot.get(object + to_string(i), false).get("Rotation", false).asFloat();
 		float Xscale = file.mRoot.get(object + to_string(i), false).get("Scale", false).get("x", false).asFloat();
 		float Yscale = file.mRoot.get(object + to_string(i), false).get("Scale", false).get("y", false).asFloat();
-		
-
-
 		std::string textureDir = file.mRoot.get(object + to_string(i), false).get("TextureDir", false).asString();
 		CAMERA->cameraPos.x = file.mRoot.get("DefalutCamera", false).get("EYE", false).get("x", false).asFloat();
 		CAMERA->cameraPos.y = file.mRoot.get("DefalutCamera", false).get("EYE", false).get("y", false).asFloat();
@@ -112,9 +94,7 @@ void LevelManager::LoadLevel(std::string  path)
 		
 		for (unsigned int indexC = 0; ;indexC++) {
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "TRANSFORM") {
-			//	Transform * transform = new Transform();
 				tempObject->AddComponent<Transform>();
-			//	tempObject->GetComponent<Transform>()->position.x
 				tempObject->GetComponent<Transform>()->position.x = Xpos;
 				tempObject->GetComponent<Transform>()->position.y = Ypos;
 				tempObject->GetComponent<Transform>()->scale.x = Xscale;
@@ -122,25 +102,18 @@ void LevelManager::LoadLevel(std::string  path)
 				tempObject->GetComponent<Transform>()->scale *= scaleFactor;
 				tempObject->GetComponent<Transform>()->angle = Rotation;
 				tempObject->GetComponent<Transform>()->rotation = glm::vec3(0, 0, 1);
-			
-			//	tempObject->AddComponent(transform);
 			}
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "SPRITE") {
-			//	Sprite * sprite = new Sprite();
 				tempObject->AddComponent<Sprite>();
  				tempObject->GetComponent<Sprite>()->depth = file.mRoot[object + to_string(i)]["Depth"].asFloat();
 				tempObject->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
 				tempObject->GetComponent<Sprite>()->isPerspective = true;
-				tempObject->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(textureDir);
-			//	tempObject->AddComponent(sprite);
-				
-				
+				tempObject->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id(textureDir);				
 			}
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "CONTROLLER") {
 				tempObject->AddComponent<PlayerController>();
 			}
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "BODY") {
-		//		Body * body = new Body(glm::vec3(0, 0, 0), mass);
  				tempObject->AddComponent<Body>();
 				tempObject->GetComponent<Body>()->gravityOn = GravityOn;
 				tempObject->GetComponent<Body>()->pm_invmass = mass;
@@ -153,8 +126,6 @@ void LevelManager::LoadLevel(std::string  path)
 
 			}
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "ANIMATION") {
-				//Animation * GetComponent<Animation>()= new Animation();
-
 				tempObject->AddComponent<Animation>();
 				tempObject->GetComponent<Animation>()->setFlipX(false);
 				tempObject->GetComponent<Animation>()->setTime(0.f);
@@ -163,8 +134,6 @@ void LevelManager::LoadLevel(std::string  path)
 
 			}
 			if (file.mRoot[object + to_string(i)]["Components"][indexC].asString() == "TRIGGER") {
-	//			Trigger * trigger = new Trigger();
-
 				tempObject->AddComponent<Trigger>();
 				if (Objectstyle == "Trigger180") {
 					tempObject->GetComponent<Trigger>()->TriggerType = "180";
@@ -192,51 +161,27 @@ void LevelManager::LoadLevel(std::string  path)
 		
 		if (Objectstyle == "Player")
 		{
-			//tempObject = FACTORY->CreatePlayer(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0), glm::vec3(0, 0, 0), mass);
 			tempObject->objectstyle = Objectstyle::Player;
 			tempObject->GetComponent<Sprite>()->depth = 10.f;
-  			//tempObject = FACTORY->CreateArchetype(ReadingArchetype("Player.json"));
 		}
 		else if (Objectstyle == "Asteriod")
 		{
-			//tempObject = FACTORY->CreateAsteroid(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0), glm::vec3(0, 0, 0), mass);
 			tempObject->objectstyle = Objectstyle::Asteriod;
 		}
 		else if (Objectstyle == "Wall")
 		{
-			//tempObject = FACTORY->CreateWall(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0));
 			tempObject->objectstyle = Objectstyle::Wall;
-			/*int x, y;
-
-			if(static_cast<int>(tempObject->GetComponent<Transform>()->scale.x) % 20 == 0 )
-				x = 1;
-			else 
-				x= static_cast<int>(tempObject->GetComponent<Transform>()->scale.x) / 40;
-			if (static_cast<int>(tempObject->GetComponent<Transform>()->scale.y) %20 == 0)
-				y = 1;
-			else
-				y = static_cast<int>(tempObject->GetComponent<Transform>()->scale.x) / 40;
-
-			tempObject->GetComponent<Transform>()->u_v.x =x;
-			tempObject->GetComponent<Transform>()->u_v.y =y;*/
-
-
 		}
 		else if (Objectstyle == "AttachWall")
 		{
-			//tempObject = FACTORY->CreateWall(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0));
 			tempObject->objectstyle = Objectstyle::AttachWall;
 		}
 		else if (Objectstyle == "Button")
 		{
-
-		
-			//tempObject = FACTORY->CreateButton(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0));
 			tempObject->objectstyle = Objectstyle::Button;
 		}
 		else if (Objectstyle == "Box")
 		{
-			//tempObject = FACTORY->CreateBox(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0));
 			tempObject->objectstyle = Objectstyle::Box;
 			int x, y;
 
@@ -254,23 +199,19 @@ void LevelManager::LoadLevel(std::string  path)
 		}
 		else if (Objectstyle == "Trigger90")
 		{
-			//tempObject = FACTORY->CreateTrigger(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0));
 			tempObject->objectstyle = Objectstyle::Trigger90;
 			
 		}
 		else if (Objectstyle == "Trigger90Right")
 		{
-			//tempObject = FACTORY->CreateTrigger(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0));
 			tempObject->objectstyle = Objectstyle::Trigger90Right;
 		}
 		else if (Objectstyle == "Trigger180")
 		{
-			//tempObject = FACTORY->CreateTrigger(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0));
 			tempObject->objectstyle = Objectstyle::Trigger180;
 		}
 		else if (Objectstyle == "Clearzone")
 		{
-			//tempObject = FACTORY->CreateButton(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0));
 			tempObject->objectstyle = Objectstyle::Clearzone;
 		}
 
@@ -311,9 +252,7 @@ void LevelManager::SaveLevel(std::string  path)
 
 	path = ".\\levels.\\" + path;
 
-	//path = Userinfo;
-	//path += "/Documents/RoteRote/levels/" + saveLevel;
-//#endif
+
 	free(Userinfo);
 	Jsonclass file;
 	Json::Value root;
@@ -436,9 +375,6 @@ void LevelManager::SaveLevel(std::string  path)
 		case Objectstyle::Hazard:
 			root[object + to_string(i)]["ObjectType"] = "Hazard";
 			break;
-			/*case Objectstyle::Camera:
-			root[object + to_string(i)]["ObjectType"] = "Camera";
-			break;*/
 		default:
 			DEBUG_ASSERT(true, "Invaild Object Style");
 
@@ -473,19 +409,8 @@ void TE::LevelManager::SavingLevelInfo(void)
 	char * Userinfo;
 	size_t len = path.size();
 	_dupenv_s(&Userinfo, &len, "USERPROFILE");
-
-
-
-/*
-#ifdef _DEBUG
-#else
-	path = Userinfo;
-	path +=*/ "/Documents/RoteRote/ClearInfo.json";
-//#endif
 	free(Userinfo);
 	
-
-
 	Jsonclass file;
 	Json::Value root;
 
@@ -510,15 +435,6 @@ void TE::LevelManager::LoadingLevelInfo(void)
 	size_t len = path.size();
 	_dupenv_s(&Userinfo, &len, "USERPROFILE");
 
-
-
-
-
-//#ifdef _DEBUG
-//#else
-//	path = Userinfo;
-//	path += "/Documents/RoteRote/ClearInfo.json";
-//#endif
 	free(Userinfo);
 
 	Jsonclass file;
@@ -528,8 +444,6 @@ void TE::LevelManager::LoadingLevelInfo(void)
 	file.ReadFile(path);
 	for (auto levelname : INGAMELOGIC->vsLevelList)
 	{
-		//vsLevelListandclear.push_back	
-
 		STATEMANAGER->vsLevelListandclear.push_back(std::pair<std::string, bool>(levelname, file.mRoot.get(levelname, false).asBool()));
 
 	}

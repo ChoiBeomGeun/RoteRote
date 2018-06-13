@@ -217,18 +217,15 @@
     <ClCompile Include="jsoncpp.cpp" />
     <ClCompile Include="json\JsonClass.cpp" />
     <ClCompile Include="LevelManager.cpp" />
-    <ClCompile Include="Mat44.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ParticleManager.cpp" />
     <ClCompile Include="Particles.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Soundmanager.cpp" />
     <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="SpriteBatch.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="TriggerC.cpp" />
     <ClCompile Include="TUMath.cpp" />
-    <ClCompile Include="vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
@@ -251,7 +248,6 @@
     <ClInclude Include="ParticleManager.h" />
     <ClInclude Include="Particles.h" />
     <ClInclude Include="SoundManager.h" />
-    <ClInclude Include="SpriteBatch.h" />
     <ClInclude Include="TE.h" />
     <ClInclude Include="Body.h" />
     <ClInclude Include="Component.h" />
@@ -265,7 +261,6 @@
     <ClInclude Include="imgui_impl_sdl_gl3.h" />
     <ClInclude Include="imgui_internal.h" />
     <ClInclude Include="Input.h" />
-    <ClInclude Include="Mat44.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Sprite.h" />
@@ -279,7 +274,6 @@
     <ClInclude Include="TriggerC.h" />
     <ClInclude Include="TUMath.h" />
     <ClInclude Include="Type.h" />
-    <ClInclude Include="vector3.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>

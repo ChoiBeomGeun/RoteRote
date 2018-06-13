@@ -1,14 +1,16 @@
 /******************************************************************************/
 /*!
-\file		EditorData.h
-\author		KyungOok Park
-\par		email: qkrruddn6680@gmail.com
-\par		course: GAM250
-\par		ThumbUp Engine
-\date       12/12/2017
+\file	EditorData.h
+\author	KyungOok Park
+\par	email: qkrruddn6680@gmail.com
+\par	course: GAM250
+\par	ThumbUp Engine
+\date   12/12/2017
 \brief
+
 struct GameData, store Object.
 class EditorData, function for edit object.
+
 All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/

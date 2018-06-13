@@ -34,7 +34,6 @@ namespace TE {
 		ComponentType GetType(){return cType;}
 		virtual ~Component() {  };
 		Component(ComponentType type) : cType(type) {}
-	//private:
 		Object * pOwner;
 		ComponentType cType;
 	};

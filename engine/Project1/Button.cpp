@@ -1,3 +1,15 @@
+/******************************************************************************/
+/*!
+\file   Button.cpp
+\author Choi Beom Geun
+\par    email: o77151@gmail.com
+\par    Class:GAM250
+\par    ThumbUp Engine
+\date   2017/11/29
+
+implementation for Button
+*/
+/******************************************************************************/
 #include "Sprite.h"
 #include "Graphics.h"
 #include <algorithm>

@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file		InGameLogic.cpp
-\author		Choi Beom Geun
-\par		email: o77151@gmail.com
-\par		Class:GAM250
-\par		ThumbUp Engine
-\date		2017/11/29
+\file	InGameLogic.cpp
+\author	Choi Beom Geun
+\par	email: o77151@gmail.com
+\par	Class:GAM250
+\par	ThumbUp Engine
+\date	2017/11/29
 
 InGameLogic System source file
 All content 2018 DigiPen (USA) Corporation, all rights reserved.
@@ -69,7 +69,6 @@ void InGameLogic::InGameInit()
 	}
 
 	if (!(b_playerExist || b_colorzoneExist))
-	//	DEBUG_ASSERT(true, "Opps ! There is no player or clearzone");
 	APP->b_Win = false;
 	APP->b_Lose = false;
 	
@@ -113,13 +112,11 @@ bool InGameLogic::InGameDelay(float  dt, float howlong)
 	
 		if (temp > howlong)
 		{
-			//STATEMANAGER->b_IsDelay = false;
 			temp = 0;
 			return false;
 		}
 		else 
 		{			
-			//STATEMANAGER->b_IsDelay = true;
 			return true;;
 		}
 	
@@ -130,11 +127,6 @@ void InGameLogic::InGameShutdown(void)
 #ifdef _DEBUG 
 	for (auto IngameLogics : GameLogicList)
 		IngameLogics->Free();
-#endif // !
+#endif
 
-//	PHYSICS->Initialize();
-//	LOGGINGSYSTEM->Free();
-	//CAMERA->view.RotateZ(TUMath::DegreeToRadian(0));
-//	PHYSICS->gravity = glm::vec3(0, -20, 0);
-	//	PHYSICS->gravity.Set(Vector3(0, -20, 0));
 }

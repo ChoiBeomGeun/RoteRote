@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file		Graphics.h
-\author		HyunJun Yoo
-\par		email: hyunjun306@gmail.com
-\par		Class:GAM250
-\par		ThumbUp Engine
-\date		06/13/2018
+\file	Graphics.h
+\author	HyunJun Yoo
+\par	email: hyunjun306@gmail.com
+\par	Class:GAM250
+\par	ThumbUp Engine
+\date	06/13/2018
 
 GLSLProgram header file.
 All content 2018 DigiPen (USA) Corporation, all rights reserved.
@@ -100,8 +100,6 @@ namespace TE {
 		//Init the system
 		void Initialize(void) override;
 
-
-		//void ChangeScale(void);
 		//All systems are updated every frame
 		void Update(float dt) override;
 		void framebuffer_size_callback(SDL_Window * window, int width, int height);

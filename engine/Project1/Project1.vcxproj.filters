@@ -68,9 +68,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="vector3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="engine.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -79,9 +76,6 @@
     </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>Application\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Mat44.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Graphics.cpp">
       <Filter>Graphics</Filter>
@@ -149,9 +143,6 @@
     <ClCompile Include="ImguiGraphics.cpp">
       <Filter>IMGUIDEBUG</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteBatch.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
@@ -195,9 +186,6 @@
     </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>Application\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Mat44.h">
-      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Graphics.h">
       <Filter>Graphics</Filter>
@@ -298,9 +286,6 @@
     <ClInclude Include="Type.h">
       <Filter>Physics</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteBatch.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Graphics</Filter>
     </ClInclude>
@@ -324,9 +309,6 @@
     </ClInclude>
     <ClInclude Include="Archetype.h">
       <Filter>IMGUIDEBUG</Filter>
-    </ClInclude>
-    <ClInclude Include="vector3.h">
-      <Filter>Statemanager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

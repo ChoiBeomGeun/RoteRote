@@ -1,10 +1,10 @@
 /******************************************************************************/
 /*!
-\file        GLSLProgram.h
-\author      HyunJun Yoo
-\par         email: hyunjun306@gmail.com
-\par         course: GAM250
-\date        12/11/2017
+\file   GLSLProgram.h
+\author HyunJun Yoo
+\par    email: hyunjun306@gmail.com
+\par    course: GAM250
+\date   12/11/2017
 
 header file for GLSLProgram.
 All content 2018 DigiPen (USA) Corporation, all rights reserved.

@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file		level1.cpp
-\author		Choi Beom Geun
-\par		email: o77151@gmail.com
-\par		Class:GAM250
-\par		ThumbUp Engine
-\date		2017/11/29
+\file	level1.cpp
+\author	Choi Beom Geun
+\par	email: o77151@gmail.com
+\par	Class:GAM250
+\par	ThumbUp Engine
+\date	2017/11/29
 
 All levels is running in this state
 All content 2018 DigiPen (USA) Corporation, all rights reserved.
@@ -72,7 +72,6 @@ Object * laser_particle;
 Object * trail_particle;
 Level1::Level1()
 {
-	//   _centerOfScreen = { 0.f ,0.f };
 }
 
 Level1::~Level1()
@@ -81,25 +80,15 @@ Level1::~Level1()
 
 void Level1::Load()
 {
-//	INGAMELOGIC->InGameInit();
 
 }
 
 void Level1::Init()
 {
-	//Loading Button 
-	/*Object * Loading = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(2, 2, 0));
-	Loading->IsLoadingObject = true;
-	Loading->GetComponent<Sprite>()->texture_load("loading.png");
-*/
 	CAMERA->Initialize();
 
-	//camAct.isCamToPlayer = true;
 	LosesoundOnetime = true;
-	CenterToPlayer = true;
-	ZoomInToPlayer = false;
-	XmovedCompleted = false;
-	YmovedCompleted = false;
+	
 	path2 = "SAVE";
 	_camPaceSpeed = 100.0f;
 
@@ -113,7 +102,6 @@ void Level1::Init()
 	file.ReadFile(path2);
 
 	camAct.Setshakeduration(2);
-	//camAct.isCamToPlayer = false;
 	loseSound = SOUNDMANAGER->LoadSound("lose.mp3");
 	Background = SOUNDMANAGER->LoadSound("menu.mp3");
 	winSound2 = SOUNDMANAGER->LoadSound("win.mp3");
@@ -139,7 +127,6 @@ void Level1::Init()
 	HUDLevelname->objectstyle = Objectstyle::Button;
 
 
-	//PARTICLEMANAGER->LoadEmitter("particle1.json");
 
 	INGAMELOGIC->InGameInit();
 	SOUNDMANAGER->PlaySounds(Background, true);
@@ -189,8 +176,7 @@ void Level1::Init()
 	trail_particle->GetComponent<Sprite>()->isPerspective = true;
 	PARTICLEMANAGER->LoadEmitter(trail_particle, "PlayerTrail.json");
 
-	//laser_particle = FACTORY->CreateHUD(glm::vec3(0), glm::vec3(0));
-	//laser_particle->GetComponent<Sprite>()->isPerspective = true;
+
 
 	for (auto p : PARTICLEMANAGER->m_EmitterList)
 	{
@@ -204,10 +190,7 @@ void Level1::Init()
 		{
 			p->pos = player->GetComponent<Transform>()->position;
 		}
-		/*else if(p->type == ET_LASER)
-		{
-			p->pos = FACTORY->GetClearZone()->GetComponent<Transform>()->position;
-		}*/
+	
 	}
 	LoseSOUNDONCE = true;
 }
@@ -216,7 +199,6 @@ void Level1::Update(float dt)
 {
 	APP->IsKeyBoardAvailable = true;
 	camAct.Update(dt);
-	//std::cout << "cam.x: " << CAMERA->cameraPos.x << ",  cam.y: " << CAMERA->cameraPos.y <<  std::endl;
 #ifdef _DEBUG
 	CheatKeyFunctions();
 #endif
@@ -234,10 +216,7 @@ void Level1::Update(float dt)
 		FACTORY->ObjectIDMap[10]->GetComponent<Sprite>()->Color[4] = 0;
 		FACTORY->ObjectIDMap[17]->GetComponent<Sprite>()->Color[4] = 0;
 	}
-	/*std::cout << "CAMERA pos .x " << CAMERA->cameraPos.x << "\n";
-	std::cout << "CAMERA pos .y " << CAMERA->cameraPos.y << "\n";*/
 
-	//Backgroundobj->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 140);
 
 	if (Input::IsTriggered(SDL_SCANCODE_R) && !STATEMANAGER->b_IsReplay && !APP->b_Win && !APP->b_Lose)
 		STATEMANAGER->Restart();
@@ -286,21 +265,7 @@ void Level1::Update(float dt)
 		}
 	}
 
-	/*if (STATEMANAGER->b_IsDelay_Cam)
-	{
-		STATEMANAGER->b_IsDelay = STATEMANAGER->b_IsDelay_Cam;
-		STATEMANAGER->b_IsDelay_Cam = INGAMELOGIC->InGameDelay(dt, 2);
-		if (STATEMANAGER->b_IsDelay_Cam)
-			camAct.cam_move_interpolate(glm::vec2(player->GetComponent<Transform>()->position), dt);
-		if (!STATEMANAGER->b_IsDelay_Cam)
-			STATEMANAGER->b_IsDelay = !STATEMANAGER->b_IsDelay_Cam;
-	}*/
-
-	/*if (FACTORY->GetClearZone())
-	{
-		if(!PARTICLEMANAGER->m_EmitterList.empty() && FACTORY->GetPlayer() != nullptr)
-			PARTICLEMANAGER->m_EmitterList[1]->pos = FACTORY->GetClearZone()->GetComponent<Transform>()->position;
-	}*/
+	
 	INGAMELOGIC->InGameUpdate(dt);
 	if (STATEMANAGER->b_IsReplay)
 	{
@@ -405,16 +370,13 @@ void Level1::Free(void)
 	PHYSICS->gravityScale = -20.f;
 	PHYSICS->GravityType = Gravity::y_Minus;
 	PHYSICS->gravity = glm::vec3(0, PHYSICS->gravityScale, 0);
-	//SOUNDMANAGER->StopSound(Background);
 	STATEMANAGER->b_IsReplayStart = true;
 	STATEMANAGER->b_IsReplay = false;
 	STATEMANAGER->b_Relplay = false;
 	INGAMELOGIC->InGameShutdown();
-	//SOUNDMANAGER->DeleteSounds();
 	PARTICLEMANAGER->Delete_all_particles();
 	FACTORY->DestroyAllObjects();
-//	delete LEVELMANAGER;
-	//delete LOGGINGSYSTEM;
+
 	
 }
 void Level1::Unload()

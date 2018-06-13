@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file       EditorData.cpp
-\author     KyungOok Park
-\par        email: qkrruddn6680@gmail.com
-\par        course: GAM250
-\par		ThumbUp Engine
-\date       12/12/2017
+\file   EditorData.cpp
+\author KyungOok Park
+\par    email: qkrruddn6680@gmail.com
+\par    course: GAM250
+\par	ThumbUp Engine
+\date   12/12/2017
 \brief
 
 struct GameData, store Object.
@@ -32,7 +32,6 @@ void EditorData::InitPlayer(GameData & gamedata)
 	playerinEditor->GetComponent<Transform>()->SetScale(glm::vec3(10,10, 0));
 	playerinEditor->GetComponent<Body>()->pm_velocity= (glm::vec3(0, 0, 0));
 	playerinEditor->GetComponent<Body>()->pm_mass = 1.f;
-	//gamedata.Player = FACTORY->CreatePlayer(glm::vec3(0, 0, 0), glm::vec3(10, 10, 0), glm::vec3(0, 0, 0), 1.f);
 }
 
 void EditorData::InitClearZone(GameData & gamedata)
@@ -526,7 +525,6 @@ void EditorData::DeleteObject(GameData & gamedata)
 		if (button->second)
 		{
 			FACTORY->Destroy(button->first);
-			//Object* toDelete = button->first;
 			gamedata.Button.erase(button);
 			gamedata.IsEditable_Object_Exist = false;
 			return;

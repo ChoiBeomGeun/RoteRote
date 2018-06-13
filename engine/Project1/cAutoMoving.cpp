@@ -1,17 +1,16 @@
-/**
-\file        Sprite.cpp
-\author      HyunJun Yoo
-\par         email: hyunjun306@gmail.com
-\par         course: GAM250
-\date        12/16/2017
+/******************************************************************************/
+/*!
+\file	cAutoMoving.cpp
+\author HyunJun Yoo
+\par    email: hyunjun306@gmail.com
+\par    course: CS225
+\date   12/16/2017
 \brief
 
-This is where textures are loaded, sort sprite by depth.
-and store sprite info to sprite vector
-
+AutoMoving header
 All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
-
+/******************************************************************************/
 
 #include "cAutoMoving.h"
 #include "Graphics.h"

@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file		Menu.cpp
-\author		Kyungook.Park
-\par		email: qkrruddn6680@gmail.com
-\par		Class:GAM250
-\par		ThumbUp Engine
-\date		2017/04/19
+\file	Menu.cpp
+\author	Kyungook.Park
+\par	email: qkrruddn6680@gmail.com
+\par	Class:GAM250
+\par	ThumbUp Engine
+\date	2017/04/19
 
 Menu state source file
 There are ¡°go to level select state¡±, ¡°option state¡±, ¡°How to play state¡±
@@ -65,9 +65,6 @@ void Menu::Load()
 		Menu_Option = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("kr_Menu_Option.png");
 
 	}
-
-
-
 	select_particle = FACTORY->CreateHUD(glm::vec3(0, 0,0),glm::vec3(0.1f));
 	select_particle->GetComponent<Sprite>()->isPerspective = true;
 	PARTICLEMANAGER->LoadEmitter(select_particle, "MenuParticle.json");
@@ -75,25 +72,8 @@ void Menu::Load()
 	{
 		p.second->GetComponent<Sprite>()->isPerspective = true;
 	}
-	/*FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position = glm::vec3(0, rotation_radius, 0);
-	FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.05f, APP->_screenWidth *.05f, 0);
-
-	FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->position = glm::vec3(-rotation_radius, 0, 0);
-	FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.05f, APP->_screenWidth *.05f, 0);
-
-	FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->position = glm::vec3(0, -rotation_radius, 0);
-	FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.05f, APP->_screenWidth *.05f, 0);
-
-	FACTORY->ObjectIDMap[4]->GetComponent<Transform>()->position = glm::vec3(rotation_radius, 0, 0);
-	FACTORY->ObjectIDMap[4]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.05f, APP->_screenWidth *.05f, 0);
-
-	FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.45f, APP->_screenWidth *.45f, 0);
-	FACTORY->ObjectIDMap[6]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.25f, APP->_screenWidth *.25f, 0);
-*/
-
 	
 	select_particle->GetComponent<Transform>()->position.y = static_cast<float>(rotation_radius);
-	//select_particle->GetComponent<Emitter>()->pos.y = static_cast<float>(rotation_radius);
 }
 
  void Menu::Init()
@@ -112,11 +92,6 @@ void Menu::Load()
 	 select_index = 0;
 	 MenuCam.cameraSetting(CameraPosType::EN_Menu);
 	 SOUNDMANAGER->PlaySounds(MenuSound, true);
-	 /*APP->ResizeAllObjects();	
-	 FACTORY->ObjectIDMap[7]->GetComponent<Transform>()->position = glm::vec3(0, APP->_screenHeight*.45f, 0);
-
-	 FACTORY->ObjectIDMap[7]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth*.5f, APP->_screenHeight*.2f, 0);*/
-
 }
 
 void Menu::Update(float dt)
@@ -286,13 +261,13 @@ void Menu::Selection_plus(void)
 {
 	switch (Selection)
 	{
-	case MenuList::Menu_Start:  Selection = MenuList::Menu_HowToPlay; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Menu_HowToPlay.png");
+	case MenuList::Menu_Start:  Selection = MenuList::Menu_HowToPlay; 
 		break;
-	case MenuList::Menu_HowToPlay: Selection = MenuList::Menu_Quit;	//FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Menu_Quit.png");
+	case MenuList::Menu_HowToPlay: Selection = MenuList::Menu_Quit;	
 		break;
-	case MenuList::Menu_Quit: Selection = MenuList::Menu_Option; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Menu_Option.png");
+	case MenuList::Menu_Quit: Selection = MenuList::Menu_Option; 
 		break;
-	case MenuList::Menu_Option: Selection = MenuList::Menu_Start; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Menu_Start.png");
+	case MenuList::Menu_Option: Selection = MenuList::Menu_Start;
 		break;
 	default:
 		break;
@@ -303,13 +278,13 @@ void Menu::Selection_minus(void)
 {
 	switch (Selection)
 	{
-	case MenuList::Menu_HowToPlay:  Selection = MenuList::Menu_Start; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Menu_Start.png");
+	case MenuList::Menu_HowToPlay:  Selection = MenuList::Menu_Start; 
 		break;
-	case MenuList::Menu_Quit: Selection = MenuList::Menu_HowToPlay; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Menu_HowToPlay.png");
+	case MenuList::Menu_Quit: Selection = MenuList::Menu_HowToPlay; 
 		break;
-	case MenuList::Menu_Option: Selection = MenuList::Menu_Quit; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Menu_Quit.png");
+	case MenuList::Menu_Option: Selection = MenuList::Menu_Quit; 
 		break;
-	case MenuList::Menu_Start: Selection = MenuList::Menu_Option; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Menu_Option.png");
+	case MenuList::Menu_Start: Selection = MenuList::Menu_Option;
 		break;
 	default:
 		break;

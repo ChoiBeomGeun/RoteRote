@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file		Ending.cpp
-\author		Choi Beom Geun
-\par		email: o77151@gmail.com
-\par		Class:GAM250
-\par		ThumbUp Engine
-\date		2017/11/29
+\file	Ending.cpp
+\author	Choi Beom Geun
+\par	email: o77151@gmail.com
+\par	Class:GAM250
+\par	ThumbUp Engine
+\date	2017/11/29
 	
 Ending
 All content 2018 DigiPen (USA) Corporation, all rights reserved.
@@ -108,18 +108,14 @@ void Ending::Update(float dt)
 			else
 				autoindexE--;
 
-
-			
 			if (transv >= 255.f)
 			{
 				IsOut = true;
-				//transv = 0;
 			}
 
 			if (transv == 0 && IsOut)
 			{
 				IsOut = false;
-				//transv = 0;
 				transindex++;
 				if (transindex == 25)
 				{
@@ -135,15 +131,6 @@ void Ending::Update(float dt)
 				transv += 1;
 			if (transindex != 25)
 			FACTORY->ObjectIDMap[transindex]->GetComponent<Sprite>()->ChangeAvalue(transv);
-		
-					
-						
-
-
-			
-
-
-
 }
 
 void Ending::Free(void)

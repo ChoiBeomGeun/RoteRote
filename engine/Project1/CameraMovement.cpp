@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file        CameraMovement.cpp
-\author      HyunJun Yoo
-\par         email: hyunjun306@gmail.com
-\par         course: GAM250
-\par		 ThumbUp Engine
-\date        06/13/2018
+\file   CameraMovement.cpp
+\author HyunJun Yoo
+\par    email: hyunjun306@gmail.com
+\par    course: GAM250
+\par	ThumbUp Engine
+\date   06/13/2018
 
 This is implementation for CameraMovement
 All content 2018 DigiPen (USA) Corporation, all rights reserved.

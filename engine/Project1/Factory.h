@@ -49,7 +49,6 @@ namespace TE {
 		Object* GetObjectwID (ObjectID id);
 		Object * CreateWall(const glm::vec3 & pos, const glm::vec3 & scale);
 	
-		//Object * CreateCamera(const glm::vec3 & eye, const glm::vec3 & center, const glm::vec3 & up, const float angle);
 		Object * CreateEmptyObject();
 		//Showing how to create an object through hardcode
 		//Todo : when applying data driven methods, use this as blueprint

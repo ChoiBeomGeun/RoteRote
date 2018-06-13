@@ -1,11 +1,11 @@
 ﻿/******************************************************************************/
 /*!
-\file		logging.cpp
-\author		Choi Beom Geun
-\par		email: o77151@gmail.com
-\par		Class:GAM250
-\par		ThumbUp Engine
-\date		2017/11/29
+\file	logging.cpp
+\author	Choi Beom Geun
+\par	email: o77151@gmail.com
+\par	Class:GAM250
+\par	ThumbUp Engine
+\date	2017/11/29
 
 Logging system for playtesting source file
 All content 2018 DigiPen (USA) Corporation, all rights reserved.
@@ -38,9 +38,7 @@ struct int_compare {
 
 		const {
 
-		//return std::atoi(&a.at(5)) > std::atoi(&b.at(5));
 		return std::atoi(&a.Levelname.at(5)) > std::atoi(&b.Levelname.at(5));
-		//return true;
 	}
 
 };
@@ -67,11 +65,6 @@ TE::LoggingSystem::LoggingSystem()
 
 
 		if (LoggingInit) {
-
-
-
-
-			//LOGGINGSYSTEM->rootlog["Date"] = 3;
 			for (auto it : ENGINE->mVsLevelnamelist)
 			{
 				if (*it.begin() == 'l')
@@ -81,17 +74,10 @@ TE::LoggingSystem::LoggingSystem()
 					temp.HowMuchTimepassed = 0;
 					temp.Levelname = it;
 					GameLevelList.push_back(temp);
-
 				}
-
-
-
-
 			}
 			LoggingInit = false;
-		//	std::sort(GameLevelList.begin(), GameLevelList.end(), [](std::string a, std::string b )
-			//{ return b; });
-			//std::atoi()
+		
 		}
 	
 	std::sort(GameLevelList.begin(), GameLevelList.end(), int_compare());
@@ -147,20 +133,11 @@ void TE::LoggingSystem::SavingLog(void)
 		strftime(buff, 20, "%Y-%m-%d %H:%M:%S", localtime(&now));
 		std::string date = buff;
 		LOGGINGSYSTEM->rootlog["Date"] = date;
-
-
 		int LogSize = (int)ENGINE->mVsLognamelist.size() + 1;
-
 		std::string pathto = "playerlog";
-		pathto = pathto + std::to_string(LogSize) + ".json";
-	
-
-	
+		pathto = pathto + std::to_string(LogSize) + ".json";	
 		std::string saveLevel = pathto;
-
 		pathto = ".\\logging.\\" + pathto;
-
-
 		LOGGINGSYSTEM->rootlog["HowMuchTimePassedInGame"] = ENGINE->HowMuchTimePassedInGame;
 		for (auto it : GameLevelList)
 		{
@@ -170,9 +147,6 @@ void TE::LoggingSystem::SavingLog(void)
 			LOGGINGSYSTEM->rootlog[it.Levelname]["HowMuchTimePassedToWin"] = it.HowMuchTimeToWin;
 			LOGGINGSYSTEM->rootlog[it.Levelname]["NumberOfTriggerActivation"] = it.NumberOfTriggerActivation;
 		}
-
-
-
 		files.WriteFile(pathto, LOGGINGSYSTEM->rootlog);
 	}
 
@@ -181,9 +155,6 @@ void TE::LoggingSystem::SavingLog(void)
 void TE::LoggingSystem::Free(void)
 {
 
-
-	//delete LOGGINGSYSTEM;
-	
 }
 
 TE::LoggingSystem::~LoggingSystem()

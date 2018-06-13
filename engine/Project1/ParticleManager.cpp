@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file		ParticleManager.cpp
-\author		HyunJun Yoo
-\par		email: hyunjun306@gmail.com
-\par		Class:GAM250
-\par		ThumbUp Engine
-\date		06/11/2015
+\file	ParticleManager.cpp
+\author	HyunJun Yoo
+\par	email: hyunjun306@gmail.com
+\par	Class:GAM250
+\par	ThumbUp Engine
+\date	06/11/2015
 
 This is where particles are controlled
 All content 2018 DigiPen (USA) Corporation, all rights reserved.

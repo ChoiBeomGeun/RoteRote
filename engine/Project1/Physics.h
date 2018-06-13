@@ -1,10 +1,11 @@
-/**
-\file        Physics.h
-\author      KyungOok Park
-\par         email: qkrruddn6680@gmail.com
-\par         course: GAM250
-\par   ThumbUp Engine
-\date        12/12/2017
+/******************************************************************************/
+/*!
+\file   Physics.h
+\author	KyungOok Park
+\par	email: qkrruddn6680@gmail.com
+\par    course: GAM250
+\par	ThumbUp Engine
+\date	12/12/2017
 \brief
 Pair class
 Pair class has two object's as a class member and their collision information.
@@ -12,6 +13,8 @@ Physics class
 
 All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
+/******************************************************************************/
+
 #pragma once
 #include "System.h"
 #include <vector>
@@ -69,7 +72,6 @@ namespace TE {
 		std::vector<Pair> m_vecpair;
 	private:
 		bool AABBvsAABB(Body *pA, Body *pB, Pair *M);
-		//friend void Body::Body(Vector3 vel,float invmass);
 		//ExplictEuler (Forward Euler ) Integator
 		void ExplictEulerIntegrator(float dt);
 		void BroadPhase();

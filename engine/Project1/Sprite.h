@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file		Sprite.h
-\author		HyunJun Yoo
-\par		email: hyunjun306@gmail.com
-\par		Class:GAM250
-\par		ThumbUp Engine
-\date		06/13/2018
+\file	Sprite.h
+\author	HyunJun Yoo
+\par	email: hyunjun306@gmail.com
+\par	Class:GAM250
+\par	ThumbUp Engine
+\date	06/13/2018
 
 Sprite component,
 where sprite is defined.

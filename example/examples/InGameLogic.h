@@ -21,21 +21,11 @@ namespace  TE {
 	public:
 		InGameLogic();
 		~InGameLogic();
-	//	{
-	///*		for (auto * gls : GameLogicList)
-	//			delete gls;*/
-	//	}
+
 		void InGameInit(void);
 		void InGameUpdate(float dt);
 		bool InGameDelay(float  dt, float howlong);
-		void InGameShutdown(void);
-
-	/*	template<typename GLST>
-		void Add()
-		{
-			GameLogicList.push_back(new GLST());
-		}*/
-		
+		void InGameShutdown(void);	
 		void InGameLogicAdd(GameLogicSystem * game_logic_system);
 		void DestoryAllGameLogics(void);
 		std::vector<GameLogicSystem*> GameLogicList;

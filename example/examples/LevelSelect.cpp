@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file		LevelSelect.cpp
-\author		Kyungook.Park
-\par		email: qkrruddn6680@gmail.com
-\par		Class:GAM250
-\par		ThumbUp Engine
-\date		2017/04/19
+\file	LevelSelect.cpp
+\author	Kyungook.Park
+\par	email: qkrruddn6680@gmail.com
+\par	Class:GAM250
+\par	ThumbUp Engine
+\date	2017/04/19
 
 Level selection stage source file
 All content 2018 DigiPen (USA) Corporation, all rights reserved.
@@ -37,9 +37,7 @@ struct StringCompareLevel {
 
 		const {
 
-		//return std::atoi(&a.at(5)) > std::atoi(&b.at(5));
 		return std::atoi(&a.at(5)) > std::atoi(&b.at(5));
-		//return true;
 	}
 };
 

@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file		main.cpp
-\author		Choi Beom Geun
-\par		email: o77151@gmail.com
-\par		Class:GAM250
-\par		ThumbUp Engine
-\date		2017/11/29
+\file	main.cpp
+\author	Choi Beom Geun
+\par	email: o77151@gmail.com
+\par	Class:GAM250
+\par	ThumbUp Engine
+\date	2017/11/29
 
 Whole main game loop for the game
 In this cpp, there should be add states and set states
@@ -51,7 +51,6 @@ int main(int,char**)
 	DEBUG_CREATE_CONSOLE();
 	Engine * TEengine = new Engine();
 
-	//Engine * ENGINE2= new Engine();
 	//Todo : Create Engine
 	 
 	//Todo : Initialize the Engine and initialize all systems.
@@ -75,7 +74,6 @@ int main(int,char**)
 	STATEMANAGER->AddState(new Ending);
 	STATEMANAGER->SetPauseState(StatesList::Pause);
 	STATEMANAGER->SetStartState(StatesList::Intro);
-//	STATEMANAGER->SetReplayState(6);
 
 
 	//Todo : Main Loop

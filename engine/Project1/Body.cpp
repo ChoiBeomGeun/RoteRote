@@ -1,15 +1,21 @@
-/**
-\file        Body.cpp
-\author      KyungOok Park
-\par         email: qkrruddn6680@gmail.com
-\par         course: GAM250
+/******************************************************************************/
+/*!
+\file   Body.cpp
+\author KyungOok Park
+\par    email: qkrruddn6680@gmail.com
+\par    course: GAM250
 \par	ThumbUp Engine
-\date        12/12/2017
+\date   12/12/2017
 \brief
-	Every Object has body component except button and HUD.
+
+Every Object has body component except button and HUD.
 This body class includes information that is used in calculating physics.
+
 All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
+/******************************************************************************/
+
+
 #include "Body.h"
 #include "Physics.h"
 #include "Transform.h"
@@ -34,14 +40,11 @@ Body::Body(glm::vec3 vel, float invmass) : Component(CT_BODY), pm_velocity(vel),
 
 Body::~Body()
 {
-	//PHYSICS->m_vecprb.clear();
-	//PHYSICS->m_Body.clear();
-	//FACTORY->BodyID = 0;
+	
 }
 void Body::Initialize()
 {
 	m_pTransform = GetOwner()->GetComponent<Transform>();
-	//restitution = 0.2f;
 	m_force = glm::vec3(0);
 
 	Jump = false;

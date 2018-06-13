@@ -49,7 +49,6 @@ namespace TE {
 		bool SoundOnOffCheck(void) { return b_SoundOnOff; }
 		void PauseAllSound(void);
 		void ResumeAllSound(void);
-//		FMOD_RESULT GetVolume(SOUNDID soundtoadjust) { return Channels[soundtoadjust]->getVolume() };
 		SOUNDID soundID = 0;
 		std::vector<float> Volume;
 	private:

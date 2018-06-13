@@ -1,10 +1,10 @@
 /**
-\file        Physics.cpp
-\author      KyungOok Park
-\par         email: qkrruddn6680@gmail.com
-\par         course: GAM250
-\par   ThumbUp Engine
-\date        12/12/2017
+\file   Physics.cpp
+\author KyungOok Park
+\par    email: qkrruddn6680@gmail.com
+\par    course: GAM250
+\par	ThumbUp Engine
+\date   12/12/2017
 \brief
 This state checks collision between every objects and resolve it through BroadPhase.
 Also by Explicit Euler integrator function loop, every objects move by their velocity.

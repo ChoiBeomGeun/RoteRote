@@ -59,9 +59,7 @@ void ObjectFactory::Initialize()
 
 void ObjectFactory::Update(float /*dt*/)
 {
-	// (FACTORY->ObjectIDMap[i.first]->GetComponent(ComponentType::CT_TRANSFORM) != nullptr)
-
-      	GamePlayer = FACTORY->GetPlayer();
+    GamePlayer = FACTORY->GetPlayer();
 
 	//Todo : Delete All object in the objectTobedeleted list
 
@@ -72,11 +70,9 @@ void ObjectFactory::Update(float /*dt*/)
 
 		Object * gameObject = *it;
 
-		//std::map<ObjectID, Object*>::iterator IDit = ObjectIDMap.find(gameObject->objID);
 		auto IDit = ObjectIDMap.find(gameObject->objID);
 
 
-	//	DEBUG_ASSERT(IDit == ObjectIDMap.end(), "Object is bad memory");
 
 		if (IDit != ObjectIDMap.end())
 		{
@@ -174,7 +170,6 @@ Object * ObjectFactory::CreateEmptyObject()
 Object * ObjectFactory::CreateArchetype(Archetype path)
 {
 	Object * temp = CreateEmptyObject();
-	//temp->objectstyle = Wall;
 
 
 	for (unsigned i = 0; i < path.HavingComponents.size(); i++)
@@ -189,11 +184,9 @@ Object * ObjectFactory::CreateArchetype(Archetype path)
 			temp->GetComponent<Body>()->gravityOn = path.GravityOn;
 			temp->GetComponent<Body>()->restitution = 0;
 		
-			//'++;
 		}
 		if (path.HavingComponents[i] == ComponentType::CT_BUTTON)
 		{
-	//		Button * button = new Button();
 			temp->AddComponent<Button>();
 			temp->objectstyle = Objectstyle::Button;
 
@@ -201,7 +194,6 @@ Object * ObjectFactory::CreateArchetype(Archetype path)
 		if (path.HavingComponents[i] == ComponentType::CT_TRANSFORM)
 		{
 			temp->AddComponent<Transform>();
-		//	Transform * transform = new Transform();
 			temp->GetComponent<Transform>()->rotation = glm::vec3(0, 0, 1);
 			temp->GetComponent<Transform>()->SetPosition(path.DefaultPosition);
 			temp->GetComponent<Transform>()->SetScale(path.DefaultScale);
@@ -215,7 +207,6 @@ Object * ObjectFactory::CreateArchetype(Archetype path)
 		}
 		if (path.HavingComponents[i] == ComponentType::CT_SPRITE)
 		{
-	//		Sprite * sprite = new Sprite();
 			temp->AddComponent<Sprite>();
 			temp->GetComponent<Sprite>()->depth = 0.0f;
 			temp->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
@@ -231,17 +222,14 @@ Object * ObjectFactory::CreateArchetype(Archetype path)
 		if (path.HavingComponents[i] == ComponentType::CT_CONTROLLER)
 		{
 			temp->AddComponent<PlayerController>();
-			//Controller * controller = new Controller();
 			temp->objectstyle = Player;
 
 			temp->GetComponent<Body>()->gravityOn = true;
 			temp->GetComponent<Body>()->restitution = 0;
-			//temp->AddComponent(controller);
 		}
 
 		if (path.HavingComponents[i] == ComponentType::CT_TRIGGER)
 		{
-			//Trigger * trigger = new Trigger();
 			if (path._180triggerornot)
 				temp->objectstyle = Trigger180;
 			else
@@ -289,7 +277,6 @@ Object * ObjectFactory::CreateWall(const glm::vec3 & pos, const glm::vec3& scale
 {
 	Object* Wall = CreateEmptyObject();
 	Wall->objectstyle = Objectstyle::Wall;
-//	Transform * transform = new Transform();
 	Wall->AddComponent<Transform>();
 	Wall->GetComponent<Transform>()->SetPosition(pos);
 	Wall->GetComponent<Transform>()->SetScale(scale);
@@ -298,20 +285,17 @@ Object * ObjectFactory::CreateWall(const glm::vec3 & pos, const glm::vec3& scale
 	Wall->AddComponent<Body>();
 	Wall->GetComponent<Body>()->pm_velocity = glm::vec3(0, 0, 0);
 	Wall->GetComponent<Body>()->pm_mass = 0;
-	//Wall->AddComponent(new Body(glm::vec3(0, 0, 0), 0));
 	Wall->GetComponent<Body>()->gravityOn = true;
 	//Todo: add sprite and body components
 
 	Wall->AddComponent<Sprite>();
 	Wall->GetComponent<Sprite>()->depth = 0.0f;
-	//sprite->isFlipY = false;
 	Wall->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("wall.png");
 	//TOdo : load textrue and get texture id
 	Wall->GetComponent<Sprite>()->m_TextureID = 3;
 	Wall->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
 	Wall->GetComponent<Sprite>()->isPerspective = true;
 
-//	Wall->AddComponent(sprite);
 
 
 	Wall->Initialize();
@@ -368,7 +352,6 @@ Object * TE::ObjectFactory::CreateHUD(const glm::vec3 & pos, const glm::vec3 & s
 	Object* Hud = CreateEmptyObject();
 	
 	Hud->objectstyle = Objectstyle::Button;
-//	Transform * transform = new Transform();
 	Hud->AddComponent<Transform>();
 	Hud->GetComponent<Transform>()->SetPosition(glm::vec3(APP->_screenWidth *pos.x, APP->_screenHeight * pos.y,0));
 	
@@ -378,14 +361,11 @@ Object * TE::ObjectFactory::CreateHUD(const glm::vec3 & pos, const glm::vec3 & s
 
 	Hud->AddComponent<Sprite>();
 	Hud->GetComponent<Sprite>()->isPerspective = false;
-	//sprite->isFlipY = false;
 	Hud->GetComponent<Sprite>()->depth = 1.0f;
 	Hud->GetComponent<Sprite>()->isRotating = false;
 
-	/*Hud->GetComponent<Sprite>()->m_TextureID = 5;*/
 	Hud->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 255);
 
-//	Hud->AddComponent(sprite);
 
 
 	Hud->Initialize();

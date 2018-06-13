@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file       MapEditor.cpp
-\author     KyungOok Park
-\par        email: qkrruddn6680@gmail.com
-\par        course: GAM250
-\par		ThumbUp Engine
-\date       12/12/2017
+\file   MapEditor.cpp
+\author KyungOok Park
+\par    email: qkrruddn6680@gmail.com
+\par    course: GAM250
+\par	ThumbUp Engine
+\date   12/12/2017
 \brief
 MapEditor state
 
@@ -140,37 +140,6 @@ void MapEditor::Update(float dt)
 		EditorData::MoveObject(gamedata, mouse);
 	}
 
-	//if (Input::IsTriggered(SDL_SCANCODE_LEFT))
-	//{
-	//   EditorData::ScaleObject(gamedata, mouse);
-	//}
-
-	//if (Input::IsMouseDown)
-	//{
-	//   gamedata.mousePosBefore = mouse;
-
-	//   printf("MouseDown\n");
-	//   printf("%f , %f", gamedata.mousePosBefore.x, gamedata.mousePosBefore.y);
-	//}
-
-	//if (Input::IsMouseUp)
-	//{
-	//   gamedata.mousePosAfter = mouse;
-	//   printf("Up\n");
-	//   printf("%f , %f", gamedata.mousePosAfter.x, gamedata.mousePosAfter.y);
-	//}
-
-
-
-
-	//if (Input::IsTriggered(SDL_SCANCODE_M))
-	//{
-	//   GRAPHICS->drawGrid = true;
-	//}
-	//if (Input::IsTriggered(SDL_SCANCODE_G))
-	//{
-	//   GRAPHICS->drawGrid = false;
-	//}
 	if (Input::IsTriggered(SDL_SCANCODE_BACKSPACE))
 	{
 		EditorData::DeleteObject(gamedata);

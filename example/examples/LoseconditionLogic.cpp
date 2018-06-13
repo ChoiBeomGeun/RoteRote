@@ -60,8 +60,6 @@ void TE::LoseconditionLogic::Update(float dt)
 				SOUNDMANAGER->PlayOnceSounds(LoseSound, false, IsLoseSoundPlayed);
 			
 				APP->b_Lose = true;
-				//STATEMANAGER->ReplayPosition.clear();
-				//STATEMANAGER->ReplayPosition.clear();
  				CAMERA->IsCameraShaking = true;
 				STATEMANAGER->Restart();
 			}
@@ -81,8 +79,8 @@ void TE::LoseconditionLogic::Update(float dt)
 
 		if (Loseplayer != nullptr && obj != nullptr)
 		{
-			_fourPoints[DyingPlace::EN_LEFT_X] = CAMERA->cameraPos.x - APP->_screenWidth *.45f; // , CAMERA->CenterOfCamera.y + APP->_screenHeight*.5f);
-			_fourPoints[DyingPlace::EN_RIGHT_X] = CAMERA->cameraPos.x + APP->_screenWidth *.45f;// , CAMERA->CenterOfCamera.y + APP->_screenHeight*.5f);
+			_fourPoints[DyingPlace::EN_LEFT_X] = CAMERA->cameraPos.x - APP->_screenWidth *.45f; 
+			_fourPoints[DyingPlace::EN_RIGHT_X] = CAMERA->cameraPos.x + APP->_screenWidth *.45f;
 			_fourPoints[DyingPlace::EN_UP_Y] = CAMERA->cameraPos.y + APP->_screenHeight*.45f;
 			_fourPoints[DyingPlace::EN_DOWN_Y] = CAMERA->cameraPos.y - APP->_screenHeight*.45f;
 
@@ -127,7 +125,6 @@ void TE::LoseconditionLogic::Update(float dt)
 					FACTORY->GetPlayer()->GetComponent<Body>()->pm_velocity = glm::vec3(0);
 					APP->b_Lose = true;
 			
-					//STATEMANAGER->ReplayPosition.clear();
 					CAMERA->IsCameraShaking = true;
 					STATEMANAGER->Restart();
 
@@ -141,7 +138,6 @@ void TE::LoseconditionLogic::Update(float dt)
 
 void TE::LoseconditionLogic::Free(void)
 {
-//	delete LOSECONDITIONLOGIC;
 	CAMERA->IsCameraShaking = false;
 
 	  

@@ -47,12 +47,5 @@ namespace TE {
 		int MaxLife;
 	};
 
-	//class LimitedTrigger : public Trigger
-	//{
-	//public:
-	//	LimitedTrigger();
-	//	~LimitedTrigger();
-	//private:
-	//	int LifeTime;
-	//};
+	
 }

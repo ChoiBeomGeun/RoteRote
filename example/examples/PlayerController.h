@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file		PlayerController.h
-\author		KyungOok Park
-\par		email: qkrruddn6680@gmail.com
-\par		Class:GAM250
-\par		ThumbUp Engine
-\date		06/13/2018
+\file	PlayerController.h
+\author	KyungOok Park
+\par	email: qkrruddn6680@gmail.com
+\par	Class:GAM250
+\par	ThumbUp Engine
+\date	06/13/2018
 
 PlayerController state class.
 

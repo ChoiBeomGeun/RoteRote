@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file       MapEditor.h
-\author     KyungOok Park
-\par        email: qkrruddn6680@gmail.com
-\par        course: GAM250
-\par		ThumbUp Engine
-\date       12/12/2017
+\file   MapEditor.h
+\author KyungOok Park
+\par    email: qkrruddn6680@gmail.com
+\par    course: GAM250
+\par	ThumbUp Engine
+\date   12/12/2017
 \brief
 MapEditor state
 

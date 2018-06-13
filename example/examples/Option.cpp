@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file		Option.cpp
-\author		Kyungook.Park
-\par		email: qkrruddn6680@gmail.com
-\par		Class:GAM250
-\par		ThumbUp Engine
-\date		2017/12/19
+\file	Option.cpp
+\author	Kyungook.Park
+\par	email: qkrruddn6680@gmail.com
+\par	Class:GAM250
+\par	ThumbUp Engine
+\date	2017/12/19
 
 Option state source file
 There are ¡°go to level select state¡±, ¡°option state¡±, ¡°How to play state¡±
@@ -146,7 +146,6 @@ void Option::Update(float dt)
 				OptionSound = SOUNDMANAGER->LoadSound("Menu.mp3");
 				MoveSound = SOUNDMANAGER->LoadSound("Menumove.mp3");
 				SelectSound = SOUNDMANAGER->LoadSound("Menuselect.mp3");
-				//TE::FACTORY->ObjectIDMap[4]->sprite->texture_load("on.png");
 				FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("sound.png");
 
 			}
@@ -165,13 +164,11 @@ void Option::Update(float dt)
 			static bool full = false;
 		if (!APP->_isfull)
 		{
-			//TE::FACTORY->ObjectIDMap[7]->sprite->texture_load("on.png");
 			APP->toggle_fullscreen(APP->getWindow(), true);
 			full = true;
 		}
 		else
 		{
-			//	TE::FACTORY->ObjectIDMap[7]->sprite->texture_load("OFF.png");
 			APP->toggle_fullscreen(APP->getWindow(), false);
 			full = false;
 		}
@@ -278,13 +275,13 @@ void Option::Selection_plus(void)
 {
 	switch (Selection)
 	{
-	case OptionList::Option_SoundOnOff:  Selection = OptionList::Option_Full; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Option_Credits.png");
+	case OptionList::Option_SoundOnOff:  Selection = OptionList::Option_Full; 
 		break;
-	case OptionList::Option_Full: Selection = OptionList::Option_Back;	//FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Option_Back.png");
+	case OptionList::Option_Full: Selection = OptionList::Option_Back;
 		break;
-	case OptionList::Option_Back: Selection = OptionList::Option_Credits; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Option_Full.png");
+	case OptionList::Option_Back: Selection = OptionList::Option_Credits;
 		break;
-	case OptionList::Option_Credits: Selection = OptionList::Option_SoundOnOff; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Option_SoundOnOff.png");
+	case OptionList::Option_Credits: Selection = OptionList::Option_SoundOnOff;
 		break;
 	default:
 		break;
@@ -295,13 +292,13 @@ void Option::Selection_minus(void)
 {
 	switch (Selection)
 	{
-	case OptionList::Option_Full:  Selection = OptionList::Option_SoundOnOff; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Option_SoundOnOff.png");
+	case OptionList::Option_Full:  Selection = OptionList::Option_SoundOnOff;
 		break;
-	case OptionList::Option_Back: Selection = OptionList::Option_Full; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Option_Credits.png");
+	case OptionList::Option_Back: Selection = OptionList::Option_Full; 
 		break;
-	case OptionList::Option_Credits: Selection = OptionList::Option_Back; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Option_Back.png");
+	case OptionList::Option_Credits: Selection = OptionList::Option_Back;
 		break;
-	case OptionList::Option_SoundOnOff: Selection = OptionList::Option_Credits; //FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->texture_load("Option_Option.png");
+	case OptionList::Option_SoundOnOff: Selection = OptionList::Option_Credits;
 		break;
 	default:
 		break;

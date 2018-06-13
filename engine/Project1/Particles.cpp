@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file		Particles.cpp
-\author		HyunJun Yoo
-\par		email: hyunjun306@gmail.com
-\par		Class:GAM250
-\par		ThumbUp Engine
-\date		06/11/2015
+\file	Particles.cpp
+\author	HyunJun Yoo
+\par	email: hyunjun306@gmail.com
+\par	Class:GAM250
+\par	ThumbUp Engine
+\date	06/11/2015
 
 Particles are created here.
 All content 2018 DigiPen (USA) Corporation, all rights reserved.

@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file		Animation.cpp
-\author		HyunJun Yoo
-\par		email: hyunjun306@gmail.com
-\par		Class:GAM250
-\par		ThumbUp Engine
-\date		06/13/2018
+\file	Animation.cpp
+\author	HyunJun Yoo
+\par	email: hyunjun306@gmail.com
+\par	Class:GAM250
+\par	ThumbUp Engine
+\date	06/13/2018
 
 Animation class implementation file.
 it is a component type.
