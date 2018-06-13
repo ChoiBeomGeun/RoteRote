@@ -104,7 +104,7 @@ namespace TE {
 				leftblock = FACTORY->LeftBoundary()->GetComponent<Transform>()->position;
 				width = abs(rightblock.x - leftblock.x), height = abs(upblock.y - downblock.y);
 				center.x = leftblock.x + width * .5f;
-				center.y = downblock.x + height * .5f;
+				center.y = downblock.y + height * .5f;
 			}
 			else if(type == CameraRotation::EN_90)
 			{
@@ -125,7 +125,7 @@ namespace TE {
 
 				width = std::abs(rightblock.x - leftblock.x), height = std::abs(upblock.y - downblock.y);
 				center.x = leftblock.x + width * .5f;
-				center.y = downblock.x + height * .5f;
+				center.y = downblock.y + height * .5f;
 				
 			}
 			else if(type == CameraRotation::EN_270)
@@ -136,8 +136,8 @@ namespace TE {
 				rightblock = FACTORY->UpBoundary()->GetComponent<Transform>()->position;
 
 				width = std::abs(rightblock.y - leftblock.y), height = std::abs(upblock.x - downblock.x);
-				center.y = leftblock.y + width * .5f;
-				center.x = downblock.x + height * .5f;
+				center.y = leftblock.x + width * .5f;
+				center.x = downblock.y + height * .5f;
 			}
 
 				
@@ -158,13 +158,12 @@ namespace TE {
 			}
 			else if (STATEMANAGER->Loadtolevelname == "level2.json" || STATEMANAGER->Loadtolevelname == "level3.json" ||
 				STATEMANAGER->Loadtolevelname == "level5.json" ||
-				STATEMANAGER->Loadtolevelname == "level8.json" || STATEMANAGER->Loadtolevelname == "level10.json" || 
-				STATEMANAGER->Loadtolevelname == "level18.json"  || STATEMANAGER->Loadtolevelname == "level19.json")
+				STATEMANAGER->Loadtolevelname == "level8.json" || STATEMANAGER->Loadtolevelname == "level10.json"  )
 			{
 				CAMERA->cameraPos.x = 0;
 				CAMERA->cameraPos.x = 0;
 			}
-			else if (STATEMANAGER->Loadtolevelname == "level4.json")
+			else if (STATEMANAGER->Loadtolevelname == "level4.json" || STATEMANAGER->Loadtolevelname == "level12.json")
 			{
 				if (type == CameraRotation::EN_0)
 				{
@@ -233,36 +232,32 @@ namespace TE {
 				leftboundary = downblock.x - width * .1f;
 				rightboundary = downblock.x + width * .1f;
 				
-				if (type == CameraRotation::EN_0 )
+				if (type == CameraRotation::EN_0)
 				{
 					if (playerpos.x < leftboundary)
 						CAMERA->cameraPos.x = leftboundary;
 					else if (playerpos.x > rightboundary)
+					{
 						CAMERA->cameraPos.x = rightboundary;
+					}
 					else
+					{
 						CAMERA->cameraPos.x = playerpos.x;
+					}
 				}
 				else if (type == CameraRotation::EN_90)
 				{
-					upboundary = upblock.x - height * .3f;
-					downboundary = downblock.x + height * .2f;
-					if (STATEMANAGER->Loadtolevelname == "level12.json")
-					{
-						if (playerpos.x < downboundary)
-							CAMERA->cameraPos.x = downboundary;
-						else if (playerpos.x < upboundary)
-							CAMERA->cameraPos.x = playerpos.x;
-					}
-					else if (!iscam_interpol)
-						iscam_interpol = cam_move_interpolate(glm::vec2(upboundary,center.y), dt);
-					else
-					{
-						if (playerpos.x < downboundary)
-							CAMERA->cameraPos.x = downboundary;
-						else if (playerpos.x < upboundary)
-							CAMERA->cameraPos.x = playerpos.x;
-						iscam_interpol = true;
-					}
+					upboundary = upblock.x - height * .35f;
+					downboundary = downblock.x + height * .35f;
+					/*else if (!iscam_interpol)
+						iscam_interpol = cam_move_interpolate(glm::vec2(upboundary,center.y), dt);*/
+					//float difference = abs(upboundary - upblock.x *.5f);
+					if (playerpos.x < downboundary)
+						CAMERA->cameraPos.x = downboundary;
+					else if (playerpos.x < upboundary)
+						CAMERA->cameraPos.x = playerpos.x;// +difference;
+					iscam_interpol = true;
+					
 				}
 				else if (type == CameraRotation::EN_180)
 				{
@@ -280,17 +275,18 @@ namespace TE {
 				else if (type == CameraRotation::EN_270)
 				{
 					upboundary = upblock.x - height * .2f;
-					downboundary = downblock.x + height * 0.4f;
-					if (!iscam_interpol)
+
+					downboundary = downblock.x - height * 0.3f;
+					/*if (!iscam_interpol)
 						iscam_interpol = cam_move_interpolate(glm::vec2(downboundary, center.y), dt);
 					else
-					{
+					{*/
 						if (playerpos.x < upboundary)
 							CAMERA->cameraPos.x = upboundary;
 						else if (playerpos.x < downboundary)
 							CAMERA->cameraPos.x = playerpos.x;
 						iscam_interpol = true;
-					}
+					//}
 				}
 			}
 		}
