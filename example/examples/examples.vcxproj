@@ -112,7 +112,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)\external\fmod\lib;$(SolutionDir)\external\glfw\lib-vc2010-32;$(SolutionDir)\engine\external\tuEngine\lib\$(PlatformTarget)\;$(SolutionDir)\external\soil\lib\$(PlatformTarget)\;$(SolutionDir)external\gl3w\lib;$(SolutionDir)\external\glew\lib\Release\$(Platform)\;$(SolutionDir)\external\SDL2\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SOIL.lib;SDL2.lib;SDL2main.lib;Project1.lib;glew32.lib;opengl32.lib;gl3w.lib;gl3w_d.lib;fmodex64_vc.lib;fmodex_vc.lib;fmodex_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SOIL.lib;SDL2.lib;SDL2main.lib;Thumbupengine.lib;glew32.lib;opengl32.lib;gl3w.lib;gl3w_d.lib;fmodex64_vc.lib;fmodex_vc.lib;fmodex_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalOptions>/IGNORE:4099 /IGNORE:4075 /IGNORE:4098 %(AdditionalOptions)</AdditionalOptions>
@@ -144,7 +144,7 @@ copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(T
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)\external\fmod\lib;$(SolutionDir)\external\glfw\lib-vc2010-32;$(SolutionDir)\engine\external\tuEngine\lib\$(PlatformTarget)\;$(SolutionDir)\external\soil\lib\$(PlatformTarget)\;$(SolutionDir)external\gl3w\lib;$(SolutionDir)\external\glew\lib\Release\$(Platform)\;$(SolutionDir)\external\SDL2\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SOIL.lib;SDL2.lib;SDL2main.lib;Project1.lib;glew32.lib;opengl32.lib;gl3w.lib;gl3w_d.lib;fmodex64_vc.lib;fmodex_vc.lib;fmodex_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SOIL.lib;SDL2.lib;SDL2main.lib;Thumbupengine.lib;glew32.lib;opengl32.lib;gl3w.lib;gl3w_d.lib;fmodex64_vc.lib;fmodex_vc.lib;fmodex_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <AdditionalOptions>/IGNORE:4099 /IGNORE:4075 /IGNORE:4098 %(AdditionalOptions)</AdditionalOptions>
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
@@ -178,7 +178,7 @@ copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(T
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)\external\fmod\lib;$(SolutionDir)\external\glfw\lib-vc2010-32;$(SolutionDir)\engine\external\tuEngine\lib\$(PlatformTarget)\;$(SolutionDir)\external\soil\lib\$(PlatformTarget)\;$(SolutionDir)external\gl3w\lib;$(SolutionDir)\external\glew\lib\Release\$(Platform)\;$(SolutionDir)\external\SDL2\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SOIL.lib;SDL2.lib;SDL2main.lib;Project1.lib;glew32.lib;opengl32.lib;gl3w.lib;gl3w_d.lib;fmodex64_vc.lib;fmodex_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SOIL.lib;SDL2.lib;SDL2main.lib;Thumbupengine.lib;glew32.lib;opengl32.lib;gl3w.lib;gl3w_d.lib;fmodex64_vc.lib;fmodex_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <AdditionalOptions>/IGNORE:4099 /IGNORE:4075 /IGNORE:4098 %(AdditionalOptions)</AdditionalOptions>
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
@@ -212,7 +212,7 @@ copy /y /b "$(SolutionDir)external\glew\bin\Release\$(Platform)\glew32.dll" "$(T
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)\external\fmod\lib;$(SolutionDir)\external\glfw\lib-vc2010-32;$(SolutionDir)\engine\external\tuEngine\lib\$(PlatformTarget)\;$(SolutionDir)\external\soil\lib\$(PlatformTarget)\;$(SolutionDir)external\gl3w\lib;$(SolutionDir)\external\glew\lib\Release\$(Platform)\;$(SolutionDir)\external\SDL2\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SOIL.lib;SDL2.lib;SDL2main.lib;Project1.lib;glew32.lib;opengl32.lib;gl3w.lib;gl3w_d.lib;fmodex64_vc.lib;fmodex_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SOIL.lib;SDL2.lib;SDL2main.lib;Thumbupengine.lib;glew32.lib;opengl32.lib;gl3w.lib;gl3w_d.lib;fmodex64_vc.lib;fmodex_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <AdditionalOptions>/IGNORE:4099 /IGNORE:4075 /IGNORE:4098 %(AdditionalOptions)</AdditionalOptions>
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
