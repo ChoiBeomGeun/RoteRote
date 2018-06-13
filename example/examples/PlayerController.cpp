@@ -168,6 +168,7 @@ void PlayerController::Movement(float dt)
 				if (Input::IsTriggered(SDL_SCANCODE_SPACE) && IsAttachable)
 				{
 					WallJumpTriggered = true;
+					SOUNDMANAGER->PlaySounds(JumpSound, false);
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -WallJump;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = 600;
 				}
@@ -176,6 +177,7 @@ void PlayerController::Movement(float dt)
 			{
 				if (Input::IsPressed(SDL_SCANCODE_LEFT))
 				{
+					SOUNDMANAGER->PlaySounds(JumpSound, false);
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -700;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump;
 				}
@@ -196,6 +198,7 @@ void PlayerController::Movement(float dt)
 				if (Input::IsTriggered(SDL_SCANCODE_SPACE) && IsAttachable)
 				{
 					WallJumpTriggered = true;
+					SOUNDMANAGER->PlaySounds(JumpSound, false);
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = WallJump;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = 600;
 				}
@@ -204,6 +207,7 @@ void PlayerController::Movement(float dt)
 			{
 				if (Input::IsPressed(SDL_SCANCODE_RIGHT))
 				{
+					SOUNDMANAGER->PlaySounds(JumpSound, false);
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = 700;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump;
 				}
@@ -276,6 +280,7 @@ void PlayerController::Movement(float dt)
 				if (Input::IsTriggered(SDL_SCANCODE_SPACE) && IsAttachable)
 				{
 					WallJumpTriggered = true;
+					SOUNDMANAGER->PlaySounds(JumpSound, false);
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -WallJump;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -600;
 				}
@@ -284,6 +289,7 @@ void PlayerController::Movement(float dt)
 			{
 				if (Input::IsPressed(SDL_SCANCODE_LEFT))
 				{
+					SOUNDMANAGER->PlaySounds(JumpSound, false);
 					FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(true);
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = 700;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump;
@@ -304,6 +310,7 @@ void PlayerController::Movement(float dt)
 				if (Input::IsTriggered(SDL_SCANCODE_SPACE) && IsAttachable)
 				{
 					WallJumpTriggered = true;
+					SOUNDMANAGER->PlaySounds(JumpSound, false);
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = WallJump;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -600;
 				}
@@ -312,6 +319,7 @@ void PlayerController::Movement(float dt)
 			{
 				if (Input::IsPressed(SDL_SCANCODE_RIGHT))
 				{
+					SOUNDMANAGER->PlaySounds(JumpSound, false);
 					FACTORY->GetPlayer()->GetComponent<Animation>()->setPressed(true);
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -700;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump;
@@ -376,6 +384,7 @@ void PlayerController::Movement(float dt)
 				if (Input::IsTriggered(SDL_SCANCODE_SPACE) && IsAttachable)
 				{
 					WallJumpTriggered = true;
+					SOUNDMANAGER->PlaySounds(JumpSound, false);
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -600;
 				}
@@ -384,6 +393,7 @@ void PlayerController::Movement(float dt)
 			{
 				if (Input::IsPressed(SDL_SCANCODE_LEFT))
 				{
+					SOUNDMANAGER->PlaySounds(JumpSound, false);
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -700;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = WallJump;
 				}
@@ -403,6 +413,7 @@ void PlayerController::Movement(float dt)
 				if (Input::IsTriggered(SDL_SCANCODE_SPACE) && IsAttachable)
 				{
 					WallJumpTriggered = true;
+					SOUNDMANAGER->PlaySounds(JumpSound, false);
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -WallJump;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -600;
 				}
@@ -411,6 +422,7 @@ void PlayerController::Movement(float dt)
 			{
 				if (Input::IsPressed(SDL_SCANCODE_RIGHT))
 				{
+					SOUNDMANAGER->PlaySounds(JumpSound, false);
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = 700;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = WallJump;
 				}
@@ -473,6 +485,7 @@ void PlayerController::Movement(float dt)
 				if (Input::IsTriggered(SDL_SCANCODE_SPACE) && IsAttachable)
 				{
 					WallJumpTriggered = true;
+					SOUNDMANAGER->PlaySounds(JumpSound, false);
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = WallJump;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = 600;
 				}
@@ -481,6 +494,7 @@ void PlayerController::Movement(float dt)
 			{
 				if (Input::IsPressed(SDL_SCANCODE_LEFT))
 				{
+					SOUNDMANAGER->PlaySounds(JumpSound, false);
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = 700;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = WallJump;
 				}
@@ -500,6 +514,7 @@ void PlayerController::Movement(float dt)
 				if (Input::IsTriggered(SDL_SCANCODE_SPACE) && IsAttachable)
 				{
 					WallJumpTriggered = true;
+					SOUNDMANAGER->PlaySounds(JumpSound, false);
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -WallJump;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = 600;
 				}
@@ -508,6 +523,7 @@ void PlayerController::Movement(float dt)
 			{
 				if (Input::IsPressed(SDL_SCANCODE_RIGHT))
 				{
+					SOUNDMANAGER->PlaySounds(JumpSound, false);
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.y = -700;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = WallJump;
 				}
