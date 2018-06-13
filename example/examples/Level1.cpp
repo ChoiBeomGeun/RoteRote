@@ -410,6 +410,7 @@ void Level1::Free(void)
 	STATEMANAGER->b_Relplay = false;
 	INGAMELOGIC->InGameShutdown();
 	//SOUNDMANAGER->DeleteSounds();
+	PARTICLEMANAGER->Delete_all_particles();
 	FACTORY->DestroyAllObjects();
 //	delete LEVELMANAGER;
 	//delete LOGGINGSYSTEM;

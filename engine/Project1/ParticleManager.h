@@ -34,7 +34,7 @@ namespace TE {
 	- GetEmitters
 	- GetEmmiterCount
 	- AddEmitter
-	- DeleteEmitter
+	- Delete_all_particles
 	- UpdateEmitter
 	- DrawEmitter
 
@@ -61,7 +61,7 @@ namespace TE {
 		
 
 		void AddEmitter(Emitter* pEmitter);
-		void DeleteEmitter(std::vector <Emitter*>::iterator emitterIt);
+		void Delete_all_particles();
 		
 		std::vector <Emitter*> m_EmitterList;
 		void initialize_life_time();

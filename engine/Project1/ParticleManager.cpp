@@ -380,10 +380,15 @@ namespace TE {
 		m_EmitterList.push_back(pEmitter);
 	}
 
-	void ParticleManager::DeleteEmitter(std::vector <Emitter*>::iterator emitterIt)
+	void ParticleManager::Delete_all_particles()
 	{
 		// Todo find emitter to delete
-		m_EmitterList.erase(emitterIt);
+		if(!m_EmitterList.empty())
+		for (auto p : m_EmitterList)
+		{
+			delete p->pParticles;
+			p->pParticles = nullptr;
+		}
 	}
 
 	void ParticleManager::initialize_life_time()

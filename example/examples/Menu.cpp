@@ -261,6 +261,7 @@ void Menu::Update(float dt)
 
 void Menu::Free(void)
 {
+	PARTICLEMANAGER->Delete_all_particles();
 }
 
 void Menu::Unload()

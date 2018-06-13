@@ -121,7 +121,7 @@ Object* ClearzoneLogic::GetClearzone(void)
 }
 void TE::ClearzoneLogic::Free(void)
 {
-
+	PARTICLEMANAGER->Delete_all_particles();
 	SOUNDMANAGER->DeleteSounds();
 }
 ClearzoneLogic::~ClearzoneLogic()
