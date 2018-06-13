@@ -123,6 +123,11 @@ Application::Application() : pWnd(nullptr), ResolutionNumber(2)
 				_isfull = true;
 		//		SDL_SetWindowFullscreen(pWnd, SDL_WINDOW_FULLSCREEN);
 			}
+
+			if (!strcmp(line, "KOR")) {
+				IsKRMODE = true;
+				//		SDL_SetWindowFullscreen(pWnd, SDL_WINDOW_FULLSCREEN);
+			}
 		}
 	}
 
@@ -352,7 +357,10 @@ void Application::PollWindowEvent(SDL_Event & currEvent)
 		if (confirmationa == NULL || RealExit == false) {
 			confirmationa = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0));
 			confirmationa->GetComponent<Transform>()->scale = glm::vec3(650, 250, 0);
+			if(!APP->IsKRMODE)
 			confirmationa->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Sure.png");
+			else
+				confirmationa->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("kr_Sure.png");
 			confirmationa->objectstyle = Objectstyle::NoneReremovable;
 		}
 		RealExit = true;

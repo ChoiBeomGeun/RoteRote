@@ -101,7 +101,6 @@ void Pause::Load()
 	frame->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("LevelSelction.png");
 	textIndicator->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Quit.png");
 
-
 	frame->GetComponent<Sprite>()->isRotating = true; 
 	textIndicator->GetComponent<Sprite>()->isRotating = true;
 	iconRestart->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("question.png");
@@ -245,7 +244,10 @@ void Pause::Update(float dt)
 				obj_confirmationPause->GetComponent<Transform>()->position = glm::vec3(0, 0, 0);
 				obj_confirmationPause->GetComponent<Transform>()->scale = glm::vec3(650, 250, 0);
 				obj_confirmationPause->GetComponent<Sprite>()->depth = 3;
+				if(!APP->IsKRMODE)
 				obj_confirmationPause->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Sure.png");
+				else
+					obj_confirmationPause->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("kr_Sure.png");
 				ConfirmationIsOn = true;
 				return;
 				break;
@@ -256,7 +258,10 @@ void Pause::Update(float dt)
 				oHowToPlay->GetComponent<Transform>()->position = glm::vec3(0, 0, 0);
 				oHowToPlay->GetComponent<Transform>()->scale = glm::vec3(500, 300, 0);
 				oHowToPlay->GetComponent<Sprite>()->depth =5;
+				if (!APP->IsKRMODE)
 				oHowToPlay->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("howtoplay.png");
+				else
+					oHowToPlay->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("kr_howtoplay.png");
 
 				HowTOplay = true;
 
@@ -396,13 +401,31 @@ void Pause::Selection_Text(void)
 {
 	switch (Selection)
 	{
-	case PauseList::Pause_LevelSelect: textIndicator->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_HowToPlay.png");
+
+	case PauseList::Pause_LevelSelect: 
+		if (!APP->IsKRMODE)
+		textIndicator->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_HowToPlay.png");
+		else
+			textIndicator->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("kr_Menu_HowToPlay.png");
+
 		break;
-	case PauseList::Pause_HowToPlay: textIndicator->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Quit.png");
+	case PauseList::Pause_HowToPlay: 
+		if (!APP->IsKRMODE)
+		textIndicator->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Quit.png");
+		else
+			textIndicator->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("kr_Menu_Quit.png");
 		break; 
-	case PauseList::Pause_Exit: textIndicator->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Pause_levelseclect.png");
+	case PauseList::Pause_Exit:
+		if (!APP->IsKRMODE)
+		textIndicator->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Pause_levelseclect.png");
+		else
+			textIndicator->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("kr_Pause_levelseclect.png");
 		break; 
-	case PauseList::Pause_Restart: textIndicator->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Pause_Restart.png");
+	case PauseList::Pause_Restart: 
+		if (!APP->IsKRMODE)
+		textIndicator->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Pause_Restart.png");
+		else
+			textIndicator->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("kr_Pause_Restart.png");
 		break;
 	default:
 		break;

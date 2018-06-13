@@ -52,6 +52,11 @@ void Ending::Load()
 	STATEMANAGER->IsEndingISOVER = true;
 	std::string saveLevele = "SAVE";
 	LEVELMANAGER->LoadLevel("Ending.json");
+
+	if(APP->IsKRMODE)
+		FACTORY->ObjectIDMap[21]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("kr_credit1.png");
+
+
 	FACTORY->ObjectIDMap[21]->GetComponent<Sprite>()->ChangeColor(255, 255, 255, 0);
 	FACTORY->ObjectIDMap[21]->GetComponent<Transform>()->SetScale(glm::vec3(
 		FACTORY->ObjectIDMap[21]->GetComponent<Transform>()->GetScale().x-500, 

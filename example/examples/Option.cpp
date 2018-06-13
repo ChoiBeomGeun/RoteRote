@@ -55,11 +55,20 @@ void Option::Load()
 
 
 
+	if (!APP->IsKRMODE) {
+		Option_SoundOnOff = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Option_SoundOnOff.png");
+		Option_Credits = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Option_Credits.png");
+		Option_Back = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Option_BackToMenu.png");
+		Option_Full = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Option_FullScreen.png");
+	}
+	else {
+		Option_SoundOnOff = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("kr_Option_SoundOnOff.png");
+		Option_Credits = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("kr_Option_Credits.png");
+		Option_Back = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("kr_Option_BackToMenu.png");
+		Option_Full = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("kr_Option_FullScreen.png");
+		FACTORY->ObjectIDMap[7]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("kr_OptionTitile.png");
 
-	Option_SoundOnOff = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Option_SoundOnOff.png");
-	Option_Credits = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Option_Credits.png");
-	Option_Back = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Option_BackToMenu.png"); 
-	Option_Full = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Option_FullScreen.png");
+	}
 }
 
 void Option::Init()

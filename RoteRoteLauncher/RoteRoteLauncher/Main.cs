@@ -93,6 +93,11 @@ namespace RoteRoteLauncherView
                 {
                     rdr.WriteLine(listBox1.SelectedItem.ToString());
                     rdr.WriteLine(checkBox1.Checked.ToString());
+
+                    if (checkBox2.Checked)
+                        rdr.WriteLine("KOR");
+                    else
+                        rdr.WriteLine("ENG");
                 }
 
                 System.Diagnostics.Process ps = new System.Diagnostics.Process();
@@ -168,6 +173,11 @@ namespace RoteRoteLauncherView
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             ClickedSize = CurrentSize[listBox1.SelectedIndex];
+
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
 
         }
     }

@@ -51,13 +51,20 @@ void Menu::Load()
 	MenuSound = SOUNDMANAGER->LoadSound("menu.mp3");
 	MoveSound = SOUNDMANAGER->LoadSound("menumove.mp3");
 	SelectSound = SOUNDMANAGER->LoadSound("menuselect.mp3");
+	if (!APP->IsKRMODE) {
+		Menu_Start = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Start.png");
+		Menu_HowToPlay = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_HowToPlay.png");
+		Menu_Quit = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Quit.png");
+		Menu_Option = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Option.png");
+	}
+	else
+	{
+		Menu_Start = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("kr_Menu_Start.png");
+		Menu_HowToPlay = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("kr_Menu_HowToPlay.png");
+		Menu_Quit = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("kr_Menu_Quit.png");
+		Menu_Option = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("kr_Menu_Option.png");
 
-	Menu_Start = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Start.png");
-	Menu_HowToPlay = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_HowToPlay.png");
-	Menu_Quit = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Quit.png");
-	Menu_Option = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Menu_Option.png");
-
-
+	}
 
 
 
@@ -181,6 +188,7 @@ void Menu::Update(float dt)
 				obj_howToPlay = FACTORY->CreateHUD(glm::vec3(0, -.2f, 0), glm::vec3(.7, 0.5, 0));
 				obj_howToPlay->GetComponent<Transform>()->position = glm::vec3(100, -150, 0);
 				obj_howToPlay->GetComponent<Transform>()->scale = glm::vec3(900, 250, 0);
+
 				obj_howToPlay->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("howTOPlay2.png");
 				HowToPlayIsOn = true;
 				return;
@@ -188,7 +196,10 @@ void Menu::Update(float dt)
 			case MenuList::Menu_Quit: 
 				obj_confirmation = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(.5, 0.5, 0));
 				obj_confirmation->GetComponent<Transform>()->scale = glm::vec3(650, 250, 0);
+				if (!APP->IsKRMODE) 
 				obj_confirmation->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Sure.png");
+				else
+					obj_confirmation->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("kr_Sure.png");
 				ConfirmationIsOn = true;
 				return;
 				break;

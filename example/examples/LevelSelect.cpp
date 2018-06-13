@@ -96,12 +96,24 @@ void LevelSelect::Load()
 	LEVELMANAGER->LoadingLevelInfo();
 	LEVELMANAGER->LoadLevel("selectlevel.json");
 
+
+	if (!APP->IsKRMODE) {
+		FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("kr_levelSeclect.png");
+	}
+
+
+
+
 	for (int i = 1; i <= LevelList::quit + 1; ++i)
 	{
 		Levelpng[i - 1] = FACTORY->ObjectIDMap[3]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("level" + NumberToString(i) + ".png");
 
-		if(i == LevelList::quit + 1)
+		if (i == LevelList::quit + 1) {
+			if (!APP->IsKRMODE) 
 			Levelpng[i - 1] = Sprite::find_texture_id("Menu_Quit.png");
+			else
+				Levelpng[i - 1] = Sprite::find_texture_id("kr_Menu_Quit.png");
+		}
 	}
 
 	LevelList = STATEMANAGER->i_LevelSelect - 1;

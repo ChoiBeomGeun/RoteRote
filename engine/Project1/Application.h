@@ -94,6 +94,7 @@ namespace TE {
 		bool b_Win;
 		bool b_Lose;
 		bool _isfull;
+		bool IsKRMODE = false;
 		bool windowminimized = false;
 		bool windowIsActive = false;
 		bool IsKeyBoardAvailable = true;
