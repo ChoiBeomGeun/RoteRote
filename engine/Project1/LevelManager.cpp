@@ -476,12 +476,12 @@ void TE::LevelManager::SavingLevelInfo(void)
 
 
 
-
+/*
 #ifdef _DEBUG
 #else
 	path = Userinfo;
-	path += "/Documents/RoteRote/ClearInfo.json";
-#endif
+	path +=*/ "/Documents/RoteRote/ClearInfo.json";
+//#endif
 	free(Userinfo);
 	
 
@@ -514,11 +514,11 @@ void TE::LevelManager::LoadingLevelInfo(void)
 
 
 
-#ifdef _DEBUG
-#else
-	path = Userinfo;
-	path += "/Documents/RoteRote/ClearInfo.json";
-#endif
+//#ifdef _DEBUG
+//#else
+//	path = Userinfo;
+//	path += "/Documents/RoteRote/ClearInfo.json";
+//#endif
 	free(Userinfo);
 
 	Jsonclass file;

@@ -27,24 +27,30 @@ using System.Diagnostics;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using RoteMapView;
+using System.Security.Principal;
 
 namespace RoteRoteLauncherView
 {
     public partial class Main : Form
     {
+
         int i_hiddencount = 0;
         bool b_IsHiddenFormAppeared = true;
         private Size MaxSize;
         private Size []CurrentSize = new Size[6];
         private Size ClickedSize;
+        ProcessStartInfo procInfo;
         public Main()
         {
+
             InitializeComponent();
             MaxSize = MonitorInfoCSharp.Form1.returnMaxSize();
 
-            
+
         }
         
+
+
         private void Form1_Load(object sender, EventArgs e)
         {
          
@@ -67,8 +73,8 @@ namespace RoteRoteLauncherView
         private void button1_Click(object sender, EventArgs e)
         {
 
-            string temp = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            temp += ".\\RoteRote.\\temp.ini";
+        //    string temp = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+         //   temp += ".\\RoteRote.\\temp.ini";
             if (listBox1.SelectedIndex != -1)
             {
                 if (ClickedSize.Width > MaxSize.Width ||
@@ -89,7 +95,7 @@ namespace RoteRoteLauncherView
                 }
 
 
-                using (StreamWriter rdr = new StreamWriter(temp))
+                using (StreamWriter rdr = new StreamWriter("temp.ini"))
                 {
                     rdr.WriteLine(listBox1.SelectedItem.ToString());
                     rdr.WriteLine(checkBox1.Checked.ToString());
@@ -103,7 +109,9 @@ namespace RoteRoteLauncherView
                 System.Diagnostics.Process ps = new System.Diagnostics.Process();
                 ps.StartInfo.FileName = "RoteRote.exe";
                 ps.Start();
+                
                 Application.Exit();
+          
             }
         }
 
@@ -148,11 +156,11 @@ namespace RoteRoteLauncherView
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string temp = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            temp += ".\\RoteRote.\\ClearInfo.json";
+         //   string temp = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+      //      temp += ".\\RoteRote.\\ClearInfo.json";
             JObject Reading = null;
  
-                Reading = JObject.Parse(File.ReadAllText(temp));
+                Reading = JObject.Parse(File.ReadAllText("ClearInfo.json"));
 
             int LevelNumber = System.Int16.Parse(Reading["NumberOfTheLevels"].ToString());
             for (int i = 1; i <= LevelNumber; i++)
@@ -165,7 +173,7 @@ namespace RoteRoteLauncherView
            
             }
             Reading["level" + 1.ToString() + ".json"] = false;
-            File.WriteAllText(temp, Reading.ToString());
+            File.WriteAllText("ClearInfo.json", Reading.ToString());
 
 
         }
