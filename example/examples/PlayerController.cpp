@@ -59,6 +59,9 @@ void PlayerController::Initialize()
 	STATEMANAGER->IsDrawing = true;
 
 	JumpSound = SOUNDMANAGER->LoadSound("jump.mp3");
+	SlideSound = SOUNDMANAGER->LoadSound("slide.mp3"); 
+
+	IsSlideSoundOn = false;
 }
 
 void PlayerController::Update(float dt)
@@ -93,9 +96,27 @@ void PlayerController::Movement(float dt)
 
 
 	if ((this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Left || this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Right) && IsAttachable)
+	{
 		WallAttached = true;
+	}
 	else
+	{
 		WallAttached = false;
+	}
+
+	if (WallAttached)
+	{
+		if (!IsSlideSoundOn)
+		{
+			IsSlideSoundOn = true;
+			SOUNDMANAGER->PlaySounds(SlideSound, true);
+		}
+	}
+	else
+	{
+		SOUNDMANAGER->StopSound(SlideSound);
+		IsSlideSoundOn = false;
+	}
 
 	if (this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Air)
 	{
