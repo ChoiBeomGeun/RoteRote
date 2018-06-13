@@ -48,25 +48,8 @@ Application::Application() : pWnd(nullptr), ResolutionNumber(2)
 
 	char line[200]; // 한 줄씩 읽어서 임시로 저장할 공간
 
-	
-//#ifdef _DEBUG
 	ifile.open(".\\temp.ini");
-//#else
-//
-//
-//	char * Userinfo;
-//	size_t len = path.size();
-//	_dupenv_s(&Userinfo, &len, "USERPROFILE");
-//
-//	path = Userinfo;
-//	path += "/Documents/RoteRote/temp.ini";
-//
-//
-//	ifile.open(path);  // 파일 열기
-//
-//	free(Userinfo);
-//
-//#endif
+
 	
 	
 	if (ifile.is_open())
@@ -135,19 +118,6 @@ Application::Application() : pWnd(nullptr), ResolutionNumber(2)
 
 
 
-
-
-	
-
-#ifdef _DEBUG
-#else
-
-	//if (remove(path.c_str()) != 0)
-	//	perror("Error deleting file");
-	//else
-	//	puts("File successfully deleted");
-	
-#endif
 ;
 
 
@@ -228,9 +198,6 @@ void Application::Initialize()
 	
 	if(_isfull)
 		SDL_SetWindowFullscreen(pWnd, SDL_WINDOW_FULLSCREEN);
-#ifndef _DEBUG
-	//	SDL_SetWindowFullscreen(pWnd, SDL_WINDOW_FULLSCREEN);
-#endif // DEBUG
 
 	SDL_GL_SetSwapInterval(1);
 	
@@ -325,7 +292,7 @@ void Application::PollEvents(void)
 		}
 		if (event.window.event == SDL_WINDOWEVENT_FOCUS_LOST)
 		{
-			//windowIsActive = true;
+			windowIsActive = true;
 		}
 
 		if (event.window.event == SDL_WINDOWEVENT_FOCUS_GAINED) {

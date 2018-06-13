@@ -124,6 +124,18 @@ void StateManager::Initialize(void)
 
 void StateManager::Update(float dt)
 {
+	if (!b_IsRotating && b_IsGameLevel && !b_IsReplay && !APP->b_Win && !APP->b_Lose)
+	{
+		if (Input::IsTriggered(SDL_SCANCODE_ESCAPE) && APP->b_Lose == false)
+			PauseReturn();
+		if (APP->windowIsActive) {
+			PauseReturn();
+			APP->windowIsActive = false;
+		}
+
+
+
+	}
 
 	if (forceLevelLoading)
 	{
@@ -189,7 +201,7 @@ void StateManager::Update(float dt)
 		IsFadingOut = true;
 		IsFadingIn = true;
 		transvalue = 255;
-		FACTORY;
+
 		SOUNDMANAGER->DeleteSounds();
 		FACTORY->DestroyAllObjects();
 		this->v_StatesLists[i_CurrentStateNumber]->Free();
@@ -252,7 +264,7 @@ void StateManager::Update(float dt)
 
 	}
 	if (b_Relplay) {
-		FACTORY;
+	
 		this->v_StatesLists[i_ReplayStageNumber]->Update(dt);
 
 		if (IsFadingIn) {
@@ -266,7 +278,7 @@ void StateManager::Update(float dt)
 
 	
 		
-		FACTORY;
+	
 		this->v_StatesLists[i_CurrentStateNumber]->Update(dt);
 
 		if (IsFadingIn) {
@@ -277,7 +289,7 @@ void StateManager::Update(float dt)
 		itransvalue = 0;
 	}
 	if (b_IsPauseOn) {
-		FACTORY;
+		
 		this->v_StatesLists[i_PauseStageNumber]->Update(dt);
 
 		if (IsFadingIn) {
@@ -291,18 +303,6 @@ void StateManager::Update(float dt)
 
 
 
-	if (!b_IsRotating && b_IsGameLevel && !b_IsReplay)
-	{
-		if (Input::IsTriggered(SDL_SCANCODE_ESCAPE) && APP->b_Lose == false)
-			PauseReturn();
-		if (APP->windowIsActive) {
-			PauseReturn();
-			APP->windowIsActive = false;
-		}
-
-
-
-	}
 
 
 

@@ -1,8 +1,8 @@
 /******************************************************************************/
 /*!
 \file		Pause.h
-\author		Kyungook.Park
-\par		email: qkrruddn6680@gmail.com
+\author		Choi Beom Geun
+\par		email: 	email: o77151@gmail.com
 \par		Class:GAM250
 \par		ThumbUp Engine
 \date		2017/12/19

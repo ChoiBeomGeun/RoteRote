@@ -21,7 +21,7 @@ All content 2018 DigiPen (USA) Corporation, all rights reserved.
 using namespace TE;
 Object * Loseplayer;
 Object *obj;
-SOUNDID LoseSound;
+unsigned int LoseSound;
 bool Losesoundonce ;
 
 namespace TE {
@@ -33,13 +33,14 @@ namespace TE {
 }
 TE::LoseconditionLogic::LoseconditionLogic()
 {
-	LoseSound = SOUNDMANAGER->LoadSound("win.mp3");
+
 	FallSound = SOUNDMANAGER->LoadSound("fall.mp3");
 	LOSECONDITIONLOGIC = this;
 }
 
 void TE::LoseconditionLogic::Initialize()
 {
+	LoseSound = SOUNDMANAGER->LoadSound("lose.mp3");
 	Losesoundonce = true;
 	Loseplayer = FACTORY->GetPlayer();
 	isBoundaryLose = false;
@@ -117,8 +118,9 @@ void TE::LoseconditionLogic::Update(float dt)
 			{
 				if (std::abs(int_xnormal) + 10.f < std::abs(xdis) && std::abs(int_ynormal) + 10.f < std::abs(ydis))
 				{
-					SOUNDMANAGER->PlayOnceSounds(LoseSound, false, IsLoseSoundPlayed);
-
+				//	SOUNDMANAGER->PauseAllSound();
+ 					SOUNDMANAGER->PlayOnceSounds(LoseSound, false, IsLoseSoundPlayed);
+				
 
  					
 					FACTORY->GetPlayer()->GetComponent<Sprite>()->ChangeColor(255, 0, 0, 255);

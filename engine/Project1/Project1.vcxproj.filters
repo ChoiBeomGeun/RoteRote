@@ -226,12 +226,6 @@
     <ClInclude Include="StateManager.h">
       <Filter>Statemanager</Filter>
     </ClInclude>
-    <ClInclude Include="GameStateLists.h">
-      <Filter>Statemanager</Filter>
-    </ClInclude>
-    <ClInclude Include="GameStateList.h">
-      <Filter>Statemanager</Filter>
-    </ClInclude>
     <ClInclude Include="BaseStage.h">
       <Filter>Statemanager</Filter>
     </ClInclude>

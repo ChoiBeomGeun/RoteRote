@@ -1,8 +1,8 @@
 /******************************************************************************/
 /*!
 \file		Pause.cpp
-\author		Kyungook.Park
-\par		email: qkrruddn6680@gmail.com
+\author		Choi Beom Geun
+\par		email: o77151@gmail.com
 \par		Class:GAM250
 \par		ThumbUp Engine
 \date		2017/04/19
@@ -33,10 +33,7 @@ All content 2018 DigiPen (USA) Corporation, all rights reserved.
 #include "Trigger.h"
 #include "ObjectStyle.h"
 using namespace TE;
-//Object * ooHowToPlay2;
-//Object * ooConfirmation2;
-//
-//Object * ooCredits;
+
 
 Object * frame =nullptr;
 Object * textIndicator = nullptr;

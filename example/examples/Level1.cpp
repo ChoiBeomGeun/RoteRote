@@ -123,9 +123,10 @@ void Level1::Init()
 	STATEMANAGER->b_IsReplayStart = true;
 	STATEMANAGER->b_IsReplay = false;
 	STATEMANAGER->b_Relplay = false;
-
+	STATEMANAGER->b_IsDelay = false;
 	STATEMANAGER->AniSave.clear();
-
+	APP->b_Win = false;
+	APP->b_Lose = false;
 
 	LEVELMANAGER->LoadLevel(STATEMANAGER->Loadtolevelname);
 
