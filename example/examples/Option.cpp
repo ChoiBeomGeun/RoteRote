@@ -60,40 +60,17 @@ void Option::Load()
 	Option_Credits = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Option_Credits.png");
 	Option_Back = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Option_BackToMenu.png"); 
 	Option_Full = FACTORY->ObjectIDMap[6]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("Option_FullScreen.png");
-
-	//FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->position = glm::vec3(0, rotation_radius,0);
-	//FACTORY->ObjectIDMap[1]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.05f, APP->_screenWidth *.05f, 0);
-
-	//FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->position = glm::vec3(-rotation_radius,0,0);
-	//FACTORY->ObjectIDMap[2]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.05f, APP->_screenWidth *.05f, 0);
-
-	//FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->position = glm::vec3(0,-rotation_radius,0);
-	//FACTORY->ObjectIDMap[3]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.05f, APP->_screenWidth *.05f, 0);
-
-	//FACTORY->ObjectIDMap[4]->GetComponent<Transform>()->position = glm::vec3(rotation_radius,0,0);
-	//FACTORY->ObjectIDMap[4]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.05f, APP->_screenWidth *.05f, 0);
-
-	//FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.45f, APP->_screenWidth *.45f, 0);
-	//FACTORY->ObjectIDMap[6]->GetComponent<Transform>()->scale = glm::vec3(APP->_screenWidth *.25f, APP->_screenWidth *.25f, 0);
-
-	//FACTORY->ObjectIDMap[7]->GetComponent<Transform>()->position = glm::vec3(0, APP->_screenHeight*.4f, 0);
-
-	
-	
 }
 
 void Option::Init()
 {
 	if (IsSoundOn)
 	{
-
 		FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("sound.png");
-
 	}
 	else
 	{
 		FACTORY->ObjectIDMap[1]->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("soundoff.png");
-
 	}
 	CreditsIsON = false;
 	Selection = OptionList::Option_SoundOnOff;
@@ -109,20 +86,12 @@ void Option::Init()
 	select_index = 0;
 	OptionCam.cameraSetting(CameraPosType::EN_Option);
 	SOUNDMANAGER->PlaySounds(OptionSound, true);
-	/*APP->ResizeAllObjects();
-	FACTORY->ObjectIDMap[7]->GetComponent<Transform>()->scale.y = APP->_screenHeight*.1f;
-	FACTORY->ObjectIDMap[6]->GetComponent<Transform>()->scale = glm::vec3(FACTORY->ObjectIDMap[6]->GetComponent<Transform>()->scale.x, FACTORY->ObjectIDMap[6]->GetComponent<Transform>()->scale.x, 0);
-	FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->scale = glm::vec3(FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->scale.x, FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->scale.x, 0);*/
-
 }
 
 void Option::Update(float dt)
 {
-
-
 	if (Input::IsTriggered(SDL_SCANCODE_ESCAPE))
 		STATEMANAGER->MoveState(StatesList::Menu);
-
 
 	IsSelected = false;
 	if (FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle == 360.f || FACTORY->ObjectIDMap[5]->GetComponent<Transform>()->angle == -360.f)
@@ -215,7 +184,7 @@ void Option::Update(float dt)
 			
 			ooCredits = FACTORY->CreateArchetype(ReadingArchetype("Button.json"));
 			ooCredits->GetComponent<Transform>()->SetPosition(glm::vec3(0,0,0));
-			ooCredits->GetComponent<Transform>()->SetScale(glm::vec3(APP->_screenWidth, APP->_screenHeight, 0));
+			ooCredits->GetComponent<Transform>()->SetScale(glm::vec3(1280.f, 720.f, 0));
 			ooCredits->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("CreditsText.png");
 			CreditsIsON = true;
 			return;
