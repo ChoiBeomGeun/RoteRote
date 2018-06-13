@@ -153,7 +153,7 @@ void PlayerController::Movement(float dt)
 			FACTORY->GetPlayer()->GetComponent<Animation>()->setFlipX(false);
 			if (Input::IsPressed(SDL_SCANCODE_RIGHT))
 			{
-				if (Input::IsPressed(SDL_SCANCODE_SPACE) && IsAttachable)
+				if (Input::IsTriggered(SDL_SCANCODE_SPACE) && IsAttachable)
 				{
 					WallJumpTriggered = true;
 					this->GetOwner()->GetComponent<Body>()->pm_velocity.x = -WallJump;
