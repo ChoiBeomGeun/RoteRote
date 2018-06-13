@@ -258,13 +258,8 @@ void Pause::Update(float dt)
 				oHowToPlay->GetComponent<Transform>()->position = glm::vec3(0, 0, 0);
 				oHowToPlay->GetComponent<Transform>()->scale = glm::vec3(500, 300, 0);
 				oHowToPlay->GetComponent<Sprite>()->depth =5;
-				if (!APP->IsKRMODE)
 				oHowToPlay->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("howTOPlay2.png");
-				else
-					oHowToPlay->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("kr_howtoplay.png");
-
 				HowTOplay = true;
-
 			}
 			}
 		}
