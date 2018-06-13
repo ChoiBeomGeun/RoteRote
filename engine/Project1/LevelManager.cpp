@@ -206,19 +206,19 @@ void LevelManager::LoadLevel(std::string  path)
 		{
 			//tempObject = FACTORY->CreateWall(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0));
 			tempObject->objectstyle = Objectstyle::Wall;
-			int x, y;
+			/*int x, y;
 
-			if(tempObject->GetComponent<Transform>()->scale.x == 20)
+			if(static_cast<int>(tempObject->GetComponent<Transform>()->scale.x) % 20 == 0 )
 				x = 1;
 			else 
-				x= tempObject->GetComponent<Transform>()->scale.x / 40;
-			if (tempObject->GetComponent<Transform>()->scale.y == 20)
+				x= static_cast<int>(tempObject->GetComponent<Transform>()->scale.x) / 40;
+			if (static_cast<int>(tempObject->GetComponent<Transform>()->scale.y) %20 == 0)
 				y = 1;
 			else
-				y = tempObject->GetComponent<Transform>()->scale.x / 40;
+				y = static_cast<int>(tempObject->GetComponent<Transform>()->scale.x) / 40;
 
 			tempObject->GetComponent<Transform>()->u_v.x =x;
-			tempObject->GetComponent<Transform>()->u_v.y =y;
+			tempObject->GetComponent<Transform>()->u_v.y =y;*/
 
 
 		}
@@ -238,6 +238,19 @@ void LevelManager::LoadLevel(std::string  path)
 		{
 			//tempObject = FACTORY->CreateBox(glm::vec3(Xpos, Ypos, Zpos), glm::vec3(Xscale, Yscale, 0));
 			tempObject->objectstyle = Objectstyle::Box;
+			int x, y;
+
+			if (static_cast<int>(tempObject->GetComponent<Transform>()->scale.x) % 20 == 0)
+				x = 1;
+			else
+				x = static_cast<int>(tempObject->GetComponent<Transform>()->scale.x) / 40;
+			if (static_cast<int>(tempObject->GetComponent<Transform>()->scale.y) % 20 == 0)
+				y = 1;
+			else
+				y = static_cast<int>(tempObject->GetComponent<Transform>()->scale.x) / 40;
+
+			tempObject->GetComponent<Transform>()->u_v.x = x;
+			tempObject->GetComponent<Transform>()->u_v.y = y;
 		}
 		else if (Objectstyle == "Trigger90")
 		{

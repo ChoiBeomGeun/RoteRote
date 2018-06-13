@@ -296,11 +296,10 @@ void TE::Graphics::drawPerspective(std::vector<Sprite*>::iterator iter)
 		model = glm::rotate(model, glm::radians((*iter)->pOwner->GetComponent<Transform>()->angle), (*iter)->pOwner->GetComponent<Transform>()->rotation);
 		model = glm::scale(model, glm::vec3((*iter)->pOwner->GetComponent<Transform>()->scale));
 
-	
-		if ((*iter)->pOwner->GetComponent<Sprite>()->mTexutureDir == "unattachwall.png")
+		if ((*iter)->pOwner->objectstyle == Objectstyle::Box)
 			glUniform2f(uniformLocation[UV], (*iter)->pOwner->GetComponent<Transform>()->u_v.x, (*iter)->pOwner->GetComponent<Transform>()->u_v.y);
 		else
-		glUniform2f(uniformLocation[UV], (*iter)->pOwner->GetComponent<Transform>()->u_v.x, (*iter)->pOwner->GetComponent<Transform>()->u_v.y);
+			glUniform2f(uniformLocation[UV], (*iter)->pOwner->GetComponent<Transform>()->u_v.x, (*iter)->pOwner->GetComponent<Transform>()->u_v.y);
 
 		
 		glUniformMatrix4fv(uniformLocation[MODEL], 1, GL_FALSE, &model[0][0]);
