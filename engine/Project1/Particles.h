@@ -43,7 +43,9 @@ namespace TE {
 		ET_EXPLOSION, //!< type of explosion
 		ET_TRAIL,      //!<  type of trail
 		ET_SELECTION, //!< type of Background
-		ET_LASER //!< Hazard
+		ET_LASER, //!< Hazard
+		ET_END
+
 	};
 
 	class Emitter : public Component //!< struct of Emitter

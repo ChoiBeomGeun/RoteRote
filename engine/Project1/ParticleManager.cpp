@@ -48,6 +48,27 @@ namespace TE {
 	{
 		DEBUG_ASSERT(PARTICLEMANAGER != nullptr, "There should be only one ParticleManager");
 		PARTICLEMANAGER = this;
+		m_capacity = 0;      // Capacity of emitter
+		m_size = 0;					// Number of emitter
+		m_currentID = 0;			// ID of emitter
+
+		m_minExpVel = 0;
+		m_maxExpVel = 100;
+		m_minExpScale = 0;
+		m_maxExpScale = 75;
+
+		m_minTrailVel = 0;
+		m_maxTrailVel = 100;
+		m_minTrailScale = 0;
+		m_maxTrailScale = 50;
+
+		m_minBackgroundDist = -(APP->_screenWidth * .3f);
+		m_maxBackgroundDist = APP->_screenWidth * .3f;
+		m_maxBackLifeTime = 20;
+		m_laserVel = glm::vec3(0);
+		m_scaleFactor = 30;
+		m_expLife = 20;
+		m_EmitterList.clear();
 
 	}
 

@@ -27,6 +27,7 @@ namespace TE {
 	{
 		pos = glm::vec3(0);
 		vel = glm::vec3(0);
+		type;
 		m_textureID = 0;
 		size = 0;
 		capacity = 0;

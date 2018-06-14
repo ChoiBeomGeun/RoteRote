@@ -41,7 +41,7 @@ splash::~splash()
 
 void splash::Load()
 {
-	blackholesplash = SOUNDMANAGER->LoadSound("splash.wav");
+	blackholesplash = SOUNDMANAGER->LoadSound("splash.mp3");
 	printf("splashLoad\n");
 }
 

@@ -108,7 +108,6 @@ void Level1::Init()
 	loseFallingSound = SOUNDMANAGER->LoadSound("fall.mp3");
 	loseElecSound = SOUNDMANAGER->LoadSound("elec.mp3");
 	Background = SOUNDMANAGER->LoadSound("menu.mp3");
-	winSound2 = SOUNDMANAGER->LoadSound("win.mp3");
 	STATEMANAGER->b_IsRot90 = false;
 	STATEMANAGER->b_IsRot180 = false;
 	STATEMANAGER->b_IsGameLevel = true;
