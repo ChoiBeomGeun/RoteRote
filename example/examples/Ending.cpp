@@ -103,6 +103,7 @@ void Ending::Update(float dt)
 			GoLeft = true;
 
 			if (GoLeft) {
+			
 				autoindexE++;
 			}
 			else
@@ -116,6 +117,7 @@ void Ending::Update(float dt)
 			if (transv == 0 && IsOut)
 			{
 				IsOut = false;
+				FACTORY->Destroy(FACTORY->ObjectIDMap[transindex]);
 				transindex++;
 				if (transindex == 25)
 				{

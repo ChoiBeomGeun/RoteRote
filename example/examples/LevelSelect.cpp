@@ -171,7 +171,8 @@ void LevelSelect::Update(float dt)
 		else
 			LockObject->GetComponent<Transform>()->SetScale(glm::vec3(300, 300, 0));
 	}
-
+	if (LevelList == LevelList::quit)
+		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(0, -120, 0));
 	if (IsConfirmationOn) {
 		if (Input::IsTriggered(SDL_SCANCODE_Y))
 			ENGINE->Quit();
@@ -277,7 +278,8 @@ void LevelSelect::Update(float dt)
 			SOUNDMANAGER->PlaySounds(lsMoveSound, false);
 		}
 
-		if (Input::IsTriggered(SDL_SCANCODE_SPACE) || Input::IsTriggered(SDL_SCANCODE_RETURN)) {
+		if (STATEMANAGER->vsLevelListandclear[LevelList].second != true&&
+			Input::IsTriggered(SDL_SCANCODE_SPACE) || Input::IsTriggered(SDL_SCANCODE_RETURN)) {
 			if (STATEMANAGER->i_LevelSelect != 20 || STATEMANAGER->vsLevelListandclear[LevelList].second != true) {
 				if (LevelList != LevelList::quit)
 				{
