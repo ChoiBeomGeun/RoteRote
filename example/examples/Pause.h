@@ -8,8 +8,8 @@
 \date	2017/12/19
 
 Pause state header file
-There are ¡°go to level select state¡±, ¡°Pause state¡±, ¡°How to play state¡±
-¡°Quit the game¡±
+There are go to level select state, Pause state, How to play state
+Quit the game
 All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/

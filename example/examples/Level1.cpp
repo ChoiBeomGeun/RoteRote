@@ -61,6 +61,8 @@ Object * Indicator1;
 Object * Indicator2;
 unsigned int Background;
 unsigned int loseSound;
+unsigned int loseFallingSound;
+unsigned int loseElecSound;
 unsigned int winSound2;
 Jsonclass file;
 Json::Value root;
@@ -103,6 +105,8 @@ void Level1::Init()
 
 	camAct.Setshakeduration(2);
 	loseSound = SOUNDMANAGER->LoadSound("lose.mp3");
+	loseFallingSound = SOUNDMANAGER->LoadSound("fall.mp3");
+	loseElecSound = SOUNDMANAGER->LoadSound("elec.mp3");
 	Background = SOUNDMANAGER->LoadSound("menu.mp3");
 	winSound2 = SOUNDMANAGER->LoadSound("win.mp3");
 	STATEMANAGER->b_IsRot90 = false;
@@ -205,7 +209,12 @@ void Level1::Update(float dt)
 
 	if (APP->b_Lose)
 	{
+		if(LOSECONDITIONLOGIC->IsBoxDie)
 		SOUNDMANAGER->PlayOnceSounds(loseSound, false, LoseSOUNDONCE);
+		if (LOSECONDITIONLOGIC->IsFalling)
+			SOUNDMANAGER->PlayOnceSounds(loseFallingSound, false, LoseSOUNDONCE);
+		if (LOSECONDITIONLOGIC->IsElec)
+			SOUNDMANAGER->PlayOnceSounds(loseElecSound, false, LoseSOUNDONCE);
 		LoseSOUNDONCE = false;
 	}
 

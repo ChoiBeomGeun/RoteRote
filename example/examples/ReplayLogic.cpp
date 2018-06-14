@@ -98,7 +98,7 @@ void Backgame3(void)
 
 void MakeReplayerUI(void) {
 	
-
+	STATEMANAGER->b_IsGameLevel = true;
 	pauseindex3 = 0;
 	SOUNDMANAGER->DeleteSounds();
 	FACTORY->DestroyAllObjects();

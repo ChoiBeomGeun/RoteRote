@@ -5,7 +5,7 @@
 \par	email: hyunjun306@gmail.com
 \par	Class:GAM250
 \par	ThumbUp Engine
-\date	06/13/2018
+\date	06/13/2017
 
 GLSLProgram header file.
 All content 2018 DigiPen (USA) Corporation, all rights reserved.

@@ -202,7 +202,6 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraMovement.cpp" />
     <ClCompile Include="cAutoMoving.cpp" />
-    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="Factory.cpp" />
     <ClCompile Include="GameLogic.cpp" />

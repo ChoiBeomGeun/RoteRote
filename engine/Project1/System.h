@@ -5,7 +5,7 @@
 \par    email: o77151@gmail.com
 \par    Class:GAM250
 \par    ThumbUp Engine
-\date   2017/11/29
+\date   2018/11/29
 A pure virtual base class(an interface) that is the base class
 for all systems used  by the Engine
 System abstract function

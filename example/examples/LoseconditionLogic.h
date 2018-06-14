@@ -35,6 +35,9 @@ namespace TE
 		~LoseconditionLogic();
 		bool isBoundaryLose;
 		bool IsLoseSoundPlayed = true;
+		bool IsElec = false;
+		bool IsFalling = false;
+		bool IsBoxDie = false;
 	private:
 		float _fourPoints[4];
 

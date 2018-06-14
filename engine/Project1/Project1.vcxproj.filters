@@ -152,9 +152,6 @@
     <ClCompile Include="GameLogic.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="Controller.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
     <ClCompile Include="cAutoMoving.cpp">
       <Filter>Object</Filter>
     </ClCompile>

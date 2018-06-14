@@ -8,8 +8,8 @@
 \date	2017/12/19
 
 Option state header file
-There are ¡°go to level select state¡±, ¡°option state¡±, ¡°How to play state¡±
-¡°Quit the game¡±
+There are go to level select state,option state,How to play state
+,Quit the game
 All content 2018 DigiPen (USA) Corporation, all rights reserved.
 */
 /******************************************************************************/
@@ -49,7 +49,7 @@ private:
 	bool IsTextChanged;
 	bool IsSoundOn = true;
 	int select_index;
-	unsigned int Option_SoundOnOff;		//Is it Okay To sign texture as just int not unsigned int
+	unsigned int Option_SoundOnOff;	
 	unsigned int Option_Credits;
 	unsigned int Option_Back;
 	unsigned int Option_Full;

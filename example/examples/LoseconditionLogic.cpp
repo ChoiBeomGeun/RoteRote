@@ -22,6 +22,7 @@ using namespace TE;
 Object * Loseplayer;
 Object *obj;
 unsigned int LoseSound;
+unsigned int HazardLoseSound;
 bool Losesoundonce ;
 
 namespace TE {
@@ -35,12 +36,14 @@ TE::LoseconditionLogic::LoseconditionLogic()
 {
 
 	FallSound = SOUNDMANAGER->LoadSound("fall.mp3");
+	HazardLoseSound = SOUNDMANAGER->LoadSound("elec.mp3");
 	LOSECONDITIONLOGIC = this;
 }
 
 void TE::LoseconditionLogic::Initialize()
 {
 	LoseSound = SOUNDMANAGER->LoadSound("lose.mp3");
+	IsLoseSoundPlayed = true;
 	Losesoundonce = true;
 	Loseplayer = FACTORY->GetPlayer();
 	isBoundaryLose = false;
@@ -57,11 +60,12 @@ void TE::LoseconditionLogic::Update(float dt)
 		{
 			if (Physics::RectvsRectCollisionCheck(Loseplayer->GetComponent<Transform>(), Objects.second->GetComponent<Transform>()))
 			{
-				SOUNDMANAGER->PlayOnceSounds(LoseSound, false, IsLoseSoundPlayed);
-			
+
+				IsElec = true;
 				APP->b_Lose = true;
  				CAMERA->IsCameraShaking = true;
 				STATEMANAGER->Restart();
+			
 			}
 		}
 		if (Objects.second->objectstyle ==Objectstyle::Box || Objects.second->objectstyle == Objectstyle::AttachBox
@@ -90,8 +94,8 @@ void TE::LoseconditionLogic::Update(float dt)
 				Loseplayer->GetComponent<Transform>()->position.y > 1000/*_fourPoints[DyingPlace::EN_UP_Y]*/ || Loseplayer->GetComponent<Transform>()->position.y < -1000/*_fourPoints[DyingPlace::EN_DOWN_Y]*/))
 			{
 
-		
-				SOUNDMANAGER->PlayOnceSounds(LoseSound, false,IsLoseSoundPlayed);
+				IsFalling = true;
+			
 
 				
 				FACTORY->GetPlayer()->GetComponent<Sprite>()->ChangeColor(255, 0, 0, 255);
@@ -117,9 +121,9 @@ void TE::LoseconditionLogic::Update(float dt)
 				if (std::abs(int_xnormal) + 10.f < std::abs(xdis) && std::abs(int_ynormal) + 10.f < std::abs(ydis))
 				{
 				//	SOUNDMANAGER->PauseAllSound();
- 					SOUNDMANAGER->PlayOnceSounds(LoseSound, false, IsLoseSoundPlayed);
-				
 
+				
+					IsBoxDie = true;
  					
 					FACTORY->GetPlayer()->GetComponent<Sprite>()->ChangeColor(255, 0, 0, 255);
 					FACTORY->GetPlayer()->GetComponent<Body>()->pm_velocity = glm::vec3(0);
@@ -138,6 +142,9 @@ void TE::LoseconditionLogic::Update(float dt)
 
 void TE::LoseconditionLogic::Free(void)
 {
+	IsBoxDie = false;
+	IsElec = false;
+	IsFalling = false;
 	CAMERA->IsCameraShaking = false;
 
 	  
