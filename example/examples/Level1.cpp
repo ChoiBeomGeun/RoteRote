@@ -53,6 +53,7 @@ std::vector<glm::vec3> replayPos;
 std::vector<Object> replayPlayer;
 bool LosesoundOnetime = true;
 bool IndicatorCheck = true;
+bool GodMode = false;
 std::string  path2;
 Object * HUDLevelname;
 Object * Backgroundobj[11];
@@ -200,11 +201,13 @@ void Level1::Init()
 
 void Level1::Update(float dt)
 {
+
+	
 	APP->IsKeyBoardAvailable = true;
 	camAct.Update(dt);
-#ifdef _DEBUG
+
 	CheatKeyFunctions();
-#endif
+
 
 	if (APP->b_Lose)
 	{
@@ -509,8 +512,7 @@ void Level1::loadbackground()
 
 void CheatKeyFunctions(void) {
 
-	if (Input::IsTriggered(SDL_SCANCODE_F7))
-		STATEMANAGER->MoveState(StatesList::MapEditor-1);
+
 
 
 
@@ -533,21 +535,10 @@ void CheatKeyFunctions(void) {
 
 
 	}
-	if (Input::IsTriggered(SDL_SCANCODE_F11))
+	if (Input::IsTriggered(SDL_SCANCODE_F7))
 		STATEMANAGER->Restart();
-	if (Input::IsTriggered(SDL_SCANCODE_F9) && !IsAutoplay)
-	{
 
-		STATEMANAGER->b_IsAutoplaying = true;
-		IsAutoplay = true;
-	}
 
-	if (Input::IsTriggered(SDL_SCANCODE_M))
-	{
-		
-
-		system("start RoteMap.exe");
-	}
 }
 
 

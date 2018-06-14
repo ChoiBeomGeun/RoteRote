@@ -44,7 +44,7 @@ ClearzoneLogic::ClearzoneLogic()
 void ClearzoneLogic::Initialize()
 {
 	OnceWin = true;
-	WinSound = SOUNDMANAGER->LoadSound("portalintro.wav");
+	WinSound = SOUNDMANAGER->LoadSound("portalintro.mp3");
 	player = FACTORY->GetPlayer();
 	obj = GetClearzone();
 	clearparticle = FACTORY->CreateHUD(obj->GetComponent<Transform>()->position, obj->GetComponent<Transform>()->scale);

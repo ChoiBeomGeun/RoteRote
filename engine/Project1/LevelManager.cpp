@@ -409,7 +409,15 @@ void TE::LevelManager::SavingLevelInfo(void)
 	char * Userinfo;
 	size_t len = path.size();
 	_dupenv_s(&Userinfo, &len, "USERPROFILE");
+
+
+#ifdef _DEBUG
+#else
+	path = Userinfo;
+	path += "/Documents/RoteRote/ClearInfo.json";
+#endif
 	free(Userinfo);
+
 	
 	Jsonclass file;
 	Json::Value root;
@@ -430,11 +438,15 @@ void TE::LevelManager::SavingLevelInfo(void)
 void TE::LevelManager::LoadingLevelInfo(void)
 {
 
-	std::string  path = "ClearInfo.json";
+ 	std::string  path = "ClearInfo.json";
 	char * Userinfo;
 	size_t len = path.size();
 	_dupenv_s(&Userinfo, &len, "USERPROFILE");
-
+#ifdef _DEBUG
+#else
+	path = Userinfo;
+	path += "/Documents/RoteRote/ClearInfo.json";
+#endif
 	free(Userinfo);
 
 	Jsonclass file;

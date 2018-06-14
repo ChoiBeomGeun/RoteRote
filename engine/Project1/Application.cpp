@@ -48,8 +48,25 @@ Application::Application() : pWnd(nullptr), ResolutionNumber(2)
 
 	char line[200]; // 한 줄씩 읽어서 임시로 저장할 공간
 
-	ifile.open(".\\temp.ini");
 
+#ifdef _DEBUG
+	ifile.open(".\\temp.ini");
+	#else
+	
+	
+		char * Userinfo;
+		size_t len = path.size();
+		_dupenv_s(&Userinfo, &len, "USERPROFILE");
+	
+		path = Userinfo;
+		path += "/Documents/RoteRote/temp.ini";
+	
+	
+		ifile.open(path);  // 파일 열기
+	
+		free(Userinfo);
+	
+	#endif
 	
 	
 	if (ifile.is_open())

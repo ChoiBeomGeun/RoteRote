@@ -73,8 +73,8 @@ namespace RoteRoteLauncherView
         private void button1_Click(object sender, EventArgs e)
         {
 
-        //    string temp = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-         //   temp += ".\\RoteRote.\\temp.ini";
+            string temp = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            temp += ".\\RoteRote.\\temp.ini";
             if (listBox1.SelectedIndex != -1)
             {
                 if (ClickedSize.Width > MaxSize.Width ||
@@ -95,7 +95,7 @@ namespace RoteRoteLauncherView
                 }
 
 
-                using (StreamWriter rdr = new StreamWriter("temp.ini"))
+                using (StreamWriter rdr = new StreamWriter(temp))
                 {
                     rdr.WriteLine(listBox1.SelectedItem.ToString());
                     rdr.WriteLine(checkBox1.Checked.ToString());
@@ -156,11 +156,11 @@ namespace RoteRoteLauncherView
 
         private void button4_Click(object sender, EventArgs e)
         {
-         //   string temp = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-      //      temp += ".\\RoteRote.\\ClearInfo.json";
+            string temp = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            temp += ".\\RoteRote.\\ClearInfo.json";
             JObject Reading = null;
  
-                Reading = JObject.Parse(File.ReadAllText("ClearInfo.json"));
+                Reading = JObject.Parse(File.ReadAllText(temp));
 
             int LevelNumber = System.Int16.Parse(Reading["NumberOfTheLevels"].ToString());
             for (int i = 1; i <= LevelNumber; i++)
