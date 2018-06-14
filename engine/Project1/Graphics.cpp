@@ -223,7 +223,7 @@ void Graphics::Update(float dt)
 		glUniformMatrix4fv(uniformLocation[PROJ], 1, GL_FALSE, &CAMERA->projection[0][0]);
 		glUniform4f(uniformLocation[COLOR], (*it)->Color[0], (*it)->Color[1], (*it)->Color[2], (*it)->Color[3]);
 		glUniform1i(uniformLocation[DRAWINGSTATUS], drawStats);
-		glPushAttrib(GL_CURRENT_BIT);
+		//glPushAttrib(GL_CURRENT_BIT);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 	}
 
@@ -331,7 +331,7 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 					glUniformMatrix4fv(particleLoc[PARTICLEVIEW], 1, GL_FALSE, &view[0][0]);
 					glUniformMatrix4fv(particleLoc[PARTICLEPROJ], 1, GL_FALSE, &CAMERA->projection[0][0]);
 					glUniform1i(particleLoc[PSTATS], drawStats);
-					glPushAttrib(GL_CURRENT_BIT);
+					//glPushAttrib(GL_CURRENT_BIT);
 					glDrawArrays(GL_TRIANGLES, 0, 6);
 				}
 			}
