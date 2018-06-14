@@ -290,6 +290,20 @@ namespace TE {
 							Particle& particle = (*EIT)->pParticles[i];
 							//If scale of particle is 0
 
+							particle.color[0] = ((i * i * i) % 200) / 255.f;
+							particle.color[1] = ((i * 7 * i) % 255) / 255.f;
+							particle.color[2] = (((i * 8 * i) /2) %255) / 255.f;
+							particle.color[3] = (((i * 9 * i)  /2) %255) / 255.f;
+
+							if (particle.color[0] >= 255)
+								particle.color[0] = 0;
+							if (particle.color[1] >= 255)
+								particle.color[1] = 0;
+							if (particle.color[2] >= 255)
+								particle.color[2] = 0;
+							if (particle.color[3] >= 255)
+								particle.color[3] = 0;
+
 							if (particle.scale.x <= 0 || particle.scale.y <= 0)
 							{
 								//Set particle position to emitter position.
