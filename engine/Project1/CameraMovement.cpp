@@ -237,6 +237,11 @@ namespace TE {
 					downboundary = downblock.x - height * 0.3f;
 						if (playerpos.x < upboundary)
 							CAMERA->cameraPos.x = upboundary;
+						else if (STATEMANAGER->Loadtolevelname == "level14.json")
+						{
+							if (playerpos.x > downboundary)
+								CAMERA->cameraPos.x = playerpos.x;
+						}
 						else if (playerpos.x < downboundary)
 							CAMERA->cameraPos.x = playerpos.x;
 				}
