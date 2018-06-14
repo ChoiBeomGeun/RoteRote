@@ -27,7 +27,6 @@ All content 2018 DigiPen (USA) Corporation, all rights reserved.
 #include "Pause.h"
 #include "LevelSelect.h"
 #include "StateLists.h"
-#include "Replay.h"
 #include "logging.h"
 #include <crtdbg.h>
 #include "LevelManager.h"

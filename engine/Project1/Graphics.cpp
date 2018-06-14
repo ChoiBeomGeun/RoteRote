@@ -1,11 +1,11 @@
 /******************************************************************************/
 /*!
-\file	Graphics.cpp
-\author	HyunJun Yoo
-\par	email: hyunjun306@gmail.com
-\par	Class:GAM250
-\par	ThumbUp Engine
-\date	06/13/2017
+\file   Graphics.cpp
+\author   HyunJun Yoo
+\par   email: hyunjun306@gmail.com
+\par   Class:GAM250
+\par   ThumbUp Engine
+\date   06/13/2017
 
 Graphics.cpp,
 This is where it get all sprite and animation data to redner objects
@@ -64,12 +64,12 @@ void Graphics::Initialize(void)
 
 	// initialize Shader
 	initbasicShader();
-	
+
 	if (buffer == 0)
 		glGenBuffers(1, &buffer);
 	if (basicVAO == 0)
 		glGenVertexArrays(1, &basicVAO);
-	
+
 	// first triangle
 	vertexData[0].setPosition(-0.5f, 0.5f, 0.0f);
 	vertexData[0].setColor(255, 255, 255, 255);
@@ -97,9 +97,9 @@ void Graphics::Initialize(void)
 	vertexData[5].setUV(0.0f, 1.0f); // 0, 1 // flip 1, 1
 
 
-	//create opengl buffer object
+									 //create opengl buffer object
 
-	// tell opengl to bind our vertex buffer object
+									 // tell opengl to bind our vertex buffer object
 	glBindBuffer(GL_ARRAY_BUFFER, buffer);
 	// upload the data to the GPU
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
@@ -113,7 +113,7 @@ void Graphics::Initialize(void)
 	initparticleShader();
 	drawparticle_attributes();
 	setparticleUniformLoc();
-	
+
 #ifdef _DEBUG
 	ImGui_ImplSdlGL3_Init(APP->pWnd);
 	ImVec4 clear_color = ImColor(114, 144, 154);
@@ -123,7 +123,7 @@ void Graphics::Initialize(void)
 	splashtime = 0.f;
 
 	Sprite::LoadAllSprites();
-	
+
 
 }
 
@@ -176,7 +176,7 @@ void Graphics::drawparticle_attributes()
 	// this is the UV attribute pointer
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uv));
 	// draw the 6 vertices to the screen
-	//	glDrawArrays(GL_TRIANGLES, 0, 6); // drawing 6 vertices 
+	//   glDrawArrays(GL_TRIANGLES, 0, 6); // drawing 6 vertices 
 
 
 	//glEnableVertexAttribArray(0);// disable the vertex attrib array. this is not optional
@@ -204,7 +204,7 @@ void Graphics::Update(float dt)
 	glUniform1i(uniformLocation[SAMPLER], 0);
 	glUniform1i(particleLoc[PTEXTURE], 1);
 	glUniform1i(particleLoc[PSAMPLER], 0);
-	
+
 	view = CAMERA->view;
 	CAMERA->update();
 	for (std::vector<Sprite*>::iterator it = SpriteList.begin();
@@ -299,8 +299,8 @@ void TE::Graphics::drawOrthogonal(std::vector<Sprite*>::iterator iter)
 		drawStats = 1;
 		hudmodel = glm::mat4(1.0f);
 		hudmodel = glm::translate(hudmodel, (*iter)->pOwner->GetComponent<Transform>()->position);
-		if((*iter)->isRotating)
-		hudmodel = glm::rotate(hudmodel, glm::radians((*iter)->pOwner->GetComponent<Transform>()->angle), (*iter)->pOwner->GetComponent<Transform>()->rotation);
+		if ((*iter)->isRotating)
+			hudmodel = glm::rotate(hudmodel, glm::radians((*iter)->pOwner->GetComponent<Transform>()->angle), (*iter)->pOwner->GetComponent<Transform>()->rotation);
 
 		hudmodel = glm::scale(hudmodel, (*iter)->pOwner->GetComponent<Transform>()->scale);
 		glUniformMatrix4fv(uniformLocation[HUDMODEL], 1, GL_FALSE, &hudmodel[0][0]);
@@ -312,30 +312,30 @@ void TE::Graphics::drawParticles(std::vector<Sprite*>::iterator iter)
 	if ((*iter)->pOwner->HasComponent<Emitter>())
 	{
 		_particleProgram.use();
-		
+
 		for (auto p : PARTICLEMANAGER->m_EmitterList)
 		{
 			glBindTexture(GL_TEXTURE_2D, p->pOwner->GetComponent<Sprite>()->m_TextureID);
 			if (p->isOn)
 			{
-				if(p->pParticles)
-				for (int i = 0; i < p->capacity; ++i)
-				{
-					drawStats = 3;
-					particlemodel = glm::mat4(1.0f);
-					CAMERA->proj();
-					particlemodel = glm::translate(particlemodel, p->pParticles[i].pos);
-					particlemodel = glm::rotate(particlemodel, glm::radians(p->pParticles[i].angle), (*iter)->pOwner->GetComponent<Transform>()->rotation);
-					particlemodel = glm::scale(particlemodel, p->pParticles[i].scale);
-					glUniform4f(particleLoc[PCOLOR], p->pParticles[i].color[0], p->pParticles[i].color[1],
-						p->pParticles[i].color[2], p->pParticles[i].color[3]);
-					glUniformMatrix4fv(particleLoc[PARTICLEMODEL], 1, GL_FALSE, &particlemodel[0][0]);
-					glUniformMatrix4fv(particleLoc[PARTICLEVIEW], 1, GL_FALSE, &view[0][0]);
-					glUniformMatrix4fv(particleLoc[PARTICLEPROJ], 1, GL_FALSE, &CAMERA->projection[0][0]);
-					glUniform1i(particleLoc[PSTATS], drawStats);
-					//glPushAttrib(GL_CURRENT_BIT);
-					glDrawArrays(GL_TRIANGLES, 0, 6);
-				}
+				if (p->pParticles)
+					for (int i = 0; i < p->capacity; ++i)
+					{
+						drawStats = 3;
+						particlemodel = glm::mat4(1.0f);
+						CAMERA->proj();
+						particlemodel = glm::translate(particlemodel, p->pParticles[i].pos);
+						particlemodel = glm::rotate(particlemodel, glm::radians(p->pParticles[i].angle), (*iter)->pOwner->GetComponent<Transform>()->rotation);
+						particlemodel = glm::scale(particlemodel, p->pParticles[i].scale);
+						glUniform4f(particleLoc[PCOLOR], p->pParticles[i].color[0], p->pParticles[i].color[1],
+							p->pParticles[i].color[2], p->pParticles[i].color[3]);
+						glUniformMatrix4fv(particleLoc[PARTICLEMODEL], 1, GL_FALSE, &particlemodel[0][0]);
+						glUniformMatrix4fv(particleLoc[PARTICLEVIEW], 1, GL_FALSE, &view[0][0]);
+						glUniformMatrix4fv(particleLoc[PARTICLEPROJ], 1, GL_FALSE, &CAMERA->projection[0][0]);
+						glUniform1i(particleLoc[PSTATS], drawStats);
+						//glPushAttrib(GL_CURRENT_BIT);
+						glDrawArrays(GL_TRIANGLES, 0, 6);
+					}
 			}
 		}
 	}
@@ -357,7 +357,7 @@ void TE::Graphics::setbasicUniformLoc()
 	uniformLocation[ANIMATIONX] = _basicProgram.getUniformLocation("animationx");
 	uniformLocation[TIME] = _basicProgram.getUniformLocation("timer");
 	uniformLocation[UV] = _basicProgram.getUniformLocation("uv");
-	
+
 
 }
 

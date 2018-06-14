@@ -161,14 +161,7 @@ void LevelSelect::Init()
 }
 
 void LevelSelect::Update(float dt)
-{/*
-	if (LevelList != LevelList::quit)
-	{
-		if (STATEMANAGER->vsLevelListandclear[LevelList].second != true)
-			LockObject->GetComponent<Transform>()->SetScale(glm::vec3(0, -120, 0));
-		else
-			LockObject->GetComponent<Transform>()->SetScale(glm::vec3(300, 300, 0));
-	}*/
+{
 
 	if (IsConfirmationOn) {
 		if (Input::IsTriggered(SDL_SCANCODE_Y))
@@ -277,7 +270,7 @@ void LevelSelect::Update(float dt)
 
 		if (
 			Input::IsTriggered(SDL_SCANCODE_SPACE) || Input::IsTriggered(SDL_SCANCODE_RETURN)) {
-			if (STATEMANAGER->i_LevelSelect != 20 || STATEMANAGER->vsLevelListandclear[LevelList].second != true) {
+			if (STATEMANAGER->i_LevelSelect != 20) {
 				if (LevelList != LevelList::quit)
 				{
 					STATEMANAGER->i_LevelSelect = LevelList + 1;

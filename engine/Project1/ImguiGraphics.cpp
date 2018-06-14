@@ -43,7 +43,7 @@ void ImGuiUpdate(void) {
 		static int vec4i[4] = { 1, 5, 100, 255 };
 
 
-		
+
 
 		if (ImGui::CollapsingHeader("SoundManager"))
 		{
@@ -142,7 +142,7 @@ void ImGuiUpdate(void) {
 				ObjectPosition += std::to_string(i.second->objID);
 				if (ImGui::CollapsingHeader(Object.c_str()))
 				{
-					if (i.second->objectstyle != Objectstyle::Player && 
+					if (i.second->objectstyle != Objectstyle::Player &&
 						i.second->objectstyle != Objectstyle::Clearzone) {
 						if (ImGui::Button(("Delete" + Object).c_str()))
 						{
@@ -151,7 +151,7 @@ void ImGuiUpdate(void) {
 						}
 					}
 					// Transform Component
-					if (FACTORY->ObjectIDMap[i.first]->HasComponent<Transform>() )
+					if (FACTORY->ObjectIDMap[i.first]->HasComponent<Transform>())
 					{
 						if (ImGui::TreeNode(("Transform " + std::to_string(i.second->objID)).c_str()))
 						{
@@ -214,25 +214,25 @@ void ImGuiUpdate(void) {
 						std::string particleScl = "scale";
 						if (ImGui::TreeNode(("Particle " + std::to_string(i.second->objID)).c_str()))
 						{
-							
+
 							ImGui::SliderFloat((ObjectPosition + "x").c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Emitter>()->pos.x, -1000.f, 1000.f);
 							ImGui::SliderFloat((ObjectPosition + "y").c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Emitter>()->pos.y, -1000.f, 1000.f);
 							ImGui::SliderFloat((ObjectPosition + "z").c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Emitter>()->pos.z, -1000.f, 1000.f);
-							
+
 							ImGui::SliderFloat((particleVel + "x").c_str(), &PARTICLEMANAGER->m_laserVel.x, -100, 100.f);
 							ImGui::SliderFloat((particleVel + "y").c_str(), &PARTICLEMANAGER->m_laserVel.y, -100, 100.f);
 
-							ImGui::SliderFloat((particleScl+ "min").c_str(), &PARTICLEMANAGER->m_minTrailScale, -100, 100);
-							ImGui::SliderFloat((particleScl+ "max").c_str(), &PARTICLEMANAGER->m_maxTrailScale, -100, 100);
+							ImGui::SliderFloat((particleScl + "min").c_str(), &PARTICLEMANAGER->m_minTrailScale, -100, 100);
+							ImGui::SliderFloat((particleScl + "max").c_str(), &PARTICLEMANAGER->m_maxTrailScale, -100, 100);
 
 
 
-							
+
 							ImGui::Text("Particle Type is %s", &FACTORY->ObjectIDMap[i.first]->GetComponent<Emitter>()->type);
 							ImGui::Checkbox(EmitterOn.c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Emitter>()->isOn);
-							
+
 							ImGui::SliderFloat(lifeTime.c_str(), &FACTORY->ObjectIDMap[i.first]->GetComponent<Emitter>()->explifeTime, 0.f, 50.f);
-							
+
 							ImGui::TreePop();
 						}
 					}
@@ -252,7 +252,7 @@ void ImGuiUpdate(void) {
 
 			}
 
-			ImGui::Combo("Archtypes", &t, cppArchetypesditems,(int) ENGINE->mVsArchtypenamelist.size());
+			ImGui::Combo("Archtypes", &t, cppArchetypesditems, (int)ENGINE->mVsArchtypenamelist.size());
 
 
 			if (ImGui::Button("Make Archtypes"))
@@ -308,5 +308,5 @@ void ImguiFree(void)
 
 	delete cppSounditems;
 	delete cppArchetypesditems;
-	
+
 }

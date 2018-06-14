@@ -17,7 +17,6 @@ All content 2018 DigiPen (USA) Corporation, all rights reserved.
 #include  "Factory.h"
 #include "StateManager.h"
 #include "Trigger.h"
-#include "Replay.h"
 #include "Application.h"
 #include "LoseconditionLogic.h"
 #include "logging.h"

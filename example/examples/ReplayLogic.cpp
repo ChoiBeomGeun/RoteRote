@@ -127,9 +127,6 @@ void MakeReplayerUI(void) {
 	rlback = SOUNDMANAGER->LoadSound("menuselect.mp3");
 	rlselect = SOUNDMANAGER->LoadSound("menuselect.mp3");
 	rlwin = SOUNDMANAGER->LoadSound("win3.mp3");
-	if(STATEMANAGER->i_LevelSelect != 20)
-	STATEMANAGER->vsLevelListandclear[STATEMANAGER->i_LevelSelect - 1 +1].second = false;
-	//LEVELMANAGER->SavingLevelInfo();
 	for (auto p : PARTICLEMANAGER->m_EmitterList)
 	{
 		p->isOn = true;
