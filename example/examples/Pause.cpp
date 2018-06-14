@@ -125,16 +125,16 @@ void Pause::Init()
 }
 
 void Pause::Update(float dt)
-{
+{/*
 	if (HowTOplay) {
 
 
-		if (Input::IsTriggered(SDL_SCANCODE_ESCAPE)) {
+		if (Input::IsTriggered(SDL_SCANCODE_SPACE)) {
 			SOUNDMANAGER->PlaySounds(SelectSound, false);
 			HowTOplay = false;
 			FACTORY->Destroy(oHowToPlay);
 		}
-	}
+	}*/
 
 
 	for(auto obj : FACTORY->ObjectIDMap)
@@ -154,7 +154,6 @@ void Pause::Update(float dt)
 
 	}
 
-	if (!HowTOplay) {
 
 		if (ConfirmationIsOn) {
 			if (Input::IsTriggered(SDL_SCANCODE_Y))
@@ -243,9 +242,15 @@ void Pause::Update(float dt)
 
 			case PauseList::Pause_LevelSelect:
 			{
-				oHowToPlay = FACTORY->CreateHUD(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0));
-				oHowToPlay->GetComponent<Transform>()->position = glm::vec3(0, 0, 0);
-				oHowToPlay->GetComponent<Transform>()->scale = glm::vec3(500, 300, 0);
+				if (HowTOplay)
+				{
+					HowTOplay = false;
+					FACTORY->Destroy(oHowToPlay);
+					return;
+				}
+				oHowToPlay = FACTORY->CreateHUD(glm::vec3(0,0, 0), glm::vec3(0, 0, 0));
+				oHowToPlay->GetComponent<Transform>()->position = glm::vec3(500, 0, 0);
+				oHowToPlay->GetComponent<Transform>()->scale = glm::vec3(500, 150, 0);
 				oHowToPlay->GetComponent<Sprite>()->depth =5;
 				oHowToPlay->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("howTOPlay2.png");
 				HowTOplay = true;
@@ -293,7 +298,7 @@ void Pause::Update(float dt)
 				RightRotate = false;
 		}
 
-	}
+	
 
 
 }
