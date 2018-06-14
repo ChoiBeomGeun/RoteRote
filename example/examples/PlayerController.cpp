@@ -100,7 +100,7 @@ void PlayerController::Movement(float dt)
 		WallAttached = false;
 	}
 
-	if (WallAttached)
+	if ((this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Left || this->GetOwner()->GetComponent<Body>()->GroundType == Grounded::Right))
 	{
 		if (!IsSlideSoundOn)
 		{
