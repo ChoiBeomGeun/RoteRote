@@ -222,6 +222,16 @@ void Application::Update(float /*dt*/)
 
 	PollEvents();
 
+	if (Input::IsTriggered(SDL_SCANCODE_F11))
+	{
+		if (_isfull)
+			_isfull = false;
+		else
+			_isfull = true;
+
+		toggle_fullscreen(pWnd, _isfull);
+	}
+
 }
 
 void Application::SwapWindow(void)

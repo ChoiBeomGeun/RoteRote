@@ -496,7 +496,7 @@ bool Physics::AABBvsAABB(Body * pA, Body * pB, Pair * M)
 
 void Physics::PositionalCorrection(Pair *M)
 {
-	const float percent = 1.f; // usually 20% to 80%
+	const float percent = 0.8f; // usually 20% to 80%
 	const float slop = 0.05f; // usually 0.01 to 0.1
 	float lhs_invmass = M->m_lhs->pm_invmass;
 	float rhs_invmass = M->m_rhs->pm_invmass;
