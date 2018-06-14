@@ -49,7 +49,6 @@ namespace RoteRoteLauncherView
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -119,16 +118,6 @@ namespace RoteRoteLauncherView
             this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(199, 203);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(114, 23);
-            this.button4.TabIndex = 7;
-            this.button4.Text = "Init SaveData";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
@@ -147,7 +136,6 @@ namespace RoteRoteLauncherView
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(331, 241);
             this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.pictureBox1);
@@ -174,7 +162,6 @@ namespace RoteRoteLauncherView
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.CheckBox checkBox2;
     }
 }

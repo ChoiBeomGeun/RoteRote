@@ -59,7 +59,7 @@ Application::Application() : pWnd(nullptr), ResolutionNumber(2)
 		_dupenv_s(&Userinfo, &len, "USERPROFILE");
 	
 		path = Userinfo;
-		path += "/Documents/RoteRote/temp.ini";
+		path += "/Desktop/temp.ini";
 	
 	
 		ifile.open(path);  // 파일 열기
@@ -131,7 +131,17 @@ Application::Application() : pWnd(nullptr), ResolutionNumber(2)
 		}
 	}
 
-	ifile.close(); 
+	ifile.close();
+#ifdef _DEBUG
+#else
+
+	if (remove(path.c_str()) != 0)
+		perror("Error deleting file");
+	else
+		puts("File successfully deleted");
+
+#endif
+	 
 
 
 

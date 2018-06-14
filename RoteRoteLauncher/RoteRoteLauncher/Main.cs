@@ -73,8 +73,8 @@ namespace RoteRoteLauncherView
         private void button1_Click(object sender, EventArgs e)
         {
 
-            string temp = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            temp += ".\\RoteRote.\\temp.ini";
+            string temp = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            temp += "\\temp.ini";
             if (listBox1.SelectedIndex != -1)
             {
                 if (ClickedSize.Width > MaxSize.Width ||
@@ -156,8 +156,8 @@ namespace RoteRoteLauncherView
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string temp = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            temp += ".\\RoteRote.\\ClearInfo.json";
+            string temp = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            temp += "ClearInfo.json";
             JObject Reading = null;
  
                 Reading = JObject.Parse(File.ReadAllText(temp));

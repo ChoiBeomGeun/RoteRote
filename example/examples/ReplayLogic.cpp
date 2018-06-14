@@ -129,7 +129,7 @@ void MakeReplayerUI(void) {
 	rlwin = SOUNDMANAGER->LoadSound("win3.mp3");
 	if(STATEMANAGER->i_LevelSelect != 20)
 	STATEMANAGER->vsLevelListandclear[STATEMANAGER->i_LevelSelect - 1 +1].second = false;
-	LEVELMANAGER->SavingLevelInfo();
+	//LEVELMANAGER->SavingLevelInfo();
 	for (auto p : PARTICLEMANAGER->m_EmitterList)
 	{
 		p->isOn = true;

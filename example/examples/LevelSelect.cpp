@@ -50,6 +50,21 @@ LevelSelect::~LevelSelect()
 {
 
 }
+
+void SavingLevelInfo(void) {
+
+
+	
+}
+void LoadingLevelInfo(void) {
+
+
+
+
+
+}
+
+
 /*
 Load texture & Initialize a value of texture to Levelpng[i]
 */
@@ -76,7 +91,7 @@ void LevelSelect::Load()
 
 
 
-	LEVELMANAGER->LoadingLevelInfo();
+	//LEVELMANAGER->LoadingLevelInfo();
 	LEVELMANAGER->LoadLevel("selectlevel.json");
 
 
@@ -102,9 +117,7 @@ void LevelSelect::Load()
 	LevelList = STATEMANAGER->i_LevelSelect - 1;
 	FACTORY->ObjectIDMap[2]->GetComponent<Sprite>()->depth = 1;
 
-	LockObject = FACTORY->CreateArchetype(ReadingArchetype("Button.json"));
-	LockObject->GetComponent<Sprite>()->m_TextureID = Sprite::find_texture_id("LevelSelectionLock.png");
-        LockObject->GetComponent<Transform>()->SetPosition(glm::vec3(0, -120, 0));
+
 
 
 	glm::vec3 num_pos(-100.f, 180.f, 0);
@@ -148,16 +161,15 @@ void LevelSelect::Init()
 }
 
 void LevelSelect::Update(float dt)
-{
+{/*
 	if (LevelList != LevelList::quit)
 	{
 		if (STATEMANAGER->vsLevelListandclear[LevelList].second != true)
 			LockObject->GetComponent<Transform>()->SetScale(glm::vec3(0, -120, 0));
 		else
 			LockObject->GetComponent<Transform>()->SetScale(glm::vec3(300, 300, 0));
-	}
-	if (LevelList == LevelList::quit)
-		LockObject->GetComponent<Transform>()->SetScale(glm::vec3(0, -120, 0));
+	}*/
+
 	if (IsConfirmationOn) {
 		if (Input::IsTriggered(SDL_SCANCODE_Y))
 			ENGINE->Quit();
@@ -263,22 +275,24 @@ void LevelSelect::Update(float dt)
 			SOUNDMANAGER->PlaySounds(lsMoveSound, false);
 		}
 
-		if (Input::IsTriggered(SDL_SCANCODE_SPACE) || Input::IsTriggered(SDL_SCANCODE_RETURN)) {
-			if (LevelList != 20)
-			{
-				if (STATEMANAGER->vsLevelListandclear[LevelList].second != true) {
-						STATEMANAGER->i_LevelSelect = LevelList + 1;
-						std::string levelnumber = NumberToString(STATEMANAGER->i_LevelSelect);
-						STATEMANAGER->Loadtolevelname = "level" + levelnumber + ".json";
-						STATEMANAGER->MoveState(StatesList::Level1);
-						SOUNDMANAGER->PlaySounds(lsSelectSound, false);
+		if (
+			Input::IsTriggered(SDL_SCANCODE_SPACE) || Input::IsTriggered(SDL_SCANCODE_RETURN)) {
+			if (STATEMANAGER->i_LevelSelect != 20 || STATEMANAGER->vsLevelListandclear[LevelList].second != true) {
+				if (LevelList != LevelList::quit)
+				{
+					STATEMANAGER->i_LevelSelect = LevelList + 1;
+					std::string levelnumber = NumberToString(STATEMANAGER->i_LevelSelect);
+					STATEMANAGER->Loadtolevelname = "level" + levelnumber + ".json";
+					STATEMANAGER->MoveState(StatesList::Level1);
+					SOUNDMANAGER->PlaySounds(lsSelectSound, false);
+				}
+				else {
+					STATEMANAGER->MoveState(StatesList::Menu);
+					SOUNDMANAGER->PlaySounds(lsSelectSound, false);
 				}
 			}
-			else if (LevelList == 20)
-			{
-				STATEMANAGER->MoveState(StatesList::Menu);
-				SOUNDMANAGER->PlaySounds(lsSelectSound, false);
-			}
+
+			
 		}
 
 		if (Input::IsTriggered(SDL_SCANCODE_ESCAPE)) {
