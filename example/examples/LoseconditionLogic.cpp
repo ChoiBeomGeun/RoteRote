@@ -56,6 +56,19 @@ void TE::LoseconditionLogic::Update(float dt)
 		return;
 	for (auto Objects : FACTORY->ObjectIDMap)
 	{
+		if(abs(Objects.second->GetComponent<Transform>()->angle) > 3600.f)
+		{ 
+			Objects.second->GetComponent<Transform>()->angle = 0;
+		}
+
+		if (abs(Objects.second->GetComponent<Transform>()->position.x) > 10000.f || abs(Objects.second->GetComponent<Transform>()->position.y) > 10000.f)
+		{
+			Objects.second->GetComponent<Transform>()->scale = glm::vec3(0);
+			Objects.second->GetComponent<Transform>()->position = glm::vec3(10000, 10000, 0);
+			Objects.second->GetComponent<Body>()->pm_velocity = glm::vec3(0);
+		}
+
+
 		if (Objects.second->objectstyle == Objectstyle::Hazard)
 		{
 			if (Physics::RectvsRectCollisionCheck(Loseplayer->GetComponent<Transform>(), Objects.second->GetComponent<Transform>()))
