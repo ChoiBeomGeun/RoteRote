@@ -318,6 +318,7 @@ void Physics::KinematicBoxCollision(float &rhs_invmass, float &lhs_invmass, Pair
 			else if (M->m_rhs->m_pTransform->position.x > M->m_lhs->m_pTransform->position.x)
 				rhs_invmass = 0;
 		}
+
 	}
 	else if (M->m_lhs->GetOwner()->objectstyle == Objectstyle::Player && (M->m_rhs->GetOwner()->objectstyle == Objectstyle::Box || M->m_rhs->GetOwner()->objectstyle == Objectstyle::AttachBox))
 		rhs_invmass = 0;
@@ -495,7 +496,7 @@ bool Physics::AABBvsAABB(Body * pA, Body * pB, Pair * M)
 
 void Physics::PositionalCorrection(Pair *M)
 {
-	const float percent = 0.4f; // usually 20% to 80%
+	const float percent = 1.f; // usually 20% to 80%
 	const float slop = 0.05f; // usually 0.01 to 0.1
 	float lhs_invmass = M->m_lhs->pm_invmass;
 	float rhs_invmass = M->m_rhs->pm_invmass;
