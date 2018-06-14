@@ -50,21 +50,6 @@ LevelSelect::~LevelSelect()
 {
 
 }
-
-void SavingLevelInfo(void) {
-
-
-	
-}
-void LoadingLevelInfo(void) {
-
-
-
-
-
-}
-
-
 /*
 Load texture & Initialize a value of texture to Levelpng[i]
 */
@@ -278,24 +263,22 @@ void LevelSelect::Update(float dt)
 			SOUNDMANAGER->PlaySounds(lsMoveSound, false);
 		}
 
-		if (STATEMANAGER->vsLevelListandclear[LevelList].second != true&&
-			Input::IsTriggered(SDL_SCANCODE_SPACE) || Input::IsTriggered(SDL_SCANCODE_RETURN)) {
-			if (STATEMANAGER->i_LevelSelect != 20 || STATEMANAGER->vsLevelListandclear[LevelList].second != true) {
-				if (LevelList != LevelList::quit)
-				{
-					STATEMANAGER->i_LevelSelect = LevelList + 1;
-					std::string levelnumber = NumberToString(STATEMANAGER->i_LevelSelect);
-					STATEMANAGER->Loadtolevelname = "level" + levelnumber + ".json";
-					STATEMANAGER->MoveState(StatesList::Level1);
-					SOUNDMANAGER->PlaySounds(lsSelectSound, false);
-				}
-				else {
-					STATEMANAGER->MoveState(StatesList::Menu);
-					SOUNDMANAGER->PlaySounds(lsSelectSound, false);
+		if (Input::IsTriggered(SDL_SCANCODE_SPACE) || Input::IsTriggered(SDL_SCANCODE_RETURN)) {
+			if (LevelList != 20)
+			{
+				if (STATEMANAGER->vsLevelListandclear[LevelList].second != true) {
+						STATEMANAGER->i_LevelSelect = LevelList + 1;
+						std::string levelnumber = NumberToString(STATEMANAGER->i_LevelSelect);
+						STATEMANAGER->Loadtolevelname = "level" + levelnumber + ".json";
+						STATEMANAGER->MoveState(StatesList::Level1);
+						SOUNDMANAGER->PlaySounds(lsSelectSound, false);
 				}
 			}
-
-			
+			else if (LevelList == 20)
+			{
+				STATEMANAGER->MoveState(StatesList::Menu);
+				SOUNDMANAGER->PlaySounds(lsSelectSound, false);
+			}
 		}
 
 		if (Input::IsTriggered(SDL_SCANCODE_ESCAPE)) {
