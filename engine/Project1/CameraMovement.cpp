@@ -219,14 +219,16 @@ namespace TE {
 				{
 					upboundary = upblock.x - height * .2f;
 					downboundary = downblock.x + height * .2f;
-					
+					if(STATEMANAGER->Loadtolevelname == "level14.json")
+					{ }
+					else {
 						if (playerpos.x < leftboundary)
 							CAMERA->cameraPos.x = leftboundary;
 						else if (playerpos.x > rightboundary)
 							CAMERA->cameraPos.x = rightboundary;
 						else
 							CAMERA->cameraPos.x = playerpos.x;
-					
+					}
 				}
 				else if (type == CameraRotation::EN_270)
 				{
