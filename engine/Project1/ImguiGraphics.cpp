@@ -21,8 +21,10 @@ char** cppLevelitems;
 char** cppTextureitems;
 char** cppSounditems;
 char** cppArchetypesditems;
-
-
+bool Soundnew = true;
+bool textnew = true;
+bool Leveldnew = true;
+bool Archetynew = true;
 static int j = -1;
 
 void ImGuiUpdate(void) {
@@ -46,7 +48,10 @@ void ImGuiUpdate(void) {
 		if (ImGui::CollapsingHeader("SoundManager"))
 		{
 			static int t = -1;
-			cppSounditems = new char*[ENGINE->mVsSoundnamelist.size() + 1];
+			if (Soundnew) {
+				cppSounditems = new char*[ENGINE->mVsSoundnamelist.size() + 1];
+				Soundnew = false;
+			}
 			for (unsigned int i = 0; i < ENGINE->mVsSoundnamelist.size(); i++)
 			{
 				cppSounditems[i] = const_cast<char*>(ENGINE->mVsSoundnamelist[i].c_str());
@@ -179,7 +184,10 @@ void ImGuiUpdate(void) {
 						if (ImGui::TreeNode(("Sprite " + std::to_string(i.second->objID)).c_str()))
 						{
 							int arraysize2 = 0;
-							cppTextureitems = new char*[ENGINE->mVsTexturenamelist.size() + 1];
+							if (textnew) {
+								cppTextureitems = new char*[ENGINE->mVsTexturenamelist.size() + 1];
+								textnew = false;
+							}
 							for (unsigned int j = 0; j < ENGINE->mVsTexturenamelist.size(); j++)
 							{
 								cppTextureitems[j] = const_cast<char*>(ENGINE->mVsTexturenamelist[j].c_str());
@@ -232,7 +240,12 @@ void ImGuiUpdate(void) {
 				}
 			}
 			static int t = -1;
-			cppArchetypesditems = new char*[ENGINE->mVsArchtypenamelist.size() + 1];
+			if (Archetynew) {
+				cppArchetypesditems = new char*[ENGINE->mVsArchtypenamelist.size() + 1];
+				Archetynew = false;
+
+
+			}
 			for (unsigned int i = 0; i < ENGINE->mVsArchtypenamelist.size(); i++)
 			{
 				cppArchetypesditems[i] = const_cast<char*>(ENGINE->mVsArchtypenamelist[i].c_str());
@@ -246,8 +259,10 @@ void ImGuiUpdate(void) {
 				FACTORY->CreateArchetype(ReadingArchetype(cppArchetypesditems[t]));
 
 		}
-
-		cppLevelitems = new char*[ENGINE->mVsLevelnamelist.size() + 1];
+		if (Leveldnew) {
+			cppLevelitems = new char*[ENGINE->mVsLevelnamelist.size() + 1];
+			Leveldnew = false;
+		}
 		for (unsigned int i = 0; i < ENGINE->mVsLevelnamelist.size(); i++)
 		{
 			cppLevelitems[i] = const_cast<char*>(ENGINE->mVsLevelnamelist[i].c_str());

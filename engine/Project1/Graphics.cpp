@@ -113,10 +113,11 @@ void Graphics::Initialize(void)
 	initparticleShader();
 	drawparticle_attributes();
 	setparticleUniformLoc();
-
+	
 #ifdef _DEBUG
 	ImGui_ImplSdlGL3_Init(APP->pWnd);
 	ImVec4 clear_color = ImColor(114, 144, 154);
+
 #endif
 	time = 0.f;
 	splashtime = 0.f;
@@ -257,6 +258,7 @@ Graphics::~Graphics()
 	pCamera = NULL;
 #ifdef _DEBUG
 	ImguiFree();
+	ImGui::Shutdown();
 	ImGui_ImplSdlGL3_Shutdown();
 #endif
 	glDeleteVertexArrays(1, &buffer);
