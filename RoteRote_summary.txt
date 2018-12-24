@@ -1,0 +1,9 @@
+Rote Rote(Platformer, Puzzle)
+
+RoteRote is 2D platformer puzzle game where a player's girlfriend is disappeared into 
+rotating blackhole. After losing his girlfriend, he goes after her and rotate the world 
+to solve puzzles. 
+
+HyunJun Yoo   - Producer, Graphics
+BeomGeun Choi - Technical Director, Engines
+KyungOok Park - Lead Desinger, Physics
